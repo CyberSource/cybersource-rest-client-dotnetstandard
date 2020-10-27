@@ -1,0 +1,5 @@
+{
+   "packageName" : "CyberSource",
+   "targetFramework" : "v4.6.1",
+   "testPackage" : "cybersource-rest-client-dotnet.Test"
+}

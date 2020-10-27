@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiSdk", "ApiSdk\ApiSdk.csproj", "{23C047B9-8597-4A5F-82B7-A2F97555AD9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiSdkTests.NetCore", "ApiSdkTests.NetCore\ApiSdkTests.NetCore.csproj", "{B3F426A5-7324-4147-8992-7C50B1902C73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{23C047B9-8597-4A5F-82B7-A2F97555AD9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23C047B9-8597-4A5F-82B7-A2F97555AD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23C047B9-8597-4A5F-82B7-A2F97555AD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23C047B9-8597-4A5F-82B7-A2F97555AD9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3F426A5-7324-4147-8992-7C50B1902C73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3F426A5-7324-4147-8992-7C50B1902C73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3F426A5-7324-4147-8992-7C50B1902C73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3F426A5-7324-4147-8992-7C50B1902C73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4D25916-F2C3-471F-8B4B-86CD58B767D7}
+	EndGlobalSection
+EndGlobal

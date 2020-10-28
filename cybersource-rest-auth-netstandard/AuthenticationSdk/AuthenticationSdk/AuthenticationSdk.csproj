@@ -8,7 +8,7 @@
     <Product>Authentication_SDK</Product>
     <Description />
     <Copyright>Copyright © 2021</Copyright>
-    <AssemblyName>AuthenticationSdkNetStandard</AssemblyName>
+    <AssemblyName>Cybersource.Authentication.NetStandard</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

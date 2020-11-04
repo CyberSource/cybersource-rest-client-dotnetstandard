@@ -15,7 +15,14 @@ powershell -Command "(Get-Content ..\src\CyberSource\Api\ReportDownloadsApi.cs) 
 
 powershell -Command "(Get-Content ..\src\CyberSource\Api\TransactionBatchesApi.cs) | ForEach-Object { $_ -replace 'null\); \/\/ Return statement', 'localVarResponse.Content); // Return statement' } | Set-Content ..\src\CyberSource\Api\TransactionBatchesApi.cs"
 
-rem Need to shorten filenames
+REM Loading content of excludeList.txt into a space-separated list in a variable
+SETLOCAL EnableDelayedExpansion
+SET excludeList=
+FOR /f "tokens=* delims=\n" %%a in ('type "excludelist.txt"') do (
+	SET excludeList=!excludeList! %%a
+)
+
+REM Need to shorten filenames
 
 powershell Rename-Item ..\src\Cybersource\Model\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction.cs Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedMerchantInitiatedTransaction.cs
 
@@ -29,23 +36,36 @@ powershell Rename-Item ..\src\Cybersource.Test\Model\Tmsv2customersEmbeddedDefau
 
 powershell Rename-Item ..\src\Cybersource\Model\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptions.cs Tmsv2customersEmbeddedAuthorizationOptions.cs
 
-powershell Rename-Item ..\src\cybersource.test\Model\RiskV1AddressVerificationsPost201ResponseAddressVerificationInformationStandardAddressAddress1Tests.cs RiskV1AddressVerificationsPost201ResponseStandardAddressAddress1Tests.cs
+powershell Rename-Item ..\src\Cybersource.Test\Model\RiskV1AddressVerificationsPost201ResponseAddressVerificationInformationStandardAddressAddress1Tests.cs RiskV1AddressVerificationsPost201ResponseStandardAddressAddress1Tests.cs
+
+powershell Rename-Item ..\src\Cybersource\Model\RiskV1AddressVerificationsPost201ResponseAddressVerificationInformationStandardAddressAddress1.cs RiskV1AddressVerificationsPost201ResponseAddress1.cs
+
+powershell Rename-Item ..\docs\RiskV1AddressVerificationsPost201ResponseAddressVerificationInformationStandardAddressAddress1.md RiskV1AddressVerificationsPost201ResponseAddress1.md
+
+powershell Rename-Item ..\src\Cybersource.Test\Model\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierLinksPaymentInstrumentsTests.cs Tmsv2customersEmbeddedPaymentInstrumentsTests.cs
+
+powershell Rename-Item ..\src\Cybersource.Test\Model\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierProcessingInformationTests.cs Tmsv2customersEmbeddedDefaultProcessingInformationTests.cs
+
+powershell Rename-Item ..\src\Cybersource\Model\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierLinksPaymentInstruments.cs Tmsv2customersEmbeddedLinksPaymentInstruments.cs
+
+powershell Rename-Item ..\src\Cybersource.Test\Model\Ptsv2paymentsProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransactionTests.cs Ptsv2paymentsMerchantInitiatedTransactionTests.cs
 
 powershell Rename-Item ..\src\Cybersource\Model\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator.cs Tmsv2customersEmbeddedAuthorizationOptionsInitiator.cs
 
 powershell Rename-Item ..\docs\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator.md Tmsv2customersEmbeddedAuthorizationOptionsInitiator.md
 
-powershell Rename-Item ..\src\cybersource.test\Model\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierLinksPaymentInstrumentsTests.cs Tmsv2customersEmbeddedPaymentInstrumentsTests.cs
+robocopy ..\src\cybersource ..\ /S /XF %excludeList%
 
-powershell Rename-Item ..\src\cybersource.test\Model\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierProcessingInformationTests.cs Tmsv2customersEmbeddedDefaultProcessingInformationTests.cs
+robocopy ..\src\cybersource.test ..\..\cybersource-rest-client-netstandard.Test /S /XF %excludeList%
 
-xcopy ..\src\cybersource ..\ /s /e /y /exclude:excludelist.txt
-REM git checkout ..\README.md
-
-xcopy ..\src\cybersource.test ..\..\cybersource-rest-client-netstandard.Test /s /e /y /exclude:excludelist.txt
 del ..\CyberSource.sln
+del ..\*ignore
+del ..\.travis.yml
+del ..\build.*
+del ..\git_push.sh
+del ..\mono_nunit_test.sh
+del ..\README.md
 
 rd /s /q ..\src
-
 
 pause

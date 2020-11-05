@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="AuthenticationSdk">
-      <HintPath>..\..\AuthenticationSdk\AuthenticationSdk\bin\Debug\netstandard2.0\AuthenticationSdk.dll</HintPath>
+    <Reference Include="Cybersource.Authentication.NetStandard">
+      <HintPath>..\..\AuthenticationSdk\AuthenticationSdk\bin\Debug\netstandard2.1\Cybersource.Authentication.NetStandard.dll</HintPath>
     </Reference>
   </ItemGroup>
 

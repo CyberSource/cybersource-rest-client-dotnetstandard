@@ -32,16 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="AuthenticationSdk">
-      <HintPath>..\..\cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk\bin\Debug\netstandard2.1\AuthenticationSdk.dll</HintPath>
+    <Reference Include="Cybersource.Authentication.NetStandard">
+      <HintPath>..\..\cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk\bin\Debug\netstandard2.1\Cybersource.Authentication.NetStandard.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="README.md">
-      <Pack>true</Pack>
-      <PackagePath>\</PackagePath>
-    </Content>
   </ItemGroup>
 
 </Project>

@@ -48,12 +48,19 @@ namespace AuthenticationSdk.core
 
             LogUtility.InitLogConfig(EnableLog, LogDirectory, LogFileName, LogfileMaxSize);
 
-            // Logger object is ready to Log
-            Logger.Trace("\n");
-            Logger.Trace("START> =======================================");
+            try
+            {
+                // Logger object is ready to Log
+                Logger.Trace("\n");
+                Logger.Trace("START> =======================================");
 
-            // Logging the source of properties' values
-            Logger.Trace("Reading Merchant Configuration from " + _propertiesSetUsing);
+                // Logging the source of properties' values
+                Logger.Trace("Reading Merchant Configuration from " + _propertiesSetUsing);
+            }
+            catch (Exception e)
+            {
+                ExceptionUtility.Exception(e.Message, e.StackTrace);
+            }
 
             // Validations
             ValidateProperties();
@@ -366,31 +373,31 @@ namespace AuthenticationSdk.core
                 if (string.IsNullOrEmpty(KeyAlias))
                 {
                     KeyAlias = MerchantId;
-                    Logger.Warn($"{Constants.WarningPrefix} KeyAlias not provided. Assigning the value of: [MerchantID]");
+                    throw new Exception($"{Constants.WarningPrefix} KeyAlias not provided. Assigning the value of: [MerchantID]");
                 }
 
                 if (!string.Equals(KeyAlias, MerchantId))
                 {
                     KeyAlias = MerchantId;
-                    Logger.Warn($"{Constants.WarningPrefix} Incorrect value of KeyAlias provided. Assigning the value of: [MerchantID]");
+                    throw new Exception($"{Constants.WarningPrefix} Incorrect value of KeyAlias provided. Assigning the value of: [MerchantID]");
                 }
 
                 if (string.IsNullOrEmpty(KeyPass))
                 {
                     KeyPass = MerchantId;
-                    Logger.Warn($"{Constants.WarningPrefix} KeyPassword not provided. Assigning the value of: [MerchantID]");
+                    throw new Exception($"{Constants.WarningPrefix} KeyPassword not provided. Assigning the value of: [MerchantID]");
                 }
 
                 if (string.IsNullOrEmpty(KeyDirectory))
                 {
                     KeyDirectory = Constants.P12FileDirectory;
-                    Logger.Warn($"{Constants.WarningPrefix} KeysDirectory not provided. Using Default Path: {KeyDirectory}");
+                    throw new Exception($"{Constants.WarningPrefix} KeysDirectory not provided. Using Default Path: {KeyDirectory}");
                 }
 
                 if (string.IsNullOrEmpty(KeyfileName))
                 {
                     KeyfileName = MerchantId;
-                    Logger.Warn($"{Constants.WarningPrefix} KeyfileName not provided. Assigning the value of: [MerchantId]");
+                    throw new Exception($"{Constants.WarningPrefix} KeyfileName not provided. Assigning the value of: [MerchantId]");
                 }
 
                 P12Keyfilepath = KeyDirectory + "\\" + KeyfileName + ".p12";

@@ -112,17 +112,24 @@ namespace AuthenticationSdk.core
 
         private void LogMerchantDetails()
         {
-            // Using Request Target provided in the sample code/merchantconfig
-            _logger.Trace("Using Request Target:'{0}'", _merchantConfig.RequestTarget);
+            try
+            {
+                // Using Request Target provided in the sample code/merchantconfig
+                _logger.Trace("Using Request Target:'{0}'", _merchantConfig.RequestTarget);
 
-            // logging Authentication type
-            _logger.Trace("Authentication Type -> {0}", _merchantConfig.AuthenticationType);
+                // logging Authentication type
+                _logger.Trace("Authentication Type -> {0}", _merchantConfig.AuthenticationType);
 
-            // logging Request Type
-            _logger.Trace("Request Type -> {0}", _merchantConfig.RequestType);
+                // logging Request Type
+                _logger.Trace("Request Type -> {0}", _merchantConfig.RequestType);
 
-            // Logging all the Properties of MerchantConfig and their respective Values
-            _logger.Trace("MERCHCFG > {0}", MerchantConfig.LogAllproperties(_merchantConfig));
+                // Logging all the Properties of MerchantConfig and their respective Values
+                _logger.Trace("MERCHCFG > {0}", MerchantConfig.LogAllproperties(_merchantConfig));
+            }
+            catch (Exception e)
+            {
+                ExceptionUtility.Exception(e.Message, e.StackTrace);
+            }
         }
     }
 }

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cybersource-rest-client-netstandard", "cybersource-rest-client-netstandard\cybersource-rest-client-netstandard.csproj", "{DE56907C-0626-4B03-8634-CCABBA4E5156}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cybersource-rest-client-netstandard.Test", "cybersource-rest-client-netstandard.Test\cybersource-rest-client-netstandard.Test.csproj", "{8760D562-F5E3-47CD-9A70-A7ACE98F1580}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE56907C-0626-4B03-8634-CCABBA4E5156}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE56907C-0626-4B03-8634-CCABBA4E5156}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE56907C-0626-4B03-8634-CCABBA4E5156}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE56907C-0626-4B03-8634-CCABBA4E5156}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8760D562-F5E3-47CD-9A70-A7ACE98F1580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8760D562-F5E3-47CD-9A70-A7ACE98F1580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8760D562-F5E3-47CD-9A70-A7ACE98F1580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8760D562-F5E3-47CD-9A70-A7ACE98F1580}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CE32CB9A-0025-4DFC-9F1D-2A6344502299}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,6 @@
+*.nuspec
+*.config
+AssemblyInfo.cs
+*.sln
+*.csproj
+packages.config

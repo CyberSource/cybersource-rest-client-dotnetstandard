@@ -3,12 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.0.1</Version>
+    <Version>0.0.1.0</Version>
     <Authors>CyberSource</Authors>
     <Product>Authentication_SDK</Product>
     <Description />
     <Copyright>Copyright © 2021</Copyright>
     <AssemblyName>Cybersource.Authentication.NetStandard</AssemblyName>
+    <PackageId>CyberSource.Authentication.NetStandard</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

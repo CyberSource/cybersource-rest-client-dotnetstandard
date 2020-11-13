@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>CyberSource</RootNamespace>
-    <Version>0.0.0.1</Version>
+    <Version>0.0.1.0</Version>
     <Authors>CyberSource</Authors>
     <Company>CyberSource</Company>
     <Description>A library generated from a Swagger doc</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>Cybersource.Rest.Client.NetStandard</PackageId>
+    <PackageId>CyberSource.Rest.Client.NetStandard</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -25,16 +25,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CyberSource.Authentication.NetStandard" Version="0.0.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="RestSharp" Version="106.11.5" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Cybersource.Authentication.NetStandard">
-      <HintPath>..\..\cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk\bin\Debug\netstandard2.1\Cybersource.Authentication.NetStandard.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

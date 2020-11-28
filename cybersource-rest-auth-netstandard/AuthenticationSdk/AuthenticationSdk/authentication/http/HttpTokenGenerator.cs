@@ -61,7 +61,10 @@ namespace AuthenticationSdk.authentication.http
             signatureString.Append('\n');
             signatureString.Append("v-c-merchant-id");
             signatureString.Append(": ");
-            signatureString.Append(_httpToken.MerchantId);
+            if(_httpToken.UseMetaKey == true)
+                signatureString.Append(_httpToken.PortfolioId);
+            else
+                signatureString.Append(_httpToken.MerchantId);
             signatureString.Remove(0, 1);
 
             var signatureByteString = Encoding.UTF8.GetBytes(signatureString.ToString());
@@ -104,7 +107,10 @@ namespace AuthenticationSdk.authentication.http
             signatureString.Append('\n');
             signatureString.Append("v-c-merchant-id");
             signatureString.Append(": ");
-            signatureString.Append(_httpToken.MerchantId);
+            if (_httpToken.UseMetaKey == true)
+                signatureString.Append(_httpToken.PortfolioId);
+            else
+                signatureString.Append(_httpToken.MerchantId);
             signatureString.Remove(0, 1);
 
             var signatureByteString = Encoding.UTF8.GetBytes(signatureString.ToString());

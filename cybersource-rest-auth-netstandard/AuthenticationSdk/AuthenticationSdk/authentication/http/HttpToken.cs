@@ -19,6 +19,15 @@ namespace AuthenticationSdk.authentication.http
             MerchantSecretKey = merchantConfig.MerchantSecretKey;
             MerchantKeyId = merchantConfig.MerchantKeyId;
             HttpSignRequestTarget = merchantConfig.RequestType.ToLower() + " " + merchantConfig.RequestTarget;
+
+            bool.TryParse(merchantConfig.UseMetaKey, out bool tempUseMetaKey);
+
+            UseMetaKey = tempUseMetaKey;
+
+            if (UseMetaKey)
+            {
+                PortfolioId = merchantConfig.PortfolioId;
+            }
         }
 
         public string SignatureAlgorithm { get; set; }
@@ -26,6 +35,10 @@ namespace AuthenticationSdk.authentication.http
         public string GmtDateTime { get; set; }
 
         public string MerchantId { get; set; }
+
+        public string PortfolioId { get; set; }
+
+        public bool UseMetaKey { get; set; }
 
         public string MerchantSecretKey { get; set; }
 

@@ -68,9 +68,13 @@ namespace AuthenticationSdk.core
 
         public string MerchantId { get; set; }
 
+        public string PortfolioId { get; set; }
+
         public string MerchantSecretKey { get; set; }
 
         public string MerchantKeyId { get; set; }
+
+        public string UseMetaKey { get; set; }
 
         public string AuthenticationType { get; set; }
 
@@ -158,8 +162,10 @@ namespace AuthenticationSdk.core
             _propertiesSetUsing = "App.Config File";
 
             MerchantId = merchantConfigSection["merchantID"];
+            PortfolioId = merchantConfigSection["portfolioID"];
             MerchantSecretKey = merchantConfigSection["merchantsecretKey"];
             MerchantKeyId = merchantConfigSection["merchantKeyId"];
+            UseMetaKey = merchantConfigSection["useMetaKey"];
             AuthenticationType = merchantConfigSection["authenticationType"];
             KeyDirectory = merchantConfigSection["keysDirectory"];
             KeyfileName = merchantConfigSection["keyFilename"];
@@ -195,6 +201,12 @@ namespace AuthenticationSdk.core
                     RunEnvironment = merchantConfigDictionary[key];
                     key = "authenticationType";
                     AuthenticationType = merchantConfigDictionary[key];
+                    key = "useMetaKey";
+                    UseMetaKey = merchantConfigDictionary[key];
+                    if(string.IsNullOrEmpty(UseMetaKey))
+                    {
+                        UseMetaKey = "false";
+                    }
 
                     Enumerations.AuthenticationType authTypeInput;
                     Enum.TryParse(AuthenticationType.ToUpper(), out authTypeInput);
@@ -205,6 +217,16 @@ namespace AuthenticationSdk.core
                         MerchantSecretKey = merchantConfigDictionary[key];
                         key = "merchantKeyId";
                         MerchantKeyId = merchantConfigDictionary[key];
+                    }
+
+                    if (Equals(bool.Parse(UseMetaKey.ToString()), true))
+                    {
+                        key = "portfolioID";
+                        PortfolioId = merchantConfigDictionary[key];
+                        if(Equals(PortfolioId, string.Empty))
+                        {
+                            throw new KeyNotFoundException();
+                        }
                     }
 
                     // OPTIONAL KEYS

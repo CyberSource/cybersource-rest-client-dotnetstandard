@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.1.0</Version>
+    <Version>0.0.1.1</Version>
     <Authors>CyberSource</Authors>
     <Product>Authentication_SDK</Product>
     <Description />

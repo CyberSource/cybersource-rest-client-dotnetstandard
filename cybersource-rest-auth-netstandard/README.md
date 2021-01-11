@@ -110,7 +110,7 @@ _configurationDictionary.Add("runEnvironment", "cybersource.environment.sandbox"
 
 * To get started using this SDK, it is highly recommended to download our [sample code repository](https://github.com/CyberSource/cybersource-rest-samples-csharp).
 
-* In that respository, we have comprehensive code samples for all common uses of our API.
+* In that repository, we have comprehensive code samples for all common uses of our API.
 
 * Additionally, you can find details and examples of how our API is structured in our [Developer Center API Reference](https://developer.cybersource.com/api/reference/api-reference.html).
 

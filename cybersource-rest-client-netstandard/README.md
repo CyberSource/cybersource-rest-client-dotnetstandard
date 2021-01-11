@@ -26,7 +26,7 @@ To get started using this SDK, it's highly recommended to download our sample co
 
 * Cybersource .NET Core Sample Code Repository (on GitHub) <!-- [Cybersource .NET Core Sample Code Repository (on GitHub)](https://github.com/CyberSource/cybersource-rest-samples-csharp) -->
 
-In that respository, we have comprehensive sample codes for all common uses of our API.
+In that repository, we have comprehensive sample codes for all common uses of our API.
 
 Additionally, you can find details and examples of how our API is structured in our API Reference Guide:
 

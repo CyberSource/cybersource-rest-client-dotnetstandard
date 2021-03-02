@@ -1,6 +1,7 @@
 ﻿using System;
 using AuthenticationSdk.authentication.http;
 using AuthenticationSdk.authentication.jwt;
+using AuthenticationSdk.authentication.oauth;
 using AuthenticationSdk.util;
 using NLog;
 
@@ -97,6 +98,45 @@ namespace AuthenticationSdk.core
                     }
 
                     _logger.Trace("{0} {1}", "Authorization:", tokenObj.BearerToken);
+
+                    return tokenObj;
+                }
+
+                return null;
+            }
+            catch (Exception e)
+            {
+                ExceptionUtility.Exception(e.Message, e.StackTrace);
+                return null;
+            }
+        }
+
+        /**
+         * @return a OAuthToken object (OAuth Bearer Token), 
+         * based on the Merchant Configuration passed to the Constructor of Authorize Class
+         */
+        public OAuthToken GetOAuthToken()
+        {
+            try
+            {
+                if (_merchantConfig != null)
+                {
+                    LogMerchantDetails();
+
+                    Enumerations.ValidateRequestType(_merchantConfig.RequestType);
+
+                    var tokenObj = (OAuthToken)new OAuthTokenGenerator(_merchantConfig).GetToken();
+
+                    if (_merchantConfig.IsGetRequest || _merchantConfig.IsDeleteRequest)
+                    {
+                        _logger.Trace("{0} {1}", "Content-Type:", "application/json");
+                    }
+                    else if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
+                    {
+                        _logger.Trace("{0} {1}", "Content-Type:", "application/hal+json");
+                    }
+
+                    _logger.Trace("{0} {1}", "Authorization:", tokenObj.AccessToken);
 
                     return tokenObj;
                 }

@@ -8,7 +8,9 @@ namespace AuthenticationSdk.util
         public enum AuthenticationType
         {
             HTTP_SIGNATURE,
-            JWT
+            JWT,
+            MUTUAL_AUTH,
+            OAUTH
         }
 
         public enum RequestType

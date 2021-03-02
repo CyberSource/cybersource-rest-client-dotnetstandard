@@ -42,6 +42,8 @@ Configure the following information in `App.Config` file
 
 * LogFilename: Merchant will provide log file name.
 
+* Use Meta Key: Set to false
+
 ```lang-none
    authenticationType  = http_Signature
    merchantID          = <merchantID>
@@ -52,6 +54,7 @@ Configure the following information in `App.Config` file
    logDirectory        = <logDirectory>
    logMaximumSize      = <size>
    logFilename         = <logFilename>
+   useMetaKey          = false
 ```
 
 ### JWT Authentication
@@ -78,6 +81,8 @@ Configure the following information in the `App.Config` file
 
 * LogFilename: Merchant will provide log file name.
 
+* Use Meta Key: Set to false
+
 ```lang-none
    authenticationType  = Jwt
    merchantID          = <merchantID>
@@ -90,6 +95,47 @@ Configure the following information in the `App.Config` file
    logDirectory        = <logDirectory>
    logMaximumSize      = <size>
    logFilename         = <logFilename>
+   useMetaKey          = false
+```
+
+  #### For using MetaKey
+
+  MetaKey can be used for HTTP Signature and JWT authentication
+  Configure the following information in App.config file  
+
+  For HTTP Signature Authentication - 
+* Authentication Type:  Merchant should enter "HTTP".
+* Merchant ID: Merchant will provide the child merchant ID under the Portfolio ID, which has taken from EBC portal.
+* MerchantSecretKey: Merchant will provide the secret Meta Key value, which has taken from EBC portal.
+* MerchantKeyId:  Merchant will provide the Meta Key ID value, which has taken from EBC portal.
+* PortfolioId: Merchant will provide the Portfolio ID, taken from EBC portal.
+* Use Meta Key: Set it to true to use Meta Key.
+
+```lang-none
+   authenticationType  = http_Signature
+   merchantID          = <child merchantID>  
+   merchantKeyId       = <MetaKey merchantKeyId>
+   merchantsecretKey   = <Metakey merchantsecretKey>
+   useMetaKey          = true
+   portfolioID         = <Portfolio ID>
+```
+
+  For JWT Authentication - 
+* Authentication Type:  Merchant should enter "JWT".
+* Merchant ID: Merchant will provide the child merchant ID under the Portfolio ID, which has taken from EBC portal.
+* keyAlias: Alias of the Merchant ID, to be used while generating the JWT token.
+* keyPassword: Alias of the Portfolio ID password, to be used while generating the JWT token.
+* keyfilepath: Path of the folder where the .P12 file is placed. This file has generated from the EBC portal.
+* Use Meta Key: Set it to true to use Meta Key.
+
+```lang-none
+   authenticationType  = Jwt
+   merchantID          = <child merchantID>   
+   keyAlias            = <keyAlias>
+   keyPassword         = <keyPassword>
+   keyFileName         = <keyFileName>
+   keysDirectory       = <keysDirectory>
+   useMetaKey          = true
 ```
 
 ### Switching between the sandbox environment and the production environment

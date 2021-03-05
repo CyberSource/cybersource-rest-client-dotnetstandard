@@ -76,6 +76,22 @@ namespace AuthenticationSdk.core
 
         public string UseMetaKey { get; set; }
 
+        public string EnableClientCert { get; set; }
+
+        public string ClientCertDirectory { get; set; }
+
+        public string ClientCertFile { get; set; }
+
+        public string ClientCertPassword { get; set; }
+
+        public string ClientId { get; set; }
+
+        public string AccessToken { get; set; }
+
+        public string RefreshToken { get; set; }
+
+        public string ClientSecret { get; set; }
+
         public string AuthenticationType { get; set; }
 
         public string KeyDirectory { get; set; }
@@ -136,6 +152,8 @@ namespace AuthenticationSdk.core
 
         public bool IsJwtTokenAuthType { get; set; }
 
+        public bool IsOAuthTokenAuthType { get; set; }
+
         public static string LogAllproperties(MerchantConfig obj)
         {
             var hiddenProperties = Constants.HideMerchantConfigProps.Split(',');
@@ -170,6 +188,12 @@ namespace AuthenticationSdk.core
             KeyDirectory = merchantConfigSection["keysDirectory"];
             KeyfileName = merchantConfigSection["keyFilename"];
             RunEnvironment = merchantConfigSection["runEnvironment"];
+            EnableClientCert = merchantConfigSection["enableClientCert"];
+            ClientCertDirectory = merchantConfigSection["clientCertDirectory"];
+            ClientCertFile = merchantConfigSection["clientCertFile"];
+            ClientCertPassword = merchantConfigSection["clientCertPassword"];
+            ClientId = merchantConfigSection["clientId"];
+            ClientSecret = merchantConfigSection["clientSecret"];
             KeyAlias = merchantConfigSection["keyAlias"];
             KeyPass = merchantConfigSection["keyPass"];
             EnableLog = merchantConfigSection["enableLog"];
@@ -194,25 +218,31 @@ namespace AuthenticationSdk.core
                 {
                     _propertiesSetUsing = "Dictionary Object";
 
-                    // MANDATORY KEYS
-                    key = "merchantID";
-                    MerchantId = merchantConfigDictionary[key];
+                    // MANDATORY KEYS                    
                     key = "runEnvironment";
                     RunEnvironment = merchantConfigDictionary[key];
                     key = "authenticationType";
                     AuthenticationType = merchantConfigDictionary[key];
+
                     key = "useMetaKey";
-                    UseMetaKey = merchantConfigDictionary[key];
-                    if(string.IsNullOrEmpty(UseMetaKey))
+                    UseMetaKey = "false";
+                    if (merchantConfigDictionary.ContainsKey(key))
                     {
-                        UseMetaKey = "false";
+                        UseMetaKey = merchantConfigDictionary[key];
+                        if (string.IsNullOrEmpty(UseMetaKey))
+                        {
+                            UseMetaKey = "false";
+                        }
                     }
+                    
 
                     Enumerations.AuthenticationType authTypeInput;
                     Enum.TryParse(AuthenticationType.ToUpper(), out authTypeInput);
 
                     if (Equals(authTypeInput, Enumerations.AuthenticationType.HTTP_SIGNATURE))
                     {
+                        key = "merchantID";
+                        MerchantId = merchantConfigDictionary[key];
                         key = "merchantsecretKey";
                         MerchantSecretKey = merchantConfigDictionary[key];
                         key = "merchantKeyId";
@@ -233,6 +263,8 @@ namespace AuthenticationSdk.core
                     // only if the key is passed read the value, otherwise use default / null values
                     if (Equals(authTypeInput, Enumerations.AuthenticationType.JWT))
                     {
+                        key = "merchantID";
+                        MerchantId = merchantConfigDictionary[key];
                         if (merchantConfigDictionary.ContainsKey("keyAlias"))
                         {
                             KeyAlias = merchantConfigDictionary["keyAlias"];
@@ -251,6 +283,96 @@ namespace AuthenticationSdk.core
                         if (merchantConfigDictionary.ContainsKey("keysDirectory"))
                         {
                             KeyDirectory = merchantConfigDictionary["keysDirectory"];
+                        }
+                    }
+
+                    if(Equals(authTypeInput, Enumerations.AuthenticationType.OAUTH))
+                    {
+                        IsOAuthTokenAuthType = true;
+                        key = "accessToken";
+                        if (merchantConfigDictionary.ContainsKey(key) && !string.IsNullOrEmpty(merchantConfigDictionary[key]))
+                        {
+                            AccessToken = merchantConfigDictionary[key];
+                        }
+                        else
+                        {
+                            throw new KeyNotFoundException();
+                        }
+
+                        key = "refreshToken";
+                        if (merchantConfigDictionary.ContainsKey(key) && !string.IsNullOrEmpty(merchantConfigDictionary[key]))
+                        {
+                            RefreshToken = merchantConfigDictionary[key];
+                        }
+                        else
+                        {
+                            throw new KeyNotFoundException();
+                        }
+                    }
+
+                    if (Equals(authTypeInput, Enumerations.AuthenticationType.MUTUAL_AUTH))
+                    {
+                        key = "clientId";
+                        if (merchantConfigDictionary.ContainsKey(key) && !string.IsNullOrEmpty(merchantConfigDictionary[key]))
+                        {
+                            ClientId = merchantConfigDictionary[key];
+                        }
+                        else
+                        {
+                            throw new KeyNotFoundException();
+                        }
+
+                        key = "clientSecret";
+                        if (merchantConfigDictionary.ContainsKey(key) && !string.IsNullOrEmpty(merchantConfigDictionary[key]))
+                        {
+                            ClientSecret = merchantConfigDictionary[key];
+                        }
+                        else
+                        {
+                            throw new KeyNotFoundException();
+                        }
+                    }
+
+                    key = "enableClientCert";
+                    if (merchantConfigDictionary.ContainsKey(key) && !string.IsNullOrEmpty(merchantConfigDictionary[key]))
+                    {
+                        EnableClientCert = merchantConfigDictionary[key];
+                    }
+                    else
+                    {
+                        EnableClientCert = "false";
+                    }
+
+                    if(Equals(bool.Parse(EnableClientCert.ToString()), true))
+                    {
+                        key = "clientCertFile";
+                        if (merchantConfigDictionary.ContainsKey(key) && !string.IsNullOrEmpty(merchantConfigDictionary[key]))
+                        {
+                            ClientCertFile = merchantConfigDictionary[key];
+                        }
+                        else
+                        {
+                            throw new KeyNotFoundException();
+                        }
+
+                        key = "clientCertPassword";
+                        if (merchantConfigDictionary.ContainsKey(key) && !string.IsNullOrEmpty(merchantConfigDictionary[key]))
+                        {
+                            ClientCertPassword = merchantConfigDictionary[key];
+                        }
+                        else
+                        {
+                            throw new KeyNotFoundException();
+                        }
+
+                        key = "clientCertDirectory";
+                        if (merchantConfigDictionary.ContainsKey(key) && !string.IsNullOrEmpty(merchantConfigDictionary[key]))
+                        {
+                            ClientCertDirectory = merchantConfigDictionary[key];
+                        }
+                        else
+                        {
+                            throw new KeyNotFoundException();
                         }
                     }
 
@@ -314,12 +436,7 @@ namespace AuthenticationSdk.core
 
         private void ValidateProperties()
         {
-            // VALIDATIONS COMMON FOR BOTH AUTH MECH.
-            if (string.IsNullOrEmpty(MerchantId))
-            {
-                throw new Exception($"{Constants.ErrorPrefix} Merchant Config field - MerchantID is Mandatory");
-            }
-
+            
             // Validating and setting up Authentication type
             Enumerations.ValidateAuthenticationType(AuthenticationType);
 
@@ -369,6 +486,18 @@ namespace AuthenticationSdk.core
             {
                 HostName = Constants.IDCProdHostName;
             }
+            else if (RunEnvironmentTester.Equals(Constants.CybsMutualAuthProdRunEnv.ToUpper()))
+            {
+                HostName = Constants.CybsMutualAuthProdHostName;
+            }
+            else if (RunEnvironmentTester.Equals(Constants.CybsMutualAuthSandboxRunEnv.ToUpper()))
+            {
+                HostName = Constants.CybsMutualAuthSandboxHostName;
+            }
+            else if (RunEnvironmentTester.Equals(Constants.SitMutualAuthRunEnv.ToUpper()))
+            {
+                HostName = Constants.SitMutualAuthHostName;
+            }
             else
             {
                 HostName = RunEnvironment.ToLower();
@@ -378,6 +507,11 @@ namespace AuthenticationSdk.core
             // 1. FOR HTTP SIGNATURE
             if (IsHttpSignAuthType)
             {
+                if (string.IsNullOrEmpty(MerchantId))
+                {
+                    throw new Exception($"{Constants.ErrorPrefix} Merchant Config field - MerchantID is Mandatory");
+                }
+
                 if (string.IsNullOrEmpty(MerchantKeyId))
                 {
                     throw new Exception($"{Constants.ErrorPrefix} Merchant Config field - MerchantKeyId is Mandatory");
@@ -392,6 +526,11 @@ namespace AuthenticationSdk.core
             // 2. FOR JWT TOKEN
             else if (IsJwtTokenAuthType)
             {
+                if (string.IsNullOrEmpty(MerchantId))
+                {
+                    throw new Exception($"{Constants.ErrorPrefix} Merchant Config field - MerchantID is Mandatory");
+                }
+
                 if (string.IsNullOrEmpty(KeyAlias))
                 {
                     KeyAlias = MerchantId;

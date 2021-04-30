@@ -60,9 +60,9 @@ In order to use OAuth, set the run environment to OAuth enabled URLs. OAuth only
 
 ```csharp
    // For TESTING use
-   _configurationDictionary.Add("runEnvironment", "cybersource.environment.mutualauth.sandbox")
+    _configurationDictionary.Add("runEnvironment", "api-matest.cybersource.com")
    // For PRODUCTION use
-   // _configurationDictionary.Add("runEnvironment", "cybersource.environment.mutualauth.production")
+    // _configurationDictionary.Add("runEnvironment", "api-ma.cybersource.com")
 ```
 
 ### Switching between the sandbox environment and the production environment
@@ -71,10 +71,10 @@ Cybersource maintains a complete sandbox environment for testing and development
 
 ```csharp
 // For TESTING use
-_configurationDictionary.Add("runEnvironment", "cybersource.environment.sandbox");
+	_configurationDictionary.Add("runEnvironment", "apitest.cybersource.com");
 
 // For PRODUCTION use
-// _configurationDictionary.Add("runEnvironment", "cybersource.environment.production");
+	// _configurationDictionary.Add("runEnvironment", "api.cybersource.com");
 ```
 
 API credentials are different for each environment, so be sure to switch to the appropriate credentials when switching environments.

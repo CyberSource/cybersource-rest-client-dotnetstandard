@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <Reference Include="Cybersource.Authentication.NetStandard">
-      <HintPath>..\..\AuthenticationSdk\AuthenticationSdk\bin\Debug\netstandard2.1\Cybersource.Authentication.NetStandard.dll</HintPath>
+      <HintPath>..\..\AuthenticationSdk\AuthenticationSdk\bin\Release\netstandard2.1\Cybersource.Authentication.NetStandard.dll</HintPath>
     </Reference>
   </ItemGroup>
 

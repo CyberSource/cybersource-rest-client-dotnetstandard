@@ -146,10 +146,10 @@ For example:
 
 ```csharp
 // For TESTING use
-_configurationDictionary.Add("runEnvironment", "cybersource.environment.sandbox");
+_configurationDictionary.Add("runEnvironment", "apitest.cybersource.com");
 
 // For PRODUCTION use
-// _configurationDictionary.Add("runEnvironment", "cybersource.environment.production");
+// _configurationDictionary.Add("runEnvironment", "api.cybersource.com");
 ```
 
 ## SDK Usage Examples and Sample Code

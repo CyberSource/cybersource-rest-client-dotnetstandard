@@ -459,49 +459,12 @@ namespace AuthenticationSdk.core
             {
                 throw new Exception($"{Constants.ErrorPrefix} Merchant Config field - RunEnvironment is Mandatory");
             }
+            else if (Constants.OldRunEnvironmentConstants.Contains(RunEnvironment.ToUpper()))
+            {
+                throw new Exception($"{Constants.DeprecationPrefix} The value \"{RunEnvironment}\" for this field `RunEnvironment` has been deprecated and will not be used anymore.\n\nPlease refer to the README file [ https://github.com/CyberSource/cybersource-rest-samples-csharp/blob/master/README.md ] for information about the new values that are accepted.");
+            }
 
-            var RunEnvironmentTester = RunEnvironment.ToUpper();
-
-            if (RunEnvironmentTester.Equals(Constants.CybsSandboxRunEnv.ToUpper()))
-            {
-                HostName = Constants.CybsSandboxHostName;
-            }
-            else if (RunEnvironmentTester.Equals(Constants.CybsProdRunEnv.ToUpper()))
-            {
-                HostName = Constants.CybsProdHostName;
-            }
-            else if (RunEnvironmentTester.Equals(Constants.BoASandboxRunEnv.ToUpper()))
-            {
-                HostName = Constants.BoASandboxHostName;
-            }
-            else if (RunEnvironmentTester.Equals(Constants.BoAProdRunEnv.ToUpper()))
-            {
-                HostName = Constants.BoAProdHostName;
-            }
-            else if (RunEnvironmentTester.Equals(Constants.IDCSandboxRunEnv.ToUpper()))
-            {
-                HostName = Constants.IDCSandboxHostName;
-            }
-            else if (RunEnvironmentTester.Equals(Constants.IDCProdRunEnv.ToUpper()))
-            {
-                HostName = Constants.IDCProdHostName;
-            }
-            else if (RunEnvironmentTester.Equals(Constants.CybsMutualAuthProdRunEnv.ToUpper()))
-            {
-                HostName = Constants.CybsMutualAuthProdHostName;
-            }
-            else if (RunEnvironmentTester.Equals(Constants.CybsMutualAuthSandboxRunEnv.ToUpper()))
-            {
-                HostName = Constants.CybsMutualAuthSandboxHostName;
-            }
-            else if (RunEnvironmentTester.Equals(Constants.SitMutualAuthRunEnv.ToUpper()))
-            {
-                HostName = Constants.SitMutualAuthHostName;
-            }
-            else
-            {
                 HostName = RunEnvironment.ToLower();
-            }
 
             // AUTHENTICATION MECHANISM SPECIFIC CHECKS
             // 1. FOR HTTP SIGNATURE

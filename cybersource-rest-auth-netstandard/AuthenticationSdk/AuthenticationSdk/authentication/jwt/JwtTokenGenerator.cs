@@ -54,7 +54,7 @@ namespace AuthenticationSdk.authentication.jwt
 
         private string TokenForCategory1()
         {
-            var jwtBody = "{ \"iat\":\"" + DateTime.Now.ToUniversalTime().ToString("r") + "\"}";
+            var jwtBody = $"{{ \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\"}}";
 
             var x5Cert = _jwtToken.Certificate;
 
@@ -82,7 +82,7 @@ namespace AuthenticationSdk.authentication.jwt
         {
             var digest = GenerateDigest(_jwtToken.RequestJsonData);
 
-            var jwtBody = "{\n            \"digest\":\"" + digest + "\", \"digestAlgorithm\":\"SHA-256\", \"iat\":\"" + DateTime.Now.ToUniversalTime().ToString("r") + "\"}";
+            var jwtBody = $"{{\n            \"digest\":\"{digest}\", \"digestAlgorithm\":\"SHA-256\", \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\"}}";
 
             var x5Cert = _jwtToken.Certificate;
 

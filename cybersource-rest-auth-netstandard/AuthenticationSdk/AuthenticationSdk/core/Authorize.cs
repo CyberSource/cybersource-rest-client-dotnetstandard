@@ -12,7 +12,7 @@ namespace AuthenticationSdk.core
     *===============================================================================*/
     public class Authorize
     {
-        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
+        private static Logger _logger;
         private readonly MerchantConfig _merchantConfig;
 
         public Authorize(MerchantConfig merchantConfig)
@@ -20,6 +20,11 @@ namespace AuthenticationSdk.core
             _merchantConfig = merchantConfig;
             Enumerations.ValidateRequestType(_merchantConfig.RequestType);
             Enumerations.SetRequestType(_merchantConfig);
+
+            if (_logger == null)
+            {
+                _logger = LogManager.GetCurrentClassLogger();
+            }
         }
 
         /**
@@ -36,28 +41,32 @@ namespace AuthenticationSdk.core
 
                     Enumerations.ValidateRequestType(_merchantConfig.RequestType);
 
+                    if (String.IsNullOrEmpty(_merchantConfig.MerchantId) || String.IsNullOrEmpty(_merchantConfig.MerchantKeyId) || String.IsNullOrEmpty(_merchantConfig.MerchantSecretKey))
+                    {
+                        throw new Exception("Missing or Empty Credentials : MerchantID or MerchantKeyID or MerchantSecretKey");
+                    }
+
                     var signatureObj = (HttpToken)new HttpTokenGenerator(_merchantConfig).GetToken();
 
                     if (_merchantConfig.IsGetRequest || _merchantConfig.IsDeleteRequest)
                     {
-                        _logger.Trace("{0} {1}", "Content-Type:", "application/json");
+                        _logger.Debug("Content-Type: application/json");
                     }
+                    else if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
+                    {
+                        _logger.Debug("Content-Type: application/hal+json");
+                    }
+
+                    _logger.Debug($"v-c-merchant-id: {signatureObj.MerchantId}");
+                    _logger.Debug($"Date: {signatureObj.GmtDateTime}");
+                    _logger.Debug($"Host: {signatureObj.HostName}");
 
                     if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
                     {
-                        _logger.Trace("{0} {1}", "Content-Type:", "application/hal+json");
+                        _logger.Debug($"digest: {signatureObj.Digest}");
                     }
 
-                    _logger.Trace("{0} {1}", "v-c-merchant-id:", signatureObj.MerchantId);
-                    _logger.Trace("{0} {1}", "Date:", signatureObj.GmtDateTime);
-                    _logger.Trace("{0} {1}", "Host:", signatureObj.HostName);
-
-                    if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
-                    {
-                        _logger.Trace("{0} {1}", "digest:", signatureObj.Digest);
-                    }
-
-                    _logger.Trace("{0} {1}", "signature:", signatureObj.SignatureParam);
+                    _logger.Debug($"signature: {signatureObj.SignatureParam}");
 
                     return signatureObj;
                 }
@@ -66,8 +75,8 @@ namespace AuthenticationSdk.core
             }
             catch (Exception e)
             {
-                ExceptionUtility.Exception(e.Message, e.StackTrace);
-                return null;
+                _logger.Error(e.Message);
+                throw e;
             }
         }
 
@@ -81,23 +90,27 @@ namespace AuthenticationSdk.core
             {
                 if (_merchantConfig != null)
                 {
-
                     LogMerchantDetails();
 
                     Enumerations.ValidateRequestType(_merchantConfig.RequestType);
+
+                    if (String.IsNullOrEmpty(_merchantConfig.MerchantId) || String.IsNullOrEmpty(_merchantConfig.KeyAlias) || String.IsNullOrEmpty(_merchantConfig.KeyPass))
+                    {
+                        throw new Exception("Missing or Empty Credentials : MerchantID or KeyAlias or KeyPassphrase");
+                    }
 
                     var tokenObj = (JwtToken)new JwtTokenGenerator(_merchantConfig).GetToken();
 
                     if (_merchantConfig.IsGetRequest || _merchantConfig.IsDeleteRequest)
                     {
-                        _logger.Trace("{0} {1}", "Content-Type:", "application/json");
+                        _logger.Debug("Content-Type: application/json");
                     }
                     else if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
                     {
-                        _logger.Trace("{0} {1}", "Content-Type:", "application/hal+json");
+                        _logger.Debug("Content-Type: application/hal+json");
                     }
 
-                    _logger.Trace("{0} {1}", "Authorization:", tokenObj.BearerToken);
+                    _logger.Debug($"Authorization: {tokenObj.BearerToken}");
 
                     return tokenObj;
                 }
@@ -106,8 +119,8 @@ namespace AuthenticationSdk.core
             }
             catch (Exception e)
             {
-                ExceptionUtility.Exception(e.Message, e.StackTrace);
-                return null;
+                _logger.Error(e.Message);
+                throw e;
             }
         }
 
@@ -125,18 +138,23 @@ namespace AuthenticationSdk.core
 
                     Enumerations.ValidateRequestType(_merchantConfig.RequestType);
 
+                    if (String.IsNullOrEmpty(_merchantConfig.AccessToken) || String.IsNullOrEmpty(_merchantConfig.RefreshToken))
+                    {
+                        throw new Exception("Missing or Empty Credentials : AccessToken or RefreshToken");
+                    }
+
                     var tokenObj = (OAuthToken)new OAuthTokenGenerator(_merchantConfig).GetToken();
 
                     if (_merchantConfig.IsGetRequest || _merchantConfig.IsDeleteRequest)
                     {
-                        _logger.Trace("{0} {1}", "Content-Type:", "application/json");
+                        _logger.Debug("Content-Type: application/json");
                     }
                     else if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
                     {
-                        _logger.Trace("{0} {1}", "Content-Type:", "application/hal+json");
+                        _logger.Debug("Content-Type: application/hal+json");
                     }
 
-                    _logger.Trace("{0} {1}", "Authorization:", tokenObj.AccessToken);
+                    _logger.Debug($"Authorization: {tokenObj.AccessToken}");
 
                     return tokenObj;
                 }
@@ -145,8 +163,8 @@ namespace AuthenticationSdk.core
             }
             catch (Exception e)
             {
-                ExceptionUtility.Exception(e.Message, e.StackTrace);
-                return null;
+                _logger.Error(e.Message);
+                throw e;
             }
         }
 
@@ -155,20 +173,21 @@ namespace AuthenticationSdk.core
             try
             {
                 // Using Request Target provided in the sample code/merchantconfig
-                _logger.Trace("Using Request Target:'{0}'", _merchantConfig.RequestTarget);
+                _logger.Debug($"Request Target: '{_merchantConfig.RequestTarget}'");
 
                 // logging Authentication type
-                _logger.Trace("Authentication Type -> {0}", _merchantConfig.AuthenticationType);
+                _logger.Debug($"Authentication Type: {_merchantConfig.AuthenticationType}");
 
                 // logging Request Type
-                _logger.Trace("Request Type -> {0}", _merchantConfig.RequestType);
+                _logger.Debug($"Request Type: {_merchantConfig.RequestType}");
 
                 // Logging all the Properties of MerchantConfig and their respective Values
-                _logger.Trace("MERCHCFG > {0}", MerchantConfig.LogAllproperties(_merchantConfig));
+                _merchantConfig.LogMerchantConfigurationProperties();
             }
             catch (Exception e)
             {
-                ExceptionUtility.Exception(e.Message, e.StackTrace);
+                _logger.Error(e.Message);
+                throw e;
             }
         }
     }

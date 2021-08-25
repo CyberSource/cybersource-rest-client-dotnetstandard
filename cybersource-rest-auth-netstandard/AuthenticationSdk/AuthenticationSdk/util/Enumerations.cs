@@ -27,8 +27,7 @@ namespace AuthenticationSdk.util
             // Validating the Authentication type by comparing with the values in Enum
             if (string.IsNullOrEmpty(authType))
             {
-                throw new Exception(
-                    $"{Constants.ErrorPrefix} No Authentication type provided in config file");
+                throw new Exception($"{Constants.ErrorPrefix} No Authentication type provided in config file");
             }
 
             if (Enum.IsDefined(typeof(AuthenticationType), authType.ToUpper()))
@@ -36,28 +35,24 @@ namespace AuthenticationSdk.util
                 return true;
             }
 
-            throw new Exception(
-                $"{Constants.ErrorPrefix}Invalid Auth type {authType} provided in config file");
+            throw new Exception($"{Constants.ErrorPrefix}Invalid Auth type {authType} provided in config file");
         }
 
         public static bool ValidateRequestType(string requestType)
         {
             if (requestType == null)
             {
-                throw new Exception(
-                    $"{Constants.ErrorPrefix} RequestType has not been set. Set it to any one of the Valid Values: GET/POST/PUT/DELETE");
+                throw new Exception($"{Constants.ErrorPrefix} RequestType has not been set. Set it to any one of the Valid Values: GET/POST/PUT/DELETE");
             }
 
             if (requestType.Trim() == string.Empty)
             {
-                throw new Exception(
-                    $"{Constants.ErrorPrefix} RequestType has been set as blank. Set it to any one of the Valid Values: GET/POST/PUT/DELETE");
+                throw new Exception($"{Constants.ErrorPrefix} RequestType has been set as blank. Set it to any one of the Valid Values: GET/POST/PUT/DELETE");
             }
 
             if (!Enum.IsDefined(typeof(RequestType), requestType.ToUpper()))
             {
-                throw new Exception(
-                    $"{Constants.ErrorPrefix} Invalid Request Type:{requestType} . Valid Values: GET/POST/PUT/DELETE");
+                throw new Exception($"{Constants.ErrorPrefix} Invalid Request Type:{requestType} . Valid Values: GET/POST/PUT/DELETE");
             }
 
             return true;
@@ -81,8 +76,7 @@ namespace AuthenticationSdk.util
             {
                 merchantConfig.IsDeleteRequest = true;
             }
-            else if (string.Equals(merchantConfig.RequestType, RequestType.PATCH.ToString(),
-                StringComparison.OrdinalIgnoreCase))
+            else if (string.Equals(merchantConfig.RequestType, RequestType.PATCH.ToString(), StringComparison.OrdinalIgnoreCase))
             {
                 merchantConfig.IsPatchRequest = true;
             }

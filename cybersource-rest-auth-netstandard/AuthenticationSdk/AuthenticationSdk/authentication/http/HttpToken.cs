@@ -8,11 +8,11 @@ namespace AuthenticationSdk.authentication.http
     {
         public HttpToken(MerchantConfig merchantConfig)
         {
-            // props that don't use merchant config object
+            // Properties that are not dependent on merchant configuration
             SignatureAlgorithm = Constants.SignatureAlgorithm;
-            GmtDateTime = DateTime.Now.ToUniversalTime().ToString("r");            
+            GmtDateTime = DateTime.Now.ToUniversalTime().ToString("r");
 
-            // props that use merchant config object for their values to be set
+            // Properties that are dependent on merchant configuration
             RequestJsonData = merchantConfig.RequestJsonData;
             HostName = merchantConfig.HostName;
             MerchantId = merchantConfig.MerchantId;

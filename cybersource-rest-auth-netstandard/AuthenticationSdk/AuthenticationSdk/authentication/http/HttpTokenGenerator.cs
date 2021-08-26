@@ -44,27 +44,22 @@ namespace AuthenticationSdk.authentication.http
         {
             var signatureString = new StringBuilder();
             var signatureHeaderValue = new StringBuilder();
-            const string getOrDeleteHeaders = "host date (request-target) v-c-merchant-id";            
+            const string getOrDeleteHeaders = "host date (request-target) v-c-merchant-id";
 
-            signatureString.Append('\n');
-            signatureString.Append("host");
-            signatureString.Append(": ");
-            signatureString.Append(_httpToken.HostName);
-            signatureString.Append('\n');
-            signatureString.Append("date");
-            signatureString.Append(": ");
-            signatureString.Append(_httpToken.GmtDateTime);
-            signatureString.Append('\n');
-            signatureString.Append("(request-target)");
-            signatureString.Append(": ");
-            signatureString.Append(_httpToken.HttpSignRequestTarget);
-            signatureString.Append('\n');
-            signatureString.Append("v-c-merchant-id");
-            signatureString.Append(": ");
-            if(_httpToken.UseMetaKey == true)
+            signatureString.Append($"\nhost: {_httpToken.HostName}")
+                           .Append($"\ndate: {_httpToken.GmtDateTime}")
+                           .Append($"\n(request-target): {_httpToken.HttpSignRequestTarget}")
+                           .Append($"\nv-c-merchant-id: ");
+
+            if (_httpToken.UseMetaKey == true)
+            {
                 signatureString.Append(_httpToken.PortfolioId);
+            }
             else
+            {
                 signatureString.Append(_httpToken.MerchantId);
+            }
+
             signatureString.Remove(0, 1);
 
             var signatureByteString = Encoding.UTF8.GetBytes(signatureString.ToString());
@@ -73,10 +68,10 @@ namespace AuthenticationSdk.authentication.http
             var hashmessage = aKeyId.ComputeHash(signatureByteString);
             var base64EncodedSignature = Convert.ToBase64String(hashmessage);
 
-            signatureHeaderValue.Append("keyid=\"" + _httpToken.MerchantKeyId + "\"");
-            signatureHeaderValue.Append(", algorithm=\"" + _httpToken.SignatureAlgorithm + "\"");
-            signatureHeaderValue.Append(", headers=\"" + getOrDeleteHeaders + "\"");
-            signatureHeaderValue.Append(", signature=\"" + base64EncodedSignature + "\"");
+            signatureHeaderValue.Append($"keyid=\"{_httpToken.MerchantKeyId}\"")
+                                .Append($", algorithm=\"{_httpToken.SignatureAlgorithm}\"")
+                                .Append($", headers=\"{getOrDeleteHeaders}\"")
+                                .Append($", signature=\"{base64EncodedSignature}\"");
 
             return signatureHeaderValue.ToString();
         }
@@ -88,29 +83,21 @@ namespace AuthenticationSdk.authentication.http
             _httpToken.Digest = GenerateDigest();
             const string postOrPutHeaders = "host date (request-target) digest v-c-merchant-id";
 
-            signatureString.Append('\n');
-            signatureString.Append("host");
-            signatureString.Append(": ");
-            signatureString.Append(_httpToken.HostName);
-            signatureString.Append('\n');
-            signatureString.Append("date");
-            signatureString.Append(": ");
-            signatureString.Append(_httpToken.GmtDateTime);
-            signatureString.Append('\n');
-            signatureString.Append("(request-target)");
-            signatureString.Append(": ");
-            signatureString.Append(_httpToken.HttpSignRequestTarget);
-            signatureString.Append('\n');
-            signatureString.Append("digest");
-            signatureString.Append(": ");
-            signatureString.Append(_httpToken.Digest);
-            signatureString.Append('\n');
-            signatureString.Append("v-c-merchant-id");
-            signatureString.Append(": ");
+            signatureString.Append($"\nhost: {_httpToken.HostName}")
+                           .Append($"\ndate: {_httpToken.GmtDateTime}")
+                           .Append($"\n(request-target): {_httpToken.HttpSignRequestTarget}")
+                           .Append($"\ndigest: {_httpToken.Digest}")
+                           .Append($"\nv-c-merchant-id: ");
+
             if (_httpToken.UseMetaKey == true)
+            {
                 signatureString.Append(_httpToken.PortfolioId);
+            }
             else
+            {
                 signatureString.Append(_httpToken.MerchantId);
+            }
+
             signatureString.Remove(0, 1);
 
             var signatureByteString = Encoding.UTF8.GetBytes(signatureString.ToString());
@@ -119,10 +106,10 @@ namespace AuthenticationSdk.authentication.http
             var hashmessage = aKeyId.ComputeHash(signatureByteString);
             var base64EncodedSignature = Convert.ToBase64String(hashmessage);
 
-            signatureHeaderValue.Append("keyid=\"" + _httpToken.MerchantKeyId + "\"");
-            signatureHeaderValue.Append(", algorithm=\"" + _httpToken.SignatureAlgorithm + "\"");
-            signatureHeaderValue.Append(", headers=\"" + postOrPutHeaders + "\"");
-            signatureHeaderValue.Append(", signature=\"" + base64EncodedSignature + "\"");
+            signatureHeaderValue.Append($"keyid=\"{_httpToken.MerchantKeyId}\"")
+                                .Append($", algorithm=\"{_httpToken.SignatureAlgorithm}\"")
+                                .Append($", headers=\"{postOrPutHeaders}\"")
+                                .Append($", signature=\"{base64EncodedSignature}\"");
 
             return signatureHeaderValue.ToString();
         }

@@ -15,10 +15,8 @@ namespace AuthenticationSdk.util
             {
                 ObjectCache cache = MemoryCache.Default;
 
-                var cachedCertificateFromP12File = cache["certiFromP12File"] as X509Certificate2;
-
                 // If no entry found from cache, create a cache entry and return the created object
-                if (cachedCertificateFromP12File == null)
+                if (!(cache["certiFromP12File"] is X509Certificate2 cachedCertificateFromP12File))
                 {
                     var policy = new CacheItemPolicy();
                     var filePaths = new List<string>();
@@ -26,9 +24,9 @@ namespace AuthenticationSdk.util
                     filePaths.Add(cachedFilePath);
                     policy.ChangeMonitors.Add(new HostFileChangeMonitor(filePaths));
 
-                    var certi = new X509Certificate2(p12FilePath, keyPassword);
-                    cache.Set("certiFromP12File", certi, policy);
-                    return certi;
+                    var certificate = new X509Certificate2(p12FilePath, keyPassword);
+                    cache.Set("certiFromP12File", certificate, policy);
+                    return certificate;
                 }
 
                 // otherwise return the cache entry
@@ -41,7 +39,7 @@ namespace AuthenticationSdk.util
                     throw new Exception($"{Constants.ErrorPrefix} KeyPassword provided:{keyPassword} is incorrect");
                 }
 
-                return null;
+                throw e;
             }
         }
     }

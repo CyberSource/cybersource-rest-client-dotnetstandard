@@ -9,7 +9,6 @@ using ApiSdk.model;
 using ApiSdk.util;
 using AuthenticationSdk.core;
 using NLog;
-using ExceptionUtil = AuthenticationSdk.util.ExceptionUtility;
 using static AuthenticationSdk.util.Enumerations;
 
 namespace ApiSdk.service
@@ -24,6 +23,7 @@ namespace ApiSdk.service
         private readonly IConnection _conn;
         private int _statusCode;
         private Response _response;
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         public PaymentRequestService(MerchantConfig merchantConfig)
         {
@@ -112,13 +112,13 @@ namespace ApiSdk.service
                 }
                 catch (TaskCanceledException e)
                 {
-                    ExceptionUtil.Exception(
-                        $"{Constants.ErrorPrefix} Network Error: Connection could not be established.",
-                        e.StackTrace);
+                    logger.Error($"{Constants.ErrorPrefix} Network Error: Connection could not be established.");
+                    logger.Error(e.StackTrace);
                 }
                 catch (Exception e)
                 {
-                    ExceptionUtil.Exception(e.Message, e.StackTrace);
+                    logger.Error(e.Message);
+                    logger.Error(e.StackTrace);
                 }
             }
         }
@@ -156,13 +156,13 @@ namespace ApiSdk.service
                 }
                 catch (TaskCanceledException e)
                 {
-                    ExceptionUtil.Exception(
-                        $"{Constants.ErrorPrefix} Network Error: Connection could not be established.",
-                        e.StackTrace);
+                    logger.Error($"{Constants.ErrorPrefix} Network Error: Connection could not be established.");
+                    logger.Error(e.StackTrace);
                 }
                 catch (Exception e)
                 {
-                    ExceptionUtil.Exception(e.Message, e.StackTrace);
+                    logger.Error(e.Message);
+                    logger.Error(e.StackTrace);
                 }
             }
         }
@@ -200,13 +200,13 @@ namespace ApiSdk.service
                 }
                 catch (TaskCanceledException e)
                 {
-                    ExceptionUtil.Exception(
-                        $"{Constants.ErrorPrefix} Network Error: Connection could not be established.",
-                        e.StackTrace);
+                    logger.Error($"{Constants.ErrorPrefix} Network Error: Connection could not be established.");
+                    logger.Error(e.StackTrace);
                 }
                 catch (Exception e)
                 {
-                    ExceptionUtil.Exception(e.Message, e.StackTrace);
+                    logger.Error(e.Message);
+                    logger.Error(e.StackTrace);
                 }
             }
         }
@@ -237,13 +237,13 @@ namespace ApiSdk.service
                 }
                 catch (TaskCanceledException e)
                 {
-                    ExceptionUtil.Exception(
-                        $"{Constants.ErrorPrefix} Network Error: Connection could not be established.",
-                        e.StackTrace);
+                    logger.Error($"{Constants.ErrorPrefix} Network Error: Connection could not be established.");
+                    logger.Error(e.StackTrace);
                 }
                 catch (Exception e)
                 {
-                    ExceptionUtil.Exception(e.Message, e.StackTrace);
+                    logger.Error(e.Message);
+                    logger.Error(e.StackTrace);
                 }
             }
         }

@@ -18,14 +18,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CyberSource.Authentication.NetStandard" Version="0.0.1.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="NLog" Version="4.7.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Cybersource.Authentication.NetStandard">
-      <HintPath>..\..\AuthenticationSdk\AuthenticationSdk\bin\Release\netstandard2.1\Cybersource.Authentication.NetStandard.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

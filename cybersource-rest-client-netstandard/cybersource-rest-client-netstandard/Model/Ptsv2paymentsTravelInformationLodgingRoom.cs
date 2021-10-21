@@ -139,12 +139,6 @@ namespace CyberSource.Model
         /// <returns>Validation Result</returns>
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // DailyRate (string) maxLength
-            if(this.DailyRate != null && this.DailyRate.Length >= 8)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DailyRate, length must be less than or equal to 8.", new [] { "DailyRate" });
-            }
-
             // NumberOfNights (int?) maximum
             if(this.NumberOfNights >= (int?)9999)
             {

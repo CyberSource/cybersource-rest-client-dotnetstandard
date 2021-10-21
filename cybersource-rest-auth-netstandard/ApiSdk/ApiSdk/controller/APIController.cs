@@ -39,7 +39,8 @@ namespace ApiSdk.controller
             }
             catch (Exception e)
             {
-                ExceptionUtility.Exception(e.Message, e.StackTrace);
+                this._logger.Error(e.Message);
+                this._logger.Error(e.StackTrace);
                 return null;
             }
         }
@@ -60,7 +61,8 @@ namespace ApiSdk.controller
             }
             catch (Exception e)
             {
-                ExceptionUtility.Exception(e.Message, e.StackTrace);
+                this._logger.Error(e.Message);
+                this._logger.Error(e.StackTrace);
                 return null;
             }
         }
@@ -81,7 +83,8 @@ namespace ApiSdk.controller
             }
             catch (Exception e)
             {
-                ExceptionUtility.Exception(e.Message, e.StackTrace);
+                this._logger.Error(e.Message);
+                this._logger.Error(e.StackTrace);
                 return null;
             }
         }
@@ -102,7 +105,8 @@ namespace ApiSdk.controller
             }
             catch (Exception e)
             {
-                ExceptionUtility.Exception(e.Message, e.StackTrace);
+                this._logger.Error(e.Message);
+                this._logger.Error(e.StackTrace);
                 return null;
             }
         }

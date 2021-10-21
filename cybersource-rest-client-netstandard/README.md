@@ -59,9 +59,9 @@ For more detailed information on OAuth, refer to the documentation at [Cybersour
 In order to use OAuth, set the run environment to OAuth enabled URLs. OAuth only works in these run environments.
 
 ```csharp
-   // For TESTING use
+    // For TESTING use
     _configurationDictionary.Add("runEnvironment", "api-matest.cybersource.com")
-   // For PRODUCTION use
+    // For PRODUCTION use
     // _configurationDictionary.Add("runEnvironment", "api-ma.cybersource.com")
 ```
 
@@ -70,14 +70,21 @@ In order to use OAuth, set the run environment to OAuth enabled URLs. OAuth only
 Cybersource maintains a complete sandbox environment for testing and development purposes. This sandbox environment is an exact duplicate of our production environment with the transaction authorization and settlement process simulated. By default, this SDK is configured to communicate with the sandbox environment. To switch to the production environment, set the `runEnvironment` property in the SDK Configuration. See our sample at [Sample Configuration file](https://github.com/CyberSource/cybersource-rest-samples-csharp/blob/master/Source/Configuration.cs).
 
 ```csharp
-// For TESTING use
-	_configurationDictionary.Add("runEnvironment", "apitest.cybersource.com");
-
-// For PRODUCTION use
-	// _configurationDictionary.Add("runEnvironment", "api.cybersource.com");
+    // For TESTING use
+    _configurationDictionary.Add("runEnvironment", "apitest.cybersource.com");
+    // For PRODUCTION use
+    // _configurationDictionary.Add("runEnvironment", "api.cybersource.com");
 ```
 
 API credentials are different for each environment, so be sure to switch to the appropriate credentials when switching environments.
+
+### Logging
+
+[![Generic badge](https://img.shields.io/badge/LOGGING-NEW-GREEN.svg)](https://shields.io/)
+
+Since v0.0.1.7, a new logging framework has been introduced in the SDK. This new logging framework makes use of NLog, and standardizes the logging so that it can be integrated with the logging in the client application.
+
+More information about this new logging framework can be found in this file : [Logging.md](Logging.md)
 
 ## License
 

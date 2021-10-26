@@ -178,12 +178,6 @@ namespace CyberSource.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for CategoryCode, must be a value less than or equal to 9999.", new [] { "CategoryCode" });
             }
 
-            // VatRegistrationNumber (string) maxLength
-            if(this.VatRegistrationNumber != null && this.VatRegistrationNumber.Length >= 21)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for VatRegistrationNumber, length must be less than or equal to 21.", new [] { "VatRegistrationNumber" });
-            }
-
             yield break;
         }
     }

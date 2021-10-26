@@ -180,12 +180,6 @@ namespace CyberSource.Model
                 yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TotalCaptureCount, must be a value greater than or equal to 1.", new [] { "TotalCaptureCount" });
             }
 
-            // DateToCapture (string) maxLength
-            if(this.DateToCapture != null && this.DateToCapture.Length >= 4)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DateToCapture, length must be less than or equal to 4.", new [] { "DateToCapture" });
-            }
-
             yield break;
         }
     }

@@ -69,5 +69,8 @@ del ..\mono_nunit_test.sh
 del ..\README.md
 
 rd /s /q ..\src
+git checkout ..\Api\OAuthApi.cs
+git checkout ..\Model\AccessTokenResponse.cs
+git checkout ..\Model\CreateAccessTokenRequest.cs
 
 pause

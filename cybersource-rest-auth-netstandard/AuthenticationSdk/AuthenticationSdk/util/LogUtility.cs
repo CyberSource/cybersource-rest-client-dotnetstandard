@@ -12,8 +12,27 @@ namespace AuthenticationSdk.util
         private static Dictionary<string, string> sensitiveTags = new Dictionary<string, string>();
         private static Dictionary<string, string> authenticationTags = new Dictionary<string, string>();
 
+        /// <summary>
+        /// mutex to ensure that the operation is thread safe
+        /// </summary>
+        private static readonly object mutex = new object();
+
+        /// <summary>
+        /// check if the dictionaries have already been loaded
+        /// </summary>
+        private static bool loaded = false;
+
+
         private static void LoadSensitiveDataConfiguration()
         {
+            lock (mutex)
+            {
+                if (loaded)
+                {
+                    //only load once as otherwise another thread could be iterating over the dictionaries whilst attempting to reload the dictionaries
+                    return;
+                }
+
             sensitiveTags.Clear();
             authenticationTags.Clear();
 
@@ -56,6 +75,9 @@ namespace AuthenticationSdk.util
 
                 authenticationTags.Add(pattern, replacement);
             }
+
+                loaded = true;
+            }
         }
 
         public static string MaskSensitiveData(string str)
@@ -77,6 +99,11 @@ namespace AuthenticationSdk.util
 
         public static bool IsMaskingEnabled(Logger logger)
         {
+            if (!(logger.Factory.Configuration?.Variables?.ContainsKey("enableMasking") ?? false))
+            {
+                logger.Warn("NLog configuration is missing key/value pair: enableMasking. Assuming true");
+                return true;
+            }
             return logger.Factory.Configuration.Variables["enableMasking"].ToString().ToLower().Contains("true");
         }
 

@@ -9,10 +9,10 @@ namespace AuthenticationSdk.util
 {
     public class LogUtility
     {
-        private static Dictionary<string, string> sensitiveTags = new Dictionary<string, string>();
-        private static Dictionary<string, string> authenticationTags = new Dictionary<string, string>();
+        private Dictionary<string, string> sensitiveTags = new Dictionary<string, string>();
+        private Dictionary<string, string> authenticationTags = new Dictionary<string, string>();
 
-        private static void LoadSensitiveDataConfiguration()
+        private void LoadSensitiveDataConfiguration()
         {
             sensitiveTags.Clear();
             authenticationTags.Clear();
@@ -58,7 +58,7 @@ namespace AuthenticationSdk.util
             }
         }
 
-        public static string MaskSensitiveData(string str)
+        public string MaskSensitiveData(string str)
         {
             LoadSensitiveDataConfiguration();
 
@@ -75,12 +75,12 @@ namespace AuthenticationSdk.util
             return str;
         }
 
-        public static bool IsMaskingEnabled(Logger logger)
+        public bool IsMaskingEnabled(Logger logger)
         {
             return logger.Factory.Configuration.Variables["enableMasking"].ToString().ToLower().Contains("true");
         }
 
-        public static string ConvertDictionaryToString(Dictionary<string, string> dict)
+        public string ConvertDictionaryToString(Dictionary<string, string> dict)
         {
             var stringBuilder = new StringBuilder();
 

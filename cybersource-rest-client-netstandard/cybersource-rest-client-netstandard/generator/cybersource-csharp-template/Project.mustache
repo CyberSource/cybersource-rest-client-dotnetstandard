@@ -93,9 +93,9 @@
   </ItemGroup>
   {{^netStandard}}
   <ItemGroup>
-      <None Include="packages.config" />
-      <None Include="{{packageName}}.nuspec" />
-      <None Include="README.md" />
+    <None Include="packages.config" />
+    <None Include="{{packageName}}.nuspec" />
+    <None Include="README.md" />
       {{#generatePropertyChanged}}
       <None Include="FodyWeavers.xml" />
       {{/generatePropertyChanged}}

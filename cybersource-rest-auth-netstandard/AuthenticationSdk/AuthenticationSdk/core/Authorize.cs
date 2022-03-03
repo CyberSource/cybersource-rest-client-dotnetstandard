@@ -41,7 +41,7 @@ namespace AuthenticationSdk.core
 
                     Enumerations.ValidateRequestType(_merchantConfig.RequestType);
 
-                    if (String.IsNullOrEmpty(_merchantConfig.MerchantId) || String.IsNullOrEmpty(_merchantConfig.MerchantKeyId) || String.IsNullOrEmpty(_merchantConfig.MerchantSecretKey))
+                    if (string.IsNullOrEmpty(_merchantConfig.MerchantId) || string.IsNullOrEmpty(_merchantConfig.MerchantKeyId) || string.IsNullOrEmpty(_merchantConfig.MerchantSecretKey))
                     {
                         throw new Exception("Missing or Empty Credentials : MerchantID or MerchantKeyID or MerchantSecretKey");
                     }
@@ -94,7 +94,7 @@ namespace AuthenticationSdk.core
 
                     Enumerations.ValidateRequestType(_merchantConfig.RequestType);
 
-                    if (String.IsNullOrEmpty(_merchantConfig.MerchantId) || String.IsNullOrEmpty(_merchantConfig.KeyAlias) || String.IsNullOrEmpty(_merchantConfig.KeyPass))
+                    if (string.IsNullOrEmpty(_merchantConfig.MerchantId) || string.IsNullOrEmpty(_merchantConfig.KeyAlias) || string.IsNullOrEmpty(_merchantConfig.KeyPass))
                     {
                         throw new Exception("Missing or Empty Credentials : MerchantID or KeyAlias or KeyPassphrase");
                     }
@@ -138,7 +138,7 @@ namespace AuthenticationSdk.core
 
                     Enumerations.ValidateRequestType(_merchantConfig.RequestType);
 
-                    if (String.IsNullOrEmpty(_merchantConfig.AccessToken) || String.IsNullOrEmpty(_merchantConfig.RefreshToken))
+                    if (string.IsNullOrEmpty(_merchantConfig.AccessToken) || string.IsNullOrEmpty(_merchantConfig.RefreshToken))
                     {
                         throw new Exception("Missing or Empty Credentials : AccessToken or RefreshToken");
                     }

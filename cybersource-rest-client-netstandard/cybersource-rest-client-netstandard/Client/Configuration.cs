@@ -69,9 +69,9 @@ namespace CyberSource.Client
             if (merchConfigDictObj != null)
             {
                 if (merchConfigDictObj.ContainsKey("useProxy"))
-				{
-					if (bool.Parse(merchConfigDictObj["useProxy"])) 
-					{
+                {
+                    if (bool.Parse(merchConfigDictObj["useProxy"]))
+                    {
 
                         if (!string.IsNullOrWhiteSpace(merchConfigDictObj["proxyAddress"]) && int.TryParse(merchConfigDictObj["proxyPort"], out int proxyPortTest))
                         {
@@ -172,16 +172,10 @@ namespace CyberSource.Client
         {
             if (apiClient == null)
             {
-                if (Default != null && Default.ApiClient == null)
-                    Default.ApiClient = new ApiClient();
-
-                ApiClient = Default != null ? Default.ApiClient : new ApiClient();
+                ApiClient = new ApiClient();
             }
             else
             {
-                if (Default != null && Default.ApiClient == null)
-                    Default.ApiClient = apiClient;
-
                 ApiClient = apiClient;
             }
         }

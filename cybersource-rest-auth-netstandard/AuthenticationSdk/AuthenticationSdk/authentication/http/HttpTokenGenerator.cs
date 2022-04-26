@@ -80,7 +80,10 @@ namespace AuthenticationSdk.authentication.http
         {
             var signatureString = new StringBuilder();
             var signatureHeaderValue = new StringBuilder();
-            _httpToken.Digest = GenerateDigest();
+            if (_merchantConfig.RequestJsonData != null)
+            {
+                _httpToken.Digest = GenerateDigest();
+            }
             const string postOrPutHeaders = "host date (request-target) digest v-c-merchant-id";
 
             signatureString.Append($"\nhost: {_httpToken.HostName}")

@@ -10,6 +10,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>CyberSource.Rest.Client.NetStandard</PackageId>
     <PackageProjectUrl>https://github.com/nofrixion/cybersource-rest-client-dotnetstandard</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/nofrixion/cybersource-rest-client-dotnetstandard</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

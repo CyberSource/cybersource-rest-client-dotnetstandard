@@ -3,21 +3,20 @@ name: CyberSource AuthenticationSDK publish
 on:
   push:
     tags:
-    - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   build:
     runs-on: windows-2022
     name: build and publish
     steps:
+    - name: Support longpaths
+      run: git config --system core.longpaths true
     - uses: actions/checkout@v2
-    - name: Set VERSION variable from tag
-      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
     - name: Install dependencies
-      run: dotnet restore cybersource-rest-auth-netstandard\AuthenticationSdk.sln
+      run: dotnet restore cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk.sln
     - name: Build
-      run: dotnet build cybersource-rest-auth-netstandard\AuthenticationSdk.sln -c Release --no-restore
+      run: dotnet build cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk.sln -c Release --no-restore
     - name: Publish
-      run: dotnet nuget push CyberSource.Authentication.NetStandard.${VERSION}.nupkg --source https://nuget.pkg.github.com/nofrixion/index.json --api-key ${GITHUB_TOKEN}
+      run: dotnet nuget push *.nupkg --source https://nuget.pkg.github.com/nofrixion/index.json --api-key ${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

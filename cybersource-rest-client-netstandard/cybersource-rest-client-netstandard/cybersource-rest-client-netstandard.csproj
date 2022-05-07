@@ -3,12 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>CyberSource</RootNamespace>
-    <Version>0.0.1.14</Version>
-    <Authors>CyberSource</Authors>
+    <Version>0.0.1.15-pre</Version>
+    <Authors>CyberSource and NoFrixion</Authors>
     <Company>CyberSource</Company>
     <Description>A library generated from a Swagger doc</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>CyberSource.Rest.Client.NetStandard</PackageId>
+    <PackageProjectUrl>https://github.com/nofrixion/cybersource-rest-client-dotnetstandard</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -25,7 +26,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CyberSource.Authentication.NetStandard" Version="0.0.1.6" />
+    <PackageReference Include="CyberSource.Authentication.NetStandard" Version="0.0.1.7-pre" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="NLog" Version="4.7.4" />

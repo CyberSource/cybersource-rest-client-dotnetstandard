@@ -1,0 +1,20 @@
+name: CyberSource AuthenticationSDK publish
+
+on:
+  push:
+    tags:
+
+jobs:
+  build:
+    runs-on: windows-2022
+    name: build and publish
+    steps:
+    - name: Support longpaths
+      run: git config --system core.longpaths true
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: dotnet restore cybersource-rest-client-netstandard\cybersource-rest-client-netstandard.sln
+    - name: Build
+      run: dotnet build cybersource-rest-auth-netstandard\cybersource-rest-client-netstandard.sln -c Release --no-restore
+    - name: Publish
+      run: dotnet nuget push **\*.nupkg --source https://nuget.pkg.github.com/nofrixion/index.json --api-key ${{ secrets.GITHUB_TOKEN }}

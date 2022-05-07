@@ -8,9 +8,9 @@ jobs:
     runs-on: windows-2022
     name: build
     steps:
-    - uses: actions/checkout@v2
     - name: Support longpaths
       run: git config --system core.longpaths true
+    - uses: actions/checkout@v2
     - name: Install dependencies
       run: dotnet restore cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk.csproj
     - name: Build

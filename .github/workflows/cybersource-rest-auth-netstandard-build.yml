@@ -12,7 +12,7 @@ jobs:
       run: git config --system core.longpaths true
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: dotnet restore cybersource-rest-auth-netstandard\AuthenticationSdk.sln
+      run: dotnet restore cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk.sln
     - name: Build
-      run: dotnet build cybersource-rest-auth-netstandard\AuthenticationSdk.sln -c Release --no-restore
+      run: dotnet build cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk.sln -c Release --no-restore
 

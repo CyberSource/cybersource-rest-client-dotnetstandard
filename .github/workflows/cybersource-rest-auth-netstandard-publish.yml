@@ -17,6 +17,4 @@ jobs:
     - name: Build
       run: dotnet build cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk.sln -c Release --no-restore
     - name: Publish
-      run: dotnet nuget push *.nupkg --source https://nuget.pkg.github.com/nofrixion/index.json --api-key ${GITHUB_TOKEN}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget push *.nupkg --source https://nuget.pkg.github.com/nofrixion/index.json --api-key ${{ secrets.GITHUB_TOKEN }}

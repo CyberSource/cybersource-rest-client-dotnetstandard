@@ -3,7 +3,7 @@ name: CyberSource REST Client Publish
 on:
   push:
     tags:
-    - '*'
+    - 'c*'
 
 jobs:
   build:

@@ -3,7 +3,7 @@ name: CyberSource AuthenticationSDK publish
 on:
   push:
     tags:
-    - 'a*'
+    - 'auth-*'
 
 jobs:
   build:

@@ -16,5 +16,5 @@ jobs:
     - name: Install dependencies
       run: dotnet restore cybersource-rest-client-netstandard\cybersource-rest-client-netstandard.sln
     - name: Build
-      run: dotnet build cybersource-rest-auth-netstandard\cybersource-rest-client-netstandard.sln -c Release --no-restore
+      run: dotnet build cybersource-rest-client-netstandard\cybersource-rest-client-netstandard.sln -c Release --no-restore
 

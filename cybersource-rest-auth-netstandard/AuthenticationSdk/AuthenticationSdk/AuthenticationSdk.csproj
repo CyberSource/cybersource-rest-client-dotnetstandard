@@ -3,13 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.1.6</Version>
-    <Authors>CyberSource</Authors>
+    <Version>0.0.1.7-pre</Version>
+    <Authors>CyberSource and NoFrixion</Authors>
     <Product>Authentication_SDK</Product>
     <Description />
-    <Copyright>Copyright © 2021</Copyright>
+    <Copyright>Copyright © 2022</Copyright>
     <AssemblyName>Cybersource.Authentication.NetStandard</AssemblyName>
     <PackageId>CyberSource.Authentication.NetStandard</PackageId>
+    <PackageProjectUrl>https://github.com/nofrixion/cybersource-rest-client-dotnetstandard</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/nofrixion/cybersource-rest-client-dotnetstandard</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

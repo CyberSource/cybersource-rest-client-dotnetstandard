@@ -1,0 +1,18 @@
+name: CyberSource AuthenticationSDK Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-2022
+    name: build
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: dotnet restore cybersource-rest-auth-netstandard\AuthenticationSdk.sln
+    - name: Build
+      run: dotnet build cybersource-rest-auth-netstandard\AuthenticationSdk.sln -c Release --no-restore
+

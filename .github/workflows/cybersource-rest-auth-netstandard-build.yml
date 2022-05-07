@@ -2,8 +2,6 @@ name: CyberSource AuthenticationSDK Build
 
 on:
   push:
-    branches:
-      - master
 
 jobs:
   build:
@@ -12,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: dotnet restore cybersource-rest-auth-netstandard\AuthenticationSdk.sln
+      run: dotnet restore cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk.csproj
     - name: Build
-      run: dotnet build cybersource-rest-auth-netstandard\AuthenticationSdk.sln -c Release --no-restore
+      run: dotnet build cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk.csproj -c Release --no-restore
 

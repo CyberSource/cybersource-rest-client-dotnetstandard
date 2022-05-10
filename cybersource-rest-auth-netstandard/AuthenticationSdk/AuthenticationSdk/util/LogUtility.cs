@@ -8,13 +8,15 @@ namespace AuthenticationSdk.util
 {
     public class LogUtility
     {
-        private Dictionary<string, string> sensitiveTags;
-        private Dictionary<string, string> authenticationTags;
+        private static Dictionary<string, string> sensitiveTags = new Dictionary<string, string>();
+        private static Dictionary<string, string> authenticationTags = new Dictionary<string, string>();
 
         public LogUtility()
         {
-            sensitiveTags = new Dictionary<string, string>();
-            authenticationTags = new Dictionary<string, string>();
+            if (!loaded)
+            {
+                LoadSensitiveDataConfiguration();
+            }
         }
 
         /// <summary>
@@ -31,11 +33,6 @@ namespace AuthenticationSdk.util
         {
             lock(mutex)
             {
-                if (loaded)
-                {
-                    return;
-                }
-
                 sensitiveTags.Clear();
                 authenticationTags.Clear();
 
@@ -48,8 +45,6 @@ namespace AuthenticationSdk.util
 
         public string MaskSensitiveData(string str)
         {
-            LoadSensitiveDataConfiguration();
-
             try
             {
                 foreach (KeyValuePair<string, string> tag in sensitiveTags)

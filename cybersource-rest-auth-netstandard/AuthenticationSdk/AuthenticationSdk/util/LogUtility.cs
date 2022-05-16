@@ -45,8 +45,6 @@ namespace AuthenticationSdk.util
 
         public string MaskSensitiveData(string str)
         {
-            string v = str.Replace(" ", "");
-            str = v;
             try
             {
                 foreach (KeyValuePair<string, string> tag in sensitiveTags)

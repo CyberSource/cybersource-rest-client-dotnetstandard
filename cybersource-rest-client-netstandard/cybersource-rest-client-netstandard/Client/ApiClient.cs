@@ -957,7 +957,7 @@ namespace CyberSource.Client
 
             //Set the Configuration
             Configuration.DefaultHeader = authenticationHeaders;
-            RestClient = new RestClient("https://" + merchantConfig.HostName);
+            RestClient.BaseUrl = new Uri("https://" + merchantConfig.HostName);
             
             if (Configuration.Proxy != null)
             {

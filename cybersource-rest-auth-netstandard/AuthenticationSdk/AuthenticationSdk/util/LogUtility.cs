@@ -64,8 +64,8 @@ namespace AuthenticationSdk.util
                         foreach (Match match in matches)
                         {
                             String strr = match.ToString();
-                            strr = Regex.Replace(strr, "\\s*[s/-]*", "");
-
+                            strr = strr.Replace(" ", "");
+                            strr = strr.Replace("-", "");
                             //replace original value in str with match
                             str = str.Replace(match.ToString(), strr);
                         }

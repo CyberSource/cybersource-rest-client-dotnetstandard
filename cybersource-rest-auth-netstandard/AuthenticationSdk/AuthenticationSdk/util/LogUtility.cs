@@ -49,6 +49,27 @@ namespace AuthenticationSdk.util
             {
                 foreach (KeyValuePair<string, string> tag in sensitiveTags)
                 {
+                    //removing the space and hypen from PAN details before masking
+                    if (tag.Key.StartsWith("\\\"number\\\"") || tag.Key.StartsWith("\\\"cardNumber\\\"") || tag.Key.StartsWith("\\\"account\\\"")
+                         || tag.Key.StartsWith("\\\"prefix\\\"") || tag.Key.StartsWith("\\\"bin\\\""))
+                    {
+                        string[] splittedStr = tag.Key.Split(':');
+                        string tagName = splittedStr[0];
+                        string specialPatternForPAN = "(((\\s*[s/-]*\\s*)+)\\p{N}((\\s*[s/-]*\\s*)+))+";
+
+                        // match the patters for PAN number
+                        MatchCollection matches = Regex.Matches(str, $"{tagName}:\\\"{specialPatternForPAN}\\\"");
+
+                        //remove space and dash from the all matched pattern
+                        foreach (Match match in matches)
+                        {
+                            String strr = match.ToString();
+                            strr = strr.Replace(" ", "");
+                            strr = strr.Replace("-", "");
+                            //replace original value in str with match
+                            str = str.Replace(match.ToString(), strr);
+                        }
+                    }
                     str = Regex.Replace(str, tag.Key, tag.Value);
                 }
             }

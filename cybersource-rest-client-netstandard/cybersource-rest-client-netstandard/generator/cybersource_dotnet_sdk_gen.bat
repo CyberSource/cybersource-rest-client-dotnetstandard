@@ -15,6 +15,8 @@ powershell -Command "(Get-Content ..\src\CyberSource\Api\ReportDownloadsApi.cs) 
 
 powershell -Command "(Get-Content ..\src\CyberSource\Api\TransactionBatchesApi.cs) | ForEach-Object { $_ -replace 'null\); \/\/ Return statement', 'localVarResponse.Content); // Return statement' } | Set-Content ..\src\CyberSource\Api\TransactionBatchesApi.cs"
 
+powershell -Command " Set-Content ..\src\CyberSource\Api\SecureFileShareApi.cs ((get-content ..\src\CyberSource\Api\SecureFileShareApi.cs -raw) -replace '\*_\/_\*;charset=utf-8', '*/*;charset=utf-8') "
+
 REM Loading content of excludeList.txt into a space-separated list in a variable
 SETLOCAL EnableDelayedExpansion
 SET excludeList=

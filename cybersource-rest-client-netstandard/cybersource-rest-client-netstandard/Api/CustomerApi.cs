@@ -230,6 +230,7 @@ namespace CyberSource.Api
     {
         private static Logger logger;
         private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private int? _statusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerApi"/> class.
@@ -341,6 +342,25 @@ namespace CyberSource.Api
         }
 
         /// <summary>
+        /// Retrieves the status code being set for the most recently executed API request.
+        /// </summary>
+        /// <returns>Status Code of previous request</returns>
+        public int GetStatusCode()
+        {
+            return this._statusCode == null ? 0 : (int) this._statusCode;
+        }
+
+        /// <summary>
+        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
+        /// </summary>
+        /// <param name="statusCode">Status Code to be set</param>
+        /// <returns></returns>
+        public void SetStatusCode(int? statusCode)
+        {
+            this._statusCode = statusCode;
+        }
+
+        /// <summary>
         /// Delete a Customer 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
@@ -350,6 +370,7 @@ namespace CyberSource.Api
         public void DeleteCustomer (string customerTokenId, string profileId = null)
         {
             logger.Debug("CALLING API \"DeleteCustomer\" STARTED");
+            this.SetStatusCode(null);
             DeleteCustomerWithHttpInfo(customerTokenId, profileId);
         }
 
@@ -431,6 +452,7 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
@@ -446,6 +468,7 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task DeleteCustomerAsync (string customerTokenId, string profileId = null)
         {
             logger.Debug("CALLING API \"DeleteCustomerAsync\" STARTED");
+            this.SetStatusCode(null);
             await DeleteCustomerAsyncWithHttpInfo(customerTokenId, profileId);
 
         }
@@ -528,6 +551,7 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
@@ -542,8 +566,10 @@ namespace CyberSource.Api
         public TmsV2CustomersResponse GetCustomer (string customerTokenId, string profileId = null)
         {
             logger.Debug("CALLING API \"GetCustomer\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<TmsV2CustomersResponse> localVarResponse = GetCustomerWithHttpInfo(customerTokenId, profileId);
             logger.Debug("CALLING API \"GetCustomer\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -640,8 +666,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<TmsV2CustomersResponse> GetCustomerAsync (string customerTokenId, string profileId = null)
         {
             logger.Debug("CALLING API \"GetCustomerAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<TmsV2CustomersResponse> localVarResponse = await GetCustomerAsyncWithHttpInfo(customerTokenId, profileId);
             logger.Debug("CALLING API \"GetCustomerAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -740,8 +768,10 @@ namespace CyberSource.Api
         public TmsV2CustomersResponse PatchCustomer (string customerTokenId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null)
         {
             logger.Debug("CALLING API \"PatchCustomer\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<TmsV2CustomersResponse> localVarResponse = PatchCustomerWithHttpInfo(customerTokenId, patchCustomerRequest, profileId, ifMatch);
             logger.Debug("CALLING API \"PatchCustomer\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -861,8 +891,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<TmsV2CustomersResponse> PatchCustomerAsync (string customerTokenId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null)
         {
             logger.Debug("CALLING API \"PatchCustomerAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<TmsV2CustomersResponse> localVarResponse = await PatchCustomerAsyncWithHttpInfo(customerTokenId, patchCustomerRequest, profileId, ifMatch);
             logger.Debug("CALLING API \"PatchCustomerAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -980,8 +1012,10 @@ namespace CyberSource.Api
         public TmsV2CustomersResponse PostCustomer (PostCustomerRequest postCustomerRequest, string profileId = null)
         {
             logger.Debug("CALLING API \"PostCustomer\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<TmsV2CustomersResponse> localVarResponse = PostCustomerWithHttpInfo(postCustomerRequest, profileId);
             logger.Debug("CALLING API \"PostCustomer\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -1082,8 +1116,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<TmsV2CustomersResponse> PostCustomerAsync (PostCustomerRequest postCustomerRequest, string profileId = null)
         {
             logger.Debug("CALLING API \"PostCustomerAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<TmsV2CustomersResponse> localVarResponse = await PostCustomerAsyncWithHttpInfo(postCustomerRequest, profileId);
             logger.Debug("CALLING API \"PostCustomerAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }

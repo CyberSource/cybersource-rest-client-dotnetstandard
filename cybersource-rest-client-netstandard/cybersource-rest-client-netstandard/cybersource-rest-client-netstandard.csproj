@@ -25,12 +25,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CyberSource.Authentication.NetStandard" Version="0.0.1.8" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NLog" Version="4.7.4" />
     <PackageReference Include="RestSharp" Version="106.12.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Cybersource.Authentication.NetStandard">
+      <HintPath>..\..\cybersource-rest-auth-netstandard\AuthenticationSdk\AuthenticationSdk\bin\Release\netstandard2.1\Cybersource.Authentication.NetStandard.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

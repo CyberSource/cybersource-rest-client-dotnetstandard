@@ -233,9 +233,6 @@ namespace AuthenticationSdk.core
                     RunEnvironment = merchantConfigDictionary[key];
                     key = "authenticationType";
                     AuthenticationType = merchantConfigDictionary[key];
-                    key = "intermediateHost";
-                    IntermediateHost= merchantConfigDictionary[key];
-
                     key = "useMetaKey";
                     UseMetaKey = "false";
                     if (merchantConfigDictionary.ContainsKey(key))
@@ -245,6 +242,11 @@ namespace AuthenticationSdk.core
                         {
                             UseMetaKey = "false";
                         }
+                    }
+                    key = "intermediateHost";
+                    if (merchantConfigDictionary.ContainsKey(key))
+                    {
+                        IntermediateHost = merchantConfigDictionary[key];
                     }
 
                     Enum.TryParse(AuthenticationType.ToUpper(), out Enumerations.AuthenticationType authTypeInput);

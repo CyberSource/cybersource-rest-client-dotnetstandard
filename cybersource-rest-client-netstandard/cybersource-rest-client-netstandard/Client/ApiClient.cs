@@ -401,9 +401,7 @@ namespace CyberSource.Client
                 {
                     logger.Debug($"HTTP Request Headers :\n{headerPrintOutput}");
                 }
-
-                Console.WriteLine($"HTTP Request Headers :\n{headerPrintOutput}");
-
+                
                 InterceptRequest(request);
                 response = (RestResponse) RestClient.Execute(request);
                 InterceptResponse(request, response);

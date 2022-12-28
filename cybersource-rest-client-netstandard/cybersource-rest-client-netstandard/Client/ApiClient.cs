@@ -185,14 +185,17 @@ namespace CyberSource.Client
                 CallAuthenticationHeaders(method.ToString(), path, postBody.ToString());
             }
 
+            
             foreach (var param in Configuration.DefaultHeader)
             {
                 if (param.Key == "Authorization")
                 {
+                    //need to check whether the headers pre exist or not, if yes then delete and override with cybersource expecting value otherwise it will have two duplicate keys 
                     request.AddParameter("Authorization", string.Format("Bearer " + param.Value),
                         ParameterType.HttpHeader);
                 }
                 else
+                    //need to check whether the headers pre exist or not, if yes then delete and override with cybersource expecting value otherwise it will have two duplicate keys
                     request.AddHeader(param.Key, param.Value);
             }
 
@@ -398,6 +401,8 @@ namespace CyberSource.Client
                 {
                     logger.Debug($"HTTP Request Headers :\n{headerPrintOutput}");
                 }
+
+                Console.WriteLine($"HTTP Request Headers :\n{headerPrintOutput}");
 
                 InterceptRequest(request);
                 response = (RestResponse) RestClient.Execute(request);
@@ -915,7 +920,7 @@ namespace CyberSource.Client
                 var httpSign = authorize.GetSignature();
                 authenticationHeaders.Add("v-c-merchant-id", httpSign.MerchantId);
                 authenticationHeaders.Add("Date", httpSign.GmtDateTime);
-                authenticationHeaders.Add("Host", httpSign.HostName);
+                authenticationHeaders.Add("Host", httpSign.HostName); //it should be cybersource
                 authenticationHeaders.Add("Signature", httpSign.SignatureParam);
 
                 if (merchantConfig.IsPostRequest || merchantConfig.IsPutRequest || merchantConfig.IsPatchRequest)
@@ -957,7 +962,16 @@ namespace CyberSource.Client
 
             //Set the Configuration
             Configuration.DefaultHeader = authenticationHeaders;
-            RestClient = new RestClient("https://" + merchantConfig.HostName);
+
+            if (!string.IsNullOrWhiteSpace(merchantConfig.IntermediateHost))
+            {
+                //change with intermediate hostname if present
+                RestClient = new RestClient("https://" + merchantConfig.IntermediateHost);
+            }
+            else
+            {
+                RestClient = new RestClient("https://" + merchantConfig.HostName);
+            }
             
             if (Configuration.Proxy != null)
             {

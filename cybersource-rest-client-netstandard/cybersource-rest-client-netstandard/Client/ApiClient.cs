@@ -190,13 +190,17 @@ namespace CyberSource.Client
             {
                 if (param.Key == "Authorization")
                 {
-                    //need to check whether the headers pre exist or not, if yes then delete and override with cybersource expecting value otherwise it will have two duplicate keys 
                     request.AddParameter("Authorization", string.Format("Bearer " + param.Value),
                         ParameterType.HttpHeader);
                 }
                 else
-                    //need to check whether the headers pre exist or not, if yes then delete and override with cybersource expecting value otherwise it will have two duplicate keys
+                {
+                    if (request.Parameters.Any(x => x.Name == param.Key && x.Type == ParameterType.HttpHeader))
+                    {
+                        continue;
+                    }
                     request.AddHeader(param.Key, param.Value);
+                }
             }
 
             // add query parameter, if any

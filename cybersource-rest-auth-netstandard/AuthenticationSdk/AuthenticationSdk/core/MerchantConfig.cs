@@ -202,7 +202,7 @@ namespace AuthenticationSdk.core
             KeyDirectory = merchantConfigSection["keysDirectory"];
             KeyfileName = merchantConfigSection["keyFilename"];
             RunEnvironment = merchantConfigSection["runEnvironment"];
-            IntermediateHost = merchantConfigSection["intermediateHost"]
+            IntermediateHost = merchantConfigSection["intermediateHost"];
             EnableClientCert = merchantConfigSection["enableClientCert"];
             ClientCertDirectory = merchantConfigSection["clientCertDirectory"];
             ClientCertFile = merchantConfigSection["clientCertFile"];
@@ -232,6 +232,7 @@ namespace AuthenticationSdk.core
                     RunEnvironment = merchantConfigDictionary[key];
                     key = "authenticationType";
                     AuthenticationType = merchantConfigDictionary[key];
+
                     key = "useMetaKey";
                     UseMetaKey = "false";
                     if (merchantConfigDictionary.ContainsKey(key))

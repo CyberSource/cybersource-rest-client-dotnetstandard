@@ -185,7 +185,6 @@ namespace CyberSource.Client
                 CallAuthenticationHeaders(method.ToString(), path, postBody.ToString());
             }
 
-            
             foreach (var param in Configuration.DefaultHeader)
             {
                 if (param.Key == "Authorization")
@@ -405,7 +404,7 @@ namespace CyberSource.Client
                 {
                     logger.Debug($"HTTP Request Headers :\n{headerPrintOutput}");
                 }
-                
+
                 InterceptRequest(request);
                 response = (RestResponse) RestClient.Execute(request);
                 InterceptResponse(request, response);
@@ -922,7 +921,7 @@ namespace CyberSource.Client
                 var httpSign = authorize.GetSignature();
                 authenticationHeaders.Add("v-c-merchant-id", httpSign.MerchantId);
                 authenticationHeaders.Add("Date", httpSign.GmtDateTime);
-                authenticationHeaders.Add("Host", httpSign.HostName); //it should be cybersource
+                authenticationHeaders.Add("Host", httpSign.HostName);
                 authenticationHeaders.Add("Signature", httpSign.SignatureParam);
 
                 if (merchantConfig.IsPostRequest || merchantConfig.IsPutRequest || merchantConfig.IsPatchRequest)

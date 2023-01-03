@@ -202,8 +202,7 @@ namespace AuthenticationSdk.core
             KeyDirectory = merchantConfigSection["keysDirectory"];
             KeyfileName = merchantConfigSection["keyFilename"];
             RunEnvironment = merchantConfigSection["runEnvironment"];
-            IntermediateHost = merchantConfigSection["intermediateHost"];
-            //add property here ---- intermediate host name 
+            IntermediateHost = merchantConfigSection["intermediateHost"]
             EnableClientCert = merchantConfigSection["enableClientCert"];
             ClientCertDirectory = merchantConfigSection["clientCertDirectory"];
             ClientCertFile = merchantConfigSection["clientCertFile"];

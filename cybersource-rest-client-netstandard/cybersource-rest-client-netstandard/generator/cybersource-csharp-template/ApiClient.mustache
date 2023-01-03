@@ -207,7 +207,7 @@ namespace {{packageName}}.Client
                         ParameterType.HttpHeader);
                 }
                 else
-				{
+                {
                     if (request.Parameters.Any(x => x.Name == param.Key && x.Type == ParameterType.HttpHeader))
                     {
                         continue;
@@ -1034,7 +1034,7 @@ namespace {{packageName}}.Client
             //Set the Configuration
             Configuration.DefaultHeader = authenticationHeaders;
 			
-			if (!string.IsNullOrWhiteSpace(merchantConfig.IntermediateHost))
+            if (!string.IsNullOrWhiteSpace(merchantConfig.IntermediateHost))
             {
                 //change with intermediate hostname if present
                 RestClient = new RestClient("https://" + merchantConfig.IntermediateHost);

@@ -967,7 +967,16 @@ namespace CyberSource.Client
             if (!string.IsNullOrWhiteSpace(merchantConfig.IntermediateHost))
             {
                 //change with intermediate hostname if present
-                RestClient = new RestClient("https://" + merchantConfig.IntermediateHost);
+                //supporting both for http or https for intermediate url
+                if (merchantConfig.IntermediateHost.StartsWith("http://") || merchantConfig.IntermediateHost.StartsWith("https://"))
+                {
+                    RestClient = new RestClient(merchantConfig.IntermediateHost);
+                }
+                else
+                {
+                    RestClient = new RestClient("https://" + merchantConfig.IntermediateHost);
+                }
+               
             }
             else
             {

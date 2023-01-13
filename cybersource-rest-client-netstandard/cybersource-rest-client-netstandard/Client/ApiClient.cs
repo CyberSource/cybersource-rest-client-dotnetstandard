@@ -963,7 +963,7 @@ namespace CyberSource.Client
 
             //Set the Configuration
             Configuration.DefaultHeader = authenticationHeaders;
-
+			
             if (!string.IsNullOrWhiteSpace(merchantConfig.IntermediateHost))
             {
                 //change with intermediate hostname if present
@@ -976,7 +976,6 @@ namespace CyberSource.Client
                 {
                     RestClient = new RestClient("https://" + merchantConfig.IntermediateHost);
                 }
-               
             }
             else
             {

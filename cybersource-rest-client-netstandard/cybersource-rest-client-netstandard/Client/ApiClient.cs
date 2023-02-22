@@ -556,14 +556,19 @@ namespace CyberSource.Client
                 }
             }
 
-                if (logUtility.IsMaskingEnabled(logger))
-                {
-                    logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
-                }
-                else
-                {
-                    logger.Debug($"HTTP Request Headers :\n{headerPrintOutput.ToString()}");
-                }
+            if (logUtility.IsMaskingEnabled(logger))
+            {
+                logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
+            }
+            else
+            {
+                logger.Debug($"HTTP Request Headers :\n{headerPrintOutput.ToString()}");
+            }
+
+            // set timeout
+            RestClient.Timeout = Configuration.Timeout;
+            // set user agent
+            RestClient.UserAgent = Configuration.UserAgent;
 
             InterceptRequest(request);
             var response = await RestClient.ExecuteTaskAsync(request);

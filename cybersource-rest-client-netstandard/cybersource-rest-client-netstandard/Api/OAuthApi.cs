@@ -188,6 +188,9 @@ namespace CyberSource.Api
             this._statusCode = statusCode;
         }
 
+        /// <summary>
+        /// Process a POST request to generate an access token.
+        /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>        
         /// <param name="createAccessTokenRequest"></param>
         /// <returns>AccessTokenResponse</returns>
@@ -201,18 +204,22 @@ namespace CyberSource.Api
             return localVarResponse.Data;
         }
 
-        
+        /// <summary>
+        /// Process a POST request to generate an access token.
+        /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>        
         /// <param name="createAccessTokenRequest"></param>
         /// <returns>ApiResponse of AccessTokenResponse</returns>
         public ApiResponse<AccessTokenResponse> PostAccessTokenRequestWithHttpInfo(CreateAccessTokenRequest createAccessTokenRequest)
-        {            
+        {
             LogUtility logUtility = new LogUtility();
 
             // verify the required parameter 'createAccessTokenRequest' is set
             if (createAccessTokenRequest == null)
+            {
                 logger.Error("ApiException : Missing required parameter 'createAccessTokenRequest' when calling OAuthApi->PostAccessTokenRequest");
                 throw new ApiException(400, "Missing required parameter 'createAccessTokenRequest' when calling OAuthApi->PostAccessTokenRequest");
+            }
 
             var localVarPath = $"/oauth2/v3/token";
             var localVarPathParams = new Dictionary<string, string>();
@@ -255,12 +262,13 @@ namespace CyberSource.Api
                 logger.Debug($"HTTP Request Body :\n{localVarPostBody}");
             }
 
+
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -276,18 +284,26 @@ namespace CyberSource.Api
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (AccessTokenResponse)Configuration.ApiClient.Deserialize(localVarResponse, typeof(AccessTokenResponse))); // Return statement
         }
-        
+
+        /// <summary>
+        /// Process a POST request to generate an access token.
+        /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>        
         /// <param name="createAccessTokenRequest"></param>
         /// <returns>Task of AccessTokenResponse</returns>
         public async System.Threading.Tasks.Task<AccessTokenResponse> PostAccessTokenRequestAsync(CreateAccessTokenRequest createAccessTokenRequest)
         {
+            logger.Debug("CALLING API \"PostAccessTokenRequestAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<AccessTokenResponse> localVarResponse = await PostAccessTokenRequestAsyncWithHttpInfo(createAccessTokenRequest);
+            logger.Debug("CALLING API \"PostAccessTokenRequestAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
-
         }
 
-        
+        /// <summary>
+        /// Process a POST request to generate an access token.
+        /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>     
         /// <param name="createAccessTokenRequest"></param>
         /// <returns>Task of ApiResponse (AccessTokenResponse)</returns>
@@ -300,6 +316,7 @@ namespace CyberSource.Api
             {
                 logger.Error("ApiException : Missing required parameter 'createAccessTokenRequest' when calling OAuthApi->PostAccessTokenRequest");
                 throw new ApiException(400, "Missing required parameter 'createAccessTokenRequest' when calling OAuthApi->PostAccessTokenRequest");
+            }
 
             var localVarPath = $"/oauth2/v3/token";
             var localVarPathParams = new Dictionary<string, string>();

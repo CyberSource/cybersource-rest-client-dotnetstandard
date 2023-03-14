@@ -298,16 +298,21 @@ namespace CyberSource.Client
                 if (param.Key == "Authorization")
                 {
                     requestT.AddHeader("Authorization", string.Format("Bearer " + param.Value));
-                }
-                else if (param.Key == "Date")
-                {
-                    requestT.AddHeader("Date", DateTime.Parse(param.Value));
-                }
-                else if (param.Key == "Host")
-                { }
-                else
-                {
-                    requestT.AddHeader(param.Key, param.Value);
+                }else{
+                    if (requestT.Parameters.Any(x => string.Equals(x.Name, param.Key, StringComparison.OrdinalIgnoreCase) && x.Type == ParameterType.HttpHeader))
+                    {
+                        continue;
+                    }
+                    if (param.Key == "Date")
+                    {
+                        requestT.AddHeader("Date", DateTime.Parse(param.Value));
+                    }
+                    else if (param.Key == "Host")
+                    { }
+                    else
+                    {
+                        requestT.AddHeader(param.Key, param.Value);
+                    }
                 }
             }
 

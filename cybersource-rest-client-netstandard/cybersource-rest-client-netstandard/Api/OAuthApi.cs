@@ -244,7 +244,6 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
-
             if (createAccessTokenRequest != null && createAccessTokenRequest.GetType() != typeof(byte[]))
             {
                 localVarPostBody = Configuration.ApiClient.Serialize(createAccessTokenRequest); // http body (model) parameter
@@ -360,7 +359,6 @@ namespace CyberSource.Api
             {
                 logger.Debug($"HTTP Request Body :\n{localVarPostBody}");
             }
-
 
             // make the HTTP request
             RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,

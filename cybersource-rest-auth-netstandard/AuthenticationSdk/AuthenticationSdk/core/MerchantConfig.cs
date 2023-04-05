@@ -102,6 +102,8 @@ namespace AuthenticationSdk.core
 
         public string RunEnvironment { get; set; }
 
+        public string IntermediateHost { get; set; }
+
         public string KeyAlias { get; set; }
 
         public string KeyPass { get; set; }
@@ -200,6 +202,7 @@ namespace AuthenticationSdk.core
             KeyDirectory = merchantConfigSection["keysDirectory"];
             KeyfileName = merchantConfigSection["keyFilename"];
             RunEnvironment = merchantConfigSection["runEnvironment"];
+            IntermediateHost = merchantConfigSection["intermediateHost"];
             EnableClientCert = merchantConfigSection["enableClientCert"];
             ClientCertDirectory = merchantConfigSection["clientCertDirectory"];
             ClientCertFile = merchantConfigSection["clientCertFile"];
@@ -239,6 +242,11 @@ namespace AuthenticationSdk.core
                         {
                             UseMetaKey = "false";
                         }
+                    }
+                    key = "intermediateHost";
+                    if (merchantConfigDictionary.ContainsKey(key))
+                    {
+                        IntermediateHost = merchantConfigDictionary[key];
                     }
 
                     Enum.TryParse(AuthenticationType.ToUpper(), out Enumerations.AuthenticationType authTypeInput);

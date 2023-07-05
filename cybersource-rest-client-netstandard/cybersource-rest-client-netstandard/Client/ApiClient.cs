@@ -157,7 +157,7 @@ namespace CyberSource.Client
                     firstQueryParam = false;
                 }
             }
-            
+
             var request = new RestRequest(path, method);
 
             // add path parameter, if any
@@ -175,7 +175,7 @@ namespace CyberSource.Client
                 }
                 else
                     request.AddHeader(param.Key, param.Value);
-            }            
+            }
 
             if (postBody == null)
             {
@@ -233,7 +233,7 @@ namespace CyberSource.Client
                     {
                         // request.AddParameter("application/json", postBody, ParameterType.RequestBody);
                         request.AddJsonBody(postBody);
-                    }                    
+                    }
                 }
                 else if (postBody.GetType() == typeof(byte[]))
                 {
@@ -663,7 +663,7 @@ namespace CyberSource.Client
                 {
                     outDateTime = ((DateTime?)obj).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
                 }
-                
+
                 return outDateTime;
             }
             else if (obj is DateTimeOffset) {
@@ -893,7 +893,7 @@ namespace CyberSource.Client
                 return filename;
             }
         }
-        
+
         /// <summary>
         /// Generate Request Authentication Headers using the Authentication SDK
         /// </summary>
@@ -950,7 +950,7 @@ namespace CyberSource.Client
             // {
             //     authenticationHeaders.Add("v-c-solution-id", Configuration.SolutionId);
             // }
-            
+
             if (Configuration.Proxy == null && merchantConfig.UseProxy != null)
             {
                 if (bool.Parse(merchantConfig.UseProxy))
@@ -989,7 +989,7 @@ namespace CyberSource.Client
             {
                 RestClient = new RestClient("https://" + merchantConfig.HostName);
             }
-            
+
             if (Configuration.Proxy != null)
             {
                 RestClient.Options.Proxy = Configuration.Proxy;

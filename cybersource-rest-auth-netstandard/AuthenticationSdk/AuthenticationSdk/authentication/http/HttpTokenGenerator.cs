@@ -44,11 +44,11 @@ namespace AuthenticationSdk.authentication.http
         {
             var signatureString = new StringBuilder();
             var signatureHeaderValue = new StringBuilder();
-            const string getOrDeleteHeaders = "host date (request-target) v-c-merchant-id";
+            const string getOrDeleteHeaders = "host date request-target v-c-merchant-id";
 
             signatureString.Append($"\nhost: {_httpToken.HostName}")
                            .Append($"\ndate: {_httpToken.GmtDateTime}")
-                           .Append($"\n(request-target): {_httpToken.HttpSignRequestTarget}")
+                           .Append($"\nrequest-target: {_httpToken.HttpSignRequestTarget}")
                            .Append($"\nv-c-merchant-id: ");
 
             if (_httpToken.UseMetaKey == true)
@@ -81,11 +81,11 @@ namespace AuthenticationSdk.authentication.http
             var signatureString = new StringBuilder();
             var signatureHeaderValue = new StringBuilder();
             _httpToken.Digest = GenerateDigest();
-            const string postOrPutHeaders = "host date (request-target) digest v-c-merchant-id";
+            const string postOrPutHeaders = "host date request-target digest v-c-merchant-id";
 
             signatureString.Append($"\nhost: {_httpToken.HostName}")
                            .Append($"\ndate: {_httpToken.GmtDateTime}")
-                           .Append($"\n(request-target): {_httpToken.HttpSignRequestTarget}")
+                           .Append($"\nrequest-target: {_httpToken.HttpSignRequestTarget}")
                            .Append($"\ndigest: {_httpToken.Digest}")
                            .Append($"\nv-c-merchant-id: ");
 

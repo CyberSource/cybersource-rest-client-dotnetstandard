@@ -70,6 +70,61 @@ powershell Rename-Item ..\..\..\src\CyberSource\Model\Tmsv2customersEmbeddedDefa
 
 powershell Rename-Item ..\..\..\docs\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierProcessingInformationAuthorizationOptionsInitiator.md Tmsv2customersEmbeddedAuthorizationOptionsInitiator.md
 
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsCardProcessingConfigurationInformationConfigurationsCommonMerchantDescriptorInformationTests.cs PaymentProductsCardProcessingMerchantDescriptorInformationTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsCardProcessingConfigurationInformationConfigurationsFeaturesCardNotPresentPayoutsCurrenciesTests.cs PaymentProductsCardProcessingPayoutsCurrenciesTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsECheckConfigurationInformationConfigurationsFeaturesAccountValidationServiceInternalOnlyTests.cs PaymentProductsECheckServiceInternalOnlyTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsECheckConfigurationInformationConfigurationsFeaturesAccountValidationServiceProcessorsTests.cs PaymentProductsECheckProcessorsTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsPayerAuthenticationConfigurationInformationConfigurationsCardTypesVerifiedByVisaCurrenciesTests.cs PaymentProductsPayerAuthVerifiedByVisaCurrenciesTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsSecureAcceptanceConfigurationInformationConfigurationsNotificationsCustomerNotificationsTests.cs PaymentProductsSecureAcceptanceCustomerNotificationsTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsSecureAcceptanceConfigurationInformationConfigurationsNotificationsMerchantNotificationsTests.cs PaymentProductsSecureAcceptanceMerchantNotificationsTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentGlobalPaymentInformationBasicInformationTests.cs PaymentProductsVirtualTerminalPaymentInformationBasicInformationTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentGlobalPaymentInformationMerchantDefinedDataFieldsTests.cs PaymentProductsVirtualTerminalMerchantDefinedDataFieldsTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentGlobalPaymentInformationPaymentInformationTests.cs PaymentProductsVirtualTerminalPaymentInformationTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentGlobalPaymentInformationTests.cs PaymentProductsVirtualTerminalCardNotPresentGlobalPaymentInformationTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentReceiptInformationEmailReceiptTests.cs PaymentProductsVirtualTerminalReceiptInformationEmailReceiptTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentReceiptInformationHeaderTests.cs PaymentProductsVirtualTerminalReceiptInformationHeaderTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentReceiptInformationOrderInformationTests.cs PaymentProductsVirtualTerminalReceiptInformationOrderInformationTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\RiskProductsDecisionManagerConfigurationInformationConfigurationsThirdpartyProviderAccurintCredentialsTests.cs RiskProductsDecisionManagerThirdpartyAccurintCredentialsTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\RiskProductsDecisionManagerConfigurationInformationConfigurationsThirdpartyProviderCredilinkCredentialsTests.cs RiskProductsDecisionManagerThirdpartyCredilinkCredentialsTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\RiskProductsDecisionManagerConfigurationInformationConfigurationsThirdpartyProviderSignifydCredentialsTests.cs RiskProductsDecisionManagerThirdpartySignifydCredentialsTests.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentGlobalPaymentInformationBasicInformation.cs PaymentProductsVirtualTerminalPaymentInformationBasicInformation.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentGlobalPaymentInformationMerchantDefinedDataFields.cs PaymentProductsVirtualTerminalMerchantDefinedDataFields.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentGlobalPaymentInformationPaymentInformation.cs PaymentProductsVirtualTerminalPaymentInformation.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentReceiptInformationEmailReceipt.cs PaymentProductsVirtualTerminalReceiptInformationEmailReceipt.cs
+
+powershell Rename-Item ..\..\..\src\CyberSource\Model\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentReceiptInformationOrderInformation.cs PaymentProductsVirtualTerminalReceiptInformationOrderInformation.cs
+
+powershell Rename-Item ..\..\..\docs\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentGlobalPaymentInformationBasicInformation.md PaymentProductsVirtualTerminalPaymentInformationBasicInformation.md
+
+powershell Rename-Item ..\..\..\docs\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentGlobalPaymentInformationMerchantDefinedDataFields.md PaymentProductsVirtualTerminalMerchantDefinedDataFields.md
+
+powershell Rename-Item ..\..\..\docs\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentGlobalPaymentInformationPaymentInformation.md PaymentProductsVirtualTerminalPaymentInformation.md
+
+powershell Rename-Item ..\..\..\docs\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentReceiptInformationEmailReceipt.md PaymentProductsVirtualTerminalReceiptInformationEmailReceipt.md
+
+powershell Rename-Item ..\..\..\docs\PaymentProductsVirtualTerminalConfigurationInformationConfigurationsCardNotPresentReceiptInformationOrderInformation.md PaymentProductsVirtualTerminalReceiptInformationOrderInformation.md
+
+
 robocopy ..\..\..\src\cybersource ..\ /S /XF %excludeList%
 
 robocopy ..\..\..\src\cybersource.test ..\..\cybersource-rest-client-netstandard.Test /S /XF %excludeList%

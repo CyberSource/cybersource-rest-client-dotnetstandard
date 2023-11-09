@@ -58,7 +58,7 @@ powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\Ptsv2paymentsProcessi
 
 powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\PtsV2PaymentsPost201ResponseConsumerAuthenticationInformationStrongAuthenticationIssuerInformationTests.cs PtsV2PaymentsPost201ResponseStrongAuthenticationIssuerInformationTests.cs
 
-powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\RiskV1ExportComplianceInquiriesPost201ResponseExportComplianceInformationWatchListMatchesTests.cs RiskV1ExportComplianceWatchListMatchesTests.cs
+@REM powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\RiskV1ExportComplianceInquiriesPost201ResponseExportComplianceInformationWatchListMatchesTests.cs RiskV1ExportComplianceWatchListMatchesTests.cs
 
 powershell Rename-Item ..\..\..\src\CyberSource.Test\Model\Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierTokenizedCardCardTests.cs Tmsv2customersTokenizedCardCardTests.cs
 

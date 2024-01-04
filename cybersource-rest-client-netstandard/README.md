@@ -43,7 +43,7 @@ The API Reference Guide provides examples of what information is needed for a pa
 
 ## Example using Sample Code Application
 
-* Add [CyberSource REST client](https://github.com/CyberSource/cybersource-rest-samples-csharp/blob/cfd0c4e996c4d991eef5e06f6c8c520e3354e8c2/cybersource-rest-samples-netcore.csproj#L43) into your .NETStandard project.
+* Add [CyberSource REST client](https://github.com/CyberSource/cybersource-rest-samples-csharp/blob/cfd0c4e996c4d991eef5e06f6c8c520e3354e8c2/cybersource-rest-samples-netcore.csproj#L43) into your .NET Standard project.
 
 * Configure your credentials in [Configuration File](https://github.com/CyberSource/cybersource-rest-samples-csharp/blob/cfd0c4e996c4d991eef5e06f6c8c520e3354e8c2/Source/Configuration.cs#L12C9-L48C10)
 

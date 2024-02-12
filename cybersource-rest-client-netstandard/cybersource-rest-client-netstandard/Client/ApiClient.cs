@@ -270,12 +270,15 @@ namespace CyberSource.Client
             }
 
             RestRequest requestT = new RestRequest(path);
-            RestClient.Options.UserAgent = Configuration.UserAgent;
+            RestClientOptions clientOptions = RestClient.Options;
 
             if (Configuration.Proxy != null)
             {
-                RestClient.Options.Proxy = Configuration.Proxy;
+                clientOptions.Proxy = Configuration.Proxy;
             }
+
+            RestClient = new RestClient(clientOptions);
+            RestClient.Options.UserAgent = Configuration.UserAgent;
 
             // Add Header Parameter, if any
             // Passed to this function
@@ -299,7 +302,9 @@ namespace CyberSource.Client
                 if (param.Key == "Authorization")
                 {
                     requestT.AddHeader("Authorization", string.Format("Bearer " + param.Value));
-                }else{
+                }
+                else
+                {
                     if (requestT.Parameters.Any(x => string.Equals(x.Name, param.Key, StringComparison.OrdinalIgnoreCase) && x.Type == ParameterType.HttpHeader))
                     {
                         continue;
@@ -440,14 +445,13 @@ namespace CyberSource.Client
 
             // set timeout
             request.Timeout = Configuration.Timeout;
-            // set user agent
-            RestClient.Options.UserAgent = Configuration.UserAgent;
+            RestClientOptions clientOptions = RestClient.Options;
 
             // RestClient.ClearHandlers();
 
             if (Configuration.Proxy != null)
             {
-                RestClient.Options.Proxy = Configuration.Proxy;
+                clientOptions.Proxy = Configuration.Proxy;
             }
 
             // Adding Client Cert
@@ -465,8 +469,11 @@ namespace CyberSource.Client
                 // Importing Certificates
                 var certificate = new X509Certificate2(fileName, clientCertPassword);
                 clientCertPassword.Dispose();
-                RestClient.Options.ClientCertificates = new X509CertificateCollection { certificate };
+                clientOptions.ClientCertificates = new X509CertificateCollection { certificate };
             }
+
+            RestClient = new RestClient(clientOptions);
+            RestClient.Options.UserAgent = Configuration.UserAgent;
 
             // Logging Request Headers
             var headerPrintOutput = new StringBuilder();
@@ -568,7 +575,7 @@ namespace CyberSource.Client
             // set timeout
             request.Timeout = Configuration.Timeout;
             // set user agent
-            RestClient.Options.UserAgent = Configuration.UserAgent;
+            RestClientOptions clientOptions = RestClient.Options;
 
             if (logUtility.IsMaskingEnabled(logger))
             {
@@ -578,6 +585,9 @@ namespace CyberSource.Client
             {
                 logger.Debug($"HTTP Request Headers :\n{headerPrintOutput.ToString()}");
             }
+
+            RestClient = new RestClient(clientOptions);
+            RestClient.Options.UserAgent = Configuration.UserAgent;
 
             InterceptRequest(request);
             var response = await RestClient.ExecuteAsync(request);
@@ -990,10 +1000,14 @@ namespace CyberSource.Client
                 RestClient = new RestClient("https://" + merchantConfig.HostName);
             }
 
+            RestClientOptions clientOptions = RestClient.Options;
+
             if (Configuration.Proxy != null)
             {
-                RestClient.Options.Proxy = Configuration.Proxy;
+                clientOptions.Proxy = Configuration.Proxy;
             }
+
+            RestClient = new RestClient(clientOptions);
         }
     }
 }

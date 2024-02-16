@@ -17,6 +17,7 @@ using CyberSource.Client;
 using CyberSource.Model;
 using NLog;
 using AuthenticationSdk.util;
+using CyberSource.Utilities.Tracking;
 
 namespace CyberSource.Api
 {
@@ -53,7 +54,7 @@ namespace CyberSource.Api
         /// Get Report Based on Report Id
         /// </summary>
         /// <remarks>
-        /// Download a report using the reportId value. If you don’t already know this value, you can obtain it using the Retrieve available reports call. 
+        /// Download a report using the reportId value. If you don&#39;t already know this value, you can obtain it using the Retrieve available reports call. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportId">Valid Report Id</param>
@@ -65,7 +66,7 @@ namespace CyberSource.Api
         /// Get Report Based on Report Id
         /// </summary>
         /// <remarks>
-        /// Download a report using the reportId value. If you don’t already know this value, you can obtain it using the Retrieve available reports call. 
+        /// Download a report using the reportId value. If you don&#39;t already know this value, you can obtain it using the Retrieve available reports call. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportId">Valid Report Id</param>
@@ -138,7 +139,7 @@ namespace CyberSource.Api
         /// Get Report Based on Report Id
         /// </summary>
         /// <remarks>
-        /// Download a report using the reportId value. If you don’t already know this value, you can obtain it using the Retrieve available reports call. 
+        /// Download a report using the reportId value. If you don&#39;t already know this value, you can obtain it using the Retrieve available reports call. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportId">Valid Report Id</param>
@@ -150,7 +151,7 @@ namespace CyberSource.Api
         /// Get Report Based on Report Id
         /// </summary>
         /// <remarks>
-        /// Download a report using the reportId value. If you don’t already know this value, you can obtain it using the Retrieve available reports call. 
+        /// Download a report using the reportId value. If you don&#39;t already know this value, you can obtain it using the Retrieve available reports call. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportId">Valid Report Id</param>
@@ -204,6 +205,7 @@ namespace CyberSource.Api
     {
         private static Logger logger;
         private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private int? _statusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportsApi"/> class.
@@ -256,7 +258,7 @@ namespace CyberSource.Api
         /// <value>The base path</value>
         public string GetBasePath()
         {
-            return Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
         }
 
         /// <summary>
@@ -315,6 +317,25 @@ namespace CyberSource.Api
         }
 
         /// <summary>
+        /// Retrieves the status code being set for the most recently executed API request.
+        /// </summary>
+        /// <returns>Status Code of previous request</returns>
+        public int GetStatusCode()
+        {
+            return this._statusCode == null ? 0 : (int) this._statusCode;
+        }
+
+        /// <summary>
+        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
+        /// </summary>
+        /// <param name="statusCode">Status Code to be set</param>
+        /// <returns></returns>
+        public void SetStatusCode(int? statusCode)
+        {
+            this._statusCode = statusCode;
+        }
+
+        /// <summary>
         /// Create Adhoc Report Create a one-time report. You must specify the type of report in reportDefinitionName. For a list of values for reportDefinitionName, see the [Reporting Developer Guide](https://www.cybersource.com/developers/documentation/reporting_and_reconciliation) 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
@@ -324,6 +345,7 @@ namespace CyberSource.Api
         public void CreateReport (CreateAdhocReportRequest createAdhocReportRequest, string organizationId = null)
         {
             logger.Debug("CALLING API \"CreateReport\" STARTED");
+            this.SetStatusCode(null);
             CreateReportWithHttpInfo(createAdhocReportRequest, organizationId);
         }
 
@@ -376,6 +398,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             if (createAdhocReportRequest != null && createAdhocReportRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                createAdhocReportRequest = (CreateAdhocReportRequest)sdkTracker.InsertDeveloperIdTracker(createAdhocReportRequest, createAdhocReportRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(createAdhocReportRequest); // http body (model) parameter
             }
             else
@@ -394,8 +418,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -410,6 +434,7 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
@@ -425,6 +450,7 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task CreateReportAsync (CreateAdhocReportRequest createAdhocReportRequest, string organizationId = null)
         {
             logger.Debug("CALLING API \"CreateReportAsync\" STARTED");
+            this.SetStatusCode(null);
             await CreateReportAsyncWithHttpInfo(createAdhocReportRequest, organizationId);
 
         }
@@ -478,6 +504,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             if (createAdhocReportRequest != null && createAdhocReportRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                createAdhocReportRequest = (CreateAdhocReportRequest)sdkTracker.InsertDeveloperIdTracker(createAdhocReportRequest, createAdhocReportRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(createAdhocReportRequest); // http body (model) parameter
             }
             else
@@ -496,8 +524,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -512,12 +540,13 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
         }
         /// <summary>
-        /// Get Report Based on Report Id Download a report using the reportId value. If you don’t already know this value, you can obtain it using the Retrieve available reports call. 
+        /// Get Report Based on Report Id Download a report using the reportId value. If you don&#39;t already know this value, you can obtain it using the Retrieve available reports call. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportId">Valid Report Id</param>
@@ -526,13 +555,15 @@ namespace CyberSource.Api
         public ReportingV3ReportsIdGet200Response GetReportByReportId (string reportId, string organizationId = null)
         {
             logger.Debug("CALLING API \"GetReportByReportId\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<ReportingV3ReportsIdGet200Response> localVarResponse = GetReportByReportIdWithHttpInfo(reportId, organizationId);
             logger.Debug("CALLING API \"GetReportByReportId\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get Report Based on Report Id Download a report using the reportId value. If you don’t already know this value, you can obtain it using the Retrieve available reports call. 
+        /// Get Report Based on Report Id Download a report using the reportId value. If you don&#39;t already know this value, you can obtain it using the Retrieve available reports call. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportId">Valid Report Id</param>
@@ -584,7 +615,7 @@ namespace CyberSource.Api
                 localVarQueryParams.Add("organizationId", Configuration.ApiClient.ParameterToString(organizationId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -595,8 +626,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -617,7 +648,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Get Report Based on Report Id Download a report using the reportId value. If you don’t already know this value, you can obtain it using the Retrieve available reports call. 
+        /// Get Report Based on Report Id Download a report using the reportId value. If you don&#39;t already know this value, you can obtain it using the Retrieve available reports call. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportId">Valid Report Id</param>
@@ -626,14 +657,16 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<ReportingV3ReportsIdGet200Response> GetReportByReportIdAsync (string reportId, string organizationId = null)
         {
             logger.Debug("CALLING API \"GetReportByReportIdAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<ReportingV3ReportsIdGet200Response> localVarResponse = await GetReportByReportIdAsyncWithHttpInfo(reportId, organizationId);
             logger.Debug("CALLING API \"GetReportByReportIdAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Get Report Based on Report Id Download a report using the reportId value. If you don’t already know this value, you can obtain it using the Retrieve available reports call. 
+        /// Get Report Based on Report Id Download a report using the reportId value. If you don&#39;t already know this value, you can obtain it using the Retrieve available reports call. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportId">Valid Report Id</param>
@@ -685,7 +718,7 @@ namespace CyberSource.Api
                 localVarQueryParams.Add("organizationId", Configuration.ApiClient.ParameterToString(organizationId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -696,8 +729,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -733,8 +766,10 @@ namespace CyberSource.Api
         public ReportingV3ReportsGet200Response SearchReports (DateTime? startTime, DateTime? endTime, string timeQueryType, string organizationId = null, string reportMimeType = null, string reportFrequency = null, string reportName = null, int? reportDefinitionId = null, string reportStatus = null)
         {
             logger.Debug("CALLING API \"SearchReports\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<ReportingV3ReportsGet200Response> localVarResponse = SearchReportsWithHttpInfo(startTime, endTime, timeQueryType, organizationId, reportMimeType, reportFrequency, reportName, reportDefinitionId, reportStatus);
             logger.Debug("CALLING API \"SearchReports\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -844,7 +879,7 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -855,8 +890,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -893,8 +928,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<ReportingV3ReportsGet200Response> SearchReportsAsync (DateTime? startTime, DateTime? endTime, string timeQueryType, string organizationId = null, string reportMimeType = null, string reportFrequency = null, string reportName = null, int? reportDefinitionId = null, string reportStatus = null)
         {
             logger.Debug("CALLING API \"SearchReportsAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<ReportingV3ReportsGet200Response> localVarResponse = await SearchReportsAsyncWithHttpInfo(startTime, endTime, timeQueryType, organizationId, reportMimeType, reportFrequency, reportName, reportDefinitionId, reportStatus);
             logger.Debug("CALLING API \"SearchReportsAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -1005,7 +1042,7 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -1016,8 +1053,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;

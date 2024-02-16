@@ -17,6 +17,7 @@ using CyberSource.Client;
 using CyberSource.Model;
 using NLog;
 using AuthenticationSdk.util;
+using CyberSource.Utilities.Tracking;
 
 namespace CyberSource.Api
 {
@@ -176,6 +177,7 @@ namespace CyberSource.Api
     {
         private static Logger logger;
         private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private int? _statusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionBatchesApi"/> class.
@@ -228,7 +230,7 @@ namespace CyberSource.Api
         /// <value>The base path</value>
         public string GetBasePath()
         {
-            return Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
         }
 
         /// <summary>
@@ -287,6 +289,25 @@ namespace CyberSource.Api
         }
 
         /// <summary>
+        /// Retrieves the status code being set for the most recently executed API request.
+        /// </summary>
+        /// <returns>Status Code of previous request</returns>
+        public int GetStatusCode()
+        {
+            return this._statusCode == null ? 0 : (int) this._statusCode;
+        }
+
+        /// <summary>
+        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
+        /// </summary>
+        /// <param name="statusCode">Status Code to be set</param>
+        /// <returns></returns>
+        public void SetStatusCode(int? statusCode)
+        {
+            this._statusCode = statusCode;
+        }
+
+        /// <summary>
         /// Get Transaction Details for a given Batch Id Provides real-time detailed status information about the transactions that you previously uploaded in the Business Center or processed with the Offline Transaction File Submission service. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
@@ -297,6 +318,7 @@ namespace CyberSource.Api
         public void GetTransactionBatchDetails (string id, DateTime? uploadDate = null, string status = null)
         {
             logger.Debug("CALLING API \"GetTransactionBatchDetails\" STARTED");
+            this.SetStatusCode(null);
             GetTransactionBatchDetailsWithHttpInfo(id, uploadDate, status);
         }
 
@@ -360,7 +382,7 @@ namespace CyberSource.Api
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -371,8 +393,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -387,6 +409,7 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
@@ -403,6 +426,7 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task GetTransactionBatchDetailsAsync (string id, DateTime? uploadDate = null, string status = null)
         {
             logger.Debug("CALLING API \"GetTransactionBatchDetailsAsync\" STARTED");
+            this.SetStatusCode(null);
             await GetTransactionBatchDetailsAsyncWithHttpInfo(id, uploadDate, status);
 
         }
@@ -467,7 +491,7 @@ namespace CyberSource.Api
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -478,8 +502,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -494,6 +518,7 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
@@ -507,8 +532,10 @@ namespace CyberSource.Api
         public PtsV1TransactionBatchesIdGet200Response GetTransactionBatchId (string id)
         {
             logger.Debug("CALLING API \"GetTransactionBatchId\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV1TransactionBatchesIdGet200Response> localVarResponse = GetTransactionBatchIdWithHttpInfo(id);
             logger.Debug("CALLING API \"GetTransactionBatchId\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -558,7 +585,7 @@ namespace CyberSource.Api
                 localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -569,8 +596,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -599,8 +626,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<PtsV1TransactionBatchesIdGet200Response> GetTransactionBatchIdAsync (string id)
         {
             logger.Debug("CALLING API \"GetTransactionBatchIdAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV1TransactionBatchesIdGet200Response> localVarResponse = await GetTransactionBatchIdAsyncWithHttpInfo(id);
             logger.Debug("CALLING API \"GetTransactionBatchIdAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -651,7 +680,7 @@ namespace CyberSource.Api
                 localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -662,8 +691,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -692,8 +721,10 @@ namespace CyberSource.Api
         public PtsV1TransactionBatchesGet200Response GetTransactionBatches (DateTime? startTime, DateTime? endTime)
         {
             logger.Debug("CALLING API \"GetTransactionBatches\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV1TransactionBatchesGet200Response> localVarResponse = GetTransactionBatchesWithHttpInfo(startTime, endTime);
             logger.Debug("CALLING API \"GetTransactionBatches\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -755,7 +786,7 @@ namespace CyberSource.Api
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -766,8 +797,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -797,8 +828,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<PtsV1TransactionBatchesGet200Response> GetTransactionBatchesAsync (DateTime? startTime, DateTime? endTime)
         {
             logger.Debug("CALLING API \"GetTransactionBatchesAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV1TransactionBatchesGet200Response> localVarResponse = await GetTransactionBatchesAsyncWithHttpInfo(startTime, endTime);
             logger.Debug("CALLING API \"GetTransactionBatchesAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -861,7 +894,7 @@ namespace CyberSource.Api
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -872,8 +905,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;

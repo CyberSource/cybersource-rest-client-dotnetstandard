@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using AuthenticationSdk.util;
 using NLog;
@@ -101,6 +102,8 @@ namespace AuthenticationSdk.core
 
         public string RunEnvironment { get; set; }
 
+        public string IntermediateHost { get; set; }
+
         public string KeyAlias { get; set; }
 
         public string KeyPass { get; set; }
@@ -155,6 +158,8 @@ namespace AuthenticationSdk.core
 
         public bool IsOAuthTokenAuthType { get; set; }
 
+        public string PemFileDirectory { get; set; }
+
         #endregion
 
         public void LogMerchantConfigurationProperties()
@@ -199,6 +204,7 @@ namespace AuthenticationSdk.core
             KeyDirectory = merchantConfigSection["keysDirectory"];
             KeyfileName = merchantConfigSection["keyFilename"];
             RunEnvironment = merchantConfigSection["runEnvironment"];
+            IntermediateHost = merchantConfigSection["intermediateHost"];
             EnableClientCert = merchantConfigSection["enableClientCert"];
             ClientCertDirectory = merchantConfigSection["clientCertDirectory"];
             ClientCertFile = merchantConfigSection["clientCertFile"];
@@ -213,6 +219,7 @@ namespace AuthenticationSdk.core
             ProxyPort = merchantConfigSection["proxyPort"];
             ProxyUsername = merchantConfigSection["proxyUsername"];
             ProxyPassword = merchantConfigSection["proxyPassword"];
+            PemFileDirectory = merchantConfigSection["pemFileDirectory"];
         }
 
         private void SetValuesUsingDictObj(IReadOnlyDictionary<string, string> merchantConfigDictionary)
@@ -238,6 +245,11 @@ namespace AuthenticationSdk.core
                         {
                             UseMetaKey = "false";
                         }
+                    }
+                    key = "intermediateHost";
+                    if (merchantConfigDictionary.ContainsKey(key))
+                    {
+                        IntermediateHost = merchantConfigDictionary[key];
                     }
 
                     Enum.TryParse(AuthenticationType.ToUpper(), out Enumerations.AuthenticationType authTypeInput);
@@ -408,6 +420,11 @@ namespace AuthenticationSdk.core
                     {
                         ProxyPassword = merchantConfigDictionary["proxyPassword"];
                     }
+
+                    if (merchantConfigDictionary.ContainsKey("pemFileDirectory"))
+                    {
+                        PemFileDirectory = merchantConfigDictionary["pemFileDirectory"];
+                    }
                 }
             }
             catch (KeyNotFoundException err)
@@ -516,7 +533,9 @@ namespace AuthenticationSdk.core
                     throw new Exception($"{Constants.WarningPrefix} KeyfileName not provided. Assigning the value of: [MerchantId]");
                 }
 
-                P12Keyfilepath = KeyDirectory + "\\" + KeyfileName + ".p12";
+                var pathDirectorySeparator = Path.DirectorySeparatorChar;
+
+                P12Keyfilepath = $"{KeyDirectory}{pathDirectorySeparator}{KeyfileName}.p12";
             }
         }
     }

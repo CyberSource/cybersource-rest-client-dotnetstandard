@@ -17,6 +17,7 @@ using CyberSource.Client;
 using CyberSource.Model;
 using NLog;
 using AuthenticationSdk.util;
+using CyberSource.Utilities.Tracking;
 
 namespace CyberSource.Api
 {
@@ -30,266 +31,266 @@ namespace CyberSource.Api
         /// Delete a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Payment Instrument**&lt;br&gt;Your system can use this API to delete an existing Payment Instrument for a Customer.&lt;br&gt;Any Instrument Identifiers representing the card number will also be deleted if they are not associated with any other Payment Instruments.&lt;br&gt;If a customer has more than one Payment Instrument then the default Payment Instrument cannot be deleted without first selecting a [new default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns></returns>
-        void DeleteCustomerPaymentInstrument (string customerTokenId, string paymentInstrumentTokenId, string profileId = null);
+        void DeleteCustomerPaymentInstrument (string customerId, string paymentInstrumentId, string profileId = null);
 
         /// <summary>
         /// Delete a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Payment Instrument**&lt;br&gt;Your system can use this API to delete an existing Payment Instrument for a Customer.&lt;br&gt;Any Instrument Identifiers representing the card number will also be deleted if they are not associated with any other Payment Instruments.&lt;br&gt;If a customer has more than one Payment Instrument then the default Payment Instrument cannot be deleted without first selecting a [new default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteCustomerPaymentInstrumentWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, string profileId = null);
+        ApiResponse<Object> DeleteCustomerPaymentInstrumentWithHttpInfo (string customerId, string paymentInstrumentId, string profileId = null);
         /// <summary>
         /// Retrieve a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Payment Instrument**&lt;br&gt;Your system can use this API to retrieve an existing Payment Instrument for a Customer.&lt;br&gt;To perform a payment with a particular Payment Instrument simply specify the [Payment Instrument Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        Tmsv2customersEmbeddedDefaultPaymentInstrument GetCustomerPaymentInstrument (string customerTokenId, string paymentInstrumentTokenId, string profileId = null);
+        Tmsv2customersEmbeddedDefaultPaymentInstrument GetCustomerPaymentInstrument (string customerId, string paymentInstrumentId, string profileId = null);
 
         /// <summary>
         /// Retrieve a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Payment Instrument**&lt;br&gt;Your system can use this API to retrieve an existing Payment Instrument for a Customer.&lt;br&gt;To perform a payment with a particular Payment Instrument simply specify the [Payment Instrument Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> GetCustomerPaymentInstrumentWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, string profileId = null);
+        ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> GetCustomerPaymentInstrumentWithHttpInfo (string customerId, string paymentInstrumentId, string profileId = null);
         /// <summary>
         /// List Payment Instruments for a Customer
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Payment Instruments**&lt;br&gt;Your system can use this API to retrieve all existing Payment Instruments for a Customer. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>PaymentInstrumentList</returns>
-        PaymentInstrumentList GetCustomerPaymentInstrumentsList (string customerTokenId, string profileId = null, long? offset = null, long? limit = null);
+        PaymentInstrumentList GetCustomerPaymentInstrumentsList (string customerId, string profileId = null, long? offset = null, long? limit = null);
 
         /// <summary>
         /// List Payment Instruments for a Customer
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Payment Instruments**&lt;br&gt;Your system can use this API to retrieve all existing Payment Instruments for a Customer. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>ApiResponse of PaymentInstrumentList</returns>
-        ApiResponse<PaymentInstrumentList> GetCustomerPaymentInstrumentsListWithHttpInfo (string customerTokenId, string profileId = null, long? offset = null, long? limit = null);
+        ApiResponse<PaymentInstrumentList> GetCustomerPaymentInstrumentsListWithHttpInfo (string customerId, string profileId = null, long? offset = null, long? limit = null);
         /// <summary>
         /// Update a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Payment Instrument**&lt;br&gt;Your system can use this API to update an existing Payment Instrument for a Customer, including selecting a [default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
         /// <param name="patchCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        Tmsv2customersEmbeddedDefaultPaymentInstrument PatchCustomersPaymentInstrument (string customerTokenId, string paymentInstrumentTokenId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null);
+        Tmsv2customersEmbeddedDefaultPaymentInstrument PatchCustomersPaymentInstrument (string customerId, string paymentInstrumentId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null);
 
         /// <summary>
         /// Update a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Payment Instrument**&lt;br&gt;Your system can use this API to update an existing Payment Instrument for a Customer, including selecting a [default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
         /// <param name="patchCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> PatchCustomersPaymentInstrumentWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null);
+        ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> PatchCustomersPaymentInstrumentWithHttpInfo (string customerId, string paymentInstrumentId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null);
         /// <summary>
         /// Create a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// Include an existing TMS Customer &amp; Instrument Identifier token id in the request. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** * An Instrument Identifier token can be created by calling: **POST *_/tms/v1/instrumentidentifiers*** 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;&lt;br&gt;**Creating a Customer Payment Instrument**&lt;br&gt;It is recommended you [create a Customer Payment Instrument via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body), this can be for a zero amount.&lt;br&gt;In Europe: You should perform Payer Authentication alongside the Authorization.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Payment Network Tokens**&lt;br&gt;Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.&lt;br&gt;A Payment Network Token will be automatically created and used in future payments if you are enabled for the service.&lt;br&gt;A Payment Network Token can also be [provisioned for an existing Instrument Identifier](#token-management_instrument-identifier_enroll-an-instrument-identifier-for-payment-network-token).&lt;br&gt;For more information about Payment Network Tokens see the Developer Guide.&lt;br&gt;&lt;br&gt;**Payments with Customers Payment Instrument**&lt;br&gt;To perform a payment with a particular Payment Instrument or Shipping Address specify the [Payment Instrument in the payment request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        Tmsv2customersEmbeddedDefaultPaymentInstrument PostCustomerPaymentInstrument (string customerTokenId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null);
+        Tmsv2customersEmbeddedDefaultPaymentInstrument PostCustomerPaymentInstrument (string customerId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null);
 
         /// <summary>
         /// Create a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// Include an existing TMS Customer &amp; Instrument Identifier token id in the request. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** * An Instrument Identifier token can be created by calling: **POST *_/tms/v1/instrumentidentifiers*** 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;&lt;br&gt;**Creating a Customer Payment Instrument**&lt;br&gt;It is recommended you [create a Customer Payment Instrument via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body), this can be for a zero amount.&lt;br&gt;In Europe: You should perform Payer Authentication alongside the Authorization.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Payment Network Tokens**&lt;br&gt;Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.&lt;br&gt;A Payment Network Token will be automatically created and used in future payments if you are enabled for the service.&lt;br&gt;A Payment Network Token can also be [provisioned for an existing Instrument Identifier](#token-management_instrument-identifier_enroll-an-instrument-identifier-for-payment-network-token).&lt;br&gt;For more information about Payment Network Tokens see the Developer Guide.&lt;br&gt;&lt;br&gt;**Payments with Customers Payment Instrument**&lt;br&gt;To perform a payment with a particular Payment Instrument or Shipping Address specify the [Payment Instrument in the payment request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> PostCustomerPaymentInstrumentWithHttpInfo (string customerTokenId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null);
+        ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> PostCustomerPaymentInstrumentWithHttpInfo (string customerId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
         /// Delete a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Payment Instrument**&lt;br&gt;Your system can use this API to delete an existing Payment Instrument for a Customer.&lt;br&gt;Any Instrument Identifiers representing the card number will also be deleted if they are not associated with any other Payment Instruments.&lt;br&gt;If a customer has more than one Payment Instrument then the default Payment Instrument cannot be deleted without first selecting a [new default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteCustomerPaymentInstrumentAsync (string customerTokenId, string paymentInstrumentTokenId, string profileId = null);
+        System.Threading.Tasks.Task DeleteCustomerPaymentInstrumentAsync (string customerId, string paymentInstrumentId, string profileId = null);
 
         /// <summary>
         /// Delete a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Payment Instrument**&lt;br&gt;Your system can use this API to delete an existing Payment Instrument for a Customer.&lt;br&gt;Any Instrument Identifiers representing the card number will also be deleted if they are not associated with any other Payment Instruments.&lt;br&gt;If a customer has more than one Payment Instrument then the default Payment Instrument cannot be deleted without first selecting a [new default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomerPaymentInstrumentAsyncWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, string profileId = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomerPaymentInstrumentAsyncWithHttpInfo (string customerId, string paymentInstrumentId, string profileId = null);
         /// <summary>
         /// Retrieve a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Payment Instrument**&lt;br&gt;Your system can use this API to retrieve an existing Payment Instrument for a Customer.&lt;br&gt;To perform a payment with a particular Payment Instrument simply specify the [Payment Instrument Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> GetCustomerPaymentInstrumentAsync (string customerTokenId, string paymentInstrumentTokenId, string profileId = null);
+        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> GetCustomerPaymentInstrumentAsync (string customerId, string paymentInstrumentId, string profileId = null);
 
         /// <summary>
         /// Retrieve a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Payment Instrument**&lt;br&gt;Your system can use this API to retrieve an existing Payment Instrument for a Customer.&lt;br&gt;To perform a payment with a particular Payment Instrument simply specify the [Payment Instrument Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultPaymentInstrument)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> GetCustomerPaymentInstrumentAsyncWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, string profileId = null);
+        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> GetCustomerPaymentInstrumentAsyncWithHttpInfo (string customerId, string paymentInstrumentId, string profileId = null);
         /// <summary>
         /// List Payment Instruments for a Customer
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Payment Instruments**&lt;br&gt;Your system can use this API to retrieve all existing Payment Instruments for a Customer. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>Task of PaymentInstrumentList</returns>
-        System.Threading.Tasks.Task<PaymentInstrumentList> GetCustomerPaymentInstrumentsListAsync (string customerTokenId, string profileId = null, long? offset = null, long? limit = null);
+        System.Threading.Tasks.Task<PaymentInstrumentList> GetCustomerPaymentInstrumentsListAsync (string customerId, string profileId = null, long? offset = null, long? limit = null);
 
         /// <summary>
         /// List Payment Instruments for a Customer
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Payment Instruments**&lt;br&gt;Your system can use this API to retrieve all existing Payment Instruments for a Customer. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (PaymentInstrumentList)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PaymentInstrumentList>> GetCustomerPaymentInstrumentsListAsyncWithHttpInfo (string customerTokenId, string profileId = null, long? offset = null, long? limit = null);
+        System.Threading.Tasks.Task<ApiResponse<PaymentInstrumentList>> GetCustomerPaymentInstrumentsListAsyncWithHttpInfo (string customerId, string profileId = null, long? offset = null, long? limit = null);
         /// <summary>
         /// Update a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Payment Instrument**&lt;br&gt;Your system can use this API to update an existing Payment Instrument for a Customer, including selecting a [default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
         /// <param name="patchCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> PatchCustomersPaymentInstrumentAsync (string customerTokenId, string paymentInstrumentTokenId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null);
+        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> PatchCustomersPaymentInstrumentAsync (string customerId, string paymentInstrumentId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null);
 
         /// <summary>
         /// Update a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Payment Instrument**&lt;br&gt;Your system can use this API to update an existing Payment Instrument for a Customer, including selecting a [default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
         /// <param name="patchCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultPaymentInstrument)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> PatchCustomersPaymentInstrumentAsyncWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null);
+        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> PatchCustomersPaymentInstrumentAsyncWithHttpInfo (string customerId, string paymentInstrumentId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null);
         /// <summary>
         /// Create a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// Include an existing TMS Customer &amp; Instrument Identifier token id in the request. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** * An Instrument Identifier token can be created by calling: **POST *_/tms/v1/instrumentidentifiers*** 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;&lt;br&gt;**Creating a Customer Payment Instrument**&lt;br&gt;It is recommended you [create a Customer Payment Instrument via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body), this can be for a zero amount.&lt;br&gt;In Europe: You should perform Payer Authentication alongside the Authorization.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Payment Network Tokens**&lt;br&gt;Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.&lt;br&gt;A Payment Network Token will be automatically created and used in future payments if you are enabled for the service.&lt;br&gt;A Payment Network Token can also be [provisioned for an existing Instrument Identifier](#token-management_instrument-identifier_enroll-an-instrument-identifier-for-payment-network-token).&lt;br&gt;For more information about Payment Network Tokens see the Developer Guide.&lt;br&gt;&lt;br&gt;**Payments with Customers Payment Instrument**&lt;br&gt;To perform a payment with a particular Payment Instrument or Shipping Address specify the [Payment Instrument in the payment request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> PostCustomerPaymentInstrumentAsync (string customerTokenId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null);
+        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> PostCustomerPaymentInstrumentAsync (string customerId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null);
 
         /// <summary>
         /// Create a Customer Payment Instrument
         /// </summary>
         /// <remarks>
-        /// Include an existing TMS Customer &amp; Instrument Identifier token id in the request. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** * An Instrument Identifier token can be created by calling: **POST *_/tms/v1/instrumentidentifiers*** 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;&lt;br&gt;**Creating a Customer Payment Instrument**&lt;br&gt;It is recommended you [create a Customer Payment Instrument via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body), this can be for a zero amount.&lt;br&gt;In Europe: You should perform Payer Authentication alongside the Authorization.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Payment Network Tokens**&lt;br&gt;Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.&lt;br&gt;A Payment Network Token will be automatically created and used in future payments if you are enabled for the service.&lt;br&gt;A Payment Network Token can also be [provisioned for an existing Instrument Identifier](#token-management_instrument-identifier_enroll-an-instrument-identifier-for-payment-network-token).&lt;br&gt;For more information about Payment Network Tokens see the Developer Guide.&lt;br&gt;&lt;br&gt;**Payments with Customers Payment Instrument**&lt;br&gt;To perform a payment with a particular Payment Instrument or Shipping Address specify the [Payment Instrument in the payment request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultPaymentInstrument)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> PostCustomerPaymentInstrumentAsyncWithHttpInfo (string customerTokenId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null);
+        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> PostCustomerPaymentInstrumentAsyncWithHttpInfo (string customerId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null);
         #endregion Asynchronous Operations
     }
 
@@ -300,6 +301,7 @@ namespace CyberSource.Api
     {
         private static Logger logger;
         private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private int? _statusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerPaymentInstrumentApi"/> class.
@@ -352,7 +354,7 @@ namespace CyberSource.Api
         /// <value>The base path</value>
         public string GetBasePath()
         {
-            return Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
         }
 
         /// <summary>
@@ -411,45 +413,65 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Delete a Customer Payment Instrument 
+        /// Retrieves the status code being set for the most recently executed API request.
+        /// </summary>
+        /// <returns>Status Code of previous request</returns>
+        public int GetStatusCode()
+        {
+            return this._statusCode == null ? 0 : (int) this._statusCode;
+        }
+
+        /// <summary>
+        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
+        /// </summary>
+        /// <param name="statusCode">Status Code to be set</param>
+        /// <returns></returns>
+        public void SetStatusCode(int? statusCode)
+        {
+            this._statusCode = statusCode;
+        }
+
+        /// <summary>
+        /// Delete a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Payment Instrument**&lt;br&gt;Your system can use this API to delete an existing Payment Instrument for a Customer.&lt;br&gt;Any Instrument Identifiers representing the card number will also be deleted if they are not associated with any other Payment Instruments.&lt;br&gt;If a customer has more than one Payment Instrument then the default Payment Instrument cannot be deleted without first selecting a [new default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns></returns>
-        public void DeleteCustomerPaymentInstrument (string customerTokenId, string paymentInstrumentTokenId, string profileId = null)
+        public void DeleteCustomerPaymentInstrument (string customerId, string paymentInstrumentId, string profileId = null)
         {
             logger.Debug("CALLING API \"DeleteCustomerPaymentInstrument\" STARTED");
-            DeleteCustomerPaymentInstrumentWithHttpInfo(customerTokenId, paymentInstrumentTokenId, profileId);
+            this.SetStatusCode(null);
+            DeleteCustomerPaymentInstrumentWithHttpInfo(customerId, paymentInstrumentId, profileId);
         }
 
         /// <summary>
-        /// Delete a Customer Payment Instrument 
+        /// Delete a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Payment Instrument**&lt;br&gt;Your system can use this API to delete an existing Payment Instrument for a Customer.&lt;br&gt;Any Instrument Identifiers representing the card number will also be deleted if they are not associated with any other Payment Instruments.&lt;br&gt;If a customer has more than one Payment Instrument then the default Payment Instrument cannot be deleted without first selecting a [new default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DeleteCustomerPaymentInstrumentWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, string profileId = null)
+        public ApiResponse<Object> DeleteCustomerPaymentInstrumentWithHttpInfo (string customerId, string paymentInstrumentId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
             }
-            // verify the required parameter 'paymentInstrumentTokenId' is set
-            if (paymentInstrumentTokenId == null)
+            // verify the required parameter 'paymentInstrumentId' is set
+            if (paymentInstrumentId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/payment-instruments/{paymentInstrumentTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/payment-instruments/{paymentInstrumentId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -473,13 +495,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (paymentInstrumentTokenId != null)
+            if (paymentInstrumentId != null)
             {
-                localVarPathParams.Add("paymentInstrumentTokenId", Configuration.ApiClient.ParameterToString(paymentInstrumentTokenId)); // path parameter
+                localVarPathParams.Add("paymentInstrumentId", Configuration.ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -487,7 +509,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.DELETE == Method.POST)
+            if (Method.Delete == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -498,8 +520,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -514,52 +536,54 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
         }
 
         /// <summary>
-        /// Delete a Customer Payment Instrument 
+        /// Delete a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Payment Instrument**&lt;br&gt;Your system can use this API to delete an existing Payment Instrument for a Customer.&lt;br&gt;Any Instrument Identifiers representing the card number will also be deleted if they are not associated with any other Payment Instruments.&lt;br&gt;If a customer has more than one Payment Instrument then the default Payment Instrument cannot be deleted without first selecting a [new default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteCustomerPaymentInstrumentAsync (string customerTokenId, string paymentInstrumentTokenId, string profileId = null)
+        public async System.Threading.Tasks.Task DeleteCustomerPaymentInstrumentAsync (string customerId, string paymentInstrumentId, string profileId = null)
         {
             logger.Debug("CALLING API \"DeleteCustomerPaymentInstrumentAsync\" STARTED");
-            await DeleteCustomerPaymentInstrumentAsyncWithHttpInfo(customerTokenId, paymentInstrumentTokenId, profileId);
+            this.SetStatusCode(null);
+            await DeleteCustomerPaymentInstrumentAsyncWithHttpInfo(customerId, paymentInstrumentId, profileId);
 
         }
 
         /// <summary>
-        /// Delete a Customer Payment Instrument 
+        /// Delete a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Payment Instrument**&lt;br&gt;Your system can use this API to delete an existing Payment Instrument for a Customer.&lt;br&gt;Any Instrument Identifiers representing the card number will also be deleted if they are not associated with any other Payment Instruments.&lt;br&gt;If a customer has more than one Payment Instrument then the default Payment Instrument cannot be deleted without first selecting a [new default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomerPaymentInstrumentAsyncWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, string profileId = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomerPaymentInstrumentAsyncWithHttpInfo (string customerId, string paymentInstrumentId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
             }
-            // verify the required parameter 'paymentInstrumentTokenId' is set
-            if (paymentInstrumentTokenId == null)
+            // verify the required parameter 'paymentInstrumentId' is set
+            if (paymentInstrumentId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->DeleteCustomerPaymentInstrument");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/payment-instruments/{paymentInstrumentTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/payment-instruments/{paymentInstrumentId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -583,13 +607,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (paymentInstrumentTokenId != null)
+            if (paymentInstrumentId != null)
             {
-                localVarPathParams.Add("paymentInstrumentTokenId", Configuration.ApiClient.ParameterToString(paymentInstrumentTokenId)); // path parameter
+                localVarPathParams.Add("paymentInstrumentId", Configuration.ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -597,7 +621,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.DELETE == Method.POST)
+            if (Method.Delete == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -608,8 +632,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -624,52 +648,55 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
         }
         /// <summary>
-        /// Retrieve a Customer Payment Instrument 
+        /// Retrieve a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Payment Instrument**&lt;br&gt;Your system can use this API to retrieve an existing Payment Instrument for a Customer.&lt;br&gt;To perform a payment with a particular Payment Instrument simply specify the [Payment Instrument Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        public Tmsv2customersEmbeddedDefaultPaymentInstrument GetCustomerPaymentInstrument (string customerTokenId, string paymentInstrumentTokenId, string profileId = null)
+        public Tmsv2customersEmbeddedDefaultPaymentInstrument GetCustomerPaymentInstrument (string customerId, string paymentInstrumentId, string profileId = null)
         {
             logger.Debug("CALLING API \"GetCustomerPaymentInstrument\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = GetCustomerPaymentInstrumentWithHttpInfo(customerTokenId, paymentInstrumentTokenId, profileId);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = GetCustomerPaymentInstrumentWithHttpInfo(customerId, paymentInstrumentId, profileId);
             logger.Debug("CALLING API \"GetCustomerPaymentInstrument\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Retrieve a Customer Payment Instrument 
+        /// Retrieve a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Payment Instrument**&lt;br&gt;Your system can use this API to retrieve an existing Payment Instrument for a Customer.&lt;br&gt;To perform a payment with a particular Payment Instrument simply specify the [Payment Instrument Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        public ApiResponse< Tmsv2customersEmbeddedDefaultPaymentInstrument > GetCustomerPaymentInstrumentWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, string profileId = null)
+        public ApiResponse< Tmsv2customersEmbeddedDefaultPaymentInstrument > GetCustomerPaymentInstrumentWithHttpInfo (string customerId, string paymentInstrumentId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
             }
-            // verify the required parameter 'paymentInstrumentTokenId' is set
-            if (paymentInstrumentTokenId == null)
+            // verify the required parameter 'paymentInstrumentId' is set
+            if (paymentInstrumentId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/payment-instruments/{paymentInstrumentTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/payment-instruments/{paymentInstrumentId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -693,13 +720,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (paymentInstrumentTokenId != null)
+            if (paymentInstrumentId != null)
             {
-                localVarPathParams.Add("paymentInstrumentTokenId", Configuration.ApiClient.ParameterToString(paymentInstrumentTokenId)); // path parameter
+                localVarPathParams.Add("paymentInstrumentId", Configuration.ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -707,7 +734,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -718,8 +745,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -740,48 +767,50 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Retrieve a Customer Payment Instrument 
+        /// Retrieve a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Payment Instrument**&lt;br&gt;Your system can use this API to retrieve an existing Payment Instrument for a Customer.&lt;br&gt;To perform a payment with a particular Payment Instrument simply specify the [Payment Instrument Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> GetCustomerPaymentInstrumentAsync (string customerTokenId, string paymentInstrumentTokenId, string profileId = null)
+        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> GetCustomerPaymentInstrumentAsync (string customerId, string paymentInstrumentId, string profileId = null)
         {
             logger.Debug("CALLING API \"GetCustomerPaymentInstrumentAsync\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = await GetCustomerPaymentInstrumentAsyncWithHttpInfo(customerTokenId, paymentInstrumentTokenId, profileId);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = await GetCustomerPaymentInstrumentAsyncWithHttpInfo(customerId, paymentInstrumentId, profileId);
             logger.Debug("CALLING API \"GetCustomerPaymentInstrumentAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Retrieve a Customer Payment Instrument 
+        /// Retrieve a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Payment Instrument**&lt;br&gt;Your system can use this API to retrieve an existing Payment Instrument for a Customer.&lt;br&gt;To perform a payment with a particular Payment Instrument simply specify the [Payment Instrument Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultPaymentInstrument)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> GetCustomerPaymentInstrumentAsyncWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, string profileId = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> GetCustomerPaymentInstrumentAsyncWithHttpInfo (string customerId, string paymentInstrumentId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
             }
-            // verify the required parameter 'paymentInstrumentTokenId' is set
-            if (paymentInstrumentTokenId == null)
+            // verify the required parameter 'paymentInstrumentId' is set
+            if (paymentInstrumentId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrument");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/payment-instruments/{paymentInstrumentTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/payment-instruments/{paymentInstrumentId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -805,13 +834,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (paymentInstrumentTokenId != null)
+            if (paymentInstrumentId != null)
             {
-                localVarPathParams.Add("paymentInstrumentTokenId", Configuration.ApiClient.ParameterToString(paymentInstrumentTokenId)); // path parameter
+                localVarPathParams.Add("paymentInstrumentId", Configuration.ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -819,7 +848,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -830,8 +859,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -851,43 +880,45 @@ namespace CyberSource.Api
                 (Tmsv2customersEmbeddedDefaultPaymentInstrument) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Tmsv2customersEmbeddedDefaultPaymentInstrument))); // Return statement
         }
         /// <summary>
-        /// List Payment Instruments for a Customer 
+        /// List Payment Instruments for a Customer |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Payment Instruments**&lt;br&gt;Your system can use this API to retrieve all existing Payment Instruments for a Customer. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>PaymentInstrumentList</returns>
-        public PaymentInstrumentList GetCustomerPaymentInstrumentsList (string customerTokenId, string profileId = null, long? offset = null, long? limit = null)
+        public PaymentInstrumentList GetCustomerPaymentInstrumentsList (string customerId, string profileId = null, long? offset = null, long? limit = null)
         {
             logger.Debug("CALLING API \"GetCustomerPaymentInstrumentsList\" STARTED");
-            ApiResponse<PaymentInstrumentList> localVarResponse = GetCustomerPaymentInstrumentsListWithHttpInfo(customerTokenId, profileId, offset, limit);
+            this.SetStatusCode(null);
+            ApiResponse<PaymentInstrumentList> localVarResponse = GetCustomerPaymentInstrumentsListWithHttpInfo(customerId, profileId, offset, limit);
             logger.Debug("CALLING API \"GetCustomerPaymentInstrumentsList\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List Payment Instruments for a Customer 
+        /// List Payment Instruments for a Customer |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Payment Instruments**&lt;br&gt;Your system can use this API to retrieve all existing Payment Instruments for a Customer. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>ApiResponse of PaymentInstrumentList</returns>
-        public ApiResponse< PaymentInstrumentList > GetCustomerPaymentInstrumentsListWithHttpInfo (string customerTokenId, string profileId = null, long? offset = null, long? limit = null)
+        public ApiResponse< PaymentInstrumentList > GetCustomerPaymentInstrumentsListWithHttpInfo (string customerId, string profileId = null, long? offset = null, long? limit = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrumentsList");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrumentsList");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrumentsList");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrumentsList");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/payment-instruments";
+            var localVarPath = $"/tms/v2/customers/{customerId}/payment-instruments";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -911,9 +942,9 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (offset != null)
@@ -930,7 +961,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -941,8 +972,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -963,44 +994,46 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// List Payment Instruments for a Customer 
+        /// List Payment Instruments for a Customer |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Payment Instruments**&lt;br&gt;Your system can use this API to retrieve all existing Payment Instruments for a Customer. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>Task of PaymentInstrumentList</returns>
-        public async System.Threading.Tasks.Task<PaymentInstrumentList> GetCustomerPaymentInstrumentsListAsync (string customerTokenId, string profileId = null, long? offset = null, long? limit = null)
+        public async System.Threading.Tasks.Task<PaymentInstrumentList> GetCustomerPaymentInstrumentsListAsync (string customerId, string profileId = null, long? offset = null, long? limit = null)
         {
             logger.Debug("CALLING API \"GetCustomerPaymentInstrumentsListAsync\" STARTED");
-            ApiResponse<PaymentInstrumentList> localVarResponse = await GetCustomerPaymentInstrumentsListAsyncWithHttpInfo(customerTokenId, profileId, offset, limit);
+            this.SetStatusCode(null);
+            ApiResponse<PaymentInstrumentList> localVarResponse = await GetCustomerPaymentInstrumentsListAsyncWithHttpInfo(customerId, profileId, offset, limit);
             logger.Debug("CALLING API \"GetCustomerPaymentInstrumentsListAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// List Payment Instruments for a Customer 
+        /// List Payment Instruments for a Customer |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Payment Instruments**&lt;br&gt;Your system can use this API to retrieve all existing Payment Instruments for a Customer. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (PaymentInstrumentList)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PaymentInstrumentList>> GetCustomerPaymentInstrumentsListAsyncWithHttpInfo (string customerTokenId, string profileId = null, long? offset = null, long? limit = null)
+        public async System.Threading.Tasks.Task<ApiResponse<PaymentInstrumentList>> GetCustomerPaymentInstrumentsListAsyncWithHttpInfo (string customerId, string profileId = null, long? offset = null, long? limit = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrumentsList");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrumentsList");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrumentsList");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->GetCustomerPaymentInstrumentsList");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/payment-instruments";
+            var localVarPath = $"/tms/v2/customers/{customerId}/payment-instruments";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -1024,9 +1057,9 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (offset != null)
@@ -1043,7 +1076,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -1054,8 +1087,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -1075,48 +1108,50 @@ namespace CyberSource.Api
                 (PaymentInstrumentList) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PaymentInstrumentList))); // Return statement
         }
         /// <summary>
-        /// Update a Customer Payment Instrument 
+        /// Update a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Payment Instrument**&lt;br&gt;Your system can use this API to update an existing Payment Instrument for a Customer, including selecting a [default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
         /// <param name="patchCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        public Tmsv2customersEmbeddedDefaultPaymentInstrument PatchCustomersPaymentInstrument (string customerTokenId, string paymentInstrumentTokenId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null)
+        public Tmsv2customersEmbeddedDefaultPaymentInstrument PatchCustomersPaymentInstrument (string customerId, string paymentInstrumentId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null)
         {
             logger.Debug("CALLING API \"PatchCustomersPaymentInstrument\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = PatchCustomersPaymentInstrumentWithHttpInfo(customerTokenId, paymentInstrumentTokenId, patchCustomerPaymentInstrumentRequest, profileId, ifMatch);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = PatchCustomersPaymentInstrumentWithHttpInfo(customerId, paymentInstrumentId, patchCustomerPaymentInstrumentRequest, profileId, ifMatch);
             logger.Debug("CALLING API \"PatchCustomersPaymentInstrument\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Update a Customer Payment Instrument 
+        /// Update a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Payment Instrument**&lt;br&gt;Your system can use this API to update an existing Payment Instrument for a Customer, including selecting a [default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
         /// <param name="patchCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        public ApiResponse< Tmsv2customersEmbeddedDefaultPaymentInstrument > PatchCustomersPaymentInstrumentWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null)
+        public ApiResponse< Tmsv2customersEmbeddedDefaultPaymentInstrument > PatchCustomersPaymentInstrumentWithHttpInfo (string customerId, string paymentInstrumentId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
             }
-            // verify the required parameter 'paymentInstrumentTokenId' is set
-            if (paymentInstrumentTokenId == null)
+            // verify the required parameter 'paymentInstrumentId' is set
+            if (paymentInstrumentId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
             }
             // verify the required parameter 'patchCustomerPaymentInstrumentRequest' is set
             if (patchCustomerPaymentInstrumentRequest == null)
@@ -1125,7 +1160,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'patchCustomerPaymentInstrumentRequest' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/payment-instruments/{paymentInstrumentTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/payment-instruments/{paymentInstrumentId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -1149,13 +1184,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (paymentInstrumentTokenId != null)
+            if (paymentInstrumentId != null)
             {
-                localVarPathParams.Add("paymentInstrumentTokenId", Configuration.ApiClient.ParameterToString(paymentInstrumentTokenId)); // path parameter
+                localVarPathParams.Add("paymentInstrumentId", Configuration.ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -1169,6 +1204,8 @@ namespace CyberSource.Api
             }
             if (patchCustomerPaymentInstrumentRequest != null && patchCustomerPaymentInstrumentRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                patchCustomerPaymentInstrumentRequest = (PatchCustomerPaymentInstrumentRequest)sdkTracker.InsertDeveloperIdTracker(patchCustomerPaymentInstrumentRequest, patchCustomerPaymentInstrumentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(patchCustomerPaymentInstrumentRequest); // http body (model) parameter
             }
             else
@@ -1187,8 +1224,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1209,49 +1246,51 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Update a Customer Payment Instrument 
+        /// Update a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Payment Instrument**&lt;br&gt;Your system can use this API to update an existing Payment Instrument for a Customer, including selecting a [default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
         /// <param name="patchCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> PatchCustomersPaymentInstrumentAsync (string customerTokenId, string paymentInstrumentTokenId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null)
+        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> PatchCustomersPaymentInstrumentAsync (string customerId, string paymentInstrumentId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null)
         {
             logger.Debug("CALLING API \"PatchCustomersPaymentInstrumentAsync\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = await PatchCustomersPaymentInstrumentAsyncWithHttpInfo(customerTokenId, paymentInstrumentTokenId, patchCustomerPaymentInstrumentRequest, profileId, ifMatch);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = await PatchCustomersPaymentInstrumentAsyncWithHttpInfo(customerId, paymentInstrumentId, patchCustomerPaymentInstrumentRequest, profileId, ifMatch);
             logger.Debug("CALLING API \"PatchCustomersPaymentInstrumentAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Update a Customer Payment Instrument 
+        /// Update a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Payment Instrument**&lt;br&gt;Your system can use this API to update an existing Payment Instrument for a Customer, including selecting a [default Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument_samplerequests-dropdown_make-customer-payment-instrument-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="paymentInstrumentTokenId">The TokenId of a payment instrument.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="paymentInstrumentId">The Id of a payment instrument.</param>
         /// <param name="patchCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultPaymentInstrument)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> PatchCustomersPaymentInstrumentAsyncWithHttpInfo (string customerTokenId, string paymentInstrumentTokenId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> PatchCustomersPaymentInstrumentAsyncWithHttpInfo (string customerId, string paymentInstrumentId, PatchCustomerPaymentInstrumentRequest patchCustomerPaymentInstrumentRequest, string profileId = null, string ifMatch = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
             }
-            // verify the required parameter 'paymentInstrumentTokenId' is set
-            if (paymentInstrumentTokenId == null)
+            // verify the required parameter 'paymentInstrumentId' is set
+            if (paymentInstrumentId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'paymentInstrumentTokenId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'paymentInstrumentId' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
             }
             // verify the required parameter 'patchCustomerPaymentInstrumentRequest' is set
             if (patchCustomerPaymentInstrumentRequest == null)
@@ -1260,7 +1299,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'patchCustomerPaymentInstrumentRequest' when calling CustomerPaymentInstrumentApi->PatchCustomersPaymentInstrument");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/payment-instruments/{paymentInstrumentTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/payment-instruments/{paymentInstrumentId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -1284,13 +1323,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (paymentInstrumentTokenId != null)
+            if (paymentInstrumentId != null)
             {
-                localVarPathParams.Add("paymentInstrumentTokenId", Configuration.ApiClient.ParameterToString(paymentInstrumentTokenId)); // path parameter
+                localVarPathParams.Add("paymentInstrumentId", Configuration.ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -1304,6 +1343,8 @@ namespace CyberSource.Api
             }
             if (patchCustomerPaymentInstrumentRequest != null && patchCustomerPaymentInstrumentRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                patchCustomerPaymentInstrumentRequest = (PatchCustomerPaymentInstrumentRequest)sdkTracker.InsertDeveloperIdTracker(patchCustomerPaymentInstrumentRequest, patchCustomerPaymentInstrumentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(patchCustomerPaymentInstrumentRequest); // http body (model) parameter
             }
             else
@@ -1322,8 +1363,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -1343,38 +1384,40 @@ namespace CyberSource.Api
                 (Tmsv2customersEmbeddedDefaultPaymentInstrument) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Tmsv2customersEmbeddedDefaultPaymentInstrument))); // Return statement
         }
         /// <summary>
-        /// Create a Customer Payment Instrument Include an existing TMS Customer &amp; Instrument Identifier token id in the request. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** * An Instrument Identifier token can be created by calling: **POST *_/tms/v1/instrumentidentifiers*** 
+        /// Create a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;&lt;br&gt;**Creating a Customer Payment Instrument**&lt;br&gt;It is recommended you [create a Customer Payment Instrument via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body), this can be for a zero amount.&lt;br&gt;In Europe: You should perform Payer Authentication alongside the Authorization.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Payment Network Tokens**&lt;br&gt;Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.&lt;br&gt;A Payment Network Token will be automatically created and used in future payments if you are enabled for the service.&lt;br&gt;A Payment Network Token can also be [provisioned for an existing Instrument Identifier](#token-management_instrument-identifier_enroll-an-instrument-identifier-for-payment-network-token).&lt;br&gt;For more information about Payment Network Tokens see the Developer Guide.&lt;br&gt;&lt;br&gt;**Payments with Customers Payment Instrument**&lt;br&gt;To perform a payment with a particular Payment Instrument or Shipping Address specify the [Payment Instrument in the payment request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        public Tmsv2customersEmbeddedDefaultPaymentInstrument PostCustomerPaymentInstrument (string customerTokenId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null)
+        public Tmsv2customersEmbeddedDefaultPaymentInstrument PostCustomerPaymentInstrument (string customerId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null)
         {
             logger.Debug("CALLING API \"PostCustomerPaymentInstrument\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = PostCustomerPaymentInstrumentWithHttpInfo(customerTokenId, postCustomerPaymentInstrumentRequest, profileId);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = PostCustomerPaymentInstrumentWithHttpInfo(customerId, postCustomerPaymentInstrumentRequest, profileId);
             logger.Debug("CALLING API \"PostCustomerPaymentInstrument\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Create a Customer Payment Instrument Include an existing TMS Customer &amp; Instrument Identifier token id in the request. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** * An Instrument Identifier token can be created by calling: **POST *_/tms/v1/instrumentidentifiers*** 
+        /// Create a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;&lt;br&gt;**Creating a Customer Payment Instrument**&lt;br&gt;It is recommended you [create a Customer Payment Instrument via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body), this can be for a zero amount.&lt;br&gt;In Europe: You should perform Payer Authentication alongside the Authorization.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Payment Network Tokens**&lt;br&gt;Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.&lt;br&gt;A Payment Network Token will be automatically created and used in future payments if you are enabled for the service.&lt;br&gt;A Payment Network Token can also be [provisioned for an existing Instrument Identifier](#token-management_instrument-identifier_enroll-an-instrument-identifier-for-payment-network-token).&lt;br&gt;For more information about Payment Network Tokens see the Developer Guide.&lt;br&gt;&lt;br&gt;**Payments with Customers Payment Instrument**&lt;br&gt;To perform a payment with a particular Payment Instrument or Shipping Address specify the [Payment Instrument in the payment request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        public ApiResponse< Tmsv2customersEmbeddedDefaultPaymentInstrument > PostCustomerPaymentInstrumentWithHttpInfo (string customerTokenId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null)
+        public ApiResponse< Tmsv2customersEmbeddedDefaultPaymentInstrument > PostCustomerPaymentInstrumentWithHttpInfo (string customerId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->PostCustomerPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->PostCustomerPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->PostCustomerPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->PostCustomerPaymentInstrument");
             }
             // verify the required parameter 'postCustomerPaymentInstrumentRequest' is set
             if (postCustomerPaymentInstrumentRequest == null)
@@ -1383,7 +1426,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'postCustomerPaymentInstrumentRequest' when calling CustomerPaymentInstrumentApi->PostCustomerPaymentInstrument");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/payment-instruments";
+            var localVarPath = $"/tms/v2/customers/{customerId}/payment-instruments";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -1407,9 +1450,9 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (profileId != null)
@@ -1418,6 +1461,8 @@ namespace CyberSource.Api
             }
             if (postCustomerPaymentInstrumentRequest != null && postCustomerPaymentInstrumentRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                postCustomerPaymentInstrumentRequest = (PostCustomerPaymentInstrumentRequest)sdkTracker.InsertDeveloperIdTracker(postCustomerPaymentInstrumentRequest, postCustomerPaymentInstrumentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(postCustomerPaymentInstrumentRequest); // http body (model) parameter
             }
             else
@@ -1436,8 +1481,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1458,39 +1503,41 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Create a Customer Payment Instrument Include an existing TMS Customer &amp; Instrument Identifier token id in the request. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** * An Instrument Identifier token can be created by calling: **POST *_/tms/v1/instrumentidentifiers*** 
+        /// Create a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;&lt;br&gt;**Creating a Customer Payment Instrument**&lt;br&gt;It is recommended you [create a Customer Payment Instrument via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body), this can be for a zero amount.&lt;br&gt;In Europe: You should perform Payer Authentication alongside the Authorization.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Payment Network Tokens**&lt;br&gt;Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.&lt;br&gt;A Payment Network Token will be automatically created and used in future payments if you are enabled for the service.&lt;br&gt;A Payment Network Token can also be [provisioned for an existing Instrument Identifier](#token-management_instrument-identifier_enroll-an-instrument-identifier-for-payment-network-token).&lt;br&gt;For more information about Payment Network Tokens see the Developer Guide.&lt;br&gt;&lt;br&gt;**Payments with Customers Payment Instrument**&lt;br&gt;To perform a payment with a particular Payment Instrument or Shipping Address specify the [Payment Instrument in the payment request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultPaymentInstrument</returns>
-        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> PostCustomerPaymentInstrumentAsync (string customerTokenId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null)
+        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultPaymentInstrument> PostCustomerPaymentInstrumentAsync (string customerId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null)
         {
             logger.Debug("CALLING API \"PostCustomerPaymentInstrumentAsync\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = await PostCustomerPaymentInstrumentAsyncWithHttpInfo(customerTokenId, postCustomerPaymentInstrumentRequest, profileId);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument> localVarResponse = await PostCustomerPaymentInstrumentAsyncWithHttpInfo(customerId, postCustomerPaymentInstrumentRequest, profileId);
             logger.Debug("CALLING API \"PostCustomerPaymentInstrumentAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Create a Customer Payment Instrument Include an existing TMS Customer &amp; Instrument Identifier token id in the request. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** * An Instrument Identifier token can be created by calling: **POST *_/tms/v1/instrumentidentifiers*** 
+        /// Create a Customer Payment Instrument |  |  |  | | - -- | - -- | - -- | |**Customer Payment Instrument**&lt;br&gt;A Customer Payment Instrument represents tokenized customer payment information such as expiration date, billing address &amp; card type.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Payment Instruments](#token-management_customer-payment-instrument_retrieve-a-customer-payment-instrument), with one allocated as the Customers default for use in payments.&lt;br&gt;A Payment Instrument token does not store the card number. A Payment Instrument is associated with an [Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier) that represents either a payment card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;&lt;br&gt;**Creating a Customer Payment Instrument**&lt;br&gt;It is recommended you [create a Customer Payment Instrument via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body), this can be for a zero amount.&lt;br&gt;In Europe: You should perform Payer Authentication alongside the Authorization.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Payment Network Tokens**&lt;br&gt;Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.&lt;br&gt;A Payment Network Token will be automatically created and used in future payments if you are enabled for the service.&lt;br&gt;A Payment Network Token can also be [provisioned for an existing Instrument Identifier](#token-management_instrument-identifier_enroll-an-instrument-identifier-for-payment-network-token).&lt;br&gt;For more information about Payment Network Tokens see the Developer Guide.&lt;br&gt;&lt;br&gt;**Payments with Customers Payment Instrument**&lt;br&gt;To perform a payment with a particular Payment Instrument or Shipping Address specify the [Payment Instrument in the payment request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerPaymentInstrumentRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultPaymentInstrument)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> PostCustomerPaymentInstrumentAsyncWithHttpInfo (string customerTokenId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultPaymentInstrument>> PostCustomerPaymentInstrumentAsyncWithHttpInfo (string customerId, PostCustomerPaymentInstrumentRequest postCustomerPaymentInstrumentRequest, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->PostCustomerPaymentInstrument");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerPaymentInstrumentApi->PostCustomerPaymentInstrument");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->PostCustomerPaymentInstrument");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerPaymentInstrumentApi->PostCustomerPaymentInstrument");
             }
             // verify the required parameter 'postCustomerPaymentInstrumentRequest' is set
             if (postCustomerPaymentInstrumentRequest == null)
@@ -1499,7 +1546,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'postCustomerPaymentInstrumentRequest' when calling CustomerPaymentInstrumentApi->PostCustomerPaymentInstrument");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/payment-instruments";
+            var localVarPath = $"/tms/v2/customers/{customerId}/payment-instruments";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -1523,9 +1570,9 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (profileId != null)
@@ -1534,6 +1581,8 @@ namespace CyberSource.Api
             }
             if (postCustomerPaymentInstrumentRequest != null && postCustomerPaymentInstrumentRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                postCustomerPaymentInstrumentRequest = (PostCustomerPaymentInstrumentRequest)sdkTracker.InsertDeveloperIdTracker(postCustomerPaymentInstrumentRequest, postCustomerPaymentInstrumentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(postCustomerPaymentInstrumentRequest); // http body (model) parameter
             }
             else
@@ -1552,8 +1601,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;

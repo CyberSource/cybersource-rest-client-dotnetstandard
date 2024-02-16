@@ -81,6 +81,14 @@ namespace CyberSource.Test
             // TODO unit test for the property 'TerminalSerialNumber'
         }
         /// <summary>
+        /// Test the property 'CardholderVerificationMethodUsed'
+        /// </summary>
+        [Test]
+        public void CardholderVerificationMethodUsedTest()
+        {
+            // TODO unit test for the property 'CardholderVerificationMethodUsed'
+        }
+        /// <summary>
         /// Test the property 'LaneNumber'
         /// </summary>
         [Test]
@@ -191,6 +199,14 @@ namespace CyberSource.Test
         public void TerminalPinCapabilityTest()
         {
             // TODO unit test for the property 'TerminalPinCapability'
+        }
+        /// <summary>
+        /// Test the property 'PinEntrySolution'
+        /// </summary>
+        [Test]
+        public void PinEntrySolutionTest()
+        {
+            // TODO unit test for the property 'PinEntrySolution'
         }
         /// <summary>
         /// Test the property 'DeviceId'

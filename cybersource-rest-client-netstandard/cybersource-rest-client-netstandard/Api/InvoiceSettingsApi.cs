@@ -17,6 +17,7 @@ using CyberSource.Client;
 using CyberSource.Model;
 using NLog;
 using AuthenticationSdk.util;
+using CyberSource.Utilities.Tracking;
 
 namespace CyberSource.Api
 {
@@ -30,7 +31,7 @@ namespace CyberSource.Api
         /// Get Invoice Settings
         /// </summary>
         /// <remarks>
-        /// Get the invoice settings for the invoice payment page.
+        /// Allows you to retrieve the invoice settings for the payment page.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>InvoicingV2InvoiceSettingsGet200Response</returns>
@@ -40,7 +41,7 @@ namespace CyberSource.Api
         /// Get Invoice Settings
         /// </summary>
         /// <remarks>
-        /// Get the invoice settings for the invoice payment page.
+        /// Allows you to retrieve the invoice settings for the payment page.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of InvoicingV2InvoiceSettingsGet200Response</returns>
@@ -49,7 +50,7 @@ namespace CyberSource.Api
         /// Update Invoice Settings
         /// </summary>
         /// <remarks>
-        /// Update invoice settings for the invoice payment page.
+        /// Allows you to customize the payment page, the checkout experience, email communication and payer authentication. You can customize the invoice to match your brand with your business name, logo and brand colors, and a VAT Tax number. You can choose to capture the payers shipping details, phone number and email during the checkout process. You can add a custom message to all invoice emails and enable or disable payer authentication for invoice payments.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="invoiceSettingsRequest"></param>
@@ -60,7 +61,7 @@ namespace CyberSource.Api
         /// Update Invoice Settings
         /// </summary>
         /// <remarks>
-        /// Update invoice settings for the invoice payment page.
+        /// Allows you to customize the payment page, the checkout experience, email communication and payer authentication. You can customize the invoice to match your brand with your business name, logo and brand colors, and a VAT Tax number. You can choose to capture the payers shipping details, phone number and email during the checkout process. You can add a custom message to all invoice emails and enable or disable payer authentication for invoice payments.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="invoiceSettingsRequest"></param>
@@ -72,7 +73,7 @@ namespace CyberSource.Api
         /// Get Invoice Settings
         /// </summary>
         /// <remarks>
-        /// Get the invoice settings for the invoice payment page.
+        /// Allows you to retrieve the invoice settings for the payment page.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of InvoicingV2InvoiceSettingsGet200Response</returns>
@@ -82,7 +83,7 @@ namespace CyberSource.Api
         /// Get Invoice Settings
         /// </summary>
         /// <remarks>
-        /// Get the invoice settings for the invoice payment page.
+        /// Allows you to retrieve the invoice settings for the payment page.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (InvoicingV2InvoiceSettingsGet200Response)</returns>
@@ -91,7 +92,7 @@ namespace CyberSource.Api
         /// Update Invoice Settings
         /// </summary>
         /// <remarks>
-        /// Update invoice settings for the invoice payment page.
+        /// Allows you to customize the payment page, the checkout experience, email communication and payer authentication. You can customize the invoice to match your brand with your business name, logo and brand colors, and a VAT Tax number. You can choose to capture the payers shipping details, phone number and email during the checkout process. You can add a custom message to all invoice emails and enable or disable payer authentication for invoice payments.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="invoiceSettingsRequest"></param>
@@ -102,7 +103,7 @@ namespace CyberSource.Api
         /// Update Invoice Settings
         /// </summary>
         /// <remarks>
-        /// Update invoice settings for the invoice payment page.
+        /// Allows you to customize the payment page, the checkout experience, email communication and payer authentication. You can customize the invoice to match your brand with your business name, logo and brand colors, and a VAT Tax number. You can choose to capture the payers shipping details, phone number and email during the checkout process. You can add a custom message to all invoice emails and enable or disable payer authentication for invoice payments.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="invoiceSettingsRequest"></param>
@@ -118,6 +119,7 @@ namespace CyberSource.Api
     {
         private static Logger logger;
         private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private int? _statusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoiceSettingsApi"/> class.
@@ -170,7 +172,7 @@ namespace CyberSource.Api
         /// <value>The base path</value>
         public string GetBasePath()
         {
-            return Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
         }
 
         /// <summary>
@@ -229,20 +231,41 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Get Invoice Settings Get the invoice settings for the invoice payment page.
+        /// Retrieves the status code being set for the most recently executed API request.
+        /// </summary>
+        /// <returns>Status Code of previous request</returns>
+        public int GetStatusCode()
+        {
+            return this._statusCode == null ? 0 : (int) this._statusCode;
+        }
+
+        /// <summary>
+        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
+        /// </summary>
+        /// <param name="statusCode">Status Code to be set</param>
+        /// <returns></returns>
+        public void SetStatusCode(int? statusCode)
+        {
+            this._statusCode = statusCode;
+        }
+
+        /// <summary>
+        /// Get Invoice Settings Allows you to retrieve the invoice settings for the payment page.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>InvoicingV2InvoiceSettingsGet200Response</returns>
         public InvoicingV2InvoiceSettingsGet200Response GetInvoiceSettings ()
         {
             logger.Debug("CALLING API \"GetInvoiceSettings\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoiceSettingsGet200Response> localVarResponse = GetInvoiceSettingsWithHttpInfo();
             logger.Debug("CALLING API \"GetInvoiceSettings\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get Invoice Settings Get the invoice settings for the invoice payment page.
+        /// Get Invoice Settings Allows you to retrieve the invoice settings for the payment page.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of InvoicingV2InvoiceSettingsGet200Response</returns>
@@ -267,7 +290,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -275,7 +301,7 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -286,8 +312,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -308,21 +334,23 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Get Invoice Settings Get the invoice settings for the invoice payment page.
+        /// Get Invoice Settings Allows you to retrieve the invoice settings for the payment page.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of InvoicingV2InvoiceSettingsGet200Response</returns>
         public async System.Threading.Tasks.Task<InvoicingV2InvoiceSettingsGet200Response> GetInvoiceSettingsAsync ()
         {
             logger.Debug("CALLING API \"GetInvoiceSettingsAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoiceSettingsGet200Response> localVarResponse = await GetInvoiceSettingsAsyncWithHttpInfo();
             logger.Debug("CALLING API \"GetInvoiceSettingsAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Get Invoice Settings Get the invoice settings for the invoice payment page.
+        /// Get Invoice Settings Allows you to retrieve the invoice settings for the payment page.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (InvoicingV2InvoiceSettingsGet200Response)</returns>
@@ -347,7 +375,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -355,7 +386,7 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -366,8 +397,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -387,7 +418,7 @@ namespace CyberSource.Api
                 (InvoicingV2InvoiceSettingsGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoiceSettingsGet200Response))); // Return statement
         }
         /// <summary>
-        /// Update Invoice Settings Update invoice settings for the invoice payment page.
+        /// Update Invoice Settings Allows you to customize the payment page, the checkout experience, email communication and payer authentication. You can customize the invoice to match your brand with your business name, logo and brand colors, and a VAT Tax number. You can choose to capture the payers shipping details, phone number and email during the checkout process. You can add a custom message to all invoice emails and enable or disable payer authentication for invoice payments.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="invoiceSettingsRequest"></param>
@@ -395,13 +426,15 @@ namespace CyberSource.Api
         public InvoicingV2InvoiceSettingsGet200Response UpdateInvoiceSettings (InvoiceSettingsRequest invoiceSettingsRequest)
         {
             logger.Debug("CALLING API \"UpdateInvoiceSettings\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoiceSettingsGet200Response> localVarResponse = UpdateInvoiceSettingsWithHttpInfo(invoiceSettingsRequest);
             logger.Debug("CALLING API \"UpdateInvoiceSettings\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Update Invoice Settings Update invoice settings for the invoice payment page.
+        /// Update Invoice Settings Allows you to customize the payment page, the checkout experience, email communication and payer authentication. You can customize the invoice to match your brand with your business name, logo and brand colors, and a VAT Tax number. You can choose to capture the payers shipping details, phone number and email during the checkout process. You can add a custom message to all invoice emails and enable or disable payer authentication for invoice payments.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="invoiceSettingsRequest"></param>
@@ -433,7 +466,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -443,6 +479,8 @@ namespace CyberSource.Api
 
             if (invoiceSettingsRequest != null && invoiceSettingsRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                invoiceSettingsRequest = (InvoiceSettingsRequest)sdkTracker.InsertDeveloperIdTracker(invoiceSettingsRequest, invoiceSettingsRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(invoiceSettingsRequest); // http body (model) parameter
             }
             else
@@ -461,8 +499,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -483,7 +521,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Update Invoice Settings Update invoice settings for the invoice payment page.
+        /// Update Invoice Settings Allows you to customize the payment page, the checkout experience, email communication and payer authentication. You can customize the invoice to match your brand with your business name, logo and brand colors, and a VAT Tax number. You can choose to capture the payers shipping details, phone number and email during the checkout process. You can add a custom message to all invoice emails and enable or disable payer authentication for invoice payments.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="invoiceSettingsRequest"></param>
@@ -491,14 +529,16 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<InvoicingV2InvoiceSettingsGet200Response> UpdateInvoiceSettingsAsync (InvoiceSettingsRequest invoiceSettingsRequest)
         {
             logger.Debug("CALLING API \"UpdateInvoiceSettingsAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoiceSettingsGet200Response> localVarResponse = await UpdateInvoiceSettingsAsyncWithHttpInfo(invoiceSettingsRequest);
             logger.Debug("CALLING API \"UpdateInvoiceSettingsAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Update Invoice Settings Update invoice settings for the invoice payment page.
+        /// Update Invoice Settings Allows you to customize the payment page, the checkout experience, email communication and payer authentication. You can customize the invoice to match your brand with your business name, logo and brand colors, and a VAT Tax number. You can choose to capture the payers shipping details, phone number and email during the checkout process. You can add a custom message to all invoice emails and enable or disable payer authentication for invoice payments.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="invoiceSettingsRequest"></param>
@@ -530,7 +570,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -540,6 +583,8 @@ namespace CyberSource.Api
 
             if (invoiceSettingsRequest != null && invoiceSettingsRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                invoiceSettingsRequest = (InvoiceSettingsRequest)sdkTracker.InsertDeveloperIdTracker(invoiceSettingsRequest, invoiceSettingsRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(invoiceSettingsRequest); // http body (model) parameter
             }
             else
@@ -558,8 +603,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;

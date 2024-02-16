@@ -24,6 +24,7 @@ using AuthenticationSdk.core;
 using AuthenticationSdk.util;
 using System.Security.Cryptography.X509Certificates;
 using NLog;
+using System.Security;
 
 namespace CyberSource.Client
 {
@@ -41,14 +42,14 @@ namespace CyberSource.Client
         /// Allows for extending request processing for <see cref="ApiClient"/> generated code.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
-        partial void InterceptRequest(IRestRequest request);
+        partial void InterceptRequest(RestRequest request); // CHANGED
 
         /// <summary>
         /// Allows for extending response processing for <see cref="ApiClient"/> generated code.
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
         /// <param name="response">The RestSharp response object</param>
-        partial void InterceptResponse(IRestRequest request, IRestResponse response);
+        partial void InterceptResponse(RestRequest request, RestResponse response); // CHANGED
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" /> class
@@ -156,7 +157,7 @@ namespace CyberSource.Client
                     firstQueryParam = false;
                 }
             }
-            
+
             var request = new RestRequest(path, method);
 
             // add path parameter, if any
@@ -174,7 +175,7 @@ namespace CyberSource.Client
                 }
                 else
                     request.AddHeader(param.Key, param.Value);
-            }            
+            }
 
             if (postBody == null)
             {
@@ -193,7 +194,13 @@ namespace CyberSource.Client
                         ParameterType.HttpHeader);
                 }
                 else
+                {
+                    if (request.Parameters.Any(x => string.Equals(x.Name, param.Key, StringComparison.OrdinalIgnoreCase) && x.Type == ParameterType.HttpHeader))
+                    {
+                        continue;
+                    }
                     request.AddHeader(param.Key, param.Value);
+                }
             }
 
             // add query parameter, if any
@@ -207,7 +214,7 @@ namespace CyberSource.Client
             // add file parameter, if any
             foreach(var param in fileParams)
             {
-                request.AddFile(param.Value.Name, param.Value.Writer, param.Value.FileName, param.Value.ContentLength, param.Value.ContentType);
+                request.AddFile(param.Value.Name, param.Value.FileName, param.Value.ContentType);
             }
 
             if (postBody != null) // http body (model or byte[]) parameter
@@ -224,8 +231,9 @@ namespace CyberSource.Client
                     }
                     else
                     {
-                        request.AddParameter("application/json", postBody, ParameterType.RequestBody);
-                    }                    
+                        // request.AddParameter("application/json", postBody, ParameterType.RequestBody);
+                        request.AddJsonBody(postBody);
+                    }
                 }
                 else if (postBody.GetType() == typeof(byte[]))
                 {
@@ -234,6 +242,82 @@ namespace CyberSource.Client
             }
 
             return request;
+        }
+
+        private RestRequest PrepareRestRequest(
+            string path, Method method, Dictionary<string, string> queryParams, object postBody,
+            Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
+            Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
+            string contentType)
+        {
+            // Change to path(Request Target) to be sent to Authentication SDK
+            // Include Query Params in the Request target
+            var firstQueryParam = true;
+            foreach (var param in queryParams)
+            {
+                var key = param.Key;
+                var val = param.Value;
+
+                if (!firstQueryParam)
+                {
+                    path = path + "&" + key + "=" + val;
+                }
+                else
+                {
+                    path = path + "?" + key + "=" + val;
+                    firstQueryParam = false;
+                }
+            }
+
+            RestRequest requestT = new RestRequest(path);
+            RestClient.Options.UserAgent = Configuration.UserAgent;
+
+            if (Configuration.Proxy != null)
+            {
+                RestClient.Options.Proxy = Configuration.Proxy;
+            }
+
+            // Add Header Parameter, if any
+            // Passed to this function
+            foreach (var param in headerParams)
+            {
+                requestT.AddHeader(param.Key, param.Value);
+            }
+
+            //initiate the default authentication headers
+            if (postBody == null)
+            {
+                CallAuthenticationHeaders(method.ToString(), path);
+            }
+            else
+            {
+                CallAuthenticationHeaders(method.ToString(), path, postBody.ToString());
+            }
+
+            foreach (var param in Configuration.DefaultHeader)
+            {
+                if (param.Key == "Authorization")
+                {
+                    requestT.AddHeader("Authorization", string.Format("Bearer " + param.Value));
+                }else{
+                    if (requestT.Parameters.Any(x => string.Equals(x.Name, param.Key, StringComparison.OrdinalIgnoreCase) && x.Type == ParameterType.HttpHeader))
+                    {
+                        continue;
+                    }
+                    if (param.Key == "Date")
+                    {
+                        requestT.AddHeader("Date", DateTime.Parse(param.Value));
+                    }
+                    else if (param.Key == "Host")
+                    { }
+                    else
+                    {
+                        requestT.AddHeader(param.Key, param.Value);
+                    }
+                }
+            }
+
+            return requestT;
         }
 
         // Creates and sets up a HttpWebRequest for calls which needs response in a file format.
@@ -263,7 +347,7 @@ namespace CyberSource.Client
             }
 
             //initiate a HttpWebRequest object
-            HttpWebRequest requestT = (HttpWebRequest)WebRequest.Create(Uri.EscapeUriString("https://" + RestClient.BaseUrl.Host + path));
+            HttpWebRequest requestT = (HttpWebRequest)WebRequest.Create(Uri.EscapeUriString("https://" + RestClient.Options.BaseUrl.Host + path));
             requestT.UserAgent = Configuration.UserAgent;
 
             if (Configuration.Proxy != null)
@@ -350,143 +434,68 @@ namespace CyberSource.Client
             }
 
             //check if the Response is to be downloaded as a file, this value to be set by the calling API class
-            if (string.IsNullOrEmpty(DownloadResponseFileName))
+            var request = PrepareRequest(
+                path, method, queryParams, postBody, headerParams, formParams, fileParams,
+                pathParams, contentType);
+
+            // set timeout
+            request.Timeout = Configuration.Timeout;
+            // set user agent
+            RestClient.Options.UserAgent = Configuration.UserAgent;
+
+            // RestClient.ClearHandlers();
+
+            if (Configuration.Proxy != null)
             {
-                var request = PrepareRequest(
-                    path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                    pathParams, contentType);
+                RestClient.Options.Proxy = Configuration.Proxy;
+            }
 
-                // set timeout
-                RestClient.Timeout = Configuration.Timeout;
-                // set user agent
-                RestClient.UserAgent = Configuration.UserAgent;
-            
-                RestClient.ClearHandlers();
-
-                if (Configuration.Proxy != null)
+            // Adding Client Cert
+            if(Configuration.MerchantConfigDictionaryObj.ContainsKey("enableClientCert") && Equals(bool.Parse(Configuration.MerchantConfigDictionaryObj["enableClientCert"]), true))
+            {
+                string clientCertDirectory = Configuration.MerchantConfigDictionaryObj["clientCertDirectory"];
+                string clientCertFile = Configuration.MerchantConfigDictionaryObj["clientCertFile"];
+                SecureString clientCertPassword = new SecureString();
+                foreach (char c in Configuration.MerchantConfigDictionaryObj["clientCertPassword"])
                 {
-                    RestClient.Proxy = Configuration.Proxy;
-                }            
-                
-                // Adding Client Cert
-                if(Configuration.MerchantConfigDictionaryObj.ContainsKey("enableClientCert") && Equals(bool.Parse(Configuration.MerchantConfigDictionaryObj["enableClientCert"]), true))
-                {
-                    string clientCertDirectory = Configuration.MerchantConfigDictionaryObj["clientCertDirectory"];
-                    string clientCertFile = Configuration.MerchantConfigDictionaryObj["clientCertFile"];
-                    string clientCertPassword = Configuration.MerchantConfigDictionaryObj["clientCertPassword"];
-                    string fileName = Path.Combine(clientCertDirectory, clientCertFile);
-                    // Importing Certificates
-                    var certificate = new X509Certificate2(fileName, clientCertPassword);
-                    RestClient.ClientCertificates = new X509CertificateCollection { certificate };
+                    clientCertPassword.AppendChar(c);
                 }
+                clientCertPassword.MakeReadOnly();
+                string fileName = Path.Combine(clientCertDirectory, clientCertFile);
+                // Importing Certificates
+                var certificate = new X509Certificate2(fileName, clientCertPassword);
+                clientCertPassword.Dispose();
+                RestClient.Options.ClientCertificates = new X509CertificateCollection { certificate };
+            }
 
-                // Logging Request Headers
-                var headerPrintOutput = new StringBuilder();
-                foreach (var param in request.Parameters)
+            // Logging Request Headers
+            var headerPrintOutput = new StringBuilder();
+            foreach (var param in request.Parameters)
+            {
+                if (param.Type.ToString().Equals("HttpHeader"))
                 {
-                    if (param.Type.ToString().Equals("HttpHeader"))
-                    {
-                        headerPrintOutput.Append($"{param.Name} : {param.Value}\n");
-                    }
+                    headerPrintOutput.Append($"{param.Name} : {param.Value}\n");
                 }
+            }
 
-                if (logUtility.IsMaskingEnabled(logger))
-                {
-                    logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
-                }
-                else
-                {
-                    logger.Debug($"HTTP Request Headers :\n{headerPrintOutput}");
-                }
-
-                InterceptRequest(request);
-                response = (RestResponse) RestClient.Execute(request);
-                InterceptResponse(request, response);
+            if (logUtility.IsMaskingEnabled(logger))
+            {
+                logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
             }
             else
             {
-                //prepare a HttpWebRequest request object
-                var requestT = PrepareHttpWebRequest(path, method, queryParams, postBody, headerParams, formParams, fileParams, pathParams, contentType);
-
-                // Logging Request Headers
-                var headerPrintOutput = new StringBuilder();
-
-                foreach (var headerKey in requestT.Headers.AllKeys)
-                {
-                    var stringBuilder = new StringBuilder();
-                    stringBuilder.Append($"{headerKey} : ");
-
-                    foreach (var value in requestT.Headers.GetValues(headerKey))
-                    {
-                        stringBuilder.Append($"{value}, ");
-                    }
-
-                    headerPrintOutput.Append($"{stringBuilder.ToString().Remove(stringBuilder.Length - 2)}\n");
-                }
-
-                if (logUtility.IsMaskingEnabled(logger))
-                {
-                    logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
-                }
-                else
-                {
-                    logger.Debug($"HTTP Request Headers :\n{headerPrintOutput.ToString()}");
-                }
-
-                //getting the response stream using httpwebrequest
-                HttpWebResponse responseT = (HttpWebResponse)requestT.GetResponse();
-                using (Stream responseStream = responseT.GetResponseStream())
-                {
-                    try
-                    {
-                        //setting high timeout to accomodate large files till 2GB, need to revisit for a dynamic approach
-                        responseStream.ReadTimeout = 8000000;
-                        responseStream.WriteTimeout = 9000000;
-                        using (Stream fileStream = File.OpenWrite(DownloadResponseFileName))
-                        {
-                            byte[] buffer = new byte[4096];
-                            int bytesRead = responseStream.Read(buffer, 0, 4096);
-                            while (bytesRead > 0)
-                            {
-                                fileStream.Write(buffer, 0, bytesRead);
-                                bytesRead = responseStream.Read(buffer, 0, 4096);
-                            }
-                        }
-                    }
-                    catch (Exception err)
-                    {
-                        logger.Error($"ApiException : Error writing to path {DownloadResponseFileName}");
-                        throw new ApiException(-1, $"Error writing to path : {DownloadResponseFileName}");
-                    }
-                }
-
-                //setting the generic response with response headers
-                foreach (var header in responseT.Headers)
-                {
-                    response.Headers.Add(new Parameter(header.ToString(), string.Join(",", responseT.Headers.GetValues(header.ToString()).ToArray()), ParameterType.HttpHeader));
-                }
-
-                //setting the generic RestResponse which is returned to the calling class
-                response.StatusCode = responseT.StatusCode;
-                if (responseT.StatusCode == HttpStatusCode.OK)
-                {
-                    response.Content = "Custom Message: Response downloaded to file " + DownloadResponseFileName;
-                }
-                else if (responseT.StatusCode == HttpStatusCode.NotFound)
-                {
-                    response.Content = "Custom Message: The requested resource is not found. Please try again later.";
-                }
-                else
-                {
-                    response.Content = responseT.StatusDescription;
-                }
+                logger.Debug($"HTTP Request Headers :\n{headerPrintOutput}");
             }
+
+            InterceptRequest(request);
+            response = (RestResponse) RestClient.Execute(request);
+            InterceptResponse(request, response);
 
             Configuration.DefaultHeader.Clear();
 
             // Logging Response Headers
             httpResponseStatusCode = (int)response.StatusCode;
-            httpResponseHeaders = response.Headers;
+            httpResponseHeaders = response.Headers.ToList<Parameter>();
             httpResponseData = response.Content;
 
             logger.Debug($"HTTP Response Status Code: {httpResponseStatusCode}");
@@ -556,17 +565,22 @@ namespace CyberSource.Client
                 }
             }
 
-                if (logUtility.IsMaskingEnabled(logger))
-                {
-                    logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
-                }
-                else
-                {
-                    logger.Debug($"HTTP Request Headers :\n{headerPrintOutput.ToString()}");
-                }
+            // set timeout
+            request.Timeout = Configuration.Timeout;
+            // set user agent
+            RestClient.Options.UserAgent = Configuration.UserAgent;
+
+            if (logUtility.IsMaskingEnabled(logger))
+            {
+                logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
+            }
+            else
+            {
+                logger.Debug($"HTTP Request Headers :\n{headerPrintOutput.ToString()}");
+            }
 
             InterceptRequest(request);
-            var response = await RestClient.ExecuteTaskAsync(request);
+            var response = await RestClient.ExecuteAsync(request);
             InterceptResponse(request, response);
 
             // Logging Response Headers
@@ -649,7 +663,7 @@ namespace CyberSource.Client
                 {
                     outDateTime = ((DateTime?)obj).Value.ToString("yyyy-MM-ddTHH:mm:ssZ");
                 }
-                
+
                 return outDateTime;
             }
             else if (obj is DateTimeOffset) {
@@ -676,9 +690,9 @@ namespace CyberSource.Client
         /// <param name="response">The HTTP response.</param>
         /// <param name="type">Object type.</param>
         /// <returns>Object representation of the JSON string.</returns>
-        public object Deserialize(IRestResponse response, Type type)
+        public object Deserialize(RestResponse response, Type type) // CHANGED
         {
-            IList<Parameter> headers = response.Headers;
+            IList<Parameter> headers = response.Headers.ToList<Parameter>();
             if (type == typeof(byte[])) // return byte array
             {
                 return response.RawBytes;
@@ -879,7 +893,7 @@ namespace CyberSource.Client
                 return filename;
             }
         }
-        
+
         /// <summary>
         /// Generate Request Authentication Headers using the Authentication SDK
         /// </summary>
@@ -936,7 +950,7 @@ namespace CyberSource.Client
             // {
             //     authenticationHeaders.Add("v-c-solution-id", Configuration.SolutionId);
             // }
-            
+
             if (Configuration.Proxy == null && merchantConfig.UseProxy != null)
             {
                 if (bool.Parse(merchantConfig.UseProxy))
@@ -957,11 +971,28 @@ namespace CyberSource.Client
 
             //Set the Configuration
             Configuration.DefaultHeader = authenticationHeaders;
-            RestClient = new RestClient("https://" + merchantConfig.HostName);
-            
+			
+            if (!string.IsNullOrWhiteSpace(merchantConfig.IntermediateHost))
+            {
+                //change with intermediate hostname if present
+                //supporting both for http or https for intermediate url
+                if (merchantConfig.IntermediateHost.StartsWith("http://") || merchantConfig.IntermediateHost.StartsWith("https://"))
+                {
+                    RestClient = new RestClient(merchantConfig.IntermediateHost);
+                }
+                else
+                {
+                    RestClient = new RestClient("https://" + merchantConfig.IntermediateHost);
+                }
+            }
+            else
+            {
+                RestClient = new RestClient("https://" + merchantConfig.HostName);
+            }
+
             if (Configuration.Proxy != null)
             {
-                RestClient.Proxy = Configuration.Proxy;
+                RestClient.Options.Proxy = Configuration.Proxy;
             }
         }
     }

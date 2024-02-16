@@ -34,16 +34,18 @@ namespace CyberSource.Model
         /// Initializes a new instance of the <see cref="KmsV2KeysSymPost201ResponseKeyInformation" /> class.
         /// </summary>
         /// <param name="OrganizationId">Merchant Id .</param>
-        /// <param name="ReferenceNumber">Reference number is a unique identifier provided by the client along with the organization Id. This is an optional field provided solely for the client’s convenience. If client specifies value for this field in the request, it is expected to be available in the response. .</param>
+        /// <param name="ExternalOrganizationId">Payworks MerchantId for given organizationId. .</param>
+        /// <param name="ReferenceNumber">Reference number is a unique identifier provided by the client along with the organization Id. This is an optional field provided solely for the client&#39;s convenience. If client specifies value for this field in the request, it is expected to be available in the response. .</param>
         /// <param name="KeyId">Key Serial Number .</param>
         /// <param name="Key">value of the key .</param>
         /// <param name="Status">The status of the key.  Possible values:  - FAILED  - ACTIVE .</param>
         /// <param name="ExpirationDate">The expiration time in UTC. &#x60;Format: YYYY-MM-DDThh:mm:ssZ&#x60;  Example 2016-08-11T22:47:57Z equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The T separates the date and the time. The Z indicates UTC. .</param>
         /// <param name="Message">message in case of failed key.</param>
         /// <param name="ErrorInformation">ErrorInformation.</param>
-        public KmsV2KeysSymPost201ResponseKeyInformation(string OrganizationId = default(string), string ReferenceNumber = default(string), string KeyId = default(string), string Key = default(string), string Status = default(string), string ExpirationDate = default(string), string Message = default(string), KmsV2KeysSymPost201ResponseErrorInformation ErrorInformation = default(KmsV2KeysSymPost201ResponseErrorInformation))
+        public KmsV2KeysSymPost201ResponseKeyInformation(string OrganizationId = default(string), string ExternalOrganizationId = default(string), string ReferenceNumber = default(string), string KeyId = default(string), string Key = default(string), string Status = default(string), string ExpirationDate = default(string), string Message = default(string), KmsV2KeysSymPost201ResponseErrorInformation ErrorInformation = default(KmsV2KeysSymPost201ResponseErrorInformation))
         {
             this.OrganizationId = OrganizationId;
+            this.ExternalOrganizationId = ExternalOrganizationId;
             this.ReferenceNumber = ReferenceNumber;
             this.KeyId = KeyId;
             this.Key = Key;
@@ -61,9 +63,16 @@ namespace CyberSource.Model
         public string OrganizationId { get; set; }
 
         /// <summary>
-        /// Reference number is a unique identifier provided by the client along with the organization Id. This is an optional field provided solely for the client’s convenience. If client specifies value for this field in the request, it is expected to be available in the response. 
+        /// Payworks MerchantId for given organizationId. 
         /// </summary>
-        /// <value>Reference number is a unique identifier provided by the client along with the organization Id. This is an optional field provided solely for the client’s convenience. If client specifies value for this field in the request, it is expected to be available in the response. </value>
+        /// <value>Payworks MerchantId for given organizationId. </value>
+        [DataMember(Name="externalOrganizationId", EmitDefaultValue=false)]
+        public string ExternalOrganizationId { get; set; }
+
+        /// <summary>
+        /// Reference number is a unique identifier provided by the client along with the organization Id. This is an optional field provided solely for the client&#39;s convenience. If client specifies value for this field in the request, it is expected to be available in the response. 
+        /// </summary>
+        /// <value>Reference number is a unique identifier provided by the client along with the organization Id. This is an optional field provided solely for the client&#39;s convenience. If client specifies value for this field in the request, it is expected to be available in the response. </value>
         [DataMember(Name="referenceNumber", EmitDefaultValue=false)]
         public string ReferenceNumber { get; set; }
 
@@ -117,6 +126,7 @@ namespace CyberSource.Model
             var sb = new StringBuilder();
             sb.Append("class KmsV2KeysSymPost201ResponseKeyInformation {\n");
             sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
+            sb.Append("  ExternalOrganizationId: ").Append(ExternalOrganizationId).Append("\n");
             sb.Append("  ReferenceNumber: ").Append(ReferenceNumber).Append("\n");
             sb.Append("  KeyId: ").Append(KeyId).Append("\n");
             sb.Append("  Key: ").Append(Key).Append("\n");
@@ -164,6 +174,11 @@ namespace CyberSource.Model
                     this.OrganizationId == other.OrganizationId ||
                     this.OrganizationId != null &&
                     this.OrganizationId.Equals(other.OrganizationId)
+                ) && 
+                (
+                    this.ExternalOrganizationId == other.ExternalOrganizationId ||
+                    this.ExternalOrganizationId != null &&
+                    this.ExternalOrganizationId.Equals(other.ExternalOrganizationId)
                 ) && 
                 (
                     this.ReferenceNumber == other.ReferenceNumber ||
@@ -215,6 +230,8 @@ namespace CyberSource.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.OrganizationId != null)
                     hash = hash * 59 + this.OrganizationId.GetHashCode();
+                if (this.ExternalOrganizationId != null)
+                    hash = hash * 59 + this.ExternalOrganizationId.GetHashCode();
                 if (this.ReferenceNumber != null)
                     hash = hash * 59 + this.ReferenceNumber.GetHashCode();
                 if (this.KeyId != null)

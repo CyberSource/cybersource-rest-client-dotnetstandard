@@ -36,18 +36,17 @@ namespace CyberSource.Model
         /// <param name="SearchId">An unique identification number assigned by CyberSource to identify each Search request..</param>
         /// <param name="Save">Indicates whether or not you want to save this search request for future use. The options are:  * &#x60;true&#x60; * &#x60;false&#x60; (default value)  If set to &#x60;true&#x60;, this field returns &#x60;searchID&#x60; in the response. You can use this value to retrieve the details of the saved search. .</param>
         /// <param name="Name">Name of this search. When &#x60;save&#x60; is set to &#x60;true&#x60;, this search is saved with this name. .</param>
-        /// <param name="Timezone">Merchant’s time zone in ISO standard, using the TZ database format. For example: &#x60;America/Chicago&#x60; .</param>
+        /// <param name="Timezone">Merchant&#39;s time zone in ISO standard, using the TZ database format. For example: &#x60;America/Chicago&#x60; .</param>
         /// <param name="Query">String that contains the filters and variables for which you want to search. For information about supported field-filters and operators, see the [Query Filters]( https://developer.cybersource.com/api/developer-guides/dita-txn-search-details-rest-api-dev-guide-102718/txn-search-intro/txn-filtering.html) section of the Transaction Search Developer Guide. .</param>
         /// <param name="Offset">Controls the starting point within the collection of results, which defaults to 0. The first item in the collection is retrieved by setting a zero offset.  For example, if you have a collection of 15 items to be retrieved from a resource and you specify limit&#x3D;5, you can retrieve the entire set of results in 3 successive requests by varying the offset value like this:  &#x60;offset&#x3D;0&#x60; &#x60;offset&#x3D;5&#x60; &#x60;offset&#x3D;10&#x60;  **Note:** If an offset larger than the number of results is provided, this will result in no embedded object being returned. .</param>
-        /// <param name="Limit">Controls the maximum number of items that may be returned for a single request. The default is 20, the maximum is 2000. .</param>
+        /// <param name="Limit">Controls the maximum number of items that may be returned for a single request. The default is 20, the maximum is 2500. .</param>
         /// <param name="Sort">A comma separated list of the following form:  &#x60;submitTimeUtc:desc&#x60; .</param>
         /// <param name="Count">Results for this page, this could be below the limit..</param>
         /// <param name="TotalCount">Total number of results..</param>
-        /// <param name="Status">The status of the submitted transaction..</param>
         /// <param name="SubmitTimeUtc">Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC.  Returned by Cybersource for all services. .</param>
         /// <param name="Embedded">Embedded.</param>
         /// <param name="Links">Links.</param>
-        public TssV2TransactionsPost201Response(string SearchId = default(string), bool? Save = default(bool?), string Name = default(string), string Timezone = default(string), string Query = default(string), int? Offset = default(int?), int? Limit = default(int?), string Sort = default(string), int? Count = default(int?), int? TotalCount = default(int?), string Status = default(string), string SubmitTimeUtc = default(string), TssV2TransactionsPost201ResponseEmbedded Embedded = default(TssV2TransactionsPost201ResponseEmbedded), PtsV2IncrementalAuthorizationPatch201ResponseLinks Links = default(PtsV2IncrementalAuthorizationPatch201ResponseLinks))
+        public TssV2TransactionsPost201Response(string SearchId = default(string), bool? Save = default(bool?), string Name = default(string), string Timezone = default(string), string Query = default(string), int? Offset = default(int?), int? Limit = default(int?), string Sort = default(string), int? Count = default(int?), int? TotalCount = default(int?), string SubmitTimeUtc = default(string), TssV2TransactionsPost201ResponseEmbedded Embedded = default(TssV2TransactionsPost201ResponseEmbedded), PtsV2IncrementalAuthorizationPatch201ResponseLinks Links = default(PtsV2IncrementalAuthorizationPatch201ResponseLinks))
         {
             this.SearchId = SearchId;
             this.Save = Save;
@@ -59,7 +58,6 @@ namespace CyberSource.Model
             this.Sort = Sort;
             this.Count = Count;
             this.TotalCount = TotalCount;
-            this.Status = Status;
             this.SubmitTimeUtc = SubmitTimeUtc;
             this.Embedded = Embedded;
             this.Links = Links;
@@ -87,9 +85,9 @@ namespace CyberSource.Model
         public string Name { get; set; }
 
         /// <summary>
-        /// Merchant’s time zone in ISO standard, using the TZ database format. For example: &#x60;America/Chicago&#x60; 
+        /// Merchant&#39;s time zone in ISO standard, using the TZ database format. For example: &#x60;America/Chicago&#x60; 
         /// </summary>
-        /// <value>Merchant’s time zone in ISO standard, using the TZ database format. For example: &#x60;America/Chicago&#x60; </value>
+        /// <value>Merchant&#39;s time zone in ISO standard, using the TZ database format. For example: &#x60;America/Chicago&#x60; </value>
         [DataMember(Name="timezone", EmitDefaultValue=false)]
         public string Timezone { get; set; }
 
@@ -108,9 +106,9 @@ namespace CyberSource.Model
         public int? Offset { get; set; }
 
         /// <summary>
-        /// Controls the maximum number of items that may be returned for a single request. The default is 20, the maximum is 2000. 
+        /// Controls the maximum number of items that may be returned for a single request. The default is 20, the maximum is 2500. 
         /// </summary>
-        /// <value>Controls the maximum number of items that may be returned for a single request. The default is 20, the maximum is 2000. </value>
+        /// <value>Controls the maximum number of items that may be returned for a single request. The default is 20, the maximum is 2500. </value>
         [DataMember(Name="limit", EmitDefaultValue=false)]
         public int? Limit { get; set; }
 
@@ -134,13 +132,6 @@ namespace CyberSource.Model
         /// <value>Total number of results.</value>
         [DataMember(Name="totalCount", EmitDefaultValue=false)]
         public int? TotalCount { get; set; }
-
-        /// <summary>
-        /// The status of the submitted transaction.
-        /// </summary>
-        /// <value>The status of the submitted transaction.</value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
 
         /// <summary>
         /// Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC.  Returned by Cybersource for all services. 
@@ -179,7 +170,6 @@ namespace CyberSource.Model
             sb.Append("  Sort: ").Append(Sort).Append("\n");
             sb.Append("  Count: ").Append(Count).Append("\n");
             sb.Append("  TotalCount: ").Append(TotalCount).Append("\n");
-            sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
             sb.Append("  Embedded: ").Append(Embedded).Append("\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
@@ -270,11 +260,6 @@ namespace CyberSource.Model
                     this.TotalCount.Equals(other.TotalCount)
                 ) && 
                 (
-                    this.Status == other.Status ||
-                    this.Status != null &&
-                    this.Status.Equals(other.Status)
-                ) && 
-                (
                     this.SubmitTimeUtc == other.SubmitTimeUtc ||
                     this.SubmitTimeUtc != null &&
                     this.SubmitTimeUtc.Equals(other.SubmitTimeUtc)
@@ -322,8 +307,6 @@ namespace CyberSource.Model
                     hash = hash * 59 + this.Count.GetHashCode();
                 if (this.TotalCount != null)
                     hash = hash * 59 + this.TotalCount.GetHashCode();
-                if (this.Status != null)
-                    hash = hash * 59 + this.Status.GetHashCode();
                 if (this.SubmitTimeUtc != null)
                     hash = hash * 59 + this.SubmitTimeUtc.GetHashCode();
                 if (this.Embedded != null)

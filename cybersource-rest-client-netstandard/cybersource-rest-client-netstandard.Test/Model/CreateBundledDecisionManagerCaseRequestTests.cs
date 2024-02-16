@@ -176,6 +176,22 @@ namespace CyberSource.Test
         {
             // TODO unit test for the property 'ConsumerAuthenticationInformation'
         }
+        /// <summary>
+        /// Test the property 'WatchlistScreeningInformation'
+        /// </summary>
+        [Test]
+        public void WatchlistScreeningInformationTest()
+        {
+            // TODO unit test for the property 'WatchlistScreeningInformation'
+        }
+        /// <summary>
+        /// Test the property 'TokenInformation'
+        /// </summary>
+        [Test]
+        public void TokenInformationTest()
+        {
+            // TODO unit test for the property 'TokenInformation'
+        }
 
     }
 

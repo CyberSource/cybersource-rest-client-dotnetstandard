@@ -17,6 +17,7 @@ using CyberSource.Client;
 using CyberSource.Model;
 using NLog;
 using AuthenticationSdk.util;
+using CyberSource.Utilities.Tracking;
 
 namespace CyberSource.Api
 {
@@ -30,266 +31,266 @@ namespace CyberSource.Api
         /// Delete a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Shipping Address**&lt;br&gt;Your system can use this API to delete an existing Shipping Address for a Customer.&lt;br&gt;If a customer has more than one Shipping Address then the default Shipping Address cannot be deleted without first selecting a [new default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns></returns>
-        void DeleteCustomerShippingAddress (string customerTokenId, string shippingAddressTokenId, string profileId = null);
+        void DeleteCustomerShippingAddress (string customerId, string shippingAddressId, string profileId = null);
 
         /// <summary>
         /// Delete a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Shipping Address**&lt;br&gt;Your system can use this API to delete an existing Shipping Address for a Customer.&lt;br&gt;If a customer has more than one Shipping Address then the default Shipping Address cannot be deleted without first selecting a [new default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteCustomerShippingAddressWithHttpInfo (string customerTokenId, string shippingAddressTokenId, string profileId = null);
+        ApiResponse<Object> DeleteCustomerShippingAddressWithHttpInfo (string customerId, string shippingAddressId, string profileId = null);
         /// <summary>
         /// Retrieve a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Shipping Address**&lt;br&gt;Your system can use this API to retrieve an existing Shipping Address for a Customer.&lt;br&gt;To perform a payment with a particular Shipping Address simply specify the [Shipping Address Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        Tmsv2customersEmbeddedDefaultShippingAddress GetCustomerShippingAddress (string customerTokenId, string shippingAddressTokenId, string profileId = null);
+        Tmsv2customersEmbeddedDefaultShippingAddress GetCustomerShippingAddress (string customerId, string shippingAddressId, string profileId = null);
 
         /// <summary>
         /// Retrieve a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Shipping Address**&lt;br&gt;Your system can use this API to retrieve an existing Shipping Address for a Customer.&lt;br&gt;To perform a payment with a particular Shipping Address simply specify the [Shipping Address Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> GetCustomerShippingAddressWithHttpInfo (string customerTokenId, string shippingAddressTokenId, string profileId = null);
+        ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> GetCustomerShippingAddressWithHttpInfo (string customerId, string shippingAddressId, string profileId = null);
         /// <summary>
         /// List Shipping Addresses for a Customer
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Shipping Addresses**&lt;br&gt;Your system can use this API to retrieve all existing Shipping Addresses for a Customer. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>ShippingAddressListForCustomer</returns>
-        ShippingAddressListForCustomer GetCustomerShippingAddressesList (string customerTokenId, string profileId = null, long? offset = null, long? limit = null);
+        ShippingAddressListForCustomer GetCustomerShippingAddressesList (string customerId, string profileId = null, long? offset = null, long? limit = null);
 
         /// <summary>
         /// List Shipping Addresses for a Customer
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Shipping Addresses**&lt;br&gt;Your system can use this API to retrieve all existing Shipping Addresses for a Customer. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>ApiResponse of ShippingAddressListForCustomer</returns>
-        ApiResponse<ShippingAddressListForCustomer> GetCustomerShippingAddressesListWithHttpInfo (string customerTokenId, string profileId = null, long? offset = null, long? limit = null);
+        ApiResponse<ShippingAddressListForCustomer> GetCustomerShippingAddressesListWithHttpInfo (string customerId, string profileId = null, long? offset = null, long? limit = null);
         /// <summary>
         /// Update a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Shipping Address**&lt;br&gt;Your system can use this API to update an existing Shipping Addresses for a Customer, including selecting a [default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
         /// <param name="patchCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        Tmsv2customersEmbeddedDefaultShippingAddress PatchCustomersShippingAddress (string customerTokenId, string shippingAddressTokenId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null);
+        Tmsv2customersEmbeddedDefaultShippingAddress PatchCustomersShippingAddress (string customerId, string shippingAddressId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null);
 
         /// <summary>
         /// Update a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Shipping Address**&lt;br&gt;Your system can use this API to update an existing Shipping Addresses for a Customer, including selecting a [default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
         /// <param name="patchCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> PatchCustomersShippingAddressWithHttpInfo (string customerTokenId, string shippingAddressTokenId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null);
+        ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> PatchCustomersShippingAddressWithHttpInfo (string customerId, string shippingAddressId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null);
         /// <summary>
         /// Create a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// Include an existing TMS Customer token id in the request URI. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Creating a Customer Shipping Address**&lt;br&gt;Your system can use this API to create an existing Customers default or non default Shipping Address.&lt;br&gt;You can also create additional Customer Shipping Addresses via the [Payments API](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        Tmsv2customersEmbeddedDefaultShippingAddress PostCustomerShippingAddress (string customerTokenId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null);
+        Tmsv2customersEmbeddedDefaultShippingAddress PostCustomerShippingAddress (string customerId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null);
 
         /// <summary>
         /// Create a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// Include an existing TMS Customer token id in the request URI. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Creating a Customer Shipping Address**&lt;br&gt;Your system can use this API to create an existing Customers default or non default Shipping Address.&lt;br&gt;You can also create additional Customer Shipping Addresses via the [Payments API](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> PostCustomerShippingAddressWithHttpInfo (string customerTokenId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null);
+        ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> PostCustomerShippingAddressWithHttpInfo (string customerId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
         /// Delete a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Shipping Address**&lt;br&gt;Your system can use this API to delete an existing Shipping Address for a Customer.&lt;br&gt;If a customer has more than one Shipping Address then the default Shipping Address cannot be deleted without first selecting a [new default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteCustomerShippingAddressAsync (string customerTokenId, string shippingAddressTokenId, string profileId = null);
+        System.Threading.Tasks.Task DeleteCustomerShippingAddressAsync (string customerId, string shippingAddressId, string profileId = null);
 
         /// <summary>
         /// Delete a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Shipping Address**&lt;br&gt;Your system can use this API to delete an existing Shipping Address for a Customer.&lt;br&gt;If a customer has more than one Shipping Address then the default Shipping Address cannot be deleted without first selecting a [new default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomerShippingAddressAsyncWithHttpInfo (string customerTokenId, string shippingAddressTokenId, string profileId = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomerShippingAddressAsyncWithHttpInfo (string customerId, string shippingAddressId, string profileId = null);
         /// <summary>
         /// Retrieve a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Shipping Address**&lt;br&gt;Your system can use this API to retrieve an existing Shipping Address for a Customer.&lt;br&gt;To perform a payment with a particular Shipping Address simply specify the [Shipping Address Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> GetCustomerShippingAddressAsync (string customerTokenId, string shippingAddressTokenId, string profileId = null);
+        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> GetCustomerShippingAddressAsync (string customerId, string shippingAddressId, string profileId = null);
 
         /// <summary>
         /// Retrieve a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Shipping Address**&lt;br&gt;Your system can use this API to retrieve an existing Shipping Address for a Customer.&lt;br&gt;To perform a payment with a particular Shipping Address simply specify the [Shipping Address Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultShippingAddress)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> GetCustomerShippingAddressAsyncWithHttpInfo (string customerTokenId, string shippingAddressTokenId, string profileId = null);
+        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> GetCustomerShippingAddressAsyncWithHttpInfo (string customerId, string shippingAddressId, string profileId = null);
         /// <summary>
         /// List Shipping Addresses for a Customer
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Shipping Addresses**&lt;br&gt;Your system can use this API to retrieve all existing Shipping Addresses for a Customer. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>Task of ShippingAddressListForCustomer</returns>
-        System.Threading.Tasks.Task<ShippingAddressListForCustomer> GetCustomerShippingAddressesListAsync (string customerTokenId, string profileId = null, long? offset = null, long? limit = null);
+        System.Threading.Tasks.Task<ShippingAddressListForCustomer> GetCustomerShippingAddressesListAsync (string customerId, string profileId = null, long? offset = null, long? limit = null);
 
         /// <summary>
         /// List Shipping Addresses for a Customer
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Shipping Addresses**&lt;br&gt;Your system can use this API to retrieve all existing Shipping Addresses for a Customer. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (ShippingAddressListForCustomer)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ShippingAddressListForCustomer>> GetCustomerShippingAddressesListAsyncWithHttpInfo (string customerTokenId, string profileId = null, long? offset = null, long? limit = null);
+        System.Threading.Tasks.Task<ApiResponse<ShippingAddressListForCustomer>> GetCustomerShippingAddressesListAsyncWithHttpInfo (string customerId, string profileId = null, long? offset = null, long? limit = null);
         /// <summary>
         /// Update a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Shipping Address**&lt;br&gt;Your system can use this API to update an existing Shipping Addresses for a Customer, including selecting a [default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
         /// <param name="patchCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> PatchCustomersShippingAddressAsync (string customerTokenId, string shippingAddressTokenId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null);
+        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> PatchCustomersShippingAddressAsync (string customerId, string shippingAddressId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null);
 
         /// <summary>
         /// Update a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Shipping Address**&lt;br&gt;Your system can use this API to update an existing Shipping Addresses for a Customer, including selecting a [default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
         /// <param name="patchCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultShippingAddress)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> PatchCustomersShippingAddressAsyncWithHttpInfo (string customerTokenId, string shippingAddressTokenId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null);
+        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> PatchCustomersShippingAddressAsyncWithHttpInfo (string customerId, string shippingAddressId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null);
         /// <summary>
         /// Create a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// Include an existing TMS Customer token id in the request URI. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Creating a Customer Shipping Address**&lt;br&gt;Your system can use this API to create an existing Customers default or non default Shipping Address.&lt;br&gt;You can also create additional Customer Shipping Addresses via the [Payments API](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> PostCustomerShippingAddressAsync (string customerTokenId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null);
+        System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> PostCustomerShippingAddressAsync (string customerId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null);
 
         /// <summary>
         /// Create a Customer Shipping Address
         /// </summary>
         /// <remarks>
-        /// Include an existing TMS Customer token id in the request URI. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** 
+        /// |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Creating a Customer Shipping Address**&lt;br&gt;Your system can use this API to create an existing Customers default or non default Shipping Address.&lt;br&gt;You can also create additional Customer Shipping Addresses via the [Payments API](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body). 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultShippingAddress)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> PostCustomerShippingAddressAsyncWithHttpInfo (string customerTokenId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null);
+        System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> PostCustomerShippingAddressAsyncWithHttpInfo (string customerId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null);
         #endregion Asynchronous Operations
     }
 
@@ -300,6 +301,7 @@ namespace CyberSource.Api
     {
         private static Logger logger;
         private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private int? _statusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerShippingAddressApi"/> class.
@@ -352,7 +354,7 @@ namespace CyberSource.Api
         /// <value>The base path</value>
         public string GetBasePath()
         {
-            return Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
         }
 
         /// <summary>
@@ -411,45 +413,65 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Delete a Customer Shipping Address 
+        /// Retrieves the status code being set for the most recently executed API request.
+        /// </summary>
+        /// <returns>Status Code of previous request</returns>
+        public int GetStatusCode()
+        {
+            return this._statusCode == null ? 0 : (int) this._statusCode;
+        }
+
+        /// <summary>
+        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
+        /// </summary>
+        /// <param name="statusCode">Status Code to be set</param>
+        /// <returns></returns>
+        public void SetStatusCode(int? statusCode)
+        {
+            this._statusCode = statusCode;
+        }
+
+        /// <summary>
+        /// Delete a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Shipping Address**&lt;br&gt;Your system can use this API to delete an existing Shipping Address for a Customer.&lt;br&gt;If a customer has more than one Shipping Address then the default Shipping Address cannot be deleted without first selecting a [new default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns></returns>
-        public void DeleteCustomerShippingAddress (string customerTokenId, string shippingAddressTokenId, string profileId = null)
+        public void DeleteCustomerShippingAddress (string customerId, string shippingAddressId, string profileId = null)
         {
             logger.Debug("CALLING API \"DeleteCustomerShippingAddress\" STARTED");
-            DeleteCustomerShippingAddressWithHttpInfo(customerTokenId, shippingAddressTokenId, profileId);
+            this.SetStatusCode(null);
+            DeleteCustomerShippingAddressWithHttpInfo(customerId, shippingAddressId, profileId);
         }
 
         /// <summary>
-        /// Delete a Customer Shipping Address 
+        /// Delete a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Shipping Address**&lt;br&gt;Your system can use this API to delete an existing Shipping Address for a Customer.&lt;br&gt;If a customer has more than one Shipping Address then the default Shipping Address cannot be deleted without first selecting a [new default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DeleteCustomerShippingAddressWithHttpInfo (string customerTokenId, string shippingAddressTokenId, string profileId = null)
+        public ApiResponse<Object> DeleteCustomerShippingAddressWithHttpInfo (string customerId, string shippingAddressId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
             }
-            // verify the required parameter 'shippingAddressTokenId' is set
-            if (shippingAddressTokenId == null)
+            // verify the required parameter 'shippingAddressId' is set
+            if (shippingAddressId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/shipping-addresses/{shippingAddressTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/shipping-addresses/{shippingAddressId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -473,13 +495,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (shippingAddressTokenId != null)
+            if (shippingAddressId != null)
             {
-                localVarPathParams.Add("shippingAddressTokenId", Configuration.ApiClient.ParameterToString(shippingAddressTokenId)); // path parameter
+                localVarPathParams.Add("shippingAddressId", Configuration.ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -487,7 +509,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.DELETE == Method.POST)
+            if (Method.Delete == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -498,8 +520,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -514,52 +536,54 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
         }
 
         /// <summary>
-        /// Delete a Customer Shipping Address 
+        /// Delete a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Shipping Address**&lt;br&gt;Your system can use this API to delete an existing Shipping Address for a Customer.&lt;br&gt;If a customer has more than one Shipping Address then the default Shipping Address cannot be deleted without first selecting a [new default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteCustomerShippingAddressAsync (string customerTokenId, string shippingAddressTokenId, string profileId = null)
+        public async System.Threading.Tasks.Task DeleteCustomerShippingAddressAsync (string customerId, string shippingAddressId, string profileId = null)
         {
             logger.Debug("CALLING API \"DeleteCustomerShippingAddressAsync\" STARTED");
-            await DeleteCustomerShippingAddressAsyncWithHttpInfo(customerTokenId, shippingAddressTokenId, profileId);
+            this.SetStatusCode(null);
+            await DeleteCustomerShippingAddressAsyncWithHttpInfo(customerId, shippingAddressId, profileId);
 
         }
 
         /// <summary>
-        /// Delete a Customer Shipping Address 
+        /// Delete a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Deleting a Customers Shipping Address**&lt;br&gt;Your system can use this API to delete an existing Shipping Address for a Customer.&lt;br&gt;If a customer has more than one Shipping Address then the default Shipping Address cannot be deleted without first selecting a [new default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomerShippingAddressAsyncWithHttpInfo (string customerTokenId, string shippingAddressTokenId, string profileId = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomerShippingAddressAsyncWithHttpInfo (string customerId, string shippingAddressId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
             }
-            // verify the required parameter 'shippingAddressTokenId' is set
-            if (shippingAddressTokenId == null)
+            // verify the required parameter 'shippingAddressId' is set
+            if (shippingAddressId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->DeleteCustomerShippingAddress");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/shipping-addresses/{shippingAddressTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/shipping-addresses/{shippingAddressId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -583,13 +607,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (shippingAddressTokenId != null)
+            if (shippingAddressId != null)
             {
-                localVarPathParams.Add("shippingAddressTokenId", Configuration.ApiClient.ParameterToString(shippingAddressTokenId)); // path parameter
+                localVarPathParams.Add("shippingAddressId", Configuration.ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -597,7 +621,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.DELETE == Method.POST)
+            if (Method.Delete == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -608,8 +632,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -624,52 +648,55 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
         }
         /// <summary>
-        /// Retrieve a Customer Shipping Address 
+        /// Retrieve a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Shipping Address**&lt;br&gt;Your system can use this API to retrieve an existing Shipping Address for a Customer.&lt;br&gt;To perform a payment with a particular Shipping Address simply specify the [Shipping Address Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        public Tmsv2customersEmbeddedDefaultShippingAddress GetCustomerShippingAddress (string customerTokenId, string shippingAddressTokenId, string profileId = null)
+        public Tmsv2customersEmbeddedDefaultShippingAddress GetCustomerShippingAddress (string customerId, string shippingAddressId, string profileId = null)
         {
             logger.Debug("CALLING API \"GetCustomerShippingAddress\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = GetCustomerShippingAddressWithHttpInfo(customerTokenId, shippingAddressTokenId, profileId);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = GetCustomerShippingAddressWithHttpInfo(customerId, shippingAddressId, profileId);
             logger.Debug("CALLING API \"GetCustomerShippingAddress\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Retrieve a Customer Shipping Address 
+        /// Retrieve a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Shipping Address**&lt;br&gt;Your system can use this API to retrieve an existing Shipping Address for a Customer.&lt;br&gt;To perform a payment with a particular Shipping Address simply specify the [Shipping Address Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        public ApiResponse< Tmsv2customersEmbeddedDefaultShippingAddress > GetCustomerShippingAddressWithHttpInfo (string customerTokenId, string shippingAddressTokenId, string profileId = null)
+        public ApiResponse< Tmsv2customersEmbeddedDefaultShippingAddress > GetCustomerShippingAddressWithHttpInfo (string customerId, string shippingAddressId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
             }
-            // verify the required parameter 'shippingAddressTokenId' is set
-            if (shippingAddressTokenId == null)
+            // verify the required parameter 'shippingAddressId' is set
+            if (shippingAddressId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/shipping-addresses/{shippingAddressTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/shipping-addresses/{shippingAddressId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -693,13 +720,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (shippingAddressTokenId != null)
+            if (shippingAddressId != null)
             {
-                localVarPathParams.Add("shippingAddressTokenId", Configuration.ApiClient.ParameterToString(shippingAddressTokenId)); // path parameter
+                localVarPathParams.Add("shippingAddressId", Configuration.ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -707,7 +734,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -718,8 +745,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -740,48 +767,50 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Retrieve a Customer Shipping Address 
+        /// Retrieve a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Shipping Address**&lt;br&gt;Your system can use this API to retrieve an existing Shipping Address for a Customer.&lt;br&gt;To perform a payment with a particular Shipping Address simply specify the [Shipping Address Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> GetCustomerShippingAddressAsync (string customerTokenId, string shippingAddressTokenId, string profileId = null)
+        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> GetCustomerShippingAddressAsync (string customerId, string shippingAddressId, string profileId = null)
         {
             logger.Debug("CALLING API \"GetCustomerShippingAddressAsync\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = await GetCustomerShippingAddressAsyncWithHttpInfo(customerTokenId, shippingAddressTokenId, profileId);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = await GetCustomerShippingAddressAsyncWithHttpInfo(customerId, shippingAddressId, profileId);
             logger.Debug("CALLING API \"GetCustomerShippingAddressAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Retrieve a Customer Shipping Address 
+        /// Retrieve a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving a Customer Shipping Address**&lt;br&gt;Your system can use this API to retrieve an existing Shipping Address for a Customer.&lt;br&gt;To perform a payment with a particular Shipping Address simply specify the [Shipping Address Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultShippingAddress)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> GetCustomerShippingAddressAsyncWithHttpInfo (string customerTokenId, string shippingAddressTokenId, string profileId = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> GetCustomerShippingAddressAsyncWithHttpInfo (string customerId, string shippingAddressId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
             }
-            // verify the required parameter 'shippingAddressTokenId' is set
-            if (shippingAddressTokenId == null)
+            // verify the required parameter 'shippingAddressId' is set
+            if (shippingAddressId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->GetCustomerShippingAddress");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/shipping-addresses/{shippingAddressTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/shipping-addresses/{shippingAddressId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -805,13 +834,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (shippingAddressTokenId != null)
+            if (shippingAddressId != null)
             {
-                localVarPathParams.Add("shippingAddressTokenId", Configuration.ApiClient.ParameterToString(shippingAddressTokenId)); // path parameter
+                localVarPathParams.Add("shippingAddressId", Configuration.ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -819,7 +848,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -830,8 +859,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -851,43 +880,45 @@ namespace CyberSource.Api
                 (Tmsv2customersEmbeddedDefaultShippingAddress) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Tmsv2customersEmbeddedDefaultShippingAddress))); // Return statement
         }
         /// <summary>
-        /// List Shipping Addresses for a Customer 
+        /// List Shipping Addresses for a Customer |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Shipping Addresses**&lt;br&gt;Your system can use this API to retrieve all existing Shipping Addresses for a Customer. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>ShippingAddressListForCustomer</returns>
-        public ShippingAddressListForCustomer GetCustomerShippingAddressesList (string customerTokenId, string profileId = null, long? offset = null, long? limit = null)
+        public ShippingAddressListForCustomer GetCustomerShippingAddressesList (string customerId, string profileId = null, long? offset = null, long? limit = null)
         {
             logger.Debug("CALLING API \"GetCustomerShippingAddressesList\" STARTED");
-            ApiResponse<ShippingAddressListForCustomer> localVarResponse = GetCustomerShippingAddressesListWithHttpInfo(customerTokenId, profileId, offset, limit);
+            this.SetStatusCode(null);
+            ApiResponse<ShippingAddressListForCustomer> localVarResponse = GetCustomerShippingAddressesListWithHttpInfo(customerId, profileId, offset, limit);
             logger.Debug("CALLING API \"GetCustomerShippingAddressesList\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List Shipping Addresses for a Customer 
+        /// List Shipping Addresses for a Customer |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Shipping Addresses**&lt;br&gt;Your system can use this API to retrieve all existing Shipping Addresses for a Customer. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>ApiResponse of ShippingAddressListForCustomer</returns>
-        public ApiResponse< ShippingAddressListForCustomer > GetCustomerShippingAddressesListWithHttpInfo (string customerTokenId, string profileId = null, long? offset = null, long? limit = null)
+        public ApiResponse< ShippingAddressListForCustomer > GetCustomerShippingAddressesListWithHttpInfo (string customerId, string profileId = null, long? offset = null, long? limit = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddressesList");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddressesList");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerShippingAddressApi->GetCustomerShippingAddressesList");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerShippingAddressApi->GetCustomerShippingAddressesList");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/shipping-addresses";
+            var localVarPath = $"/tms/v2/customers/{customerId}/shipping-addresses";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -911,9 +942,9 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (offset != null)
@@ -930,7 +961,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -941,8 +972,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -963,44 +994,46 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// List Shipping Addresses for a Customer 
+        /// List Shipping Addresses for a Customer |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Shipping Addresses**&lt;br&gt;Your system can use this API to retrieve all existing Shipping Addresses for a Customer. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>Task of ShippingAddressListForCustomer</returns>
-        public async System.Threading.Tasks.Task<ShippingAddressListForCustomer> GetCustomerShippingAddressesListAsync (string customerTokenId, string profileId = null, long? offset = null, long? limit = null)
+        public async System.Threading.Tasks.Task<ShippingAddressListForCustomer> GetCustomerShippingAddressesListAsync (string customerId, string profileId = null, long? offset = null, long? limit = null)
         {
             logger.Debug("CALLING API \"GetCustomerShippingAddressesListAsync\" STARTED");
-            ApiResponse<ShippingAddressListForCustomer> localVarResponse = await GetCustomerShippingAddressesListAsyncWithHttpInfo(customerTokenId, profileId, offset, limit);
+            this.SetStatusCode(null);
+            ApiResponse<ShippingAddressListForCustomer> localVarResponse = await GetCustomerShippingAddressesListAsyncWithHttpInfo(customerId, profileId, offset, limit);
             logger.Debug("CALLING API \"GetCustomerShippingAddressesListAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// List Shipping Addresses for a Customer 
+        /// List Shipping Addresses for a Customer |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Shipping Addresses**&lt;br&gt;Your system can use this API to retrieve all existing Shipping Addresses for a Customer. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
         /// <returns>Task of ApiResponse (ShippingAddressListForCustomer)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ShippingAddressListForCustomer>> GetCustomerShippingAddressesListAsyncWithHttpInfo (string customerTokenId, string profileId = null, long? offset = null, long? limit = null)
+        public async System.Threading.Tasks.Task<ApiResponse<ShippingAddressListForCustomer>> GetCustomerShippingAddressesListAsyncWithHttpInfo (string customerId, string profileId = null, long? offset = null, long? limit = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddressesList");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->GetCustomerShippingAddressesList");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerShippingAddressApi->GetCustomerShippingAddressesList");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerShippingAddressApi->GetCustomerShippingAddressesList");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/shipping-addresses";
+            var localVarPath = $"/tms/v2/customers/{customerId}/shipping-addresses";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -1024,9 +1057,9 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (offset != null)
@@ -1043,7 +1076,7 @@ namespace CyberSource.Api
             {
                 localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
             }
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -1054,8 +1087,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -1075,48 +1108,50 @@ namespace CyberSource.Api
                 (ShippingAddressListForCustomer) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ShippingAddressListForCustomer))); // Return statement
         }
         /// <summary>
-        /// Update a Customer Shipping Address 
+        /// Update a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Shipping Address**&lt;br&gt;Your system can use this API to update an existing Shipping Addresses for a Customer, including selecting a [default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
         /// <param name="patchCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        public Tmsv2customersEmbeddedDefaultShippingAddress PatchCustomersShippingAddress (string customerTokenId, string shippingAddressTokenId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null)
+        public Tmsv2customersEmbeddedDefaultShippingAddress PatchCustomersShippingAddress (string customerId, string shippingAddressId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null)
         {
             logger.Debug("CALLING API \"PatchCustomersShippingAddress\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = PatchCustomersShippingAddressWithHttpInfo(customerTokenId, shippingAddressTokenId, patchCustomerShippingAddressRequest, profileId, ifMatch);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = PatchCustomersShippingAddressWithHttpInfo(customerId, shippingAddressId, patchCustomerShippingAddressRequest, profileId, ifMatch);
             logger.Debug("CALLING API \"PatchCustomersShippingAddress\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Update a Customer Shipping Address 
+        /// Update a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Shipping Address**&lt;br&gt;Your system can use this API to update an existing Shipping Addresses for a Customer, including selecting a [default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
         /// <param name="patchCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        public ApiResponse< Tmsv2customersEmbeddedDefaultShippingAddress > PatchCustomersShippingAddressWithHttpInfo (string customerTokenId, string shippingAddressTokenId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null)
+        public ApiResponse< Tmsv2customersEmbeddedDefaultShippingAddress > PatchCustomersShippingAddressWithHttpInfo (string customerId, string shippingAddressId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
             }
-            // verify the required parameter 'shippingAddressTokenId' is set
-            if (shippingAddressTokenId == null)
+            // verify the required parameter 'shippingAddressId' is set
+            if (shippingAddressId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
             }
             // verify the required parameter 'patchCustomerShippingAddressRequest' is set
             if (patchCustomerShippingAddressRequest == null)
@@ -1125,7 +1160,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'patchCustomerShippingAddressRequest' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/shipping-addresses/{shippingAddressTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/shipping-addresses/{shippingAddressId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -1149,13 +1184,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (shippingAddressTokenId != null)
+            if (shippingAddressId != null)
             {
-                localVarPathParams.Add("shippingAddressTokenId", Configuration.ApiClient.ParameterToString(shippingAddressTokenId)); // path parameter
+                localVarPathParams.Add("shippingAddressId", Configuration.ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -1169,6 +1204,8 @@ namespace CyberSource.Api
             }
             if (patchCustomerShippingAddressRequest != null && patchCustomerShippingAddressRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                patchCustomerShippingAddressRequest = (PatchCustomerShippingAddressRequest)sdkTracker.InsertDeveloperIdTracker(patchCustomerShippingAddressRequest, patchCustomerShippingAddressRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(patchCustomerShippingAddressRequest); // http body (model) parameter
             }
             else
@@ -1187,8 +1224,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1209,49 +1246,51 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Update a Customer Shipping Address 
+        /// Update a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Shipping Address**&lt;br&gt;Your system can use this API to update an existing Shipping Addresses for a Customer, including selecting a [default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
         /// <param name="patchCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> PatchCustomersShippingAddressAsync (string customerTokenId, string shippingAddressTokenId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null)
+        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> PatchCustomersShippingAddressAsync (string customerId, string shippingAddressId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null)
         {
             logger.Debug("CALLING API \"PatchCustomersShippingAddressAsync\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = await PatchCustomersShippingAddressAsyncWithHttpInfo(customerTokenId, shippingAddressTokenId, patchCustomerShippingAddressRequest, profileId, ifMatch);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = await PatchCustomersShippingAddressAsyncWithHttpInfo(customerId, shippingAddressId, patchCustomerShippingAddressRequest, profileId, ifMatch);
             logger.Debug("CALLING API \"PatchCustomersShippingAddressAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Update a Customer Shipping Address 
+        /// Update a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Shipping Address**&lt;br&gt;Your system can use this API to update an existing Shipping Addresses for a Customer, including selecting a [default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body) for use in payments. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
-        /// <param name="shippingAddressTokenId">The TokenId of an shipping address.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
+        /// <param name="shippingAddressId">The Id of a shipping address.</param>
         /// <param name="patchCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultShippingAddress)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> PatchCustomersShippingAddressAsyncWithHttpInfo (string customerTokenId, string shippingAddressTokenId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> PatchCustomersShippingAddressAsyncWithHttpInfo (string customerId, string shippingAddressId, PatchCustomerShippingAddressRequest patchCustomerShippingAddressRequest, string profileId = null, string ifMatch = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
             }
-            // verify the required parameter 'shippingAddressTokenId' is set
-            if (shippingAddressTokenId == null)
+            // verify the required parameter 'shippingAddressId' is set
+            if (shippingAddressId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'shippingAddressTokenId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'shippingAddressId' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
             }
             // verify the required parameter 'patchCustomerShippingAddressRequest' is set
             if (patchCustomerShippingAddressRequest == null)
@@ -1260,7 +1299,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'patchCustomerShippingAddressRequest' when calling CustomerShippingAddressApi->PatchCustomersShippingAddress");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/shipping-addresses/{shippingAddressTokenId}";
+            var localVarPath = $"/tms/v2/customers/{customerId}/shipping-addresses/{shippingAddressId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -1284,13 +1323,13 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
-            if (shippingAddressTokenId != null)
+            if (shippingAddressId != null)
             {
-                localVarPathParams.Add("shippingAddressTokenId", Configuration.ApiClient.ParameterToString(shippingAddressTokenId)); // path parameter
+                localVarPathParams.Add("shippingAddressId", Configuration.ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
@@ -1304,6 +1343,8 @@ namespace CyberSource.Api
             }
             if (patchCustomerShippingAddressRequest != null && patchCustomerShippingAddressRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                patchCustomerShippingAddressRequest = (PatchCustomerShippingAddressRequest)sdkTracker.InsertDeveloperIdTracker(patchCustomerShippingAddressRequest, patchCustomerShippingAddressRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(patchCustomerShippingAddressRequest); // http body (model) parameter
             }
             else
@@ -1322,8 +1363,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -1343,38 +1384,40 @@ namespace CyberSource.Api
                 (Tmsv2customersEmbeddedDefaultShippingAddress) Configuration.ApiClient.Deserialize(localVarResponse, typeof(Tmsv2customersEmbeddedDefaultShippingAddress))); // Return statement
         }
         /// <summary>
-        /// Create a Customer Shipping Address Include an existing TMS Customer token id in the request URI. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** 
+        /// Create a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Creating a Customer Shipping Address**&lt;br&gt;Your system can use this API to create an existing Customers default or non default Shipping Address.&lt;br&gt;You can also create additional Customer Shipping Addresses via the [Payments API](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        public Tmsv2customersEmbeddedDefaultShippingAddress PostCustomerShippingAddress (string customerTokenId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null)
+        public Tmsv2customersEmbeddedDefaultShippingAddress PostCustomerShippingAddress (string customerId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null)
         {
             logger.Debug("CALLING API \"PostCustomerShippingAddress\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = PostCustomerShippingAddressWithHttpInfo(customerTokenId, postCustomerShippingAddressRequest, profileId);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = PostCustomerShippingAddressWithHttpInfo(customerId, postCustomerShippingAddressRequest, profileId);
             logger.Debug("CALLING API \"PostCustomerShippingAddress\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Create a Customer Shipping Address Include an existing TMS Customer token id in the request URI. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** 
+        /// Create a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Creating a Customer Shipping Address**&lt;br&gt;Your system can use this API to create an existing Customers default or non default Shipping Address.&lt;br&gt;You can also create additional Customer Shipping Addresses via the [Payments API](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        public ApiResponse< Tmsv2customersEmbeddedDefaultShippingAddress > PostCustomerShippingAddressWithHttpInfo (string customerTokenId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null)
+        public ApiResponse< Tmsv2customersEmbeddedDefaultShippingAddress > PostCustomerShippingAddressWithHttpInfo (string customerId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->PostCustomerShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->PostCustomerShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerShippingAddressApi->PostCustomerShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerShippingAddressApi->PostCustomerShippingAddress");
             }
             // verify the required parameter 'postCustomerShippingAddressRequest' is set
             if (postCustomerShippingAddressRequest == null)
@@ -1383,7 +1426,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'postCustomerShippingAddressRequest' when calling CustomerShippingAddressApi->PostCustomerShippingAddress");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/shipping-addresses";
+            var localVarPath = $"/tms/v2/customers/{customerId}/shipping-addresses";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -1407,9 +1450,9 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (profileId != null)
@@ -1418,6 +1461,8 @@ namespace CyberSource.Api
             }
             if (postCustomerShippingAddressRequest != null && postCustomerShippingAddressRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                postCustomerShippingAddressRequest = (PostCustomerShippingAddressRequest)sdkTracker.InsertDeveloperIdTracker(postCustomerShippingAddressRequest, postCustomerShippingAddressRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(postCustomerShippingAddressRequest); // http body (model) parameter
             }
             else
@@ -1436,8 +1481,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1458,39 +1503,41 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Create a Customer Shipping Address Include an existing TMS Customer token id in the request URI. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** 
+        /// Create a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Creating a Customer Shipping Address**&lt;br&gt;Your system can use this API to create an existing Customers default or non default Shipping Address.&lt;br&gt;You can also create additional Customer Shipping Addresses via the [Payments API](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of Tmsv2customersEmbeddedDefaultShippingAddress</returns>
-        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> PostCustomerShippingAddressAsync (string customerTokenId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null)
+        public async System.Threading.Tasks.Task<Tmsv2customersEmbeddedDefaultShippingAddress> PostCustomerShippingAddressAsync (string customerId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null)
         {
             logger.Debug("CALLING API \"PostCustomerShippingAddressAsync\" STARTED");
-            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = await PostCustomerShippingAddressAsyncWithHttpInfo(customerTokenId, postCustomerShippingAddressRequest, profileId);
+            this.SetStatusCode(null);
+            ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress> localVarResponse = await PostCustomerShippingAddressAsyncWithHttpInfo(customerId, postCustomerShippingAddressRequest, profileId);
             logger.Debug("CALLING API \"PostCustomerShippingAddressAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Create a Customer Shipping Address Include an existing TMS Customer token id in the request URI. * A Customer token can be created by calling: **POST *_/tms/v2/customers*** 
+        /// Create a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Creating a Customer Shipping Address**&lt;br&gt;Your system can use this API to create an existing Customers default or non default Shipping Address.&lt;br&gt;You can also create additional Customer Shipping Addresses via the [Payments API](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="customerTokenId">The TokenId of a customer.</param>
+        /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="postCustomerShippingAddressRequest"></param>
-        /// <param name="profileId">The id of a profile containing user specific TMS configuration. (optional)</param>
+        /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (Tmsv2customersEmbeddedDefaultShippingAddress)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> PostCustomerShippingAddressAsyncWithHttpInfo (string customerTokenId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null)
+        public async System.Threading.Tasks.Task<ApiResponse<Tmsv2customersEmbeddedDefaultShippingAddress>> PostCustomerShippingAddressAsyncWithHttpInfo (string customerId, PostCustomerShippingAddressRequest postCustomerShippingAddressRequest, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
-            // verify the required parameter 'customerTokenId' is set
-            if (customerTokenId == null)
+            // verify the required parameter 'customerId' is set
+            if (customerId == null)
             {
-                logger.Error("ApiException : Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->PostCustomerShippingAddress");
-                throw new ApiException(400, "Missing required parameter 'customerTokenId' when calling CustomerShippingAddressApi->PostCustomerShippingAddress");
+                logger.Error("ApiException : Missing required parameter 'customerId' when calling CustomerShippingAddressApi->PostCustomerShippingAddress");
+                throw new ApiException(400, "Missing required parameter 'customerId' when calling CustomerShippingAddressApi->PostCustomerShippingAddress");
             }
             // verify the required parameter 'postCustomerShippingAddressRequest' is set
             if (postCustomerShippingAddressRequest == null)
@@ -1499,7 +1546,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'postCustomerShippingAddressRequest' when calling CustomerShippingAddressApi->PostCustomerShippingAddress");
             }
 
-            var localVarPath = $"/tms/v2/customers/{customerTokenId}/shipping-addresses";
+            var localVarPath = $"/tms/v2/customers/{customerId}/shipping-addresses";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -1523,9 +1570,9 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (customerTokenId != null)
+            if (customerId != null)
             {
-                localVarPathParams.Add("customerTokenId", Configuration.ApiClient.ParameterToString(customerTokenId)); // path parameter
+                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (profileId != null)
@@ -1534,6 +1581,8 @@ namespace CyberSource.Api
             }
             if (postCustomerShippingAddressRequest != null && postCustomerShippingAddressRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                postCustomerShippingAddressRequest = (PostCustomerShippingAddressRequest)sdkTracker.InsertDeveloperIdTracker(postCustomerShippingAddressRequest, postCustomerShippingAddressRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(postCustomerShippingAddressRequest); // http body (model) parameter
             }
             else
@@ -1552,8 +1601,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;

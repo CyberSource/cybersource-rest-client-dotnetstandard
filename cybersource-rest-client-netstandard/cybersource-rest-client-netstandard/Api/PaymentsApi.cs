@@ -17,6 +17,7 @@ using CyberSource.Client;
 using CyberSource.Model;
 using NLog;
 using AuthenticationSdk.util;
+using CyberSource.Utilities.Tracking;
 
 namespace CyberSource.Api
 {
@@ -30,7 +31,7 @@ namespace CyberSource.Api
         /// Process a Payment
         /// </summary>
         /// <remarks>
-        /// A payment authorizes the amount for the transaction. There are a number of supported payment feature, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/api/developer-guides/dita-payments/GettingStarted.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
+        /// A payment authorizes the amount for the transaction. There are a number of supported payment features, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/docs/cybs/en-us/payments/developer/ctv/rest/payments/payments-intro.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
@@ -41,7 +42,7 @@ namespace CyberSource.Api
         /// Process a Payment
         /// </summary>
         /// <remarks>
-        /// A payment authorizes the amount for the transaction. There are a number of supported payment feature, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/api/developer-guides/dita-payments/GettingStarted.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
+        /// A payment authorizes the amount for the transaction. There are a number of supported payment features, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/docs/cybs/en-us/payments/developer/ctv/rest/payments/payments-intro.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
@@ -70,13 +71,36 @@ namespace CyberSource.Api
         /// <param name="incrementAuthRequest"></param>
         /// <returns>ApiResponse of PtsV2IncrementalAuthorizationPatch201Response</returns>
         ApiResponse<PtsV2IncrementalAuthorizationPatch201Response> IncrementAuthWithHttpInfo (string id, IncrementAuthRequest incrementAuthRequest);
+        /// <summary>
+        /// Check a Payment Status
+        /// </summary>
+        /// <remarks>
+        /// Checks and updates the payment status 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">The payment id whose status needs to be checked and updated.</param>
+        /// <param name="refreshPaymentStatusRequest"></param>
+        /// <returns>PtsV2PaymentsPost201Response1</returns>
+        PtsV2PaymentsPost201Response1 RefreshPaymentStatus (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
+
+        /// <summary>
+        /// Check a Payment Status
+        /// </summary>
+        /// <remarks>
+        /// Checks and updates the payment status 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">The payment id whose status needs to be checked and updated.</param>
+        /// <param name="refreshPaymentStatusRequest"></param>
+        /// <returns>ApiResponse of PtsV2PaymentsPost201Response1</returns>
+        ApiResponse<PtsV2PaymentsPost201Response1> RefreshPaymentStatusWithHttpInfo (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
         /// Process a Payment
         /// </summary>
         /// <remarks>
-        /// A payment authorizes the amount for the transaction. There are a number of supported payment feature, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/api/developer-guides/dita-payments/GettingStarted.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
+        /// A payment authorizes the amount for the transaction. There are a number of supported payment features, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/docs/cybs/en-us/payments/developer/ctv/rest/payments/payments-intro.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
@@ -87,7 +111,7 @@ namespace CyberSource.Api
         /// Process a Payment
         /// </summary>
         /// <remarks>
-        /// A payment authorizes the amount for the transaction. There are a number of supported payment feature, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/api/developer-guides/dita-payments/GettingStarted.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
+        /// A payment authorizes the amount for the transaction. There are a number of supported payment features, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/docs/cybs/en-us/payments/developer/ctv/rest/payments/payments-intro.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
@@ -116,6 +140,29 @@ namespace CyberSource.Api
         /// <param name="incrementAuthRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2IncrementalAuthorizationPatch201Response)</returns>
         System.Threading.Tasks.Task<ApiResponse<PtsV2IncrementalAuthorizationPatch201Response>> IncrementAuthAsyncWithHttpInfo (string id, IncrementAuthRequest incrementAuthRequest);
+        /// <summary>
+        /// Check a Payment Status
+        /// </summary>
+        /// <remarks>
+        /// Checks and updates the payment status 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">The payment id whose status needs to be checked and updated.</param>
+        /// <param name="refreshPaymentStatusRequest"></param>
+        /// <returns>Task of PtsV2PaymentsPost201Response1</returns>
+        System.Threading.Tasks.Task<PtsV2PaymentsPost201Response1> RefreshPaymentStatusAsync (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
+
+        /// <summary>
+        /// Check a Payment Status
+        /// </summary>
+        /// <remarks>
+        /// Checks and updates the payment status 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">The payment id whose status needs to be checked and updated.</param>
+        /// <param name="refreshPaymentStatusRequest"></param>
+        /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response1)</returns>
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response1>> RefreshPaymentStatusAsyncWithHttpInfo (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
         #endregion Asynchronous Operations
     }
 
@@ -126,6 +173,7 @@ namespace CyberSource.Api
     {
         private static Logger logger;
         private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private int? _statusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentsApi"/> class.
@@ -178,7 +226,7 @@ namespace CyberSource.Api
         /// <value>The base path</value>
         public string GetBasePath()
         {
-            return Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
         }
 
         /// <summary>
@@ -237,7 +285,26 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Process a Payment A payment authorizes the amount for the transaction. There are a number of supported payment feature, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/api/developer-guides/dita-payments/GettingStarted.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
+        /// Retrieves the status code being set for the most recently executed API request.
+        /// </summary>
+        /// <returns>Status Code of previous request</returns>
+        public int GetStatusCode()
+        {
+            return this._statusCode == null ? 0 : (int) this._statusCode;
+        }
+
+        /// <summary>
+        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
+        /// </summary>
+        /// <param name="statusCode">Status Code to be set</param>
+        /// <returns></returns>
+        public void SetStatusCode(int? statusCode)
+        {
+            this._statusCode = statusCode;
+        }
+
+        /// <summary>
+        /// Process a Payment A payment authorizes the amount for the transaction. There are a number of supported payment features, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/docs/cybs/en-us/payments/developer/ctv/rest/payments/payments-intro.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
@@ -245,13 +312,15 @@ namespace CyberSource.Api
         public PtsV2PaymentsPost201Response CreatePayment (CreatePaymentRequest createPaymentRequest)
         {
             logger.Debug("CALLING API \"CreatePayment\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsPost201Response> localVarResponse = CreatePaymentWithHttpInfo(createPaymentRequest);
             logger.Debug("CALLING API \"CreatePayment\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Process a Payment A payment authorizes the amount for the transaction. There are a number of supported payment feature, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/api/developer-guides/dita-payments/GettingStarted.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
+        /// Process a Payment A payment authorizes the amount for the transaction. There are a number of supported payment features, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/docs/cybs/en-us/payments/developer/ctv/rest/payments/payments-intro.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
@@ -293,6 +362,8 @@ namespace CyberSource.Api
 
             if (createPaymentRequest != null && createPaymentRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                createPaymentRequest = (CreatePaymentRequest)sdkTracker.InsertDeveloperIdTracker(createPaymentRequest, createPaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(createPaymentRequest); // http body (model) parameter
             }
             else
@@ -311,8 +382,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -333,7 +404,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Process a Payment A payment authorizes the amount for the transaction. There are a number of supported payment feature, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/api/developer-guides/dita-payments/GettingStarted.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
+        /// Process a Payment A payment authorizes the amount for the transaction. There are a number of supported payment features, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/docs/cybs/en-us/payments/developer/ctv/rest/payments/payments-intro.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
@@ -341,14 +412,16 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<PtsV2PaymentsPost201Response> CreatePaymentAsync (CreatePaymentRequest createPaymentRequest)
         {
             logger.Debug("CALLING API \"CreatePaymentAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsPost201Response> localVarResponse = await CreatePaymentAsyncWithHttpInfo(createPaymentRequest);
             logger.Debug("CALLING API \"CreatePaymentAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Process a Payment A payment authorizes the amount for the transaction. There are a number of supported payment feature, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/api/developer-guides/dita-payments/GettingStarted.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
+        /// Process a Payment A payment authorizes the amount for the transaction. There are a number of supported payment features, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/docs/cybs/en-us/payments/developer/ctv/rest/payments/payments-intro.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
@@ -390,6 +463,8 @@ namespace CyberSource.Api
 
             if (createPaymentRequest != null && createPaymentRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                createPaymentRequest = (CreatePaymentRequest)sdkTracker.InsertDeveloperIdTracker(createPaymentRequest, createPaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(createPaymentRequest); // http body (model) parameter
             }
             else
@@ -408,8 +483,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -438,8 +513,10 @@ namespace CyberSource.Api
         public PtsV2IncrementalAuthorizationPatch201Response IncrementAuth (string id, IncrementAuthRequest incrementAuthRequest)
         {
             logger.Debug("CALLING API \"IncrementAuth\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2IncrementalAuthorizationPatch201Response> localVarResponse = IncrementAuthWithHttpInfo(id, incrementAuthRequest);
             logger.Debug("CALLING API \"IncrementAuth\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -498,6 +575,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (incrementAuthRequest != null && incrementAuthRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                incrementAuthRequest = (IncrementAuthRequest)sdkTracker.InsertDeveloperIdTracker(incrementAuthRequest, incrementAuthRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(incrementAuthRequest); // http body (model) parameter
             }
             else
@@ -516,8 +595,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -547,8 +626,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<PtsV2IncrementalAuthorizationPatch201Response> IncrementAuthAsync (string id, IncrementAuthRequest incrementAuthRequest)
         {
             logger.Debug("CALLING API \"IncrementAuthAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2IncrementalAuthorizationPatch201Response> localVarResponse = await IncrementAuthAsyncWithHttpInfo(id, incrementAuthRequest);
             logger.Debug("CALLING API \"IncrementAuthAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -608,6 +689,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (incrementAuthRequest != null && incrementAuthRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                incrementAuthRequest = (IncrementAuthRequest)sdkTracker.InsertDeveloperIdTracker(incrementAuthRequest, incrementAuthRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(incrementAuthRequest); // http body (model) parameter
             }
             else
@@ -626,8 +709,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PATCH, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -645,6 +728,232 @@ namespace CyberSource.Api
             return new ApiResponse<PtsV2IncrementalAuthorizationPatch201Response>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (PtsV2IncrementalAuthorizationPatch201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2IncrementalAuthorizationPatch201Response))); // Return statement
+        }
+        /// <summary>
+        /// Check a Payment Status Checks and updates the payment status 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">The payment id whose status needs to be checked and updated.</param>
+        /// <param name="refreshPaymentStatusRequest"></param>
+        /// <returns>PtsV2PaymentsPost201Response1</returns>
+        public PtsV2PaymentsPost201Response1 RefreshPaymentStatus (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
+        {
+            logger.Debug("CALLING API \"RefreshPaymentStatus\" STARTED");
+            this.SetStatusCode(null);
+            ApiResponse<PtsV2PaymentsPost201Response1> localVarResponse = RefreshPaymentStatusWithHttpInfo(id, refreshPaymentStatusRequest);
+            logger.Debug("CALLING API \"RefreshPaymentStatus\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Check a Payment Status Checks and updates the payment status 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">The payment id whose status needs to be checked and updated.</param>
+        /// <param name="refreshPaymentStatusRequest"></param>
+        /// <returns>ApiResponse of PtsV2PaymentsPost201Response1</returns>
+        public ApiResponse< PtsV2PaymentsPost201Response1 > RefreshPaymentStatusWithHttpInfo (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
+        {
+            LogUtility logUtility = new LogUtility();
+
+            // verify the required parameter 'id' is set
+            if (id == null)
+            {
+                logger.Error("ApiException : Missing required parameter 'id' when calling PaymentsApi->RefreshPaymentStatus");
+                throw new ApiException(400, "Missing required parameter 'id' when calling PaymentsApi->RefreshPaymentStatus");
+            }
+            // verify the required parameter 'refreshPaymentStatusRequest' is set
+            if (refreshPaymentStatusRequest == null)
+            {
+                logger.Error("ApiException : Missing required parameter 'refreshPaymentStatusRequest' when calling PaymentsApi->RefreshPaymentStatus");
+                throw new ApiException(400, "Missing required parameter 'refreshPaymentStatusRequest' when calling PaymentsApi->RefreshPaymentStatus");
+            }
+
+            var localVarPath = $"/pts/v2/refresh-payment-status/{id}";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+                "application/json;charset=utf-8"
+            };
+            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+                "application/hal+json;charset=utf-8"
+            };
+            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (id != null)
+            {
+                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            if (refreshPaymentStatusRequest != null && refreshPaymentStatusRequest.GetType() != typeof(byte[]))
+            {
+                SdkTracker sdkTracker = new SdkTracker();
+                refreshPaymentStatusRequest = (RefreshPaymentStatusRequest)sdkTracker.InsertDeveloperIdTracker(refreshPaymentStatusRequest, refreshPaymentStatusRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
+                localVarPostBody = Configuration.ApiClient.Serialize(refreshPaymentStatusRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = refreshPaymentStatusRequest; // byte array
+            }
+
+            if (logUtility.IsMaskingEnabled(logger))
+            {
+                logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
+            }
+            else
+            {
+                logger.Debug($"HTTP Request Body :\n{localVarPostBody}");
+            }
+
+
+            // make the HTTP request
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("RefreshPaymentStatus", localVarResponse);
+                if (exception != null)
+                {
+                    logger.Error($"Exception : {exception.Message}");
+                    throw exception;
+                }
+            }
+
+            return new ApiResponse<PtsV2PaymentsPost201Response1>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (PtsV2PaymentsPost201Response1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response1))); // Return statement
+        }
+
+        /// <summary>
+        /// Check a Payment Status Checks and updates the payment status 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">The payment id whose status needs to be checked and updated.</param>
+        /// <param name="refreshPaymentStatusRequest"></param>
+        /// <returns>Task of PtsV2PaymentsPost201Response1</returns>
+        public async System.Threading.Tasks.Task<PtsV2PaymentsPost201Response1> RefreshPaymentStatusAsync (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
+        {
+            logger.Debug("CALLING API \"RefreshPaymentStatusAsync\" STARTED");
+            this.SetStatusCode(null);
+            ApiResponse<PtsV2PaymentsPost201Response1> localVarResponse = await RefreshPaymentStatusAsyncWithHttpInfo(id, refreshPaymentStatusRequest);
+            logger.Debug("CALLING API \"RefreshPaymentStatusAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
+            return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Check a Payment Status Checks and updates the payment status 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">The payment id whose status needs to be checked and updated.</param>
+        /// <param name="refreshPaymentStatusRequest"></param>
+        /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response1)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response1>> RefreshPaymentStatusAsyncWithHttpInfo (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
+        {
+            LogUtility logUtility = new LogUtility();
+
+            // verify the required parameter 'id' is set
+            if (id == null)
+            {
+                logger.Error("ApiException : Missing required parameter 'id' when calling PaymentsApi->RefreshPaymentStatus");
+                throw new ApiException(400, "Missing required parameter 'id' when calling PaymentsApi->RefreshPaymentStatus");
+            }
+            // verify the required parameter 'refreshPaymentStatusRequest' is set
+            if (refreshPaymentStatusRequest == null)
+            {
+                logger.Error("ApiException : Missing required parameter 'refreshPaymentStatusRequest' when calling PaymentsApi->RefreshPaymentStatus");
+                throw new ApiException(400, "Missing required parameter 'refreshPaymentStatusRequest' when calling PaymentsApi->RefreshPaymentStatus");
+            }
+
+            var localVarPath = $"/pts/v2/refresh-payment-status/{id}";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+                "application/json;charset=utf-8"
+            };
+            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+                "application/hal+json;charset=utf-8"
+            };
+            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (id != null)
+            {
+                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            if (refreshPaymentStatusRequest != null && refreshPaymentStatusRequest.GetType() != typeof(byte[]))
+            {
+                SdkTracker sdkTracker = new SdkTracker();
+                refreshPaymentStatusRequest = (RefreshPaymentStatusRequest)sdkTracker.InsertDeveloperIdTracker(refreshPaymentStatusRequest, refreshPaymentStatusRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
+                localVarPostBody = Configuration.ApiClient.Serialize(refreshPaymentStatusRequest); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = refreshPaymentStatusRequest; // byte array
+            }
+
+            if (logUtility.IsMaskingEnabled(logger))
+            {
+                logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
+            }
+            else
+            {
+                logger.Debug($"HTTP Request Body :\n{localVarPostBody}");
+            }
+
+
+            // make the HTTP request
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("RefreshPaymentStatus", localVarResponse);
+                if (exception != null)
+                {
+                    logger.Error($"Exception : {exception.Message}");
+                    throw exception;
+                }
+            }
+
+            return new ApiResponse<PtsV2PaymentsPost201Response1>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (PtsV2PaymentsPost201Response1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response1))); // Return statement
         }
     }
 }

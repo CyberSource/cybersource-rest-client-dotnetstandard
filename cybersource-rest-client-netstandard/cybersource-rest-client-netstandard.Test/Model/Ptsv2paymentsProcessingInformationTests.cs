@@ -73,12 +73,28 @@ namespace CyberSource.Test
             // TODO unit test for the property 'ActionList'
         }
         /// <summary>
+        /// Test the property 'EnableEscrowOption'
+        /// </summary>
+        [Test]
+        public void EnableEscrowOptionTest()
+        {
+            // TODO unit test for the property 'EnableEscrowOption'
+        }
+        /// <summary>
         /// Test the property 'ActionTokenTypes'
         /// </summary>
         [Test]
         public void ActionTokenTypesTest()
         {
             // TODO unit test for the property 'ActionTokenTypes'
+        }
+        /// <summary>
+        /// Test the property 'BinSource'
+        /// </summary>
+        [Test]
+        public void BinSourceTest()
+        {
+            // TODO unit test for the property 'BinSource'
         }
         /// <summary>
         /// Test the property 'Capture'
@@ -113,6 +129,14 @@ namespace CyberSource.Test
             // TODO unit test for the property 'CommerceIndicator'
         }
         /// <summary>
+        /// Test the property 'CommerceIndicatorLabel'
+        /// </summary>
+        [Test]
+        public void CommerceIndicatorLabelTest()
+        {
+            // TODO unit test for the property 'CommerceIndicatorLabel'
+        }
+        /// <summary>
         /// Test the property 'PaymentSolution'
         /// </summary>
         [Test]
@@ -143,6 +167,14 @@ namespace CyberSource.Test
         public void PurchaseLevelTest()
         {
             // TODO unit test for the property 'PurchaseLevel'
+        }
+        /// <summary>
+        /// Test the property 'PaymentId'
+        /// </summary>
+        [Test]
+        public void PaymentIdTest()
+        {
+            // TODO unit test for the property 'PaymentId'
         }
         /// <summary>
         /// Test the property 'ReportGroup'
@@ -287,6 +319,14 @@ namespace CyberSource.Test
         public void IsReturnAuthRecordEnabledTest()
         {
             // TODO unit test for the property 'IsReturnAuthRecordEnabled'
+        }
+        /// <summary>
+        /// Test the property 'NetworkPartnerId'
+        /// </summary>
+        [Test]
+        public void NetworkPartnerIdTest()
+        {
+            // TODO unit test for the property 'NetworkPartnerId'
         }
 
     }

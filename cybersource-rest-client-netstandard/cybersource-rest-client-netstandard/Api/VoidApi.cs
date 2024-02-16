@@ -17,6 +17,7 @@ using CyberSource.Client;
 using CyberSource.Model;
 using NLog;
 using AuthenticationSdk.util;
+using CyberSource.Utilities.Tracking;
 
 namespace CyberSource.Api
 {
@@ -30,7 +31,7 @@ namespace CyberSource.Api
         /// Timeout Void
         /// </summary>
         /// <remarks>
-        /// This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to Timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
+        /// This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
@@ -41,7 +42,7 @@ namespace CyberSource.Api
         /// Timeout Void
         /// </summary>
         /// <remarks>
-        /// This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to Timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
+        /// This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
@@ -145,7 +146,7 @@ namespace CyberSource.Api
         /// Timeout Void
         /// </summary>
         /// <remarks>
-        /// This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to Timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
+        /// This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
@@ -156,7 +157,7 @@ namespace CyberSource.Api
         /// Timeout Void
         /// </summary>
         /// <remarks>
-        /// This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to Timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
+        /// This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
@@ -264,6 +265,7 @@ namespace CyberSource.Api
     {
         private static Logger logger;
         private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private int? _statusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VoidApi"/> class.
@@ -316,7 +318,7 @@ namespace CyberSource.Api
         /// <value>The base path</value>
         public string GetBasePath()
         {
-            return Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
         }
 
         /// <summary>
@@ -375,7 +377,26 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Timeout Void This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to Timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
+        /// Retrieves the status code being set for the most recently executed API request.
+        /// </summary>
+        /// <returns>Status Code of previous request</returns>
+        public int GetStatusCode()
+        {
+            return this._statusCode == null ? 0 : (int) this._statusCode;
+        }
+
+        /// <summary>
+        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
+        /// </summary>
+        /// <param name="statusCode">Status Code to be set</param>
+        /// <returns></returns>
+        public void SetStatusCode(int? statusCode)
+        {
+            this._statusCode = statusCode;
+        }
+
+        /// <summary>
+        /// Timeout Void This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
@@ -383,13 +404,15 @@ namespace CyberSource.Api
         public PtsV2PaymentsVoidsPost201Response MitVoid (MitVoidRequest mitVoidRequest)
         {
             logger.Debug("CALLING API \"MitVoid\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = MitVoidWithHttpInfo(mitVoidRequest);
             logger.Debug("CALLING API \"MitVoid\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Timeout Void This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to Timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
+        /// Timeout Void This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
@@ -405,7 +428,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'mitVoidRequest' when calling VoidApi->MitVoid");
             }
 
-            var localVarPath = $"/pts/v2/voids/";
+            var localVarPath = $"/pts/v2/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -431,6 +454,8 @@ namespace CyberSource.Api
 
             if (mitVoidRequest != null && mitVoidRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                mitVoidRequest = (MitVoidRequest)sdkTracker.InsertDeveloperIdTracker(mitVoidRequest, mitVoidRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(mitVoidRequest); // http body (model) parameter
             }
             else
@@ -449,8 +474,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -471,7 +496,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Timeout Void This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to Timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
+        /// Timeout Void This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
@@ -479,14 +504,16 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> MitVoidAsync (MitVoidRequest mitVoidRequest)
         {
             logger.Debug("CALLING API \"MitVoidAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = await MitVoidAsyncWithHttpInfo(mitVoidRequest);
             logger.Debug("CALLING API \"MitVoidAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Timeout Void This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to Timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
+        /// Timeout Void This is to void a previous payment, capture, refund, or credit that merchant does not receive a reply(Mostly due to timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in your payment, capture, refund, or credit API call and use same transactionId in this API request payload to reverse the payment.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
@@ -502,7 +529,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'mitVoidRequest' when calling VoidApi->MitVoid");
             }
 
-            var localVarPath = $"/pts/v2/voids/";
+            var localVarPath = $"/pts/v2/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
@@ -528,6 +555,8 @@ namespace CyberSource.Api
 
             if (mitVoidRequest != null && mitVoidRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                mitVoidRequest = (MitVoidRequest)sdkTracker.InsertDeveloperIdTracker(mitVoidRequest, mitVoidRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(mitVoidRequest); // http body (model) parameter
             }
             else
@@ -546,8 +575,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -576,8 +605,10 @@ namespace CyberSource.Api
         public PtsV2PaymentsVoidsPost201Response VoidCapture (VoidCaptureRequest voidCaptureRequest, string id)
         {
             logger.Debug("CALLING API \"VoidCapture\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = VoidCaptureWithHttpInfo(voidCaptureRequest, id);
             logger.Debug("CALLING API \"VoidCapture\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -636,6 +667,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (voidCaptureRequest != null && voidCaptureRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                voidCaptureRequest = (VoidCaptureRequest)sdkTracker.InsertDeveloperIdTracker(voidCaptureRequest, voidCaptureRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(voidCaptureRequest); // http body (model) parameter
             }
             else
@@ -654,8 +687,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -685,8 +718,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidCaptureAsync (VoidCaptureRequest voidCaptureRequest, string id)
         {
             logger.Debug("CALLING API \"VoidCaptureAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = await VoidCaptureAsyncWithHttpInfo(voidCaptureRequest, id);
             logger.Debug("CALLING API \"VoidCaptureAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -746,6 +781,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (voidCaptureRequest != null && voidCaptureRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                voidCaptureRequest = (VoidCaptureRequest)sdkTracker.InsertDeveloperIdTracker(voidCaptureRequest, voidCaptureRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(voidCaptureRequest); // http body (model) parameter
             }
             else
@@ -764,8 +801,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -794,8 +831,10 @@ namespace CyberSource.Api
         public PtsV2PaymentsVoidsPost201Response VoidCredit (VoidCreditRequest voidCreditRequest, string id)
         {
             logger.Debug("CALLING API \"VoidCredit\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = VoidCreditWithHttpInfo(voidCreditRequest, id);
             logger.Debug("CALLING API \"VoidCredit\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -854,6 +893,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (voidCreditRequest != null && voidCreditRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                voidCreditRequest = (VoidCreditRequest)sdkTracker.InsertDeveloperIdTracker(voidCreditRequest, voidCreditRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(voidCreditRequest); // http body (model) parameter
             }
             else
@@ -872,8 +913,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -903,8 +944,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidCreditAsync (VoidCreditRequest voidCreditRequest, string id)
         {
             logger.Debug("CALLING API \"VoidCreditAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = await VoidCreditAsyncWithHttpInfo(voidCreditRequest, id);
             logger.Debug("CALLING API \"VoidCreditAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -964,6 +1007,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (voidCreditRequest != null && voidCreditRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                voidCreditRequest = (VoidCreditRequest)sdkTracker.InsertDeveloperIdTracker(voidCreditRequest, voidCreditRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(voidCreditRequest); // http body (model) parameter
             }
             else
@@ -982,8 +1027,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -1012,8 +1057,10 @@ namespace CyberSource.Api
         public PtsV2PaymentsVoidsPost201Response VoidPayment (VoidPaymentRequest voidPaymentRequest, string id)
         {
             logger.Debug("CALLING API \"VoidPayment\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = VoidPaymentWithHttpInfo(voidPaymentRequest, id);
             logger.Debug("CALLING API \"VoidPayment\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -1072,6 +1119,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (voidPaymentRequest != null && voidPaymentRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                voidPaymentRequest = (VoidPaymentRequest)sdkTracker.InsertDeveloperIdTracker(voidPaymentRequest, voidPaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(voidPaymentRequest); // http body (model) parameter
             }
             else
@@ -1090,8 +1139,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1121,8 +1170,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidPaymentAsync (VoidPaymentRequest voidPaymentRequest, string id)
         {
             logger.Debug("CALLING API \"VoidPaymentAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = await VoidPaymentAsyncWithHttpInfo(voidPaymentRequest, id);
             logger.Debug("CALLING API \"VoidPaymentAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -1182,6 +1233,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (voidPaymentRequest != null && voidPaymentRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                voidPaymentRequest = (VoidPaymentRequest)sdkTracker.InsertDeveloperIdTracker(voidPaymentRequest, voidPaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(voidPaymentRequest); // http body (model) parameter
             }
             else
@@ -1200,8 +1253,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -1230,8 +1283,10 @@ namespace CyberSource.Api
         public PtsV2PaymentsVoidsPost201Response VoidRefund (VoidRefundRequest voidRefundRequest, string id)
         {
             logger.Debug("CALLING API \"VoidRefund\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = VoidRefundWithHttpInfo(voidRefundRequest, id);
             logger.Debug("CALLING API \"VoidRefund\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -1290,6 +1345,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (voidRefundRequest != null && voidRefundRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                voidRefundRequest = (VoidRefundRequest)sdkTracker.InsertDeveloperIdTracker(voidRefundRequest, voidRefundRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(voidRefundRequest); // http body (model) parameter
             }
             else
@@ -1308,8 +1365,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1339,8 +1396,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidRefundAsync (VoidRefundRequest voidRefundRequest, string id)
         {
             logger.Debug("CALLING API \"VoidRefundAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = await VoidRefundAsyncWithHttpInfo(voidRefundRequest, id);
             logger.Debug("CALLING API \"VoidRefundAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -1400,6 +1459,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (voidRefundRequest != null && voidRefundRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                voidRefundRequest = (VoidRefundRequest)sdkTracker.InsertDeveloperIdTracker(voidRefundRequest, voidRefundRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(voidRefundRequest); // http body (model) parameter
             }
             else
@@ -1418,8 +1479,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;

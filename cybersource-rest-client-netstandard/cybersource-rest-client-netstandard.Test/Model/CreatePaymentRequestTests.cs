@@ -169,6 +169,14 @@ namespace CyberSource.Test
             // TODO unit test for the property 'MerchantDefinedInformation'
         }
         /// <summary>
+        /// Test the property 'MerchantDefinedSecureInformation'
+        /// </summary>
+        [Test]
+        public void MerchantDefinedSecureInformationTest()
+        {
+            // TODO unit test for the property 'MerchantDefinedSecureInformation'
+        }
+        /// <summary>
         /// Test the property 'InstallmentInformation'
         /// </summary>
         [Test]
@@ -247,6 +255,14 @@ namespace CyberSource.Test
         public void RecurringPaymentInformationTest()
         {
             // TODO unit test for the property 'RecurringPaymentInformation'
+        }
+        /// <summary>
+        /// Test the property 'WatchlistScreeningInformation'
+        /// </summary>
+        [Test]
+        public void WatchlistScreeningInformationTest()
+        {
+            // TODO unit test for the property 'WatchlistScreeningInformation'
         }
 
     }

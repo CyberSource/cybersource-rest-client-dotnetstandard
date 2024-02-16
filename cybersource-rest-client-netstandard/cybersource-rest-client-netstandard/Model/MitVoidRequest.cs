@@ -35,10 +35,14 @@ namespace CyberSource.Model
         /// </summary>
         /// <param name="ClientReferenceInformation">ClientReferenceInformation.</param>
         /// <param name="PaymentInformation">PaymentInformation.</param>
-        public MitVoidRequest(Ptsv2paymentsClientReferenceInformation ClientReferenceInformation = default(Ptsv2paymentsClientReferenceInformation), Ptsv2paymentsidvoidsPaymentInformation PaymentInformation = default(Ptsv2paymentsidvoidsPaymentInformation))
+        /// <param name="OrderInformation">OrderInformation.</param>
+        /// <param name="ProcessingInformation">ProcessingInformation.</param>
+        public MitVoidRequest(Ptsv2paymentsClientReferenceInformation ClientReferenceInformation = default(Ptsv2paymentsClientReferenceInformation), Ptsv2paymentsidvoidsPaymentInformation PaymentInformation = default(Ptsv2paymentsidvoidsPaymentInformation), Ptsv2paymentsidvoidsOrderInformation OrderInformation = default(Ptsv2paymentsidvoidsOrderInformation), Ptsv2voidsProcessingInformation ProcessingInformation = default(Ptsv2voidsProcessingInformation))
         {
             this.ClientReferenceInformation = ClientReferenceInformation;
             this.PaymentInformation = PaymentInformation;
+            this.OrderInformation = OrderInformation;
+            this.ProcessingInformation = ProcessingInformation;
         }
         
         /// <summary>
@@ -54,6 +58,18 @@ namespace CyberSource.Model
         public Ptsv2paymentsidvoidsPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
+        /// Gets or Sets OrderInformation
+        /// </summary>
+        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        public Ptsv2paymentsidvoidsOrderInformation OrderInformation { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ProcessingInformation
+        /// </summary>
+        [DataMember(Name="processingInformation", EmitDefaultValue=false)]
+        public Ptsv2voidsProcessingInformation ProcessingInformation { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -63,6 +79,8 @@ namespace CyberSource.Model
             sb.Append("class MitVoidRequest {\n");
             sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
             sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
+            sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
+            sb.Append("  ProcessingInformation: ").Append(ProcessingInformation).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -108,6 +126,16 @@ namespace CyberSource.Model
                     this.PaymentInformation == other.PaymentInformation ||
                     this.PaymentInformation != null &&
                     this.PaymentInformation.Equals(other.PaymentInformation)
+                ) && 
+                (
+                    this.OrderInformation == other.OrderInformation ||
+                    this.OrderInformation != null &&
+                    this.OrderInformation.Equals(other.OrderInformation)
+                ) && 
+                (
+                    this.ProcessingInformation == other.ProcessingInformation ||
+                    this.ProcessingInformation != null &&
+                    this.ProcessingInformation.Equals(other.ProcessingInformation)
                 );
         }
 
@@ -126,6 +154,10 @@ namespace CyberSource.Model
                     hash = hash * 59 + this.ClientReferenceInformation.GetHashCode();
                 if (this.PaymentInformation != null)
                     hash = hash * 59 + this.PaymentInformation.GetHashCode();
+                if (this.OrderInformation != null)
+                    hash = hash * 59 + this.OrderInformation.GetHashCode();
+                if (this.ProcessingInformation != null)
+                    hash = hash * 59 + this.ProcessingInformation.GetHashCode();
                 return hash;
             }
         }

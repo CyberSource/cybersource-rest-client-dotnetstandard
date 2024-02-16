@@ -17,6 +17,7 @@ using CyberSource.Client;
 using CyberSource.Model;
 using NLog;
 using AuthenticationSdk.util;
+using CyberSource.Utilities.Tracking;
 
 namespace CyberSource.Api
 {
@@ -80,6 +81,7 @@ namespace CyberSource.Api
     {
         private static Logger logger;
         private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private int? _statusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PayoutsApi"/> class.
@@ -132,7 +134,7 @@ namespace CyberSource.Api
         /// <value>The base path</value>
         public string GetBasePath()
         {
-            return Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
         }
 
         /// <summary>
@@ -191,6 +193,25 @@ namespace CyberSource.Api
         }
 
         /// <summary>
+        /// Retrieves the status code being set for the most recently executed API request.
+        /// </summary>
+        /// <returns>Status Code of previous request</returns>
+        public int GetStatusCode()
+        {
+            return this._statusCode == null ? 0 : (int) this._statusCode;
+        }
+
+        /// <summary>
+        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
+        /// </summary>
+        /// <param name="statusCode">Status Code to be set</param>
+        /// <returns></returns>
+        public void SetStatusCode(int? statusCode)
+        {
+            this._statusCode = statusCode;
+        }
+
+        /// <summary>
         /// Process a Payout Send funds from a selected funding source to a designated credit/debit card account or a prepaid card using an Original Credit Transaction (OCT). 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
@@ -199,8 +220,10 @@ namespace CyberSource.Api
         public PtsV2PayoutsPost201Response OctCreatePayment (OctCreatePaymentRequest octCreatePaymentRequest)
         {
             logger.Debug("CALLING API \"OctCreatePayment\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PayoutsPost201Response> localVarResponse = OctCreatePaymentWithHttpInfo(octCreatePaymentRequest);
             logger.Debug("CALLING API \"OctCreatePayment\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -247,6 +270,8 @@ namespace CyberSource.Api
 
             if (octCreatePaymentRequest != null && octCreatePaymentRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                octCreatePaymentRequest = (OctCreatePaymentRequest)sdkTracker.InsertDeveloperIdTracker(octCreatePaymentRequest, octCreatePaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(octCreatePaymentRequest); // http body (model) parameter
             }
             else
@@ -265,8 +290,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -295,8 +320,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<PtsV2PayoutsPost201Response> OctCreatePaymentAsync (OctCreatePaymentRequest octCreatePaymentRequest)
         {
             logger.Debug("CALLING API \"OctCreatePaymentAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<PtsV2PayoutsPost201Response> localVarResponse = await OctCreatePaymentAsyncWithHttpInfo(octCreatePaymentRequest);
             logger.Debug("CALLING API \"OctCreatePaymentAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -344,6 +371,8 @@ namespace CyberSource.Api
 
             if (octCreatePaymentRequest != null && octCreatePaymentRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                octCreatePaymentRequest = (OctCreatePaymentRequest)sdkTracker.InsertDeveloperIdTracker(octCreatePaymentRequest, octCreatePaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(octCreatePaymentRequest); // http body (model) parameter
             }
             else
@@ -362,8 +391,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;

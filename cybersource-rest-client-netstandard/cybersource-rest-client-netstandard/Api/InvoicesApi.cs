@@ -17,6 +17,7 @@ using CyberSource.Client;
 using CyberSource.Model;
 using NLog;
 using AuthenticationSdk.util;
+using CyberSource.Utilities.Tracking;
 
 namespace CyberSource.Api
 {
@@ -30,7 +31,7 @@ namespace CyberSource.Api
         /// Create a New Invoice
         /// </summary>
         /// <remarks>
-        /// Create a new invoice.
+        /// The invoicing product enables you to bill any customer with an email address and accept digital payments securely from any connected device. You can either use the system generated email or use the invoice payment link in your own communication. You can add discounts and taxes for the entire invoice or for each line item. To customize the invoice to match your brand see [Invoice Settings](https://developer.cybersource.com/api-reference-assets/index.html#invoicing_invoice-settings_update-invoice-settings). The invoice payment page uses Unified Checkout to process the payments.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
@@ -41,7 +42,7 @@ namespace CyberSource.Api
         /// Create a New Invoice
         /// </summary>
         /// <remarks>
-        /// Create a new invoice.
+        /// The invoicing product enables you to bill any customer with an email address and accept digital payments securely from any connected device. You can either use the system generated email or use the invoice payment link in your own communication. You can add discounts and taxes for the entire invoice or for each line item. To customize the invoice to match your brand see [Invoice Settings](https://developer.cybersource.com/api-reference-assets/index.html#invoicing_invoice-settings_update-invoice-settings). The invoice payment page uses Unified Checkout to process the payments.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
@@ -51,7 +52,7 @@ namespace CyberSource.Api
         /// Get a List of Invoices
         /// </summary>
         /// <remarks>
-        /// Get a list of invoices.
+        /// Provides a (filtered) list of invoices that have been created in your account. You can filter the list based on Invoice Status by setting the status query parameter to one of DRAFT, CREATED, SENT, PARTIAL, PAID or CANCELED.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">Page offset number.</param>
@@ -64,7 +65,7 @@ namespace CyberSource.Api
         /// Get a List of Invoices
         /// </summary>
         /// <remarks>
-        /// Get a list of invoices.
+        /// Provides a (filtered) list of invoices that have been created in your account. You can filter the list based on Invoice Status by setting the status query parameter to one of DRAFT, CREATED, SENT, PARTIAL, PAID or CANCELED.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">Page offset number.</param>
@@ -76,7 +77,7 @@ namespace CyberSource.Api
         /// Get Invoice Details
         /// </summary>
         /// <remarks>
-        /// Get the details of a specific invoice.
+        /// You can retrieve details of a specific invoice. This can be used to check the Invoice status and get a list of invoice payments in the invoice history section of the response. For each payment transaction you can use the Transaction Details API to get more details on the payment transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -87,7 +88,7 @@ namespace CyberSource.Api
         /// Get Invoice Details
         /// </summary>
         /// <remarks>
-        /// Get the details of a specific invoice.
+        /// You can retrieve details of a specific invoice. This can be used to check the Invoice status and get a list of invoice payments in the invoice history section of the response. For each payment transaction you can use the Transaction Details API to get more details on the payment transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -97,7 +98,7 @@ namespace CyberSource.Api
         /// Cancel an Invoice
         /// </summary>
         /// <remarks>
-        /// Cancel an invoice.
+        /// You can cancel an invoice if no payment is made to it. You cannot cancel partially or fully paid invoices.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -108,7 +109,7 @@ namespace CyberSource.Api
         /// Cancel an Invoice
         /// </summary>
         /// <remarks>
-        /// Cancel an invoice.
+        /// You can cancel an invoice if no payment is made to it. You cannot cancel partially or fully paid invoices.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -118,7 +119,7 @@ namespace CyberSource.Api
         /// Send an Invoice
         /// </summary>
         /// <remarks>
-        /// Send an invoice.
+        /// You can send an invoice in draft or created state or resend a sent or partially paid invoice. Fully paid or canceled invoices cannot be resent.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -129,7 +130,7 @@ namespace CyberSource.Api
         /// Send an Invoice
         /// </summary>
         /// <remarks>
-        /// Send an invoice.
+        /// You can send an invoice in draft or created state or resend a sent or partially paid invoice. Fully paid or canceled invoices cannot be resent.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -139,7 +140,7 @@ namespace CyberSource.Api
         /// Update an Invoice
         /// </summary>
         /// <remarks>
-        /// Update an invoice.
+        /// You can update all information except the invoice number till any payment is received for an invoice. Invoices that are partially or fully paid or cancelled cannot be updated.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -151,7 +152,7 @@ namespace CyberSource.Api
         /// Update an Invoice
         /// </summary>
         /// <remarks>
-        /// Update an invoice.
+        /// You can update all information except the invoice number till any payment is received for an invoice. Invoices that are partially or fully paid or cancelled cannot be updated.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -164,7 +165,7 @@ namespace CyberSource.Api
         /// Create a New Invoice
         /// </summary>
         /// <remarks>
-        /// Create a new invoice.
+        /// The invoicing product enables you to bill any customer with an email address and accept digital payments securely from any connected device. You can either use the system generated email or use the invoice payment link in your own communication. You can add discounts and taxes for the entire invoice or for each line item. To customize the invoice to match your brand see [Invoice Settings](https://developer.cybersource.com/api-reference-assets/index.html#invoicing_invoice-settings_update-invoice-settings). The invoice payment page uses Unified Checkout to process the payments.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
@@ -175,7 +176,7 @@ namespace CyberSource.Api
         /// Create a New Invoice
         /// </summary>
         /// <remarks>
-        /// Create a new invoice.
+        /// The invoicing product enables you to bill any customer with an email address and accept digital payments securely from any connected device. You can either use the system generated email or use the invoice payment link in your own communication. You can add discounts and taxes for the entire invoice or for each line item. To customize the invoice to match your brand see [Invoice Settings](https://developer.cybersource.com/api-reference-assets/index.html#invoicing_invoice-settings_update-invoice-settings). The invoice payment page uses Unified Checkout to process the payments.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
@@ -185,7 +186,7 @@ namespace CyberSource.Api
         /// Get a List of Invoices
         /// </summary>
         /// <remarks>
-        /// Get a list of invoices.
+        /// Provides a (filtered) list of invoices that have been created in your account. You can filter the list based on Invoice Status by setting the status query parameter to one of DRAFT, CREATED, SENT, PARTIAL, PAID or CANCELED.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">Page offset number.</param>
@@ -198,7 +199,7 @@ namespace CyberSource.Api
         /// Get a List of Invoices
         /// </summary>
         /// <remarks>
-        /// Get a list of invoices.
+        /// Provides a (filtered) list of invoices that have been created in your account. You can filter the list based on Invoice Status by setting the status query parameter to one of DRAFT, CREATED, SENT, PARTIAL, PAID or CANCELED.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">Page offset number.</param>
@@ -210,7 +211,7 @@ namespace CyberSource.Api
         /// Get Invoice Details
         /// </summary>
         /// <remarks>
-        /// Get the details of a specific invoice.
+        /// You can retrieve details of a specific invoice. This can be used to check the Invoice status and get a list of invoice payments in the invoice history section of the response. For each payment transaction you can use the Transaction Details API to get more details on the payment transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -221,7 +222,7 @@ namespace CyberSource.Api
         /// Get Invoice Details
         /// </summary>
         /// <remarks>
-        /// Get the details of a specific invoice.
+        /// You can retrieve details of a specific invoice. This can be used to check the Invoice status and get a list of invoice payments in the invoice history section of the response. For each payment transaction you can use the Transaction Details API to get more details on the payment transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -231,7 +232,7 @@ namespace CyberSource.Api
         /// Cancel an Invoice
         /// </summary>
         /// <remarks>
-        /// Cancel an invoice.
+        /// You can cancel an invoice if no payment is made to it. You cannot cancel partially or fully paid invoices.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -242,7 +243,7 @@ namespace CyberSource.Api
         /// Cancel an Invoice
         /// </summary>
         /// <remarks>
-        /// Cancel an invoice.
+        /// You can cancel an invoice if no payment is made to it. You cannot cancel partially or fully paid invoices.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -252,7 +253,7 @@ namespace CyberSource.Api
         /// Send an Invoice
         /// </summary>
         /// <remarks>
-        /// Send an invoice.
+        /// You can send an invoice in draft or created state or resend a sent or partially paid invoice. Fully paid or canceled invoices cannot be resent.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -263,7 +264,7 @@ namespace CyberSource.Api
         /// Send an Invoice
         /// </summary>
         /// <remarks>
-        /// Send an invoice.
+        /// You can send an invoice in draft or created state or resend a sent or partially paid invoice. Fully paid or canceled invoices cannot be resent.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -273,7 +274,7 @@ namespace CyberSource.Api
         /// Update an Invoice
         /// </summary>
         /// <remarks>
-        /// Update an invoice.
+        /// You can update all information except the invoice number till any payment is received for an invoice. Invoices that are partially or fully paid or cancelled cannot be updated.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -285,7 +286,7 @@ namespace CyberSource.Api
         /// Update an Invoice
         /// </summary>
         /// <remarks>
-        /// Update an invoice.
+        /// You can update all information except the invoice number till any payment is received for an invoice. Invoices that are partially or fully paid or cancelled cannot be updated.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -302,6 +303,7 @@ namespace CyberSource.Api
     {
         private static Logger logger;
         private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private int? _statusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoicesApi"/> class.
@@ -354,7 +356,7 @@ namespace CyberSource.Api
         /// <value>The base path</value>
         public string GetBasePath()
         {
-            return Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
         }
 
         /// <summary>
@@ -413,7 +415,26 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Create a New Invoice Create a new invoice.
+        /// Retrieves the status code being set for the most recently executed API request.
+        /// </summary>
+        /// <returns>Status Code of previous request</returns>
+        public int GetStatusCode()
+        {
+            return this._statusCode == null ? 0 : (int) this._statusCode;
+        }
+
+        /// <summary>
+        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
+        /// </summary>
+        /// <param name="statusCode">Status Code to be set</param>
+        /// <returns></returns>
+        public void SetStatusCode(int? statusCode)
+        {
+            this._statusCode = statusCode;
+        }
+
+        /// <summary>
+        /// Create a New Invoice The invoicing product enables you to bill any customer with an email address and accept digital payments securely from any connected device. You can either use the system generated email or use the invoice payment link in your own communication. You can add discounts and taxes for the entire invoice or for each line item. To customize the invoice to match your brand see [Invoice Settings](https://developer.cybersource.com/api-reference-assets/index.html#invoicing_invoice-settings_update-invoice-settings). The invoice payment page uses Unified Checkout to process the payments.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
@@ -421,13 +442,15 @@ namespace CyberSource.Api
         public InvoicingV2InvoicesPost201Response CreateInvoice (CreateInvoiceRequest createInvoiceRequest)
         {
             logger.Debug("CALLING API \"CreateInvoice\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesPost201Response> localVarResponse = CreateInvoiceWithHttpInfo(createInvoiceRequest);
             logger.Debug("CALLING API \"CreateInvoice\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Create a New Invoice Create a new invoice.
+        /// Create a New Invoice The invoicing product enables you to bill any customer with an email address and accept digital payments securely from any connected device. You can either use the system generated email or use the invoice payment link in your own communication. You can add discounts and taxes for the entire invoice or for each line item. To customize the invoice to match your brand see [Invoice Settings](https://developer.cybersource.com/api-reference-assets/index.html#invoicing_invoice-settings_update-invoice-settings). The invoice payment page uses Unified Checkout to process the payments.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
@@ -459,7 +482,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -469,6 +495,8 @@ namespace CyberSource.Api
 
             if (createInvoiceRequest != null && createInvoiceRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                createInvoiceRequest = (CreateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(createInvoiceRequest, createInvoiceRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(createInvoiceRequest); // http body (model) parameter
             }
             else
@@ -487,8 +515,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -509,7 +537,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Create a New Invoice Create a new invoice.
+        /// Create a New Invoice The invoicing product enables you to bill any customer with an email address and accept digital payments securely from any connected device. You can either use the system generated email or use the invoice payment link in your own communication. You can add discounts and taxes for the entire invoice or for each line item. To customize the invoice to match your brand see [Invoice Settings](https://developer.cybersource.com/api-reference-assets/index.html#invoicing_invoice-settings_update-invoice-settings). The invoice payment page uses Unified Checkout to process the payments.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
@@ -517,14 +545,16 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<InvoicingV2InvoicesPost201Response> CreateInvoiceAsync (CreateInvoiceRequest createInvoiceRequest)
         {
             logger.Debug("CALLING API \"CreateInvoiceAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesPost201Response> localVarResponse = await CreateInvoiceAsyncWithHttpInfo(createInvoiceRequest);
             logger.Debug("CALLING API \"CreateInvoiceAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Create a New Invoice Create a new invoice.
+        /// Create a New Invoice The invoicing product enables you to bill any customer with an email address and accept digital payments securely from any connected device. You can either use the system generated email or use the invoice payment link in your own communication. You can add discounts and taxes for the entire invoice or for each line item. To customize the invoice to match your brand see [Invoice Settings](https://developer.cybersource.com/api-reference-assets/index.html#invoicing_invoice-settings_update-invoice-settings). The invoice payment page uses Unified Checkout to process the payments.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
@@ -556,7 +586,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -566,6 +599,8 @@ namespace CyberSource.Api
 
             if (createInvoiceRequest != null && createInvoiceRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                createInvoiceRequest = (CreateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(createInvoiceRequest, createInvoiceRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(createInvoiceRequest); // http body (model) parameter
             }
             else
@@ -584,8 +619,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -605,7 +640,7 @@ namespace CyberSource.Api
                 (InvoicingV2InvoicesPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPost201Response))); // Return statement
         }
         /// <summary>
-        /// Get a List of Invoices Get a list of invoices.
+        /// Get a List of Invoices Provides a (filtered) list of invoices that have been created in your account. You can filter the list based on Invoice Status by setting the status query parameter to one of DRAFT, CREATED, SENT, PARTIAL, PAID or CANCELED.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">Page offset number.</param>
@@ -615,13 +650,15 @@ namespace CyberSource.Api
         public InvoicingV2InvoicesAllGet200Response GetAllInvoices (int? offset, int? limit, string status = null)
         {
             logger.Debug("CALLING API \"GetAllInvoices\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesAllGet200Response> localVarResponse = GetAllInvoicesWithHttpInfo(offset, limit, status);
             logger.Debug("CALLING API \"GetAllInvoices\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get a List of Invoices Get a list of invoices.
+        /// Get a List of Invoices Provides a (filtered) list of invoices that have been created in your account. You can filter the list based on Invoice Status by setting the status query parameter to one of DRAFT, CREATED, SENT, PARTIAL, PAID or CANCELED.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">Page offset number.</param>
@@ -661,7 +698,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -684,7 +724,7 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -695,8 +735,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -717,7 +757,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Get a List of Invoices Get a list of invoices.
+        /// Get a List of Invoices Provides a (filtered) list of invoices that have been created in your account. You can filter the list based on Invoice Status by setting the status query parameter to one of DRAFT, CREATED, SENT, PARTIAL, PAID or CANCELED.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">Page offset number.</param>
@@ -727,14 +767,16 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<InvoicingV2InvoicesAllGet200Response> GetAllInvoicesAsync (int? offset, int? limit, string status = null)
         {
             logger.Debug("CALLING API \"GetAllInvoicesAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesAllGet200Response> localVarResponse = await GetAllInvoicesAsyncWithHttpInfo(offset, limit, status);
             logger.Debug("CALLING API \"GetAllInvoicesAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Get a List of Invoices Get a list of invoices.
+        /// Get a List of Invoices Provides a (filtered) list of invoices that have been created in your account. You can filter the list based on Invoice Status by setting the status query parameter to one of DRAFT, CREATED, SENT, PARTIAL, PAID or CANCELED.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="offset">Page offset number.</param>
@@ -774,7 +816,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -797,7 +842,7 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -808,8 +853,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -829,7 +874,7 @@ namespace CyberSource.Api
                 (InvoicingV2InvoicesAllGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesAllGet200Response))); // Return statement
         }
         /// <summary>
-        /// Get Invoice Details Get the details of a specific invoice.
+        /// Get Invoice Details You can retrieve details of a specific invoice. This can be used to check the Invoice status and get a list of invoice payments in the invoice history section of the response. For each payment transaction you can use the Transaction Details API to get more details on the payment transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -837,13 +882,15 @@ namespace CyberSource.Api
         public InvoicingV2InvoicesGet200Response GetInvoice (string id)
         {
             logger.Debug("CALLING API \"GetInvoice\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesGet200Response> localVarResponse = GetInvoiceWithHttpInfo(id);
             logger.Debug("CALLING API \"GetInvoice\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get Invoice Details Get the details of a specific invoice.
+        /// Get Invoice Details You can retrieve details of a specific invoice. This can be used to check the Invoice status and get a list of invoice payments in the invoice history section of the response. For each payment transaction you can use the Transaction Details API to get more details on the payment transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -875,7 +922,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -888,7 +938,7 @@ namespace CyberSource.Api
                 localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -899,8 +949,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -921,7 +971,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Get Invoice Details Get the details of a specific invoice.
+        /// Get Invoice Details You can retrieve details of a specific invoice. This can be used to check the Invoice status and get a list of invoice payments in the invoice history section of the response. For each payment transaction you can use the Transaction Details API to get more details on the payment transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -929,14 +979,16 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<InvoicingV2InvoicesGet200Response> GetInvoiceAsync (string id)
         {
             logger.Debug("CALLING API \"GetInvoiceAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesGet200Response> localVarResponse = await GetInvoiceAsyncWithHttpInfo(id);
             logger.Debug("CALLING API \"GetInvoiceAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Get Invoice Details Get the details of a specific invoice.
+        /// Get Invoice Details You can retrieve details of a specific invoice. This can be used to check the Invoice status and get a list of invoice payments in the invoice history section of the response. For each payment transaction you can use the Transaction Details API to get more details on the payment transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -968,7 +1020,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -981,7 +1036,7 @@ namespace CyberSource.Api
                 localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -992,8 +1047,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -1013,7 +1068,7 @@ namespace CyberSource.Api
                 (InvoicingV2InvoicesGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesGet200Response))); // Return statement
         }
         /// <summary>
-        /// Cancel an Invoice Cancel an invoice.
+        /// Cancel an Invoice You can cancel an invoice if no payment is made to it. You cannot cancel partially or fully paid invoices.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1021,13 +1076,15 @@ namespace CyberSource.Api
         public InvoicingV2InvoicesPost201Response PerformCancelAction (string id)
         {
             logger.Debug("CALLING API \"PerformCancelAction\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesPost201Response> localVarResponse = PerformCancelActionWithHttpInfo(id);
             logger.Debug("CALLING API \"PerformCancelAction\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Cancel an Invoice Cancel an invoice.
+        /// Cancel an Invoice You can cancel an invoice if no payment is made to it. You cannot cancel partially or fully paid invoices.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1059,7 +1116,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1072,7 +1132,7 @@ namespace CyberSource.Api
                 localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
-            if (Method.POST == Method.POST)
+            if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -1083,8 +1143,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1105,7 +1165,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Cancel an Invoice Cancel an invoice.
+        /// Cancel an Invoice You can cancel an invoice if no payment is made to it. You cannot cancel partially or fully paid invoices.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1113,14 +1173,16 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<InvoicingV2InvoicesPost201Response> PerformCancelActionAsync (string id)
         {
             logger.Debug("CALLING API \"PerformCancelActionAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesPost201Response> localVarResponse = await PerformCancelActionAsyncWithHttpInfo(id);
             logger.Debug("CALLING API \"PerformCancelActionAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Cancel an Invoice Cancel an invoice.
+        /// Cancel an Invoice You can cancel an invoice if no payment is made to it. You cannot cancel partially or fully paid invoices.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1152,7 +1214,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1165,7 +1230,7 @@ namespace CyberSource.Api
                 localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
-            if (Method.POST == Method.POST)
+            if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -1176,8 +1241,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -1197,7 +1262,7 @@ namespace CyberSource.Api
                 (InvoicingV2InvoicesPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPost201Response))); // Return statement
         }
         /// <summary>
-        /// Send an Invoice Send an invoice.
+        /// Send an Invoice You can send an invoice in draft or created state or resend a sent or partially paid invoice. Fully paid or canceled invoices cannot be resent.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1205,13 +1270,15 @@ namespace CyberSource.Api
         public InvoicingV2InvoicesPost201Response PerformSendAction (string id)
         {
             logger.Debug("CALLING API \"PerformSendAction\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesPost201Response> localVarResponse = PerformSendActionWithHttpInfo(id);
             logger.Debug("CALLING API \"PerformSendAction\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Send an Invoice Send an invoice.
+        /// Send an Invoice You can send an invoice in draft or created state or resend a sent or partially paid invoice. Fully paid or canceled invoices cannot be resent.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1243,7 +1310,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1256,7 +1326,7 @@ namespace CyberSource.Api
                 localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
-            if (Method.POST == Method.POST)
+            if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -1267,8 +1337,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1289,7 +1359,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Send an Invoice Send an invoice.
+        /// Send an Invoice You can send an invoice in draft or created state or resend a sent or partially paid invoice. Fully paid or canceled invoices cannot be resent.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1297,14 +1367,16 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<InvoicingV2InvoicesPost201Response> PerformSendActionAsync (string id)
         {
             logger.Debug("CALLING API \"PerformSendActionAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesPost201Response> localVarResponse = await PerformSendActionAsyncWithHttpInfo(id);
             logger.Debug("CALLING API \"PerformSendActionAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Send an Invoice Send an invoice.
+        /// Send an Invoice You can send an invoice in draft or created state or resend a sent or partially paid invoice. Fully paid or canceled invoices cannot be resent.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1336,7 +1408,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1349,7 +1424,7 @@ namespace CyberSource.Api
                 localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
-            if (Method.POST == Method.POST)
+            if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -1360,8 +1435,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -1381,7 +1456,7 @@ namespace CyberSource.Api
                 (InvoicingV2InvoicesPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPost201Response))); // Return statement
         }
         /// <summary>
-        /// Update an Invoice Update an invoice.
+        /// Update an Invoice You can update all information except the invoice number till any payment is received for an invoice. Invoices that are partially or fully paid or cancelled cannot be updated.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1390,13 +1465,15 @@ namespace CyberSource.Api
         public InvoicingV2InvoicesPost201Response UpdateInvoice (string id, UpdateInvoiceRequest updateInvoiceRequest)
         {
             logger.Debug("CALLING API \"UpdateInvoice\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesPost201Response> localVarResponse = UpdateInvoiceWithHttpInfo(id, updateInvoiceRequest);
             logger.Debug("CALLING API \"UpdateInvoice\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Update an Invoice Update an invoice.
+        /// Update an Invoice You can update all information except the invoice number till any payment is received for an invoice. Invoices that are partially or fully paid or cancelled cannot be updated.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1435,7 +1512,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1450,6 +1530,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (updateInvoiceRequest != null && updateInvoiceRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                updateInvoiceRequest = (UpdateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(updateInvoiceRequest, updateInvoiceRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(updateInvoiceRequest); // http body (model) parameter
             }
             else
@@ -1468,8 +1550,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1490,7 +1572,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Update an Invoice Update an invoice.
+        /// Update an Invoice You can update all information except the invoice number till any payment is received for an invoice. Invoices that are partially or fully paid or cancelled cannot be updated.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1499,14 +1581,16 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<InvoicingV2InvoicesPost201Response> UpdateInvoiceAsync (string id, UpdateInvoiceRequest updateInvoiceRequest)
         {
             logger.Debug("CALLING API \"UpdateInvoiceAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<InvoicingV2InvoicesPost201Response> localVarResponse = await UpdateInvoiceAsyncWithHttpInfo(id, updateInvoiceRequest);
             logger.Debug("CALLING API \"UpdateInvoiceAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Update an Invoice Update an invoice.
+        /// Update an Invoice You can update all information except the invoice number till any payment is received for an invoice. Invoices that are partially or fully paid or cancelled cannot be updated.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
@@ -1545,7 +1629,10 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/json;charset=utf-8"
+                "application/json",
+                "application/hal+json",
+                "application/json;charset=utf-8",
+                "application/hal+json;charset=utf-8"
             };
             string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1560,6 +1647,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             if (updateInvoiceRequest != null && updateInvoiceRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                updateInvoiceRequest = (UpdateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(updateInvoiceRequest, updateInvoiceRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(updateInvoiceRequest); // http body (model) parameter
             }
             else
@@ -1578,8 +1667,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;

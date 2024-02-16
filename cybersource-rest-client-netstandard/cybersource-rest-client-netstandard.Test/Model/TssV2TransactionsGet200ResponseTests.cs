@@ -105,6 +105,14 @@ namespace CyberSource.Test
             // TODO unit test for the property 'SubmitTimeUTC'
         }
         /// <summary>
+        /// Test the property 'Status'
+        /// </summary>
+        [Test]
+        public void StatusTest()
+        {
+            // TODO unit test for the property 'Status'
+        }
+        /// <summary>
         /// Test the property 'ApplicationInformation'
         /// </summary>
         [Test]
@@ -215,6 +223,14 @@ namespace CyberSource.Test
         public void PaymentInsightsInformationTest()
         {
             // TODO unit test for the property 'PaymentInsightsInformation'
+        }
+        /// <summary>
+        /// Test the property 'PayoutOptions'
+        /// </summary>
+        [Test]
+        public void PayoutOptionsTest()
+        {
+            // TODO unit test for the property 'PayoutOptions'
         }
         /// <summary>
         /// Test the property 'ProcessingInformation'

@@ -145,6 +145,14 @@ namespace CyberSource.Test
             // TODO unit test for the property 'ForwardedAcquirerCode'
         }
         /// <summary>
+        /// Test the property 'SettlementDate'
+        /// </summary>
+        [Test]
+        public void SettlementDateTest()
+        {
+            // TODO unit test for the property 'SettlementDate'
+        }
+        /// <summary>
         /// Test the property 'Avs'
         /// </summary>
         [Test]
@@ -303,6 +311,22 @@ namespace CyberSource.Test
         public void CompleteUrlTest()
         {
             // TODO unit test for the property 'CompleteUrl'
+        }
+        /// <summary>
+        /// Test the property 'Signature'
+        /// </summary>
+        [Test]
+        public void SignatureTest()
+        {
+            // TODO unit test for the property 'Signature'
+        }
+        /// <summary>
+        /// Test the property 'PublicKey'
+        /// </summary>
+        [Test]
+        public void PublicKeyTest()
+        {
+            // TODO unit test for the property 'PublicKey'
         }
 
     }

@@ -14,9 +14,11 @@ Name | Type | Description | Notes
 **TravelInformation** | [**Riskv1decisionsTravelInformation**](Riskv1decisionsTravelInformation.md) |  | [optional] 
 **MerchantDefinedInformation** | [**List&lt;Riskv1decisionsMerchantDefinedInformation&gt;**](Riskv1decisionsMerchantDefinedInformation.md) |  | [optional] 
 **MerchantInformation** | [**Riskv1decisionsMerchantInformation**](Riskv1decisionsMerchantInformation.md) |  | [optional] 
-**AcquirerInformation** | [**Ptsv2paymentsAcquirerInformation**](Ptsv2paymentsAcquirerInformation.md) |  | [optional] 
+**AcquirerInformation** | [**Riskv1decisionsAcquirerInformation**](Riskv1decisionsAcquirerInformation.md) |  | [optional] 
 **RecurringPaymentInformation** | [**Ptsv2paymentsRecurringPaymentInformation**](Ptsv2paymentsRecurringPaymentInformation.md) |  | [optional] 
 **ConsumerAuthenticationInformation** | [**Riskv1decisionsConsumerAuthenticationInformation**](Riskv1decisionsConsumerAuthenticationInformation.md) |  | [optional] 
+**WatchlistScreeningInformation** | [**Ptsv2paymentsWatchlistScreeningInformation**](Ptsv2paymentsWatchlistScreeningInformation.md) |  | [optional] 
+**TokenInformation** | [**Riskv1decisionsTokenInformation**](Riskv1decisionsTokenInformation.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

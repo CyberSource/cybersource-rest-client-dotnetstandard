@@ -35,9 +35,9 @@ namespace CyberSource.Model
         /// </summary>
         /// <param name="MerchantDescriptor">MerchantDescriptor.</param>
         /// <param name="DomainName">This field will contain either the merchant url or the reverse domain as per the requirement for DSRP Format 3. This might vary transaction to transaction and might not be static. Merchant needs to have access to send this value for all DSRP program. .</param>
-        /// <param name="SalesOrganizationId">Company ID assigned to an independent sales organization. Get this value from Mastercard.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 106-116 - Field: Mastercard Independent Sales Organization ID  **Note** The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant’s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies.  For processor-specific information, see the &#x60;sales_organization_ID&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html) .</param>
-        /// <param name="CategoryCode">The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company’s cards. When you do not include this field in your request, CyberSource uses the value in your CyberSource account.  For processor-specific information, see the &#x60;merchant_category_code&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html)  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR4 - Position: 150-153 - Field: Merchant Category Code .</param>
-        /// <param name="CategoryCodeDomestic">Merchant category code for domestic transactions. The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company’s cards. Including this field in a request for a domestic transaction might reduce interchange fees.  When you include this field in a request: - Do not include the &#x60;merchant_category_code&#x60; field. - The value for this field overrides the value in your CyberSource account.  This field is supported only for: - Domestic transactions with Mastercard in Spain. Domestic means that you and the cardholder are in the same country. - Merchants enrolled in the OmniPay Direct interchange program. - First Data Merchant Solutions (Europe) on OmniPay Direct. .</param>
+        /// <param name="SalesOrganizationId">Company ID assigned to an independent sales organization. Get this value from Mastercard.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 106-116 - Field: Mastercard Independent Sales Organization ID  **Note** The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies.  For processor-specific information, see the &#x60;sales_organization_ID&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html) .</param>
+        /// <param name="CategoryCode">The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. When you do not include this field in your request, CyberSource uses the value in your CyberSource account.  For processor-specific information, see the &#x60;merchant_category_code&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html)  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR4 - Position: 150-153 - Field: Merchant Category Code .</param>
+        /// <param name="CategoryCodeDomestic">Merchant category code for domestic transactions. The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. Including this field in a request for a domestic transaction might reduce interchange fees.  When you include this field in a request: - Do not include the &#x60;merchant_category_code&#x60; field. - The value for this field overrides the value in your CyberSource account.  This field is supported only for: - Domestic transactions with Mastercard in Spain. Domestic means that you and the cardholder are in the same country. - Merchants enrolled in the OmniPay Direct interchange program. - First Data Merchant Solutions (Europe) on OmniPay Direct. .</param>
         /// <param name="TaxId">Your Cadastro Nacional da Pessoa Jurídica (CNPJ) number.  This field is supported only for BNDES transactions on CyberSource through VisaNet.  The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP07 TCR6 - Position: 40-59 - Field: BNDES Reference Field 1  For details, see &#x60;bill_merchant_tax_id&#x60; field description in the [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/) .</param>
         /// <param name="VatRegistrationNumber">Your government-assigned tax identification number.  #### Tax Calculation Required field for value added tax only. Not applicable to U.S. and Canadian taxes.  #### CyberSource through VisaNet For CtV processors, the maximum length is 20.  For other processor-specific information, see the &#x60;merchant_vat_registration_number&#x60; field description in [Level II and Level III Processing Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/Level_2_3_SCMP_API/html) .</param>
         /// <param name="CardAcceptorReferenceNumber">Reference number that facilitates card acceptor/corporation communication and record keeping.  For processor-specific information, see the &#x60;card_acceptor_ref_number&#x60; field description in [Level II and Level III Processing Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/Level_2_3_SCMP_API/html) .</param>
@@ -46,8 +46,11 @@ namespace CyberSource.Model
         /// <param name="CancelUrl">customer would be redirected to this url based on the decision of the transaction.</param>
         /// <param name="SuccessUrl">customer would be redirected to this url based on the decision of the transaction.</param>
         /// <param name="FailureUrl">customer would be redirected to this url based on the decision of the transaction.</param>
-        /// <param name="MerchantName">Use this field only if you are requesting payment with Payer Authentication serice together.  Your company’s name as you want it to appear to the customer in the issuing bank’s authentication form. This value overrides the value specified by your merchant bank. .</param>
-        public Ptsv2paymentsMerchantInformation(Ptsv2paymentsMerchantInformationMerchantDescriptor MerchantDescriptor = default(Ptsv2paymentsMerchantInformationMerchantDescriptor), string DomainName = default(string), string SalesOrganizationId = default(string), int? CategoryCode = default(int?), int? CategoryCodeDomestic = default(int?), string TaxId = default(string), string VatRegistrationNumber = default(string), string CardAcceptorReferenceNumber = default(string), string TransactionLocalDateTime = default(string), Ptsv2paymentsMerchantInformationServiceFeeDescriptor ServiceFeeDescriptor = default(Ptsv2paymentsMerchantInformationServiceFeeDescriptor), string CancelUrl = default(string), string SuccessUrl = default(string), string FailureUrl = default(string), string MerchantName = default(string))
+        /// <param name="ReturnUrl">URL for displaying payment results to the consumer (notifications) after the transaction is processed. Usually this URL belongs to merchant and its behavior is defined by merchant .</param>
+        /// <param name="PartnerIdCode">#### Visa Platform Connect This field may be used for transactions on accounts issued under co-branding agreements when one of the co-branding partners. .</param>
+        /// <param name="ServiceLocation">ServiceLocation.</param>
+        /// <param name="MerchantName">Use this field only if you are requesting payment with Payer Authentication service together.  Your company&#39;s name as you want it to appear to the customer in the issuing bank&#39;s authentication form. This value overrides the value specified by your merchant bank. .</param>
+        public Ptsv2paymentsMerchantInformation(Ptsv2paymentsMerchantInformationMerchantDescriptor MerchantDescriptor = default(Ptsv2paymentsMerchantInformationMerchantDescriptor), string DomainName = default(string), string SalesOrganizationId = default(string), int? CategoryCode = default(int?), int? CategoryCodeDomestic = default(int?), string TaxId = default(string), string VatRegistrationNumber = default(string), string CardAcceptorReferenceNumber = default(string), string TransactionLocalDateTime = default(string), Ptsv2paymentsMerchantInformationServiceFeeDescriptor ServiceFeeDescriptor = default(Ptsv2paymentsMerchantInformationServiceFeeDescriptor), string CancelUrl = default(string), string SuccessUrl = default(string), string FailureUrl = default(string), string ReturnUrl = default(string), string PartnerIdCode = default(string), Ptsv2paymentsMerchantInformationServiceLocation ServiceLocation = default(Ptsv2paymentsMerchantInformationServiceLocation), string MerchantName = default(string))
         {
             this.MerchantDescriptor = MerchantDescriptor;
             this.DomainName = DomainName;
@@ -62,6 +65,9 @@ namespace CyberSource.Model
             this.CancelUrl = CancelUrl;
             this.SuccessUrl = SuccessUrl;
             this.FailureUrl = FailureUrl;
+            this.ReturnUrl = ReturnUrl;
+            this.PartnerIdCode = PartnerIdCode;
+            this.ServiceLocation = ServiceLocation;
             this.MerchantName = MerchantName;
         }
         
@@ -79,23 +85,23 @@ namespace CyberSource.Model
         public string DomainName { get; set; }
 
         /// <summary>
-        /// Company ID assigned to an independent sales organization. Get this value from Mastercard.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 106-116 - Field: Mastercard Independent Sales Organization ID  **Note** The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant’s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies.  For processor-specific information, see the &#x60;sales_organization_ID&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html) 
+        /// Company ID assigned to an independent sales organization. Get this value from Mastercard.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 106-116 - Field: Mastercard Independent Sales Organization ID  **Note** The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies.  For processor-specific information, see the &#x60;sales_organization_ID&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html) 
         /// </summary>
-        /// <value>Company ID assigned to an independent sales organization. Get this value from Mastercard.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 106-116 - Field: Mastercard Independent Sales Organization ID  **Note** The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant’s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies.  For processor-specific information, see the &#x60;sales_organization_ID&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html) </value>
+        /// <value>Company ID assigned to an independent sales organization. Get this value from Mastercard.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 106-116 - Field: Mastercard Independent Sales Organization ID  **Note** The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies.  For processor-specific information, see the &#x60;sales_organization_ID&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html) </value>
         [DataMember(Name="salesOrganizationId", EmitDefaultValue=false)]
         public string SalesOrganizationId { get; set; }
 
         /// <summary>
-        /// The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company’s cards. When you do not include this field in your request, CyberSource uses the value in your CyberSource account.  For processor-specific information, see the &#x60;merchant_category_code&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html)  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR4 - Position: 150-153 - Field: Merchant Category Code 
+        /// The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. When you do not include this field in your request, CyberSource uses the value in your CyberSource account.  For processor-specific information, see the &#x60;merchant_category_code&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html)  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR4 - Position: 150-153 - Field: Merchant Category Code 
         /// </summary>
-        /// <value>The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company’s cards. When you do not include this field in your request, CyberSource uses the value in your CyberSource account.  For processor-specific information, see the &#x60;merchant_category_code&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html)  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR4 - Position: 150-153 - Field: Merchant Category Code </value>
+        /// <value>The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. When you do not include this field in your request, CyberSource uses the value in your CyberSource account.  For processor-specific information, see the &#x60;merchant_category_code&#x60; field description in [Credit Card Services Using the SCMP API.](http://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html)  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR4 - Position: 150-153 - Field: Merchant Category Code </value>
         [DataMember(Name="categoryCode", EmitDefaultValue=false)]
         public int? CategoryCode { get; set; }
 
         /// <summary>
-        /// Merchant category code for domestic transactions. The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company’s cards. Including this field in a request for a domestic transaction might reduce interchange fees.  When you include this field in a request: - Do not include the &#x60;merchant_category_code&#x60; field. - The value for this field overrides the value in your CyberSource account.  This field is supported only for: - Domestic transactions with Mastercard in Spain. Domestic means that you and the cardholder are in the same country. - Merchants enrolled in the OmniPay Direct interchange program. - First Data Merchant Solutions (Europe) on OmniPay Direct. 
+        /// Merchant category code for domestic transactions. The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. Including this field in a request for a domestic transaction might reduce interchange fees.  When you include this field in a request: - Do not include the &#x60;merchant_category_code&#x60; field. - The value for this field overrides the value in your CyberSource account.  This field is supported only for: - Domestic transactions with Mastercard in Spain. Domestic means that you and the cardholder are in the same country. - Merchants enrolled in the OmniPay Direct interchange program. - First Data Merchant Solutions (Europe) on OmniPay Direct. 
         /// </summary>
-        /// <value>Merchant category code for domestic transactions. The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company’s cards. Including this field in a request for a domestic transaction might reduce interchange fees.  When you include this field in a request: - Do not include the &#x60;merchant_category_code&#x60; field. - The value for this field overrides the value in your CyberSource account.  This field is supported only for: - Domestic transactions with Mastercard in Spain. Domestic means that you and the cardholder are in the same country. - Merchants enrolled in the OmniPay Direct interchange program. - First Data Merchant Solutions (Europe) on OmniPay Direct. </value>
+        /// <value>Merchant category code for domestic transactions. The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. Including this field in a request for a domestic transaction might reduce interchange fees.  When you include this field in a request: - Do not include the &#x60;merchant_category_code&#x60; field. - The value for this field overrides the value in your CyberSource account.  This field is supported only for: - Domestic transactions with Mastercard in Spain. Domestic means that you and the cardholder are in the same country. - Merchants enrolled in the OmniPay Direct interchange program. - First Data Merchant Solutions (Europe) on OmniPay Direct. </value>
         [DataMember(Name="categoryCodeDomestic", EmitDefaultValue=false)]
         public int? CategoryCodeDomestic { get; set; }
 
@@ -155,9 +161,29 @@ namespace CyberSource.Model
         public string FailureUrl { get; set; }
 
         /// <summary>
-        /// Use this field only if you are requesting payment with Payer Authentication serice together.  Your company’s name as you want it to appear to the customer in the issuing bank’s authentication form. This value overrides the value specified by your merchant bank. 
+        /// URL for displaying payment results to the consumer (notifications) after the transaction is processed. Usually this URL belongs to merchant and its behavior is defined by merchant 
         /// </summary>
-        /// <value>Use this field only if you are requesting payment with Payer Authentication serice together.  Your company’s name as you want it to appear to the customer in the issuing bank’s authentication form. This value overrides the value specified by your merchant bank. </value>
+        /// <value>URL for displaying payment results to the consumer (notifications) after the transaction is processed. Usually this URL belongs to merchant and its behavior is defined by merchant </value>
+        [DataMember(Name="returnUrl", EmitDefaultValue=false)]
+        public string ReturnUrl { get; set; }
+
+        /// <summary>
+        /// #### Visa Platform Connect This field may be used for transactions on accounts issued under co-branding agreements when one of the co-branding partners. 
+        /// </summary>
+        /// <value>#### Visa Platform Connect This field may be used for transactions on accounts issued under co-branding agreements when one of the co-branding partners. </value>
+        [DataMember(Name="partnerIdCode", EmitDefaultValue=false)]
+        public string PartnerIdCode { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ServiceLocation
+        /// </summary>
+        [DataMember(Name="serviceLocation", EmitDefaultValue=false)]
+        public Ptsv2paymentsMerchantInformationServiceLocation ServiceLocation { get; set; }
+
+        /// <summary>
+        /// Use this field only if you are requesting payment with Payer Authentication service together.  Your company&#39;s name as you want it to appear to the customer in the issuing bank&#39;s authentication form. This value overrides the value specified by your merchant bank. 
+        /// </summary>
+        /// <value>Use this field only if you are requesting payment with Payer Authentication service together.  Your company&#39;s name as you want it to appear to the customer in the issuing bank&#39;s authentication form. This value overrides the value specified by your merchant bank. </value>
         [DataMember(Name="merchantName", EmitDefaultValue=false)]
         public string MerchantName { get; set; }
 
@@ -182,6 +208,9 @@ namespace CyberSource.Model
             sb.Append("  CancelUrl: ").Append(CancelUrl).Append("\n");
             sb.Append("  SuccessUrl: ").Append(SuccessUrl).Append("\n");
             sb.Append("  FailureUrl: ").Append(FailureUrl).Append("\n");
+            sb.Append("  ReturnUrl: ").Append(ReturnUrl).Append("\n");
+            sb.Append("  PartnerIdCode: ").Append(PartnerIdCode).Append("\n");
+            sb.Append("  ServiceLocation: ").Append(ServiceLocation).Append("\n");
             sb.Append("  MerchantName: ").Append(MerchantName).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -285,6 +314,21 @@ namespace CyberSource.Model
                     this.FailureUrl.Equals(other.FailureUrl)
                 ) && 
                 (
+                    this.ReturnUrl == other.ReturnUrl ||
+                    this.ReturnUrl != null &&
+                    this.ReturnUrl.Equals(other.ReturnUrl)
+                ) && 
+                (
+                    this.PartnerIdCode == other.PartnerIdCode ||
+                    this.PartnerIdCode != null &&
+                    this.PartnerIdCode.Equals(other.PartnerIdCode)
+                ) && 
+                (
+                    this.ServiceLocation == other.ServiceLocation ||
+                    this.ServiceLocation != null &&
+                    this.ServiceLocation.Equals(other.ServiceLocation)
+                ) && 
+                (
                     this.MerchantName == other.MerchantName ||
                     this.MerchantName != null &&
                     this.MerchantName.Equals(other.MerchantName)
@@ -328,6 +372,12 @@ namespace CyberSource.Model
                     hash = hash * 59 + this.SuccessUrl.GetHashCode();
                 if (this.FailureUrl != null)
                     hash = hash * 59 + this.FailureUrl.GetHashCode();
+                if (this.ReturnUrl != null)
+                    hash = hash * 59 + this.ReturnUrl.GetHashCode();
+                if (this.PartnerIdCode != null)
+                    hash = hash * 59 + this.PartnerIdCode.GetHashCode();
+                if (this.ServiceLocation != null)
+                    hash = hash * 59 + this.ServiceLocation.GetHashCode();
                 if (this.MerchantName != null)
                     hash = hash * 59 + this.MerchantName.GetHashCode();
                 return hash;

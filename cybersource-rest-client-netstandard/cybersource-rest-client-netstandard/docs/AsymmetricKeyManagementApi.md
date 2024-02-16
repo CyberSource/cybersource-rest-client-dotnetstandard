@@ -4,18 +4,19 @@ All URIs are relative to *https://apitest.cybersource.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateP12Keys**](AsymmetricKeyManagementApi.md#createp12keys) | **POST** /kms/v2/keys-asym | Create one or more PKCS#12 keys
-[**DeleteBulkP12Keys**](AsymmetricKeyManagementApi.md#deletebulkp12keys) | **POST** /kms/v2/keys-asym/deletes | Delete one or more PKCS#12 keys
-[**GetP12KeyDetails**](AsymmetricKeyManagementApi.md#getp12keydetails) | **GET** /kms/v2/keys-asym/{keyId} | Retrieves PKCS#12 key details
+[**CreateP12Keys**](AsymmetricKeyManagementApi.md#createp12keys) | **POST** /kms/v2/keys-asym | Create one or more PKCS12 keys
+[**DeleteBulkP12Keys**](AsymmetricKeyManagementApi.md#deletebulkp12keys) | **POST** /kms/v2/keys-asym/deletes | Delete one or more PKCS12 keys
+[**GetP12KeyDetails**](AsymmetricKeyManagementApi.md#getp12keydetails) | **GET** /kms/v2/keys-asym/{keyId} | Retrieves PKCS12 key details
+[**UpdateAsymKey**](AsymmetricKeyManagementApi.md#updateasymkey) | **PATCH** /kms/v2/keys-asym/{keyId} | Activate or De-activate Asymmetric Key
 
 
 <a name="createp12keys"></a>
 # **CreateP12Keys**
 > KmsV2KeysAsymPost201Response CreateP12Keys (CreateP12KeysRequest createP12KeysRequest)
 
-Create one or more PKCS#12 keys
+Create one or more PKCS12 keys
 
-'Create one or more PKCS#12 keys' 
+'Create one or more PKCS12 keys' 
 
 ### Example
 ```csharp
@@ -36,7 +37,7 @@ namespace Example
 
             try
             {
-                // Create one or more PKCS#12 keys
+                // Create one or more PKCS12 keys
                 KmsV2KeysAsymPost201Response result = apiInstance.CreateP12Keys(createP12KeysRequest);
                 Debug.WriteLine(result);
             }
@@ -74,9 +75,9 @@ No authorization required
 # **DeleteBulkP12Keys**
 > KmsV2KeysAsymDeletesPost200Response DeleteBulkP12Keys (DeleteBulkP12KeysRequest deleteBulkP12KeysRequest)
 
-Delete one or more PKCS#12 keys
+Delete one or more PKCS12 keys
 
-'Delete one or more PKCS#12 keys' 
+'Delete one or more PKCS12 keys' 
 
 ### Example
 ```csharp
@@ -97,7 +98,7 @@ namespace Example
 
             try
             {
-                // Delete one or more PKCS#12 keys
+                // Delete one or more PKCS12 keys
                 KmsV2KeysAsymDeletesPost200Response result = apiInstance.DeleteBulkP12Keys(deleteBulkP12KeysRequest);
                 Debug.WriteLine(result);
             }
@@ -135,7 +136,7 @@ No authorization required
 # **GetP12KeyDetails**
 > KmsV2KeysAsymGet200Response GetP12KeyDetails (string keyId)
 
-Retrieves PKCS#12 key details
+Retrieves PKCS12 key details
 
 Retrieves keys details by providing the key id.
 
@@ -158,7 +159,7 @@ namespace Example
 
             try
             {
-                // Retrieves PKCS#12 key details
+                // Retrieves PKCS12 key details
                 KmsV2KeysAsymGet200Response result = apiInstance.GetP12KeyDetails(keyId);
                 Debug.WriteLine(result);
             }
@@ -180,6 +181,69 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**KmsV2KeysAsymGet200Response**](KmsV2KeysAsymGet200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json;charset=utf-8
+ - **Accept**: application/hal+json;charset=utf-8
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="updateasymkey"></a>
+# **UpdateAsymKey**
+> Object UpdateAsymKey (string keyId, UpdateAsymKeysRequest updateAsymKeysRequest)
+
+Activate or De-activate Asymmetric Key
+
+Activate or De-activate Asymmetric Key 
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using CyberSource.Api;
+using CyberSource.Client;
+using CyberSource.Model;
+
+namespace Example
+{
+    public class UpdateAsymKeyExample
+    {
+        public void main()
+        {
+            var apiInstance = new AsymmetricKeyManagementApi();
+            var keyId = keyId_example;  // string | Key ID. 
+            var updateAsymKeysRequest = new UpdateAsymKeysRequest(); // UpdateAsymKeysRequest | 
+
+            try
+            {
+                // Activate or De-activate Asymmetric Key
+                Object result = apiInstance.UpdateAsymKey(keyId, updateAsymKeysRequest);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling AsymmetricKeyManagementApi.UpdateAsymKey: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **keyId** | **string**| Key ID.  | 
+ **updateAsymKeysRequest** | [**UpdateAsymKeysRequest**](UpdateAsymKeysRequest.md)|  | 
+
+### Return type
+
+**Object**
 
 ### Authorization
 

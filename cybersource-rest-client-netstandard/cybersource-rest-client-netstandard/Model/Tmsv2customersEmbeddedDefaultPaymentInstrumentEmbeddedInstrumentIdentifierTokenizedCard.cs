@@ -40,30 +40,51 @@ namespace CyberSource.Model
         }
         
         /// <summary>
-        /// The network token card association brand Valid values: - visa - mastercard 
+        /// The network token card association brand Possible Values: - visa - mastercard - americanexpress 
         /// </summary>
-        /// <value>The network token card association brand Valid values: - visa - mastercard </value>
+        /// <value>The network token card association brand Possible Values: - visa - mastercard - americanexpress </value>
         [DataMember(Name="type", EmitDefaultValue=false)]
         public string Type { get; private set; }
 
         /// <summary>
-        /// Issuers state for the network token Valid values: - ACTIVE - SUSPENDED : This state can change to ACTIVE or DELETED. - DELETED : This is a final state for the network token. 
+        /// State of the network token or network token provision Possible Values: - ACTIVE : Network token is active. - SUSPENDED : Network token is suspended. This state can change back to ACTIVE. - DELETED : This is a final state for a network token instance. - UNPROVISIONED : A previous network token provision was unsuccessful. 
         /// </summary>
-        /// <value>Issuers state for the network token Valid values: - ACTIVE - SUSPENDED : This state can change to ACTIVE or DELETED. - DELETED : This is a final state for the network token. </value>
+        /// <value>State of the network token or network token provision Possible Values: - ACTIVE : Network token is active. - SUSPENDED : Network token is suspended. This state can change back to ACTIVE. - DELETED : This is a final state for a network token instance. - UNPROVISIONED : A previous network token provision was unsuccessful. </value>
         [DataMember(Name="state", EmitDefaultValue=false)]
         public string State { get; private set; }
 
         /// <summary>
-        /// The token requestors customer’s payment network token 
+        /// Unique Identifier for the enrolled PAN. This Id is provided by the card association when a network token is provisioned successfully. 
         /// </summary>
-        /// <value>The token requestors customer’s payment network token </value>
+        /// <value>Unique Identifier for the enrolled PAN. This Id is provided by the card association when a network token is provisioned successfully. </value>
+        [DataMember(Name="enrollmentId", EmitDefaultValue=false)]
+        public string EnrollmentId { get; private set; }
+
+        /// <summary>
+        /// Unique Identifier for the network token. This Id is provided by the card association when a network token is provisioned successfully. 
+        /// </summary>
+        /// <value>Unique Identifier for the network token. This Id is provided by the card association when a network token is provisioned successfully. </value>
+        [DataMember(Name="tokenReferenceId", EmitDefaultValue=false)]
+        public string TokenReferenceId { get; private set; }
+
+        /// <summary>
+        /// Issuers state for the network token Possible Values: - INVALID_REQUEST : The network token provision request contained invalid data. - CARD_VERIFICATION_FAILED : The network token provision request contained data that could not be verified. - CARD_NOT_ELIGIBLE : Card can currently not be used with issuer for tokenization. - CARD_NOT_ALLOWED : Card can currently not be used with card association for tokenization. - DECLINED : Card can currently not be used with issuer for tokenization. - SERVICE_UNAVAILABLE : The network token service was unavailable or timed out. - SYSTEM_ERROR : An unexpected error occurred with network token service, check configuration. 
+        /// </summary>
+        /// <value>Issuers state for the network token Possible Values: - INVALID_REQUEST : The network token provision request contained invalid data. - CARD_VERIFICATION_FAILED : The network token provision request contained data that could not be verified. - CARD_NOT_ELIGIBLE : Card can currently not be used with issuer for tokenization. - CARD_NOT_ALLOWED : Card can currently not be used with card association for tokenization. - DECLINED : Card can currently not be used with issuer for tokenization. - SERVICE_UNAVAILABLE : The network token service was unavailable or timed out. - SYSTEM_ERROR : An unexpected error occurred with network token service, check configuration. </value>
+        [DataMember(Name="reason", EmitDefaultValue=false)]
+        public string Reason { get; private set; }
+
+        /// <summary>
+        /// The token requestors network token 
+        /// </summary>
+        /// <value>The token requestors network token </value>
         [DataMember(Name="number", EmitDefaultValue=false)]
         public string Number { get; private set; }
 
         /// <summary>
-        /// Two-digit month in which the network token expires.  Format: &#x60;MM&#x60;.  Valid values: &#x60;01&#x60; through &#x60;12&#x60;. 
+        /// Two-digit month in which the network token expires.  Format: &#x60;MM&#x60;.  Possible Values: &#x60;01&#x60; through &#x60;12&#x60;. 
         /// </summary>
-        /// <value>Two-digit month in which the network token expires.  Format: &#x60;MM&#x60;.  Valid values: &#x60;01&#x60; through &#x60;12&#x60;. </value>
+        /// <value>Two-digit month in which the network token expires.  Format: &#x60;MM&#x60;.  Possible Values: &#x60;01&#x60; through &#x60;12&#x60;. </value>
         [DataMember(Name="expirationMonth", EmitDefaultValue=false)]
         public string ExpirationMonth { get; private set; }
 
@@ -97,6 +118,9 @@ namespace CyberSource.Model
             sb.Append("class Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierTokenizedCard {\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  State: ").Append(State).Append("\n");
+            sb.Append("  EnrollmentId: ").Append(EnrollmentId).Append("\n");
+            sb.Append("  TokenReferenceId: ").Append(TokenReferenceId).Append("\n");
+            sb.Append("  Reason: ").Append(Reason).Append("\n");
             sb.Append("  Number: ").Append(Number).Append("\n");
             sb.Append("  ExpirationMonth: ").Append(ExpirationMonth).Append("\n");
             sb.Append("  ExpirationYear: ").Append(ExpirationYear).Append("\n");
@@ -149,6 +173,21 @@ namespace CyberSource.Model
                     this.State.Equals(other.State)
                 ) && 
                 (
+                    this.EnrollmentId == other.EnrollmentId ||
+                    this.EnrollmentId != null &&
+                    this.EnrollmentId.Equals(other.EnrollmentId)
+                ) && 
+                (
+                    this.TokenReferenceId == other.TokenReferenceId ||
+                    this.TokenReferenceId != null &&
+                    this.TokenReferenceId.Equals(other.TokenReferenceId)
+                ) && 
+                (
+                    this.Reason == other.Reason ||
+                    this.Reason != null &&
+                    this.Reason.Equals(other.Reason)
+                ) && 
+                (
                     this.Number == other.Number ||
                     this.Number != null &&
                     this.Number.Equals(other.Number)
@@ -190,6 +229,12 @@ namespace CyberSource.Model
                     hash = hash * 59 + this.Type.GetHashCode();
                 if (this.State != null)
                     hash = hash * 59 + this.State.GetHashCode();
+                if (this.EnrollmentId != null)
+                    hash = hash * 59 + this.EnrollmentId.GetHashCode();
+                if (this.TokenReferenceId != null)
+                    hash = hash * 59 + this.TokenReferenceId.GetHashCode();
+                if (this.Reason != null)
+                    hash = hash * 59 + this.Reason.GetHashCode();
                 if (this.Number != null)
                     hash = hash * 59 + this.Number.GetHashCode();
                 if (this.ExpirationMonth != null)

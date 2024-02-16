@@ -65,6 +65,14 @@ namespace CyberSource.Test
         }
 
         /// <summary>
+        /// Test the property 'BinSource'
+        /// </summary>
+        [Test]
+        public void BinSourceTest()
+        {
+            // TODO unit test for the property 'BinSource'
+        }
+        /// <summary>
         /// Test the property 'IndustryDataType'
         /// </summary>
         [Test]
@@ -87,6 +95,14 @@ namespace CyberSource.Test
         public void CommerceIndicatorTest()
         {
             // TODO unit test for the property 'CommerceIndicator'
+        }
+        /// <summary>
+        /// Test the property 'CommerceIndicatorLabel'
+        /// </summary>
+        [Test]
+        public void CommerceIndicatorLabelTest()
+        {
+            // TODO unit test for the property 'CommerceIndicatorLabel'
         }
         /// <summary>
         /// Test the property 'BusinessApplicationId'

@@ -47,7 +47,9 @@ namespace CyberSource.Model
         /// <param name="AcquirerInformation">AcquirerInformation.</param>
         /// <param name="RecurringPaymentInformation">RecurringPaymentInformation.</param>
         /// <param name="ConsumerAuthenticationInformation">ConsumerAuthenticationInformation.</param>
-        public CreateBundledDecisionManagerCaseRequest(Riskv1decisionsClientReferenceInformation ClientReferenceInformation = default(Riskv1decisionsClientReferenceInformation), Riskv1decisionsProcessorInformation ProcessorInformation = default(Riskv1decisionsProcessorInformation), Riskv1decisionsProcessingInformation ProcessingInformation = default(Riskv1decisionsProcessingInformation), Riskv1decisionsPaymentInformation PaymentInformation = default(Riskv1decisionsPaymentInformation), Riskv1decisionsOrderInformation OrderInformation = default(Riskv1decisionsOrderInformation), Riskv1decisionsBuyerInformation BuyerInformation = default(Riskv1decisionsBuyerInformation), Riskv1decisionsDeviceInformation DeviceInformation = default(Riskv1decisionsDeviceInformation), Riskv1decisionsRiskInformation RiskInformation = default(Riskv1decisionsRiskInformation), Riskv1decisionsTravelInformation TravelInformation = default(Riskv1decisionsTravelInformation), List<Riskv1decisionsMerchantDefinedInformation> MerchantDefinedInformation = default(List<Riskv1decisionsMerchantDefinedInformation>), Riskv1decisionsMerchantInformation MerchantInformation = default(Riskv1decisionsMerchantInformation), Ptsv2paymentsAcquirerInformation AcquirerInformation = default(Ptsv2paymentsAcquirerInformation), Ptsv2paymentsRecurringPaymentInformation RecurringPaymentInformation = default(Ptsv2paymentsRecurringPaymentInformation), Riskv1decisionsConsumerAuthenticationInformation ConsumerAuthenticationInformation = default(Riskv1decisionsConsumerAuthenticationInformation))
+        /// <param name="WatchlistScreeningInformation">WatchlistScreeningInformation.</param>
+        /// <param name="TokenInformation">TokenInformation.</param>
+        public CreateBundledDecisionManagerCaseRequest(Riskv1decisionsClientReferenceInformation ClientReferenceInformation = default(Riskv1decisionsClientReferenceInformation), Riskv1decisionsProcessorInformation ProcessorInformation = default(Riskv1decisionsProcessorInformation), Riskv1decisionsProcessingInformation ProcessingInformation = default(Riskv1decisionsProcessingInformation), Riskv1decisionsPaymentInformation PaymentInformation = default(Riskv1decisionsPaymentInformation), Riskv1decisionsOrderInformation OrderInformation = default(Riskv1decisionsOrderInformation), Riskv1decisionsBuyerInformation BuyerInformation = default(Riskv1decisionsBuyerInformation), Riskv1decisionsDeviceInformation DeviceInformation = default(Riskv1decisionsDeviceInformation), Riskv1decisionsRiskInformation RiskInformation = default(Riskv1decisionsRiskInformation), Riskv1decisionsTravelInformation TravelInformation = default(Riskv1decisionsTravelInformation), List<Riskv1decisionsMerchantDefinedInformation> MerchantDefinedInformation = default(List<Riskv1decisionsMerchantDefinedInformation>), Riskv1decisionsMerchantInformation MerchantInformation = default(Riskv1decisionsMerchantInformation), Riskv1decisionsAcquirerInformation AcquirerInformation = default(Riskv1decisionsAcquirerInformation), Ptsv2paymentsRecurringPaymentInformation RecurringPaymentInformation = default(Ptsv2paymentsRecurringPaymentInformation), Riskv1decisionsConsumerAuthenticationInformation ConsumerAuthenticationInformation = default(Riskv1decisionsConsumerAuthenticationInformation), Ptsv2paymentsWatchlistScreeningInformation WatchlistScreeningInformation = default(Ptsv2paymentsWatchlistScreeningInformation), Riskv1decisionsTokenInformation TokenInformation = default(Riskv1decisionsTokenInformation))
         {
             this.ClientReferenceInformation = ClientReferenceInformation;
             this.ProcessorInformation = ProcessorInformation;
@@ -63,6 +65,8 @@ namespace CyberSource.Model
             this.AcquirerInformation = AcquirerInformation;
             this.RecurringPaymentInformation = RecurringPaymentInformation;
             this.ConsumerAuthenticationInformation = ConsumerAuthenticationInformation;
+            this.WatchlistScreeningInformation = WatchlistScreeningInformation;
+            this.TokenInformation = TokenInformation;
         }
         
         /// <summary>
@@ -135,7 +139,7 @@ namespace CyberSource.Model
         /// Gets or Sets AcquirerInformation
         /// </summary>
         [DataMember(Name="acquirerInformation", EmitDefaultValue=false)]
-        public Ptsv2paymentsAcquirerInformation AcquirerInformation { get; set; }
+        public Riskv1decisionsAcquirerInformation AcquirerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets RecurringPaymentInformation
@@ -148,6 +152,18 @@ namespace CyberSource.Model
         /// </summary>
         [DataMember(Name="consumerAuthenticationInformation", EmitDefaultValue=false)]
         public Riskv1decisionsConsumerAuthenticationInformation ConsumerAuthenticationInformation { get; set; }
+
+        /// <summary>
+        /// Gets or Sets WatchlistScreeningInformation
+        /// </summary>
+        [DataMember(Name="watchlistScreeningInformation", EmitDefaultValue=false)]
+        public Ptsv2paymentsWatchlistScreeningInformation WatchlistScreeningInformation { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TokenInformation
+        /// </summary>
+        [DataMember(Name="tokenInformation", EmitDefaultValue=false)]
+        public Riskv1decisionsTokenInformation TokenInformation { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -171,6 +187,8 @@ namespace CyberSource.Model
             sb.Append("  AcquirerInformation: ").Append(AcquirerInformation).Append("\n");
             sb.Append("  RecurringPaymentInformation: ").Append(RecurringPaymentInformation).Append("\n");
             sb.Append("  ConsumerAuthenticationInformation: ").Append(ConsumerAuthenticationInformation).Append("\n");
+            sb.Append("  WatchlistScreeningInformation: ").Append(WatchlistScreeningInformation).Append("\n");
+            sb.Append("  TokenInformation: ").Append(TokenInformation).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -276,6 +294,16 @@ namespace CyberSource.Model
                     this.ConsumerAuthenticationInformation == other.ConsumerAuthenticationInformation ||
                     this.ConsumerAuthenticationInformation != null &&
                     this.ConsumerAuthenticationInformation.Equals(other.ConsumerAuthenticationInformation)
+                ) && 
+                (
+                    this.WatchlistScreeningInformation == other.WatchlistScreeningInformation ||
+                    this.WatchlistScreeningInformation != null &&
+                    this.WatchlistScreeningInformation.Equals(other.WatchlistScreeningInformation)
+                ) && 
+                (
+                    this.TokenInformation == other.TokenInformation ||
+                    this.TokenInformation != null &&
+                    this.TokenInformation.Equals(other.TokenInformation)
                 );
         }
 
@@ -318,6 +346,10 @@ namespace CyberSource.Model
                     hash = hash * 59 + this.RecurringPaymentInformation.GetHashCode();
                 if (this.ConsumerAuthenticationInformation != null)
                     hash = hash * 59 + this.ConsumerAuthenticationInformation.GetHashCode();
+                if (this.WatchlistScreeningInformation != null)
+                    hash = hash * 59 + this.WatchlistScreeningInformation.GetHashCode();
+                if (this.TokenInformation != null)
+                    hash = hash * 59 + this.TokenInformation.GetHashCode();
                 return hash;
             }
         }

@@ -17,6 +17,7 @@ using CyberSource.Client;
 using CyberSource.Model;
 using NLog;
 using AuthenticationSdk.util;
+using CyberSource.Utilities.Tracking;
 
 namespace CyberSource.Api
 {
@@ -120,7 +121,7 @@ namespace CyberSource.Api
         /// Get Subscription for Report Name
         /// </summary>
         /// <remarks>
-        /// View the details of a report subscription, such as the report format or report frequency, using the report’s unique name. 
+        /// View the details of a report subscription, such as the report format or report frequency, using the report&#39;s unique name. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportName">Name of the Report to Retrieve</param>
@@ -132,7 +133,7 @@ namespace CyberSource.Api
         /// Get Subscription for Report Name
         /// </summary>
         /// <remarks>
-        /// View the details of a report subscription, such as the report format or report frequency, using the report’s unique name. 
+        /// View the details of a report subscription, such as the report format or report frequency, using the report&#39;s unique name. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportName">Name of the Report to Retrieve</param>
@@ -235,7 +236,7 @@ namespace CyberSource.Api
         /// Get Subscription for Report Name
         /// </summary>
         /// <remarks>
-        /// View the details of a report subscription, such as the report format or report frequency, using the report’s unique name. 
+        /// View the details of a report subscription, such as the report format or report frequency, using the report&#39;s unique name. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportName">Name of the Report to Retrieve</param>
@@ -247,7 +248,7 @@ namespace CyberSource.Api
         /// Get Subscription for Report Name
         /// </summary>
         /// <remarks>
-        /// View the details of a report subscription, such as the report format or report frequency, using the report’s unique name. 
+        /// View the details of a report subscription, such as the report format or report frequency, using the report&#39;s unique name. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportName">Name of the Report to Retrieve</param>
@@ -264,6 +265,7 @@ namespace CyberSource.Api
     {
         private static Logger logger;
         private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private int? _statusCode;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportSubscriptionsApi"/> class.
@@ -316,7 +318,7 @@ namespace CyberSource.Api
         /// <value>The base path</value>
         public string GetBasePath()
         {
-            return Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
         }
 
         /// <summary>
@@ -375,6 +377,25 @@ namespace CyberSource.Api
         }
 
         /// <summary>
+        /// Retrieves the status code being set for the most recently executed API request.
+        /// </summary>
+        /// <returns>Status Code of previous request</returns>
+        public int GetStatusCode()
+        {
+            return this._statusCode == null ? 0 : (int) this._statusCode;
+        }
+
+        /// <summary>
+        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
+        /// </summary>
+        /// <param name="statusCode">Status Code to be set</param>
+        /// <returns></returns>
+        public void SetStatusCode(int? statusCode)
+        {
+            this._statusCode = statusCode;
+        }
+
+        /// <summary>
         /// Create a Standard or Classic Subscription Create or update an already existing classic or standard subscription. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
@@ -384,6 +405,7 @@ namespace CyberSource.Api
         public void CreateStandardOrClassicSubscription (PredefinedSubscriptionRequestBean predefinedSubscriptionRequestBean, string organizationId = null)
         {
             logger.Debug("CALLING API \"CreateStandardOrClassicSubscription\" STARTED");
+            this.SetStatusCode(null);
             CreateStandardOrClassicSubscriptionWithHttpInfo(predefinedSubscriptionRequestBean, organizationId);
         }
 
@@ -436,6 +458,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             if (predefinedSubscriptionRequestBean != null && predefinedSubscriptionRequestBean.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                predefinedSubscriptionRequestBean = (PredefinedSubscriptionRequestBean)sdkTracker.InsertDeveloperIdTracker(predefinedSubscriptionRequestBean, predefinedSubscriptionRequestBean.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(predefinedSubscriptionRequestBean); // http body (model) parameter
             }
             else
@@ -454,8 +478,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -470,6 +494,7 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
@@ -485,6 +510,7 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task CreateStandardOrClassicSubscriptionAsync (PredefinedSubscriptionRequestBean predefinedSubscriptionRequestBean, string organizationId = null)
         {
             logger.Debug("CALLING API \"CreateStandardOrClassicSubscriptionAsync\" STARTED");
+            this.SetStatusCode(null);
             await CreateStandardOrClassicSubscriptionAsyncWithHttpInfo(predefinedSubscriptionRequestBean, organizationId);
 
         }
@@ -538,6 +564,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             if (predefinedSubscriptionRequestBean != null && predefinedSubscriptionRequestBean.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                predefinedSubscriptionRequestBean = (PredefinedSubscriptionRequestBean)sdkTracker.InsertDeveloperIdTracker(predefinedSubscriptionRequestBean, predefinedSubscriptionRequestBean.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(predefinedSubscriptionRequestBean); // http body (model) parameter
             }
             else
@@ -556,8 +584,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -572,6 +600,7 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
@@ -586,6 +615,7 @@ namespace CyberSource.Api
         public void CreateSubscription (CreateReportSubscriptionRequest createReportSubscriptionRequest, string organizationId = null)
         {
             logger.Debug("CALLING API \"CreateSubscription\" STARTED");
+            this.SetStatusCode(null);
             CreateSubscriptionWithHttpInfo(createReportSubscriptionRequest, organizationId);
         }
 
@@ -638,6 +668,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             if (createReportSubscriptionRequest != null && createReportSubscriptionRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                createReportSubscriptionRequest = (CreateReportSubscriptionRequest)sdkTracker.InsertDeveloperIdTracker(createReportSubscriptionRequest, createReportSubscriptionRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(createReportSubscriptionRequest); // http body (model) parameter
             }
             else
@@ -656,8 +688,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -672,6 +704,7 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
@@ -687,6 +720,7 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task CreateSubscriptionAsync (CreateReportSubscriptionRequest createReportSubscriptionRequest, string organizationId = null)
         {
             logger.Debug("CALLING API \"CreateSubscriptionAsync\" STARTED");
+            this.SetStatusCode(null);
             await CreateSubscriptionAsyncWithHttpInfo(createReportSubscriptionRequest, organizationId);
 
         }
@@ -740,6 +774,8 @@ namespace CyberSource.Api
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             if (createReportSubscriptionRequest != null && createReportSubscriptionRequest.GetType() != typeof(byte[]))
             {
+                SdkTracker sdkTracker = new SdkTracker();
+                createReportSubscriptionRequest = (CreateReportSubscriptionRequest)sdkTracker.InsertDeveloperIdTracker(createReportSubscriptionRequest, createReportSubscriptionRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
                 localVarPostBody = Configuration.ApiClient.Serialize(createReportSubscriptionRequest); // http body (model) parameter
             }
             else
@@ -758,8 +794,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -774,6 +810,7 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
@@ -788,6 +825,7 @@ namespace CyberSource.Api
         public void DeleteSubscription (string reportName, string organizationId = null)
         {
             logger.Debug("CALLING API \"DeleteSubscription\" STARTED");
+            this.SetStatusCode(null);
             DeleteSubscriptionWithHttpInfo(reportName, organizationId);
         }
 
@@ -843,7 +881,7 @@ namespace CyberSource.Api
                 localVarQueryParams.Add("organizationId", Configuration.ApiClient.ParameterToString(organizationId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.DELETE == Method.POST)
+            if (Method.Delete == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -854,8 +892,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -870,6 +908,7 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
@@ -885,6 +924,7 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task DeleteSubscriptionAsync (string reportName, string organizationId = null)
         {
             logger.Debug("CALLING API \"DeleteSubscriptionAsync\" STARTED");
+            this.SetStatusCode(null);
             await DeleteSubscriptionAsyncWithHttpInfo(reportName, organizationId);
 
         }
@@ -941,7 +981,7 @@ namespace CyberSource.Api
                 localVarQueryParams.Add("organizationId", Configuration.ApiClient.ParameterToString(organizationId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.DELETE == Method.POST)
+            if (Method.Delete == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -952,8 +992,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -968,6 +1008,7 @@ namespace CyberSource.Api
                 }
             }
 
+            this.SetStatusCode(localVarStatusCode);
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 localVarResponse.Content); // Return statement
@@ -981,8 +1022,10 @@ namespace CyberSource.Api
         public ReportingV3ReportSubscriptionsGet200Response GetAllSubscriptions (string organizationId = null)
         {
             logger.Debug("CALLING API \"GetAllSubscriptions\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<ReportingV3ReportSubscriptionsGet200Response> localVarResponse = GetAllSubscriptionsWithHttpInfo(organizationId);
             logger.Debug("CALLING API \"GetAllSubscriptions\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
@@ -1026,7 +1069,7 @@ namespace CyberSource.Api
                 localVarQueryParams.Add("organizationId", Configuration.ApiClient.ParameterToString(organizationId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -1037,8 +1080,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1067,8 +1110,10 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<ReportingV3ReportSubscriptionsGet200Response> GetAllSubscriptionsAsync (string organizationId = null)
         {
             logger.Debug("CALLING API \"GetAllSubscriptionsAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<ReportingV3ReportSubscriptionsGet200Response> localVarResponse = await GetAllSubscriptionsAsyncWithHttpInfo(organizationId);
             logger.Debug("CALLING API \"GetAllSubscriptionsAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
@@ -1113,7 +1158,7 @@ namespace CyberSource.Api
                 localVarQueryParams.Add("organizationId", Configuration.ApiClient.ParameterToString(organizationId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -1124,8 +1169,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;
@@ -1145,7 +1190,7 @@ namespace CyberSource.Api
                 (ReportingV3ReportSubscriptionsGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ReportingV3ReportSubscriptionsGet200Response))); // Return statement
         }
         /// <summary>
-        /// Get Subscription for Report Name View the details of a report subscription, such as the report format or report frequency, using the report’s unique name. 
+        /// Get Subscription for Report Name View the details of a report subscription, such as the report format or report frequency, using the report&#39;s unique name. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportName">Name of the Report to Retrieve</param>
@@ -1154,13 +1199,15 @@ namespace CyberSource.Api
         public ReportingV3ReportSubscriptionsGet200ResponseSubscriptions GetSubscription (string reportName, string organizationId = null)
         {
             logger.Debug("CALLING API \"GetSubscription\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<ReportingV3ReportSubscriptionsGet200ResponseSubscriptions> localVarResponse = GetSubscriptionWithHttpInfo(reportName, organizationId);
             logger.Debug("CALLING API \"GetSubscription\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get Subscription for Report Name View the details of a report subscription, such as the report format or report frequency, using the report’s unique name. 
+        /// Get Subscription for Report Name View the details of a report subscription, such as the report format or report frequency, using the report&#39;s unique name. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportName">Name of the Report to Retrieve</param>
@@ -1211,7 +1258,7 @@ namespace CyberSource.Api
                 localVarQueryParams.Add("organizationId", Configuration.ApiClient.ParameterToString(organizationId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -1222,8 +1269,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int) localVarResponse.StatusCode;
@@ -1244,7 +1291,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Get Subscription for Report Name View the details of a report subscription, such as the report format or report frequency, using the report’s unique name. 
+        /// Get Subscription for Report Name View the details of a report subscription, such as the report format or report frequency, using the report&#39;s unique name. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportName">Name of the Report to Retrieve</param>
@@ -1253,14 +1300,16 @@ namespace CyberSource.Api
         public async System.Threading.Tasks.Task<ReportingV3ReportSubscriptionsGet200ResponseSubscriptions> GetSubscriptionAsync (string reportName, string organizationId = null)
         {
             logger.Debug("CALLING API \"GetSubscriptionAsync\" STARTED");
+            this.SetStatusCode(null);
             ApiResponse<ReportingV3ReportSubscriptionsGet200ResponseSubscriptions> localVarResponse = await GetSubscriptionAsyncWithHttpInfo(reportName, organizationId);
             logger.Debug("CALLING API \"GetSubscriptionAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
         }
 
         /// <summary>
-        /// Get Subscription for Report Name View the details of a report subscription, such as the report format or report frequency, using the report’s unique name. 
+        /// Get Subscription for Report Name View the details of a report subscription, such as the report format or report frequency, using the report&#39;s unique name. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportName">Name of the Report to Retrieve</param>
@@ -1311,7 +1360,7 @@ namespace CyberSource.Api
                 localVarQueryParams.Add("organizationId", Configuration.ApiClient.ParameterToString(organizationId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            if (Method.GET == Method.POST)
+            if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
             }
@@ -1322,8 +1371,8 @@ namespace CyberSource.Api
 
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
-                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
             int localVarStatusCode = (int)localVarResponse.StatusCode;

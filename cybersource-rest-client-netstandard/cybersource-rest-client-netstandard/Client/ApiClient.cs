@@ -1001,7 +1001,6 @@ namespace CyberSource.Client
             }
 
             RestClientOptions clientOptions = RestClient.Options;
-
             if (Configuration.Proxy != null)
             {
                 clientOptions.Proxy = Configuration.Proxy;

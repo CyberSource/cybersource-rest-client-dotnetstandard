@@ -74,6 +74,7 @@ Or this can be done by adding below lines to your **`Project.csproj`** file.
   * In case `name="*"` is used, all logging statements from all namespaces will be written to log. This will include logging statements from inside the SDK as well.
   * If logging statements from inside the SDK should not be logged, provide specific namespaces in the rules.
 * The `minlevel` field denotes the minimum level to log. In a production environment, this may be set to `Warn`.
+* The variable `globalThreshold` needs to be set to `Off` in case you want to turn off the logging in Nlog.config file.
 * The variable `enableMasking` needs to be set to `true` if sensitive data in the request/response should be hidden/masked.
   * Sensitive data fields are listed below:
     * Card Security Code

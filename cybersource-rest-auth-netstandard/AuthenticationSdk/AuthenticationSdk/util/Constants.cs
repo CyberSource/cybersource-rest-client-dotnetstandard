@@ -14,7 +14,7 @@ namespace AuthenticationSdk.util
 
         public static readonly string HostName = "apitest.cybersource.com";
 
-        public static readonly string HideMerchantConfigProps = "MerchantSecretKey, MerchantKeyId, KeyAlias, KeyPassword, RequestJsonData, ";
+        public static readonly string HideMerchantConfigProps = "MerchantSecretKey, MerchantKeyId, KeyAlias, KeyPassword, KeyPass, RequestJsonData, ClientCertPassword ";
 
         public static readonly List<string> OldRunEnvironmentConstants = new List<string> { "CYBERSOURCE.ENVIRONMENT.SANDBOX", "CYBERSOURCE.ENVIRONMENT.PRODUCTION", "CYBERSOURCE.ENVIRONMENT.MUTUALAUTH.SANDBOX", "CYBERSOURCE.ENVIRONMENT.MUTUALAUTH.PRODUCTION", "BANKOFAMERICA.ENVIRONMENT.SANDBOX", "BANKOFAMERICA.ENVIRONMENT.PRODUCTION", "CYBERSOURCE.IN.ENVIRONMENT.SANDBOX", "CYBESOURCE.IN.ENVIRONMENT.PRODUCTION", "CYBESOURCE.ENVIRONMENT.MUTUALAUTH.SIT" };
 

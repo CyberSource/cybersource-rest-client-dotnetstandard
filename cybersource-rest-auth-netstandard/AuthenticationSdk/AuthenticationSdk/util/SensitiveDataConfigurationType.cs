@@ -25,7 +25,8 @@ namespace AuthenticationSdk.util
 
         public static AuthenticationSchemeTag[] authenticationTags = new AuthenticationSchemeTag[]
         {
-            new AuthenticationSchemeTag("Signature", "(keyid=\\\"([\\w-]*)\\\"),([\\w\\\"\\-\\(\\),= ]*), (signature=\\\"([\\w\\/=\\+]*)\\\")", "Signature : keyid=\"XXXXX\",$3, signature=\"$5\"")
+            new AuthenticationSchemeTag("Signature", "(keyid=\\\"([\\w-]*)\\\"),([\\w\\\"\\-\\(\\),= ]*), (signature=\\\"([\\w\\/=\\+]*)\\\")", "Signature : keyid=\"XXXXX\",$3, signature=\"$5\""),
+            new AuthenticationSchemeTag("Authorization", "Bearer\\s.*","Authorization : Bearer xxxxxxxxxxxxxxxx")
         };
     }
 

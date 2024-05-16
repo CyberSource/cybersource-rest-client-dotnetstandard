@@ -14,13 +14,15 @@ namespace AuthenticationSdk.core
     {
         private static Logger _logger;
         private readonly MerchantConfig _merchantConfig;
+        LogUtility logUtility;
+
 
         public Authorize(MerchantConfig merchantConfig)
         {
             _merchantConfig = merchantConfig;
             Enumerations.ValidateRequestType(_merchantConfig.RequestType);
             Enumerations.SetRequestType(_merchantConfig);
-
+            logUtility = new LogUtility();
             if (_logger == null)
             {
                 _logger = LogManager.GetCurrentClassLogger();
@@ -66,7 +68,7 @@ namespace AuthenticationSdk.core
                         _logger.Debug($"digest: {signatureObj.Digest}");
                     }
 
-                    _logger.Debug($"signature: {signatureObj.SignatureParam}");
+                    logUtility.LogDebugMessage( _logger, $"Signature : {signatureObj.SignatureParam}");
 
                     return signatureObj;
                 }
@@ -110,7 +112,7 @@ namespace AuthenticationSdk.core
                         _logger.Debug("Content-Type: application/hal+json");
                     }
 
-                    _logger.Debug($"Authorization: {tokenObj.BearerToken}");
+                    logUtility.LogDebugMessage(_logger, $"Authorization : Bearer {tokenObj.BearerToken}");
 
                     return tokenObj;
                 }
@@ -154,7 +156,7 @@ namespace AuthenticationSdk.core
                         _logger.Debug("Content-Type: application/hal+json");
                     }
 
-                    _logger.Debug($"Authorization: {tokenObj.AccessToken}");
+                    logUtility.LogDebugMessage(_logger, $"Authorization : Bearer {tokenObj.AccessToken}");
 
                     return tokenObj;
                 }

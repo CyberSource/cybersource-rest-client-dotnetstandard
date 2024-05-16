@@ -93,6 +93,18 @@ namespace AuthenticationSdk.util
             return str;
         }
 
+        public void LogDebugMessage(Logger logger, String debugMessage)
+        {
+            if (IsMaskingEnabled(logger))
+            {
+                logger.Debug(MaskSensitiveData(debugMessage));
+            }
+            else
+            {
+                logger.Debug(debugMessage);
+            }
+        }
+
         public bool IsMaskingEnabled(Logger logger)
         {
             if (!(logger.Factory.Configuration?.Variables?.ContainsKey("enableMasking") ?? false))

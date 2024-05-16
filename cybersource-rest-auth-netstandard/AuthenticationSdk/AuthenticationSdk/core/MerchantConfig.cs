@@ -108,13 +108,13 @@ namespace AuthenticationSdk.core
 
         public string KeyPass { get; set; }
 
-        public string EnableLog { get; set; } = "TRUE";
+        //public string EnableLog { get; set; } = "TRUE";
 
-        public string LogDirectory { get; set; } = "../../logs";
+        //public string LogDirectory { get; set; } = "../../logs";
 
-        public string LogfileMaxSize { get; set; } = "10485760"; // 10 MB = 10485760 bytes
+        //public string LogfileMaxSize { get; set; } = "10485760"; // 10 MB = 10485760 bytes
 
-        public string LogFileName { get; set; } = "cybs.log";
+        //public string LogFileName { get; set; } = "cybs.log";
 
         public string TimeOut { get; set; }
 

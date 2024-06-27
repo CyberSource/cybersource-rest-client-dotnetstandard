@@ -54,7 +54,7 @@ jobs:
                 dotnet build $CLIENT_FOLDER/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard.csproj -c release
                 echo "Before Samples Build"
                 dotnet build $SAMPLE_FOLDER/cybersource-rest-samples-netcore.csproj -c release
-                cd $SAMPLE_FOLDER/bin/Release/TARGET_FR
+                cd $SAMPLE_FOLDER/bin/Release/$TARGET_FR
                 echo "Running Samples"
                 ./SampleCodeNetCore -RunAll > output.log
                 cp output.log ../../../

@@ -1,0 +1,42 @@
+name: DOTNET-STANDARD BUILDS
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+env:
+  CLIENT_FOLDER: 'cybersource-rest-client-dotnetstandard'
+  SAMPLE_FOLDER: 'cybersource-rest-samples-csharp'
+jobs:
+    build-the-dotnet-client:
+        strategy:
+          fail-fast: false
+          matrix:
+            operating-system: [windows-latest,ubuntu-latest,macos-latest,macos-13,windows-2019,ubuntu-20.04]
+        defaults:
+            run:
+              shell: bash
+        runs-on: ${{matrix.operating-system}}
+        steps:
+            - name: Checkout the dotnet-standard-repo
+              uses: actions/checkout@v4
+              with:
+                path: ${{env.CLIENT_FOLDER}}
+            - name: Checkout cybersource-rest-samples-csharp repo
+              uses: actions/checkout@v4
+              with:
+                repository: 'CyberSource/cybersource-rest-samples-csharp'
+                ref: 'testing-branch'
+                path: ${{env.SAMPLE_FOLDER}}
+            - name: SetUp DotNet
+              uses: actions/setup-dotnet@v4
+            - name: Running the samples to check whether it works or not
+              run: |
+                cd $SAMPLE_FOLDER
+                dotnet build cybersource-rest-samples-netcore.csproj -c release
+                cd bin/Release/netcoreapp3.1
+                ./SampleCodeNetCore -RunAll > output.log
+            - name: Upload the Log file
+              uses: actions/upload-artifact@v4
+              with:
+                name: log-file-dotnet-standard-${{matrix.operating-system}}
+                path: cd $SAMPLE_FOLDER/bin/Release/netcoreapp3.1/output.log

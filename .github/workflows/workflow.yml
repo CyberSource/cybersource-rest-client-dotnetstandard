@@ -43,4 +43,4 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                 name: log-file-dotnet-standard-${{matrix.operating-system}}
-                path: cd $SAMPLE_FOLDER/bin/Release/netcoreapp3.1/output.log
+                path: cd $SAMPLE_FOLDER/bin/Release/netcoreapp3.1

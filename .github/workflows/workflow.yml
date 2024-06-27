@@ -48,6 +48,7 @@ jobs:
                   export TARGET_FR=net${NET_VER}
                   sed -i -e 's|<TargetFramework>.*</TargetFramework>|<TargetFramework>${TARGET_FR}</TargetFramework>|g' cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
                 fi
+                sed  's|<TargetFramework>.*</TargetFramework>|<TargetFramework>${TARGET_FR}</TargetFramework>|g' cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
                 echo $TARGET_FR
                 echo "Before Auth Build"
                 dotnet build $CLIENT_FOLDER/cybersource-rest-auth-netstandard/AuthenticationSdk/AuthenticationSdk/AuthenticationSdk.csproj -c release

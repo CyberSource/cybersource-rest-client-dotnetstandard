@@ -17,6 +17,10 @@ jobs:
               shell: bash
         runs-on: ${{matrix.operating-system}}
         steps:
+            - name: Setup git config
+              if: runner.os == 'Windows'
+              run: |
+                git config --global core.longpaths true
             - name: Checkout the dotnet-standard-repo
               uses: actions/checkout@v4
               with:

@@ -57,10 +57,17 @@ jobs:
                 dotnet --list-sdks
                 dotnet --list-runtimes
                 #we need to change the target sdk before building the dotnet standard projects
-
+                echo "Current Version Auth"
+                dotnet --version
                 dotnet build $CLIENT_FOLDER/cybersource-rest-auth-netstandard/AuthenticationSdk/AuthenticationSdk/AuthenticationSdk.csproj -c release
+                echo "Current Version Client"
+                dotnet --version
                 dotnet build $CLIENT_FOLDER/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard.csproj -c release
+                echo "Current Version Samples"
+                dotnet --version
                 dotnet build $SAMPLE_FOLDER/cybersource-rest-samples-netcore.csproj -c release
+                echo "Current Version"
+                dotnet --version
                 cd $SAMPLE_FOLDER/bin/Release/$TARGET_FR
                 echo "Running Samples"
                 ./SampleCodeNetCore -RunAll > output.log

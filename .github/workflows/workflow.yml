@@ -48,13 +48,9 @@ jobs:
                   export TARGET_FR=net${NET_VER}
                   sed -i -e "s|<TargetFramework>.*</TargetFramework>|<TargetFramework>${TARGET_FR}</TargetFramework>|g" cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
                 fi
-                sed  "s|<TargetFramework>.*</TargetFramework>|<TargetFramework>${TARGET_FR}</TargetFramework>|g" cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
-                echo $TARGET_FR
-                echo "Before Auth Build"
+                which dotnet
                 dotnet build $CLIENT_FOLDER/cybersource-rest-auth-netstandard/AuthenticationSdk/AuthenticationSdk/AuthenticationSdk.csproj -c release
-                echo "Before Client Build"
                 dotnet build $CLIENT_FOLDER/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard.csproj -c release
-                echo "Before Samples Build"
                 dotnet build $SAMPLE_FOLDER/cybersource-rest-samples-netcore.csproj -c release
                 cd $SAMPLE_FOLDER/bin/Release/$TARGET_FR
                 echo "Running Samples"

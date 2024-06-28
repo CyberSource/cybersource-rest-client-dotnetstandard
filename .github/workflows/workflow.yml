@@ -49,6 +49,7 @@ jobs:
                   sed -i -e "s|<TargetFramework>.*</TargetFramework>|<TargetFramework>${TARGET_FR}</TargetFramework>|g" cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
                 fi
                 which dotnet
+                dotnet --version
                 dotnet build $CLIENT_FOLDER/cybersource-rest-auth-netstandard/AuthenticationSdk/AuthenticationSdk/AuthenticationSdk.csproj -c release
                 dotnet build $CLIENT_FOLDER/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard.csproj -c release
                 dotnet build $SAMPLE_FOLDER/cybersource-rest-samples-netcore.csproj -c release

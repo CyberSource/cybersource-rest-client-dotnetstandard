@@ -70,7 +70,7 @@ jobs:
                 dotnet --version
                 cd $SAMPLE_FOLDER/bin/Release/$TARGET_FR
                 pwd
-                ls
+                ls -R
                 echo "Running Samples"
                 ./SampleCodeNetCore -RunAll > output.log
                 cp output.log ../../../

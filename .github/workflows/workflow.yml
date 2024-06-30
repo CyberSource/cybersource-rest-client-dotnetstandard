@@ -11,7 +11,7 @@ jobs:
         strategy:
           fail-fast: false
           matrix:
-            operating-system: [windows-latest,ubuntu-latest,macos-latest,macos-13,windows-2019,ubuntu-20.04,macos-14-large]
+            operating-system: [windows-latest,ubuntu-latest,windows-2019,ubuntu-20.04,macos-14-large,macos-latest-large]
             dotnet-ver: ['3.1.x','5.0','6.0','7.0','8.0']
         defaults:
             run:

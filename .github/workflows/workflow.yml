@@ -21,7 +21,7 @@ jobs:
             - name: Setup git config
               if: runner.os == 'Windows'
               run: |
-                git config --global core.longpaths true
+                git config --global core.longpaths true # because of issue with path getting too long
             - name: Checkout the dotnet-standard-repo
               uses: actions/checkout@v4
               with:
@@ -32,11 +32,11 @@ jobs:
                 repository: 'CyberSource/cybersource-rest-samples-csharp'
                 ref: 'testing-branch'
                 path: ${{env.SAMPLE_FOLDER}}
-            # - name: SetUp DotNet
-            #   id: setdotnet
-            #   uses: actions/setup-dotnet@v4
-            #   with:
-            #     dotnet-version: ${{matrix.dotnet-ver}}
+            - name: SetUp DotNet
+              id: setdotnet
+              uses: actions/setup-dotnet@v4
+              with:
+                dotnet-version: ${{matrix.dotnet-ver}}
             - name: Changing the csproj files to reference the local dll files and building the projects and running the tests
               env:
                 NET_VER: ${{matrix.dotnet-ver}}
@@ -52,10 +52,10 @@ jobs:
                   export TARGET_FR=net${NET_VER}
                   sed -i -e "s|<TargetFramework>.*</TargetFramework>|<TargetFramework>${TARGET_FR}</TargetFramework>|g" cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
                 fi
-                which dotnet
-                dotnet --version
-                dotnet --list-sdks
-                dotnet --list-runtimes
+                # which dotnet
+                # dotnet --version
+                # dotnet --list-sdks
+                # dotnet --list-runtimes
                 #we need to change the target sdk before building the dotnet standard projects
                 echo "Current Version Auth"
                 dotnet --version
@@ -69,8 +69,8 @@ jobs:
                 echo "Current Version"
                 dotnet --version
                 cd $SAMPLE_FOLDER/bin/Release/$TARGET_FR
-                pwd
-                ls -R
+                # pwd
+                # ls -R
                 echo "Running Samples"
                 ./SampleCodeNetCore -RunAll > output.log
                 cp output.log ../../../

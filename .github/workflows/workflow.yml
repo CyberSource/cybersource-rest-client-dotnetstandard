@@ -73,6 +73,7 @@ jobs:
                 # pwd
                 # ls -R
                 echo "Running Samples"
+                pwd
                 ./SampleCodeNetCore -RunAll > output.log
                 cp output.log ../../../
             - name: Setup Python v3.12 for report generation only

@@ -59,7 +59,7 @@ jobs:
                 dotnet build $CLIENT_FOLDER/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard.csproj -c release
             - name: Build the Samples project and Run Tests
               env:
-                TARGET_FR: netcore3.1
+                TARGET_FR: netcoreapp3.1
               run: |
                 if [ $NET_VER != '3.1.x' ]; then
                   export TARGET_FR=net${NET_VER}

@@ -19,7 +19,6 @@ jobs:
         runs-on: ${{matrix.operating-system}}
         env:
           NET_VER: ${{matrix.dotnet-ver}}
-          TARGET_FR: netcoreapp3.1
         steps:
             - name: Setup git config
               if: runner.os == 'Windows'
@@ -41,6 +40,8 @@ jobs:
               with:
                 dotnet-version: ${{matrix.dotnet-ver}}
             - name: Changing the csproj files to reference the local Authentication and Client dll files.
+              env:
+                TARGET_FR: netcore3.1
               run: |
                 uname -m
                 # echo '${{steps.setdotnet.outputs.dotnet-version}}'
@@ -63,7 +64,10 @@ jobs:
                 dotnet --version
                 dotnet build $CLIENT_FOLDER/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard.csproj -c release
             - name: Build the Samples project and Run Tests
+              env:
+                TARGET_FR: netcore3.1
               run: |
+                export TARGET_FR=net${NET_VER}
                 echo "Current Version Samples"
                 dotnet --version
                 dotnet build $SAMPLE_FOLDER/cybersource-rest-samples-netcore.csproj -c release

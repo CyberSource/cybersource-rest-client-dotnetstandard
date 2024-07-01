@@ -48,7 +48,7 @@ jobs:
               run: |
                 if [[ (${{matrix.dotnet-ver}} == '3.1.x' && "$(uname -s)" == "Darwin") ||
                 (${{matrix.dotnet-ver}} == '5.0' && "$(uname -s)" == "Darwin") ]]; then
-                  echo "Microsoft .NET SDK version ${{matrix.dotnet-ver}} has issues, latest Microsoft .NET SDK will be used for building the projects."
+                  echo "Microsoft .NET SDK version ${{matrix.dotnet-ver}} has issues for Mac OS, latest Microsoft .NET SDK will be used for building the projects."
                 else
                   dotnet new globaljson --sdk-version ${{steps.setdotnet.outputs.dotnet-version}}
                   cat global.json

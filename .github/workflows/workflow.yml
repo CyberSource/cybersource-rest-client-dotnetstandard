@@ -7,30 +7,29 @@ env:
   CLIENT_FOLDER: 'cybersource-rest-client-dotnetstandard'
   SAMPLE_FOLDER: 'cybersource-rest-samples-csharp'
 jobs:
-    build-the-dotnet-client:
+    workflow-job:
+        defaults:
+          run:
+            shell: bash
         strategy:
           fail-fast: false
           matrix:
-            operating-system: [windows-latest,ubuntu-latest,windows-2019,ubuntu-20.04,macos-latest,macos-13,macos-12]
+            operating-system: [windows-latest,windows-2019,ubuntu-latest,ubuntu-20.04,macos-latest,macos-13]
             dotnet-ver: ['3.1.x','5.0','6.0','7.0','8.0']
             exclude:
-              - operating-system: macos-latest
+              - operating-system: macos-latest  #macos 14 arm64 image is being used and it doesn't support .NET Core 3.1
                 dotnet-ver: '3.1.x'
-              - operating-system: macos-latest
+              - operating-system: macos-latest  #macos 14 arm64 image is being used and it doesn't support .NET 5.0 
                 dotnet-ver: '5.0'
-              
-        defaults:
-            run:
-              shell: bash
         runs-on: ${{matrix.operating-system}}
         env:
           NET_VER: ${{matrix.dotnet-ver}}
         steps:
-            - name: Setup git config
+            - name: Setup Git Config for windows to allow path lengths greater than 260 characters
               if: runner.os == 'Windows'
               run: |
-                git config --global core.longpaths true # because of issue with path getting too long
-            - name: Checkout the dotnet-standard-repo
+                git config --global core.longpaths true
+            - name: Checkout the cybersource-rest-client-dotnetstandard repo
               uses: actions/checkout@v4
               with:
                 path: ${{env.CLIENT_FOLDER}}
@@ -45,12 +44,11 @@ jobs:
               uses: actions/setup-dotnet@v4
               with:
                 dotnet-version: ${{matrix.dotnet-ver}}
-            - name: Changing the csproj files to reference the local Authentication and Client dll files.
+            - name: Changing the csproj files to reference the locally built Authorization and Client dll file
               run: |
-                uname -m
                 if [[ (${{matrix.dotnet-ver}} == '3.1.x' && "$(uname -s)" == "Darwin") ||
                 (${{matrix.dotnet-ver}} == '5.0' && "$(uname -s)" == "Darwin") ]]; then
-                  echo "Microsoft .NET SDK has issues"
+                  echo "Microsoft .NET SDK version ${{matrix.dotnet-ver}} has issues, latest Microsoft .NET SDK will be used for building the projects."
                 else
                   dotnet new globaljson --sdk-version ${{steps.setdotnet.outputs.dotnet-version}}
                   cat global.json
@@ -60,11 +58,8 @@ jobs:
                 sed -i -e 's|<PackageReference Include="CyberSource\.Rest\.Client\.NetStandard" Version=".*" />|<Reference Include="CyberSource.Rest.Client.NetStandard">\n  <HintPath>../cybersource-rest-client-dotnetstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/bin/Release/netstandard2.1/cybersource-rest-client-netstandard.dll</HintPath>\n  <Private>true</Private>\n</Reference>|g' cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
             - name: Build the Authentication and Client projects
               run: |
-                echo "Current Version Auth"
                 dotnet --version
                 dotnet build $CLIENT_FOLDER/cybersource-rest-auth-netstandard/AuthenticationSdk/AuthenticationSdk/AuthenticationSdk.csproj -c release
-                echo "Current Version Client"
-                dotnet --version
                 dotnet build $CLIENT_FOLDER/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard.csproj -c release
             - name: Build the Samples project and Run Tests
               env:
@@ -75,16 +70,11 @@ jobs:
                   sed -i -e "s|<TargetFramework>.*</TargetFramework>|<TargetFramework>${TARGET_FR}</TargetFramework>|g" cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
                 fi
                 #changing the target framework for samples application
-                echo "Current Version Samples"
                 dotnet --version
+                echo "Target Framework : ${TARGET_FR}"
                 dotnet build $SAMPLE_FOLDER/cybersource-rest-samples-netcore.csproj -c release
-                echo "Current Version"
-                dotnet --version
                 cd $SAMPLE_FOLDER/bin/Release/$TARGET_FR
-                # pwd
-                # ls -R
                 echo "Running Samples"
-                pwd
                 ./SampleCodeNetCore -RunAll > output.log
                 cp output.log ../../../
             - name: Setup Python v3.12 for report generation only
@@ -98,17 +88,15 @@ jobs:
                 pip install xhtml2pdf
                 pip install bs4
                 cd $SAMPLE_FOLDER/Validation
-                python sample_code_log_processor.py -l ../../$SAMPLE_FOLDER/output.log -o ../../$SAMPLE_FOLDER/python_actual_results.json
                 python sample_code_log_processor.py -l ../../$SAMPLE_FOLDER/output.log -o ../../$SAMPLE_FOLDER/csharp_actual_results.json
                 python response_code_validator.py -e ExpectedResults/csharp_expected_results.json -a ../../$SAMPLE_FOLDER/csharp_actual_results.json -o csharp_validation_results.json
                 python json_to_prettified_html.py -i csharp_validation_results.json -o csharp_validation_results.html
-                cp csharp_validation_results.pdf ../  #copying the file to flatten the directory of the upload artifact,Github Actions doesn't support that as of jun 2024
-            - name: Upload the Log files
+                cp csharp_validation_results.pdf ../  #copying the file to flatten the directory of the upload artifact,Github Actions doesn't support directory falttening as of June 2024
+            - name: Upload Test Reports
               uses: actions/upload-artifact@v4
               with:
-                name: log-file-${{matrix.operating-system}}-dotnet-std-ver-${{matrix.dotnet-ver}}
+                name: log-files-${{matrix.operating-system}}-dotnet-standard-ver-${{matrix.dotnet-ver}}
                 path: |
                   ${{env.SAMPLE_FOLDER}}/csharp_validation_results.pdf
-                  ${{env.SAMPLE_FOLDER}}/output.log
 
 

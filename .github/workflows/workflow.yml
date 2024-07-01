@@ -42,6 +42,7 @@ jobs:
                 NET_VER: ${{matrix.dotnet-ver}}
                 TARGET_FR: netcoreapp3.1
               run: |
+                uname -m
                 echo '${{steps.setdotnet.outputs.dotnet-version}}'
                 dotnet new globaljson --sdk-version ${{steps.setdotnet.outputs.dotnet-version}}
                 cat global.json

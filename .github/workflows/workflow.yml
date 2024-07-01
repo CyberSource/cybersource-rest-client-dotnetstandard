@@ -48,7 +48,8 @@ jobs:
             - name: Changing the csproj files to reference the local Authentication and Client dll files.
               run: |
                 uname -m
-                if [[ ${{matrix.dotnet-ver}} == '3.1.x' && [ "$(uname -s)" == "Darwin" ]] || [ ${{matrix.dotnet-ver}} == '5.0' && [ "$(uname -s)" == "Darwin" ]]]; then
+                if [[ (${{matrix.dotnet-ver}} == '3.1.x' && "$(uname -s)" == "Darwin") ||
+                (${{matrix.dotnet-ver}} == '5.0' && "$(uname -s)" == "Darwin") ]]; then
                   echo "Microsoft .NET SDK has issues"
                 else
                   dotnet new globaljson --sdk-version ${{steps.setdotnet.outputs.dotnet-version}}

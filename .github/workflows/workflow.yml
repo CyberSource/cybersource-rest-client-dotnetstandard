@@ -15,7 +15,10 @@ jobs:
             dotnet-ver: ['3.1.x','5.0','6.0','7.0','8.0']
             exclude:
               - operating-system: macos-latest
-                dotnet-ver: ['3.1.x','5.0']
+                dotnet-ver: '3.1.x'
+              - operating-system: macos-latest
+                dotnet-ver: '5.0'
+              
         defaults:
             run:
               shell: bash

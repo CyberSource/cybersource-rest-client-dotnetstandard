@@ -40,8 +40,6 @@ jobs:
               with:
                 dotnet-version: ${{matrix.dotnet-ver}}
             - name: Changing the csproj files to reference the local Authentication and Client dll files.
-              env:
-                TARGET_FR: netcore3.1
               run: |
                 uname -m
                 # echo '${{steps.setdotnet.outputs.dotnet-version}}'
@@ -50,10 +48,6 @@ jobs:
                 sed -i -e 's|<PackageReference Include="CyberSource\.Authentication\.NetStandard" Version=".*" \/>|<Reference Include="CyberSource.Authentication.NetStandard">\n  <HintPath>../../cybersource-rest-auth-netstandard/AuthenticationSdk/AuthenticationSdk/bin/Release/netstandard2.1/Cybersource.Authentication.NetStandard.dll</HintPath>\n  <Private>true</Private>\n</Reference>|g' cybersource-rest-client-dotnetstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard.csproj
                 sed -i -e 's|<PackageReference Include="CyberSource\.Authentication\.NetStandard" Version=".*" />|<Reference Include="CyberSource.Authentication.NetStandard">\n  <HintPath>../cybersource-rest-client-dotnetstandard/cybersource-rest-auth-netstandard/AuthenticationSdk/AuthenticationSdk/bin/Release/netstandard2.1/Cybersource.Authentication.NetStandard.dll</HintPath>\n  <Private>true</Private>\n</Reference>|g' cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
                 sed -i -e 's|<PackageReference Include="CyberSource\.Rest\.Client\.NetStandard" Version=".*" />|<Reference Include="CyberSource.Rest.Client.NetStandard">\n  <HintPath>../cybersource-rest-client-dotnetstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/bin/Release/netstandard2.1/cybersource-rest-client-netstandard.dll</HintPath>\n  <Private>true</Private>\n</Reference>|g' cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
-                if [ $NET_VER != '3.1.x' ]; then
-                  export TARGET_FR=net${NET_VER}
-                  sed -i -e "s|<TargetFramework>.*</TargetFramework>|<TargetFramework>${TARGET_FR}</TargetFramework>|g" cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
-                fi
             - name: Build the Authentication and Client projects
                 #we need to change the target sdk before building the dotnet standard projects
               run: |
@@ -67,7 +61,10 @@ jobs:
               env:
                 TARGET_FR: netcore3.1
               run: |
-                export TARGET_FR=net${NET_VER}
+                if [ $NET_VER != '3.1.x' ]; then
+                  export TARGET_FR=net${NET_VER}
+                  sed -i -e "s|<TargetFramework>.*</TargetFramework>|<TargetFramework>${TARGET_FR}</TargetFramework>|g" cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
+                fi
                 echo "Current Version Samples"
                 dotnet --version
                 dotnet build $SAMPLE_FOLDER/cybersource-rest-samples-netcore.csproj -c release

@@ -17,6 +17,9 @@ jobs:
             run:
               shell: bash
         runs-on: ${{matrix.operating-system}}
+        env:
+          NET_VER: ${{matrix.dotnet-ver}}
+          TARGET_FR: netcoreapp3.1
         steps:
             - name: Setup git config
               if: runner.os == 'Windows'
@@ -37,13 +40,10 @@ jobs:
               uses: actions/setup-dotnet@v4
               with:
                 dotnet-version: ${{matrix.dotnet-ver}}
-            - name: Changing the csproj files to reference the local dll files and building the projects and running the tests
-              env:
-                NET_VER: ${{matrix.dotnet-ver}}
-                TARGET_FR: netcoreapp3.1
+            - name: Changing the csproj files to reference the local Authentication and Client dll files.
               run: |
                 uname -m
-                echo '${{steps.setdotnet.outputs.dotnet-version}}'
+                # echo '${{steps.setdotnet.outputs.dotnet-version}}'
                 dotnet new globaljson --sdk-version ${{steps.setdotnet.outputs.dotnet-version}}
                 cat global.json
                 sed -i -e 's|<PackageReference Include="CyberSource\.Authentication\.NetStandard" Version=".*" \/>|<Reference Include="CyberSource.Authentication.NetStandard">\n  <HintPath>../../cybersource-rest-auth-netstandard/AuthenticationSdk/AuthenticationSdk/bin/Release/netstandard2.1/Cybersource.Authentication.NetStandard.dll</HintPath>\n  <Private>true</Private>\n</Reference>|g' cybersource-rest-client-dotnetstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard.csproj
@@ -53,25 +53,25 @@ jobs:
                   export TARGET_FR=net${NET_VER}
                   sed -i -e "s|<TargetFramework>.*</TargetFramework>|<TargetFramework>${TARGET_FR}</TargetFramework>|g" cybersource-rest-samples-csharp/cybersource-rest-samples-netcore.csproj
                 fi
-                # which dotnet
-                # dotnet --version
-                # dotnet --list-sdks
-                # dotnet --list-runtimes
+            - name: Build the Authentication and Client projects
                 #we need to change the target sdk before building the dotnet standard projects
+              run: |
                 echo "Current Version Auth"
                 dotnet --version
                 dotnet build $CLIENT_FOLDER/cybersource-rest-auth-netstandard/AuthenticationSdk/AuthenticationSdk/AuthenticationSdk.csproj -c release
                 echo "Current Version Client"
                 dotnet --version
                 dotnet build $CLIENT_FOLDER/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/cybersource-rest-client-netstandard.csproj -c release
+            - name: Build the Samples project and Run Tests
+              run: |
                 echo "Current Version Samples"
                 dotnet --version
                 dotnet build $SAMPLE_FOLDER/cybersource-rest-samples-netcore.csproj -c release
                 echo "Current Version"
                 dotnet --version
                 cd $SAMPLE_FOLDER/bin/Release/$TARGET_FR
-                pwd
-                ls -R
+                # pwd
+                # ls -R
                 echo "Running Samples"
                 ./SampleCodeNetCore -RunAll > output.log
                 cp output.log ../../../

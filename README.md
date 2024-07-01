@@ -1,4 +1,5 @@
 # .NET Standard Client SDK for the CyberSource REST API
+[![DOTNET-STANDARD BUILDS](https://github.com/CyberSource/cybersource-rest-client-dotnetstandard/actions/workflows/workflow.yml/badge.svg)](https://github.com/CyberSource/cybersource-rest-client-dotnetstandard/actions/workflows/workflow.yml)
 
 The CyberSource .NET Standard client provides convenient access to the [CyberSource REST API](https://developer.cybersource.com/api/reference/api-reference.html) from your .NET application.
 

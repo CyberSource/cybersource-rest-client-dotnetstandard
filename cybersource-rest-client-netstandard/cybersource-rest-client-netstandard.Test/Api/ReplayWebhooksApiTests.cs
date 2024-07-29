@@ -18,7 +18,6 @@ using RestSharp;
 using NUnit.Framework;
 
 using CyberSource.Client;
-using CyberSource.Model;
 using CyberSource.Api;
 
 namespace CyberSource.Test

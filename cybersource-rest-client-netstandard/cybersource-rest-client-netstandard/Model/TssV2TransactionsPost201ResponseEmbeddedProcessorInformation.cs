@@ -28,31 +28,35 @@ namespace CyberSource.Model
     /// TssV2TransactionsPost201ResponseEmbeddedProcessorInformation
     /// </summary>
     [DataContract]
-    public partial class TssV2TransactionsPost201ResponseEmbeddedProcessorInformation :  IEquatable<TssV2TransactionsPost201ResponseEmbeddedProcessorInformation>, IValidatableObject
+    public partial class TssV2TransactionsPost201ResponseEmbeddedProcessorInformation : IEquatable<TssV2TransactionsPost201ResponseEmbeddedProcessorInformation>, IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TssV2TransactionsPost201ResponseEmbeddedProcessorInformation" /> class.
         /// </summary>
         /// <param name="Processor">Processor.</param>
         /// <param name="ApprovalCode">Authorization code. Returned only when the processor returns this value.  The length of this value depends on your processor.  Returned by authorization service.  #### PIN debit Authorization code that is returned by the processor.  Returned by PIN debit credit.  #### Elavon Encrypted Account Number Program The returned value is OFFLINE.  #### TSYS Acquiring Solutions The returned value for a successful zero amount authorization is 000000. .</param>
-        public TssV2TransactionsPost201ResponseEmbeddedProcessorInformation(TssV2TransactionsGet200ResponseProcessorInformationProcessor Processor = default(TssV2TransactionsGet200ResponseProcessorInformationProcessor), string ApprovalCode = default(string))
+        public TssV2TransactionsPost201ResponseEmbeddedProcessorInformation(TssV2TransactionsGet200ResponseProcessorInformationProcessor Processor = default(TssV2TransactionsGet200ResponseProcessorInformationProcessor), string ApprovalCode = default(string), string RetrievalReferenceNumber = default(string))
         {
             this.Processor = Processor;
             this.ApprovalCode = ApprovalCode;
+            this.RetrievalReferenceNumber = RetrievalReferenceNumber;
         }
-        
+
         /// <summary>
         /// Gets or Sets Processor
         /// </summary>
-        [DataMember(Name="processor", EmitDefaultValue=false)]
+        [DataMember(Name = "processor", EmitDefaultValue = false)]
         public TssV2TransactionsGet200ResponseProcessorInformationProcessor Processor { get; set; }
 
         /// <summary>
         /// Authorization code. Returned only when the processor returns this value.  The length of this value depends on your processor.  Returned by authorization service.  #### PIN debit Authorization code that is returned by the processor.  Returned by PIN debit credit.  #### Elavon Encrypted Account Number Program The returned value is OFFLINE.  #### TSYS Acquiring Solutions The returned value for a successful zero amount authorization is 000000. 
         /// </summary>
         /// <value>Authorization code. Returned only when the processor returns this value.  The length of this value depends on your processor.  Returned by authorization service.  #### PIN debit Authorization code that is returned by the processor.  Returned by PIN debit credit.  #### Elavon Encrypted Account Number Program The returned value is OFFLINE.  #### TSYS Acquiring Solutions The returned value for a successful zero amount authorization is 000000. </value>
-        [DataMember(Name="approvalCode", EmitDefaultValue=false)]
+        [DataMember(Name = "approvalCode", EmitDefaultValue = false)]
         public string ApprovalCode { get; set; }
+
+        [DataMember(Name = "retrievalReferenceNumber", EmitDefaultValue = false)]
+        public string RetrievalReferenceNumber { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -64,10 +68,11 @@ namespace CyberSource.Model
             sb.Append("class TssV2TransactionsPost201ResponseEmbeddedProcessorInformation {\n");
             sb.Append("  Processor: ").Append(Processor).Append("\n");
             sb.Append("  ApprovalCode: ").Append(ApprovalCode).Append("\n");
+            sb.Append("  RetrievalReferenceNumber: ").Append(RetrievalReferenceNumber).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
-  
+
         /// <summary>
         /// Returns the JSON string presentation of the object
         /// </summary>
@@ -99,16 +104,21 @@ namespace CyberSource.Model
             if (other == null)
                 return false;
 
-            return 
+            return
                 (
                     this.Processor == other.Processor ||
                     this.Processor != null &&
                     this.Processor.Equals(other.Processor)
-                ) && 
+                ) &&
                 (
                     this.ApprovalCode == other.ApprovalCode ||
                     this.ApprovalCode != null &&
                     this.ApprovalCode.Equals(other.ApprovalCode)
+                ) &&
+                (
+                    this.RetrievalReferenceNumber == other.RetrievalReferenceNumber ||
+                    this.RetrievalReferenceNumber != null &&
+                    this.RetrievalReferenceNumber.Equals(other.RetrievalReferenceNumber)
                 );
         }
 
@@ -127,6 +137,8 @@ namespace CyberSource.Model
                     hash = hash * 59 + this.Processor.GetHashCode();
                 if (this.ApprovalCode != null)
                     hash = hash * 59 + this.ApprovalCode.GetHashCode();
+                if (this.RetrievalReferenceNumber != null)
+                    hash = hash * 59 + this.RetrievalReferenceNumber.GetHashCode();
                 return hash;
             }
         }

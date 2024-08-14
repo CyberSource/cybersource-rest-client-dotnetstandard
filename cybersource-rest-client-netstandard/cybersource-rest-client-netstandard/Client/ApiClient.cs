@@ -25,9 +25,20 @@ using AuthenticationSdk.util;
 using System.Security.Cryptography.X509Certificates;
 using NLog;
 using System.Security;
+using System.Collections.ObjectModel;
 
 namespace CyberSource.Client
 {
+    public partial class ApiClient
+    {
+        // <summary>
+        /// Allows for extending response processing for <see cref="ApiClient"/> generated code.
+        /// </summary>
+        /// <param name="request">The RestSharp request object</param>
+        /// <param name="response">The RestSharp response object</param>
+        partial void InterceptResponse(RestRequest request, RestResponse response);
+    }
+
     /// <summary>
     /// API client is mainly responsible for making the HTTP call to the API backend.
     /// </summary>
@@ -49,7 +60,35 @@ namespace CyberSource.Client
         /// </summary>
         /// <param name="request">The RestSharp request object</param>
         /// <param name="response">The RestSharp response object</param>
-        partial void InterceptResponse(RestRequest request, RestResponse response); // CHANGED
+        partial void InterceptResponse(RestRequest request, RestResponse response) { 
+
+            //The endpoint is sending back multiple "Vary" headers, which break the a Dictonary.
+            //According to RFC somethingSomething, duplicate headers should be concatenated under the same key,
+            //so this line turns this:
+            //Vary: Origin
+            //Vary: Access-Control-Request-Method
+            //Vary: Access-Control-Request-Headers
+            //into:
+            //Vary: Origin,-Control-Request-Method,Access-Control-Request-Headers
+            //var consolidatedHeaders = response.Headers
+            //.GroupBy(kvp => kvp.Name)
+            //.Select(g => new KeyValuePair<string, HeaderParameter>(g.Key,new HeaderParameter(g.Key, string.Join(", ", g.Select(kvp => kvp.Value)))))
+            //.ToList();
+
+
+            var consolidatedHeaders = response.Headers
+            .GroupBy(kvp => kvp.Name)
+            .Select(g => new HeaderParameter(g.Key, string.Join(", ", g.Select(kvp => kvp.Value))))
+            .ToList();
+
+
+            if (consolidatedHeaders != null && consolidatedHeaders.Count != response.Headers.Count)
+            {
+                response.Headers = new ReadOnlyCollection<HeaderParameter>(consolidatedHeaders);
+            }
+            
+
+        } // CHANGED
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiClient" /> class

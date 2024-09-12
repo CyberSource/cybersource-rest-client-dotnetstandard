@@ -104,6 +104,8 @@ namespace AuthenticationSdk.core
 
         public string IntermediateHost { get; set; }
 
+        public string DefaultDeveloperId { get; set; }
+
         public string KeyAlias { get; set; }
 
         public string KeyPass { get; set; }
@@ -205,6 +207,7 @@ namespace AuthenticationSdk.core
             KeyfileName = merchantConfigSection["keyFilename"];
             RunEnvironment = merchantConfigSection["runEnvironment"];
             IntermediateHost = merchantConfigSection["intermediateHost"];
+            DefaultDeveloperId = merchantConfigSection["defaultDeveloperId"];
             EnableClientCert = merchantConfigSection["enableClientCert"];
             ClientCertDirectory = merchantConfigSection["clientCertDirectory"];
             ClientCertFile = merchantConfigSection["clientCertFile"];
@@ -250,6 +253,12 @@ namespace AuthenticationSdk.core
                     if (merchantConfigDictionary.ContainsKey(key))
                     {
                         IntermediateHost = merchantConfigDictionary[key];
+                    }
+
+                    key = "defaultDeveloperId";
+                    if (merchantConfigDictionary.ContainsKey(key))
+                    {
+                        DefaultDeveloperId = merchantConfigDictionary[key];
                     }
 
                     Enum.TryParse(AuthenticationType.ToUpper(), out Enumerations.AuthenticationType authTypeInput);

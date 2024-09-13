@@ -17,7 +17,6 @@ using CyberSource.Client;
 using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using CyberSource.Model;
 
 namespace CyberSource.Api
 {
@@ -280,7 +279,7 @@ namespace CyberSource.Api
             if (replayWebhooksRequest != null && replayWebhooksRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                replayWebhooksRequest = (ReplayWebhooksRequest)sdkTracker.InsertDeveloperIdTracker(replayWebhooksRequest, replayWebhooksRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
+                replayWebhooksRequest = (ReplayWebhooksRequest)sdkTracker.InsertDeveloperIdTracker(replayWebhooksRequest, replayWebhooksRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
                 localVarPostBody = Configuration.ApiClient.Serialize(replayWebhooksRequest); // http body (model) parameter
             }
             else
@@ -386,7 +385,7 @@ namespace CyberSource.Api
             if (replayWebhooksRequest != null && replayWebhooksRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                replayWebhooksRequest = (ReplayWebhooksRequest)sdkTracker.InsertDeveloperIdTracker(replayWebhooksRequest, replayWebhooksRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"]);
+                replayWebhooksRequest = (ReplayWebhooksRequest)sdkTracker.InsertDeveloperIdTracker(replayWebhooksRequest, replayWebhooksRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
                 localVarPostBody = Configuration.ApiClient.Serialize(replayWebhooksRequest); // http body (model) parameter
             }
             else

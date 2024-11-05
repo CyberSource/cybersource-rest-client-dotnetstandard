@@ -449,7 +449,7 @@ namespace CyberSource.Client
             RestClientOptions clientOptions = new RestClientOptions(RestClient.Options.BaseUrl)
             {
                 Timeout = TimeSpan.FromMilliseconds(Configuration.Timeout),
-            };
+            };  
 
             // RestClient.ClearHandlers();
 
@@ -578,7 +578,7 @@ namespace CyberSource.Client
             // set user agent
             RestClientOptions clientOptions = new RestClientOptions(RestClient.Options.BaseUrl)
             {
-                Timeout = TimeSpan.FromMilliseconds(Configuration.Timeout)
+                Timeout = TimeSpan.FromMilliseconds(Configuration.Timeout),
             };
 
             if (logUtility.IsMaskingEnabled(logger))

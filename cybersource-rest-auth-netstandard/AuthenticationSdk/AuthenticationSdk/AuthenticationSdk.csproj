@@ -38,7 +38,7 @@
     <PackageReference Include="jose-jwt" Version="4.1.0" />
     <PackageReference Include="NLog" Version="5.0.0" />
 	<PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
     <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
   </ItemGroup>
 

@@ -29,6 +29,7 @@ namespace {{packageName}}.Client
         /// <param name="timeout">HTTP connection timeout (in milliseconds)</param>
         /// <param name="userAgent">HTTP user agent</param>
         /// <param name="merchConfigDictObj">Dictiory Object for Merchant Config</param>
+        /// <param name="mapToControlMLEonAPI">Dictiory Object for Controlling MLE on API level</param>
         public Configuration(ApiClient apiClient = null,
                              Dictionary<string, string> defaultHeader = null,
                              string username = null,
@@ -40,7 +41,8 @@ namespace {{packageName}}.Client
                              string dateTimeFormat = null,
                              int timeout = 100000,
                              string userAgent = "{{#httpUserAgent}}{{.}}{{/httpUserAgent}}{{^httpUserAgent}}Swagger-Codegen/{{packageVersion}}/csharp{{/httpUserAgent}}",
-                             IReadOnlyDictionary<string, string> merchConfigDictObj = null
+                             IReadOnlyDictionary<string, string> merchConfigDictObj = null,
+                             Dictionary<string, bool> mapToControlMLEonAPI = null
                             )
         {
             SetApiClientUsingDefault(apiClient);
@@ -90,6 +92,7 @@ namespace {{packageName}}.Client
             DateTimeFormat = dateTimeFormat;
             Timeout = {{#netStandard}}TimeSpan.FromMilliseconds({{/netStandard}}timeout{{#netStandard}}){{/netStandard}};
             MerchantConfigDictionaryObj = merchConfigDictObj;
+            MapToControlMLEonAPI = mapToControlMLEonAPI;
         }
 
         private string GetClientId()
@@ -187,6 +190,11 @@ namespace {{packageName}}.Client
         /// </summary>
         public Dictionary<string, string> DefaultHeader { get; set; } = new Dictionary<string, string>();
 
+        /// <summary>
+        /// Gets or sets the MapToControlMLEonAPI
+        /// </summary>
+        public Dictionary<string, bool> MapToControlMLEonAPI { get; set; } = new Dictionary<string, bool>();
+        
         /// <summary>
         /// Add default header.
         /// </summary>

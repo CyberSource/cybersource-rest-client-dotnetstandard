@@ -16,6 +16,7 @@ namespace AuthenticationSdk.util
             return File.ReadAllText(path);
         }
 
+        [Obsolete("This method has been marked as Deprecated and will be removed in coming releases. Use DecryptUsingRSAParameters(RSAParameters, string) instead.", false)]
         public static string DecryptUsingPEM(MerchantConfig merchantConfig, string encodedData)
         {
             var privateKey = LoadKeyFromFile(merchantConfig.PemFileDirectory);
@@ -24,6 +25,13 @@ namespace AuthenticationSdk.util
             RSAParameters rsaParams = DotNetUtilities.ToRSAParameters((RsaPrivateCrtKeyParameters)keyPair.Private);
             var rsa = RSA.Create();
             rsa.ImportParameters(rsaParams);
+            return JWT.Decode(encodedData, rsa, JweAlgorithm.RSA_OAEP_256, JweEncryption.A256GCM);
+        }
+
+        public static string DecryptUsingRSAParameters(RSAParameters rsaParameters, string encodedData)
+        {
+            var rsa = RSA.Create();
+            rsa.ImportParameters(rsaParameters);
             return JWT.Decode(encodedData, rsa, JweAlgorithm.RSA_OAEP_256, JweEncryption.A256GCM);
         }
     }

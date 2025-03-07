@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.1.15</Version>
+    <Version>0.0.1.16</Version>
     <Authors>CyberSource</Authors>
     <Product>Authentication_SDK</Product>
     <Description />
@@ -37,8 +37,8 @@
   <ItemGroup>
     <PackageReference Include="jose-jwt" Version="4.1.0" />
     <PackageReference Include="NLog" Version="5.0.0" />
-	<PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
     <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />
   </ItemGroup>
 

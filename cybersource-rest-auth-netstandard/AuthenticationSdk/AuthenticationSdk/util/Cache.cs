@@ -68,6 +68,7 @@ namespace AuthenticationSdk.util
             }
         }
 
+        [Obsolete("This method has been marked as Deprecated and will be removed in coming releases.", false)]
         public static RSAParameters FetchCachedRSAParameters(MerchantConfig merchantConfig)
         {
             lock (mutexForPrivateKeyFromPEM)

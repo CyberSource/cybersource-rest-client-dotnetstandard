@@ -18,6 +18,7 @@ using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
 using AuthenticationSdk.core;
+using CyberSource.Model;
 
 namespace CyberSource.Api
 {

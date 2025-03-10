@@ -19,8 +19,8 @@ namespace AuthenticationSdk.util
             new SensitiveTag("type", "[-A-Za-z0-9 ]+", "xxxxx", false),
             new SensitiveTag("token", "[-.A-Za-z0-9 ]+", "xxxxx", false),
             new SensitiveTag("signature", "[-.A-Za-z0-9 ]+", "xxxxx", false),
-            new SensitiveTag("prefix", "(\\s*)(\\p{N}{4})(\\s*)(\\p{N}{2})(\\s*\\p{N}*\\s*)", "$2$4xxxxx", false),
-            new SensitiveTag("bin", "(\\s*)(\\p{N}{4})(\\s*)(\\p{N}{2})(\\s*\\p{N}*\\s*)", "$2$4xxxxx", false)
+            new SensitiveTag("prefix", "(\\s*)(\\p{N}{4})(\\s*)(\\p{N}{2})(\\s*\\p{N}*\\s*)+", "$2$4xxxxx", false),
+            new SensitiveTag("bin", "(\\s*)(\\p{N}{4})(\\s*)(\\p{N}{2})(\\s*\\p{N}*\\s*)+", "$2$4xxxxx", false)
         };
 
         public static AuthenticationSchemeTag[] authenticationTags = new AuthenticationSchemeTag[]

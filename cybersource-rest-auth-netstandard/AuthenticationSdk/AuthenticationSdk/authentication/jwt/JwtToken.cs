@@ -21,7 +21,8 @@ namespace AuthenticationSdk.authentication.jwt
 
             KeyAlias = merchantConfig.KeyAlias;
             KeyPass = merchantConfig.KeyPass;
-            Certificate = Cache.FetchCachedCertificate(P12FilePath, KeyPass);
+            X509Certificate2Collection certs = Cache.FetchCachedCertificate(P12FilePath, KeyPass);
+            Certificate = Cache.GetCertBasedOnKeyAllias(certs, merchantConfig.KeyAlias);
         }
 
         public string BearerToken { get; set; }

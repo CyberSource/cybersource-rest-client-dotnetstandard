@@ -33,5 +33,9 @@ namespace AuthenticationSdk.util
         public static readonly string DeprecationPrefix = "Deprecated: ";
 
         public static readonly string P12FileDirectory = "..\\..\\Resource";
+
+        public static readonly string DefaultMleAliasForCert = "CyberSource_SJC_US";
+
+        public static readonly int CertificateExpiryDateWarningDays = 90;
     }
 }

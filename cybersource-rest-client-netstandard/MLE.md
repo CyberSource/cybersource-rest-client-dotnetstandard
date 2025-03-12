@@ -39,9 +39,26 @@ Another optional parameter for MLE is `mleKeyAlias`, which specifies the key ali
 
 ## Example Configuration
 
-to be added
+    private readonly Dictionary<string, string> _configurationDictionary = new Dictionary<string, string>();
+    private readonly Dictionary<string, bool> _configurationDictionaryforMLE = new Dictionary<string, bool>();
+    
+    public Dictionary<string, bool> GetMapToControlMLE()
+    {
+        _configurationDictionaryforMLE.Add("CreatePayment", true);         //CreatePayment function will have MLE=true i.e. (/pts/v2/payments POST API)      
+        _configurationDictionaryforMLE.Add("CapturePayment", false);       //capturePayment function will have MLE=false i.e.  (/pts/v2/payments/{id}/captures POST API)
 
-In the above examples:
+        return _configurationDictionaryforMLE;
+    }
+
+    public Dictionary<string, string> GetConfiguration()
+    {
+        _configurationDictionary.Add("authenticationType", "JWT");
+        _configurationDictionary.Add("useMLEGlobally", "true");     //globally MLE will be enabled for all the MLE supported APIs by Cybs in SDK
+        _configurationDictionary.Add("mleKeyAlias", "CyberSource_SJC_US");      //this is optional paramter, not required to set the parameter/value if custom value is not required for MLE key alias. Default value is "CyberSource_SJC_US".
+        //other properties
+    }
+            
+In the above example:
 - MLE is enabled/disabled globally (`useMLEGlobally` is true/false).
 - `apiFunctionName1` will have MLE disabled/enabled based on value provided.
 - `apiFunctionName2` will have MLE enabled.

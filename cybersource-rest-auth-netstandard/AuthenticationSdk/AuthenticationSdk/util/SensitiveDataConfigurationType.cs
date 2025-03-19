@@ -5,22 +5,22 @@ namespace AuthenticationSdk.util
     {
         public static SensitiveTag[] sensitiveTags = new SensitiveTag[]
         {
-            new SensitiveTag("securityCode", "[0-9]{3,4}", "xxxxx", false),
-            new SensitiveTag("number", "(\\s*\\p{N}\\s*)+(\\p{N}{4})(\\s*)", "xxxxx$2", false),
-            new SensitiveTag("cardNumber", "(\\s*\\p{N}\\s*)+(\\p{N}{4})(\\s*)", "xxxxx$2", false),
-            new SensitiveTag("expirationMonth", "[0-1][0-9]", "xxxx", false),
-            new SensitiveTag("expirationYear", "2[0-9][0-9][0-9]", "xxxx", false),
-            new SensitiveTag("account", "(\\s*\\p{N}\\s*)+(\\p{N}{4})(\\s*)", "xxxxx$2", false),
-            new SensitiveTag("routingNumber", "[0-9]+", "xxxxx", false),
-            new SensitiveTag("email", "[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", "xxxxx", false),
-            new SensitiveTag("firstName", "([a-zA-Z]+( )?[a-zA-Z]*'?-?[a-zA-Z]*( )?([a-zA-Z]*)?)", "xxxxx", false),
-            new SensitiveTag("lastName", "([a-zA-Z]+( )?[a-zA-Z]*'?-?[a-zA-Z]*( )?([a-zA-Z]*)?)", "xxxxx", false),
-            new SensitiveTag("phoneNumber", "(\\+[0-9]{1,2} )?\\(?[0-9]{3}\\)?[ .-]?[0-9]{3}[ .-]?[0-9]{4}", "xxxxx", false),
-            new SensitiveTag("type", "[-A-Za-z0-9 ]+", "xxxxx", false),
-            new SensitiveTag("token", "[-.A-Za-z0-9 ]+", "xxxxx", false),
-            new SensitiveTag("signature", "[-.A-Za-z0-9 ]+", "xxxxx", false),
-            new SensitiveTag("prefix", "(\\s*)(\\p{N}{4})(\\s*)(\\p{N}{2})(\\s*\\p{N}*\\s*)", "$2$4xxxxx", false),
-            new SensitiveTag("bin", "(\\s*)(\\p{N}{4})(\\s*)(\\p{N}{2})(\\s*\\p{N}*\\s*)", "$2$4xxxxx", false)
+            new SensitiveTag("securityCode", "", "", false),
+            new SensitiveTag("number", "", "", false),
+            new SensitiveTag("cardNumber", "", "", false),
+            new SensitiveTag("expirationMonth", "", "", false),
+            new SensitiveTag("expirationYear", "", "", false),
+            new SensitiveTag("account", "", "", false),
+            new SensitiveTag("routingNumber", "", "", false),
+            new SensitiveTag("email", "", "", false),
+            new SensitiveTag("firstName", "", "", false),
+            new SensitiveTag("lastName", "", "", false),
+            new SensitiveTag("phoneNumber", "", "", false),
+            new SensitiveTag("type", "", "", false),
+            new SensitiveTag("token", "", "", false),
+            new SensitiveTag("signature", "", "", false),
+            new SensitiveTag("prefix", "", "", false),
+            new SensitiveTag("bin", "", "", false)
         };
 
         public static AuthenticationSchemeTag[] authenticationTags = new AuthenticationSchemeTag[]

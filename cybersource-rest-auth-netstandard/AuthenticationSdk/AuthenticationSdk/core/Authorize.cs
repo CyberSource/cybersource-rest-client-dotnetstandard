@@ -63,12 +63,12 @@ namespace AuthenticationSdk.core
                     _logger.Debug($"Date: {signatureObj.GmtDateTime}");
                     _logger.Debug($"Host: {signatureObj.HostName}");
 
-                    if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
-                    {
-                        _logger.Debug($"digest: {signatureObj.Digest}");
-                    }
+                    //if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
+                    //{
+                    //    _logger.Debug($"digest: {signatureObj.Digest}");
+                    //}
 
-                    logUtility.LogDebugMessage( _logger, $"Signature : {signatureObj.SignatureParam}");
+                    //logUtility.LogDebugMessage( _logger, $"Signature : {signatureObj.SignatureParam}");
 
                     return signatureObj;
                 }
@@ -112,7 +112,7 @@ namespace AuthenticationSdk.core
                         _logger.Debug("Content-Type: application/hal+json");
                     }
 
-                    logUtility.LogDebugMessage(_logger, $"Authorization : Bearer {tokenObj.BearerToken}");
+                    //logUtility.LogDebugMessage(_logger, $"Authorization : Bearer {tokenObj.BearerToken}");
 
                     return tokenObj;
                 }
@@ -156,7 +156,7 @@ namespace AuthenticationSdk.core
                         _logger.Debug("Content-Type: application/hal+json");
                     }
 
-                    logUtility.LogDebugMessage(_logger, $"Authorization : Bearer {tokenObj.AccessToken}");
+                    //logUtility.LogDebugMessage(_logger, $"Authorization : Bearer {tokenObj.AccessToken}");
 
                     return tokenObj;
                 }

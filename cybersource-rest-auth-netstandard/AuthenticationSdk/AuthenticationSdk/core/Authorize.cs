@@ -63,12 +63,12 @@ namespace AuthenticationSdk.core
                     _logger.Debug($"Date: {signatureObj.GmtDateTime}");
                     _logger.Debug($"Host: {signatureObj.HostName}");
 
-                    //if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
-                    //{
-                    //    _logger.Debug($"digest: {signatureObj.Digest}");
-                    //}
+                    if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
+                    {
+                        logUtility.LogDebugMessage( _logger, $"digest: {signatureObj.Digest}");
+                    }
 
-                    //logUtility.LogDebugMessage( _logger, $"Signature : {signatureObj.SignatureParam}");
+                    logUtility.LogDebugMessage( _logger, $"Signature : {signatureObj.SignatureParam}");
 
                     return signatureObj;
                 }

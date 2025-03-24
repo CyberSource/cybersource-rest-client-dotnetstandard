@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using Newtonsoft.Json.Linq;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,7 @@ namespace AuthenticationSdk.util
     public class LogUtility
     {
         private static Dictionary<string, string> sensitiveTags = new Dictionary<string, string>();
+        private static List<string> sensitiveTagsList = new List<string>();
         private static Dictionary<string, string> authenticationTags = new Dictionary<string, string>();
 
         public LogUtility()
@@ -34,9 +36,11 @@ namespace AuthenticationSdk.util
             lock(mutex)
             {
                 sensitiveTags.Clear();
+                sensitiveTagsList.Clear();
                 authenticationTags.Clear();
 
                 sensitiveTags = SensitiveTags.getSensitiveTags();
+                sensitiveTagsList = SensitiveTags.getSensitiveTagsList();
                 authenticationTags = AuthenticationTags.getAuthenticationTags();
 
                 loaded = true;
@@ -45,53 +49,66 @@ namespace AuthenticationSdk.util
 
         public string MaskSensitiveData(string str)
         {
+            bool isJsonString;
             try
             {
-                foreach (KeyValuePair<string, string> tag in sensitiveTags)
+                JObject jsonObject = JObject.Parse(str);
+                isJsonString = true;
+
+                MaskSensitiveData(jsonObject);
+
+                return jsonObject.ToString();
+            }
+            catch (Exception)
+            {
+                isJsonString = false;
+            }
+
+            if (!isJsonString)
+            {
+                try
                 {
-                    //removing the space and hypen from PAN details before masking
-                    if (tag.Key.StartsWith("\\\"number\\\"") || tag.Key.StartsWith("\\\"cardNumber\\\"") || tag.Key.StartsWith("\\\"account\\\"")
-                         || tag.Key.StartsWith("\\\"prefix\\\"") || tag.Key.StartsWith("\\\"bin\\\""))
+                    foreach (KeyValuePair<string, string> tag in authenticationTags)
                     {
-                        string[] splittedStr = tag.Key.Split(':');
-                        string tagName = splittedStr[0];
-                        string specialPatternForPAN = "(((\\s*[s/-]*\\s*)+)\\p{N}((\\s*[s/-]*\\s*)+))+";
-
-                        // match the patters for PAN number
-                        MatchCollection matches = Regex.Matches(str, $"{tagName}:\\\"{specialPatternForPAN}\\\"");
-
-                        //remove space and dash from the all matched pattern
-                        foreach (Match match in matches)
-                        {
-                            String strr = match.ToString();
-                            strr = strr.Replace(" ", "");
-                            strr = strr.Replace("-", "");
-                            //replace original value in str with match
-                            str = str.Replace(match.ToString(), strr);
-                        }
+                        str = Regex.Replace(str, tag.Key, tag.Value);
                     }
-                    str = Regex.Replace(str, tag.Key, tag.Value);
                 }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
-            try
-            {
-                foreach (KeyValuePair<string, string> tag in authenticationTags)
+                catch (Exception e)
                 {
-                    str = Regex.Replace(str, tag.Key, tag.Value);
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
+                    throw e;
+                } 
             }
 
             return str;
         }
+
+        public void MaskSensitiveData(JObject jsonMsg)
+        {
+            foreach (var prop in jsonMsg.Properties())
+            {
+                bool isFieldSensitive = sensitiveTagsList.Contains(prop.Name);
+                if (isFieldSensitive)
+                {
+                    if (prop.Value != null && prop.Value.Type != JTokenType.Null)
+                    {
+                        if (prop.Value.Type == JTokenType.String)
+                        {
+                            string originalValue = prop.Value.ToString();
+                            prop.Value = new string('X', originalValue.Length);
+                        }
+                        else if (prop.Value.Type == JTokenType.Object)
+                        {
+                            MaskSensitiveData((JObject)prop.Value);
+                        }
+                    }
+                }
+                else if (prop.Value.Type == JTokenType.Object)
+                {
+                    MaskSensitiveData((JObject)prop.Value);
+                }
+            }
+        }
+
 
         public void LogDebugMessage(Logger logger, String debugMessage)
         {

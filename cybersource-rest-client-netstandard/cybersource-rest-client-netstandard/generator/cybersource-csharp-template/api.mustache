@@ -290,7 +290,7 @@ namespace {{packageName}}.{{apiPackage}}
             }
             {{/pathParams}}
             {{#pathParams}}
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            //logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             {{/pathParams}}
             {{#queryParams}}
             if ({{paramName}} != null)
@@ -299,7 +299,7 @@ namespace {{packageName}}.{{apiPackage}}
             }
             {{/queryParams}}
             {{#queryParams}}
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            //logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             {{/queryParams}}
             {{#headerParams}}
             if ({{paramName}} != null)
@@ -497,7 +497,7 @@ namespace {{packageName}}.{{apiPackage}}
             }
             {{/pathParams}}
             {{#pathParams}}
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            //logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
             {{/pathParams}}
             {{#queryParams}}
             if ({{paramName}} != null)
@@ -506,7 +506,7 @@ namespace {{packageName}}.{{apiPackage}}
             }
             {{/queryParams}}
             {{#queryParams}}
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            //logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
             {{/queryParams}}
             {{#headerParams}}
             if ({{paramName}} != null)

@@ -20,7 +20,8 @@ namespace AuthenticationSdk.util
             new SensitiveTag("token", "", "", false),
             new SensitiveTag("signature", "", "", false),
             new SensitiveTag("prefix", "", "", false),
-            new SensitiveTag("bin", "", "", false)
+            new SensitiveTag("bin", "", "", false),
+            new SensitiveTag("encryptedRequest", "", "", false)
         };
 
         public static AuthenticationSchemeTag[] authenticationTags = new AuthenticationSchemeTag[]

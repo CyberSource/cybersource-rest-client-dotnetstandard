@@ -1,4 +1,5 @@
 ﻿using AuthenticationSdk.core;
+using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ namespace AuthenticationSdk.util
                 return null;
             }
             string payload = requestBody.ToString();
-            logUtility.LogDebugMessage(logger, "LOG_REQUEST_BEFORE_MLE: " + payload);
+            logUtility.LogDebugMessage(logger, Constants.LOG_REQUEST_BEFORE_MLE + payload);
 
             X509Certificate2 mleCertificate = GetMLECertificate(merchantConfig);
             string serialNumber = GetSerialNumberFromCertificate(mleCertificate, merchantConfig);
@@ -69,7 +70,7 @@ namespace AuthenticationSdk.util
                 });
 
             object mleRequest = CreateJsonObject(jweToken);
-            logUtility.LogDebugMessage(logger, "LOG_REQUEST_AFTER_MLE: " + mleRequest.ToString());
+            logUtility.LogDebugMessage(logger, Constants.LOG_REQUEST_AFTER_MLE + mleRequest.ToString());
 
             return mleRequest;
         }
@@ -132,26 +133,10 @@ namespace AuthenticationSdk.util
             return serialNumber;
         }
 
-        [System.Runtime.Serialization.DataContract]
-        private class MLERequest
-        {
-            [System.Runtime.Serialization.DataMember]
-            public string encryptedRequest { get; set; }
-        }
-
         private static object CreateJsonObject(string jweToken)
         {
-            var jsonObject = new MLERequest { encryptedRequest = jweToken };
-            var serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(typeof(MLERequest));
-            using (var memoryStream = new System.IO.MemoryStream())
-            {
-                serializer.WriteObject(memoryStream, jsonObject);
-                memoryStream.Position = 0;
-                using (var reader = new System.IO.StreamReader(memoryStream))
-                {
-                    return reader.ReadToEnd();
-                }
-            }
+            var jsonObject = new { encryptedRequest = jweToken };
+            return JsonConvert.SerializeObject(jsonObject);
         }
 
     }

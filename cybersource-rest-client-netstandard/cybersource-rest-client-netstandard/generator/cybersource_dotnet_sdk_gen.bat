@@ -146,5 +146,6 @@ rd /s /q ..\..\..\docs
 git checkout ..\Api\OAuthApi.cs
 git checkout ..\Model\AccessTokenResponse.cs
 git checkout ..\Model\CreateAccessTokenRequest.cs
+del ..\Client\IReadableConfiguration.cs
 
 pause

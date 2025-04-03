@@ -24,7 +24,13 @@ namespace AuthenticationSdk.util
 
         private static readonly string regexForFileNameFromDirectory = "(^([a-z]|[A-Z]):(?=\\\\(?![\\0-\\37<>:\"/\\\\|?*])|\\/(?![\\0-\\37<>:\"/\\\\|?*])|$)|^\\\\(?=[\\\\\\/][^\\0-\\37<>:\"/\\\\|?*]+)|^(?=(\\\\|\\/)$)|^\\.(?=(\\\\|\\/)$)|^\\.\\.(?=(\\\\|\\/)$)|^(?=(\\\\|\\/)[^\\0-\\37<>:\"/\\\\|?*]+)|^\\.(?=(\\\\|\\/)[^\\0-\\37<>:\"/\\\\|?*]+)|^\\.\\.(?=(\\\\|\\/)[^\\0-\\37<>:\"/\\\\|?*]+))((\\\\|\\/)([^\\0-\\37<>:\"/\\\\|?*]+|(\\\\|\\/)$))*()$";
 
-        public static X509Certificate2 FetchCachedCertificate(string p12FilePath, string keyPassword)
+        private class CertInfo
+        {
+            public X509Certificate2Collection Certificates { get; set; }
+            public DateTime Timestamp { get; set; }
+        }
+
+        public static X509Certificate2Collection FetchCachedCertificate(string p12FilePath, string keyPassword)
         {
             try
             {
@@ -34,30 +40,27 @@ namespace AuthenticationSdk.util
 
                     var matches = Regex.Match(p12FilePath, regexForFileNameFromDirectory);
                     var certFile = matches.Groups[11].ToString();
-
-                    if (!cache.Contains(certFile))
+                    if (!cache.Contains(certFile) || ((CertInfo)cache[certFile]).Timestamp != File.GetLastWriteTime(p12FilePath))
                     {
                         var policy = new CacheItemPolicy();
                         var filePaths = new List<string>();
                         var cachedFilePath = Path.GetFullPath(p12FilePath);
                         filePaths.Add(cachedFilePath);
                         policy.ChangeMonitors.Add(new HostFileChangeMonitor(filePaths));
+                        var certificates = new X509Certificate2Collection();
+                        certificates.Import(p12FilePath, keyPassword, X509KeyStorageFlags.PersistKeySet);
 
-                        var certificate = new X509Certificate2(p12FilePath, keyPassword);
-                        cache.Set(certFile, certificate, policy);
-                        return certificate;
+                        CertInfo certInfo = new CertInfo();
+                        certInfo.Certificates = certificates;
+                        certInfo.Timestamp = File.GetLastWriteTime(p12FilePath);
+
+                        cache.Set(certFile, certInfo, policy);
                     }
-                    else if (cache[certFile] is X509Certificate2 cachedCertificateFromP12File)
-                    {
-                        return cachedCertificateFromP12File;
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    //return all certs in p12
+                    return ((CertInfo)cache[certFile]).Certificates;
                 }
             }
-            catch (CryptographicException e)
+            catch (Exception e)
             {
                 if (e.Message.Equals("The specified network password is not correct.\r\n"))
                 {
@@ -96,6 +99,19 @@ namespace AuthenticationSdk.util
                 }
                 return (RSAParameters)cache[certFile];
             }
+        }
+
+        public static X509Certificate2 GetCertBasedOnKeyAllias(X509Certificate2Collection certs, String keyAlias)
+        {
+            foreach (var cert in certs)
+            {
+                if (cert.GetNameInfo(X509NameType.SimpleName, false).Equals(keyAlias, StringComparison.OrdinalIgnoreCase))
+                {
+                    return cert;
+                }
+            }
+            throw new Exception($"{Constants.ErrorPrefix} Certificate with alias {keyAlias} not found.");
+
         }
     }
 }

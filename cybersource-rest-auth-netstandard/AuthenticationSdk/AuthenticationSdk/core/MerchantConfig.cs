@@ -18,7 +18,7 @@ namespace AuthenticationSdk.core
     *============================================================================================*/
     public class MerchantConfig
     {
-        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null)
+        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, bool> mapToControlMLEonAPI = null)
         {
             var _propertiesSetUsing = string.Empty;
 
@@ -37,7 +37,7 @@ namespace AuthenticationSdk.core
             {
                 _propertiesSetUsing = "Dictionary Object";
 
-                SetValuesUsingDictObj(merchantConfigDictionary);
+                SetValuesUsingDictObj(merchantConfigDictionary, mapToControlMLEonAPI);
             }
             else
             {
@@ -48,7 +48,7 @@ namespace AuthenticationSdk.core
                 {
                     _propertiesSetUsing = "App.Config File";
 
-                    SetValuesFromAppConfig(merchantConfigSection);
+                    SetValuesFromAppConfig(merchantConfigSection, mapToControlMLEonAPI);
                 }
                 else
                 {
@@ -64,6 +64,8 @@ namespace AuthenticationSdk.core
 
             // Validations
             ValidateProperties();
+            //validate MLE configs
+            ValidateMLEProperties();
         }
 
         #region Class Properties
@@ -162,6 +164,12 @@ namespace AuthenticationSdk.core
 
         public string PemFileDirectory { get; set; }
 
+        public bool UseMLEGlobally { get; set; }
+
+        public Dictionary<string, bool> MapToControlMLEonAPI { get; set; }
+
+        public string MleKeyAlias { get; set; }
+
         #endregion
 
         public void LogMerchantConfigurationProperties()
@@ -195,7 +203,7 @@ namespace AuthenticationSdk.core
             Logger.Debug($"Merchant Configuration :\n{merchCfgLogString}");
         }
 
-        private void SetValuesFromAppConfig(NameValueCollection merchantConfigSection)
+        private void SetValuesFromAppConfig(NameValueCollection merchantConfigSection, Dictionary<string, bool> mapToControlMLEonAPI)
         {
             MerchantId = merchantConfigSection["merchantID"];
             PortfolioId = merchantConfigSection["portfolioID"];
@@ -223,9 +231,30 @@ namespace AuthenticationSdk.core
             ProxyUsername = merchantConfigSection["proxyUsername"];
             ProxyPassword = merchantConfigSection["proxyPassword"];
             PemFileDirectory = merchantConfigSection["pemFileDirectory"];
+
+            if (merchantConfigSection["useMLEGlobally"] != null && "true".Equals(merchantConfigSection["useMLEGlobally"], StringComparison.OrdinalIgnoreCase))
+            {
+                UseMLEGlobally = bool.Parse(merchantConfigSection["useMLEGlobally"]);
+            }
+            else
+            {
+                UseMLEGlobally = false;
+            }
+            
+            MapToControlMLEonAPI = mapToControlMLEonAPI;
+
+            if (merchantConfigSection["mleKeyAlias"] != null)
+            {
+                MleKeyAlias = merchantConfigSection["mleKeyAlias"]?.Trim();
+            }
+
+            if (string.IsNullOrWhiteSpace(MleKeyAlias?.Trim()))
+            {
+                MleKeyAlias = Constants.DefaultMleAliasForCert;
+            }
         }
 
-        private void SetValuesUsingDictObj(IReadOnlyDictionary<string, string> merchantConfigDictionary)
+        private void SetValuesUsingDictObj(IReadOnlyDictionary<string, string> merchantConfigDictionary, Dictionary<string, bool> mapToControlMLEonAPI)
         {
             var key = string.Empty;
 
@@ -434,6 +463,31 @@ namespace AuthenticationSdk.core
                     {
                         PemFileDirectory = merchantConfigDictionary["pemFileDirectory"];
                     }
+
+                    if (merchantConfigDictionary.ContainsKey("useMLEGlobally") && "true".Equals(merchantConfigDictionary["useMLEGlobally"], StringComparison.OrdinalIgnoreCase))
+                    {
+                        UseMLEGlobally = bool.Parse(merchantConfigDictionary["useMLEGlobally"]);
+                    }
+                    else
+                    {
+                        UseMLEGlobally = false;
+                    }
+
+                    if (mapToControlMLEonAPI != null)
+                    {
+                        MapToControlMLEonAPI = mapToControlMLEonAPI;
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("mleKeyAlias"))
+                    {
+                        MleKeyAlias = merchantConfigDictionary["mleKeyAlias"]?.Trim();
+                    }
+
+                    //if MleKeyAlias is null or empty or contains only whitespace then set default value
+                    if (string.IsNullOrWhiteSpace(MleKeyAlias?.Trim()))
+                    {
+                        MleKeyAlias = Constants.DefaultMleAliasForCert;
+                    }
                 }
             }
             catch (KeyNotFoundException err)
@@ -545,6 +599,30 @@ namespace AuthenticationSdk.core
                 var pathDirectorySeparator = Path.DirectorySeparatorChar;
 
                 P12Keyfilepath = $"{KeyDirectory}{pathDirectorySeparator}{KeyfileName}.p12";
+            }
+        }
+
+        private void ValidateMLEProperties()
+        {
+            bool mleConfigured = UseMLEGlobally;
+
+            if (MapToControlMLEonAPI != null && MapToControlMLEonAPI.Count > 0)
+            {
+                foreach (bool value in MapToControlMLEonAPI.Values)
+                {
+                    if (value)
+                    {
+                        mleConfigured = true;
+                        break;
+                    }
+                }
+            }
+
+            //if MLE=true then check for auth Type
+            if (mleConfigured && !Enumerations.AuthenticationType.JWT.ToString().Equals(AuthenticationType, StringComparison.OrdinalIgnoreCase))
+            {
+                Logger.Error("MLE is only supported in JWT auth type");
+                throw new Exception("MLE is only supported in JWT auth type");
             }
         }
     }

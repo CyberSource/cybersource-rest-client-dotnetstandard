@@ -38,6 +38,7 @@ namespace CyberSource.Client
         /// <param name="timeout">HTTP connection timeout (in milliseconds)</param>
         /// <param name="userAgent">HTTP user agent</param>
         /// <param name="merchConfigDictObj">Dictiory Object for Merchant Config</param>
+        /// <param name="mapToControlMLEonAPI">Dictiory Object for Controlling MLE on API level</param>
         public Configuration(ApiClient apiClient = null,
                              Dictionary<string, string> defaultHeader = null,
                              string username = null,
@@ -49,7 +50,8 @@ namespace CyberSource.Client
                              string dateTimeFormat = null,
                              int timeout = 100000,
                              string userAgent = "Swagger-Codegen/1.0.0/csharp",
-                             IReadOnlyDictionary<string, string> merchConfigDictObj = null
+                             IReadOnlyDictionary<string, string> merchConfigDictObj = null,
+                             Dictionary<string, bool> mapToControlMLEonAPI = null
                             )
         {
             SetApiClientUsingDefault(apiClient);
@@ -99,6 +101,7 @@ namespace CyberSource.Client
             DateTimeFormat = dateTimeFormat;
             Timeout = timeout;
             MerchantConfigDictionaryObj = merchConfigDictObj;
+            MapToControlMLEonAPI = mapToControlMLEonAPI;
         }
 
         private string GetClientId()
@@ -194,6 +197,11 @@ namespace CyberSource.Client
         /// </summary>
         public Dictionary<string, string> DefaultHeader { get; set; } = new Dictionary<string, string>();
 
+        /// <summary>
+        /// Gets or sets the MapToControlMLEonAPI
+        /// </summary>
+        public Dictionary<string, bool> MapToControlMLEonAPI { get; set; } = new Dictionary<string, bool>();
+        
         /// <summary>
         /// Add default header.
         /// </summary>

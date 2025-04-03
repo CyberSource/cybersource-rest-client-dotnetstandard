@@ -49,6 +49,15 @@ namespace AuthenticationSdk.util
 
         public string MaskSensitiveData(string str)
         {
+            if (str.StartsWith(Constants.LOG_REQUEST_BEFORE_MLE))
+            {
+                return Constants.LOG_REQUEST_BEFORE_MLE + MaskSensitiveData(str.Substring(Constants.LOG_REQUEST_BEFORE_MLE.Length));
+            }
+            if (str.StartsWith(Constants.LOG_REQUEST_AFTER_MLE))
+            {
+                return Constants.LOG_REQUEST_AFTER_MLE + MaskSensitiveData(str.Substring(Constants.LOG_REQUEST_AFTER_MLE.Length));
+            }
+
             bool isJsonString;
             try
             {
@@ -112,14 +121,7 @@ namespace AuthenticationSdk.util
 
         public void LogDebugMessage(Logger logger, String debugMessage)
         {
-            if (IsMaskingEnabled(logger))
-            {
-                logger.Debug(MaskSensitiveData(debugMessage));
-            }
-            else
-            {
-                logger.Debug(debugMessage);
-            }
+            logger.Debug(MaskSensitiveData(debugMessage));
         }
 
         public bool IsMaskingEnabled(Logger logger)

@@ -177,7 +177,9 @@ namespace CyberSource.Client
                     request.AddHeader(param.Key, param.Value);
             }
 
-            if (postBody == null)
+            request.AddHeader("Content-Type", contentType);
+
+            if (postBody == null && fileParams.Count <= 0)
             {
                 CallAuthenticationHeaders(method.ToString(), path);
             }
@@ -228,6 +230,10 @@ namespace CyberSource.Client
                         {
                             request.AddParameter(param.Key, param.Value, ParameterType.GetOrPost);
                         }
+                    }
+                    else if (contentType.Contains("multipart/form-data"))
+                    {
+                        request.AddBody(postBody, "multipart/form-data");
                     }
                     else
                     {

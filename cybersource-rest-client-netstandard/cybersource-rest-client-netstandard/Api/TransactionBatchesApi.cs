@@ -19,6 +19,8 @@ using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
 using AuthenticationSdk.core;
+using System.IO;
+using System.Text;
 
 namespace CyberSource.Api
 {
@@ -1102,9 +1104,12 @@ namespace CyberSource.Api
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
 
+            string boundary = Guid.NewGuid().ToString("N");
+            string delimiter = "-------------" + boundary;
+
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "multipart/form-data"
+                "multipart/form-data; boundary=" + delimiter
             };
             string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
@@ -1118,13 +1123,46 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (_file != null)
+            string fileContent = null;
+            using (var reader = new StreamReader(_file))
             {
-                localVarFileParams.Add("file", Configuration.ApiClient.ParameterToFile("file", _file));
+                fileContent = reader.ReadToEnd();
             }
+
+            string fileName = "";
+            if (_file is FileStream fileStream)
+            {
+                fileName = Path.GetFileName(fileStream.Name);
+            }
+
+            localVarFormParams.Add(fileName, fileContent);
+
+            //if (_file != null)
+            //{
+            //localVarFileParams.Add("file", Configuration.ApiClient.ParameterToFile("file", _file));
+            ////}
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
+                StringBuilder data = new StringBuilder();
+                string eol = "\r\n";
+
+                foreach (var param in localVarFormParams)
+                {
+                    string name = param.Key;
+                    string content = param.Value;
+
+                    data.Append("--").Append(delimiter).Append(eol);
+                    data.Append("Content-Disposition: form-data; name=\"").Append(name).Append("\"; filename=\"").Append(name).Append("\"").Append(eol);
+                    data.Append("Content-Transfer-Encoding: binary").Append(eol);
+                    data.Append(eol);
+                    data.Append(content).Append(eol);
+                }
+
+                data.Append("--").Append(delimiter).Append("--").Append(eol);
+
+                localVarPostBody = data.ToString();
+                localVarFormParams = new Dictionary<String, String>();
             }
             else
             {

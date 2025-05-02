@@ -19,6 +19,7 @@ using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
 using AuthenticationSdk.core;
+using CyberSource.Utilities;
 
 namespace CyberSource.Api
 {
@@ -1099,7 +1100,7 @@ namespace CyberSource.Api
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
-            var localVarFileParams = new Dictionary<string, FileParameter>();
+            var localVarFileParams = new Dictionary<string, System.IO.Stream>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -1120,7 +1121,7 @@ namespace CyberSource.Api
 
             if (_file != null)
             {
-                localVarFileParams.Add("file", Configuration.ApiClient.ParameterToFile("file", _file));
+                localVarFileParams.Add("file", _file);
             }
             if (Method.Post == Method.Post)
             {
@@ -1130,7 +1131,13 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            
+            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if(null!= filePostBodyAndDelimiter)
+            {
+                localVarPostBody = filePostBodyAndDelimiter[0];
+                localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
+            }
+
             bool isMLESupportedByCybsForApi = false;
             MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "UploadTransactionBatch,UploadTransactionBatchAsync,UploadTransactionBatchWithHttpInfo,UploadTransactionBatchAsyncWithHttpInfo"))

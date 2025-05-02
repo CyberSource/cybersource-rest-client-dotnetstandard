@@ -562,7 +562,7 @@ namespace CyberSource.Client
             // set user agent
             RestClientOptions clientOptions = new RestClientOptions(RestClient.Options.BaseUrl)
             {
-                Timeout = TimeSpan.FromMilliseconds(Configuration.Timeout),
+                Timeout = TimeSpan.FromMilliseconds(Configuration.Timeout)
             };
 
             logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");

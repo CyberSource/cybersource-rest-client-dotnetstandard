@@ -19,6 +19,8 @@ using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
 using AuthenticationSdk.core;
+using System.IO;
+using System.Text;
 
 namespace CyberSource.Api
 {
@@ -1118,10 +1120,52 @@ namespace CyberSource.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
             }
 
-            if (_file != null)
+            ///////////   multipart //////////////
+            string boundary = Guid.NewGuid().ToString("N");
+            string[] localVarHttpContentTypes1 = new string[] {
+                "multipart/form-data"
+            };
+            string fileContent = null;
+            using (var reader = new StreamReader(_file))
             {
-                localVarFileParams.Add("file", Configuration.ApiClient.ParameterToFile("file", _file));
+                fileContent = reader.ReadToEnd();
+                // fileContent now contains the content of the file as a string  
             }
+            string fileName = "";
+            if (_file is FileStream fileStream)
+            {
+                fileName = Path.GetFileName(fileStream.Name);
+                // fileName now contains the name of the file
+            }
+
+            // Create the multipart body
+            var bodyBuilder = new StringBuilder();
+            bodyBuilder.AppendLine($"--{boundary}");
+            bodyBuilder.AppendLine($"Content-Disposition: form-data; name=\"file\"; filename=\"{fileName}\"");
+            bodyBuilder.AppendLine("Content-Type: multipart/form-data");
+            bodyBuilder.AppendLine();
+            bodyBuilder.AppendLine(fileContent); // Add file content
+            bodyBuilder.AppendLine($"--{boundary}--");
+
+            localVarHttpContentType = "multipart/form-data"; // boundary=--" + boundary;
+
+            // Convert the body to a byte array
+            byte[] bodyBytes = Encoding.UTF8.GetBytes(bodyBuilder.ToString());
+
+
+            localVarFormParams.Add(fileName, fileContent);
+
+
+
+            //if (_file != null)
+            //{
+            //    localVarFileParams.Add("file", Configuration.ApiClient.ParameterToFile("file", _file));
+            //}
+
+
+
+
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1130,7 +1174,8 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            
+            localVarPostBody = bodyBuilder.ToString();
+
             bool isMLESupportedByCybsForApi = false;
             MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "UploadTransactionBatch,UploadTransactionBatchAsync,UploadTransactionBatchWithHttpInfo,UploadTransactionBatchAsyncWithHttpInfo"))

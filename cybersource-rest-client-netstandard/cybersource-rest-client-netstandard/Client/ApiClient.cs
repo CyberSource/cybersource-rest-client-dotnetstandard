@@ -176,14 +176,24 @@ namespace CyberSource.Client
                 else
                     request.AddHeader(param.Key, param.Value);
             }
+            
+            // add form parameter, if any
+            foreach (var param in formParams)
+                request.AddParameter(param.Key, param.Value);
 
-            if (postBody == null)
+            var param1 = "";
+            foreach (var parameter in request.Parameters)
+            {
+                param1 = parameter.Value.ToString();
+            }
+
+                if (postBody == null)
             {
                 CallAuthenticationHeaders(method.ToString(), path);
             }
             else
             {
-                CallAuthenticationHeaders(method.ToString(), path, postBody.ToString());
+                CallAuthenticationHeaders(method.ToString(), path, param1); // postBody.ToString());
             }
 
             foreach (var param in Configuration.DefaultHeader)
@@ -207,16 +217,12 @@ namespace CyberSource.Client
             // foreach(var param in queryParams)
             //     request.AddQueryParameter(param.Key, param.Value);
 
-            // add form parameter, if any
-            foreach(var param in formParams)
-                request.AddParameter(param.Key, param.Value);
-
             // add file parameter, if any
             foreach(var param in fileParams)
             {
                 request.AddFile(param.Value.Name, param.Value.FileName, param.Value.ContentType);
             }
-
+            //postBody = null;
             if (postBody != null) // http body (model or byte[]) parameter
             {
                 if (postBody.GetType() == typeof(string))
@@ -232,14 +238,40 @@ namespace CyberSource.Client
                     else
                     {
                         // request.AddParameter("application/json", postBody, ParameterType.RequestBody);
-                        request.AddJsonBody(postBody);
+                        //request.AddJsonBody(postBody);
+                        //request.AddParameter(contentType, postBody, ParameterType.RequestBody);
+                        //request.AddBody(postBody, contentType);
                     }
                 }
                 else if (postBody.GetType() == typeof(byte[]))
                 {
                     request.AddParameter(contentType, postBody, ParameterType.RequestBody);
                 }
+                //request.AddParameter(contentType, postBody, ParameterType.RequestBody);
             }
+
+
+            // Inspect all parameters in the request
+            foreach (var parameter in request.Parameters)
+            {
+                //if (parameter.Type == ParameterType.File)
+                //{
+                //    Console.WriteLine("File Parameter:");
+                //    Console.WriteLine($"Name: {parameter.Name}");
+                //    Console.WriteLine($"Value: {parameter.Value}"); // This will likely be the file path or file stream
+                //}
+                //else
+                if (parameter.Type == ParameterType.RequestBody)
+                {
+                    Console.WriteLine("Request Body:");
+                    Console.WriteLine(parameter.Value);
+                }
+                else
+                {
+                    Console.WriteLine($"Other Parameter - Name: {parameter.Name}, Value: {parameter.Value}");
+                }
+            }
+
 
             return request;
         }
@@ -440,6 +472,8 @@ namespace CyberSource.Client
                 headerParams.Add("Accept", defaultAcceptHeader);
             }
 
+            headerParams.Add("Content-Type", contentType);
+
             //check if the Response is to be downloaded as a file, this value to be set by the calling API class
             var request = PrepareRequest(
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,
@@ -507,6 +541,7 @@ namespace CyberSource.Client
             foreach (var header in httpResponseHeaders)
             {
                 responseHeadersBuilder.Append($"{header}\n");
+                Console.WriteLine($"{header}");
             }
 
             logger.Debug($"HTTP Response Headers :\n{logUtility.MaskSensitiveData(responseHeadersBuilder.ToString())}");
@@ -611,7 +646,7 @@ namespace CyberSource.Client
         public FileParameter ParameterToFile(string name, Stream stream)
         {
             if (stream is FileStream)
-                return FileParameter.Create(name, ReadAsBytes(stream), Path.GetFileName(((FileStream)stream).Name));
+                return FileParameter.Create(name, ReadAsBytes(stream), (((FileStream)stream).Name));
             else
                 return FileParameter.Create(name, ReadAsBytes(stream), "no_file_name_provided");
         }

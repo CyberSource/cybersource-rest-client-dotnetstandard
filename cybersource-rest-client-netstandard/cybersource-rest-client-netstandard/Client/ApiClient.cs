@@ -212,10 +212,10 @@ namespace CyberSource.Client
                 request.AddParameter(param.Key, param.Value);
 
             // add file parameter, if any
-            foreach(var param in fileParams)
-            {
-                request.AddFile(param.Value.Name, param.Value.FileName, param.Value.ContentType);
-            }
+            //foreach(var param in fileParams)
+            //{
+            //    request.AddFile(param.Value.Name, param.Value.FileName, param.Value.ContentType);
+            //}
 
             if (postBody != null) // http body (model or byte[]) parameter
             {
@@ -228,6 +228,11 @@ namespace CyberSource.Client
                         {
                             request.AddParameter(param.Key, param.Value, ParameterType.GetOrPost);
                         }
+                    }
+                    else if (contentType.Contains("multipart/form-data"))
+                    {
+                        request.AddBody(postBody, "multipart/form-data");
+                        request.AddHeader("Content-Type", contentType); //required to set in case of file params 
                     }
                     else
                     {

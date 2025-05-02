@@ -9,7 +9,7 @@ namespace CyberSource.Utilities
 {
     public static class MultipartHelpers
     {
-        public static string[] BuildPostBodyForFiles(Dictionary<string, System.IO.Stream> localVarFileParams)
+        public static string[] BuildPostBodyForFiles(Dictionary<string, FileParameter> localVarFileParams)
         {
             if (localVarFileParams == null || localVarFileParams.Count == 0)
             {
@@ -19,21 +19,14 @@ namespace CyberSource.Utilities
             Dictionary<string, string> localVarForFileNameAndContent = new Dictionary<string, string>();
             foreach(var fileParam in localVarFileParams)
             {
+                string fileName = fileParam.Value.FileName;
                 string fileContent = null;
-                using (var reader = new StreamReader(fileParam.Value))
+                using (var reader = new StreamReader(fileParam.Value.GetFile()))
                 {
                     fileContent = reader.ReadToEnd();
                     // fileContent now contains the content of the file as a string  
                 }
-                string fileName = "";
-                if (fileParam.Value is FileStream fileStream)
-                {
-                    fileName = Path.GetFileName(fileStream.Name);
-                    // fileName now contains the name of the file
-                }
-
                 localVarForFileNameAndContent.Add(fileName, fileContent);
-
             }
 
             string boundary = Guid.NewGuid().ToString("N");

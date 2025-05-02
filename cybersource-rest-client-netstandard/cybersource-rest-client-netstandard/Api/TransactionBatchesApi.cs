@@ -1100,7 +1100,7 @@ namespace CyberSource.Api
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
-            var localVarFileParams = new Dictionary<string, System.IO.Stream>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
 
             // to determine the Content-Type header
@@ -1121,7 +1121,7 @@ namespace CyberSource.Api
 
             if (_file != null)
             {
-                localVarFileParams.Add("file", _file);
+                localVarFileParams.Add("file", Configuration.ApiClient.ParameterToFile("file", _file));
             }
             if (Method.Post == Method.Post)
             {

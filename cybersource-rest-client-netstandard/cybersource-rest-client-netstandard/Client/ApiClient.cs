@@ -212,10 +212,10 @@ namespace CyberSource.Client
                 request.AddParameter(param.Key, param.Value);
 
             // add file parameter, if any
-            foreach(var param in fileParams)
-            {
-                request.AddFile(param.Value.Name, param.Value.FileName, param.Value.ContentType);
-            }
+            //foreach(var param in fileParams)
+            //{
+                //request.AddFile(param.Value.Name, param.Value.FileName, param.Value.ContentType);
+            //}
 
             if (postBody != null) // http body (model or byte[]) parameter
             {
@@ -228,6 +228,11 @@ namespace CyberSource.Client
                         {
                             request.AddParameter(param.Key, param.Value, ParameterType.GetOrPost);
                         }
+                    }
+                    else if (contentType.Contains("multipart/form-data"))
+                    {
+                        request.AddBody(postBody, "multipart/form-data");
+                        request.AddHeader("Content-Type", contentType); //required to set in case of file params 
                     }
                     else
                     {
@@ -557,7 +562,7 @@ namespace CyberSource.Client
             // set user agent
             RestClientOptions clientOptions = new RestClientOptions(RestClient.Options.BaseUrl)
             {
-                Timeout = TimeSpan.FromMilliseconds(Configuration.Timeout),
+                Timeout = TimeSpan.FromMilliseconds(Configuration.Timeout)
             };
 
             logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
@@ -706,7 +711,19 @@ namespace CyberSource.Client
             // at this point, it must be a model (json)
             try
             {
-                return JsonConvert.DeserializeObject(response.Content, type, serializerSettings);
+                if (type == typeof(Model.PblPaymentLinksAllGet200Response))
+                {
+                    JsonSerializerSettings customSerializerSettings = new JsonSerializerSettings
+                    {
+                        ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
+                        ContractResolver = new Utilities.CustomContractResolver()
+                    };
+                    return JsonConvert.DeserializeObject(response.Content, type, customSerializerSettings);
+                }
+                else
+                {
+                    return JsonConvert.DeserializeObject(response.Content, type, serializerSettings);
+                }
             }
             catch (Exception e)
             {

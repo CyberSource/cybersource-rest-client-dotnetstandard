@@ -41,5 +41,9 @@ namespace AuthenticationSdk.util
         public static readonly string LOG_REQUEST_BEFORE_MLE = "LOG_REQUEST_BEFORE_MLE: ";
 
         public static readonly string LOG_REQUEST_AFTER_MLE = "LOG_REQUEST_AFTER_MLE: ";
+
+        public static readonly string MLE_CACHE_IDENTIFIER_FOR_CONFIG_CERT = "mleCertFromMerchantConfig";
+
+        public static readonly string MLE_CACHE_IDENTIFIER_FOR_P12_CERT = "mleCertFromP12";
     }
 }

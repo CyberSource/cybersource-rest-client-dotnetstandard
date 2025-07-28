@@ -11,15 +11,20 @@ namespace AuthenticationSdk.util
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         private static readonly LogUtility logUtility = new LogUtility();
-        public static bool CheckIsMLEForAPI(MerchantConfig merchantConfig, bool isMLESupportedByCybsForApi, string operationIds)
+
+        public static bool CheckIsMLEForAPI(MerchantConfig merchantConfig, string inboundMLEStatus, string operationIds)
         {
             bool isMLEForAPI = false;
 
-            // Check here useMLEGlobally True or False
-            // if API is part of MLE then check for useMLEGlobally global parameter
-            if (isMLESupportedByCybsForApi && merchantConfig.UseMLEGlobally)
+            // Handle inboundMLEStatus logic
+            if (string.Equals(inboundMLEStatus, "optional", StringComparison.OrdinalIgnoreCase) && merchantConfig.EnableRequestMLEForOptionalApisGlobally)
             {
                 isMLEForAPI = true;
+            }
+
+            if (string.Equals(inboundMLEStatus, "mandatory", StringComparison.OrdinalIgnoreCase))
+            {
+                isMLEForAPI = !merchantConfig.DisableRequestMLEForMandatoryApisGlobally;
             }
 
             // OperationIds are array as there are multiple public functions for apiCallFunction such as apiCall, apiCallAsync ..

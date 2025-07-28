@@ -164,7 +164,16 @@ namespace AuthenticationSdk.core
 
         public string PemFileDirectory { get; set; }
 
-        public bool UseMLEGlobally { get; set; }
+        public bool EnableRequestMLEForOptionalApisGlobally { get; set; }
+
+        public bool DisableRequestMLEForMandatoryApisGlobally { get; set; }
+
+        // Deprecated: Use EnableRequestMLEForOptionalApisGlobally instead
+        public bool UseMLEGlobally
+        {
+            get => EnableRequestMLEForOptionalApisGlobally;
+            set => EnableRequestMLEForOptionalApisGlobally = value;
+        }
 
         public Dictionary<string, bool> MapToControlMLEonAPI { get; set; }
 
@@ -232,15 +241,41 @@ namespace AuthenticationSdk.core
             ProxyPassword = merchantConfigSection["proxyPassword"];
             PemFileDirectory = merchantConfigSection["pemFileDirectory"];
 
-            if (merchantConfigSection["useMLEGlobally"] != null && "true".Equals(merchantConfigSection["useMLEGlobally"], StringComparison.OrdinalIgnoreCase))
+            bool useMLEGloballySet = merchantConfigSection["useMLEGlobally"] != null;
+            bool enableRequestMLEForOptionalApisGloballySet = merchantConfigSection["enableRequestMLEForOptionalApisGlobally"] != null;
+
+            if (enableRequestMLEForOptionalApisGloballySet)
             {
-                UseMLEGlobally = bool.Parse(merchantConfigSection["useMLEGlobally"]);
+                EnableRequestMLEForOptionalApisGlobally = bool.Parse(merchantConfigSection["enableRequestMLEForOptionalApisGlobally"]);
+            }
+            else if (useMLEGloballySet)
+            {
+                EnableRequestMLEForOptionalApisGlobally = bool.Parse(merchantConfigSection["useMLEGlobally"]);
             }
             else
             {
-                UseMLEGlobally = false;
+                EnableRequestMLEForOptionalApisGlobally = false;
             }
-            
+
+            if (useMLEGloballySet && enableRequestMLEForOptionalApisGloballySet)
+            {
+                bool useMLEGloballyValue = bool.Parse(merchantConfigSection["useMLEGlobally"]);
+                bool enableRequestMLEForOptionalApisGloballyValue = bool.Parse(merchantConfigSection["enableRequestMLEForOptionalApisGlobally"]);
+                if (useMLEGloballyValue != enableRequestMLEForOptionalApisGloballyValue)
+                {
+                    throw new Exception("Both useMLEGlobally and enableRequestMLEForOptionalApisGlobally are set but their values do not match.");
+                }
+            }
+
+            if (merchantConfigSection["disableRequestMLEForMandatoryApisGlobally"] != null)
+            {
+                DisableRequestMLEForMandatoryApisGlobally = bool.Parse(merchantConfigSection["disableRequestMLEForMandatoryApisGlobally"]);
+            }
+            else
+            {
+                DisableRequestMLEForMandatoryApisGlobally = false;
+            }
+
             MapToControlMLEonAPI = mapToControlMLEonAPI;
 
             if (merchantConfigSection["mleKeyAlias"] != null)
@@ -464,13 +499,39 @@ namespace AuthenticationSdk.core
                         PemFileDirectory = merchantConfigDictionary["pemFileDirectory"];
                     }
 
-                    if (merchantConfigDictionary.ContainsKey("useMLEGlobally") && "true".Equals(merchantConfigDictionary["useMLEGlobally"], StringComparison.OrdinalIgnoreCase))
+                    bool useMLEGloballySet = merchantConfigDictionary.ContainsKey("useMLEGlobally");
+                    bool enableRequestMLEForOptionalApisGloballySet = merchantConfigDictionary.ContainsKey("enableRequestMLEForOptionalApisGlobally");
+
+                    if (enableRequestMLEForOptionalApisGloballySet)
                     {
-                        UseMLEGlobally = bool.Parse(merchantConfigDictionary["useMLEGlobally"]);
+                        EnableRequestMLEForOptionalApisGlobally = bool.Parse(merchantConfigDictionary["enableRequestMLEForOptionalApisGlobally"]);
+                    }
+                    else if (useMLEGloballySet)
+                    {
+                        EnableRequestMLEForOptionalApisGlobally = bool.Parse(merchantConfigDictionary["useMLEGlobally"]);
                     }
                     else
                     {
-                        UseMLEGlobally = false;
+                        EnableRequestMLEForOptionalApisGlobally = false;
+                    }
+
+                    if (useMLEGloballySet && enableRequestMLEForOptionalApisGloballySet)
+                    {
+                        bool useMLEGloballyValue = bool.Parse(merchantConfigDictionary["useMLEGlobally"]);
+                        bool enableRequestMLEForOptionalApisGloballyValue = bool.Parse(merchantConfigDictionary["enableRequestMLEForOptionalApisGlobally"]);
+                        if (useMLEGloballyValue != enableRequestMLEForOptionalApisGloballyValue)
+                        {
+                            throw new Exception("Both useMLEGlobally and enableRequestMLEForOptionalApisGlobally are set but their values do not match.");
+                        }
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("disableRequestMLEForMandatoryApisGlobally"))
+                    {
+                        DisableRequestMLEForMandatoryApisGlobally = bool.Parse(merchantConfigDictionary["disableRequestMLEForMandatoryApisGlobally"]);
+                    }
+                    else
+                    {
+                        DisableRequestMLEForMandatoryApisGlobally = false;
                     }
 
                     if (mapToControlMLEonAPI != null)
@@ -604,7 +665,7 @@ namespace AuthenticationSdk.core
 
         private void ValidateMLEProperties()
         {
-            bool mleConfigured = UseMLEGlobally;
+            bool mleConfigured = EnableRequestMLEForOptionalApisGlobally;
 
             if (MapToControlMLEonAPI != null && MapToControlMLEonAPI.Count > 0)
             {

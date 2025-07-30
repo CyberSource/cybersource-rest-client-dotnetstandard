@@ -281,9 +281,8 @@ namespace CyberSource.Api
                 localVarPostBody = createCreditRequest; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "CreateCredit,CreateCreditAsync,CreateCreditWithHttpInfo,CreateCreditAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateCredit,CreateCreditAsync,CreateCreditWithHttpInfo,CreateCreditAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -390,9 +389,8 @@ namespace CyberSource.Api
                 localVarPostBody = createCreditRequest; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "CreateCredit,CreateCreditAsync,CreateCreditWithHttpInfo,CreateCreditAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateCredit,CreateCreditAsync,CreateCreditWithHttpInfo,CreateCreditAsyncWithHttpInfo"))
             {
                 try
                 {

@@ -365,9 +365,8 @@ namespace CyberSource.Api
                 localVarPostBody = checkPayerAuthEnrollmentRequest; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "False";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -474,9 +473,8 @@ namespace CyberSource.Api
                 localVarPostBody = checkPayerAuthEnrollmentRequest; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "False";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -581,9 +579,8 @@ namespace CyberSource.Api
                 localVarPostBody = payerAuthSetupRequest; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo"))
+			string inboundMLEStatus = "mandatory";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -690,9 +687,8 @@ namespace CyberSource.Api
                 localVarPostBody = payerAuthSetupRequest; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo"))
+			string inboundMLEStatus = "mandatory";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -797,9 +793,8 @@ namespace CyberSource.Api
                 localVarPostBody = validateRequest; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -906,9 +901,8 @@ namespace CyberSource.Api
                 localVarPostBody = validateRequest; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo"))
             {
                 try
                 {

@@ -319,9 +319,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GetRetrievalSummary,GetRetrievalSummaryAsync,GetRetrievalSummaryWithHttpInfo,GetRetrievalSummaryAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetRetrievalSummary,GetRetrievalSummaryAsync,GetRetrievalSummaryWithHttpInfo,GetRetrievalSummaryAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -457,9 +456,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GetRetrievalSummary,GetRetrievalSummaryAsync,GetRetrievalSummaryWithHttpInfo,GetRetrievalSummaryAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetRetrievalSummary,GetRetrievalSummaryAsync,GetRetrievalSummaryWithHttpInfo,GetRetrievalSummaryAsyncWithHttpInfo"))
             {
                 try
                 {

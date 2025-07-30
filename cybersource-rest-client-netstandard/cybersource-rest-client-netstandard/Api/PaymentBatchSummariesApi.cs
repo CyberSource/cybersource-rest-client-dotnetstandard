@@ -353,9 +353,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GetPaymentBatchSummary,GetPaymentBatchSummaryAsync,GetPaymentBatchSummaryWithHttpInfo,GetPaymentBatchSummaryAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetPaymentBatchSummary,GetPaymentBatchSummaryAsync,GetPaymentBatchSummaryWithHttpInfo,GetPaymentBatchSummaryAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -513,9 +512,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GetPaymentBatchSummary,GetPaymentBatchSummaryAsync,GetPaymentBatchSummaryWithHttpInfo,GetPaymentBatchSummaryAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetPaymentBatchSummary,GetPaymentBatchSummaryAsync,GetPaymentBatchSummaryWithHttpInfo,GetPaymentBatchSummaryAsyncWithHttpInfo"))
             {
                 try
                 {

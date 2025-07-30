@@ -281,9 +281,8 @@ namespace CyberSource.Api
                 localVarPostBody = octCreatePaymentRequest; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "OctCreatePayment,OctCreatePaymentAsync,OctCreatePaymentWithHttpInfo,OctCreatePaymentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "OctCreatePayment,OctCreatePaymentAsync,OctCreatePaymentWithHttpInfo,OctCreatePaymentAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -390,9 +389,8 @@ namespace CyberSource.Api
                 localVarPostBody = octCreatePaymentRequest; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "OctCreatePayment,OctCreatePaymentAsync,OctCreatePaymentWithHttpInfo,OctCreatePaymentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "OctCreatePayment,OctCreatePaymentAsync,OctCreatePaymentWithHttpInfo,OctCreatePaymentAsyncWithHttpInfo"))
             {
                 try
                 {

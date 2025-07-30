@@ -455,9 +455,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "DeletePaymentInstrument,DeletePaymentInstrumentAsync,DeletePaymentInstrumentWithHttpInfo,DeletePaymentInstrumentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "DeletePaymentInstrument,DeletePaymentInstrumentAsync,DeletePaymentInstrumentWithHttpInfo,DeletePaymentInstrumentAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -576,9 +575,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "DeletePaymentInstrument,DeletePaymentInstrumentAsync,DeletePaymentInstrumentWithHttpInfo,DeletePaymentInstrumentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "DeletePaymentInstrument,DeletePaymentInstrumentAsync,DeletePaymentInstrumentWithHttpInfo,DeletePaymentInstrumentAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -705,9 +703,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GetPaymentInstrument,GetPaymentInstrumentAsync,GetPaymentInstrumentWithHttpInfo,GetPaymentInstrumentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetPaymentInstrument,GetPaymentInstrumentAsync,GetPaymentInstrumentWithHttpInfo,GetPaymentInstrumentAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -835,9 +832,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GetPaymentInstrument,GetPaymentInstrumentAsync,GetPaymentInstrumentWithHttpInfo,GetPaymentInstrumentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetPaymentInstrument,GetPaymentInstrumentAsync,GetPaymentInstrumentWithHttpInfo,GetPaymentInstrumentAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -973,9 +969,8 @@ namespace CyberSource.Api
                 localVarPostBody = patchPaymentInstrumentRequest; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "PatchPaymentInstrument,PatchPaymentInstrumentAsync,PatchPaymentInstrumentWithHttpInfo,PatchPaymentInstrumentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PatchPaymentInstrument,PatchPaymentInstrumentAsync,PatchPaymentInstrumentWithHttpInfo,PatchPaymentInstrumentAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -1114,9 +1109,8 @@ namespace CyberSource.Api
                 localVarPostBody = patchPaymentInstrumentRequest; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "PatchPaymentInstrument,PatchPaymentInstrumentAsync,PatchPaymentInstrumentWithHttpInfo,PatchPaymentInstrumentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PatchPaymentInstrument,PatchPaymentInstrumentAsync,PatchPaymentInstrumentWithHttpInfo,PatchPaymentInstrumentAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -1234,9 +1228,8 @@ namespace CyberSource.Api
                 localVarPostBody = postPaymentInstrumentRequest; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "PostPaymentInstrument,PostPaymentInstrumentAsync,PostPaymentInstrumentWithHttpInfo,PostPaymentInstrumentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostPaymentInstrument,PostPaymentInstrumentAsync,PostPaymentInstrumentWithHttpInfo,PostPaymentInstrumentAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -1356,9 +1349,8 @@ namespace CyberSource.Api
                 localVarPostBody = postPaymentInstrumentRequest; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "PostPaymentInstrument,PostPaymentInstrumentAsync,PostPaymentInstrumentWithHttpInfo,PostPaymentInstrumentAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostPaymentInstrument,PostPaymentInstrumentAsync,PostPaymentInstrumentWithHttpInfo,PostPaymentInstrumentAsyncWithHttpInfo"))
             {
                 try
                 {

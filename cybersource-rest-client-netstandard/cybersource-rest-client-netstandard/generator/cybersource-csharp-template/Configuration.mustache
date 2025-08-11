@@ -45,8 +45,6 @@ namespace {{packageName}}.Client
                              Dictionary<string, bool> mapToControlMLEonAPI = null
                             )
         {
-            SetApiClientUsingDefault(apiClient);
-
             Username = username;
             Password = password;
             AccessToken = accessToken;
@@ -93,6 +91,8 @@ namespace {{packageName}}.Client
             Timeout = {{#netStandard}}TimeSpan.FromMilliseconds({{/netStandard}}timeout{{#netStandard}}){{/netStandard}};
             MerchantConfigDictionaryObj = merchConfigDictObj;
             MapToControlMLEonAPI = mapToControlMLEonAPI;
+
+            SetApiClientUsingDefault(apiClient);
         }
 
         private string GetClientId()
@@ -177,7 +177,7 @@ namespace {{packageName}}.Client
             
             if (apiClient == null)
             {
-                ApiClient = new ApiClient();
+                ApiClient = new ApiClient(this);
             }
             else
             {

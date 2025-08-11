@@ -517,7 +517,7 @@ namespace CyberSource.Client
             }
 
             logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
-            
+
             var newRestClientOptions = GetRestClientOptions(Configuration);
 
             var actualRestClient = RestClientFactory.GetRestClient(Configuration, newRestClientOptions);

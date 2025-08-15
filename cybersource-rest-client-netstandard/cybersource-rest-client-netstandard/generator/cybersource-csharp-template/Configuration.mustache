@@ -77,6 +77,15 @@ namespace {{packageName}}.Client
                         }
                     }
                 }
+
+                if (merchConfigDictObj.ContainsKey("timeout"))
+                {
+                    Timeout = int.Parse(merchConfigDictObj["timeout"]);
+                }
+                else
+                {
+                    Timeout = timeout;
+                }
             }
 
             if (defaultHeader != null)

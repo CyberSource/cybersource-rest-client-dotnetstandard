@@ -84,7 +84,7 @@ namespace {{packageName}}.Client
                 }
                 else
                 {
-                    Timeout = timeout;
+                    Timeout = {{#netStandard}}TimeSpan.FromMilliseconds({{/netStandard}}timeout{{#netStandard}}){{/netStandard}};
                 }
             }
 
@@ -97,7 +97,6 @@ namespace {{packageName}}.Client
 
             TempFolderPath = tempFolderPath;
             DateTimeFormat = dateTimeFormat;
-            Timeout = {{#netStandard}}TimeSpan.FromMilliseconds({{/netStandard}}timeout{{#netStandard}}){{/netStandard}};
             MerchantConfigDictionaryObj = merchConfigDictObj;
             MapToControlMLEonAPI = mapToControlMLEonAPI;
 

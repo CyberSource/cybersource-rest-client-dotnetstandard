@@ -47,6 +47,7 @@ namespace AuthenticationSdk.util
                         var cachedFilePath = Path.GetFullPath(p12FilePath);
                         filePaths.Add(cachedFilePath);
                         policy.ChangeMonitors.Add(new HostFileChangeMonitor(filePaths));
+
                         var certificates = new X509Certificate2Collection();
                         certificates.Import(p12FilePath, keyPassword, X509KeyStorageFlags.PersistKeySet);
 

@@ -16,13 +16,13 @@ namespace AuthenticationSdk.core
         private readonly MerchantConfig _merchantConfig;
         LogUtility logUtility;
 
-
         public Authorize(MerchantConfig merchantConfig)
         {
             _merchantConfig = merchantConfig;
             Enumerations.ValidateRequestType(_merchantConfig.RequestType);
             Enumerations.SetRequestType(_merchantConfig);
             logUtility = new LogUtility();
+
             if (_logger == null)
             {
                 _logger = LogManager.GetCurrentClassLogger();
@@ -65,10 +65,10 @@ namespace AuthenticationSdk.core
 
                     if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
                     {
-                        logUtility.LogDebugMessage( _logger, $"digest: {signatureObj.Digest}");
+                        logUtility.LogDebugMessage(_logger, $"digest: {signatureObj.Digest}");
                     }
 
-                    logUtility.LogDebugMessage( _logger, $"Signature : {signatureObj.SignatureParam}");
+                    logUtility.LogDebugMessage(_logger, $"Signature : {signatureObj.SignatureParam}");
 
                     return signatureObj;
                 }

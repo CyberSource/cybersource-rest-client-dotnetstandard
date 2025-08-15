@@ -18,7 +18,7 @@ namespace AuthenticationSdk.core
     *============================================================================================*/
     public class MerchantConfig
     {
-        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, bool> mapToControlMLEonAPI = null)
+        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string,bool> mapToControlMLEonAPI=null)
         {
             var _propertiesSetUsing = string.Empty;
 
@@ -170,6 +170,10 @@ namespace AuthenticationSdk.core
 
         public string MleKeyAlias { get; set; }
 
+        public string MaxConnectionPoolSize { get; set; }
+
+        public string KeepAliveTime { get; set; }
+
         #endregion
 
         public void LogMerchantConfigurationProperties()
@@ -252,9 +256,27 @@ namespace AuthenticationSdk.core
             {
                 MleKeyAlias = Constants.DefaultMleAliasForCert;
             }
+
+            if (merchantConfigSection["maxConnectionPoolSize"] != null)
+            {
+                MaxConnectionPoolSize = merchantConfigSection["maxConnectionPoolSize"];
+            }
+            else
+            {
+                MaxConnectionPoolSize = Constants.DefaultMaxConnectionPoolSize;
+            }
+
+            if (merchantConfigSection["keepAliveTime"] != null)
+            {
+                KeepAliveTime = merchantConfigSection["keepAliveTime"];
+            }
+            else
+            {
+                KeepAliveTime = Constants.DefaultKeepAliveTime;
+            }
         }
 
-        private void SetValuesUsingDictObj(IReadOnlyDictionary<string, string> merchantConfigDictionary, Dictionary<string, bool> mapToControlMLEonAPI)
+        private void SetValuesUsingDictObj(IReadOnlyDictionary<string, string> merchantConfigDictionary, Dictionary<string,bool> mapToControlMLEonAPI)
         {
             var key = string.Empty;
 
@@ -278,6 +300,7 @@ namespace AuthenticationSdk.core
                             UseMetaKey = "false";
                         }
                     }
+
                     key = "intermediateHost";
                     if (merchantConfigDictionary.ContainsKey(key))
                     {
@@ -464,7 +487,7 @@ namespace AuthenticationSdk.core
                         PemFileDirectory = merchantConfigDictionary["pemFileDirectory"];
                     }
 
-                    if (merchantConfigDictionary.ContainsKey("useMLEGlobally") && "true".Equals(merchantConfigDictionary["useMLEGlobally"], StringComparison.OrdinalIgnoreCase))
+                    if (merchantConfigDictionary.ContainsKey("useMLEGlobally") && "true".Equals(merchantConfigDictionary["useMLEGlobally"],StringComparison.OrdinalIgnoreCase))
                     {
                         UseMLEGlobally = bool.Parse(merchantConfigDictionary["useMLEGlobally"]);
                     }
@@ -487,6 +510,24 @@ namespace AuthenticationSdk.core
                     if (string.IsNullOrWhiteSpace(MleKeyAlias?.Trim()))
                     {
                         MleKeyAlias = Constants.DefaultMleAliasForCert;
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("maxConnectionPoolSize"))
+                    {
+                        MaxConnectionPoolSize = merchantConfigDictionary["maxConnectionPoolSize"];
+                    }
+                    else
+                    {
+                        MaxConnectionPoolSize = Constants.DefaultMaxConnectionPoolSize;
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("keepAliveTime"))
+                    {
+                        KeepAliveTime = merchantConfigDictionary["keepAliveTime"];
+                    }
+                    else
+                    {
+                        KeepAliveTime = Constants.DefaultKeepAliveTime;
                     }
                 }
             }

@@ -85,7 +85,7 @@ namespace AuthenticationSdk.util
                 catch (Exception e)
                 {
                     throw e;
-                } 
+                }
             }
 
             return str;

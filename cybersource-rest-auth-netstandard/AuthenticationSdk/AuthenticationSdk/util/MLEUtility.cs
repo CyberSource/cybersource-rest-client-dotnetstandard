@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
 namespace AuthenticationSdk.util
@@ -60,6 +61,15 @@ namespace AuthenticationSdk.util
             logUtility.LogDebugMessage(logger, Constants.LOG_REQUEST_BEFORE_MLE + payload);
 
             X509Certificate2 mleCertificate = GetMLECertificate(merchantConfig);
+
+            // Handling special case : MLE Certificate is not currently available for HTTP Signature
+            if (mleCertificate == null && Constants.AuthMechanismHttp.Equals(merchantConfig.AuthenticationType, StringComparison.OrdinalIgnoreCase))
+            {
+                logger.Debug("The certificate to use for MLE for requests is not provided in the merchant configuration. Please ensure that the certificate path is provided.");
+                logger.Debug("Currently, MLE for requests using HTTP Signature as authentication is not supported by Cybersource. By default, the SDK will fall back to non-encrypted requests.");
+                return requestBody;
+            }
+
             string serialNumber = GetSerialNumberFromCertificate(mleCertificate, merchantConfig);
             var payloadBytes = System.Text.Encoding.UTF8.GetBytes(payload);
             var rsa = mleCertificate.GetRSAPublicKey();
@@ -82,33 +92,8 @@ namespace AuthenticationSdk.util
 
         private static X509Certificate2 GetMLECertificate(MerchantConfig merchantConfig)
         {
-            X509Certificate2Collection certs = Cache.FetchCachedCertificate(merchantConfig.P12Keyfilepath, merchantConfig.KeyPass);
-            X509Certificate2 mleCertificate = Cache.GetCertBasedOnKeyAllias(certs, merchantConfig.MleKeyAlias);
-            ValidateCertificateExpiry(mleCertificate, merchantConfig.MleKeyAlias);
+            X509Certificate2 mleCertificate = Cache.GetRequestMLECertFromCache(merchantConfig);
             return mleCertificate;
-        }
-
-        private static void ValidateCertificateExpiry(X509Certificate2 certificate, string keyAlias)
-        {
-            if (certificate.NotAfter == DateTime.MinValue)
-            {
-                // Certificate does not have an expiry date
-                logger.Warn("Certificate for MLE does not have an expiry date.");
-            }
-            else if (certificate.NotAfter < DateTime.Now)
-            {
-                // Certificate is already expired
-                logger.Warn($"Certificate with MLE alias {keyAlias} is expired as of {certificate.NotAfter}. Please update the p12 file.");
-                //throw new Exception($"Certificate required for MLE has expired on: {certificate.NotAfter}");
-            }
-            else
-            {
-                TimeSpan timeToExpire = certificate.NotAfter - DateTime.Now;
-                if (timeToExpire.TotalDays < Constants.CertificateExpiryDateWarningDays)
-                {
-                    logger.Warn($"Certificate for MLE with alias {keyAlias} is going to expire on {certificate.NotAfter}. Please update the p12 file before that.");
-                }
-            }
         }
 
         private static string GetSerialNumberFromCertificate(X509Certificate2 certificate, MerchantConfig merchantConfig)
@@ -143,6 +128,5 @@ namespace AuthenticationSdk.util
             var jsonObject = new { encryptedRequest = jweToken };
             return JsonConvert.SerializeObject(jsonObject);
         }
-
     }
 }

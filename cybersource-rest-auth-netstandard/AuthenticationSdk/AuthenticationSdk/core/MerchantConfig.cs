@@ -1,11 +1,11 @@
-﻿using System;
+﻿using AuthenticationSdk.util;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using AuthenticationSdk.util;
-using NLog;
 
 namespace AuthenticationSdk.core
 {
@@ -179,6 +179,8 @@ namespace AuthenticationSdk.core
 
         public string MleKeyAlias { get; set; }
 
+        public string MleForRequestPublicCertPath { get; set; }
+
         #endregion
 
         public void LogMerchantConfigurationProperties()
@@ -241,6 +243,11 @@ namespace AuthenticationSdk.core
             ProxyPassword = merchantConfigSection["proxyPassword"];
             PemFileDirectory = merchantConfigSection["pemFileDirectory"];
 
+            if (!string.IsNullOrEmpty(merchantConfigSection["mleForRequestPublicCertPath"].Trim()))
+            {
+                MleForRequestPublicCertPath = merchantConfigSection["mleForRequestPublicCertPath"].Trim();
+            }
+
             bool useMLEGloballySet = merchantConfigSection["useMLEGlobally"] != null;
             bool enableRequestMLEForOptionalApisGloballySet = merchantConfigSection["enableRequestMLEForOptionalApisGlobally"] != null;
 
@@ -289,7 +296,7 @@ namespace AuthenticationSdk.core
             }
         }
 
-        private void SetValuesUsingDictObj(IReadOnlyDictionary<string, string> merchantConfigDictionary, Dictionary<string, bool> mapToControlMLEonAPI)
+        private void SetValuesUsingDictObj(IReadOnlyDictionary<string, string> merchantConfigDictionary, Dictionary<string,bool> mapToControlMLEonAPI)
         {
             var key = string.Empty;
 
@@ -313,6 +320,7 @@ namespace AuthenticationSdk.core
                             UseMetaKey = "false";
                         }
                     }
+
                     key = "intermediateHost";
                     if (merchantConfigDictionary.ContainsKey(key))
                     {
@@ -549,6 +557,11 @@ namespace AuthenticationSdk.core
                     {
                         MleKeyAlias = Constants.DefaultMleAliasForCert;
                     }
+
+                    if (merchantConfigDictionary.ContainsKey("mleForRequestPublicCertPath") && !string.IsNullOrEmpty(merchantConfigDictionary["mleForRequestPublicCertPath"].Trim()))
+                    {
+                        MleForRequestPublicCertPath = merchantConfigDictionary["mleForRequestPublicCertPath"].Trim();
+                    }
                 }
             }
             catch (KeyNotFoundException err)
@@ -659,12 +672,19 @@ namespace AuthenticationSdk.core
 
                 var pathDirectorySeparator = Path.DirectorySeparatorChar;
 
+                // Check the p12 file and set the keyFile to get the mleCert in case of JWT auth type
+                if (!CheckKeyFile())
+                {
+                    throw new Exception($"{Constants.ErrorPrefix} Error finding or accessing the Key Directory or Key File. Please review the values in the merchant configuration.");
+                }
+
                 P12Keyfilepath = $"{KeyDirectory}{pathDirectorySeparator}{KeyfileName}.p12";
             }
         }
 
         private void ValidateMLEProperties()
         {
+            /*
             bool mleConfigured = EnableRequestMLEForOptionalApisGlobally;
 
             if (MapToControlMLEonAPI != null && MapToControlMLEonAPI.Count > 0)
@@ -684,6 +704,90 @@ namespace AuthenticationSdk.core
             {
                 Logger.Error("MLE is only supported in JWT auth type");
                 throw new Exception("MLE is only supported in JWT auth type");
+            }
+            */
+
+            // Verify that the input path for MLE certificate is valid, else throw error in both cases (MLE=true/false)
+            if (!string.IsNullOrEmpty(MleForRequestPublicCertPath))
+            {
+                try
+                {
+                    CertificateUtility.ValidatePathAndFile(MleForRequestPublicCertPath, "mleForRequestPublicCertPath");
+                }
+                catch (IOException err)
+                {
+                    Logger.Error(err.Message);
+                    throw new Exception(err.Message);
+                }
+            }
+        }
+
+        public bool CheckKeyFile()
+        {
+            if (string.IsNullOrEmpty(KeyfileName))
+            {
+                Logger.Error("Key Filename not provided. Assigning the value of Merchant ID");
+                if (!string.IsNullOrEmpty(MerchantId))
+                {
+                    KeyfileName = MerchantId;
+                }
+            }
+
+            if (string.IsNullOrEmpty(KeyDirectory))
+            {
+                KeyDirectory = Constants.P12FileDirectory;
+                Logger.Error($"Keys Directory not provided. Using Default Path: {KeyDirectory}");
+            }
+
+            DirectoryInfo dirInfo = new DirectoryInfo(KeyDirectory);
+
+            if (!dirInfo.Exists)
+            {
+                Logger.Error($"KeyDirectory not found, Entered directory : {KeyDirectory}");
+                return false;
+            }
+
+            string keyFilePath;
+            FileInfo newFile;
+            try
+            {
+                keyFilePath = Path.Combine(KeyDirectory, KeyfileName + ".p12");
+                newFile = new FileInfo(keyFilePath);
+                if (!newFile.Exists)
+                {
+                    Logger.Error($"KeyFile not found, Entered path/file name : {keyFilePath}");
+                    return false;
+                }
+
+                Logger.Info($"Entered file/path value for Key File : {keyFilePath}");
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            bool isReadable = false;
+            try
+            {
+                using (FileStream fs = newFile.Open(FileMode.Open, FileAccess.Read))
+                {
+                    isReadable = true;
+                }
+            }
+            catch
+            {
+                isReadable = false;
+            }
+
+            if (isReadable)
+            {
+                P12Keyfilepath = keyFilePath;
+                return true;
+            }
+            else
+            {
+                Logger.Info($"File cannot be accessed. Permission denied : {keyFilePath}");
+                return false;
             }
         }
     }

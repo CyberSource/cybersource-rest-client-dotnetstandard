@@ -389,9 +389,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "DeleteTokenizedCard,DeleteTokenizedCardAsync,DeleteTokenizedCardWithHttpInfo,DeleteTokenizedCardAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "DeleteTokenizedCard,DeleteTokenizedCardAsync,DeleteTokenizedCardWithHttpInfo,DeleteTokenizedCardAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -510,9 +509,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "DeleteTokenizedCard,DeleteTokenizedCardAsync,DeleteTokenizedCardWithHttpInfo,DeleteTokenizedCardAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "DeleteTokenizedCard,DeleteTokenizedCardAsync,DeleteTokenizedCardWithHttpInfo,DeleteTokenizedCardAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -632,9 +630,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GetTokenizedCard,GetTokenizedCardAsync,GetTokenizedCardWithHttpInfo,GetTokenizedCardAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetTokenizedCard,GetTokenizedCardAsync,GetTokenizedCardWithHttpInfo,GetTokenizedCardAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -755,9 +752,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GetTokenizedCard,GetTokenizedCardAsync,GetTokenizedCardWithHttpInfo,GetTokenizedCardAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetTokenizedCard,GetTokenizedCardAsync,GetTokenizedCardWithHttpInfo,GetTokenizedCardAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -867,9 +863,8 @@ namespace CyberSource.Api
                 localVarPostBody = tokenizedcardRequest; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "PostTokenizedCard,PostTokenizedCardAsync,PostTokenizedCardWithHttpInfo,PostTokenizedCardAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostTokenizedCard,PostTokenizedCardAsync,PostTokenizedCardWithHttpInfo,PostTokenizedCardAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -982,9 +977,8 @@ namespace CyberSource.Api
                 localVarPostBody = tokenizedcardRequest; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "PostTokenizedCard,PostTokenizedCardAsync,PostTokenizedCardWithHttpInfo,PostTokenizedCardAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostTokenizedCard,PostTokenizedCardAsync,PostTokenizedCardWithHttpInfo,PostTokenizedCardAsyncWithHttpInfo"))
             {
                 try
                 {

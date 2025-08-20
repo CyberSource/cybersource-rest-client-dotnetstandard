@@ -343,9 +343,8 @@ namespace CyberSource.Api
                 localVarPostBody = createSubscriptionRequest; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "CreateFollowOnSubscription,CreateFollowOnSubscriptionAsync,CreateFollowOnSubscriptionWithHttpInfo,CreateFollowOnSubscriptionAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateFollowOnSubscription,CreateFollowOnSubscriptionAsync,CreateFollowOnSubscriptionWithHttpInfo,CreateFollowOnSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -468,9 +467,8 @@ namespace CyberSource.Api
                 localVarPostBody = createSubscriptionRequest; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "CreateFollowOnSubscription,CreateFollowOnSubscriptionAsync,CreateFollowOnSubscriptionWithHttpInfo,CreateFollowOnSubscriptionAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateFollowOnSubscription,CreateFollowOnSubscriptionAsync,CreateFollowOnSubscriptionWithHttpInfo,CreateFollowOnSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -587,9 +585,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GetFollowOnSubscription,GetFollowOnSubscriptionAsync,GetFollowOnSubscriptionWithHttpInfo,GetFollowOnSubscriptionAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetFollowOnSubscription,GetFollowOnSubscriptionAsync,GetFollowOnSubscriptionWithHttpInfo,GetFollowOnSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -707,9 +704,8 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GetFollowOnSubscription,GetFollowOnSubscriptionAsync,GetFollowOnSubscriptionWithHttpInfo,GetFollowOnSubscriptionAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetFollowOnSubscription,GetFollowOnSubscriptionAsync,GetFollowOnSubscriptionWithHttpInfo,GetFollowOnSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {

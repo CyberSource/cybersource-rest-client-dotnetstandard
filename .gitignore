@@ -355,3 +355,5 @@ MigrationBackup/
 /cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/build.sh
 /cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/git_push.sh
 /cybersource-rest-client-netstandard/cybersource-rest-client-netstandard/mono_nunit_test.sh
+
+.DS_Store

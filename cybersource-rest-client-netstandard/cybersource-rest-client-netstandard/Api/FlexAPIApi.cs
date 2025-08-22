@@ -281,7 +281,8 @@ namespace CyberSource.Api
                 localVarPostBody = generateFlexAPICaptureContextRequest; // byte array
             }
             
-			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+			string inboundMLEStatus = "false";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GenerateFlexAPICaptureContext,GenerateFlexAPICaptureContextAsync,GenerateFlexAPICaptureContextWithHttpInfo,GenerateFlexAPICaptureContextAsyncWithHttpInfo"))
             {
                 try
@@ -389,7 +390,8 @@ namespace CyberSource.Api
                 localVarPostBody = generateFlexAPICaptureContextRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+			string inboundMLEStatus = "false";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GenerateFlexAPICaptureContext,GenerateFlexAPICaptureContextAsync,GenerateFlexAPICaptureContextWithHttpInfo,GenerateFlexAPICaptureContextAsyncWithHttpInfo"))
             {
                 try

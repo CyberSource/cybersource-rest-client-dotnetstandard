@@ -684,8 +684,8 @@ namespace AuthenticationSdk.core
 
         private void ValidateMLEProperties()
         {
-            /*
-            bool mleConfigured = EnableRequestMLEForOptionalApisGlobally;
+            
+            bool requestMleConfigured = EnableRequestMLEForOptionalApisGlobally;
 
             if (MapToControlMLEonAPI != null && MapToControlMLEonAPI.Count > 0)
             {
@@ -693,19 +693,18 @@ namespace AuthenticationSdk.core
                 {
                     if (value)
                     {
-                        mleConfigured = true;
+                        requestMleConfigured = true;
                         break;
                     }
                 }
             }
 
             //if MLE=true then check for auth Type
-            if (mleConfigured && !Enumerations.AuthenticationType.JWT.ToString().Equals(AuthenticationType, StringComparison.OrdinalIgnoreCase))
+            if (requestMleConfigured && !Enumerations.AuthenticationType.JWT.ToString().Equals(AuthenticationType, StringComparison.OrdinalIgnoreCase))
             {
-                Logger.Error("MLE is only supported in JWT auth type");
-                throw new Exception("MLE is only supported in JWT auth type");
+                Logger.Error("Request MLE is only supported in JWT auth type");
+                throw new Exception("Request MLE is only supported in JWT auth type");
             }
-            */
 
             // Verify that the input path for MLE certificate is valid, else throw error in both cases (MLE=true/false)
             if (!string.IsNullOrEmpty(MleForRequestPublicCertPath))

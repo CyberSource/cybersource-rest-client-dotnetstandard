@@ -316,9 +316,9 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "DownloadReport,DownloadReportAsync,DownloadReportWithHttpInfo,DownloadReportAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "DownloadReport,DownloadReportAsync,DownloadReportWithHttpInfo,DownloadReportAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -452,9 +452,9 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "DownloadReport,DownloadReportAsync,DownloadReportWithHttpInfo,DownloadReportAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "DownloadReport,DownloadReportAsync,DownloadReportWithHttpInfo,DownloadReportAsyncWithHttpInfo"))
             {
                 try
                 {

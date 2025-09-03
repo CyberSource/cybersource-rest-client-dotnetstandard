@@ -116,7 +116,7 @@ namespace AuthenticationSdk.util
             }
             if (string.IsNullOrEmpty(serialNumber))
             {
-                logger.Warn($"Serial number not found in MLE certificate for alias {merchantConfig.MleKeyAlias} in {merchantConfig.P12Keyfilepath}.p12");
+                logger.Warn($"Serial number not found in MLE certificate for alias {merchantConfig.RequestMleKeyAlias} in {merchantConfig.P12Keyfilepath}.p12");
                 return certificate.SerialNumber;
             }
 

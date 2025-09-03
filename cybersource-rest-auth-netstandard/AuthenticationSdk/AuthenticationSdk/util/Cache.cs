@@ -181,7 +181,7 @@ namespace AuthenticationSdk.util
 
                 try
                 {
-                    mleCertificate = GetCertBasedOnKeyAlias(certificates, merchantConfig.MleKeyAlias);
+                    mleCertificate = GetCertBasedOnKeyAlias(certificates, merchantConfig.RequestMleKeyAlias);
                 }
                 catch (Exception)
                 {
@@ -189,7 +189,7 @@ namespace AuthenticationSdk.util
                     {
                         // If no certificate found for the specified alias, fall back to first certificate
                         string fileName = Path.GetFileName(certificateFilePath);
-                        logger.Warn($"No certificate found for the specified mleKeyAlias '{merchantConfig.MleKeyAlias}'. Using the first certificate from file {fileName} as the MLE request certificate.");
+                        logger.Warn($"No certificate found for the specified requestMleKeyAlias '{merchantConfig.RequestMleKeyAlias}'. Using the first certificate from file {fileName} as the MLE request certificate.");
                         mleCertificate = certificates[0];
                     }
                 }
@@ -199,13 +199,13 @@ namespace AuthenticationSdk.util
             {
                 try
                 {
-                    mleCertificate = GetCertBasedOnKeyAlias(FetchCertificateCollectionFromP12File(merchantConfig.P12Keyfilepath, merchantConfig.KeyPass), merchantConfig.MleKeyAlias);
+                    mleCertificate = GetCertBasedOnKeyAlias(FetchCertificateCollectionFromP12File(merchantConfig.P12Keyfilepath, merchantConfig.KeyPass), merchantConfig.RequestMleKeyAlias);
                 }
                 catch (Exception)
                 {
                     string fileName = Path.GetFileName(merchantConfig.P12Keyfilepath);
-                    logger.Error($"No certificate found for the specified mleKeyAlias '{merchantConfig.MleKeyAlias}' in file {fileName}.");
-                    throw new ArgumentException($"No certificate found for the specified mleKeyAlias '{merchantConfig.MleKeyAlias}' in file {fileName}.");
+                    logger.Error($"No certificate found for the specified requestMleKeyAlias '{merchantConfig.RequestMleKeyAlias}' in file {fileName}.");
+                    throw new ArgumentException($"No certificate found for the specified requestMleKeyAlias '{merchantConfig.RequestMleKeyAlias}' in file {fileName}.");
                 }
             }
 

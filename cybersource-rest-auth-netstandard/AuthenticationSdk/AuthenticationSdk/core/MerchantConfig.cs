@@ -810,6 +810,45 @@ namespace AuthenticationSdk.core
                     throw new Exception(err.Message);
                 }
             }
+
+            // Validation for MLE Response Configuration
+            if (EnableResponseMleGlobally)
+            {
+                // Validate for Auth type - Currently responseMLE feature will be enabled for JWT auth type only
+                if (!Enumerations.AuthenticationType.JWT.ToString().Equals(AuthenticationType, StringComparison.OrdinalIgnoreCase))
+                {
+                    Logger.Error("Response MLE is only supported for JWT auth type");
+                    throw new Exception("Response MLE is only supported for JWT auth type");
+                }
+
+                // Check if either private key object or private key file path is provided
+                if (ResponseMlePrivateKey == null && string.IsNullOrEmpty(ResponseMlePrivateKeyFilePath))
+                {
+                    Logger.Error("Response MLE is enabled but no private key provided. Either set ResponseMlePrivateKey object or provide ResponseMlePrivateKeyFilePath.");
+                    throw new Exception("Response MLE is enabled but no private key provided. Either set ResponseMlePrivateKey object or provide ResponseMlePrivateKeyFilePath.");
+                }
+
+                // If private key file path is provided, validate the file exists
+                if (!string.IsNullOrEmpty(ResponseMlePrivateKeyFilePath))
+                {
+                    try
+                    {
+                        CertificateUtility.ValidatePathAndFile(ResponseMlePrivateKeyFilePath, "responseMlePrivateKeyFilePath");
+                    }
+                    catch (IOException err)
+                    {
+                        Logger.Error("Invalid responseMlePrivateKeyFilePath - " + err.Message);
+                        throw new Exception("Invalid responseMlePrivateKeyFilePath - " + err.Message);
+                    }
+                }
+
+                // Uncomment below if responseMleKID is mandatory when response MLE is enabled
+                // if (string.IsNullOrEmpty(ResponseMleKID))
+                // {
+                //     Logger.Error("Response MLE is enabled but responseMleKID is not provided.");
+                //     throw new Exception("Response MLE is enabled but responseMleKID is not provided.");
+                // }
+            }
         }
 
         public bool CheckKeyFile()

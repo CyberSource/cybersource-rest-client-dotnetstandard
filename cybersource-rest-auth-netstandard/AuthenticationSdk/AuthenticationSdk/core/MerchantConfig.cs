@@ -18,7 +18,7 @@ namespace AuthenticationSdk.core
     *============================================================================================*/
     public class MerchantConfig
     {
-        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, bool> mapToControlMLEonAPI = null)
+        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, bool> mapToControlMLEonAPI = null, System.Security.Cryptography.AsymmetricAlgorithm responseMlePrivateKey = null)
         {
             var _propertiesSetUsing = string.Empty;
 
@@ -55,6 +55,11 @@ namespace AuthenticationSdk.core
                     Logger.Error($"Merchant Configuration Missing in App.Config File");
                     throw new Exception($"{Constants.ErrorPrefix} Merchant Configuration Missing in App.Config File");
                 }
+            }
+
+            if(responseMlePrivateKey != null)
+            {
+                ResponseMlePrivateKey = responseMlePrivateKey;
             }
 
             Logger.Debug("APPLICATION LOGGING START:\n");
@@ -325,6 +330,31 @@ namespace AuthenticationSdk.core
             if(string.IsNullOrWhiteSpace(RequestMleKeyAlias?.Trim()))
             {
                 RequestMleKeyAlias = Constants.DefaultMleAliasForCert;
+            }
+
+            // Adding Response MLE Related Params
+            if (merchantConfigSection["enableResponseMleGlobally"] != null)
+            {
+                EnableResponseMleGlobally = bool.Parse(merchantConfigSection["enableResponseMleGlobally"]);
+            }
+            else
+            {
+                EnableResponseMleGlobally = false;
+            }
+
+            if (merchantConfigSection["responseMleKID"] != null && !string.IsNullOrEmpty(merchantConfigSection["responseMleKID"]?.Trim()))
+            {
+                ResponseMleKID = merchantConfigSection["responseMleKID"].Trim();
+            }
+
+            if (merchantConfigSection["responseMlePrivateKeyFilePath"] != null && !string.IsNullOrWhiteSpace(merchantConfigSection["responseMlePrivateKeyFilePath"]))
+            {
+                ResponseMlePrivateKeyFilePath = merchantConfigSection["responseMlePrivateKeyFilePath"].Trim();
+            }
+
+            if (merchantConfigSection["responseMlePrivateKeyFilePassword"] != null && !string.IsNullOrEmpty(merchantConfigSection["responseMlePrivateKeyFilePassword"]))
+            {
+                ResponseMlePrivateKeyFilePassword = merchantConfigSection["responseMlePrivateKeyFilePassword"];
             }
         }
 
@@ -597,6 +627,31 @@ namespace AuthenticationSdk.core
                     if (merchantConfigDictionary.ContainsKey("mleForRequestPublicCertPath") && !string.IsNullOrEmpty(merchantConfigDictionary["mleForRequestPublicCertPath"].Trim()))
                     {
                         MleForRequestPublicCertPath = merchantConfigDictionary["mleForRequestPublicCertPath"].Trim();
+                    }
+
+                    // Adding Response MLE Related Params
+                    if (merchantConfigDictionary.ContainsKey("enableResponseMleGlobally"))
+                    {
+                        EnableResponseMleGlobally = bool.Parse(merchantConfigDictionary["enableResponseMleGlobally"]);
+                    }
+                    else
+                    {
+                        EnableResponseMleGlobally = false;
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("responseMleKID") && !string.IsNullOrEmpty(merchantConfigDictionary["responseMleKID"]?.Trim()))
+                    {
+                        ResponseMleKID = merchantConfigDictionary["responseMleKID"].Trim();
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("responseMlePrivateKeyFilePath") && !string.IsNullOrWhiteSpace(merchantConfigDictionary["responseMlePrivateKeyFilePath"]))
+                    {
+                        ResponseMlePrivateKeyFilePath = merchantConfigDictionary["responseMlePrivateKeyFilePath"].Trim();
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("responseMlePrivateKeyFilePassword") && !string.IsNullOrEmpty(merchantConfigDictionary["responseMlePrivateKeyFilePassword"]))
+                    {
+                        ResponseMlePrivateKeyFilePassword = merchantConfigDictionary["responseMlePrivateKeyFilePassword"];
                     }
                 }
             }

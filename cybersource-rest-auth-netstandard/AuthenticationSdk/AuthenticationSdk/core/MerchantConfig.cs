@@ -181,6 +181,34 @@ namespace AuthenticationSdk.core
 
         public string RequestMleKeyAlias { get; set; }
 
+        /// <summary>
+        /// Flag to enable MLE (Message Level Encryption) for response body for all APIs in SDK to get MLE Response (encrypted response) if supported by API.
+        /// </summary>
+        public bool EnableResponseMleGlobally { get; set; }
+
+        /// <summary>
+        /// Parameter to pass the KID value for the MLE response public certificate. This value will be provided in the merchant portal when retrieving the MLE response certificate.
+        /// </summary>
+        public string ResponseMleKID { get; set; }
+
+        /// <summary>
+        /// Path to the private key file used for Response MLE decryption by the SDK.
+        /// Supported formats: .p12, .key, .pem, etc.
+        /// </summary>
+        public string ResponseMlePrivateKeyFilePath { get; set; }
+
+        /// <summary>
+        /// Password for the private key file used in Response MLE decryption by the SDK.
+        /// Required for .p12 files or encrypted private keys.
+        /// </summary>
+        public string ResponseMlePrivateKeyFilePassword { get; set; }
+
+        /// <summary>
+        /// AsymmetricAlgorithm instance used for Response MLE decryption by the SDK.
+        /// Optional — either provide this object directly or specify the private key file path via configuration.
+        /// </summary>
+        public System.Security.Cryptography.AsymmetricAlgorithm ResponseMlePrivateKey { get; set; }
+
         #endregion
 
         public void LogMerchantConfigurationProperties()

@@ -902,9 +902,9 @@ namespace AuthenticationSdk.core
             
             bool requestMleConfigured = EnableRequestMLEForOptionalApisGlobally;
 
-            if (MapToControlMLEonAPI != null && MapToControlMLEonAPI.Count > 0)
+            if (InternalMapToControlRequestMLEonAPI != null && InternalMapToControlRequestMLEonAPI.Count > 0)
             {
-                foreach (bool value in MapToControlMLEonAPI.Values)
+                foreach (bool value in InternalMapToControlRequestMLEonAPI.Values)
                 {
                     if (value)
                     {
@@ -936,7 +936,20 @@ namespace AuthenticationSdk.core
             }
 
             // Validation for MLE Response Configuration
-            if (EnableResponseMleGlobally)
+
+            bool responseMleConfigured = EnableResponseMleGlobally;
+            if (InternalMapToControlResponseMLEonAPI != null && InternalMapToControlResponseMLEonAPI.Count > 0)
+            {
+                foreach (bool value in InternalMapToControlResponseMLEonAPI.Values)
+                {
+                    if (value)
+                    {
+                        responseMleConfigured = true;
+                        break;
+                    }
+                }
+            }
+            if (responseMleConfigured)
             {
                 // Validate for Auth type - Currently responseMLE feature will be enabled for JWT auth type only
                 if (!Enumerations.AuthenticationType.JWT.ToString().Equals(AuthenticationType, StringComparison.OrdinalIgnoreCase))
@@ -965,13 +978,6 @@ namespace AuthenticationSdk.core
                         throw new Exception("Invalid responseMlePrivateKeyFilePath - " + err.Message);
                     }
                 }
-
-                // Uncomment below if responseMleKID is mandatory when response MLE is enabled
-                // if (string.IsNullOrEmpty(ResponseMleKID))
-                // {
-                //     Logger.Error("Response MLE is enabled but responseMleKID is not provided.");
-                //     throw new Exception("Response MLE is enabled but responseMleKID is not provided.");
-                // }
             }
         }
 

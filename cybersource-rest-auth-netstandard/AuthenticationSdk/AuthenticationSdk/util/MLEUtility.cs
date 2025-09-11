@@ -36,13 +36,13 @@ namespace AuthenticationSdk.util
             }
 
             // Control the MLE only from map
-            if (merchantConfig.MapToControlMLEonAPI != null && merchantConfig.MapToControlMLEonAPI.Count > 0)
+            if (merchantConfig.InternalMapToControlRequestMLEonAPI != null && merchantConfig.InternalMapToControlRequestMLEonAPI.Count > 0)
             {
                 foreach (string operationId in operationArray)
                 {
-                    if (merchantConfig.MapToControlMLEonAPI.ContainsKey(operationId))
+                    if (merchantConfig.InternalMapToControlRequestMLEonAPI.ContainsKey(operationId))
                     {
-                        isMLEForAPI = merchantConfig.MapToControlMLEonAPI[operationId];
+                        isMLEForAPI = merchantConfig.InternalMapToControlRequestMLEonAPI[operationId];
                         break;
                     }
                 }

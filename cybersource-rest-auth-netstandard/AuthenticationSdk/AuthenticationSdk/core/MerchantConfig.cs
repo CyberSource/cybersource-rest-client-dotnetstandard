@@ -978,6 +978,12 @@ namespace AuthenticationSdk.core
                         throw new Exception("Invalid responseMlePrivateKeyFilePath - " + err.Message);
                     }
                 }
+                // Validate responseMleKID is provided when response MLE is enabled
+                if (string.IsNullOrEmpty(ResponseMleKID))
+                {
+                    Logger.Error("ConfigException : Response MLE is enabled but responseMleKID is not provided.");
+                    throw new Exception("Response MLE is enabled but responseMleKID is not provided.");
+                }
             }
         }
 

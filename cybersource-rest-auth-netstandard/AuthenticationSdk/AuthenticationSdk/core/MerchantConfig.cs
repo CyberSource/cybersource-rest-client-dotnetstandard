@@ -18,7 +18,7 @@ namespace AuthenticationSdk.core
     *============================================================================================*/
     public class MerchantConfig
     {
-        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, bool> mapToControlMLEonAPI = null, System.Security.Cryptography.AsymmetricAlgorithm responseMlePrivateKey = null)
+        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, string> mapToControlMLEonAPI = null, System.Security.Cryptography.AsymmetricAlgorithm responseMlePrivateKey = null)
         {
             var _propertiesSetUsing = string.Empty;
 
@@ -73,6 +73,19 @@ namespace AuthenticationSdk.core
             ValidateMLEProperties();
         }
 
+        private static Dictionary<string, string> ConvertMLEApiMapToString(Dictionary<string, bool> mapToControlMLEonAPI)
+        {
+            return mapToControlMLEonAPI?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToString());
+        }
+
+        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, bool> mapToControlMLEonAPI = null, System.Security.Cryptography.AsymmetricAlgorithm responseMlePrivateKey = null)
+            : this(
+                merchantConfigDictionary,
+                ConvertMLEApiMapToString(mapToControlMLEonAPI),
+                responseMlePrivateKey)
+        {
+            // This constructor delegates to the main constructor.
+        }
         #region Class Properties
 
         public string MerchantId { get; set; }
@@ -247,7 +260,7 @@ namespace AuthenticationSdk.core
             Logger.Debug($"Merchant Configuration :\n{merchCfgLogString}");
         }
 
-        private void SetValuesFromAppConfig(NameValueCollection merchantConfigSection, Dictionary<string, bool> mapToControlMLEonAPI)
+        private void SetValuesFromAppConfig(NameValueCollection merchantConfigSection, Dictionary<string, string> mapToControlMLEonAPI)
         {
             MerchantId = merchantConfigSection["merchantID"];
             PortfolioId = merchantConfigSection["portfolioID"];
@@ -358,7 +371,7 @@ namespace AuthenticationSdk.core
             }
         }
 
-        private void SetValuesUsingDictObj(IReadOnlyDictionary<string, string> merchantConfigDictionary, Dictionary<string,bool> mapToControlMLEonAPI)
+        private void SetValuesUsingDictObj(IReadOnlyDictionary<string, string> merchantConfigDictionary, Dictionary<string,string> mapToControlMLEonAPI)
         {
             var key = string.Empty;
 

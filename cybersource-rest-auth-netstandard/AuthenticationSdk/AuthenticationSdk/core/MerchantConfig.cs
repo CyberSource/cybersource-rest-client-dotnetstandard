@@ -193,7 +193,60 @@ namespace AuthenticationSdk.core
             set => EnableRequestMLEForOptionalApisGlobally = value;
         }
 
-        public Dictionary<string, bool> MapToControlMLEonAPI { get; set; }
+        public Dictionary<string, string> MapToControlMLEonAPI { get => MapToControlMLEonAPI;
+            set {
+                // Validate the map values of MLE Config if not null
+                if (value != null)
+                {
+                    ValidateMapToControlMLEonAPIValues(value);
+                    // Populate the internal Maps for MLE control
+                    var internalMapToControlRequestMLEonAPI = new Dictionary<string, bool>();
+                    var internalMapToControlResponseMLEonAPI = new Dictionary<string, bool>();
+
+                    foreach (var entry in value)
+                    {
+                        var apiName = entry.Key;
+                        var configValue = entry.Value;
+
+
+                        if (string.IsNullOrEmpty(configValue))
+                        {
+                            // Throw exception if configValue is empty for the given apiName
+                            throw new Exception($"Invalid MLE control map value for key '{apiName}'. Value cannot be null or empty.");
+                        }
+                        else if (configValue.Contains("::"))
+                        {
+                            // Format: "requestMLE::responseMLE"
+                            var parts = configValue.Split(new[] { "::" }, StringSplitOptions.None);
+                            var requestMLE = parts.Length > 0 ? parts[0] : string.Empty;
+                            var responseMLE = parts.Length > 1 ? parts[1] : string.Empty;
+
+                            // Set request MLE value
+                            if (!string.IsNullOrEmpty(requestMLE))
+                            {
+                                internalMapToControlRequestMLEonAPI[apiName] = bool.Parse(requestMLE);
+                            }
+
+                            // Set response MLE value
+                            if (!string.IsNullOrEmpty(responseMLE))
+                            {
+                                internalMapToControlResponseMLEonAPI[apiName] = bool.Parse(responseMLE);
+                            }
+                        }
+                        else
+                        {
+                            // Format: "true" or "false" - applies to request MLE only
+                            internalMapToControlRequestMLEonAPI[apiName] = bool.Parse(configValue);
+                        }
+                    }
+
+                    this.InternalMapToControlRequestMLEonAPI = internalMapToControlRequestMLEonAPI;
+                    this.InternalMapToControlResponseMLEonAPI = internalMapToControlResponseMLEonAPI;
+                }
+            } 
+        }
+        public Dictionary<string, bool> InternalMapToControlRequestMLEonAPI { get; set; }
+        public Dictionary<string, bool> InternalMapToControlResponseMLEonAPI { get; set; }
 
         public string MleForRequestPublicCertPath { get; set; }
 
@@ -672,6 +725,64 @@ namespace AuthenticationSdk.core
             {
                 Logger.Error($"{err.Message}");
                 throw new Exception($"{Constants.ErrorPrefix} {err.Message}");
+            }
+        }
+
+        private void ValidateMapToControlMLEonAPIValues(Dictionary<string, string> mapToControlMLEonAPI)
+        {
+            if (mapToControlMLEonAPI == null)
+            {
+                return;
+            }
+
+            foreach (var entry in mapToControlMLEonAPI)
+            {
+                var key = entry.Key;
+                var value = entry.Value;
+
+                if (string.IsNullOrEmpty(value))
+                {
+                    Logger.Error($"ConfigException : Invalid MLE control map value for key '{key}'. Value cannot be null or empty.");
+                    throw new Exception($"Invalid MLE control map value for key '{key}'. Value cannot be null or empty.");
+                }
+
+                // Check if value contains "::" separator
+                if (value.Contains("::"))
+                {
+                    var parts = value.Split(new[] { "::" }, StringSplitOptions.None);
+
+                    if (parts.Length != 2)
+                    {
+                        Logger.Error($"ConfigException : Invalid MLE control map value format for key '{key}'. Expected format: true/false for 'requestMLE::responseMLE' but got: '{value}'");
+                        throw new Exception($"Invalid MLE control map value format for key '{key}'. Expected format: true/false for 'requestMLE::responseMLE' but got: '{value}'");
+                    }
+
+                    var requestMLE = parts[0];
+                    var responseMLE = parts[1];
+
+                    // Validate first part (request MLE) - can be empty, "true", or "false"
+                    if (!string.IsNullOrEmpty(requestMLE) && !Utility.IsValidBooleanString(requestMLE))
+                    {
+                        Logger.Error($"ConfigException : Invalid request MLE value for key '{key}'. Expected 'true', 'false', or empty but got: '{requestMLE}'");
+                        throw new Exception($"Invalid request MLE value for key '{key}'. Expected 'true', 'false', or empty but got: '{requestMLE}'");
+                    }
+
+                    // Validate second part (response MLE) - can be empty, "true", or "false"
+                    if (!string.IsNullOrEmpty(responseMLE) && !Utility.IsValidBooleanString(responseMLE))
+                    {
+                        Logger.Error($"ConfigException : Invalid response MLE value for key '{key}'. Expected 'true', 'false', or empty but got: '{responseMLE}'");
+                        throw new Exception($"Invalid response MLE value for key '{key}'. Expected 'true', 'false', or empty but got: '{responseMLE}'");
+                    }
+                }
+                else
+                {
+                    // Value without "::" separator - should be "true" or "false"
+                    if (!Utility.IsValidBooleanString(value))
+                    {
+                        Logger.Error($"ConfigException : Invalid MLE control map value for key '{key}'. Expected 'true' or 'false' for requestMLE but got: '{value}'");
+                        throw new Exception($"Invalid MLE control map value for key '{key}'. Expected 'true' or 'false' for requestMLE but got: '{value}'");
+                    }
+                }
             }
         }
 

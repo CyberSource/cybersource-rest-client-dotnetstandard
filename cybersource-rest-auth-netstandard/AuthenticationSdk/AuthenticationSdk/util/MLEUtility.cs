@@ -128,5 +128,37 @@ namespace AuthenticationSdk.util
             var jsonObject = new { encryptedRequest = jweToken };
             return JsonConvert.SerializeObject(jsonObject);
         }
+        public static bool CheckIsResponseMLEForAPI(MerchantConfig merchantConfig, string operationIds)
+        {
+            // isMLE for response for an api is false by default
+            bool isResponseMLEForAPI = false;
+
+            if (merchantConfig.EnableResponseMleGlobally)
+            {
+                isResponseMLEForAPI = true;
+            }
+
+            // operationIds are array as there are multiple public functions for apiCallFunction such as apiCall, apiCallAsync ..
+            string[] operationArray = operationIds.Split(',');
+            for (int i = 0; i < operationArray.Length; i++)
+            {
+                operationArray[i] = operationArray[i].Trim();
+            }
+
+            // Control the Response MLE only from map
+            // Special Note: If API expects MLE Response mandatory and map is saying to receive non MLE response then API might throw an error from CyberSource
+            if (merchantConfig.InternalMapToControlResponseMLEonAPI != null && merchantConfig.InternalMapToControlResponseMLEonAPI.Count > 0)
+            {
+                foreach (string operationId in operationArray)
+                {
+                    if (merchantConfig.InternalMapToControlResponseMLEonAPI.ContainsKey(operationId))
+                    {
+                        isResponseMLEForAPI = merchantConfig.InternalMapToControlResponseMLEonAPI[operationId];
+                        break;
+                    }
+                }
+            }
+            return isResponseMLEForAPI;
+        }
     }
 }

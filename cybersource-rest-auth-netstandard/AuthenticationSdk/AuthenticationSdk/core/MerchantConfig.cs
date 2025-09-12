@@ -73,19 +73,6 @@ namespace AuthenticationSdk.core
             ValidateMLEProperties();
         }
 
-        private static Dictionary<string, string> ConvertMLEApiMapToString(Dictionary<string, bool> mapToControlMLEonAPI)
-        {
-            return mapToControlMLEonAPI?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToString());
-        }
-
-        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, bool> mapToControlMLEonAPI = null, System.Security.Cryptography.AsymmetricAlgorithm responseMlePrivateKey = null)
-            : this(
-                merchantConfigDictionary,
-                ConvertMLEApiMapToString(mapToControlMLEonAPI),
-                responseMlePrivateKey)
-        {
-            // This constructor delegates to the main constructor.
-        }
         #region Class Properties
 
         public string MerchantId { get; set; }
@@ -192,9 +179,12 @@ namespace AuthenticationSdk.core
             get => EnableRequestMLEForOptionalApisGlobally;
             set => EnableRequestMLEForOptionalApisGlobally = value;
         }
-
-        public Dictionary<string, string> MapToControlMLEonAPI { get => MapToControlMLEonAPI;
-            set {
+        private Dictionary<string, string> _mapToControlMLEonAPI { get; set; }
+        public Dictionary<string, string> MapToControlMLEonAPI
+        {
+            get => _mapToControlMLEonAPI;
+            set
+            {
                 // Validate the map values of MLE Config if not null
                 if (value != null)
                 {
@@ -242,8 +232,9 @@ namespace AuthenticationSdk.core
 
                     this.InternalMapToControlRequestMLEonAPI = internalMapToControlRequestMLEonAPI;
                     this.InternalMapToControlResponseMLEonAPI = internalMapToControlResponseMLEonAPI;
+                    _mapToControlMLEonAPI = value;
                 }
-            } 
+            }
         }
         public Dictionary<string, bool> InternalMapToControlRequestMLEonAPI { get; set; }
         public Dictionary<string, bool> InternalMapToControlResponseMLEonAPI { get; set; }

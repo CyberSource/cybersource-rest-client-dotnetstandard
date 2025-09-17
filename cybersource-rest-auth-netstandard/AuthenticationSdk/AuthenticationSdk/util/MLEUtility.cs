@@ -60,7 +60,7 @@ namespace AuthenticationSdk.util
             string payload = requestBody.ToString();
             logUtility.LogDebugMessage(logger, Constants.LOG_REQUEST_BEFORE_MLE + payload);
 
-            X509Certificate2 mleCertificate = GetMLECertificate(merchantConfig);
+            X509Certificate2 mleCertificate = GetRequestMLECertificate(merchantConfig);
 
             // Handling special case : MLE Certificate is not currently available for HTTP Signature
             if (mleCertificate == null && Constants.AuthMechanismHttp.Equals(merchantConfig.AuthenticationType, StringComparison.OrdinalIgnoreCase))
@@ -90,7 +90,7 @@ namespace AuthenticationSdk.util
             return mleRequest;
         }
 
-        private static X509Certificate2 GetMLECertificate(MerchantConfig merchantConfig)
+        private static X509Certificate2 GetRequestMLECertificate(MerchantConfig merchantConfig)
         {
             X509Certificate2 mleCertificate = Cache.GetRequestMLECertFromCache(merchantConfig);
             return mleCertificate;

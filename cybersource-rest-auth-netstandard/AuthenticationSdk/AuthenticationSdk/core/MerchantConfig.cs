@@ -241,6 +241,11 @@ namespace AuthenticationSdk.core
 
         public string MleForRequestPublicCertPath { get; set; }
 
+
+        /**
+         * Optional parameter. User can pass a custom requestMleKeyAlias to fetch from the certificate.
+         * Older flag "mleKeyAlias" is deprecated and will be used as alias/another name for requestMleKeyAlias.
+         */
         public string RequestMleKeyAlias { get; set; }
 
         /// <summary>

@@ -12,10 +12,10 @@ namespace AuthenticationSdk.authentication.jwt
         private readonly MerchantConfig _merchantConfig;
         private readonly JwtToken _jwtToken;
 
-        public JwtTokenGenerator(MerchantConfig merchantConfig)
+        public JwtTokenGenerator(MerchantConfig merchantConfig,bool isResponseMLEForApi)
         {
             _merchantConfig = merchantConfig;
-            _jwtToken = new JwtToken(_merchantConfig);
+            _jwtToken = new JwtToken(_merchantConfig,isResponseMLEForApi);
         }
 
         public Token GetToken()
@@ -54,7 +54,15 @@ namespace AuthenticationSdk.authentication.jwt
 
         private string TokenForCategory1()
         {
-            var jwtBody = $"{{ \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\"}}";
+            var jwtBody = "";
+            if (_jwtToken.IsResponseMLEForApi)
+            {
+                jwtBody = $"{{ \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\", \"v-c-response-mle-kid\":\"{_merchantConfig.ResponseMleKID}\" }}";
+            }
+            else
+            {
+                jwtBody = $"{{ \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\"}}";
+            }
 
             var x5Cert = _jwtToken.Certificate;
 
@@ -81,8 +89,15 @@ namespace AuthenticationSdk.authentication.jwt
         private string TokenForCategory2()
         {
             var digest = GenerateDigest(_jwtToken.RequestJsonData);
-
-            var jwtBody = $"{{\n            \"digest\":\"{digest}\", \"digestAlgorithm\":\"SHA-256\", \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\"}}";
+            var jwtBody = "";
+            if (_jwtToken.IsResponseMLEForApi)
+            {
+                jwtBody = $"{{\n            \"digest\":\"{digest}\", \"digestAlgorithm\":\"SHA-256\", \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\", \"v-c-response-mle-kid\":\"{_merchantConfig.ResponseMleKID}\"}}";
+            }
+            else
+            {
+                jwtBody = $"{{\n            \"digest\":\"{digest}\", \"digestAlgorithm\":\"SHA-256\", \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\"}}";
+            }
 
             var x5Cert = _jwtToken.Certificate;
 

@@ -961,6 +961,13 @@ namespace AuthenticationSdk.core
                     throw new Exception("Response MLE is enabled but no private key provided. Either set ResponseMlePrivateKey object or provide ResponseMlePrivateKeyFilePath.");
                 }
 
+                // Check if both private key object and private key file path are provided
+                if (ResponseMlePrivateKey != null && !string.IsNullOrEmpty(ResponseMlePrivateKeyFilePath))
+                {
+                    Logger.Error("ConfigException : Both responseMlePrivateKey object and responseMlePrivateKeyFilePath are provided. Please provide only one of them for response mle private key.");
+                    throw new Exception("Both responseMlePrivateKey object and responseMlePrivateKeyFilePath are provided. Please provide only one of them for response mle private key.");
+                }
+
                 // If private key file path is provided, validate the file exists
                 if (!string.IsNullOrEmpty(ResponseMlePrivateKeyFilePath))
                 {

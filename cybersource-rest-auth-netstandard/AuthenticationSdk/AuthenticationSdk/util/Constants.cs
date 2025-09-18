@@ -45,5 +45,7 @@ namespace AuthenticationSdk.util
         public static readonly string MLE_CACHE_IDENTIFIER_FOR_CONFIG_CERT = "mleCertFromMerchantConfig";
 
         public static readonly string MLE_CACHE_IDENTIFIER_FOR_P12_CERT = "mleCertFromP12";
+
+        public static readonly string MLE_CACHE_KEY_IDENTIFIER_FOR_RESPONSE_PRIVATE_KEY = "mleResponsePrivateKeyFromFile";
     }
 }

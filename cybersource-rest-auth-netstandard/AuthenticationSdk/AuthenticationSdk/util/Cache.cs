@@ -7,6 +7,7 @@ using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Runtime.Caching;
 using System.Security.Cryptography;
@@ -33,6 +34,12 @@ namespace AuthenticationSdk.util
             public X509Certificate2Collection Certificates { get; set; }
             public DateTime Timestamp { get; set; }
             public X509Certificate2 MLECertificate { get; set; }
+        }
+
+        private class PrivateKeyInfo
+        {
+            public AsymmetricAlgorithm PrivateKey { get; set; }
+            public DateTime Timestamp { get; set; }
         }
 
         public static X509Certificate2Collection FetchCachedCertificate(string p12FilePath, string keyPassword)
@@ -173,6 +180,57 @@ namespace AuthenticationSdk.util
 
         private static void SetupCache(MerchantConfig merchantConfig, string cacheKey, string certificateFilePath)
         {
+            var policy = new CacheItemPolicy();
+            var filePaths = new List<string>();
+            var cachedFilePath = Path.GetFullPath(certificateFilePath);
+            filePaths.Add(cachedFilePath);
+            policy.ChangeMonitors.Add(new HostFileChangeMonitor(filePaths));
+
+            ObjectCache cache = MemoryCache.Default;
+
+            if (cacheKey.EndsWith(Constants.MLE_CACHE_KEY_IDENTIFIER_FOR_RESPONSE_PRIVATE_KEY))
+            {
+                try
+                {
+                    string fileExtension = Path.GetExtension(certificateFilePath)?.TrimStart('.').ToLowerInvariant();
+                    AsymmetricAlgorithm mlePrivateKey = null;
+                    string password = merchantConfig.ResponseMlePrivateKeyFilePassword;
+
+                    // Case 1 - PKCS#12 formats (.p12, .pfx)
+                    if (fileExtension == "p12" || fileExtension == "pfx")
+                    {
+                        mlePrivateKey = Utility.ReadPrivateKeyFromP12(certificateFilePath, password);
+                    }
+                    // Case 2 - PEM-based formats (.pem, .key, .p8)
+                    else if (fileExtension == "pem" || fileExtension == "key" || fileExtension == "p8")
+                    {
+                        mlePrivateKey = (AsymmetricAlgorithm) Utility.ExtractPrivateKeyFromFile(certificateFilePath, password);
+                    }
+                    else
+                    {
+                        throw new Exception($"Unsupported Response MLE Private Key file format: {fileExtension}. Supported formats are: .p12, .pfx, .pem, .key, .p8");
+                    }
+
+                    PrivateKeyInfo privateKeyInfo = new PrivateKeyInfo
+                    {
+                        PrivateKey = mlePrivateKey,
+                        Timestamp = File.GetLastWriteTime(certificateFilePath)
+                    };
+
+                    lock (mutex)
+                    {
+                        cache.Set(cacheKey, privateKeyInfo, policy);
+                    }
+                }
+                catch (Exception e)
+                {
+                    logger.Error($"Error loading MLE response private key from: {certificateFilePath}. Error: {e.Message}");
+                    throw new Exception($"Error loading MLE response private key from: {certificateFilePath}. Error: {e.Message}", e);
+                }
+                return;
+            }
+
+            // ... existing code for other cacheKey cases ...
             X509Certificate2 mleCertificate = null;
 
             if (cacheKey.EndsWith(Constants.MLE_CACHE_IDENTIFIER_FOR_CONFIG_CERT))
@@ -215,13 +273,7 @@ namespace AuthenticationSdk.util
                 Timestamp = File.GetLastWriteTime(certificateFilePath)
             };
 
-            var policy = new CacheItemPolicy();
-            var filePaths = new List<string>();
-            var cachedFilePath = Path.GetFullPath(certificateFilePath);
-            filePaths.Add(cachedFilePath);
-            policy.ChangeMonitors.Add(new HostFileChangeMonitor(filePaths));
 
-            ObjectCache cache = MemoryCache.Default;
             lock(mutex)
             {
                 cache.Set(cacheKey, certInfo, policy);
@@ -235,6 +287,34 @@ namespace AuthenticationSdk.util
 
             //return all certs in p12
             return certificates;
+        }
+        public static AsymmetricAlgorithm GetMleResponsePrivateKeyFromFilePath(MerchantConfig merchantConfig)
+        {
+            string merchantId = merchantConfig.MerchantId;
+            string identifier = Constants.MLE_CACHE_KEY_IDENTIFIER_FOR_RESPONSE_PRIVATE_KEY;
+            string cacheKey = $"{merchantId}_{identifier}";
+            string mleResponsePrivateKeyFilePath = merchantConfig.ResponseMlePrivateKeyFilePath;
+
+            ObjectCache cache = MemoryCache.Default;
+
+            if (!cache.Contains(cacheKey))
+            {
+                SetupCache(merchantConfig, cacheKey, mleResponsePrivateKeyFilePath);
+            }
+            else
+            {
+                var responseMlePrivateKeyInfo = (PrivateKeyInfo)cache.Get(cacheKey);
+                if (responseMlePrivateKeyInfo == null || responseMlePrivateKeyInfo.Timestamp != File.GetLastWriteTime(mleResponsePrivateKeyFilePath))
+                {
+                    SetupCache(merchantConfig, cacheKey, mleResponsePrivateKeyFilePath);
+                }
+            }
+
+            var cachedResponseMlePrivateKeyInfo = (PrivateKeyInfo)cache.Get(cacheKey);
+            RSA privateKey = (RSA)cachedResponseMlePrivateKeyInfo?.PrivateKey;
+            // Assuming CertInfo is extended to include MLEPrivateKey for response
+            return cachedResponseMlePrivateKeyInfo?.PrivateKey;
+
         }
     }
 }

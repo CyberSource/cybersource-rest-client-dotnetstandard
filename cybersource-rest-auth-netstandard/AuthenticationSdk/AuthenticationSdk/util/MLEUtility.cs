@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography;
 
 namespace AuthenticationSdk.util
 {
@@ -159,6 +160,96 @@ namespace AuthenticationSdk.util
                 }
             }
             return isResponseMLEForAPI;
+        }
+
+        public static bool CheckIsMleEncryptedResponse(string responseBody)
+        {
+            if (string.IsNullOrWhiteSpace(responseBody))
+            {
+                return false;
+            }
+            try
+            {
+                var jsonObject = JsonConvert.DeserializeObject<Newtonsoft.Json.Linq.JObject>(responseBody);
+                if (jsonObject == null || jsonObject.Count != 1)
+                {
+                    return false;
+                }
+                if (jsonObject.ContainsKey("encryptedResponse"))
+                {
+                    var value = jsonObject["encryptedResponse"];
+                    return value != null && value.Type == Newtonsoft.Json.Linq.JTokenType.String;
+                }
+                return false;
+            }
+            catch
+            {
+                // If JSON parsing fails, it's not a valid JSON thus not a MLE response
+                return false;
+            }
+        }
+        private static string GetResponseMleToken(string mleResponseBody)
+        {
+            try
+            {
+                var jsonObject = JsonConvert.DeserializeObject<Newtonsoft.Json.Linq.JObject>(mleResponseBody);
+                return jsonObject?["encryptedResponse"]?.ToString();
+            }
+            catch (Exception e)
+            {
+                logger.Error("Failed to extract Response MLE token: " + e.Message);
+                return null;
+            }
+        }
+        private static AsymmetricAlgorithm GetMleResponsePrivateKey(MerchantConfig merchantConfig)
+        {
+            // First priority - if privateKey is given in merchant config return that
+            if (merchantConfig.ResponseMlePrivateKey != null)
+            {
+                return merchantConfig.ResponseMlePrivateKey;
+            }
+            // Second priority - get the privateKey from merchantConfig.ResponseMlePrivateKeyFilePath
+            var responseMlePrivateKey = Cache.GetMleResponsePrivateKeyFromFilePath(merchantConfig);
+            return responseMlePrivateKey;
+        }
+        public static string DecryptMleResponsePayload(MerchantConfig merchantConfig, string mleResponseBody)
+        {
+            if (!CheckIsMleEncryptedResponse(mleResponseBody))
+            {
+                throw new Exception("Response body is not MLE encrypted.");
+            }
+
+            var mlePrivateKey = GetMleResponsePrivateKey(merchantConfig);
+            string jweResponseToken = GetResponseMleToken(mleResponseBody);
+
+            if (string.IsNullOrEmpty(jweResponseToken))
+            {
+                // When MLE token is empty or null then fall back to non MLE encrypted response
+                return mleResponseBody;
+            }
+
+            try
+            {
+                logger.Debug("LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION: " + mleResponseBody);
+
+                // Convert AsymmetricAlgorithm to RSA if needed
+                RSA rsaKey = mlePrivateKey as RSA;
+                if (rsaKey == null)
+                {
+                    throw new Exception("MLE Response private key is not an RSA key. Only RSA keys are supported for MLE decryption.");
+                }
+                string decryptedResponse = JWEUtilty.DecryptUsingRSAParameters(rsaKey.ExportParameters(true), jweResponseToken);
+                logger.Debug("LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION: " + decryptedResponse);
+                return decryptedResponse;
+            }
+            catch (Jose.JoseException e)
+            {
+                throw new Exception("MLE Response decryption JoseException: " + e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("MLE Response token Exception: " + e.Message);
+            }
         }
     }
 }

@@ -200,11 +200,6 @@ namespace AuthenticationSdk.util
         {
             try
             {
-                if (!string.IsNullOrEmpty(password))
-                {
-                    throw new NotSupportedException("Encrypted PKCS#1 keys are not directly supported. Use PKCS#8 format for encrypted keys.");
-                }
-
                 // Parse PKCS#1 RSA private key
                 var rsaPrivateKey = RsaPrivateKeyStructure.GetInstance(keyBytes);
                 var rsaParams = new RsaPrivateCrtKeyParameters(

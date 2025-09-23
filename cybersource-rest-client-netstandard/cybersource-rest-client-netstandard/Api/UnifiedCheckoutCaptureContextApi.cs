@@ -281,9 +281,9 @@ namespace CyberSource.Api
                 localVarPostBody = generateUnifiedCheckoutCaptureContextRequest; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GenerateUnifiedCheckoutCaptureContext,GenerateUnifiedCheckoutCaptureContextAsync,GenerateUnifiedCheckoutCaptureContextWithHttpInfo,GenerateUnifiedCheckoutCaptureContextAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GenerateUnifiedCheckoutCaptureContext,GenerateUnifiedCheckoutCaptureContextAsync,GenerateUnifiedCheckoutCaptureContextWithHttpInfo,GenerateUnifiedCheckoutCaptureContextAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -390,9 +390,9 @@ namespace CyberSource.Api
                 localVarPostBody = generateUnifiedCheckoutCaptureContextRequest; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = false;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "GenerateUnifiedCheckoutCaptureContext,GenerateUnifiedCheckoutCaptureContextAsync,GenerateUnifiedCheckoutCaptureContextWithHttpInfo,GenerateUnifiedCheckoutCaptureContextAsyncWithHttpInfo"))
+			string inboundMLEStatus = "false";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GenerateUnifiedCheckoutCaptureContext,GenerateUnifiedCheckoutCaptureContextAsync,GenerateUnifiedCheckoutCaptureContextWithHttpInfo,GenerateUnifiedCheckoutCaptureContextAsyncWithHttpInfo"))
             {
                 try
                 {

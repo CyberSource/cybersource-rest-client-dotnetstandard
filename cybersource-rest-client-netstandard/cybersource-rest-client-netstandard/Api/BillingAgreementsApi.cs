@@ -386,9 +386,9 @@ namespace CyberSource.Api
                 localVarPostBody = modifyBillingAgreement; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo"))
+			string inboundMLEStatus = "optional";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -508,9 +508,9 @@ namespace CyberSource.Api
                 localVarPostBody = modifyBillingAgreement; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo"))
+			string inboundMLEStatus = "optional";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -628,9 +628,9 @@ namespace CyberSource.Api
                 localVarPostBody = intimateBillingAgreement; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo"))
+			string inboundMLEStatus = "optional";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -750,9 +750,9 @@ namespace CyberSource.Api
                 localVarPostBody = intimateBillingAgreement; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo"))
+			string inboundMLEStatus = "optional";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -857,9 +857,9 @@ namespace CyberSource.Api
                 localVarPostBody = createBillingAgreement; // byte array
             }
             
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo"))
+			string inboundMLEStatus = "optional";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -966,9 +966,9 @@ namespace CyberSource.Api
                 localVarPostBody = createBillingAgreement; // byte array
             }
 
-            bool isMLESupportedByCybsForApi = true;
-            MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, isMLESupportedByCybsForApi, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo"))
+			string inboundMLEStatus = "optional";            
+			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
+            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo"))
             {
                 try
                 {

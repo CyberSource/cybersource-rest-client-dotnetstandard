@@ -1,11 +1,11 @@
-﻿using System;
+﻿using AuthenticationSdk.util;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using AuthenticationSdk.util;
-using NLog;
 
 namespace AuthenticationSdk.core
 {
@@ -164,7 +164,16 @@ namespace AuthenticationSdk.core
 
         public string PemFileDirectory { get; set; }
 
-        public bool UseMLEGlobally { get; set; }
+        public bool EnableRequestMLEForOptionalApisGlobally { get; set; }
+
+        public bool DisableRequestMLEForMandatoryApisGlobally { get; set; }
+
+        // Deprecated: Use EnableRequestMLEForOptionalApisGlobally instead
+        public bool UseMLEGlobally
+        {
+            get => EnableRequestMLEForOptionalApisGlobally;
+            set => EnableRequestMLEForOptionalApisGlobally = value;
+        }
 
         public Dictionary<string, bool> MapToControlMLEonAPI { get; set; }
 
@@ -173,6 +182,8 @@ namespace AuthenticationSdk.core
         public string MaxConnectionPoolSize { get; set; }
 
         public string KeepAliveTime { get; set; }
+
+        public string MleForRequestPublicCertPath { get; set; }
 
         #endregion
 
@@ -236,15 +247,46 @@ namespace AuthenticationSdk.core
             ProxyPassword = merchantConfigSection["proxyPassword"];
             PemFileDirectory = merchantConfigSection["pemFileDirectory"];
 
-            if (merchantConfigSection["useMLEGlobally"] != null && "true".Equals(merchantConfigSection["useMLEGlobally"], StringComparison.OrdinalIgnoreCase))
+            if (!string.IsNullOrEmpty(merchantConfigSection["mleForRequestPublicCertPath"].Trim()))
             {
-                UseMLEGlobally = bool.Parse(merchantConfigSection["useMLEGlobally"]);
+                MleForRequestPublicCertPath = merchantConfigSection["mleForRequestPublicCertPath"].Trim();
+            }
+
+            bool useMLEGloballySet = merchantConfigSection["useMLEGlobally"] != null;
+            bool enableRequestMLEForOptionalApisGloballySet = merchantConfigSection["enableRequestMLEForOptionalApisGlobally"] != null;
+
+            if (enableRequestMLEForOptionalApisGloballySet)
+            {
+                EnableRequestMLEForOptionalApisGlobally = bool.Parse(merchantConfigSection["enableRequestMLEForOptionalApisGlobally"]);
+            }
+            else if (useMLEGloballySet)
+            {
+                EnableRequestMLEForOptionalApisGlobally = bool.Parse(merchantConfigSection["useMLEGlobally"]);
             }
             else
             {
-                UseMLEGlobally = false;
+                EnableRequestMLEForOptionalApisGlobally = false;
             }
-            
+
+            if (useMLEGloballySet && enableRequestMLEForOptionalApisGloballySet)
+            {
+                bool useMLEGloballyValue = bool.Parse(merchantConfigSection["useMLEGlobally"]);
+                bool enableRequestMLEForOptionalApisGloballyValue = bool.Parse(merchantConfigSection["enableRequestMLEForOptionalApisGlobally"]);
+                if (useMLEGloballyValue != enableRequestMLEForOptionalApisGloballyValue)
+                {
+                    throw new Exception("Both useMLEGlobally and enableRequestMLEForOptionalApisGlobally are set but their values do not match.");
+                }
+            }
+
+            if (merchantConfigSection["disableRequestMLEForMandatoryApisGlobally"] != null)
+            {
+                DisableRequestMLEForMandatoryApisGlobally = bool.Parse(merchantConfigSection["disableRequestMLEForMandatoryApisGlobally"]);
+            }
+            else
+            {
+                DisableRequestMLEForMandatoryApisGlobally = false;
+            }
+
             MapToControlMLEonAPI = mapToControlMLEonAPI;
 
             if (merchantConfigSection["mleKeyAlias"] != null)
@@ -487,13 +529,39 @@ namespace AuthenticationSdk.core
                         PemFileDirectory = merchantConfigDictionary["pemFileDirectory"];
                     }
 
-                    if (merchantConfigDictionary.ContainsKey("useMLEGlobally") && "true".Equals(merchantConfigDictionary["useMLEGlobally"],StringComparison.OrdinalIgnoreCase))
+                    bool useMLEGloballySet = merchantConfigDictionary.ContainsKey("useMLEGlobally");
+                    bool enableRequestMLEForOptionalApisGloballySet = merchantConfigDictionary.ContainsKey("enableRequestMLEForOptionalApisGlobally");
+
+                    if (enableRequestMLEForOptionalApisGloballySet)
                     {
-                        UseMLEGlobally = bool.Parse(merchantConfigDictionary["useMLEGlobally"]);
+                        EnableRequestMLEForOptionalApisGlobally = bool.Parse(merchantConfigDictionary["enableRequestMLEForOptionalApisGlobally"]);
+                    }
+                    else if (useMLEGloballySet)
+                    {
+                        EnableRequestMLEForOptionalApisGlobally = bool.Parse(merchantConfigDictionary["useMLEGlobally"]);
                     }
                     else
                     {
-                        UseMLEGlobally = false;
+                        EnableRequestMLEForOptionalApisGlobally = false;
+                    }
+
+                    if (useMLEGloballySet && enableRequestMLEForOptionalApisGloballySet)
+                    {
+                        bool useMLEGloballyValue = bool.Parse(merchantConfigDictionary["useMLEGlobally"]);
+                        bool enableRequestMLEForOptionalApisGloballyValue = bool.Parse(merchantConfigDictionary["enableRequestMLEForOptionalApisGlobally"]);
+                        if (useMLEGloballyValue != enableRequestMLEForOptionalApisGloballyValue)
+                        {
+                            throw new Exception("Both useMLEGlobally and enableRequestMLEForOptionalApisGlobally are set but their values do not match.");
+                        }
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("disableRequestMLEForMandatoryApisGlobally"))
+                    {
+                        DisableRequestMLEForMandatoryApisGlobally = bool.Parse(merchantConfigDictionary["disableRequestMLEForMandatoryApisGlobally"]);
+                    }
+                    else
+                    {
+                        DisableRequestMLEForMandatoryApisGlobally = false;
                     }
 
                     if (mapToControlMLEonAPI != null)
@@ -528,6 +596,11 @@ namespace AuthenticationSdk.core
                     else
                     {
                         KeepAliveTime = Constants.DefaultKeepAliveTime;
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("mleForRequestPublicCertPath") && !string.IsNullOrEmpty(merchantConfigDictionary["mleForRequestPublicCertPath"].Trim()))
+                    {
+                        MleForRequestPublicCertPath = merchantConfigDictionary["mleForRequestPublicCertPath"].Trim();
                     }
                 }
             }
@@ -639,13 +712,20 @@ namespace AuthenticationSdk.core
 
                 var pathDirectorySeparator = Path.DirectorySeparatorChar;
 
+                // Check the p12 file and set the keyFile to get the mleCert in case of JWT auth type
+                if (!CheckKeyFile())
+                {
+                    throw new Exception($"{Constants.ErrorPrefix} Error finding or accessing the Key Directory or Key File. Please review the values in the merchant configuration.");
+                }
+
                 P12Keyfilepath = $"{KeyDirectory}{pathDirectorySeparator}{KeyfileName}.p12";
             }
         }
 
         private void ValidateMLEProperties()
         {
-            bool mleConfigured = UseMLEGlobally;
+            
+            bool requestMleConfigured = EnableRequestMLEForOptionalApisGlobally;
 
             if (MapToControlMLEonAPI != null && MapToControlMLEonAPI.Count > 0)
             {
@@ -653,17 +733,100 @@ namespace AuthenticationSdk.core
                 {
                     if (value)
                     {
-                        mleConfigured = true;
+                        requestMleConfigured = true;
                         break;
                     }
                 }
             }
 
             //if MLE=true then check for auth Type
-            if (mleConfigured && !Enumerations.AuthenticationType.JWT.ToString().Equals(AuthenticationType, StringComparison.OrdinalIgnoreCase))
+            if (requestMleConfigured && !Enumerations.AuthenticationType.JWT.ToString().Equals(AuthenticationType, StringComparison.OrdinalIgnoreCase))
             {
-                Logger.Error("MLE is only supported in JWT auth type");
-                throw new Exception("MLE is only supported in JWT auth type");
+                Logger.Error("Request MLE is only supported in JWT auth type");
+                throw new Exception("Request MLE is only supported in JWT auth type");
+            }
+
+            // Verify that the input path for MLE certificate is valid, else throw error in both cases (MLE=true/false)
+            if (!string.IsNullOrEmpty(MleForRequestPublicCertPath))
+            {
+                try
+                {
+                    CertificateUtility.ValidatePathAndFile(MleForRequestPublicCertPath, "mleForRequestPublicCertPath");
+                }
+                catch (IOException err)
+                {
+                    Logger.Error(err.Message);
+                    throw new Exception(err.Message);
+                }
+            }
+        }
+
+        public bool CheckKeyFile()
+        {
+            if (string.IsNullOrEmpty(KeyfileName))
+            {
+                Logger.Error("Key Filename not provided. Assigning the value of Merchant ID");
+                if (!string.IsNullOrEmpty(MerchantId))
+                {
+                    KeyfileName = MerchantId;
+                }
+            }
+
+            if (string.IsNullOrEmpty(KeyDirectory))
+            {
+                KeyDirectory = Constants.P12FileDirectory;
+                Logger.Error($"Keys Directory not provided. Using Default Path: {KeyDirectory}");
+            }
+
+            DirectoryInfo dirInfo = new DirectoryInfo(KeyDirectory);
+
+            if (!dirInfo.Exists)
+            {
+                Logger.Error($"KeyDirectory not found, Entered directory : {KeyDirectory}");
+                return false;
+            }
+
+            string keyFilePath;
+            FileInfo newFile;
+            try
+            {
+                keyFilePath = Path.Combine(KeyDirectory, KeyfileName + ".p12");
+                newFile = new FileInfo(keyFilePath);
+                if (!newFile.Exists)
+                {
+                    Logger.Error($"KeyFile not found, Entered path/file name : {keyFilePath}");
+                    return false;
+                }
+
+                Logger.Info($"Entered file/path value for Key File : {keyFilePath}");
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            bool isReadable = false;
+            try
+            {
+                using (FileStream fs = newFile.Open(FileMode.Open, FileAccess.Read))
+                {
+                    isReadable = true;
+                }
+            }
+            catch
+            {
+                isReadable = false;
+            }
+
+            if (isReadable)
+            {
+                P12Keyfilepath = keyFilePath;
+                return true;
+            }
+            else
+            {
+                Logger.Info($"File cannot be accessed. Permission denied : {keyFilePath}");
+                return false;
             }
         }
     }

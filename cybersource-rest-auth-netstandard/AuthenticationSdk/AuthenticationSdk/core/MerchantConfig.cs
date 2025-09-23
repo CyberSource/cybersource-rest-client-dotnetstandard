@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace AuthenticationSdk.core
 {
@@ -18,7 +19,7 @@ namespace AuthenticationSdk.core
     *============================================================================================*/
     public class MerchantConfig
     {
-        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, string> mapToControlMLEonAPI = null, System.Security.Cryptography.AsymmetricAlgorithm responseMlePrivateKey = null)
+        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, string> mapToControlMLEonAPI = null, AsymmetricAlgorithm responseMlePrivateKey = null)
         {
             var _propertiesSetUsing = string.Empty;
 
@@ -274,7 +275,7 @@ namespace AuthenticationSdk.core
         /// AsymmetricAlgorithm instance used for Response MLE decryption by the SDK.
         /// Optional — either provide this object directly or specify the private key file path via configuration.
         /// </summary>
-        public System.Security.Cryptography.AsymmetricAlgorithm ResponseMlePrivateKey { get; set; }
+        public AsymmetricAlgorithm ResponseMlePrivateKey { get; set; }
 
         #endregion
 

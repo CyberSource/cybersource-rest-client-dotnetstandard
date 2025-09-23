@@ -244,11 +244,23 @@ namespace AuthenticationSdk.util
             }
             catch (Jose.JoseException e)
             {
-                throw new Exception("MLE Response decryption JoseException: " + e.Message);
+                string errorMessage = $"MLE Response decryption failed (JoseException): {e.Message}. " +
+                                      $"Possible reason: The provided RSA private key does not match the public key used to encrypt the message.";
+                logger.Error(errorMessage, e);
+                throw new Exception(errorMessage, e);
+            }
+            catch (CryptographicException e)
+            {
+                string errorMessage = $"MLE Response decryption failed (CryptographicException): {e.Message}. " +
+                                      "This may happen if the private key is incorrect or corrupted.";
+                logger.Error(errorMessage, e);
+                throw new Exception(errorMessage, e);
             }
             catch (Exception e)
             {
-                throw new Exception("MLE Response token Exception: " + e.Message);
+                string errorMessage = $"MLE Response decryption failed: {e.Message}";
+                logger.Error(errorMessage, e);
+                throw new Exception(errorMessage, e);
             }
         }
     }

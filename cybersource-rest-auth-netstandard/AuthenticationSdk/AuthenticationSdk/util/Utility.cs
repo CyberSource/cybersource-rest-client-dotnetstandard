@@ -189,7 +189,7 @@ namespace AuthenticationSdk.util
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"Failed to parse PKCS#8 key: {ex.Message}", ex);
+                throw new InvalidOperationException($"Possible causes: wrong password, corrupted file, or unsupported format.: {ex.Message}", ex);
             }
         }
 
@@ -221,7 +221,7 @@ namespace AuthenticationSdk.util
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"Failed to parse PKCS#1 key: {ex.Message}", ex);
+                throw new InvalidOperationException($"Possible causes: wrong password, corrupted file, or unsupported format.: {ex.Message}", ex);
             }
         }
 

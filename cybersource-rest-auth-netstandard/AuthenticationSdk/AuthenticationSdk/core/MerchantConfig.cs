@@ -18,7 +18,7 @@ namespace AuthenticationSdk.core
     *============================================================================================*/
     public class MerchantConfig
     {
-        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string,bool> mapToControlMLEonAPI=null)
+        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, bool> mapToControlMLEonAPI = null)
         {
             var _propertiesSetUsing = string.Empty;
 

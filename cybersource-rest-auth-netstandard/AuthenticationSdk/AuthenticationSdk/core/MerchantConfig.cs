@@ -627,7 +627,7 @@ namespace AuthenticationSdk.core
 
             if (string.IsNullOrEmpty(TimeOut))
             {
-                TimeOut = string.Empty;   // In Millisec
+                TimeOut = Constants.DEFAULT_TIME_OUT;   // In Millisec
             }
 
             // setting up hostname based on the run environment value

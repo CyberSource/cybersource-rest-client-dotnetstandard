@@ -355,7 +355,7 @@ namespace CyberSource.Client
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,
                 pathParams, contentType,isResponseMLEForApi);
 
-            MerchantConfig merchantConfig = new MerchantConfig(merchantConfigDictionary: Configuration.MerchantConfigDictionaryObj, mapToControlMLEonAPI: Configuration.MapToControlMLEonAPI);
+            MerchantConfig merchantConfig = new MerchantConfig(merchantConfigDictionary: Configuration.MerchantConfigDictionaryObj, mapToControlMLEonAPI: Configuration.MapToControlMLEonAPI, responseMlePrivateKey: Configuration.ResponseMlePrivateKey);
 
             var newRestClientOptions = GetRestClientOptions(merchantConfig, Configuration.UserAgent, TimeSpan.FromMilliseconds(Configuration.Timeout));
 
@@ -517,7 +517,7 @@ namespace CyberSource.Client
 
             logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
 
-            MerchantConfig merchantConfig = new MerchantConfig(merchantConfigDictionary: Configuration.MerchantConfigDictionaryObj, mapToControlMLEonAPI: Configuration.MapToControlMLEonAPI);
+            MerchantConfig merchantConfig = new MerchantConfig(merchantConfigDictionary: Configuration.MerchantConfigDictionaryObj, mapToControlMLEonAPI: Configuration.MapToControlMLEonAPI, responseMlePrivateKey: Configuration.ResponseMlePrivateKey);
 
             var newRestClientOptions = GetRestClientOptions(merchantConfig, Configuration.UserAgent, TimeSpan.FromMilliseconds(Configuration.Timeout));
 

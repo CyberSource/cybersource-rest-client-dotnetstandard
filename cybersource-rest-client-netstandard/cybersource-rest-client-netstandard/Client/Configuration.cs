@@ -56,8 +56,6 @@ namespace CyberSource.Client
                              AsymmetricAlgorithm responseMlePrivateKey = null
                             )
         {
-            SetApiClientUsingDefault(apiClient);
-
             Username = username;
             Password = password;
             AccessToken = accessToken;
@@ -90,6 +88,15 @@ namespace CyberSource.Client
                         }
                     }
                 }
+
+                if (merchConfigDictObj.ContainsKey("timeout"))
+                {
+                    Timeout = int.Parse(merchConfigDictObj["timeout"]);
+                }
+                else
+                {
+                    Timeout = timeout;
+                }
             }
 
             if (defaultHeader != null)
@@ -101,10 +108,11 @@ namespace CyberSource.Client
 
             TempFolderPath = tempFolderPath;
             DateTimeFormat = dateTimeFormat;
-            Timeout = timeout;
             MerchantConfigDictionaryObj = merchConfigDictObj;
             MapToControlMLEonAPI = mapToControlMLEonAPI;
             ResponseMlePrivateKey = responseMlePrivateKey;
+
+            SetApiClientUsingDefault(apiClient);
         }
 
         private string GetClientId()
@@ -187,7 +195,7 @@ namespace CyberSource.Client
             
             if (apiClient == null)
             {
-                ApiClient = new ApiClient();
+                ApiClient = new ApiClient(this);
             }
             else
             {
@@ -206,7 +214,7 @@ namespace CyberSource.Client
         public Dictionary<string, string> MapToControlMLEonAPI { get; set; } = new Dictionary<string, string>();
 
         public AsymmetricAlgorithm ResponseMlePrivateKey { get; set; } = null;
-        
+
         /// <summary>
         /// Add default header.
         /// </summary>

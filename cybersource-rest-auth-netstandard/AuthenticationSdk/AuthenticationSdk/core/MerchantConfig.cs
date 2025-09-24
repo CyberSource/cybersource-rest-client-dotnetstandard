@@ -240,6 +240,10 @@ namespace AuthenticationSdk.core
         public Dictionary<string, bool> InternalMapToControlRequestMLEonAPI { get; set; }
         public Dictionary<string, bool> InternalMapToControlResponseMLEonAPI { get; set; }
 
+        public string MaxConnectionPoolSize { get; set; }
+
+        public string KeepAliveTime { get; set; }
+
         public string MleForRequestPublicCertPath { get; set; }
 
 
@@ -418,6 +422,24 @@ namespace AuthenticationSdk.core
             if (merchantConfigSection["responseMlePrivateKeyFilePassword"] != null && !string.IsNullOrEmpty(merchantConfigSection["responseMlePrivateKeyFilePassword"]))
             {
                 ResponseMlePrivateKeyFilePassword = merchantConfigSection["responseMlePrivateKeyFilePassword"];
+            }
+
+            if (merchantConfigSection["maxConnectionPoolSize"] != null)
+            {
+                MaxConnectionPoolSize = merchantConfigSection["maxConnectionPoolSize"];
+            }
+            else
+            {
+                MaxConnectionPoolSize = Constants.DefaultMaxConnectionPoolSize;
+            }
+
+            if (merchantConfigSection["keepAliveTime"] != null)
+            {
+                KeepAliveTime = merchantConfigSection["keepAliveTime"];
+            }
+            else
+            {
+                KeepAliveTime = Constants.DefaultKeepAliveTime;
             }
         }
 
@@ -685,6 +707,24 @@ namespace AuthenticationSdk.core
                     if (string.IsNullOrWhiteSpace(RequestMleKeyAlias?.Trim()))
                     {
                         RequestMleKeyAlias = Constants.DefaultMleAliasForCert;
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("maxConnectionPoolSize"))
+                    {
+                        MaxConnectionPoolSize = merchantConfigDictionary["maxConnectionPoolSize"];
+                    }
+                    else
+                    {
+                        MaxConnectionPoolSize = Constants.DefaultMaxConnectionPoolSize;
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("keepAliveTime"))
+                    {
+                        KeepAliveTime = merchantConfigDictionary["keepAliveTime"];
+                    }
+                    else
+                    {
+                        KeepAliveTime = Constants.DefaultKeepAliveTime;
                     }
 
                     if (merchantConfigDictionary.ContainsKey("mleForRequestPublicCertPath") && !string.IsNullOrEmpty(merchantConfigDictionary["mleForRequestPublicCertPath"].Trim()))

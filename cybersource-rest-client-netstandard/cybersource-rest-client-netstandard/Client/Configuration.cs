@@ -54,8 +54,6 @@ namespace CyberSource.Client
                              Dictionary<string, bool> mapToControlMLEonAPI = null
                             )
         {
-            SetApiClientUsingDefault(apiClient);
-
             Username = username;
             Password = password;
             AccessToken = accessToken;
@@ -88,6 +86,15 @@ namespace CyberSource.Client
                         }
                     }
                 }
+
+                if (merchConfigDictObj.ContainsKey("timeout"))
+                {
+                    Timeout = int.Parse(merchConfigDictObj["timeout"]);
+                }
+                else
+                {
+                    Timeout = timeout;
+                }
             }
 
             if (defaultHeader != null)
@@ -99,9 +106,10 @@ namespace CyberSource.Client
 
             TempFolderPath = tempFolderPath;
             DateTimeFormat = dateTimeFormat;
-            Timeout = timeout;
             MerchantConfigDictionaryObj = merchConfigDictObj;
             MapToControlMLEonAPI = mapToControlMLEonAPI;
+
+            SetApiClientUsingDefault(apiClient);
         }
 
         private string GetClientId()
@@ -184,7 +192,7 @@ namespace CyberSource.Client
             
             if (apiClient == null)
             {
-                ApiClient = new ApiClient();
+                ApiClient = new ApiClient(this);
             }
             else
             {
@@ -201,7 +209,7 @@ namespace CyberSource.Client
         /// Gets or sets the MapToControlMLEonAPI
         /// </summary>
         public Dictionary<string, bool> MapToControlMLEonAPI { get; set; } = new Dictionary<string, bool>();
-        
+
         /// <summary>
         /// Add default header.
         /// </summary>

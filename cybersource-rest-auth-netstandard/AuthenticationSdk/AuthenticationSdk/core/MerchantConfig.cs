@@ -179,6 +179,10 @@ namespace AuthenticationSdk.core
 
         public string MleKeyAlias { get; set; }
 
+        public string MaxConnectionPoolSize { get; set; }
+
+        public string KeepAliveTime { get; set; }
+
         public string MleForRequestPublicCertPath { get; set; }
 
         #endregion
@@ -293,6 +297,24 @@ namespace AuthenticationSdk.core
             if (string.IsNullOrWhiteSpace(MleKeyAlias?.Trim()))
             {
                 MleKeyAlias = Constants.DefaultMleAliasForCert;
+            }
+
+            if (merchantConfigSection["maxConnectionPoolSize"] != null)
+            {
+                MaxConnectionPoolSize = merchantConfigSection["maxConnectionPoolSize"];
+            }
+            else
+            {
+                MaxConnectionPoolSize = Constants.DefaultMaxConnectionPoolSize;
+            }
+
+            if (merchantConfigSection["keepAliveTime"] != null)
+            {
+                KeepAliveTime = merchantConfigSection["keepAliveTime"];
+            }
+            else
+            {
+                KeepAliveTime = Constants.DefaultKeepAliveTime;
             }
         }
 
@@ -558,6 +580,24 @@ namespace AuthenticationSdk.core
                         MleKeyAlias = Constants.DefaultMleAliasForCert;
                     }
 
+                    if (merchantConfigDictionary.ContainsKey("maxConnectionPoolSize"))
+                    {
+                        MaxConnectionPoolSize = merchantConfigDictionary["maxConnectionPoolSize"];
+                    }
+                    else
+                    {
+                        MaxConnectionPoolSize = Constants.DefaultMaxConnectionPoolSize;
+                    }
+
+                    if (merchantConfigDictionary.ContainsKey("keepAliveTime"))
+                    {
+                        KeepAliveTime = merchantConfigDictionary["keepAliveTime"];
+                    }
+                    else
+                    {
+                        KeepAliveTime = Constants.DefaultKeepAliveTime;
+                    }
+
                     if (merchantConfigDictionary.ContainsKey("mleForRequestPublicCertPath") && !string.IsNullOrEmpty(merchantConfigDictionary["mleForRequestPublicCertPath"].Trim()))
                     {
                         MleForRequestPublicCertPath = merchantConfigDictionary["mleForRequestPublicCertPath"].Trim();
@@ -587,7 +627,7 @@ namespace AuthenticationSdk.core
 
             if (string.IsNullOrEmpty(TimeOut))
             {
-                TimeOut = string.Empty;   // In Millisec
+                TimeOut = Constants.DEFAULT_TIME_OUT;   // In Millisec
             }
 
             // setting up hostname based on the run environment value

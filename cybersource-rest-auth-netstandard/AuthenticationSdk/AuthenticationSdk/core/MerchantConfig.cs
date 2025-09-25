@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Security.Cryptography;
 
 namespace AuthenticationSdk.core
@@ -269,7 +270,7 @@ namespace AuthenticationSdk.core
         /// Password for the private key file used in Response MLE decryption by the SDK.
         /// Required for .p12 files or encrypted private keys.
         /// </summary>
-        public string ResponseMlePrivateKeyFilePassword { get; set; }
+        public SecureString ResponseMlePrivateKeyFilePassword { get; set; }
 
         /// <summary>
         /// AsymmetricAlgorithm instance used for Response MLE decryption by the SDK.
@@ -417,7 +418,7 @@ namespace AuthenticationSdk.core
 
             if (merchantConfigSection["responseMlePrivateKeyFilePassword"] != null && !string.IsNullOrEmpty(merchantConfigSection["responseMlePrivateKeyFilePassword"]))
             {
-                ResponseMlePrivateKeyFilePassword = merchantConfigSection["responseMlePrivateKeyFilePassword"];
+                ResponseMlePrivateKeyFilePassword = ConvertToSecureString(merchantConfigSection["responseMlePrivateKeyFilePassword"]);
             }
         }
 
@@ -714,7 +715,7 @@ namespace AuthenticationSdk.core
 
                     if (merchantConfigDictionary.ContainsKey("responseMlePrivateKeyFilePassword") && !string.IsNullOrEmpty(merchantConfigDictionary["responseMlePrivateKeyFilePassword"]))
                     {
-                        ResponseMlePrivateKeyFilePassword = merchantConfigDictionary["responseMlePrivateKeyFilePassword"];
+                        ResponseMlePrivateKeyFilePassword = ConvertToSecureString(merchantConfigDictionary["responseMlePrivateKeyFilePassword"]);
                     }
                 }
             }
@@ -1058,6 +1059,18 @@ namespace AuthenticationSdk.core
                 Logger.Info($"File cannot be accessed. Permission denied : {keyFilePath}");
                 return false;
             }
+        }
+        private SecureString ConvertToSecureString(string password)
+        {
+            if (string.IsNullOrEmpty(password))
+                return null;
+            var securePassword = new SecureString();
+            foreach (char c in password)
+            {
+                securePassword.AppendChar(c);
+            }
+            securePassword.MakeReadOnly();
+            return securePassword;
         }
     }
 }

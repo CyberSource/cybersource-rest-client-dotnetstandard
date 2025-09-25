@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -30,12 +31,12 @@ namespace AuthenticationSdk.util
         /// Reads a private key from a PKCS#12 (.p12 or .pfx) file.
         /// </summary>
         /// <param name="p12FilePath">Path to the PKCS#12 file.</param>
-        /// <param name="password">Password to unlock the file.</param>
+        /// <param name="password">Password to unlock the file as SecureString.</param>
         /// <returns>The RSA or ECDsa private key.</returns>
         /// <exception cref="FileNotFoundException">If the file doesn't exist.</exception>
         /// <exception cref="InvalidOperationException">If no private key is found.</exception>
         /// <exception cref="CryptographicException">If the file is invalid or the password is wrong.</exception>
-        public static AsymmetricAlgorithm ReadPrivateKeyFromP12(string p12FilePath, string password = "")
+        public static AsymmetricAlgorithm ReadPrivateKeyFromP12(string p12FilePath, SecureString password = null)
         {
             if (string.IsNullOrWhiteSpace(p12FilePath))
                 throw new ArgumentException("File path cannot be null or empty", nameof(p12FilePath));
@@ -45,10 +46,12 @@ namespace AuthenticationSdk.util
 
             try
             {
+                // Convert SecureString to string for X509Certificate2
+                string pwd = password == null ? string.Empty : new System.Net.NetworkCredential(string.Empty, password).Password;
                 // Load the certificate (including private key) from the P12 file
                 var cert = new X509Certificate2(
                     p12FilePath,
-                    password,
+                    pwd,
                     X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet
                 );
 
@@ -78,9 +81,9 @@ namespace AuthenticationSdk.util
         /// Extracts private key supporting PKCS#1 and PKCS#8, encrypted and unencrypted
         /// </summary>
         /// <param name="pemContent">PEM content as string</param>
-        /// <param name="password">Password for encrypted keys (optional)</param>
+        /// <param name="password">Password for encrypted keys (optional, SecureString)</param>
         /// <returns>RSA private key object</returns>
-        public static RSA ExtractPrivateKey(string pemContent, string password = null)
+        public static RSA ExtractPrivateKey(string pemContent, SecureString password = null)
         {
             try
             {
@@ -101,7 +104,10 @@ namespace AuthenticationSdk.util
         /// <summary>
         /// Extracts private key from file
         /// </summary>
-        public static RSA ExtractPrivateKeyFromFile(string filePath, string password = null)
+        /// <param name="filePath">Path to PEM file</param>
+        /// <param name="password">Password for encrypted keys (optional, SecureString)</param>
+        /// <returns>RSA private key object</returns>
+        public static RSA ExtractPrivateKeyFromFile(string filePath, SecureString password = null)
         {
             if (!File.Exists(filePath))
                 throw new FileNotFoundException($"Private key file not found: {filePath}");
@@ -113,7 +119,10 @@ namespace AuthenticationSdk.util
         /// <summary>
         /// Extract using PemReader (handles standard PEM formats)
         /// </summary>
-        private static AsymmetricKeyParameter ExtractWithPemReader(string pemContent, string password)
+        /// <param name="pemContent">PEM content as string</param>
+        /// <param name="password">Password for encrypted keys (optional, SecureString)</param>
+        /// <returns>BouncyCastle AsymmetricKeyParameter</returns>
+        private static AsymmetricKeyParameter ExtractWithPemReader(string pemContent, SecureString password)
         {
             try
             {
@@ -142,7 +151,10 @@ namespace AuthenticationSdk.util
         /// <summary>
         /// Manual parsing for different key formats
         /// </summary>
-        private static RSA ExtractWithManualParsing(string pemContent, string password)
+        /// <param name="pemContent">PEM content as string</param>
+        /// <param name="password">Password for encrypted keys (optional, SecureString)</param>
+        /// <returns>RSA private key object</returns>
+        private static RSA ExtractWithManualParsing(string pemContent, SecureString password)
         {
             // Remove PEM headers and decode base64
             var base64Content = ExtractBase64FromPem(pemContent);
@@ -166,11 +178,14 @@ namespace AuthenticationSdk.util
         /// <summary>
         /// Handle PKCS#8 format keys (encrypted and unencrypted)
         /// </summary>
-        private static RSA HandlePkcs8Key(byte[] keyBytes, string password)
+        /// <param name="keyBytes">Key bytes</param>
+        /// <param name="password">Password for encrypted keys (optional, SecureString)</param>
+        /// <returns>RSA private key object</returns>
+        private static RSA HandlePkcs8Key(byte[] keyBytes, SecureString password)
         {
             try
             {
-                if (string.IsNullOrEmpty(password))
+                if (password == null || password.Length == 0)
                 {
                     // Unencrypted PKCS#8
                     var privateKeyInfo = PrivateKeyInfo.GetInstance(keyBytes);
@@ -180,9 +195,11 @@ namespace AuthenticationSdk.util
                 else
                 {
                     // Encrypted PKCS#8
+                    char[] pwdChars = new System.Net.NetworkCredential(string.Empty, password).Password.ToCharArray();
                     var encryptedPrivateKeyInfo = EncryptedPrivateKeyInfo.GetInstance(keyBytes);
                     var privateKeyInfo = PrivateKeyInfoFactory.CreatePrivateKeyInfo(
-                        password.ToCharArray(), encryptedPrivateKeyInfo);
+                        pwdChars, encryptedPrivateKeyInfo);
+                    Array.Clear(pwdChars, 0, pwdChars.Length); // Clear password from memory
                     var privateKey = PrivateKeyFactory.CreateKey(privateKeyInfo);
                     return ConvertToRSA(privateKey);
                 }
@@ -196,7 +213,10 @@ namespace AuthenticationSdk.util
         /// <summary>
         /// Handle PKCS#1 format keys
         /// </summary>
-        private static RSA HandlePkcs1Key(byte[] keyBytes, string password)
+        /// <param name="keyBytes">Key bytes</param>
+        /// <param name="password">Password for encrypted keys (optional, SecureString)</param>
+        /// <returns>RSA private key object</returns>
+        private static RSA HandlePkcs1Key(byte[] keyBytes, SecureString password)
         {
             try
             {
@@ -223,6 +243,8 @@ namespace AuthenticationSdk.util
         /// <summary>
         /// Convert Bouncy Castle RSA parameters to .NET RSA object
         /// </summary>
+        /// <param name="privateKey">BouncyCastle AsymmetricKeyParameter</param>
+        /// <returns>.NET RSA object</returns>
         private static RSA ConvertToRSA(AsymmetricKeyParameter privateKey)
         {
             if (!(privateKey is RsaPrivateCrtKeyParameters rsaParams))
@@ -250,6 +272,8 @@ namespace AuthenticationSdk.util
         /// <summary>
         /// Extract base64 content from PEM format
         /// </summary>
+        /// <param name="pemContent">PEM content as string</param>
+        /// <returns>Base64 string</returns>
         private static string ExtractBase64FromPem(string pemContent)
         {
             var lines = pemContent.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
@@ -267,6 +291,7 @@ namespace AuthenticationSdk.util
                 {
                     break;
                 }
+                // Skip encryption headers
                 if (inKey && !line.StartsWith("Proc-Type:") && !line.StartsWith("DEK-Info:"))
                 {
                     base64Lines.Add(line.Trim());
@@ -279,6 +304,8 @@ namespace AuthenticationSdk.util
         /// <summary>
         /// Check if PEM content is PKCS#8 format
         /// </summary>
+        /// <param name="pemContent">PEM content as string</param>
+        /// <returns>True if PKCS#8 format</returns>
         private static bool IsPkcs8Format(string pemContent)
         {
             return pemContent.Contains("-----BEGIN PRIVATE KEY-----") ||
@@ -288,6 +315,8 @@ namespace AuthenticationSdk.util
         /// <summary>
         /// Check if PEM content is PKCS#1 format
         /// </summary>
+        /// <param name="pemContent">PEM content as string</param>
+        /// <returns>True if PKCS#1 format</returns>
         private static bool IsPkcs1Format(string pemContent)
         {
             return pemContent.Contains("-----BEGIN RSA PRIVATE KEY-----");
@@ -298,23 +327,37 @@ namespace AuthenticationSdk.util
         /// </summary>
         private class PasswordFinder : IPasswordFinder
         {
-            private readonly string _password;
+            private readonly SecureString _password;
 
-            public PasswordFinder(string password)
+            /// <summary>
+            /// Initializes a new instance of the PasswordFinder class.
+            /// </summary>
+            /// <param name="password">Password as SecureString</param>
+            public PasswordFinder(SecureString password)
             {
                 _password = password;
             }
 
+            /// <summary>
+            /// Returns the password as a char array for BouncyCastle
+            /// </summary>
+            /// <returns>Char array of password</returns>
             public char[] GetPassword()
             {
-                return _password?.ToCharArray();
+                if (_password == null || _password.Length == 0)
+                    return null;
+                var pwd = new System.Net.NetworkCredential(string.Empty, _password).Password.ToCharArray();
+                return pwd;
             }
         }
 
         /// <summary>
         /// Get detailed information about the extracted key
         /// </summary>
-        public static KeyInfo GetKeyInfo(string pemContent, string password = null)
+        /// <param name="pemContent">PEM content as string</param>
+        /// <param name="password">Password for encrypted keys (optional, SecureString)</param>
+        /// <returns>KeyInfo object with details</returns>
+        public static KeyInfo GetKeyInfo(string pemContent, SecureString password = null)
         {
             using var rsa = ExtractPrivateKey(pemContent, password);
             var parameters = rsa.ExportParameters(false); // Export public parameters only for info
@@ -328,6 +371,11 @@ namespace AuthenticationSdk.util
             };
         }
 
+        /// <summary>
+        /// Determines the key format from PEM content
+        /// </summary>
+        /// <param name="pemContent">PEM content as string</param>
+        /// <returns>Key format string</returns>
         private static string DetermineKeyFormat(string pemContent)
         {
             if (IsPkcs8Format(pemContent))
@@ -338,13 +386,21 @@ namespace AuthenticationSdk.util
                 return "Unknown";
         }
 
+        /// <summary>
+        /// Determines if the key is encrypted from PEM content
+        /// </summary>
+        /// <param name="pemContent">PEM content as string</param>
+        /// <returns>True if encrypted</returns>
         private static bool DetermineIfEncrypted(string pemContent)
         {
             return pemContent.Contains("-----BEGIN ENCRYPTED PRIVATE KEY-----") ||
                    pemContent.Contains("Proc-Type: 4,ENCRYPTED");
         }
-
     }
+
+    /// <summary>
+    /// Information about a cryptographic key
+    /// </summary>
     public class KeyInfo
     {
         public int KeySize { get; set; }

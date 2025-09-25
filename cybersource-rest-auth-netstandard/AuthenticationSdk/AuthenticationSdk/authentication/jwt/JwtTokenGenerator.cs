@@ -11,11 +11,13 @@ namespace AuthenticationSdk.authentication.jwt
     {
         private readonly MerchantConfig _merchantConfig;
         private readonly JwtToken _jwtToken;
+        private readonly bool _isResponseMLEForApi;
 
         public JwtTokenGenerator(MerchantConfig merchantConfig,bool isResponseMLEForApi)
         {
+            _isResponseMLEForApi = isResponseMLEForApi;
             _merchantConfig = merchantConfig;
-            _jwtToken = new JwtToken(_merchantConfig,isResponseMLEForApi);
+            _jwtToken = new JwtToken(_merchantConfig);
         }
 
         public Token GetToken()
@@ -55,7 +57,7 @@ namespace AuthenticationSdk.authentication.jwt
         private string TokenForCategory1()
         {
             var jwtBody = "";
-            if (_jwtToken.IsResponseMLEForApi)
+            if (_isResponseMLEForApi)
             {
                 jwtBody = $"{{ \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\", \"v-c-response-mle-kid\":\"{_merchantConfig.ResponseMleKID}\" }}";
             }
@@ -90,7 +92,7 @@ namespace AuthenticationSdk.authentication.jwt
         {
             var digest = GenerateDigest(_jwtToken.RequestJsonData);
             var jwtBody = "";
-            if (_jwtToken.IsResponseMLEForApi)
+            if (_isResponseMLEForApi)
             {
                 jwtBody = $"{{\n            \"digest\":\"{digest}\", \"digestAlgorithm\":\"SHA-256\", \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\", \"v-c-response-mle-kid\":\"{_merchantConfig.ResponseMleKID}\"}}";
             }

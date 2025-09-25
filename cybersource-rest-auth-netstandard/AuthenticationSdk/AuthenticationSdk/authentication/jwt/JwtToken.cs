@@ -8,7 +8,7 @@ namespace AuthenticationSdk.authentication.jwt
 {
     public class JwtToken : Token
     {
-        public JwtToken(MerchantConfig merchantConfig, bool isResponseMLEForApi)
+        public JwtToken(MerchantConfig merchantConfig)
         {
             RequestJsonData = merchantConfig.RequestJsonData;
             HostName = merchantConfig.HostName;
@@ -23,7 +23,6 @@ namespace AuthenticationSdk.authentication.jwt
             KeyPass = merchantConfig.KeyPass;
             X509Certificate2Collection certs = Cache.FetchCachedCertificate(P12FilePath, KeyPass);
             Certificate = Cache.GetCertBasedOnKeyAlias(certs, merchantConfig.KeyAlias);
-            IsResponseMLEForApi = isResponseMLEForApi;
         }
 
         public string BearerToken { get; set; }
@@ -37,8 +36,6 @@ namespace AuthenticationSdk.authentication.jwt
         public string KeyAlias { get; set; }
 
         public string KeyPass { get; }
-
-        public bool IsResponseMLEForApi { get; set; }
 
         public X509Certificate2 Certificate { get; }
     }

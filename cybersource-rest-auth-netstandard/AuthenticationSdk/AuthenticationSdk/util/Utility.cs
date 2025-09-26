@@ -39,10 +39,9 @@ namespace AuthenticationSdk.util
         public static AsymmetricAlgorithm ReadPrivateKeyFromP12(string p12FilePath, SecureString password = null)
         {
             if (string.IsNullOrWhiteSpace(p12FilePath))
+            {
                 throw new ArgumentException("File path cannot be null or empty", nameof(p12FilePath));
-
-            if (!File.Exists(p12FilePath))
-                throw new FileNotFoundException("The specified PKCS#12 file was not found.", p12FilePath);
+            }
 
             try
             {
@@ -57,23 +56,34 @@ namespace AuthenticationSdk.util
 
                 // Check if private key exists
                 if (!cert.HasPrivateKey)
+                {
                     throw new InvalidOperationException("No private key found in the P12 file.");
+                }
 
-                // Try RSA first
+                // Try RSA key
                 var rsaKey = cert.GetRSAPrivateKey();
                 if (rsaKey != null)
+                {
                     return rsaKey;
-
-                // Try ECDsa next
-                var ecdsaKey = cert.GetECDsaPrivateKey();
-                if (ecdsaKey != null)
-                    return ecdsaKey;
+                }
 
                 throw new InvalidOperationException("Private key found but unsupported algorithm type.");
             }
             catch (CryptographicException ex)
             {
                 throw new CryptographicException("Failed to read private key. Possible causes: wrong password, corrupted file, or unsupported format.", ex);
+            }
+            catch (InvalidOperationException ex)
+            {
+                if (ex.Message.Contains("No private key found"))
+                {
+                    throw new InvalidOperationException("No private key found in the P12 file.", ex);
+                }
+                else if (ex.Message.Contains("unsupported algorithm type"))
+                {
+                    throw new InvalidOperationException("Private key found but unsupported algorithm type.", ex);
+                }
+                throw;
             }
         }
 
@@ -90,7 +100,9 @@ namespace AuthenticationSdk.util
                 // First try with PemReader (handles most PEM formats)
                 var privateKey = ExtractWithPemReader(pemContent, password);
                 if (privateKey != null)
+                {
                     return ConvertToRSA(privateKey);
+                }
 
                 // If PemReader fails, try manual parsing
                 return ExtractWithManualParsing(pemContent, password);
@@ -110,7 +122,9 @@ namespace AuthenticationSdk.util
         public static RSA ExtractPrivateKeyFromFile(string filePath, SecureString password = null)
         {
             if (!File.Exists(filePath))
+            {
                 throw new FileNotFoundException($"Private key file not found: {filePath}");
+            }
 
             string pemContent = File.ReadAllText(filePath);
             return ExtractPrivateKey(pemContent, password);
@@ -161,11 +175,11 @@ namespace AuthenticationSdk.util
             var keyBytes = Convert.FromBase64String(base64Content);
 
             // Determine the key format and handle accordingly
-            if (IsPkcs8Format(pemContent))
+            if (IsKeyPkcs8Format(pemContent))
             {
                 return HandlePkcs8Key(keyBytes, password);
             }
-            else if (IsPkcs1Format(pemContent))
+            else if (IsKeyPkcs1Format(pemContent))
             {
                 return HandlePkcs1Key(keyBytes, password);
             }
@@ -173,6 +187,17 @@ namespace AuthenticationSdk.util
             {
                 throw new NotSupportedException("Unsupported key format");
             }
+        }
+
+        /// <summary>
+        /// Check if PEM content is PKCS#8 format
+        /// </summary>
+        /// <param name="pemContent">PEM content as string</param>
+        /// <returns>True if PKCS#8 format</returns>
+        private static bool IsKeyPkcs8Format(string pemContent)
+        {
+            return pemContent.Contains(Constants.PKCS8_PRIVATE_KEY_HEADER) ||
+                   pemContent.Contains(Constants.PKCS8_ENCRYPTED_PRIVATE_KEY_HEADER);
         }
 
         /// <summary>
@@ -208,6 +233,16 @@ namespace AuthenticationSdk.util
             {
                 throw new InvalidOperationException($"Possible causes: wrong password, corrupted file, or unsupported format.: {ex.Message}", ex);
             }
+        }
+
+        /// <summary>
+        /// Check if PEM content is PKCS#1 format
+        /// </summary>
+        /// <param name="pemContent">PEM content as string</param>
+        /// <returns>True if PKCS#1 format</returns>
+        private static bool IsKeyPkcs1Format(string pemContent)
+        {
+            return pemContent.Contains(Constants.PKCS1_PRIVATE_KEY_HEADER);
         }
 
         /// <summary>
@@ -302,27 +337,6 @@ namespace AuthenticationSdk.util
         }
 
         /// <summary>
-        /// Check if PEM content is PKCS#8 format
-        /// </summary>
-        /// <param name="pemContent">PEM content as string</param>
-        /// <returns>True if PKCS#8 format</returns>
-        private static bool IsPkcs8Format(string pemContent)
-        {
-            return pemContent.Contains("-----BEGIN PRIVATE KEY-----") ||
-                   pemContent.Contains("-----BEGIN ENCRYPTED PRIVATE KEY-----");
-        }
-
-        /// <summary>
-        /// Check if PEM content is PKCS#1 format
-        /// </summary>
-        /// <param name="pemContent">PEM content as string</param>
-        /// <returns>True if PKCS#1 format</returns>
-        private static bool IsPkcs1Format(string pemContent)
-        {
-            return pemContent.Contains("-----BEGIN RSA PRIVATE KEY-----");
-        }
-
-        /// <summary>
         /// Password finder for encrypted keys
         /// </summary>
         private class PasswordFinder : IPasswordFinder
@@ -345,7 +359,9 @@ namespace AuthenticationSdk.util
             public char[] GetPassword()
             {
                 if (_password == null || _password.Length == 0)
+                {
                     return null;
+                }
                 var pwd = new System.Net.NetworkCredential(string.Empty, _password).Password.ToCharArray();
                 return pwd;
             }
@@ -378,12 +394,18 @@ namespace AuthenticationSdk.util
         /// <returns>Key format string</returns>
         private static string DetermineKeyFormat(string pemContent)
         {
-            if (IsPkcs8Format(pemContent))
+            if (IsKeyPkcs8Format(pemContent))
+            {
                 return "PKCS#8";
-            else if (IsPkcs1Format(pemContent))
+            }
+            else if (IsKeyPkcs1Format(pemContent))
+            {
                 return "PKCS#1";
+            }
             else
+            {
                 return "Unknown";
+            }
         }
 
         /// <summary>
@@ -393,8 +415,8 @@ namespace AuthenticationSdk.util
         /// <returns>True if encrypted</returns>
         private static bool DetermineIfEncrypted(string pemContent)
         {
-            return pemContent.Contains("-----BEGIN ENCRYPTED PRIVATE KEY-----") ||
-                   pemContent.Contains("Proc-Type: 4,ENCRYPTED");
+            return pemContent.Contains(Constants.PKCS8_ENCRYPTED_PRIVATE_KEY_HEADER) ||
+                   pemContent.Contains(Constants.PROC_TYPE_ENCRYPTED_HEADER);
         }
     }
 

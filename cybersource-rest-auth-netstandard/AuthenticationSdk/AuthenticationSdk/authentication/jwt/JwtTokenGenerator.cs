@@ -13,7 +13,7 @@ namespace AuthenticationSdk.authentication.jwt
         private readonly JwtToken _jwtToken;
         private readonly bool _isResponseMLEForApi;
 
-        public JwtTokenGenerator(MerchantConfig merchantConfig,bool isResponseMLEForApi)
+        public JwtTokenGenerator(MerchantConfig merchantConfig, bool isResponseMLEForApi)
         {
             _isResponseMLEForApi = isResponseMLEForApi;
             _merchantConfig = merchantConfig;

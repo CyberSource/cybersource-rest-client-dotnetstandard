@@ -101,7 +101,7 @@ namespace AuthenticationSdk.core
                         throw new Exception("Missing or Empty Credentials : MerchantID or KeyAlias or KeyPassphrase");
                     }
 
-                    var tokenObj = (JwtToken)new JwtTokenGenerator(_merchantConfig,isResponseMLEForApi).GetToken();
+                    var tokenObj = (JwtToken)new JwtTokenGenerator(_merchantConfig, isResponseMLEForApi).GetToken();
 
                     if (_merchantConfig.IsGetRequest || _merchantConfig.IsDeleteRequest)
                     {

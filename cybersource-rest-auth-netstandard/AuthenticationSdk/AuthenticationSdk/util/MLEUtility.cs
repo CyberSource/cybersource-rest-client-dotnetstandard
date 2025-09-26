@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography;
+using Newtonsoft.Json.Linq;
 
 namespace AuthenticationSdk.util
 {
@@ -170,7 +171,7 @@ namespace AuthenticationSdk.util
             }
             try
             {
-                var jsonObject = JsonConvert.DeserializeObject<Newtonsoft.Json.Linq.JObject>(responseBody);
+                var jsonObject = JsonConvert.DeserializeObject<JObject>(responseBody);
                 if (jsonObject == null || jsonObject.Count != 1)
                 {
                     return false;
@@ -178,7 +179,7 @@ namespace AuthenticationSdk.util
                 if (jsonObject.ContainsKey("encryptedResponse"))
                 {
                     var value = jsonObject["encryptedResponse"];
-                    return value != null && value.Type == Newtonsoft.Json.Linq.JTokenType.String;
+                    return value != null && value.Type == JTokenType.String;
                 }
                 return false;
             }
@@ -192,7 +193,7 @@ namespace AuthenticationSdk.util
         {
             try
             {
-                var jsonObject = JsonConvert.DeserializeObject<Newtonsoft.Json.Linq.JObject>(mleResponseBody);
+                var jsonObject = JsonConvert.DeserializeObject<JObject>(mleResponseBody);
                 return jsonObject?["encryptedResponse"]?.ToString();
             }
             catch (Exception e)

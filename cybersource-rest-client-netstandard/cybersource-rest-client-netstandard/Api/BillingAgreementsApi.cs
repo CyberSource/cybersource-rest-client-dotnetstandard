@@ -549,7 +549,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2ModifyBillingAgreementPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2ModifyBillingAgreementPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2ModifyBillingAgreementPost201Response),merchantConfig)); // Return statement
+                (PtsV2ModifyBillingAgreementPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2ModifyBillingAgreementPost201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Standing Instruction intimation Standing Instruction with or without Token.
@@ -795,7 +795,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2CreditsPost201Response1>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2CreditsPost201Response1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreditsPost201Response1),merchantConfig)); // Return statement
+                (PtsV2CreditsPost201Response1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreditsPost201Response1), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Create a Billing Agreement #### Standing Instruction: Standing Instruction with or without Token. Transaction amount in case First payment is coming along with registration. Only 2 decimal places allowed  #### Create Mandate: You can create a mandate through the direct debit mandate flow. Possible create mandate status values:   - Pending—the create mandate request was successfully processed.   - Failed—the create mandate request was not accepted.  #### Import Mandate: In the Bacs scheme, a mandate is created with a status of active. Direct debit collections can be made against it immediately. You can import a mandate to the CyberSource database when:   - You have existing customers with signed, active mandates   - You manage mandates outside of CyberSource.  When you import an existing mandate to the CyberSource database, provide a unique value for the mandate ID or the request results in an error. If an import mandate request is not accepted, the import mandate status value is failed. 
@@ -1015,7 +1015,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2CreateBillingAgreementPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2CreateBillingAgreementPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreateBillingAgreementPost201Response),merchantConfig)); // Return statement
+                (PtsV2CreateBillingAgreementPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreateBillingAgreementPost201Response), merchantConfig)); // Return statement
         }
     }
 }

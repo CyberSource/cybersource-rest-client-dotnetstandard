@@ -575,7 +575,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PblPaymentLinksPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PblPaymentLinksPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PblPaymentLinksPost201Response),merchantConfig)); // Return statement
+                (PblPaymentLinksPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PblPaymentLinksPost201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get a List of Payment Links Provides a (filtered) list of payment links that have been created in your account. You can filter the list based on the following status types:  - ACTIVE  - INACTIVE 
@@ -857,7 +857,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PblPaymentLinksAllGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PblPaymentLinksAllGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PblPaymentLinksAllGet200Response),merchantConfig)); // Return statement
+                (PblPaymentLinksAllGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PblPaymentLinksAllGet200Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get Payment Link Details You can retrieve details of a specific payment link. For each payment transaction you can use the Transaction Details API to get more details on the payment transaction.
@@ -1099,7 +1099,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PblPaymentLinksGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PblPaymentLinksGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PblPaymentLinksGet200Response),merchantConfig)); // Return statement
+                (PblPaymentLinksGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PblPaymentLinksGet200Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Update a Payment Link You can update all information except the payment link number for a payment link. Changes made to amount/price will apply to new payments made using the payment link. 
@@ -1351,7 +1351,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PblPaymentLinksPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PblPaymentLinksPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PblPaymentLinksPost201Response),merchantConfig)); // Return statement
+                (PblPaymentLinksPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PblPaymentLinksPost201Response), merchantConfig)); // Return statement
         }
     }
 }

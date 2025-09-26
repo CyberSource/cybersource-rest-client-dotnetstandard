@@ -799,7 +799,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<TokenizedcardRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (TokenizedcardRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TokenizedcardRequest),merchantConfig)); // Return statement
+                (TokenizedcardRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TokenizedcardRequest), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Create a Tokenized Card |  |  |  | | - -- | - -- | - -- | |**Tokenized cards**&lt;br&gt;A Tokenized card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires. 
@@ -1031,7 +1031,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<TokenizedcardRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (TokenizedcardRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TokenizedcardRequest),merchantConfig)); // Return statement
+                (TokenizedcardRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TokenizedcardRequest), merchantConfig)); // Return statement
         }
     }
 }

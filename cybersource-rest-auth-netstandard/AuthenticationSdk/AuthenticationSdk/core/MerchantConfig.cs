@@ -418,7 +418,7 @@ namespace AuthenticationSdk.core
 
             if (merchantConfigSection["responseMlePrivateKeyFilePassword"] != null && !string.IsNullOrEmpty(merchantConfigSection["responseMlePrivateKeyFilePassword"]))
             {
-                ResponseMlePrivateKeyFilePassword = ConvertToSecureString(merchantConfigSection["responseMlePrivateKeyFilePassword"]);
+                ResponseMlePrivateKeyFilePassword = Utility.ConvertStringToSecureString(merchantConfigSection["responseMlePrivateKeyFilePassword"]);
             }
         }
 
@@ -715,7 +715,7 @@ namespace AuthenticationSdk.core
 
                     if (merchantConfigDictionary.ContainsKey("responseMlePrivateKeyFilePassword") && !string.IsNullOrEmpty(merchantConfigDictionary["responseMlePrivateKeyFilePassword"]))
                     {
-                        ResponseMlePrivateKeyFilePassword = ConvertToSecureString(merchantConfigDictionary["responseMlePrivateKeyFilePassword"]);
+                        ResponseMlePrivateKeyFilePassword = Utility.ConvertStringToSecureString(merchantConfigDictionary["responseMlePrivateKeyFilePassword"]);
                     }
                 }
             }
@@ -1060,17 +1060,6 @@ namespace AuthenticationSdk.core
                 return false;
             }
         }
-        private SecureString ConvertToSecureString(string password)
-        {
-            if (string.IsNullOrEmpty(password))
-                return null;
-            var securePassword = new SecureString();
-            foreach (char c in password)
-            {
-                securePassword.AppendChar(c);
-            }
-            securePassword.MakeReadOnly();
-            return securePassword;
-        }
+
     }
 }

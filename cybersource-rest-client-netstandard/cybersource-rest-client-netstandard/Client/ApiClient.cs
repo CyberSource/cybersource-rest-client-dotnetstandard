@@ -708,7 +708,7 @@ namespace CyberSource.Client
             {
                 if (merchantConfig == null)
                 {
-                    throw new ApiException(500, "merchantConfig cannot be null when decrypting MLE encrypted response.");
+                    throw new ApiException((int)response.StatusCode, "merchantConfig cannot be null when decrypting MLE encrypted response.");
                 }
                 
                 // Inside the if (MLEUtility.CheckIsMleEncryptedResponse(response.Content)) block
@@ -721,7 +721,7 @@ namespace CyberSource.Client
                 catch (Exception e)
                 {
                     logger.Error($"MLE Encrypted Response Decryption Error Occurred. Error: {e.Message}");
-                    throw new ApiException(500, e.Message);
+                    throw new ApiException((int)response.StatusCode, e.Message);
 
                 }
             }

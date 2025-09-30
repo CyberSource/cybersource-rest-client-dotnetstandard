@@ -314,10 +314,6 @@ namespace AuthenticationSdk.util
 
             try
             {
-                if (cachedResponseMlePrivateKeyInfo == null || cachedResponseMlePrivateKeyInfo.PrivateKey == null)
-                {
-                    throw new Exception($"{Constants.ErrorPrefix} MLE response private key could not be retrieved from cache.");
-                }
                 RSA privateKey = (RSA)cachedResponseMlePrivateKeyInfo.PrivateKey;
                 return cachedResponseMlePrivateKeyInfo.PrivateKey;
             }

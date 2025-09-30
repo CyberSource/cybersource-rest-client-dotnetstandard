@@ -16,6 +16,20 @@ namespace AuthenticationSdk.util
 {
     public static class Utility
     {
+
+
+        public static SecureString ConvertStringToSecureString(string password)
+        {
+            if (string.IsNullOrEmpty(password))
+                return null;
+            var securePassword = new SecureString();
+            foreach (char c in password)
+            {
+                securePassword.AppendChar(c);
+            }
+            securePassword.MakeReadOnly();
+            return securePassword;
+        }
         /// <summary>
         /// Checks if the provided string represents a valid boolean value ("true" or "false", case-insensitive).
         /// </summary>
@@ -45,12 +59,10 @@ namespace AuthenticationSdk.util
 
             try
             {
-                // Convert SecureString to string for X509Certificate2
-                string pwd = password == null ? string.Empty : new System.Net.NetworkCredential(string.Empty, password).Password;
                 // Load the certificate (including private key) from the P12 file
                 var cert = new X509Certificate2(
                     p12FilePath,
-                    pwd,
+                    password == null ? string.Empty : new System.Net.NetworkCredential(string.Empty, password).Password,
                     X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet
                 );
 
@@ -93,7 +105,7 @@ namespace AuthenticationSdk.util
         /// <param name="pemContent">PEM content as string</param>
         /// <param name="password">Password for encrypted keys (optional, SecureString)</param>
         /// <returns>RSA private key object</returns>
-        public static RSA ExtractPrivateKey(string pemContent, SecureString password = null)
+        private static RSA ExtractPrivateKey(string pemContent, SecureString password = null)
         {
             try
             {

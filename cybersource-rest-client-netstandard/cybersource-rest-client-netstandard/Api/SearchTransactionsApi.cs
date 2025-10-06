@@ -473,7 +473,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<TssV2TransactionsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (TssV2TransactionsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TssV2TransactionsPost201Response),merchantConfig)); // Return statement
+                (TssV2TransactionsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TssV2TransactionsPost201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get Search Results Include the Search ID in the GET request to retrieve the search results.
@@ -709,7 +709,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<TssV2TransactionsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (TssV2TransactionsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TssV2TransactionsPost201Response),merchantConfig)); // Return statement
+                (TssV2TransactionsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TssV2TransactionsPost201Response), merchantConfig)); // Return statement
         }
     }
 }

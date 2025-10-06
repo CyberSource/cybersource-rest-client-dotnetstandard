@@ -543,7 +543,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<List<InlineResponse2003>>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (List<InlineResponse2003>) Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<InlineResponse2003>),merchantConfig)); // Return statement
+                (List<InlineResponse2003>) Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<InlineResponse2003>), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Create a New Webhook Subscription Create a new webhook subscription. Before creating a webhook, ensure that a signature key has been created.  For the example \&quot;Create Webhook using oAuth with Client Credentials\&quot; - for clients who have more than one oAuth Provider and have different client secrets that they would like to config for a given webhook, they may do so by overriding the keyId inside security config of webhook subscription. See the Developer Center examples section titled \&quot;Webhook Security - Create or Store Egress Symmetric Key - Store oAuth Credentials For Symmetric Key\&quot; to store these oAuth credentials that CYBS will need for oAuth.  For JWT authentication, attach your oAuth details to the webhook subscription. See the example \&quot;Create Webhook using oAuth with JWT\&quot; 
@@ -751,7 +751,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InlineResponse2015>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InlineResponse2015) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2015),merchantConfig)); // Return statement
+                (InlineResponse2015) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2015), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Create Webhook Security Keys Create security keys that CyberSource will use internally to connect to your servers and validate messages using a digital signature.  Select the CREATE example for CyberSource to generate the key on our server and maintain it for you as well. Remember to save the key in the API response, so that you can use it to validate messages later. 
@@ -1019,7 +1019,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InlineResponse2014>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InlineResponse2014) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2014),merchantConfig)); // Return statement
+                (InlineResponse2014) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2014), merchantConfig)); // Return statement
         }
     }
 }

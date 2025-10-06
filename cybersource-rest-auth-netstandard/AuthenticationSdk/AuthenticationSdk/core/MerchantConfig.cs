@@ -6,6 +6,7 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Security.Cryptography;
 
 namespace AuthenticationSdk.core
@@ -273,7 +274,7 @@ namespace AuthenticationSdk.core
         /// Password for the private key file used in Response MLE decryption by the SDK.
         /// Required for .p12 files or encrypted private keys.
         /// </summary>
-        public string ResponseMlePrivateKeyFilePassword { get; set; }
+        public SecureString ResponseMlePrivateKeyFilePassword { get; set; }
 
         /// <summary>
         /// AsymmetricAlgorithm instance used for Response MLE decryption by the SDK.
@@ -421,7 +422,7 @@ namespace AuthenticationSdk.core
 
             if (merchantConfigSection["responseMlePrivateKeyFilePassword"] != null && !string.IsNullOrEmpty(merchantConfigSection["responseMlePrivateKeyFilePassword"]))
             {
-                ResponseMlePrivateKeyFilePassword = merchantConfigSection["responseMlePrivateKeyFilePassword"];
+                ResponseMlePrivateKeyFilePassword = Utility.ConvertStringToSecureString(merchantConfigSection["responseMlePrivateKeyFilePassword"]);
             }
 
             if (merchantConfigSection["maxConnectionPoolSize"] != null)
@@ -754,7 +755,7 @@ namespace AuthenticationSdk.core
 
                     if (merchantConfigDictionary.ContainsKey("responseMlePrivateKeyFilePassword") && !string.IsNullOrEmpty(merchantConfigDictionary["responseMlePrivateKeyFilePassword"]))
                     {
-                        ResponseMlePrivateKeyFilePassword = merchantConfigDictionary["responseMlePrivateKeyFilePassword"];
+                        ResponseMlePrivateKeyFilePassword = Utility.ConvertStringToSecureString(merchantConfigDictionary["responseMlePrivateKeyFilePassword"]);
                     }
                 }
             }
@@ -1099,5 +1100,6 @@ namespace AuthenticationSdk.core
                 return false;
             }
         }
+
     }
 }

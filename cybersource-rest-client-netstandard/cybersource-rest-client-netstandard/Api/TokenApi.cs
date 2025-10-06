@@ -557,7 +557,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InlineResponse200>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InlineResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse200),merchantConfig)); // Return statement
+                (InlineResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse200), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Generate Payment Credentials for a TMS Token |  |  |  |     | - -- | - -- | - -- |     |**Token**&lt;br&gt;A Token can represent your tokenized Customer, Payment Instrument or Instrument Identifier information.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Payment Credentials**&lt;br&gt;Contains payment information such as the network token, generated cryptogram for Visa &amp; MasterCard or dynamic CVV for Amex in a JSON Web Encryption (JWE) response.&lt;br&gt;Your system can use this API to retrieve the Payment Credentials for an existing Customer, Payment Instrument or Instrument Identifier. 
@@ -815,7 +815,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<string>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (string) Configuration.ApiClient.Deserialize(localVarResponse, typeof(string),merchantConfig)); // Return statement
+                (string) Configuration.ApiClient.Deserialize(localVarResponse, typeof(string), merchantConfig)); // Return statement
         }
     }
 }

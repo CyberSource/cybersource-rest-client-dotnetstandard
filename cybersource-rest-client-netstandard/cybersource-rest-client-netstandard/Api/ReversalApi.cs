@@ -503,7 +503,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsReversalsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsReversalsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsReversalsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Timeout Reversal This is to reverse a previous payment that merchant does not receive a reply(Mostly due to Timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in [/pts/v2/payments](https://developer.cybersource.com/api-reference-assets/index.html#payments_payments) API call and use same transactionId in this API request payload to reverse the payment.
@@ -723,7 +723,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsReversalsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsReversalsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsReversalsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response), merchantConfig)); // Return statement
         }
     }
 }

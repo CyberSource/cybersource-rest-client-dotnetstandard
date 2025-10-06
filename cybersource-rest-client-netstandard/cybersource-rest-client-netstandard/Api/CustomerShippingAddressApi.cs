@@ -975,7 +975,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PostCustomerShippingAddressRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PostCustomerShippingAddressRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostCustomerShippingAddressRequest),merchantConfig)); // Return statement
+                (PostCustomerShippingAddressRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostCustomerShippingAddressRequest), merchantConfig)); // Return statement
         }
         /// <summary>
         /// List Shipping Addresses for a Customer |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Customer Shipping Addresses**&lt;br&gt;Your system can use this API to retrieve all existing Shipping Addresses for a Customer. 
@@ -1251,7 +1251,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<ShippingAddressListForCustomer>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (ShippingAddressListForCustomer) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ShippingAddressListForCustomer),merchantConfig)); // Return statement
+                (ShippingAddressListForCustomer) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ShippingAddressListForCustomer), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Update a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customers Shipping Address**&lt;br&gt;Your system can use this API to update an existing Shipping Addresses for a Customer, including selecting a [default Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address_samplerequests-dropdown_make-customer-shipping-address-the-default_liveconsole-tab-request-body) for use in payments. 
@@ -1547,7 +1547,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PatchCustomerShippingAddressRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PatchCustomerShippingAddressRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PatchCustomerShippingAddressRequest),merchantConfig)); // Return statement
+                (PatchCustomerShippingAddressRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PatchCustomerShippingAddressRequest), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Create a Customer Shipping Address |  |  |  | | - -- | - -- | - -- | |**Customer Shipping Address**&lt;br&gt;A Customer Shipping Address represents tokenized customer shipping information.&lt;br&gt;A [Customer](#token-management_customer_create-a-customer) can have [one or more Shipping Addresses](#token-management_customer-shipping-address_list-shipping-addresses-for-a-customer), with one allocated as the Customers default for use in payments.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Creating a Customer Shipping Address**&lt;br&gt;Your system can use this API to create an existing Customers default or non default Shipping Address.&lt;br&gt;You can also create additional Customer Shipping Addresses via the [Payments API](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body). 
@@ -1805,7 +1805,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PostCustomerShippingAddressRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PostCustomerShippingAddressRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostCustomerShippingAddressRequest),merchantConfig)); // Return statement
+                (PostCustomerShippingAddressRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostCustomerShippingAddressRequest), merchantConfig)); // Return statement
         }
     }
 }

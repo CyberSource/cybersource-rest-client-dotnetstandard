@@ -7,9 +7,9 @@ using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Runtime.Caching;
+using System.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
@@ -194,15 +194,15 @@ namespace AuthenticationSdk.util
                 {
                     string fileExtension = Path.GetExtension(certificateFilePath)?.TrimStart('.').ToLowerInvariant();
                     AsymmetricAlgorithm mlePrivateKey = null;
-                    string password = merchantConfig.ResponseMlePrivateKeyFilePassword;
+                    SecureString password = merchantConfig.ResponseMlePrivateKeyFilePassword;
 
                     // Case 1 - PKCS#12 formats (.p12, .pfx)
-                    if (fileExtension == "p12" || fileExtension == "pfx")
+                    if (fileExtension.Equals("p12") || fileExtension.Equals("pfx"))
                     {
                         mlePrivateKey = Utility.ReadPrivateKeyFromP12(certificateFilePath, password);
                     }
                     // Case 2 - PEM-based formats (.pem, .key, .p8)
-                    else if (fileExtension == "pem" || fileExtension == "key" || fileExtension == "p8")
+                    else if (fileExtension.Equals("pem") || fileExtension.Equals("key") || fileExtension.Equals("p8"))
                     {
                         mlePrivateKey = (AsymmetricAlgorithm) Utility.ExtractPrivateKeyFromFile(certificateFilePath, password);
                     }
@@ -311,10 +311,17 @@ namespace AuthenticationSdk.util
             }
 
             var cachedResponseMlePrivateKeyInfo = (PrivateKeyInfo)cache.Get(cacheKey);
-            RSA privateKey = (RSA)cachedResponseMlePrivateKeyInfo?.PrivateKey;
-            // Assuming CertInfo is extended to include MLEPrivateKey for response
-            return cachedResponseMlePrivateKeyInfo?.PrivateKey;
 
+            try
+            {
+                RSA privateKey = (RSA)cachedResponseMlePrivateKeyInfo.PrivateKey;
+                return cachedResponseMlePrivateKeyInfo.PrivateKey;
+            }
+            catch (Exception ex)
+            {
+                logger.Error($"Error retrieving MLE response private key: {ex.Message}");
+                throw new Exception($"{Constants.ErrorPrefix} Failed to retrieve MLE response private key from cache.", ex);
+            }
         }
     }
 }

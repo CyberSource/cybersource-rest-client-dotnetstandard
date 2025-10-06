@@ -959,7 +959,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InlineResponse2015>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InlineResponse2015) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2015),merchantConfig)); // Return statement
+                (InlineResponse2015) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2015), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get Details On All Created Webhooks Retrieve a list of all previously created webhooks.
@@ -1223,7 +1223,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<List<InlineResponse2004>>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (List<InlineResponse2004>) Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<InlineResponse2004>),merchantConfig)); // Return statement
+                (List<InlineResponse2004>) Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<InlineResponse2004>), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Test a Webhook Configuration Test the webhook configuration by sending a sample webhook. Calling this endpoint sends a sample webhook to the endpoint identified in the user&#39;s subscription.   It will contain sample values for the product &amp; eventType based on values present in your subscription along with a sample message in the payload.   Based on the webhook response users can make any necessary modifications or rest assured knowing their setup is configured correctly. 
@@ -1459,7 +1459,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InlineResponse2016>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InlineResponse2016) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2016),merchantConfig)); // Return statement
+                (InlineResponse2016) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2016), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Update a Webhook Subscription Update a Webhook Subscription.
@@ -1693,7 +1693,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InlineResponse2005>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InlineResponse2005) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2005),merchantConfig)); // Return statement
+                (InlineResponse2005) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2005), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Update a Webhook Status Users can update the status of a webhook subscription by calling this endpoint.   The webhookId parameter in the URL path identifies the specific webhook subscription to be updated. The request body accepts the values ACTIVE or INACTIVE. If the subscription is set to INACTIVE, webhooks will not be delivered until the subscription is activated again. 
@@ -2203,7 +2203,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InlineResponse2017>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InlineResponse2017) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2017),merchantConfig)); // Return statement
+                (InlineResponse2017) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2017), merchantConfig)); // Return statement
         }
     }
 }

@@ -507,7 +507,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsRefundPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsRefundPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsRefundPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsRefundPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsRefundPost201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Refund a Payment Refund a Payment API is only used, if you have requested Authorization and Capture together in [/pts/v2/payments](https://developer.cybersource.com/api-reference-assets/index.html#payments_payments) API call. Include the payment ID in the POST request to refund the payment amount. 
@@ -753,7 +753,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsRefundPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsRefundPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsRefundPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsRefundPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsRefundPost201Response), merchantConfig)); // Return statement
         }
     }
 }

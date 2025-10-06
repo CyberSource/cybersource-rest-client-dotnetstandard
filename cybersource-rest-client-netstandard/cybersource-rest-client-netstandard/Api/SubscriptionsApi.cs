@@ -777,7 +777,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<ActivateSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (ActivateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ActivateSubscriptionResponse),merchantConfig)); // Return statement
+                (ActivateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ActivateSubscriptionResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Cancel a Subscription Cancel a Subscription
@@ -1019,7 +1019,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<CancelSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (CancelSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CancelSubscriptionResponse),merchantConfig)); // Return statement
+                (CancelSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CancelSubscriptionResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Create a Subscription Create a Recurring Billing Subscription
@@ -1245,7 +1245,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<CreateSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (CreateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CreateSubscriptionResponse),merchantConfig)); // Return statement
+                (CreateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CreateSubscriptionResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get a List of Subscriptions Retrieve Subscriptions by Subscription Code &amp; Subscription Status. 
@@ -1517,7 +1517,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetAllSubscriptionsResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetAllSubscriptionsResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetAllSubscriptionsResponse),merchantConfig)); // Return statement
+                (GetAllSubscriptionsResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetAllSubscriptionsResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get a Subscription Get a Subscription by Subscription Id
@@ -1759,7 +1759,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionResponse),merchantConfig)); // Return statement
+                (GetSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get a Subscription Code Get a Unique Subscription Code
@@ -1975,7 +1975,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetSubscriptionCodeResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetSubscriptionCodeResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionCodeResponse),merchantConfig)); // Return statement
+                (GetSubscriptionCodeResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionCodeResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Suspend a Subscription Suspend a Subscription
@@ -2217,7 +2217,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<SuspendSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (SuspendSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(SuspendSubscriptionResponse),merchantConfig)); // Return statement
+                (SuspendSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(SuspendSubscriptionResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Update a Subscription Update a Subscription by Subscription Id
@@ -2469,7 +2469,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<UpdateSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (UpdateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(UpdateSubscriptionResponse),merchantConfig)); // Return statement
+                (UpdateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(UpdateSubscriptionResponse), merchantConfig)); // Return statement
         }
     }
 }

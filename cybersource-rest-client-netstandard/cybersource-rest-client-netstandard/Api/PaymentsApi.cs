@@ -683,7 +683,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsOrderPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsOrderPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsOrderPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsOrderPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsOrderPost201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Process a Payment A payment authorizes the amount for the transaction. There are a number of supported payment features, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/docs/cybs/en-us/payments/developer/ctv/rest/payments/payments-intro.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
@@ -903,7 +903,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Create Alternative Payments Sessions Request Create Alternative Payments Sessions Request
@@ -1123,7 +1123,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response2>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response2) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2),merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response2) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Increment an Authorization Use this service to authorize additional charges in a lodging or autorental transaction. Include the ID returned from the original authorization in the PATCH request to add additional charges to that authorization. 
@@ -1369,7 +1369,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2IncrementalAuthorizationPatch201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2IncrementalAuthorizationPatch201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2IncrementalAuthorizationPatch201Response),merchantConfig)); // Return statement
+                (PtsV2IncrementalAuthorizationPatch201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2IncrementalAuthorizationPatch201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Check a Payment Status Checks and updates the payment status 
@@ -1615,7 +1615,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response1>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response1),merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response1), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Update Alternative Payments Sessions Request Update Alternative Payments Sessions Request
@@ -1861,7 +1861,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response2>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response2) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2),merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response2) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2), merchantConfig)); // Return statement
         }
     }
 }

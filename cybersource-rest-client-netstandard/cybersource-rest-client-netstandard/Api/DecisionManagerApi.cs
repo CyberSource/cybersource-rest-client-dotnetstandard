@@ -641,7 +641,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InlineResponse2001>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InlineResponse2001) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2001),merchantConfig)); // Return statement
+                (InlineResponse2001) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2001), merchantConfig)); // Return statement
         }
         /// <summary>
         /// List Management This call adds/deletes/converts the request information in the negative list.  Provide the list to be updated as the path parameter. This value can be &#39;postiive&#39;, &#39;negative&#39; or &#39;review&#39;. 
@@ -887,7 +887,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1UpdatePost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1UpdatePost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1UpdatePost201Response),merchantConfig)); // Return statement
+                (RiskV1UpdatePost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1UpdatePost201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Add a comment to a DM post-transactional case Add a comment to a DM post-transactional case
@@ -1133,7 +1133,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InlineResponse2011>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InlineResponse2011) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2011),merchantConfig)); // Return statement
+                (InlineResponse2011) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InlineResponse2011), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Create Decision Manager Decision Manager can help you automate and streamline your fraud operations. Decision Manager will return a decision based on the request values.
@@ -1353,7 +1353,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1DecisionsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1DecisionsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1DecisionsPost201Response),merchantConfig)); // Return statement
+                (RiskV1DecisionsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1DecisionsPost201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Fraud Marking This can be used to - 1. Add known fraudulent data to the fraud history 2. Remove data added to history with Transaction Marking Tool or by uploading chargeback files 3. Remove chargeback data from history that was automatically added. For detailed information, contact your Cybersource representative  Place the request ID of the transaction you want to mark as suspect (or remove from history) as the path parameter in this request. 
@@ -1599,7 +1599,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1UpdatePost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1UpdatePost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1UpdatePost201Response),merchantConfig)); // Return statement
+                (RiskV1UpdatePost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1UpdatePost201Response), merchantConfig)); // Return statement
         }
     }
 }

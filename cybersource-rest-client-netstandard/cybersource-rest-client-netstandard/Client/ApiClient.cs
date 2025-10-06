@@ -620,7 +620,7 @@ namespace CyberSource.Client
         /// <param name="response">The HTTP response.</param>
         /// <param name="type">Object type.</param>
         /// <returns>Object representation of the JSON string.</returns>
-        public object Deserialize(RestResponse response, Type type,MerchantConfig merchantConfig = null) // CHANGED
+        public object Deserialize(RestResponse response, Type type, MerchantConfig merchantConfig) // CHANGED
         {
             IList<Parameter> headers = response.Headers.ToList<Parameter>();
             if (type == typeof(byte[])) // return byte array
@@ -659,6 +659,11 @@ namespace CyberSource.Client
             // check if Response MLE is enabled, then decrypt the response content and then deserialize
             if (MLEUtility.CheckIsMleEncryptedResponse(response.Content))
             {
+                if (merchantConfig == null)
+                {
+                    throw new ApiException((int)response.StatusCode, "merchantConfig cannot be null when decrypting MLE encrypted response.");
+                }
+                
                 // Inside the if (MLEUtility.CheckIsMleEncryptedResponse(response.Content)) block
                 try
                 {
@@ -669,7 +674,7 @@ namespace CyberSource.Client
                 catch (Exception e)
                 {
                     logger.Error($"MLE Encrypted Response Decryption Error Occurred. Error: {e.Message}");
-                    throw new ApiException(500, e.Message);
+                    throw new ApiException((int)response.StatusCode, e.Message);
 
                 }
             }

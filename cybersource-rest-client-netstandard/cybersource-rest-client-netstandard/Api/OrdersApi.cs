@@ -477,7 +477,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2CreateOrderPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2CreateOrderPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreateOrderPost201Response),merchantConfig)); // Return statement
+                (PtsV2CreateOrderPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreateOrderPost201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Update an Order This API can be used in two flavours - for updating the order as well as saving the order. 
@@ -723,7 +723,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2UpdateOrderPatch201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2UpdateOrderPatch201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2UpdateOrderPatch201Response),merchantConfig)); // Return statement
+                (PtsV2UpdateOrderPatch201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2UpdateOrderPatch201Response), merchantConfig)); // Return statement
         }
     }
 }

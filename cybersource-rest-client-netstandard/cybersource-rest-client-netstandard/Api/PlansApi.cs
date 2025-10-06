@@ -763,7 +763,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<ActivateDeactivatePlanResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (ActivateDeactivatePlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ActivateDeactivatePlanResponse),merchantConfig)); // Return statement
+                (ActivateDeactivatePlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ActivateDeactivatePlanResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Create a Plan The recurring billing service enables you to manage payment plans and subscriptions for recurring payment schedules. It securely stores your customer&#39;s payment information and personal data within secure Visa data centers, reducing storage risks and PCI DSS scope through the use of *Token Management* (*TMS*).  The three key elements of *Cybersource* Recurring Billing are:  -  **Token**: stores customer billing, shipping, and payment details.  -  **Plan**: stores the billing schedule.  -  **Subscription**: combines the token and plan, and defines the subscription start date, name, and description.  The APIs in this section demonstrate the management of the Plans and Subscriptions. For Tokens please refer to [Token Management](#token-management) The availability of API features for a merchant can depend on the portfolio configuration and may need to be enabled at the portfolio level before they can be added to merchant accounts. 
@@ -989,7 +989,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<CreatePlanResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (CreatePlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CreatePlanResponse),merchantConfig)); // Return statement
+                (CreatePlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CreatePlanResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Deactivate a Plan Deactivate a Plan
@@ -1231,7 +1231,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<ActivateDeactivatePlanResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (ActivateDeactivatePlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ActivateDeactivatePlanResponse),merchantConfig)); // Return statement
+                (ActivateDeactivatePlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ActivateDeactivatePlanResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Delete a Plan Delete a Plan is only allowed: - plan status is in &#x60;DRAFT&#x60; - plan status is in &#x60;ACTIVE&#x60;, and &#x60;INACTIVE&#x60; only allowed when no subscriptions attached to a plan in the lifetime of a plan 
@@ -1473,7 +1473,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<DeletePlanResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (DeletePlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(DeletePlanResponse),merchantConfig)); // Return statement
+                (DeletePlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(DeletePlanResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get a Plan Retrieve a Plan details by Plan Id.
@@ -1715,7 +1715,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetPlanResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetPlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetPlanResponse),merchantConfig)); // Return statement
+                (GetPlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetPlanResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get a Plan Code Get a Unique Plan Code
@@ -1931,7 +1931,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetPlanCodeResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetPlanCodeResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetPlanCodeResponse),merchantConfig)); // Return statement
+                (GetPlanCodeResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetPlanCodeResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get a List of Plans Retrieve Plans by Plan Code &amp; Plan Status. 
@@ -2217,7 +2217,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetAllPlansResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetAllPlansResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetAllPlansResponse),merchantConfig)); // Return statement
+                (GetAllPlansResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetAllPlansResponse), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Update a Plan Update a Plan  Plan in &#x60;DRAFT&#x60; status - All updates are allowed on Plan with &#x60;DRAFT&#x60; status  Plan in &#x60;ACTIVE&#x60; status [Following fields are **Not Updatable**] - &#x60;planInformation.billingPeriod&#x60; - &#x60;planInformation.billingCycles&#x60; [Update is only allowed to **increase** billingCycles] - &#x60;orderInformation.amountDetails.currency&#x60; 
@@ -2469,7 +2469,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<UpdatePlanResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (UpdatePlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(UpdatePlanResponse),merchantConfig)); // Return statement
+                (UpdatePlanResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(UpdatePlanResponse), merchantConfig)); // Return statement
         }
     }
 }

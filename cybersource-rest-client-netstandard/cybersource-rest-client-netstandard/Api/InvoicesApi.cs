@@ -701,7 +701,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPost201Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPost201Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get a List of Invoices Provides a (filtered) list of invoices that have been created in your account. You can filter the list based on Invoice Status by setting the status query parameter to one of DRAFT, CREATED, SENT, PARTIAL, PAID or CANCELED.
@@ -983,7 +983,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesAllGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesAllGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesAllGet200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesAllGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesAllGet200Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Get Invoice Details You can retrieve details of a specific invoice. This can be used to check the Invoice status and get a list of invoice payments in the invoice history section of the response. For each payment transaction you can use the Transaction Details API to get more details on the payment transaction.
@@ -1225,7 +1225,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesGet200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesGet200Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Cancel an Invoice You can cancel an invoice if no payment is made to it. You cannot cancel partially or fully paid invoices.
@@ -1467,7 +1467,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesCancel200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesCancel200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesCancel200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesCancel200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesCancel200Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Publish an Invoice You can publish an invoice in DRAFT status. After invoking this method, the invoice status is changed to CREATED.
@@ -1709,7 +1709,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesPublish200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesPublish200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPublish200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesPublish200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPublish200Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Send an Invoice You can send an invoice in draft or created state or resend a sent or partially paid invoice. Fully paid or canceled invoices cannot be resent.
@@ -1951,7 +1951,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesSend200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesSend200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesSend200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesSend200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesSend200Response), merchantConfig)); // Return statement
         }
         /// <summary>
         /// Update an Invoice You can update all information except the invoice number till any payment is received for an invoice. Invoices that are partially or fully paid or cancelled cannot be updated.
@@ -2203,7 +2203,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesPut200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesPut200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPut200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesPut200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPut200Response), merchantConfig)); // Return statement
         }
     }
 }

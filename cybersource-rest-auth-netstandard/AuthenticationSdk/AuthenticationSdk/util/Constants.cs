@@ -45,5 +45,16 @@ namespace AuthenticationSdk.util
         public static readonly string MLE_CACHE_IDENTIFIER_FOR_CONFIG_CERT = "mleCertFromMerchantConfig";
 
         public static readonly string MLE_CACHE_IDENTIFIER_FOR_P12_CERT = "mleCertFromP12";
+
+        public static readonly string MLE_CACHE_KEY_IDENTIFIER_FOR_RESPONSE_PRIVATE_KEY = "mleResponsePrivateKeyFromFile";
+
+        public static readonly string PKCS8_PRIVATE_KEY_HEADER = "-----BEGIN PRIVATE KEY-----";
+
+        public static readonly string PKCS8_ENCRYPTED_PRIVATE_KEY_HEADER = "-----BEGIN ENCRYPTED PRIVATE KEY-----";
+
+        public static readonly string PKCS1_PRIVATE_KEY_HEADER = "-----BEGIN RSA PRIVATE KEY-----";
+
+        public static readonly string PROC_TYPE_ENCRYPTED_HEADER = "Proc-Type: 4,ENCRYPTED";
+
     }
 }

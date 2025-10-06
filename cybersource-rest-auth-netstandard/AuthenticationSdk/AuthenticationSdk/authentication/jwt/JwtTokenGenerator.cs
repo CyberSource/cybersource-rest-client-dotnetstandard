@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using AuthenticationSdk.core;
+using Newtonsoft.Json.Linq;
 
 namespace AuthenticationSdk.authentication.jwt
 {
@@ -11,9 +12,11 @@ namespace AuthenticationSdk.authentication.jwt
     {
         private readonly MerchantConfig _merchantConfig;
         private readonly JwtToken _jwtToken;
+        private readonly bool _isResponseMLEForApi;
 
-        public JwtTokenGenerator(MerchantConfig merchantConfig)
+        public JwtTokenGenerator(MerchantConfig merchantConfig, bool isResponseMLEForApi)
         {
+            _isResponseMLEForApi = isResponseMLEForApi;
             _merchantConfig = merchantConfig;
             _jwtToken = new JwtToken(_merchantConfig);
         }
@@ -54,7 +57,16 @@ namespace AuthenticationSdk.authentication.jwt
 
         private string TokenForCategory1()
         {
-            var jwtBody = $"{{ \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\"}}";
+            JObject claimSetJson = new JObject();
+            claimSetJson["iat"] = DateTime.Now.ToUniversalTime().ToString("r");
+
+            if (_isResponseMLEForApi)
+            {
+                claimSetJson["v-c-response-mle-kid"] = _merchantConfig.ResponseMleKID;
+            }
+
+            String jwtBody = "";
+            jwtBody = claimSetJson.ToString(Newtonsoft.Json.Formatting.None);
 
             var x5Cert = _jwtToken.Certificate;
 
@@ -82,7 +94,18 @@ namespace AuthenticationSdk.authentication.jwt
         {
             var digest = GenerateDigest(_jwtToken.RequestJsonData);
 
-            var jwtBody = $"{{\n            \"digest\":\"{digest}\", \"digestAlgorithm\":\"SHA-256\", \"iat\":\"{DateTime.Now.ToUniversalTime().ToString("r")}\"}}";
+            JObject claimSetJson = new JObject();
+            claimSetJson["digest"] = digest;
+            claimSetJson["digestAlgorithm"] = "SHA-256";
+            claimSetJson["iat"] = DateTime.Now.ToUniversalTime().ToString("r");
+
+            if (_isResponseMLEForApi)
+            {
+                claimSetJson["v-c-response-mle-kid"] = _merchantConfig.ResponseMleKID;
+            }
+
+            String jwtBody = "";
+            jwtBody = claimSetJson.ToString(Newtonsoft.Json.Formatting.None);
 
             var x5Cert = _jwtToken.Certificate;
 
@@ -101,7 +124,6 @@ namespace AuthenticationSdk.authentication.jwt
             };
 
             var token = Jose.JWT.Encode(jwtBody, privateKey, Jose.JwsAlgorithm.RS256, cybsHeaders);
-
             return token;
         }
     }

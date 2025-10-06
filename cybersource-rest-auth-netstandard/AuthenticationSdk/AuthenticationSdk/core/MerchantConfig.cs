@@ -6,6 +6,8 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Security;
+using System.Security.Cryptography;
 
 namespace AuthenticationSdk.core
 {
@@ -18,7 +20,7 @@ namespace AuthenticationSdk.core
     *============================================================================================*/
     public class MerchantConfig
     {
-        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, string> mapToControlMLEonAPI = null, System.Security.Cryptography.AsymmetricAlgorithm responseMlePrivateKey = null)
+        public MerchantConfig(IReadOnlyDictionary<string, string> merchantConfigDictionary = null, Dictionary<string, string> mapToControlMLEonAPI = null, AsymmetricAlgorithm responseMlePrivateKey = null)
         {
             var _propertiesSetUsing = string.Empty;
 
@@ -268,13 +270,13 @@ namespace AuthenticationSdk.core
         /// Password for the private key file used in Response MLE decryption by the SDK.
         /// Required for .p12 files or encrypted private keys.
         /// </summary>
-        public string ResponseMlePrivateKeyFilePassword { get; set; }
+        public SecureString ResponseMlePrivateKeyFilePassword { get; set; }
 
         /// <summary>
         /// AsymmetricAlgorithm instance used for Response MLE decryption by the SDK.
         /// Optional — either provide this object directly or specify the private key file path via configuration.
         /// </summary>
-        public System.Security.Cryptography.AsymmetricAlgorithm ResponseMlePrivateKey { get; set; }
+        public AsymmetricAlgorithm ResponseMlePrivateKey { get; set; }
 
         #endregion
 
@@ -416,7 +418,7 @@ namespace AuthenticationSdk.core
 
             if (merchantConfigSection["responseMlePrivateKeyFilePassword"] != null && !string.IsNullOrEmpty(merchantConfigSection["responseMlePrivateKeyFilePassword"]))
             {
-                ResponseMlePrivateKeyFilePassword = merchantConfigSection["responseMlePrivateKeyFilePassword"];
+                ResponseMlePrivateKeyFilePassword = Utility.ConvertStringToSecureString(merchantConfigSection["responseMlePrivateKeyFilePassword"]);
             }
         }
 
@@ -713,7 +715,7 @@ namespace AuthenticationSdk.core
 
                     if (merchantConfigDictionary.ContainsKey("responseMlePrivateKeyFilePassword") && !string.IsNullOrEmpty(merchantConfigDictionary["responseMlePrivateKeyFilePassword"]))
                     {
-                        ResponseMlePrivateKeyFilePassword = merchantConfigDictionary["responseMlePrivateKeyFilePassword"];
+                        ResponseMlePrivateKeyFilePassword = Utility.ConvertStringToSecureString(merchantConfigDictionary["responseMlePrivateKeyFilePassword"]);
                     }
                 }
             }
@@ -961,6 +963,13 @@ namespace AuthenticationSdk.core
                     throw new Exception("Response MLE is enabled but no private key provided. Either set ResponseMlePrivateKey object or provide ResponseMlePrivateKeyFilePath.");
                 }
 
+                // Check if both private key object and private key file path are provided
+                if (ResponseMlePrivateKey != null && !string.IsNullOrEmpty(ResponseMlePrivateKeyFilePath))
+                {
+                    Logger.Error("ConfigException : Both responseMlePrivateKey object and responseMlePrivateKeyFilePath are provided. Please provide only one of them for response mle private key.");
+                    throw new Exception("Both responseMlePrivateKey object and responseMlePrivateKeyFilePath are provided. Please provide only one of them for response mle private key.");
+                }
+
                 // If private key file path is provided, validate the file exists
                 if (!string.IsNullOrEmpty(ResponseMlePrivateKeyFilePath))
                 {
@@ -1051,5 +1060,6 @@ namespace AuthenticationSdk.core
                 return false;
             }
         }
+
     }
 }

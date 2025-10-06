@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography;
+using Newtonsoft.Json.Linq;
 
 namespace AuthenticationSdk.util
 {
@@ -60,7 +62,7 @@ namespace AuthenticationSdk.util
             string payload = requestBody.ToString();
             logUtility.LogDebugMessage(logger, Constants.LOG_REQUEST_BEFORE_MLE + payload);
 
-            X509Certificate2 mleCertificate = GetMLECertificate(merchantConfig);
+            X509Certificate2 mleCertificate = GetRequestMLECertificate(merchantConfig);
 
             // Handling special case : MLE Certificate is not currently available for HTTP Signature
             if (mleCertificate == null && Constants.AuthMechanismHttp.Equals(merchantConfig.AuthenticationType, StringComparison.OrdinalIgnoreCase))
@@ -90,7 +92,7 @@ namespace AuthenticationSdk.util
             return mleRequest;
         }
 
-        private static X509Certificate2 GetMLECertificate(MerchantConfig merchantConfig)
+        private static X509Certificate2 GetRequestMLECertificate(MerchantConfig merchantConfig)
         {
             X509Certificate2 mleCertificate = Cache.GetRequestMLECertFromCache(merchantConfig);
             return mleCertificate;
@@ -159,6 +161,108 @@ namespace AuthenticationSdk.util
                 }
             }
             return isResponseMLEForAPI;
+        }
+
+        public static bool CheckIsMleEncryptedResponse(string responseBody)
+        {
+            if (string.IsNullOrWhiteSpace(responseBody))
+            {
+                return false;
+            }
+            try
+            {
+                var jsonObject = JsonConvert.DeserializeObject<JObject>(responseBody);
+                if (jsonObject == null || jsonObject.Count != 1)
+                {
+                    return false;
+                }
+                if (jsonObject.ContainsKey("encryptedResponse"))
+                {
+                    var value = jsonObject["encryptedResponse"];
+                    return value != null && value.Type == JTokenType.String;
+                }
+                return false;
+            }
+            catch
+            {
+                // If JSON parsing fails, it's not a valid JSON thus not a MLE response
+                return false;
+            }
+        }
+        private static string GetResponseMleToken(string mleResponseBody)
+        {
+            try
+            {
+                var jsonObject = JsonConvert.DeserializeObject<JObject>(mleResponseBody);
+                return jsonObject?["encryptedResponse"]?.ToString();
+            }
+            catch (Exception e)
+            {
+                logger.Error("Failed to extract Response MLE token: " + e.Message);
+                return null;
+            }
+        }
+        private static AsymmetricAlgorithm GetMleResponsePrivateKey(MerchantConfig merchantConfig)
+        {
+            // First priority - if privateKey is given in merchant config return that
+            if (merchantConfig.ResponseMlePrivateKey != null)
+            {
+                return merchantConfig.ResponseMlePrivateKey;
+            }
+            // Second priority - get the privateKey from merchantConfig.ResponseMlePrivateKeyFilePath
+            var responseMlePrivateKey = Cache.GetMleResponsePrivateKeyFromFilePath(merchantConfig);
+            return responseMlePrivateKey;
+        }
+        public static string DecryptMleResponsePayload(MerchantConfig merchantConfig, string mleResponseBody)
+        {
+            if (!CheckIsMleEncryptedResponse(mleResponseBody))
+            {
+                throw new Exception("Response body is not MLE encrypted.");
+            }
+
+            var mlePrivateKey = GetMleResponsePrivateKey(merchantConfig);
+            string jweResponseToken = GetResponseMleToken(mleResponseBody);
+
+            if (string.IsNullOrEmpty(jweResponseToken))
+            {
+                // When MLE token is empty or null then fall back to non MLE encrypted response
+                return mleResponseBody;
+            }
+
+            try
+            {
+                logger.Debug("LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION: " + mleResponseBody);
+
+                // Convert AsymmetricAlgorithm to RSA if needed
+                RSA rsaKey = mlePrivateKey as RSA;
+                if (rsaKey == null)
+                {
+                    throw new Exception("MLE Response private key is not an RSA key. Only RSA keys are supported for MLE decryption.");
+                }
+                string decryptedResponse = JWEUtilty.DecryptUsingRSAParameters(rsaKey.ExportParameters(true), jweResponseToken);
+                logger.Debug("LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION: " + decryptedResponse);
+                return decryptedResponse;
+            }
+            catch (Jose.JoseException e)
+            {
+                string errorMessage = $"MLE Response decryption failed (JoseException): {e.Message}. " +
+                                      $"Possible reason: The provided RSA private key does not match the public key used to encrypt the message.";
+                logger.Error(errorMessage, e);
+                throw new Exception(errorMessage, e);
+            }
+            catch (CryptographicException e)
+            {
+                string errorMessage = $"MLE Response decryption failed (CryptographicException): {e.Message}. " +
+                                      "This may happen if the private key is incorrect or corrupted.";
+                logger.Error(errorMessage, e);
+                throw new Exception(errorMessage, e);
+            }
+            catch (Exception e)
+            {
+                string errorMessage = $"MLE Response decryption failed: {e.Message}";
+                logger.Error(errorMessage, e);
+                throw new Exception(errorMessage, e);
+            }
         }
     }
 }

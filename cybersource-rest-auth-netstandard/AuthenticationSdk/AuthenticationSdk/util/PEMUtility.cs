@@ -26,8 +26,15 @@ namespace AuthenticationSdk.util
                 throw new FileNotFoundException($"Private key file not found: {filePath}");
             }
 
-            string pemContent = File.ReadAllText(filePath);
-            return ExtractPrivateKey(pemContent, password);
+            try
+            {
+                string pemContent = File.ReadAllText(filePath);
+                return ExtractPrivateKey(pemContent, password);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Failed to read or extract private key from file: {ex.Message}", ex);
+            }
         }
 
 

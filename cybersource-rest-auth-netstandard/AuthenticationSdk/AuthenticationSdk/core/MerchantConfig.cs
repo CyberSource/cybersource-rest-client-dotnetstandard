@@ -44,7 +44,21 @@ namespace AuthenticationSdk.core
             else
             {
                 // MerchantConfig section inside App.Config File
-                var merchantConfigSection = (NameValueCollection)ConfigurationManager.GetSection("MerchantConfig");
+                NameValueCollection merchantConfigSection = null;
+                try
+                {
+                    merchantConfigSection = (NameValueCollection)ConfigurationManager.GetSection("MerchantConfig");
+                }
+                catch (ConfigurationErrorsException ex)
+                {
+                    Logger.Error($"Error accessing MerchantConfig section in App.Config: {ex.Message}");
+                    throw new Exception($"{Constants.ErrorPrefix} Error accessing MerchantConfig section in App.Config: {ex.Message}", ex);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error($"Unexpected error accessing MerchantConfig section in App.Config: {ex.Message}");
+                    throw new Exception($"{Constants.ErrorPrefix} Unexpected error accessing MerchantConfig section in App.Config: {ex.Message}", ex);
+                }
 
                 if (merchantConfigSection != null)
                 {

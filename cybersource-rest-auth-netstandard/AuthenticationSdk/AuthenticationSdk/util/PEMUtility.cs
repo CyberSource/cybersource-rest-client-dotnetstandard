@@ -298,78 +298,9 @@ namespace AuthenticationSdk.util
                 {
                     return null;
                 }
-                var pwd = new System.Net.NetworkCredential(string.Empty, _password).Password.ToCharArray();
-                return pwd;
+                return new System.Net.NetworkCredential(string.Empty, _password).Password.ToCharArray();
             }
         }
 
-        /// <summary>
-        /// Get detailed information about the extracted key
-        /// </summary>
-        /// <param name="pemContent">PEM content as string</param>
-        /// <param name="password">Password for encrypted keys (optional, SecureString)</param>
-        /// <returns>KeyInfo object with details</returns>
-        public static KeyInfo GetKeyInfo(string pemContent, SecureString password = null)
-        {
-            using var rsa = ExtractPrivateKey(pemContent, password);
-            var parameters = rsa.ExportParameters(false); // Export public parameters only for info
-
-            return new KeyInfo
-            {
-                KeySize = rsa.KeySize,
-                KeyFormat = DetermineKeyFormat(pemContent),
-                IsEncrypted = DetermineIfEncrypted(pemContent),
-                ModulusSize = parameters.Modulus?.Length * 8 ?? 0
-            };
-        }
-
-        /// <summary>
-        /// Determines the key format from PEM content
-        /// </summary>
-        /// <param name="pemContent">PEM content as string</param>
-        /// <returns>Key format string</returns>
-        private static string DetermineKeyFormat(string pemContent)
-        {
-            if (IsKeyPkcs8Format(pemContent))
-            {
-                return "PKCS#8";
-            }
-            else if (IsKeyPkcs1Format(pemContent))
-            {
-                return "PKCS#1";
-            }
-            else
-            {
-                return "Unknown";
-            }
-        }
-
-        /// <summary>
-        /// Determines if the key is encrypted from PEM content
-        /// </summary>
-        /// <param name="pemContent">PEM content as string</param>
-        /// <returns>True if encrypted</returns>
-        private static bool DetermineIfEncrypted(string pemContent)
-        {
-            return pemContent.Contains(Constants.PKCS8_ENCRYPTED_PRIVATE_KEY_HEADER) ||
-                   pemContent.Contains(Constants.PROC_TYPE_ENCRYPTED_HEADER);
-        }
-
-    }
-
-    /// <summary>
-    /// Information about a cryptographic key
-    /// </summary>
-    public class KeyInfo
-    {
-        public int KeySize { get; set; }
-        public string KeyFormat { get; set; }
-        public bool IsEncrypted { get; set; }
-        public int ModulusSize { get; set; }
-
-        public override string ToString()
-        {
-            return $"Key Size: {KeySize} bits, Format: {KeyFormat}, Encrypted: {IsEncrypted}, Modulus: {ModulusSize} bits";
-        }
     }
 }

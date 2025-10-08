@@ -642,8 +642,16 @@ namespace CyberSource.Client
                         if (match.Success)
                         {
                             string fileName = filePath + SanitizeFilename(match.Groups[1].Value.Replace("\"", "").Replace("'", ""));
-                            File.WriteAllBytes(fileName, response.RawBytes);
-                            return new FileStream(fileName, FileMode.Open);
+                            try
+                            {
+                                File.WriteAllBytes(fileName, response.RawBytes);
+                                return new FileStream(fileName, FileMode.Open);
+                            }
+                            catch (Exception ex)
+                            {
+                                logger.Error($"Error writing file '{fileName}': {ex.Message}");
+                                throw new Exception($"Error writing file '{fileName}': {ex.Message}");
+                            }
                         }
                     }
                 }

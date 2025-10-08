@@ -60,7 +60,5 @@ namespace AuthenticationSdk.util
 
         public static readonly string PKCS1_PRIVATE_KEY_HEADER = "-----BEGIN RSA PRIVATE KEY-----";
 
-        public static readonly string PROC_TYPE_ENCRYPTED_HEADER = "Proc-Type: 4,ENCRYPTED";
-
     }
 }

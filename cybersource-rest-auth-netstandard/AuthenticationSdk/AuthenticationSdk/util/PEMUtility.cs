@@ -76,21 +76,23 @@ namespace AuthenticationSdk.util
         {
             try
             {
-                using var stringReader = new StringReader(pemContent);
-                var pemReader = new PemReader(stringReader, new PasswordFinder(password));
-
-                var keyObject = pemReader.ReadObject();
-
-                if (keyObject is AsymmetricCipherKeyPair keyPair)
+                using (var stringReader = new StringReader(pemContent))
                 {
-                    return keyPair.Private;
-                }
-                else if (keyObject is AsymmetricKeyParameter keyParam && keyParam.IsPrivate)
-                {
-                    return keyParam;
-                }
+                    var pemReader = new PemReader(stringReader, new PasswordFinder(password));
 
-                return null;
+                    var keyObject = pemReader.ReadObject();
+
+                    if (keyObject is AsymmetricCipherKeyPair keyPair)
+                    {
+                        return keyPair.Private;
+                    }
+                    else if (keyObject is AsymmetricKeyParameter keyParam && keyParam.IsPrivate)
+                    {
+                        return keyParam;
+                    }
+
+                    return null;
+                }
             }
             catch
             {

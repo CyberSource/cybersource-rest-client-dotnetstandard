@@ -231,7 +231,7 @@ namespace AuthenticationSdk.util
 
             try
             {
-                logger.Debug("LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION: " + mleResponseBody);
+                logUtility.LogDebugMessage(logger, Constants.LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION + mleResponseBody);
 
                 // Convert AsymmetricAlgorithm to RSA if needed
                 RSA rsaKey = mlePrivateKey as RSA;
@@ -240,7 +240,7 @@ namespace AuthenticationSdk.util
                     throw new Exception("MLE Response private key is not an RSA key. Only RSA keys are supported for MLE decryption.");
                 }
                 string decryptedResponse = JWEUtilty.DecryptUsingRSAParameters(rsaKey.ExportParameters(true), jweResponseToken);
-                logger.Debug("LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION: " + decryptedResponse);
+                logUtility.LogDebugMessage(logger, Constants.LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION + decryptedResponse);
                 return decryptedResponse;
             }
             catch (Jose.JoseException e)

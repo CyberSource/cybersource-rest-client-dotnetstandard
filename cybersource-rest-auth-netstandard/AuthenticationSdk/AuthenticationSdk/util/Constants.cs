@@ -60,5 +60,9 @@ namespace AuthenticationSdk.util
 
         public static readonly string PKCS1_PRIVATE_KEY_HEADER = "-----BEGIN RSA PRIVATE KEY-----";
 
+        public static readonly string LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION = "LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION: ";
+        
+        public static readonly string LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION = "LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION: ";
+
     }
 }

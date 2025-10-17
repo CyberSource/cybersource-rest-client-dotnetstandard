@@ -57,6 +57,14 @@ namespace AuthenticationSdk.util
             {
                 return Constants.LOG_REQUEST_AFTER_MLE + MaskSensitiveData(str.Substring(Constants.LOG_REQUEST_AFTER_MLE.Length));
             }
+            if (str.StartsWith(Constants.LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION))
+            {
+                return Constants.LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION + MaskSensitiveData(str.Substring(Constants.LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION.Length));
+            }
+            if (str.StartsWith(Constants.LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION))
+            {
+                return Constants.LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION + MaskSensitiveData(str.Substring(Constants.LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION.Length));
+            }
 
             bool isJsonString;
             try

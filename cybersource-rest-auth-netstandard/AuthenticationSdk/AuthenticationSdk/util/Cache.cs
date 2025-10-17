@@ -314,7 +314,6 @@ namespace AuthenticationSdk.util
 
             try
             {
-                RSA privateKey = (RSA)cachedResponseMlePrivateKeyInfo.PrivateKey;
                 return cachedResponseMlePrivateKeyInfo.PrivateKey;
             }
             catch (Exception ex)

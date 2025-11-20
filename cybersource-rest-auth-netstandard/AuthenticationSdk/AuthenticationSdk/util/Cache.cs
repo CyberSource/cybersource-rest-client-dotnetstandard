@@ -236,5 +236,32 @@ namespace AuthenticationSdk.util
             //return all certs in p12
             return certificates;
         }
+
+        public static void AddPublicKeyToCache(string publickey, string runEnvironment, string kid)
+        {
+            // Construct cache key similar to PHP logic
+            string cacheKey = $"{Constants.PUBLIC_KEY_CACHE_IDENTIFIER}_{runEnvironment}_{kid}";
+
+            ObjectCache cache = MemoryCache.Default;
+
+            var policy = new CacheItemPolicy();
+            // Optionally, set expiration or change monitors if needed
+
+            lock (mutex)
+            {
+                cache.Set(cacheKey, publickey, policy);
+            }
+        }
+        public static string GetPublicKeyFromCache(string runEnvironment, string keyId)
+        {
+            string cacheKey = $"{Constants.PUBLIC_KEY_CACHE_IDENTIFIER}_{runEnvironment}_{keyId}";
+            ObjectCache cache = MemoryCache.Default;
+
+            if (cache.Contains(cacheKey))
+            {
+                return cache.Get(cacheKey) as string;
+            }
+            throw new Exception($"Public key not found in cache for [RunEnvironment: {runEnvironment}, KeyId: {keyId}]");
+        }
     }
 }

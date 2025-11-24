@@ -940,7 +940,7 @@ namespace CyberSource.Api
                 localVarPostBody = patchCustomerRequest; // byte array
             }
             
-			string inboundMLEStatus = "false";            
+			string inboundMLEStatus = "optional";            
 			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PatchCustomer,PatchCustomerAsync,PatchCustomerWithHttpInfo,PatchCustomerAsyncWithHttpInfo"))
             {
@@ -1074,7 +1074,7 @@ namespace CyberSource.Api
                 localVarPostBody = patchCustomerRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
+			string inboundMLEStatus = "optional";            
 			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PatchCustomer,PatchCustomerAsync,PatchCustomerWithHttpInfo,PatchCustomerAsyncWithHttpInfo"))
             {
@@ -1187,7 +1187,7 @@ namespace CyberSource.Api
                 localVarPostBody = postCustomerRequest; // byte array
             }
             
-			string inboundMLEStatus = "false";            
+			string inboundMLEStatus = "optional";            
 			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostCustomer,PostCustomerAsync,PostCustomerWithHttpInfo,PostCustomerAsyncWithHttpInfo"))
             {
@@ -1302,7 +1302,7 @@ namespace CyberSource.Api
                 localVarPostBody = postCustomerRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
+			string inboundMLEStatus = "optional";            
 			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostCustomer,PostCustomerAsync,PostCustomerWithHttpInfo,PostCustomerAsyncWithHttpInfo"))
             {

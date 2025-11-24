@@ -1347,7 +1347,7 @@ namespace CyberSource.Api
                 localVarPostBody = patchCustomerShippingAddressRequest; // byte array
             }
             
-			string inboundMLEStatus = "false";            
+			string inboundMLEStatus = "optional";            
 			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PatchCustomersShippingAddress,PatchCustomersShippingAddressAsync,PatchCustomersShippingAddressWithHttpInfo,PatchCustomersShippingAddressAsyncWithHttpInfo"))
             {
@@ -1494,7 +1494,7 @@ namespace CyberSource.Api
                 localVarPostBody = patchCustomerShippingAddressRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
+			string inboundMLEStatus = "optional";            
 			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PatchCustomersShippingAddress,PatchCustomersShippingAddressAsync,PatchCustomersShippingAddressWithHttpInfo,PatchCustomersShippingAddressAsyncWithHttpInfo"))
             {
@@ -1620,7 +1620,7 @@ namespace CyberSource.Api
                 localVarPostBody = postCustomerShippingAddressRequest; // byte array
             }
             
-			string inboundMLEStatus = "false";            
+			string inboundMLEStatus = "optional";            
 			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostCustomerShippingAddress,PostCustomerShippingAddressAsync,PostCustomerShippingAddressWithHttpInfo,PostCustomerShippingAddressAsyncWithHttpInfo"))
             {
@@ -1748,7 +1748,7 @@ namespace CyberSource.Api
                 localVarPostBody = postCustomerShippingAddressRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
+			string inboundMLEStatus = "optional";            
 			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI);
             if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostCustomerShippingAddress,PostCustomerShippingAddressAsync,PostCustomerShippingAddressWithHttpInfo,PostCustomerShippingAddressAsyncWithHttpInfo"))
             {

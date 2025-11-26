@@ -1037,8 +1037,25 @@ namespace AuthenticationSdk.core
                         throw new Exception("Invalid responseMlePrivateKeyFilePath - " + err.Message);
                     }
                 }
+
                 // Validate responseMleKID is provided when response MLE is enabled
-                if (string.IsNullOrEmpty(ResponseMleKID))
+                // Skip validation for P12/PFX files as KID can be auto-extracted from CyberSource-generated certificates
+                bool skipKidValidation = false;
+                
+                if (!string.IsNullOrEmpty(ResponseMlePrivateKeyFilePath))
+                {
+                    string extension = CertificateUtility.GetFileExtension(ResponseMlePrivateKeyFilePath);
+                    if (extension.Equals("p12", StringComparison.OrdinalIgnoreCase) || 
+                        extension.Equals("pfx", StringComparison.OrdinalIgnoreCase))
+                    {
+                        skipKidValidation = true;
+                        Logger.Debug("P12/PFX file detected. responseMleKID validation will be deferred to JWT token generation time for possible auto-extraction.");
+                    }
+                }
+
+                // If private key object is provided, KID validation is required
+                // If non-P12/PFX file path is provided (PEM, KEY, P8), KID validation is required
+                if (!skipKidValidation && string.IsNullOrEmpty(ResponseMleKID))
                 {
                     Logger.Error("ConfigException : Response MLE is enabled but responseMleKID is not provided.");
                     throw new Exception("Response MLE is enabled but responseMleKID is not provided.");

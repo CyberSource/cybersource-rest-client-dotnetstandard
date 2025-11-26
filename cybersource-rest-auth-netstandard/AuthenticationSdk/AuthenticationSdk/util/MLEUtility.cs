@@ -264,5 +264,100 @@ namespace AuthenticationSdk.util
                 throw new Exception(errorMessage, e);
             }
         }
+
+        /// <summary>
+        /// Validates and auto-extracts the Response MLE KID for JWT token generation.
+        /// For CyberSource-generated P12/PFX files, attempts to extract KID automatically.
+        /// For non-CyberSource files or other formats, requires manual configuration.
+        /// </summary>
+        /// <param name="merchantConfig">The merchant configuration</param>
+        /// <returns>The validated or extracted Response MLE KID</returns>
+        /// <exception cref="Exception">If KID cannot be determined</exception>
+        public static string ValidateAndAutoExtractResponseMleKid(MerchantConfig merchantConfig)
+        {
+            // If ResponseMlePrivateKey object is provided directly, use configured responseMleKID
+            if (merchantConfig.ResponseMlePrivateKey != null)
+            {
+                logger.Debug("responseMlePrivateKey is provided directly, using configured responseMleKID");
+                return merchantConfig.ResponseMleKID;
+            }
+
+            logger.Debug("Validating responseMleKID for JWT token generation");
+            string cybsKid = null;
+            bool isP12File = false;
+
+            // Check file path validity and determine if it's a P12/PFX file
+            try
+            {
+                CertificateUtility.ValidatePathAndFile(merchantConfig.ResponseMlePrivateKeyFilePath, "responseMlePrivateKeyFilePath");
+                string extension = CertificateUtility.GetFileExtension(merchantConfig.ResponseMlePrivateKeyFilePath);
+                
+                if (extension.Equals("p12", StringComparison.OrdinalIgnoreCase) || 
+                    extension.Equals("pfx", StringComparison.OrdinalIgnoreCase))
+                {
+                    isP12File = true;
+                }
+            }
+            catch (IOException e)
+            {
+                logger.Debug("No valid private key file path provided, skipping auto-extraction");
+            }
+
+            // Attempt to extract KID from CyberSource P12/PFX file
+            if (isP12File)
+            {
+                logger.Debug("P12/PFX file detected, checking if it is a CyberSource certificate");
+                CachedMLEKId cachedData = Cache.GetMLEKIdDataFromCache(merchantConfig);
+                
+                if (cachedData != null)
+                {
+                    if (cachedData.Kid != null)
+                    {
+                        // KID present means it's a CyberSource P12, use it
+                        cybsKid = cachedData.Kid;
+                    }
+                    else
+                    {
+                        // KID is null means either non-CyberSource P12 or extraction failed
+                        logger.Debug("Private key file is not a CyberSource generated P12/PFX file, skipping auto-extraction");
+                    }
+                }
+            }
+            else
+            {
+                logger.Debug("Private key file is not a P12/PFX file, skipping auto-extraction");
+            }
+
+            if (cybsKid != null)
+            {
+                logger.Debug("Successfully auto-extracted responseMleKID from CyberSource P12 certificate");
+            }
+
+            string configuredKID = merchantConfig.ResponseMleKID;
+
+            // Determine which KID to use based on what's available
+            if (cybsKid == null && configuredKID == null)
+            {
+                throw new Exception("responseMleKID is required when response MLE is enabled. " +
+                    "Could not auto-extract from certificate and no manual configuration provided. " +
+                    "Please provide responseMleKID explicitly in your configuration.");
+            }
+            else if (cybsKid == null)
+            {
+                logger.Debug("Using manually configured responseMleKID");
+                return configuredKID;
+            }
+            else if (configuredKID == null)
+            {
+                logger.Debug("Using auto-extracted responseMleKID from CyberSource certificate");
+                return cybsKid;
+            }
+            else if (!cybsKid.Equals(configuredKID))
+            {
+                logger.Warn("Auto-extracted responseMleKID does not match manually configured responseMleKID. Using configured value as preference");
+            }
+
+            return configuredKID;
+        }
     }
 }

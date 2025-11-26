@@ -322,5 +322,128 @@ namespace AuthenticationSdk.util
                 throw new Exception($"{Constants.ErrorPrefix} Failed to retrieve MLE response private key from cache.", ex);
             }
         }
+
+        /// <summary>
+        /// Retrieves cached MLE KID data for a P12/PFX file, or caches it if not present.
+        /// </summary>
+        /// <param name="merchantConfig">The merchant configuration containing the private key file path</param>
+        /// <returns>CachedMLEKId containing the extracted KID (or null) and file timestamp</returns>
+        public static CachedMLEKId GetMLEKIdDataFromCache(MerchantConfig merchantConfig)
+        {
+            string cacheKey = merchantConfig.ResponseMlePrivateKeyFilePath + Constants.RESPONSE_MLE_P12_PFX_CACHE_IDENTIFIER;
+            string filePath = merchantConfig.ResponseMlePrivateKeyFilePath;
+
+            ObjectCache cache = MemoryCache.Default;
+
+            if (!cache.Contains(cacheKey))
+            {
+                SetupMLEKIdCache(merchantConfig, cacheKey, filePath);
+            }
+            else
+            {
+                var cachedMLEKId = (CachedMLEKId)cache.Get(cacheKey);
+                if (cachedMLEKId == null || cachedMLEKId.LastModifiedTimeStamp != File.GetLastWriteTime(filePath))
+                {
+                    SetupMLEKIdCache(merchantConfig, cacheKey, filePath);
+                }
+            }
+
+            return (CachedMLEKId)cache.Get(cacheKey);
+        }
+
+        /// <summary>
+        /// Sets up the MLE KID cache by extracting the KID from a CyberSource P12/PFX certificate.
+        /// </summary>
+        /// <param name="merchantConfig">The merchant configuration</param>
+        /// <param name="cacheKey">The cache key to use</param>
+        /// <param name="filePath">The path to the P12/PFX file</param>
+        private static void SetupMLEKIdCache(MerchantConfig merchantConfig, string cacheKey, string filePath)
+        {
+            try
+            {
+                var policy = new CacheItemPolicy();
+                var filePaths = new List<string>();
+                var cachedFilePath = Path.GetFullPath(filePath);
+                filePaths.Add(cachedFilePath);
+                policy.ChangeMonitors.Add(new HostFileChangeMonitor(filePaths));
+
+                ObjectCache cache = MemoryCache.Default;
+
+                string extractedKid = null;
+                bool isCyberSourceP12 = false;
+
+                // Check if this is a CyberSource-generated P12
+                string password = merchantConfig.ResponseMlePrivateKeyFilePassword == null 
+                    ? string.Empty 
+                    : new System.Net.NetworkCredential(string.Empty, merchantConfig.ResponseMlePrivateKeyFilePassword).Password;
+                isCyberSourceP12 = CertificateUtility.IsP12GeneratedByCyberSource(filePath, password);
+
+                if (isCyberSourceP12)
+                {
+                    logger.Debug("Detected CyberSource-generated P12 file, attempting to extract KID");
+                    
+                    // Try to extract KID from certificate
+                    X509Certificate2 cert = CertificateUtility.GetCertificateByAliasFromP12(
+                        filePath,
+                        password,
+                        Constants.DefaultMleAliasForCert
+                    );
+
+                    if (cert != null)
+                    {
+                        try
+                        {
+                            extractedKid = CertificateUtility.ExtractSerialNumber(cert);
+                            logger.Debug($"Successfully extracted KID from CyberSource P12: {extractedKid}");
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.Warn($"Failed to extract KID from CyberSource P12: {ex.Message}");
+                            extractedKid = null;
+                        }
+                    }
+                    else
+                    {
+                        logger.Warn($"Could not find certificate with alias '{Constants.DefaultMleAliasForCert}' in CyberSource P12");
+                    }
+                }
+                else
+                {
+                    logger.Debug("P12 file is not CyberSource-generated, KID will not be auto-extracted");
+                }
+
+                CachedMLEKId cachedMLEKId = new CachedMLEKId
+                {
+                    Kid = extractedKid,
+                    LastModifiedTimeStamp = File.GetLastWriteTime(filePath)
+                };
+
+                lock (mutex)
+                {
+                    cache.Set(cacheKey, cachedMLEKId, policy);
+                }
+
+                logger.Debug($"MLE KID cache setup complete for file: {filePath}");
+            }
+            catch (Exception e)
+            {
+                logger.Error($"Error setting up MLE KID cache for file: {filePath}. Error: {e.Message}");
+                
+                // Cache a null KID to indicate failure
+                CachedMLEKId fallbackCache = new CachedMLEKId
+                {
+                    Kid = null,
+                    LastModifiedTimeStamp = File.GetLastWriteTime(filePath)
+                };
+
+                ObjectCache cache = MemoryCache.Default;
+                var policy = new CacheItemPolicy();
+                
+                lock (mutex)
+                {
+                    cache.Set(cacheKey, fallbackCache, policy);
+                }
+            }
+        }
     }
 }

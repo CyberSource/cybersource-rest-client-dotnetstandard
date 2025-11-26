@@ -54,6 +54,8 @@ namespace AuthenticationSdk.util
 
         public static readonly string MLE_CACHE_KEY_IDENTIFIER_FOR_RESPONSE_PRIVATE_KEY = "mleResponsePrivateKeyFromFile";
 
+        public static readonly string RESPONSE_MLE_P12_PFX_CACHE_IDENTIFIER = "responseMleP12Pfx";
+
         public static readonly string PKCS8_PRIVATE_KEY_HEADER = "-----BEGIN PRIVATE KEY-----";
 
         public static readonly string PKCS8_ENCRYPTED_PRIVATE_KEY_HEADER = "-----BEGIN ENCRYPTED PRIVATE KEY-----";

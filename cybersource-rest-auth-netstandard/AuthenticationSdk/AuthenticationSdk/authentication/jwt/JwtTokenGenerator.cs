@@ -62,7 +62,9 @@ namespace AuthenticationSdk.authentication.jwt
 
             if (_isResponseMLEForApi)
             {
-                claimSetJson["v-c-response-mle-kid"] = _merchantConfig.ResponseMleKID;
+                // Validate and auto-extract Response MLE KID if needed
+                string validatedKid = util.MLEUtility.ValidateAndAutoExtractResponseMleKid(_merchantConfig);
+                claimSetJson["v-c-response-mle-kid"] = validatedKid;
             }
 
             String jwtBody = "";
@@ -101,7 +103,9 @@ namespace AuthenticationSdk.authentication.jwt
 
             if (_isResponseMLEForApi)
             {
-                claimSetJson["v-c-response-mle-kid"] = _merchantConfig.ResponseMleKID;
+                // Validate and auto-extract Response MLE KID if needed
+                string validatedKid = util.MLEUtility.ValidateAndAutoExtractResponseMleKid(_merchantConfig);
+                claimSetJson["v-c-response-mle-kid"] = validatedKid;
             }
 
             String jwtBody = "";

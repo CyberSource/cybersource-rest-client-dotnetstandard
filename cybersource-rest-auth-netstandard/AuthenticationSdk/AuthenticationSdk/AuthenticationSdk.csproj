@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.1.19</Version>
+    <Version>0.0.1.20</Version>
     <Authors>CyberSource</Authors>
     <Product>Authentication_SDK</Product>
     <Description />
@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <PackageReference Include="jose-jwt" Version="4.1.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.14.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.0.0" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />

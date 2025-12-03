@@ -56,7 +56,7 @@ namespace CyberSource.Api
         /// Retrieve a Tokenized Card
         /// </summary>
         /// <remarks>
-        /// |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.  
+        /// |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tokenizedCardId">The Id of a tokenized card.</param>
@@ -68,38 +68,13 @@ namespace CyberSource.Api
         /// Retrieve a Tokenized Card
         /// </summary>
         /// <remarks>
-        /// |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.  
+        /// |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tokenizedCardId">The Id of a tokenized card.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of TokenizedcardRequest</returns>
         ApiResponse<TokenizedcardRequest> GetTokenizedCardWithHttpInfo (string tokenizedCardId, string profileId = null);
-        /// <summary>
-        /// Simulate Issuer Life Cycle Management Events
-        /// </summary>
-        /// <remarks>
-        /// **Lifecycle Management Events**&lt;br&gt;Simulates an issuer life cycle manegement event for updates on the tokenized card. The events that can be simulated are: - Token status changes (e.g. active, suspended, deleted) - Updates to the underlying card, including card art changes, expiration date changes, and card number suffix. **Note:** This is only available in CAS environment. 
-        /// </remarks>
-        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="profileId">The Id of a profile containing user specific TMS configuration.</param>
-        /// <param name="tokenizedCardId">The Id of a tokenized card.</param>
-        /// <param name="postIssuerLifeCycleSimulationRequest"></param>
-        /// <returns></returns>
-        void PostIssuerLifeCycleSimulation (string profileId, string tokenizedCardId, PostIssuerLifeCycleSimulationRequest postIssuerLifeCycleSimulationRequest);
-
-        /// <summary>
-        /// Simulate Issuer Life Cycle Management Events
-        /// </summary>
-        /// <remarks>
-        /// **Lifecycle Management Events**&lt;br&gt;Simulates an issuer life cycle manegement event for updates on the tokenized card. The events that can be simulated are: - Token status changes (e.g. active, suspended, deleted) - Updates to the underlying card, including card art changes, expiration date changes, and card number suffix. **Note:** This is only available in CAS environment. 
-        /// </remarks>
-        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="profileId">The Id of a profile containing user specific TMS configuration.</param>
-        /// <param name="tokenizedCardId">The Id of a tokenized card.</param>
-        /// <param name="postIssuerLifeCycleSimulationRequest"></param>
-        /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PostIssuerLifeCycleSimulationWithHttpInfo (string profileId, string tokenizedCardId, PostIssuerLifeCycleSimulationRequest postIssuerLifeCycleSimulationRequest);
         /// <summary>
         /// Create a Tokenized Card
         /// </summary>
@@ -152,7 +127,7 @@ namespace CyberSource.Api
         /// Retrieve a Tokenized Card
         /// </summary>
         /// <remarks>
-        /// |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.  
+        /// |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tokenizedCardId">The Id of a tokenized card.</param>
@@ -164,38 +139,13 @@ namespace CyberSource.Api
         /// Retrieve a Tokenized Card
         /// </summary>
         /// <remarks>
-        /// |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.  
+        /// |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires. 
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tokenizedCardId">The Id of a tokenized card.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (TokenizedcardRequest)</returns>
         System.Threading.Tasks.Task<ApiResponse<TokenizedcardRequest>> GetTokenizedCardAsyncWithHttpInfo (string tokenizedCardId, string profileId = null);
-        /// <summary>
-        /// Simulate Issuer Life Cycle Management Events
-        /// </summary>
-        /// <remarks>
-        /// **Lifecycle Management Events**&lt;br&gt;Simulates an issuer life cycle manegement event for updates on the tokenized card. The events that can be simulated are: - Token status changes (e.g. active, suspended, deleted) - Updates to the underlying card, including card art changes, expiration date changes, and card number suffix. **Note:** This is only available in CAS environment. 
-        /// </remarks>
-        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="profileId">The Id of a profile containing user specific TMS configuration.</param>
-        /// <param name="tokenizedCardId">The Id of a tokenized card.</param>
-        /// <param name="postIssuerLifeCycleSimulationRequest"></param>
-        /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PostIssuerLifeCycleSimulationAsync (string profileId, string tokenizedCardId, PostIssuerLifeCycleSimulationRequest postIssuerLifeCycleSimulationRequest);
-
-        /// <summary>
-        /// Simulate Issuer Life Cycle Management Events
-        /// </summary>
-        /// <remarks>
-        /// **Lifecycle Management Events**&lt;br&gt;Simulates an issuer life cycle manegement event for updates on the tokenized card. The events that can be simulated are: - Token status changes (e.g. active, suspended, deleted) - Updates to the underlying card, including card art changes, expiration date changes, and card number suffix. **Note:** This is only available in CAS environment. 
-        /// </remarks>
-        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="profileId">The Id of a profile containing user specific TMS configuration.</param>
-        /// <param name="tokenizedCardId">The Id of a tokenized card.</param>
-        /// <param name="postIssuerLifeCycleSimulationRequest"></param>
-        /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PostIssuerLifeCycleSimulationAsyncWithHttpInfo (string profileId, string tokenizedCardId, PostIssuerLifeCycleSimulationRequest postIssuerLifeCycleSimulationRequest);
         /// <summary>
         /// Create a Tokenized Card
         /// </summary>
@@ -604,7 +554,7 @@ namespace CyberSource.Api
                 localVarResponse.Content); // Return statement
         }
         /// <summary>
-        /// Retrieve a Tokenized Card |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.  
+        /// Retrieve a Tokenized Card |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tokenizedCardId">The Id of a tokenized card.</param>
@@ -621,7 +571,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Retrieve a Tokenized Card |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.  
+        /// Retrieve a Tokenized Card |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tokenizedCardId">The Id of a tokenized card.</param>
@@ -728,7 +678,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Retrieve a Tokenized Card |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.  
+        /// Retrieve a Tokenized Card |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tokenizedCardId">The Id of a tokenized card.</param>
@@ -746,7 +696,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Retrieve a Tokenized Card |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.  
+        /// Retrieve a Tokenized Card |  |  |  | | - -- | - -- | - -- | |**Tokenized Cards**&lt;br&gt;A Tokenized Card represents a network token. Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires. 
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tokenizedCardId">The Id of a tokenized card.</param>

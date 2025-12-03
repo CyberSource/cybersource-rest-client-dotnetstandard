@@ -246,5 +246,118 @@ namespace AuthenticationSdk.util
             int dotIndex = fileName.LastIndexOf('.');
             return dotIndex == -1 ? string.Empty : fileName.Substring(dotIndex + 1);
         }
+
+        /// <summary>
+        /// Extracts the serial number (KID) from a certificate's subject in a P12 file where CN matches the merchantId.
+        /// This is used for Response MLE KID extraction.
+        /// </summary>
+        /// <param name="filePath">Path to the P12 file</param>
+        /// <param name="password">Password for the P12 file</param>
+        /// <param name="merchantId">The merchant ID to match against the CN in the certificate subject</param>
+        /// <returns>The serial number extracted from the certificate's subject, or null if not found</returns>
+        public static string ExtractResponseMleKidFromP12(string filePath, string password, string merchantId)
+        {
+            try
+            {
+                logger.Debug($"Extracting MLE KID from P12 file: {filePath} for merchantId: {merchantId}");
+
+                // Load all certificates from P12 file
+                X509Certificate2Collection collection = new X509Certificate2Collection();
+                collection.Import(filePath, password, X509KeyStorageFlags.Exportable);
+
+                if (collection.Count == 0)
+                {
+                    logger.Error($"No certificates found in P12 file: {filePath}");
+                    return null;
+                }
+
+                logger.Debug($"Found {collection.Count} certificate(s) in P12 file");
+
+                // Iterate through certificates to find one with CN matching merchantId
+                foreach (X509Certificate2 cert in collection)
+                {
+                    if (cert.Subject == null)
+                    {
+                        logger.Debug("Certificate has no subject, skipping");
+                        continue;
+                    }
+
+                    // Extract CN from certificate subject
+                    string cn = ExtractCommonName(cert);
+
+                    if (string.IsNullOrEmpty(cn))
+                    {
+                        logger.Debug($"Certificate has no CN in subject: {cert.Subject}, skipping");
+                        continue;
+                    }
+
+                    logger.Debug($"Certificate CN: {cn}");
+
+                    // Check if CN matches merchantId (case-insensitive)
+                    if (cn.Equals(merchantId, StringComparison.OrdinalIgnoreCase))
+                    {
+                        logger.Debug($"Found certificate with matching CN: {cn}");
+
+                        // Extract serial number from certificate subject
+                        string serialNumber = ExtractSerialNumber(cert);
+
+                        if (!string.IsNullOrEmpty(serialNumber))
+                        {
+                            logger.Debug($"Serial number (MLE KID) extracted: {serialNumber}");
+                            return serialNumber;
+                        }
+                        else
+                        {
+                            logger.Warn($"Certificate with CN={cn} found but has no serial number in subject");
+                        }
+                    }
+                }
+
+                // If we get here, no matching certificate was found
+                logger.Error($"No certificate with CN matching merchantId ({merchantId}) found in P12 file: {filePath}");
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error($"Error extracting MLE KID from P12 file: {filePath}: {ex.Message}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Extracts the Common Name (CN) from a certificate's subject.
+        /// </summary>
+        /// <param name="cert">The X509Certificate2 to extract CN from</param>
+        /// <returns>The CN value, or null if not found</returns>
+        private static string ExtractCommonName(X509Certificate2 cert)
+        {
+            if (cert == null || string.IsNullOrEmpty(cert.Subject))
+            {
+                return null;
+            }
+
+            // Parse the subject DN to find CN
+            string subject = cert.Subject.ToUpperInvariant();
+            string cnPrefix = "CN=";
+            int cnIndex = subject.IndexOf(cnPrefix);
+
+            if (cnIndex >= 0)
+            {
+                int startIndex = cnIndex + cnPrefix.Length;
+                int endIndex = subject.IndexOf(',', startIndex);
+
+                if (endIndex > startIndex)
+                {
+                    return cert.Subject.Substring(startIndex, endIndex - startIndex).Trim();
+                }
+                else
+                {
+                    return cert.Subject.Substring(startIndex).Trim();
+                }
+            }
+
+            return null;
+        }
     }
 }

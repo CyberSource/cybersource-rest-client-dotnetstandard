@@ -382,29 +382,34 @@ namespace AuthenticationSdk.util
                 {
                     logger.Debug("Detected CyberSource-generated P12 file, attempting to extract KID");
                     
-                    // Try to extract KID from certificate
-                    X509Certificate2 cert = CertificateUtility.GetCertificateByAliasFromP12(
+                    // Try to extract KID from certificate with CN matching merchantId
+                    extractedKid = CertificateUtility.ExtractResponseMleKidFromP12(
                         filePath,
                         password,
-                        Constants.DefaultMleAliasForCert
+                        merchantConfig.MerchantId
                     );
 
-                    if (cert != null)
+                    if (!string.IsNullOrEmpty(extractedKid))
                     {
-                        try
-                        {
-                            extractedKid = CertificateUtility.ExtractSerialNumber(cert);
-                            logger.Debug($"Successfully extracted KID from CyberSource P12: {extractedKid}");
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.Warn($"Failed to extract KID from CyberSource P12: {ex.Message}");
-                            extractedKid = null;
-                        }
+                        logger.Debug($"Successfully extracted KID from CyberSource P12: {extractedKid}");
                     }
                     else
                     {
-                        logger.Warn($"Could not find certificate with alias '{Constants.DefaultMleAliasForCert}' in CyberSource P12");
+                        logger.Warn($"Could not extract KID from certificate with CN matching merchantId: {merchantConfig.MerchantId}");
+                        
+                        // List all certificates in the P12 for debugging
+                        try
+                        {
+                            X509Certificate2Collection allCerts = new X509Certificate2Collection();
+                            allCerts.Import(filePath, password, X509KeyStorageFlags.Exportable);
+                            Console.WriteLine($"[Cache] P12 contains {allCerts.Count} certificate(s):");
+                            foreach (X509Certificate2 c in allCerts)
+                            {
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                        }
                     }
                 }
                 else

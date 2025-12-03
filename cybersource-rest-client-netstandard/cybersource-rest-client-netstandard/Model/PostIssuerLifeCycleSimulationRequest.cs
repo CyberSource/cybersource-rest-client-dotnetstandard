@@ -25,39 +25,42 @@ using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 namespace CyberSource.Model
 {
     /// <summary>
-    /// Issuer associated with the tokenized card. 
+    /// Represents the Issuer LifeCycle Event Simulation for a Tokenized Card. 
     /// </summary>
     [DataContract]
-    public partial class Tmsv2TokenizedCardMetadataIssuer :  IEquatable<Tmsv2TokenizedCardMetadataIssuer>, IValidatableObject
+    public partial class PostIssuerLifeCycleSimulationRequest :  IEquatable<PostIssuerLifeCycleSimulationRequest>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Tmsv2TokenizedCardMetadataIssuer" /> class.
+        /// Initializes a new instance of the <see cref="PostIssuerLifeCycleSimulationRequest" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
-        public Tmsv2TokenizedCardMetadataIssuer()
+        /// <param name="State">The new state of the Tokenized Card. Possible Values: - ACTIVE - SUSPENDED - DELETED .</param>
+        /// <param name="Card">Card.</param>
+        /// <param name="Metadata">Metadata.</param>
+        public PostIssuerLifeCycleSimulationRequest(string State = default(string), Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard Card = default(Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard), Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata Metadata = default(Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata))
         {
+            this.State = State;
+            this.Card = Card;
+            this.Metadata = Metadata;
         }
         
         /// <summary>
-        /// issuer name. 
+        /// The new state of the Tokenized Card. Possible Values: - ACTIVE - SUSPENDED - DELETED 
         /// </summary>
-        /// <value>issuer name. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public string Name { get; private set; }
+        /// <value>The new state of the Tokenized Card. Possible Values: - ACTIVE - SUSPENDED - DELETED </value>
+        [DataMember(Name="state", EmitDefaultValue=false)]
+        public string State { get; set; }
 
         /// <summary>
-        /// issuer short description. 
+        /// Gets or Sets Card
         /// </summary>
-        /// <value>issuer short description. </value>
-        [DataMember(Name="shortDescription", EmitDefaultValue=false)]
-        public string ShortDescription { get; private set; }
+        [DataMember(Name="card", EmitDefaultValue=false)]
+        public Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard Card { get; set; }
 
         /// <summary>
-        /// issuer long  description. 
+        /// Gets or Sets Metadata
         /// </summary>
-        /// <value>issuer long  description. </value>
-        [DataMember(Name="longDescription", EmitDefaultValue=false)]
-        public string LongDescription { get; private set; }
+        [DataMember(Name="metadata", EmitDefaultValue=false)]
+        public Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata Metadata { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -66,10 +69,10 @@ namespace CyberSource.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Tmsv2TokenizedCardMetadataIssuer {\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (ShortDescription != null) sb.Append("  ShortDescription: ").Append(ShortDescription).Append("\n");
-            if (LongDescription != null) sb.Append("  LongDescription: ").Append(LongDescription).Append("\n");
+            sb.Append("class PostIssuerLifeCycleSimulationRequest {\n");
+            if (State != null) sb.Append("  State: ").Append(State).Append("\n");
+            if (Card != null) sb.Append("  Card: ").Append(Card).Append("\n");
+            if (Metadata != null) sb.Append("  Metadata: ").Append(Metadata).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,15 +94,15 @@ namespace CyberSource.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as Tmsv2TokenizedCardMetadataIssuer);
+            return this.Equals(obj as PostIssuerLifeCycleSimulationRequest);
         }
 
         /// <summary>
-        /// Returns true if Tmsv2TokenizedCardMetadataIssuer instances are equal
+        /// Returns true if PostIssuerLifeCycleSimulationRequest instances are equal
         /// </summary>
-        /// <param name="other">Instance of Tmsv2TokenizedCardMetadataIssuer to be compared</param>
+        /// <param name="other">Instance of PostIssuerLifeCycleSimulationRequest to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Tmsv2TokenizedCardMetadataIssuer other)
+        public bool Equals(PostIssuerLifeCycleSimulationRequest other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -107,19 +110,19 @@ namespace CyberSource.Model
 
             return 
                 (
-                    this.Name == other.Name ||
-                    this.Name != null &&
-                    this.Name.Equals(other.Name)
+                    this.State == other.State ||
+                    this.State != null &&
+                    this.State.Equals(other.State)
                 ) && 
                 (
-                    this.ShortDescription == other.ShortDescription ||
-                    this.ShortDescription != null &&
-                    this.ShortDescription.Equals(other.ShortDescription)
+                    this.Card == other.Card ||
+                    this.Card != null &&
+                    this.Card.Equals(other.Card)
                 ) && 
                 (
-                    this.LongDescription == other.LongDescription ||
-                    this.LongDescription != null &&
-                    this.LongDescription.Equals(other.LongDescription)
+                    this.Metadata == other.Metadata ||
+                    this.Metadata != null &&
+                    this.Metadata.Equals(other.Metadata)
                 );
         }
 
@@ -134,12 +137,12 @@ namespace CyberSource.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.Name != null)
-                    hash = hash * 59 + this.Name.GetHashCode();
-                if (this.ShortDescription != null)
-                    hash = hash * 59 + this.ShortDescription.GetHashCode();
-                if (this.LongDescription != null)
-                    hash = hash * 59 + this.LongDescription.GetHashCode();
+                if (this.State != null)
+                    hash = hash * 59 + this.State.GetHashCode();
+                if (this.Card != null)
+                    hash = hash * 59 + this.Card.GetHashCode();
+                if (this.Metadata != null)
+                    hash = hash * 59 + this.Metadata.GetHashCode();
                 return hash;
             }
         }

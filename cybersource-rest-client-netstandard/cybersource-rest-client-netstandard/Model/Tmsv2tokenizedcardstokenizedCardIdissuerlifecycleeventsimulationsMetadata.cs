@@ -25,32 +25,25 @@ using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 namespace CyberSource.Model
 {
     /// <summary>
-    /// InlineResponse403Errors
+    /// Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata
     /// </summary>
     [DataContract]
-    public partial class InlineResponse403Errors :  IEquatable<InlineResponse403Errors>, IValidatableObject
+    public partial class Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata :  IEquatable<Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="InlineResponse403Errors" /> class.
+        /// Initializes a new instance of the <see cref="Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
-        public InlineResponse403Errors()
+        /// <param name="CardArt">CardArt.</param>
+        public Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata(Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadataCardArt CardArt = default(Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadataCardArt))
         {
+            this.CardArt = CardArt;
         }
         
         /// <summary>
-        /// The type of error.  Possible Values:   - forbidden 
+        /// Gets or Sets CardArt
         /// </summary>
-        /// <value>The type of error.  Possible Values:   - forbidden </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
-        public string Type { get; private set; }
-
-        /// <summary>
-        /// The detailed message related to the type.
-        /// </summary>
-        /// <value>The detailed message related to the type.</value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
-        public string Message { get; private set; }
+        [DataMember(Name="cardArt", EmitDefaultValue=false)]
+        public Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadataCardArt CardArt { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -59,9 +52,8 @@ namespace CyberSource.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class InlineResponse403Errors {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
+            sb.Append("class Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata {\n");
+            if (CardArt != null) sb.Append("  CardArt: ").Append(CardArt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,15 +75,15 @@ namespace CyberSource.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as InlineResponse403Errors);
+            return this.Equals(obj as Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata);
         }
 
         /// <summary>
-        /// Returns true if InlineResponse403Errors instances are equal
+        /// Returns true if Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata instances are equal
         /// </summary>
-        /// <param name="other">Instance of InlineResponse403Errors to be compared</param>
+        /// <param name="other">Instance of Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(InlineResponse403Errors other)
+        public bool Equals(Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -99,14 +91,9 @@ namespace CyberSource.Model
 
             return 
                 (
-                    this.Type == other.Type ||
-                    this.Type != null &&
-                    this.Type.Equals(other.Type)
-                ) && 
-                (
-                    this.Message == other.Message ||
-                    this.Message != null &&
-                    this.Message.Equals(other.Message)
+                    this.CardArt == other.CardArt ||
+                    this.CardArt != null &&
+                    this.CardArt.Equals(other.CardArt)
                 );
         }
 
@@ -121,10 +108,8 @@ namespace CyberSource.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.Type != null)
-                    hash = hash * 59 + this.Type.GetHashCode();
-                if (this.Message != null)
-                    hash = hash * 59 + this.Message.GetHashCode();
+                if (this.CardArt != null)
+                    hash = hash * 59 + this.CardArt.GetHashCode();
                 return hash;
             }
         }

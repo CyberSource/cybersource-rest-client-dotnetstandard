@@ -27,6 +27,7 @@ using AuthenticationSdk.util;
 using NLog;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
+using CyberSource.Utilities;
 
 namespace CyberSource.Client
 {
@@ -200,7 +201,7 @@ namespace CyberSource.Client
             string path, Method method, Dictionary<string, string> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
-            string contentType)
+            string contentType, bool isResponseMLEForApi = false)
         {
             //1.set in the defaultHeaders of configuration
 
@@ -244,11 +245,11 @@ namespace CyberSource.Client
 
             if (postBody == null)
             {
-                CallAuthenticationHeaders(method.ToString(), path);
+                CallAuthenticationHeaders(method.ToString(), path,isResponseMLEForApi: isResponseMLEForApi);
             }
             else
             {
-                CallAuthenticationHeaders(method.ToString(), path, postBody.ToString());
+                CallAuthenticationHeaders(method.ToString(), path, postBody.ToString(),isResponseMLEForApi: isResponseMLEForApi);
             }
 
             foreach (var param in Configuration.DefaultHeader)
@@ -297,7 +298,7 @@ namespace CyberSource.Client
                     else if (contentType.Contains("multipart/form-data"))
                     {
                         request.AddBody(postBody, "multipart/form-data");
-                        request.AddHeader("Content-Type", contentType); //required to set in case of file params 
+                        request.AddHeader("Content-Type", contentType); //required to set in case of file params
                     }
                     else
                     {
@@ -331,7 +332,7 @@ namespace CyberSource.Client
             string path, Method method, Dictionary<string, string> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
-            string contentType)
+            string contentType, bool isResponseMLEForApi = false)
         {
             //declared separately to handle both regular call and download file calls
             int httpResponseStatusCode;
@@ -353,9 +354,9 @@ namespace CyberSource.Client
             //check if the Response is to be downloaded as a file, this value to be set by the calling API class
             var request = PrepareRequest(
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, contentType);
+                pathParams, contentType,isResponseMLEForApi);
 
-            MerchantConfig merchantConfig = new MerchantConfig(merchantConfigDictionary: Configuration.MerchantConfigDictionaryObj, mapToControlMLEonAPI: Configuration.MapToControlMLEonAPI);
+            MerchantConfig merchantConfig = new MerchantConfig(merchantConfigDictionary: Configuration.MerchantConfigDictionaryObj, mapToControlMLEonAPI: Configuration.MapToControlMLEonAPI, responseMlePrivateKey: Configuration.ResponseMlePrivateKey);
 
             var newRestClientOptions = GetRestClientOptions(merchantConfig, Configuration.UserAgent, TimeSpan.FromMilliseconds(Configuration.Timeout));
 
@@ -378,6 +379,9 @@ namespace CyberSource.Client
             InterceptRequest(request);
             response = (RestResponse) actualRestClient.Execute(request);
             InterceptResponse(request, response);
+			
+			// check if Response MLE is enabled, then decrypt the response content and then deserialize
+            ResponseMleHandler.DecryptMleResponseIfNeeded(response,merchantConfig);
 
             Configuration.DefaultHeader.Clear();
 
@@ -497,13 +501,13 @@ namespace CyberSource.Client
             string path, Method method, Dictionary<string, string> queryParams, object postBody,
             Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
             Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
-            string contentType)
+            string contentType, bool isResponseMLEForApi = false)
         {
             LogUtility logUtility = new LogUtility();
 
             var request = PrepareRequest(
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, contentType);
+                pathParams, contentType,isResponseMLEForApi);
 
             // Logging Request Headers
             var headerPrintOutput = new StringBuilder();
@@ -517,7 +521,7 @@ namespace CyberSource.Client
 
             logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
 
-            MerchantConfig merchantConfig = new MerchantConfig(merchantConfigDictionary: Configuration.MerchantConfigDictionaryObj, mapToControlMLEonAPI: Configuration.MapToControlMLEonAPI);
+            MerchantConfig merchantConfig = new MerchantConfig(merchantConfigDictionary: Configuration.MerchantConfigDictionaryObj, mapToControlMLEonAPI: Configuration.MapToControlMLEonAPI, responseMlePrivateKey: Configuration.ResponseMlePrivateKey);
 
             var newRestClientOptions = GetRestClientOptions(merchantConfig, Configuration.UserAgent, TimeSpan.FromMilliseconds(Configuration.Timeout));
 
@@ -526,6 +530,9 @@ namespace CyberSource.Client
             InterceptRequest(request);
             var response = await actualRestClient.ExecuteAsync(request);
             InterceptResponse(request, response);
+			
+			// check if Response MLE is enabled, then decrypt the response content and then deserialize
+            ResponseMleHandler.DecryptMleResponseIfNeeded(response,merchantConfig);
 
             // Logging Response Headers
             var httpResponseStatusCode = (int)response.StatusCode;
@@ -620,7 +627,7 @@ namespace CyberSource.Client
         /// <param name="response">The HTTP response.</param>
         /// <param name="type">Object type.</param>
         /// <returns>Object representation of the JSON string.</returns>
-        public object Deserialize(RestResponse response, Type type) // CHANGED
+        public object Deserialize(RestResponse response, Type type, MerchantConfig merchantConfig) // CHANGED
         {
             IList<Parameter> headers = response.Headers.ToList<Parameter>();
             if (type == typeof(byte[])) // return byte array
@@ -642,8 +649,16 @@ namespace CyberSource.Client
                         if (match.Success)
                         {
                             string fileName = filePath + SanitizeFilename(match.Groups[1].Value.Replace("\"", "").Replace("'", ""));
-                            File.WriteAllBytes(fileName, response.RawBytes);
-                            return new FileStream(fileName, FileMode.Open);
+                            try
+                            {
+                                File.WriteAllBytes(fileName, response.RawBytes);
+                                return new FileStream(fileName, FileMode.Open);
+                            }
+                            catch (Exception ex)
+                            {
+                                logger.Error($"Error writing file '{fileName}': {ex.Message}");
+                                throw new Exception($"Error writing file '{fileName}': {ex.Message}");
+                            }
                         }
                     }
                 }
@@ -655,6 +670,7 @@ namespace CyberSource.Client
             {
                 return DateTime.Parse(response.Content,  null, System.Globalization.DateTimeStyles.RoundtripKind);
             }
+
 
             if (type == typeof(string) || type.Name.StartsWith("System.Nullable")) // return primitive type
             {
@@ -842,12 +858,12 @@ namespace CyberSource.Client
         /// <param name="requestType">GET/POST/PUT/PATCH/DELETE</param>
         /// <param name="requestTarget">Resource Path</param>
         /// <param name="requestJsonData">Request Payload</param>
-        public void CallAuthenticationHeaders(string requestType, string requestTarget, string requestJsonData = null)
+        public void CallAuthenticationHeaders(string requestType, string requestTarget, string requestJsonData = null,bool isResponseMLEForApi = false)
         {
             requestTarget = Uri.EscapeUriString(requestTarget);
 
             var merchantConfig = Configuration.MerchantConfigDictionaryObj != null
-                ? new MerchantConfig(Configuration.MerchantConfigDictionaryObj)
+                ? new MerchantConfig(Configuration.MerchantConfigDictionaryObj,Configuration.MapToControlMLEonAPI,Configuration.ResponseMlePrivateKey)
                 : new MerchantConfig();
 
             merchantConfig.RequestType = requestType;
@@ -862,7 +878,7 @@ namespace CyberSource.Client
             if (merchantConfig.IsJwtTokenAuthType)
             {
                 //generate token and set JWT token headers
-                var jwtToken = authorize.GetToken();
+                var jwtToken = authorize.GetToken(isResponseMLEForApi);
                 authenticationHeaders.Add("Authorization", jwtToken.BearerToken);
             }
             else if (merchantConfig.IsHttpSignAuthType)

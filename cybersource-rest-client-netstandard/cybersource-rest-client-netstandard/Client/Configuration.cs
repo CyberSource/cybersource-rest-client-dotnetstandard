@@ -15,6 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Net;
+using System.Security.Cryptography;
 
 namespace CyberSource.Client
 {
@@ -51,7 +52,8 @@ namespace CyberSource.Client
                              int timeout = 100000,
                              string userAgent = "Swagger-Codegen/1.0.0/csharp",
                              IReadOnlyDictionary<string, string> merchConfigDictObj = null,
-                             Dictionary<string, bool> mapToControlMLEonAPI = null
+                             Dictionary<string, string> mapToControlMLEonAPI = null,
+                             AsymmetricAlgorithm responseMlePrivateKey = null
                             )
         {
             Username = username;
@@ -108,6 +110,7 @@ namespace CyberSource.Client
             DateTimeFormat = dateTimeFormat;
             MerchantConfigDictionaryObj = merchConfigDictObj;
             MapToControlMLEonAPI = mapToControlMLEonAPI;
+            ResponseMlePrivateKey = responseMlePrivateKey;
 
             SetApiClientUsingDefault(apiClient);
         }
@@ -208,7 +211,9 @@ namespace CyberSource.Client
         /// <summary>
         /// Gets or sets the MapToControlMLEonAPI
         /// </summary>
-        public Dictionary<string, bool> MapToControlMLEonAPI { get; set; } = new Dictionary<string, bool>();
+        public Dictionary<string, string> MapToControlMLEonAPI { get; set; } = new Dictionary<string, string>();
+
+        public AsymmetricAlgorithm ResponseMlePrivateKey { get; set; } = null;
 
         /// <summary>
         /// Add default header.

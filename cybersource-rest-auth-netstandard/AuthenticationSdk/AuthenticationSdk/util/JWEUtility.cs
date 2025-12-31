@@ -20,7 +20,14 @@ namespace AuthenticationSdk.util
         {
             var rsa = RSA.Create();
             rsa.ImportParameters(rsaParameters);
-            return JWT.Decode(encodedData, rsa, JweAlgorithm.RSA_OAEP_256, JweEncryption.A256GCM);
+            try
+            {
+                return JWT.Decode(encodedData, rsa, JweAlgorithm.RSA_OAEP_256, JweEncryption.A256GCM);
+            }
+            catch
+            {
+                return JWT.Decode(encodedData, rsa);
+            }
         }
     }
 }

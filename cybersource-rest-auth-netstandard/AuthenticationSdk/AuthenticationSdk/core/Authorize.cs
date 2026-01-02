@@ -86,7 +86,7 @@ namespace AuthenticationSdk.core
          * @return a JwtToken object (JWT Bearer Token), 
          * based on the Merchant Configuration passed to the Constructor of Authorize Class
          */
-        public JwtToken GetToken()
+        public JwtToken GetToken(bool isResponseMLEForApi = false)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace AuthenticationSdk.core
                         throw new Exception("Missing or Empty Credentials : MerchantID or KeyAlias or KeyPassphrase");
                     }
 
-                    var tokenObj = (JwtToken)new JwtTokenGenerator(_merchantConfig).GetToken();
+                    var tokenObj = (JwtToken)new JwtTokenGenerator(_merchantConfig, isResponseMLEForApi).GetToken();
 
                     if (_merchantConfig.IsGetRequest || _merchantConfig.IsDeleteRequest)
                     {

@@ -52,6 +52,20 @@ namespace AuthenticationSdk.util
 
         public static readonly string MLE_CACHE_IDENTIFIER_FOR_P12_CERT = "mleCertFromP12";
 
+        public static readonly string MLE_CACHE_KEY_IDENTIFIER_FOR_RESPONSE_PRIVATE_KEY = "mleResponsePrivateKeyFromFile";
+
+        public static readonly string RESPONSE_MLE_P12_PFX_CACHE_IDENTIFIER = "responseMleP12Pfx";
+
+        public static readonly string PKCS8_PRIVATE_KEY_HEADER = "-----BEGIN PRIVATE KEY-----";
+
+        public static readonly string PKCS8_ENCRYPTED_PRIVATE_KEY_HEADER = "-----BEGIN ENCRYPTED PRIVATE KEY-----";
+
+        public static readonly string PKCS1_PRIVATE_KEY_HEADER = "-----BEGIN RSA PRIVATE KEY-----";
+
+        public static readonly string LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION = "LOG_NETWORK_RESPONSE_BEFORE_MLE_DECRYPTION: ";
+        
+        public static readonly string LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION = "LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION: ";
+
         public static readonly string PUBLIC_KEY_CACHE_IDENTIFIER = "FlexV2PublicKeys";
     }
 }

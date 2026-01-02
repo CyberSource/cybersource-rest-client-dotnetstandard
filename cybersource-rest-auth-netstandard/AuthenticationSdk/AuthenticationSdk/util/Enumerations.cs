@@ -35,7 +35,7 @@ namespace AuthenticationSdk.util
                 return true;
             }
 
-            throw new Exception($"{Constants.ErrorPrefix}Invalid Auth type {authType} provided in config file");
+            throw new Exception($"{Constants.ErrorPrefix}Invalid Auth type provided in config file");
         }
 
         public static bool ValidateRequestType(string requestType)

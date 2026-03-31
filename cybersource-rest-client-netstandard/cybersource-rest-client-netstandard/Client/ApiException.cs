@@ -9,6 +9,7 @@
  */
 
 using System;
+using RestSharp;
 
 namespace CyberSource.Client
 {
@@ -28,6 +29,13 @@ namespace CyberSource.Client
         /// </summary>
         /// <value>The error content (Http response body).</value>
         public dynamic ErrorContent { get; private set; }
+
+        /// <summary>
+        /// Gets the underlying HTTP response object that caused this exception.
+        /// This provides access to response headers, raw content, status details, and other diagnostic information.
+        /// </summary>
+        /// <value>The RestSharp response object, or null if not available.</value>
+        public RestResponse Response { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiException"/> class.
@@ -50,10 +58,26 @@ namespace CyberSource.Client
         /// <param name="errorCode">HTTP status code.</param>
         /// <param name="message">Error message.</param>
         /// <param name="errorContent">Error content.</param>
-        public ApiException(int errorCode, string message, dynamic errorContent = null) : base(message)
+        /// <param name="innerException">The exception that is the cause of the current exception.</param>
+        public ApiException(int errorCode, string message, dynamic errorContent = null, Exception innerException = null) : base(message, innerException)
         {
             this.ErrorCode = errorCode;
             this.ErrorContent = errorContent;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApiException"/> class with response object.
+        /// </summary>
+        /// <param name="errorCode">HTTP status code.</param>
+        /// <param name="message">Error message.</param>
+        /// <param name="errorContent">Error content.</param>
+        /// <param name="response">The underlying HTTP response object.</param>
+        /// <param name="innerException">The exception that is the cause of the current exception.</param>
+        public ApiException(int errorCode, string message, dynamic errorContent, RestResponse response, Exception innerException = null) : base(message, innerException)
+        {
+            this.ErrorCode = errorCode;
+            this.ErrorContent = errorContent;
+            this.Response = response;
         }
     }
 

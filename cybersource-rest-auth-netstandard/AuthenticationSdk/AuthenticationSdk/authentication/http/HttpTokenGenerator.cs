@@ -18,8 +18,20 @@ namespace AuthenticationSdk.authentication.http
 
         public Token GetToken()
         {
-            _httpToken.SignatureParam = SetSignatureParam();
-            return _httpToken;
+            try
+            {
+                _httpToken.SignatureParam = SetSignatureParam();
+                return _httpToken;
+            }
+            catch (TokenGenerationException)
+            {
+                // Re-throw token generation exceptions as-is
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new TokenGenerationException("HTTP", $"Failed to generate HTTP signature token: {e.Message}", e);
+            }
         }
 
         private string SetSignatureParam()

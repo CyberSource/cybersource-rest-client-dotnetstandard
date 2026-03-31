@@ -44,16 +44,19 @@ namespace CyberSource.Client
             {
                 int MaxServicePointIdleTime;
                 int DefaultConnectionLimit;
+                int Timeout;
 
                 if (merchantConfig != null)
                 {
                     DefaultConnectionLimit = int.Parse(merchantConfig.MaxConnectionPoolSize);
                     MaxServicePointIdleTime = int.Parse(merchantConfig.KeepAliveTime);
+                    Timeout = int.Parse(merchantConfig.TimeOut);
                 }
                 else
                 {
                     DefaultConnectionLimit = int.Parse(Constants.DefaultMaxConnectionPoolSize);
                     MaxServicePointIdleTime = int.Parse(Constants.DefaultKeepAliveTime);
+                    Timeout = int.Parse(Constants.DEFAULT_TIME_OUT);
                 }
 
                 var handler = new StandardSocketsHttpHandler
@@ -63,7 +66,7 @@ namespace CyberSource.Client
                 };
 
                 var httpClient = new HttpClient(handler);
-                httpClient.Timeout = TimeSpan.FromMilliseconds(int.Parse(merchantConfig.TimeOut));
+                httpClient.Timeout = TimeSpan.FromMilliseconds(Timeout);
 
                 int hash = GetHashOfRestClientOptions(clientOptions);
 
@@ -84,10 +87,31 @@ namespace CyberSource.Client
                     int hashCode = 41;
                     if (clientOptions.BaseUrl != null)
                         hashCode = hashCode * 43 + clientOptions.BaseUrl.GetHashCode();
+                    
                     if (clientOptions.ClientCertificates != null)
-                        hashCode = hashCode * 43 + clientOptions.ClientCertificates.GetHashCode();
+                    {
+                        foreach (X509Certificate cert in clientOptions.ClientCertificates)
+                        {
+                            if (cert != null)
+                                hashCode = hashCode * 43 + cert.GetHashCode();
+                        }
+                    }
+                    
                     if (clientOptions.Proxy != null)
-                        hashCode = hashCode * 43 + clientOptions.Proxy.GetHashCode();
+                    {
+                        var webProxy = (WebProxy)clientOptions.Proxy;
+                        if (webProxy.Address != null)
+                            hashCode = hashCode * 43 + webProxy.Address.GetHashCode();
+                        var cred = webProxy.Credentials as NetworkCredential;
+                        if (cred != null)
+                        {
+                            if (cred.UserName != null)
+                                hashCode = hashCode * 43 + cred.UserName.GetHashCode();
+                            if (cred.Domain != null)
+                                hashCode = hashCode * 43 + cred.Domain.GetHashCode();
+                        }
+                    }
+                    
                     if (clientOptions.Timeout != null)
                         hashCode = hashCode * 43 + clientOptions.Timeout.GetHashCode();
                     if (clientOptions.UserAgent != null)
@@ -210,8 +234,9 @@ namespace CyberSource.Client
             var firstQueryParam = true;
             foreach (var param in queryParams)
             {
-                var key = param.Key;
-                var val = param.Value;
+                // URL-encode both key and value to handle special characters properly
+                var key = Uri.EscapeDataString(param.Key);
+                var val = Uri.EscapeDataString(param.Value);
 
                 if (!firstQueryParam)
                 {
@@ -243,16 +268,17 @@ namespace CyberSource.Client
                     request.AddHeader(param.Key, param.Value);
             }
 
+            Dictionary<string, string> authenticationHeaders;
             if (postBody == null)
             {
-                CallAuthenticationHeaders(method.ToString(), path,isResponseMLEForApi: isResponseMLEForApi);
+                authenticationHeaders = CallAuthenticationHeaders(method.ToString(), path, isResponseMLEForApi: isResponseMLEForApi);
             }
             else
             {
-                CallAuthenticationHeaders(method.ToString(), path, postBody.ToString(),isResponseMLEForApi: isResponseMLEForApi);
+                authenticationHeaders = CallAuthenticationHeaders(method.ToString(), path, postBody.ToString(), isResponseMLEForApi: isResponseMLEForApi);
             }
 
-            foreach (var param in Configuration.DefaultHeader)
+            foreach (var param in authenticationHeaders)
             {
                 if (param.Key == "Authorization")
                 {
@@ -341,8 +367,6 @@ namespace CyberSource.Client
 
             LogUtility logUtility = new LogUtility();
 
-            var response = new RestResponse();
-
             if (!string.IsNullOrEmpty(AcceptHeader))
             {
                 var defaultAcceptHeader = "," + headerParams["Accept"];
@@ -377,13 +401,11 @@ namespace CyberSource.Client
             logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
 
             InterceptRequest(request);
-            response = (RestResponse) actualRestClient.Execute(request);
+            var response = (RestResponse) actualRestClient.Execute(request);
             InterceptResponse(request, response);
 			
 			// check if Response MLE is enabled, then decrypt the response content and then deserialize
             ResponseMleHandler.DecryptMleResponseIfNeeded(response,merchantConfig);
-
-            Configuration.DefaultHeader.Clear();
 
             // Logging Response Headers
             httpResponseStatusCode = (int)response.StatusCode;
@@ -417,21 +439,18 @@ namespace CyberSource.Client
 
             IWebProxy webProxy = null;
 
-            if (merchantConfig.UseProxy != null)
+            if (bool.TryParse(merchantConfig.UseProxy, out bool useProxy) && useProxy)
             {
-                if (bool.Parse(merchantConfig.UseProxy))
+                if (!string.IsNullOrWhiteSpace(merchantConfig.ProxyAddress) && int.TryParse(merchantConfig.ProxyPort, out int proxyPortTest))
                 {
-                    if (!string.IsNullOrWhiteSpace(merchantConfig.ProxyAddress) && int.TryParse(merchantConfig.ProxyPort, out int proxyPortTest))
+                    WebProxy proxy = new WebProxy(merchantConfig.ProxyAddress, proxyPortTest);
+
+                    if (!string.IsNullOrWhiteSpace(merchantConfig.ProxyUsername) && !string.IsNullOrWhiteSpace(merchantConfig.ProxyPassword))
                     {
-                        WebProxy proxy = new WebProxy(merchantConfig.ProxyAddress, proxyPortTest);
-
-                        if (!string.IsNullOrWhiteSpace(merchantConfig.ProxyUsername) && !string.IsNullOrWhiteSpace(merchantConfig.ProxyPassword))
-                        {
-                            proxy.Credentials = new NetworkCredential(merchantConfig.ProxyUsername, merchantConfig.ProxyPassword);
-                        }
-
-                        webProxy = proxy;
+                        proxy.Credentials = new NetworkCredential(merchantConfig.ProxyUsername, merchantConfig.ProxyPassword);
                     }
+
+                    webProxy = proxy;
                 }
             }
 
@@ -440,7 +459,7 @@ namespace CyberSource.Client
                 clientOptions.Proxy = webProxy;
             }
 
-            if (Equals(bool.Parse(merchantConfig.EnableClientCert), true))
+            if (bool.TryParse(merchantConfig.EnableClientCert, out bool enableClientCert) && enableClientCert)
             {
                 string clientCertDirectory = merchantConfig.ClientCertDirectory;
                 string clientCertFile = merchantConfig.ClientCertFile;
@@ -697,7 +716,7 @@ namespace CyberSource.Client
             catch (Exception e)
             {
                 logger.Error($"JSON Deserialization Exception : {e.Message}");
-                throw new ApiException(500, e.Message);
+                throw new ApiException(500, $"JSON Deserialization failed: {e.Message}", null, e);
             }
         }
 
@@ -715,7 +734,7 @@ namespace CyberSource.Client
             catch (Exception e)
             {
                 logger.Error($"JSON Serialization Exception : {e.Message}");
-                throw new ApiException(500, e.Message);
+                throw new ApiException(500, $"JSON Serialization failed: {e.Message}", null, e);
             }
         }
 
@@ -858,12 +877,13 @@ namespace CyberSource.Client
         /// <param name="requestType">GET/POST/PUT/PATCH/DELETE</param>
         /// <param name="requestTarget">Resource Path</param>
         /// <param name="requestJsonData">Request Payload</param>
-        public void CallAuthenticationHeaders(string requestType, string requestTarget, string requestJsonData = null,bool isResponseMLEForApi = false)
+        /// <returns>Dictionary containing the authentication headers for this request</returns>
+        private Dictionary<string, string> CallAuthenticationHeaders(string requestType, string requestTarget, string requestJsonData = null, bool isResponseMLEForApi = false)
         {
             requestTarget = Uri.EscapeUriString(requestTarget);
 
             var merchantConfig = Configuration.MerchantConfigDictionaryObj != null
-                ? new MerchantConfig(Configuration.MerchantConfigDictionaryObj,Configuration.MapToControlMLEonAPI,Configuration.ResponseMlePrivateKey)
+                ? new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey)
                 : new MerchantConfig();
 
             merchantConfig.RequestType = requestType;
@@ -909,8 +929,7 @@ namespace CyberSource.Client
             //     authenticationHeaders.Add("v-c-solution-id", Configuration.SolutionId);
             // }
 
-            //Set the Configuration
-            Configuration.DefaultHeader = authenticationHeaders;
+            return authenticationHeaders;
         }
     }
 }

@@ -2,6 +2,7 @@
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -9,43 +10,9 @@ namespace AuthenticationSdk.util
 {
     public class LogUtility
     {
-        private static Dictionary<string, string> sensitiveTags = new Dictionary<string, string>();
-        private static List<string> sensitiveTagsList = new List<string>();
-        private static Dictionary<string, string> authenticationTags = new Dictionary<string, string>();
-
-        public LogUtility()
-        {
-            if (!loaded)
-            {
-                LoadSensitiveDataConfiguration();
-            }
-        }
-
-        /// <summary>
-        /// mutex to ensure that the operation is thread safe
-        /// </summary>
-        private static readonly object mutex = new object();
-
-        /// <summary>
-        /// check if the dictionaries have already been loaded
-        /// </summary>
-        private static bool loaded = false;
-
-        private void LoadSensitiveDataConfiguration()
-        {
-            lock(mutex)
-            {
-                sensitiveTags.Clear();
-                sensitiveTagsList.Clear();
-                authenticationTags.Clear();
-
-                sensitiveTags = SensitiveTags.getSensitiveTags();
-                sensitiveTagsList = SensitiveTags.getSensitiveTagsList();
-                authenticationTags = AuthenticationTags.getAuthenticationTags();
-
-                loaded = true;
-            }
-        }
+        private static readonly IReadOnlyDictionary<string, string> sensitiveTags = SensitiveTags.getSensitiveTags();
+        private static readonly IReadOnlyList<string> sensitiveTagsList = SensitiveTags.getSensitiveTagsList();
+        private static readonly IReadOnlyDictionary<string, string> authenticationTags = AuthenticationTags.getAuthenticationTags();
 
         public string MaskSensitiveData(string str)
         {
@@ -83,16 +50,9 @@ namespace AuthenticationSdk.util
 
             if (!isJsonString)
             {
-                try
+                foreach (KeyValuePair<string, string> tag in authenticationTags)
                 {
-                    foreach (KeyValuePair<string, string> tag in authenticationTags)
-                    {
-                        str = Regex.Replace(str, tag.Key, tag.Value);
-                    }
-                }
-                catch (Exception e)
-                {
-                    throw e;
+                    str = Regex.Replace(str, tag.Key, tag.Value);
                 }
             }
 

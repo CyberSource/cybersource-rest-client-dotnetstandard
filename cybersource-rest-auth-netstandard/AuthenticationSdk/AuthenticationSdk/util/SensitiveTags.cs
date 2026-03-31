@@ -1,67 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace AuthenticationSdk.util
 {
-    public class SensitiveTags
+    public static class SensitiveTags
     {
-        private static Dictionary<string, string> sensitiveTags = new Dictionary<string, string>();
-        private static List<string> sensitiveTagsList = new List<string>();
-        private static bool isLoaded = false;
-        private static bool isTagsListLoaded = false;
+        private static readonly IReadOnlyDictionary<string, string> sensitiveTags;
+        private static readonly IReadOnlyList<string> sensitiveTagsList;
 
-        public static Dictionary<string, string> getSensitiveTags()
+        static SensitiveTags()
         {
-            if (isLoaded)
+            var tags = new Dictionary<string, string>();
+            var tagsList = new List<string>();
+
+            foreach (var tag in SensitiveDataConfigurationType.sensitiveTags)
             {
-                return sensitiveTags;
+                var pattern = !string.IsNullOrEmpty(tag.pattern)
+                    ? $"\\\"{tag.tagName}\\\":\\\"{tag.pattern}\\\""
+                    : $"\\\"{tag.tagName}\\\":\\\".+\\\"";
+
+                var replacement = $"\"{tag.tagName}\":\"{tag.replacement}\"";
+
+                tags.Add(pattern, replacement);
+                tagsList.Add(tag.tagName);
             }
 
-            int sensitiveTagsCount = SensitiveDataConfigurationType.sensitiveTags.Length;
+            sensitiveTags = new ReadOnlyDictionary<string, string>(tags);
+            sensitiveTagsList = new ReadOnlyCollection<string>(tagsList);
+        }
 
-            for (int i = 0; i < sensitiveTagsCount; i++)
-            {
-                string tagName = SensitiveDataConfigurationType.sensitiveTags[i].tagName;
-                string pattern = SensitiveDataConfigurationType.sensitiveTags[i].pattern;
-                string replacement = SensitiveDataConfigurationType.sensitiveTags[i].replacement;
-
-                if (!string.IsNullOrEmpty(pattern))
-                {
-                    pattern = $"\\\"{tagName}\\\":\\\"{pattern}\\\"";
-                }
-                else
-                {
-                    pattern = $"\\\"{tagName}\\\":\\\".+\\\"";
-                }
-
-                replacement = $"\"{tagName}\":\"{replacement}\"";
-
-                sensitiveTags.Add(pattern, replacement);
-            }
-
-            isLoaded = true;
-
+        public static IReadOnlyDictionary<string, string> getSensitiveTags()
+        {
             return sensitiveTags;
         }
 
-        public static List<string> getSensitiveTagsList()
+        public static IReadOnlyList<string> getSensitiveTagsList()
         {
-            if (isTagsListLoaded)
-            {
-                return sensitiveTagsList;
-            }
-
-            int sensitiveTagsCount = SensitiveDataConfigurationType.sensitiveTags.Length;
-
-            for (int i = 0; i < sensitiveTagsCount; i++)
-            {
-                string tagName = SensitiveDataConfigurationType.sensitiveTags[i].tagName;
-
-                sensitiveTagsList.Add(tagName);
-            }
-
-            isTagsListLoaded = true;
-
             return sensitiveTagsList;
         }
     }

@@ -1,39 +1,30 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace AuthenticationSdk.util
 {
-    public class AuthenticationTags
+    public static class AuthenticationTags
     {
-        private static Dictionary<string, string> authenticationTags = new Dictionary<string, string>();
-        private static bool isLoaded = false;
+        private static readonly IReadOnlyDictionary<string, string> authenticationTags;
 
-        public static Dictionary<string, string> getAuthenticationTags()
+        static AuthenticationTags()
         {
-            if (isLoaded)
+            var tags = new Dictionary<string, string>();
+
+            foreach (var tag in SensitiveDataConfigurationType.authenticationTags)
             {
-                return authenticationTags;
+                var pattern = !string.IsNullOrEmpty(tag.pattern)
+                    ? $"{tag.tagName} : {tag.pattern}"
+                    : tag.pattern;
+
+                tags.Add(pattern, tag.replacement);
             }
 
-            int authenticationTagsCount = SensitiveDataConfigurationType.authenticationTags.Length;
+            authenticationTags = new ReadOnlyDictionary<string, string>(tags);
+        }
 
-            for (int i = 0; i < authenticationTagsCount; i++)
-            {
-                string tagName = SensitiveDataConfigurationType.authenticationTags[i].tagName;
-                string pattern = SensitiveDataConfigurationType.authenticationTags[i].pattern;
-                string replacement = SensitiveDataConfigurationType.authenticationTags[i].replacement;
-
-                if (!string.IsNullOrEmpty(pattern))
-                {
-                    pattern = $"{tagName} : {pattern}";
-                }
-
-                replacement = $"{replacement}";
-
-                authenticationTags.Add(pattern, replacement);
-            }
-
-            isLoaded = true;
-
+        public static IReadOnlyDictionary<string, string> getAuthenticationTags()
+        {
             return authenticationTags;
         }
     }

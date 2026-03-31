@@ -6,7 +6,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography;
+using System.Text;
 using Newtonsoft.Json.Linq;
+using Org.BouncyCastle.Crypto.Encodings;
+using Org.BouncyCastle.Crypto.Engines;
+using Org.BouncyCastle.Crypto.Modes;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Security;
 
 namespace AuthenticationSdk.util
 {
@@ -73,18 +79,9 @@ namespace AuthenticationSdk.util
             }
 
             string serialNumber = GetSerialNumberFromCertificate(mleCertificate, merchantConfig);
-            var payloadBytes = System.Text.Encoding.UTF8.GetBytes(payload);
+            var payloadBytes = Encoding.UTF8.GetBytes(payload);
             var rsa = mleCertificate.GetRSAPublicKey();
-            var jweToken = Jose.JWT.EncodeBytes(
-                payloadBytes,
-                rsa,
-                Jose.JweAlgorithm.RSA_OAEP_256,
-                Jose.JweEncryption.A256GCM,
-                extraHeaders: new Dictionary<string, object>
-                {
-                    { "kid", serialNumber },
-                    { "iat", DateTimeOffset.UtcNow.ToUnixTimeSeconds() }
-                });
+            var jweToken = JWEUtilty.EncryptJweCompact(payloadBytes, rsa, serialNumber);
 
             object mleRequest = CreateJsonObject(jweToken);
             logUtility.LogDebugMessage(logger, Constants.LOG_REQUEST_AFTER_MLE + mleRequest.ToString());
@@ -176,8 +173,9 @@ namespace AuthenticationSdk.util
             }
             catch (Exception e)
             {
-                logger.Error("Failed to extract Response MLE token: " + e.Message);
-                return null;
+                string errorMessage = $"Failed to extract MLE response token: {e.Message}";
+                logger.Error(errorMessage, e);
+                throw new MLEException("DECRYPTION", errorMessage, e);
             }
         }
         private static AsymmetricAlgorithm GetMleResponsePrivateKey(MerchantConfig merchantConfig)
@@ -195,7 +193,7 @@ namespace AuthenticationSdk.util
         {
             if (!CheckIsMleEncryptedResponse(mleResponseBody))
             {
-                throw new Exception("Response body is not MLE encrypted.");
+                throw new MLEException("VALIDATION", "Response body is not MLE encrypted.");
             }
 
             var mlePrivateKey = GetMleResponsePrivateKey(merchantConfig);
@@ -215,31 +213,31 @@ namespace AuthenticationSdk.util
                 RSA rsaKey = mlePrivateKey as RSA;
                 if (rsaKey == null)
                 {
-                    throw new Exception("MLE Response private key is not an RSA key. Only RSA keys are supported for MLE decryption.");
+                    throw new MLEException("KEY_TYPE", "MLE Response private key is not an RSA key. Only RSA keys are supported for MLE decryption.");
                 }
                 string decryptedResponse = JWEUtilty.DecryptUsingRSAParameters(rsaKey.ExportParameters(true), jweResponseToken);
                 logUtility.LogDebugMessage(logger, Constants.LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION + decryptedResponse);
                 return decryptedResponse;
             }
-            catch (Jose.JoseException e)
+            catch (Org.BouncyCastle.Crypto.InvalidCipherTextException e)
             {
-                string errorMessage = $"MLE Response decryption failed (JoseException): {e.Message}. " +
+                string errorMessage = $"MLE Response decryption failed (InvalidCipherTextException): {e.Message}. " +
                                       $"Possible reason: The provided RSA private key does not match the public key used to encrypt the message.";
                 logger.Error(errorMessage, e);
-                throw new Exception(errorMessage, e);
+                throw new MLEException("JOSE_DECRYPTION", errorMessage, e);
             }
             catch (CryptographicException e)
             {
                 string errorMessage = $"MLE Response decryption failed (CryptographicException): {e.Message}. " +
                                       "This may happen if the private key is incorrect or corrupted.";
                 logger.Error(errorMessage, e);
-                throw new Exception(errorMessage, e);
+                throw new MLEException("CRYPTO_DECRYPTION", errorMessage, e);
             }
             catch (Exception e)
             {
                 string errorMessage = $"MLE Response decryption failed: {e.Message}";
                 logger.Error(errorMessage, e);
-                throw new Exception(errorMessage, e);
+                throw new MLEException("DECRYPTION", errorMessage, e);
             }
         }
 
@@ -276,7 +274,7 @@ namespace AuthenticationSdk.util
                     isP12File = true;
                 }
             }
-            catch (IOException e)
+            catch (IOException)
             {
                 logger.Debug("No valid private key file path provided, skipping auto-extraction");
             }
@@ -316,7 +314,7 @@ namespace AuthenticationSdk.util
             // Determine which KID to use based on what's available
             if (cybsKid == null && configuredKID == null)
             {
-                throw new Exception("responseMleKID is required when response MLE is enabled. " +
+                throw new ConfigurationException("responseMleKID is required when response MLE is enabled. " +
                     "Could not auto-extract from certificate and no manual configuration provided. " +
                     "Please provide responseMleKID explicitly in your configuration.");
             }

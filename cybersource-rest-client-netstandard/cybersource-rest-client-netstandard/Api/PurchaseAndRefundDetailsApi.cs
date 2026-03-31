@@ -386,7 +386,7 @@ namespace CyberSource.Api
                 catch (Exception e)
                 {
                     logger.Error("Failed to encrypt request body {}", e.Message, e);
-                    throw new ApiException(400,"Failed to encrypt request body : " + e.Message);
+                    throw new Exception($"Failed to encrypt request body: {e.Message}", e);
                 }
             }
 
@@ -562,7 +562,7 @@ namespace CyberSource.Api
                 catch (Exception e)
                 {
                     logger.Error("Failed to encrypt request body {}", e.Message, e);
-                    throw new ApiException(400,"Failed to encrypt request body : " + e.Message);
+                    throw new Exception($"Failed to encrypt request body: {e.Message}", e);
                 }
             }
 

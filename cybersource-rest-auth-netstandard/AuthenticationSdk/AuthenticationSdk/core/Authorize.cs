@@ -45,7 +45,7 @@ namespace AuthenticationSdk.core
 
                     if (string.IsNullOrEmpty(_merchantConfig.MerchantId) || string.IsNullOrEmpty(_merchantConfig.MerchantKeyId) || string.IsNullOrEmpty(_merchantConfig.MerchantSecretKey))
                     {
-                        throw new Exception("Missing or Empty Credentials : MerchantID or MerchantKeyID or MerchantSecretKey");
+                        throw new ConfigurationException("Missing or Empty Credentials for HTTP Signature: MerchantID, MerchantKeyID, or MerchantSecretKey is required");
                     }
 
                     var signatureObj = (HttpToken)new HttpTokenGenerator(_merchantConfig).GetToken();
@@ -75,10 +75,20 @@ namespace AuthenticationSdk.core
 
                 return null;
             }
+            catch (ConfigurationException)
+            {
+                // Re-throw configuration exceptions as-is
+                throw;
+            }
+            catch (TokenGenerationException)
+            {
+                // Re-throw token generation exceptions as-is
+                throw;
+            }
             catch (Exception e)
             {
-                _logger.Error(e.Message);
-                throw e;
+                _logger.Error($"HTTP Signature generation failed: {e.Message}", e);
+                throw new TokenGenerationException("HTTP", $"Failed to generate HTTP signature: {e.Message}", e);
             }
         }
 
@@ -98,7 +108,7 @@ namespace AuthenticationSdk.core
 
                     if (string.IsNullOrEmpty(_merchantConfig.MerchantId) || string.IsNullOrEmpty(_merchantConfig.KeyAlias) || string.IsNullOrEmpty(_merchantConfig.KeyPass))
                     {
-                        throw new Exception("Missing or Empty Credentials : MerchantID or KeyAlias or KeyPassphrase");
+                        throw new ConfigurationException("Missing or Empty Credentials for JWT Token: MerchantID, KeyAlias, or KeyPassphrase is required");
                     }
 
                     var tokenObj = (JwtToken)new JwtTokenGenerator(_merchantConfig, isResponseMLEForApi).GetToken();
@@ -119,10 +129,20 @@ namespace AuthenticationSdk.core
 
                 return null;
             }
+            catch (ConfigurationException)
+            {
+                // Re-throw configuration exceptions as-is
+                throw;
+            }
+            catch (TokenGenerationException)
+            {
+                // Re-throw token generation exceptions as-is
+                throw;
+            }
             catch (Exception e)
             {
-                _logger.Error(e.Message);
-                throw e;
+                _logger.Error($"JWT Token generation failed: {e.Message}", e);
+                throw new TokenGenerationException("JWT", $"Failed to generate JWT token: {e.Message}", e);
             }
         }
 
@@ -142,7 +162,7 @@ namespace AuthenticationSdk.core
 
                     if (string.IsNullOrEmpty(_merchantConfig.AccessToken) || string.IsNullOrEmpty(_merchantConfig.RefreshToken))
                     {
-                        throw new Exception("Missing or Empty Credentials : AccessToken or RefreshToken");
+                        throw new ConfigurationException("Missing or Empty Credentials for OAuth Token: AccessToken or RefreshToken is required");
                     }
 
                     var tokenObj = (OAuthToken)new OAuthTokenGenerator(_merchantConfig).GetToken();
@@ -163,10 +183,20 @@ namespace AuthenticationSdk.core
 
                 return null;
             }
+            catch (ConfigurationException)
+            {
+                // Re-throw configuration exceptions as-is
+                throw;
+            }
+            catch (TokenGenerationException)
+            {
+                // Re-throw token generation exceptions as-is
+                throw;
+            }
             catch (Exception e)
             {
-                _logger.Error(e.Message);
-                throw e;
+                _logger.Error($"OAuth Token generation failed: {e.Message}", e);
+                throw new TokenGenerationException("OAuth", $"Failed to generate OAuth token: {e.Message}", e);
             }
         }
 
@@ -188,8 +218,8 @@ namespace AuthenticationSdk.core
             }
             catch (Exception e)
             {
-                _logger.Error(e.Message);
-                throw e;
+                _logger.Error($"Failed to log merchant details: {e.Message}", e);
+                throw new AuthenticationException("LOG_ERROR", $"Failed to log merchant configuration details: {e.Message}", e);
             }
         }
     }

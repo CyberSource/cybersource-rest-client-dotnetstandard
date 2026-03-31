@@ -343,10 +343,14 @@ namespace AuthenticationSdk.core
             ClientSecret = merchantConfigSection["clientSecret"];
             KeyAlias = merchantConfigSection["keyAlias"];
             KeyPass = merchantConfigSection["keyPass"];
-            TimeOut = merchantConfigSection["timeout"];
+            TimeOut = Utility.GetPositiveIntOrDefault(merchantConfigSection["timeout"], "timeout", Constants.DEFAULT_TIME_OUT);
+
             UseProxy = merchantConfigSection["useProxy"];
             ProxyAddress = merchantConfigSection["proxyAddress"];
-            ProxyPort = merchantConfigSection["proxyPort"];
+            
+            // Validate proxyPort - warns and returns null if invalid
+            ProxyPort = Utility.GetPositiveIntOrDefault(merchantConfigSection["proxyPort"], "proxyPort", null);
+            
             ProxyUsername = merchantConfigSection["proxyUsername"];
             ProxyPassword = merchantConfigSection["proxyPassword"];
             PemFileDirectory = merchantConfigSection["pemFileDirectory"];
@@ -427,23 +431,8 @@ namespace AuthenticationSdk.core
                 ResponseMlePrivateKeyFilePassword = Utility.ConvertStringToSecureString(merchantConfigSection["responseMlePrivateKeyFilePassword"]);
             }
 
-            if (merchantConfigSection["maxConnectionPoolSize"] != null)
-            {
-                MaxConnectionPoolSize = merchantConfigSection["maxConnectionPoolSize"];
-            }
-            else
-            {
-                MaxConnectionPoolSize = Constants.DefaultMaxConnectionPoolSize;
-            }
-
-            if (merchantConfigSection["keepAliveTime"] != null)
-            {
-                KeepAliveTime = merchantConfigSection["keepAliveTime"];
-            }
-            else
-            {
-                KeepAliveTime = Constants.DefaultKeepAliveTime;
-            }
+            MaxConnectionPoolSize = Utility.GetPositiveIntOrDefault(merchantConfigSection["maxConnectionPoolSize"], "maxConnectionPoolSize", Constants.DefaultMaxConnectionPoolSize);
+            KeepAliveTime = Utility.GetPositiveIntOrDefault(merchantConfigSection["keepAliveTime"], "keepAliveTime", Constants.DefaultKeepAliveTime);
         }
 
         private void SetValuesUsingDictObj(IReadOnlyDictionary<string, string> merchantConfigDictionary, Dictionary<string,string> mapToControlMLEonAPI)
@@ -622,10 +611,10 @@ namespace AuthenticationSdk.core
                         }
                     }
 
-                    if (merchantConfigDictionary.ContainsKey("timeout"))
-                    {
-                        TimeOut = merchantConfigDictionary["timeout"];
-                    }
+                    TimeOut = Utility.GetPositiveIntOrDefault(
+                        merchantConfigDictionary.ContainsKey("timeout") ? merchantConfigDictionary["timeout"] : null,
+                        "timeout",
+                        Constants.DEFAULT_TIME_OUT);
 
                     if (merchantConfigDictionary.ContainsKey("useProxy"))
                     {
@@ -639,7 +628,18 @@ namespace AuthenticationSdk.core
 
                     if (merchantConfigDictionary.ContainsKey("proxyPort"))
                     {
-                        ProxyPort = merchantConfigDictionary["proxyPort"];
+                        ProxyPort = Utility.GetPositiveIntOrDefault(merchantConfigDictionary["proxyPort"], "proxyPort", null);
+                    }
+                    if (ProxyPort == null && bool.TryParse(UseProxy, out bool boolUseProxy) && boolUseProxy)
+                    {
+                        if (merchantConfigDictionary.ContainsKey("proxyPort"))
+                        {
+                            throw new Exception($"Invalid value for proxyPort: '{merchantConfigDictionary["proxyPort"]}'. It must be a positive integer.");
+                        }
+                        else
+                        {
+                            throw new Exception("proxyPort is required when useProxy is true. It must be a positive integer.");
+                        }
                     }
 
                     if (merchantConfigDictionary.ContainsKey("proxyUsername"))
@@ -707,23 +707,15 @@ namespace AuthenticationSdk.core
                         RequestMleKeyAlias = Constants.DefaultMleAliasForCert;
                     }
 
-                    if (merchantConfigDictionary.ContainsKey("maxConnectionPoolSize"))
-                    {
-                        MaxConnectionPoolSize = merchantConfigDictionary["maxConnectionPoolSize"];
-                    }
-                    else
-                    {
-                        MaxConnectionPoolSize = Constants.DefaultMaxConnectionPoolSize;
-                    }
+                    MaxConnectionPoolSize = Utility.GetPositiveIntOrDefault(
+                        merchantConfigDictionary.ContainsKey("maxConnectionPoolSize") ? merchantConfigDictionary["maxConnectionPoolSize"] : null,
+                        "maxConnectionPoolSize",
+                        Constants.DefaultMaxConnectionPoolSize);
 
-                    if (merchantConfigDictionary.ContainsKey("keepAliveTime"))
-                    {
-                        KeepAliveTime = merchantConfigDictionary["keepAliveTime"];
-                    }
-                    else
-                    {
-                        KeepAliveTime = Constants.DefaultKeepAliveTime;
-                    }
+                    KeepAliveTime = Utility.GetPositiveIntOrDefault(
+                        merchantConfigDictionary.ContainsKey("keepAliveTime") ? merchantConfigDictionary["keepAliveTime"] : null,
+                        "keepAliveTime",
+                        Constants.DefaultKeepAliveTime);
 
                     if (merchantConfigDictionary.ContainsKey("mleForRequestPublicCertPath") && !string.IsNullOrEmpty(merchantConfigDictionary["mleForRequestPublicCertPath"].Trim()))
                     {
@@ -835,10 +827,8 @@ namespace AuthenticationSdk.core
                 IsJwtTokenAuthType = true;
             }
 
-            if (string.IsNullOrEmpty(TimeOut))
-            {
-                TimeOut = Constants.DEFAULT_TIME_OUT;   // In Millisec
-            }
+            // Validate TimeOut - ensure it's a valid positive integer
+            TimeOut = Utility.GetPositiveIntOrDefault(TimeOut, "timeout", Constants.DEFAULT_TIME_OUT);
 
             // setting up hostname based on the run environment value
             if (string.IsNullOrEmpty(RunEnvironment))
@@ -892,11 +882,21 @@ namespace AuthenticationSdk.core
                     throw new Exception($"{Constants.WarningPrefix} KeyAlias not provided. Assigning the value of: [MerchantID]");
                 }
 
-                if (!string.Equals(KeyAlias, MerchantId))
+                // Only enforce KeyAlias = MerchantId when UseMetaKey is false
+                bool useMetaKeyFlag = false;
+                bool.TryParse(UseMetaKey, out useMetaKeyFlag);
+                if (!useMetaKeyFlag && !string.Equals(KeyAlias, MerchantId))
                 {
                     KeyAlias = MerchantId;
                     Logger.Warn("Key Alias value provided is incorrect. Assigning the value of Merchant ID");
                     throw new Exception($"{Constants.WarningPrefix} Incorrect value of KeyAlias provided. Assigning the value of: [MerchantID]");
+                }
+                
+                if (useMetaKeyFlag && !string.Equals(KeyAlias, PortfolioId))
+                {
+                    KeyAlias = PortfolioId;
+                    Logger.Warn("Key Alias value provided is incorrect for MetaKey enabled. Assigning the value of Portfolio ID");
+                    throw new Exception($"{Constants.WarningPrefix} Incorrect value of KeyAlias provided for MetaKey enabled. Assigning the value of: [PortfolioID]");
                 }
 
                 if (string.IsNullOrEmpty(KeyPass))

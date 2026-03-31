@@ -3,11 +3,40 @@ using System.IO;
 using System.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using NLog;
 
 namespace AuthenticationSdk.util
 {
     public static class Utility
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
+        /// Validates that a configuration value is a positive integer.
+        /// Returns the value if valid, or the default with a warning log if invalid/null.
+        /// </summary>
+        /// <param name="value">The configuration value to validate</param>
+        /// <param name="fieldName">The name of the field (for logging purposes)</param>
+        /// <param name="defaultValue">The default value to use if validation fails (can be null)</param>
+        /// <returns>The validated value or default</returns>
+        public static string GetPositiveIntOrDefault(string value, string fieldName, string defaultValue)
+        {
+            if (value != null)
+            {
+                if (int.TryParse(value, out int parsed) && parsed > 0)
+                {
+                    return value;
+                }
+
+                Logger.Warn($"Invalid {fieldName} value '{value}'. Must be a positive integer. Using default: {defaultValue ?? "null"}");
+            }
+            else
+            {
+                Logger.Warn($"{fieldName} is not set. Using default: {defaultValue ?? "null"}");
+            }
+
+            return defaultValue;
+        }
 
         /// <summary>
         /// Reads a private key from a PKCS#12 (.p12 or .pfx) file.

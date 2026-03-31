@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using Jose;
+using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using AuthenticationSdk.util.jwtExceptions;
+using Org.BouncyCastle.Crypto.Digests;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Crypto.Signers;
+using Org.BouncyCastle.Security;
 
 namespace AuthenticationSdk.util
 {
@@ -28,9 +32,9 @@ namespace AuthenticationSdk.util
 
             try
             {
-                // The jose-jwt library's Payload method handles splitting the token and Base64Url decoding the payload part.
-                // It will throw an exception if the token does not have three parts or if the payload is not valid Base64Url.
-                string payloadJson = JWT.Payload(jwtToken);
+                // Split on '.' and Base64Url-decode the payload part (index 1).
+                // Handles both JWS (3 parts) and JWE (5 parts) compact serializations.
+                string payloadJson = JwtCompact.DecodePayload(jwtToken);
 
                 // The JWT specification requires the payload (Claims Set) to be a JSON object.
                 // We'll verify this to ensure the token is fully compliant.
@@ -53,14 +57,14 @@ namespace AuthenticationSdk.util
             }
             catch (Exception ex)
             {
-                // Catch exceptions from JWT.Payload() (e.g., malformed token)
+                // Catch exceptions from payload decoding (e.g., malformed token)
                 throw new InvalidJwtException("The provided JWT is malformed.", ex);
             }
         }
 
         public static IDictionary<string, object> GetJwtHeaders(string jwtToken)
         {
-            return JWT.Headers(jwtToken);
+            return JwtCompact.DecodeHeaders(jwtToken);
         }
 
         /// <summary>
@@ -69,10 +73,6 @@ namespace AuthenticationSdk.util
         /// <param name="jwtValue">The JWT token to verify.</param>
         /// <param name="publicKey">The public key in JWK JSON format.</param>
         /// <returns>Returns true if the token is successfully verified.</returns>
-        /// <exception cref="Exception">
-        /// Throws an exception if verification fails due to an invalid signature,
-        /// a malformed token, a missing algorithm header, or other errors.
-        /// </exception>
         /// <exception cref="JwtSignatureValidationException">
         /// Thrown if verification fails due to an invalid signature, malformed token, missing algorithm header, or other errors.
         /// </exception>
@@ -89,41 +89,63 @@ namespace AuthenticationSdk.util
                 // Step 1: Convert the JWK string into RSA parameters.
                 RSAParameters rsaParameters = ConvertJwkToRsaParameters(publicKey);
 
-                // Step 2: Create an RSACryptoServiceProvider and import the public key.
-                var rsa = new RSACryptoServiceProvider();
-                rsa.ImportParameters(rsaParameters);
+                // Step 2: Convert to BouncyCastle public key parameters.
+                RsaKeyParameters bcPublicKey = DotNetUtilities.GetRsaPublicKey(rsaParameters);
 
                 // Step 3: Dynamically determine the algorithm from the JWT's header.
-                var headers = JWT.Headers(jwtValue);
+                var headers = JwtCompact.DecodeHeaders(jwtValue);
                 if (!headers.TryGetValue("alg", out var alg))
                 {
                     throw new ArgumentException("JWT header is missing the 'alg' parameter.");
                 }
 
                 string algStr = alg as string;
+                if (algStr == null)
+                {
+                    throw new ArgumentException($"JWT header 'alg' must be a string, but found: {alg?.GetType().Name ?? "null"} ({alg}).");
+                }
+
                 var supportedRsaAlgorithms = new[] { "RS256", "RS384", "RS512" };
                 if (Array.IndexOf(supportedRsaAlgorithms, algStr) < 0)
                 {
-                    throw new ArgumentException($"The algorithm in the JWT token is not RSA. Only {string.Join(", ", supportedRsaAlgorithms)} are supported.");
+                    throw new ArgumentException($"The algorithm '{algStr}' in the JWT token is not supported. Only {string.Join(", ", supportedRsaAlgorithms)} are supported.");
                 }
 
-                // Parse the string algorithm into the JwsAlgorithm enum.
-                var jwsAlgorithm = (JwsAlgorithm)Enum.Parse(typeof(JwsAlgorithm), algStr);
+                // Step 4: Verify the RS256/RS384/RS512 signature using BouncyCastle.
+                // JWS signing input = Base64Url(header) + "." + Base64Url(payload)
+                string[] parts = jwtValue.Split('.');
+                if (parts.Length < 3)
+                {
+                    throw new InvalidJwtException("JWT must have at least 3 parts.");
+                }
 
-                // Step 4: Decode and verify the token.
-                // The JWT.Decode method will perform signature validation and throw
-                // a Jose.IntegrityException if the signature is invalid.
-                JWT.Decode(jwtValue, rsa, jwsAlgorithm);
+                string signingInput   = parts[0] + "." + parts[1];
+                byte[] signingBytes   = Encoding.ASCII.GetBytes(signingInput);
+                byte[] signatureBytes = Base64UrlEncoder.DecodeBytes(parts[2]);
 
-                // Step 5: If JWT.Decode completes without throwing an exception, verification is successful.
+                Org.BouncyCastle.Crypto.IDigest digest = algStr switch
+                {
+                    "RS384" => new Sha384Digest(),
+                    "RS512" => new Sha512Digest(),
+                    _       => new Sha256Digest()   // RS256 default
+                };
+
+                var signer = new RsaDigestSigner(digest);
+                signer.Init(false, bcPublicKey);
+                signer.BlockUpdate(signingBytes, 0, signingBytes.Length);
+                bool valid = signer.VerifySignature(signatureBytes);
+
+                if (!valid)
+                {
+                    throw new JwtSignatureValidationException("JWT verification failed: signature is invalid.");
+                }
+
+                // Step 5: Signature verified successfully.
                 return true;
             }
-            catch (JoseException ex)
+            catch (JwtSignatureValidationException)
             {
-                // This will catch signature validation errors (IntegrityException)
-                // or other JWT-specific issues from the jose-jwt library.
-                // Re-throwing as a general exception to signal verification failure.
-                throw new JwtSignatureValidationException("JWT verification failed. See inner exception for details.", ex);
+                throw;
             }
             catch (ArgumentException)
             {

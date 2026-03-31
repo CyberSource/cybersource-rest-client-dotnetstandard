@@ -283,7 +283,7 @@ namespace AuthenticationSdk.util
         private static X509Certificate2Collection FetchCertificateCollectionFromP12File(string p12FilePath, string keyPassword)
         {
             var certificates = new X509Certificate2Collection();
-            certificates.Import(p12FilePath, keyPassword, X509KeyStorageFlags.PersistKeySet);
+            certificates.Import(p12FilePath, keyPassword, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.PersistKeySet);
 
             //return all certs in p12
             return certificates;

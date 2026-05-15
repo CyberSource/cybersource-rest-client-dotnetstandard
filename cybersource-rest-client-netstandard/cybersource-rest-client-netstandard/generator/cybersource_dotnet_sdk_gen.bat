@@ -66,5 +66,23 @@ git checkout ..\Api\OAuthApi.cs
 git checkout ..\Model\AccessTokenResponse.cs
 git checkout ..\Model\CreateAccessTokenRequest.cs
 del ..\Client\IReadableConfiguration.cs
+git checkout ..\Client\GlobalConfiguration.cs
+git checkout ..\Api\ApiBase.cs
+git checkout ..\Client\IConfiguration.cs
+git checkout ..\Client\IMerchantLegacySettings.cs
+git checkout ..\Client\IMerchantNetworkSettings.cs
+git checkout ..\Client\IMutableConfiguration.cs
+git checkout ..\Client\ConfigurationAuthenticationExtensions.cs
+git checkout ..\Client\ConfigurationMLEExtensions.cs
+git checkout ..\Client\MerchantCredentialSettingsFactory.cs
+git checkout ..\Client\MerchantCredentialSettingsProcessor.cs
+git checkout ..\Client\MerchantCredentialSettingsValidator.cs
+git checkout ..\Client\MerchantLegacySettings.cs
+git checkout ..\Client\MerchantMLESettingsFactory.cs
+git checkout ..\Client\MerchantMLESettingsProcessor.cs
+git checkout ..\Client\MerchantMLESettingsValidator.cs
+git checkout ..\Client\MerchantRequestSettingsFactory.cs
+git checkout ..\Client\MerchantNetworkSettings.cs
+git checkout ..\Client\RestClientFactory.cs
 
 pause

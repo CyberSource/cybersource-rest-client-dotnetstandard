@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -39,7 +38,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns></returns>
-        void DeleteCustomer (string customerId, string profileId = null);
+        void DeleteCustomer(string customerId, string profileId = null);
 
         /// <summary>
         /// Delete a Customer
@@ -51,7 +50,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteCustomerWithHttpInfo (string customerId, string profileId = null);
+        ApiResponse<Object> DeleteCustomerWithHttpInfo(string customerId, string profileId = null);
         /// <summary>
         /// Retrieve a Customer
         /// </summary>
@@ -62,7 +61,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>PostCustomerRequest</returns>
-        PostCustomerRequest GetCustomer (string customerId, string profileId = null);
+        PostCustomerRequest GetCustomer(string customerId, string profileId = null);
 
         /// <summary>
         /// Retrieve a Customer
@@ -74,7 +73,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of PostCustomerRequest</returns>
-        ApiResponse<PostCustomerRequest> GetCustomerWithHttpInfo (string customerId, string profileId = null);
+        ApiResponse<PostCustomerRequest> GetCustomerWithHttpInfo(string customerId, string profileId = null);
         /// <summary>
         /// Update a Customer
         /// </summary>
@@ -87,7 +86,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>PatchCustomerRequest</returns>
-        PatchCustomerRequest PatchCustomer (string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null);
+        PatchCustomerRequest PatchCustomer(string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null);
 
         /// <summary>
         /// Update a Customer
@@ -101,7 +100,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>ApiResponse of PatchCustomerRequest</returns>
-        ApiResponse<PatchCustomerRequest> PatchCustomerWithHttpInfo (string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null);
+        ApiResponse<PatchCustomerRequest> PatchCustomerWithHttpInfo(string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null);
         /// <summary>
         /// Create a Customer
         /// </summary>
@@ -112,7 +111,7 @@ namespace CyberSource.Api
         /// <param name="postCustomerRequest"></param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>PostCustomerRequest</returns>
-        PostCustomerRequest PostCustomer (PostCustomerRequest postCustomerRequest, string profileId = null);
+        PostCustomerRequest PostCustomer(PostCustomerRequest postCustomerRequest, string profileId = null);
 
         /// <summary>
         /// Create a Customer
@@ -124,7 +123,7 @@ namespace CyberSource.Api
         /// <param name="postCustomerRequest"></param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of PostCustomerRequest</returns>
-        ApiResponse<PostCustomerRequest> PostCustomerWithHttpInfo (PostCustomerRequest postCustomerRequest, string profileId = null);
+        ApiResponse<PostCustomerRequest> PostCustomerWithHttpInfo(PostCustomerRequest postCustomerRequest, string profileId = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -137,7 +136,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteCustomerAsync (string customerId, string profileId = null);
+        System.Threading.Tasks.Task DeleteCustomerAsync(string customerId, string profileId = null);
 
         /// <summary>
         /// Delete a Customer
@@ -149,7 +148,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomerAsyncWithHttpInfo (string customerId, string profileId = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomerAsyncWithHttpInfo(string customerId, string profileId = null);
         /// <summary>
         /// Retrieve a Customer
         /// </summary>
@@ -160,7 +159,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of PostCustomerRequest</returns>
-        System.Threading.Tasks.Task<PostCustomerRequest> GetCustomerAsync (string customerId, string profileId = null);
+        System.Threading.Tasks.Task<PostCustomerRequest> GetCustomerAsync(string customerId, string profileId = null);
 
         /// <summary>
         /// Retrieve a Customer
@@ -172,7 +171,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (PostCustomerRequest)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PostCustomerRequest>> GetCustomerAsyncWithHttpInfo (string customerId, string profileId = null);
+        System.Threading.Tasks.Task<ApiResponse<PostCustomerRequest>> GetCustomerAsyncWithHttpInfo(string customerId, string profileId = null);
         /// <summary>
         /// Update a Customer
         /// </summary>
@@ -185,7 +184,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of PatchCustomerRequest</returns>
-        System.Threading.Tasks.Task<PatchCustomerRequest> PatchCustomerAsync (string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null);
+        System.Threading.Tasks.Task<PatchCustomerRequest> PatchCustomerAsync(string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null);
 
         /// <summary>
         /// Update a Customer
@@ -199,7 +198,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of ApiResponse (PatchCustomerRequest)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PatchCustomerRequest>> PatchCustomerAsyncWithHttpInfo (string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null);
+        System.Threading.Tasks.Task<ApiResponse<PatchCustomerRequest>> PatchCustomerAsyncWithHttpInfo(string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null);
         /// <summary>
         /// Create a Customer
         /// </summary>
@@ -210,7 +209,7 @@ namespace CyberSource.Api
         /// <param name="postCustomerRequest"></param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of PostCustomerRequest</returns>
-        System.Threading.Tasks.Task<PostCustomerRequest> PostCustomerAsync (PostCustomerRequest postCustomerRequest, string profileId = null);
+        System.Threading.Tasks.Task<PostCustomerRequest> PostCustomerAsync(PostCustomerRequest postCustomerRequest, string profileId = null);
 
         /// <summary>
         /// Create a Customer
@@ -222,145 +221,31 @@ namespace CyberSource.Api
         /// <param name="postCustomerRequest"></param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (PostCustomerRequest)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PostCustomerRequest>> PostCustomerAsyncWithHttpInfo (PostCustomerRequest postCustomerRequest, string profileId = null);
+        System.Threading.Tasks.Task<ApiResponse<PostCustomerRequest>> PostCustomerAsyncWithHttpInfo(PostCustomerRequest postCustomerRequest, string profileId = null);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class CustomerApi : ICustomerApi
+    public partial class CustomerApi : ApiBase, ICustomerApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public CustomerApi(string basePath)
+        public CustomerApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public CustomerApi(Configuration configuration = null)
+        public CustomerApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -370,7 +255,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns></returns>
-        public void DeleteCustomer (string customerId, string profileId = null)
+        public void DeleteCustomer(string customerId, string profileId = null)
         {
             logger.Debug("CALLING API \"DeleteCustomer\" STARTED");
             this.SetStatusCode(null);
@@ -384,7 +269,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DeleteCustomerWithHttpInfo (string customerId, string profileId = null)
+        public ApiResponse<Object> DeleteCustomerWithHttpInfo(string customerId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -398,7 +283,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v2/customers/{customerId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -407,13 +292,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -421,13 +306,15 @@ namespace CyberSource.Api
 
             if (customerId != null)
             {
-                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+                localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (Method.Delete == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -436,20 +323,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "DeleteCustomer,DeleteCustomerAsync,DeleteCustomerWithHttpInfo,DeleteCustomerAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "DeleteCustomer,DeleteCustomerAsync,DeleteCustomerWithHttpInfo,DeleteCustomerAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -458,12 +346,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "DeleteCustomer,DeleteCustomerAsync,DeleteCustomerWithHttpInfo,DeleteCustomerAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "DeleteCustomer,DeleteCustomerAsync,DeleteCustomerWithHttpInfo,DeleteCustomerAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -492,7 +379,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteCustomerAsync (string customerId, string profileId = null)
+        public async Task DeleteCustomerAsync(string customerId, string profileId = null)
         {
             logger.Debug("CALLING API \"DeleteCustomerAsync\" STARTED");
             this.SetStatusCode(null);
@@ -507,7 +394,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteCustomerAsyncWithHttpInfo (string customerId, string profileId = null)
+        public async Task<ApiResponse<Object>> DeleteCustomerAsyncWithHttpInfo(string customerId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -521,7 +408,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v2/customers/{customerId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -530,13 +417,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -544,13 +431,15 @@ namespace CyberSource.Api
 
             if (customerId != null)
             {
-                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+                localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (Method.Delete == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -559,20 +448,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "DeleteCustomer,DeleteCustomerAsync,DeleteCustomerWithHttpInfo,DeleteCustomerAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "DeleteCustomer,DeleteCustomerAsync,DeleteCustomerWithHttpInfo,DeleteCustomerAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -581,16 +470,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "DeleteCustomer,DeleteCustomerAsync,DeleteCustomerWithHttpInfo,DeleteCustomerAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "DeleteCustomer,DeleteCustomerAsync,DeleteCustomerWithHttpInfo,DeleteCustomerAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -614,7 +502,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>PostCustomerRequest</returns>
-        public PostCustomerRequest GetCustomer (string customerId, string profileId = null)
+        public PostCustomerRequest GetCustomer(string customerId, string profileId = null)
         {
             logger.Debug("CALLING API \"GetCustomer\" STARTED");
             this.SetStatusCode(null);
@@ -631,7 +519,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of PostCustomerRequest</returns>
-        public ApiResponse< PostCustomerRequest > GetCustomerWithHttpInfo (string customerId, string profileId = null)
+        public ApiResponse< PostCustomerRequest > GetCustomerWithHttpInfo(string customerId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -645,7 +533,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v2/customers/{customerId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -654,13 +542,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -668,13 +556,15 @@ namespace CyberSource.Api
 
             if (customerId != null)
             {
-                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+                localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -683,20 +573,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetCustomer,GetCustomerAsync,GetCustomerWithHttpInfo,GetCustomerAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetCustomer,GetCustomerAsync,GetCustomerWithHttpInfo,GetCustomerAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -705,12 +596,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetCustomer,GetCustomerAsync,GetCustomerWithHttpInfo,GetCustomerAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetCustomer,GetCustomerAsync,GetCustomerWithHttpInfo,GetCustomerAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -728,7 +618,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PostCustomerRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PostCustomerRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostCustomerRequest),merchantConfig)); // Return statement
+                (PostCustomerRequest) ApiClient.Deserialize(localVarResponse, typeof(PostCustomerRequest))); // Return statement
         }
 
         /// <summary>
@@ -738,7 +628,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of PostCustomerRequest</returns>
-        public async System.Threading.Tasks.Task<PostCustomerRequest> GetCustomerAsync (string customerId, string profileId = null)
+        public async Task<PostCustomerRequest> GetCustomerAsync(string customerId, string profileId = null)
         {
             logger.Debug("CALLING API \"GetCustomerAsync\" STARTED");
             this.SetStatusCode(null);
@@ -756,7 +646,7 @@ namespace CyberSource.Api
         /// <param name="customerId">The Id of a Customer.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (PostCustomerRequest)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PostCustomerRequest>> GetCustomerAsyncWithHttpInfo (string customerId, string profileId = null)
+        public async Task<ApiResponse<PostCustomerRequest>> GetCustomerAsyncWithHttpInfo(string customerId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -770,7 +660,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v2/customers/{customerId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -779,13 +669,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -793,13 +683,15 @@ namespace CyberSource.Api
 
             if (customerId != null)
             {
-                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+                localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -808,20 +700,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetCustomer,GetCustomerAsync,GetCustomerWithHttpInfo,GetCustomerAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetCustomer,GetCustomerAsync,GetCustomerWithHttpInfo,GetCustomerAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -830,16 +722,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetCustomer,GetCustomerAsync,GetCustomerWithHttpInfo,GetCustomerAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetCustomer,GetCustomerAsync,GetCustomerWithHttpInfo,GetCustomerAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -853,7 +744,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PostCustomerRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PostCustomerRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostCustomerRequest), merchantConfig)); // Return statement
+                (PostCustomerRequest) ApiClient.Deserialize(localVarResponse, typeof(PostCustomerRequest))); // Return statement
         }
         /// <summary>
         /// Update a Customer |  |  |  | | - -- | - -- | - -- | |**Customers**&lt;br&gt;A Customer represents your tokenized customer information.&lt;br&gt;You should associate the Customer Id with the customer account on your systems.&lt;br&gt;A Customer can have one or more [Payment Instruments](#token-management_customer-payment-instrument_create-a-customer-payment-instrumentl) or [Shipping Addresses](#token-management_customer-shipping-address_create-a-customer-shipping-address) with one allocated as the Customers default.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating a Customer**&lt;br&gt;Your system can use this API to update a Customers details including selecting a  [default Payment Instrument](#token-management_customer_update-a-customer_samplerequests-dropdown_update-customers-default-payment-instrument_liveconsole-tab-request-body) or [default Shipping Address](#token-management_customer_update-a-customer_samplerequests-dropdown_update-customers-default-shipping-address_liveconsole-tab-request-body) for use in payments.&lt;br&gt;Note: Updating a Customers [Payment Instrument](#token-management_customer-payment-instrument_update-a-customer-payment-instrument) or [Shipping Address](#token-management_customer-shipping-address_update-a-customer-shipping-address) details is performed using their own dedicated API resources. 
@@ -864,7 +755,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>PatchCustomerRequest</returns>
-        public PatchCustomerRequest PatchCustomer (string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null)
+        public PatchCustomerRequest PatchCustomer(string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null)
         {
             logger.Debug("CALLING API \"PatchCustomer\" STARTED");
             this.SetStatusCode(null);
@@ -883,7 +774,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>ApiResponse of PatchCustomerRequest</returns>
-        public ApiResponse< PatchCustomerRequest > PatchCustomerWithHttpInfo (string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null)
+        public ApiResponse< PatchCustomerRequest > PatchCustomerWithHttpInfo(string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -903,7 +794,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v2/customers/{customerId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -912,13 +803,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -926,35 +817,38 @@ namespace CyberSource.Api
 
             if (customerId != null)
             {
-                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+                localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (ifMatch != null)
             {
-                localVarHeaderParams.Add("if-match", Configuration.ApiClient.ParameterToString(ifMatch)); // header parameter
+                localVarHeaderParams.Add("if-match", ApiClient.ParameterToString(ifMatch)); // header parameter
             }
+
             if (patchCustomerRequest != null && patchCustomerRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                patchCustomerRequest = (PatchCustomerRequest)sdkTracker.InsertDeveloperIdTracker(patchCustomerRequest, patchCustomerRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(patchCustomerRequest); // http body (model) parameter
+                patchCustomerRequest = (PatchCustomerRequest)sdkTracker.InsertDeveloperIdTracker(patchCustomerRequest, patchCustomerRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(patchCustomerRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = patchCustomerRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PatchCustomer,PatchCustomerAsync,PatchCustomerWithHttpInfo,PatchCustomerAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PatchCustomer,PatchCustomerAsync,PatchCustomerWithHttpInfo,PatchCustomerAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -963,13 +857,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PatchCustomer,PatchCustomerAsync,PatchCustomerWithHttpInfo,PatchCustomerAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PatchCustomer,PatchCustomerAsync,PatchCustomerWithHttpInfo,PatchCustomerAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -987,7 +881,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PatchCustomerRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PatchCustomerRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PatchCustomerRequest),merchantConfig)); // Return statement
+                (PatchCustomerRequest) ApiClient.Deserialize(localVarResponse, typeof(PatchCustomerRequest))); // Return statement
         }
 
         /// <summary>
@@ -999,7 +893,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of PatchCustomerRequest</returns>
-        public async System.Threading.Tasks.Task<PatchCustomerRequest> PatchCustomerAsync (string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null)
+        public async Task<PatchCustomerRequest> PatchCustomerAsync(string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null)
         {
             logger.Debug("CALLING API \"PatchCustomerAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1019,7 +913,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of ApiResponse (PatchCustomerRequest)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PatchCustomerRequest>> PatchCustomerAsyncWithHttpInfo (string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null)
+        public async Task<ApiResponse<PatchCustomerRequest>> PatchCustomerAsyncWithHttpInfo(string customerId, PatchCustomerRequest patchCustomerRequest, string profileId = null, string ifMatch = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1039,7 +933,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v2/customers/{customerId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1048,13 +942,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1062,35 +956,38 @@ namespace CyberSource.Api
 
             if (customerId != null)
             {
-                localVarPathParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // path parameter
+                localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (ifMatch != null)
             {
-                localVarHeaderParams.Add("if-match", Configuration.ApiClient.ParameterToString(ifMatch)); // header parameter
+                localVarHeaderParams.Add("if-match", ApiClient.ParameterToString(ifMatch)); // header parameter
             }
+
             if (patchCustomerRequest != null && patchCustomerRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                patchCustomerRequest = (PatchCustomerRequest)sdkTracker.InsertDeveloperIdTracker(patchCustomerRequest, patchCustomerRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(patchCustomerRequest); // http body (model) parameter
+                patchCustomerRequest = (PatchCustomerRequest)sdkTracker.InsertDeveloperIdTracker(patchCustomerRequest, patchCustomerRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(patchCustomerRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = patchCustomerRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PatchCustomer,PatchCustomerAsync,PatchCustomerWithHttpInfo,PatchCustomerAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PatchCustomer,PatchCustomerAsync,PatchCustomerWithHttpInfo,PatchCustomerAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1099,17 +996,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PatchCustomer,PatchCustomerAsync,PatchCustomerWithHttpInfo,PatchCustomerAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PatchCustomer,PatchCustomerAsync,PatchCustomerWithHttpInfo,PatchCustomerAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1123,7 +1020,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PatchCustomerRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PatchCustomerRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PatchCustomerRequest), merchantConfig)); // Return statement
+                (PatchCustomerRequest) ApiClient.Deserialize(localVarResponse, typeof(PatchCustomerRequest))); // Return statement
         }
         /// <summary>
         /// Create a Customer |  |  |  | | - -- | - -- | - -- | |**Customers**&lt;br&gt;A Customer represents your tokenized customer information.&lt;br&gt;You should associate the Customer Id with the customer account on your systems.&lt;br&gt;A Customer can have one or more [Payment Instruments](#token-management_customer-payment-instrument_create-a-customer-payment-instrumentl) or [Shipping Addresses](#token-management_customer-shipping-address_create-a-customer-shipping-address) with one allocated as the Customers default.&lt;br&gt;&lt;br&gt;**Creating a Customer**&lt;br&gt;It is recommended you [create a Customer via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-with-customer-token-creation_liveconsole-tab-request-body), this can be for a zero amount.&lt;br&gt;The Customer will be created with a Payment Instrument and Shipping Address.&lt;br&gt;You can also [add additional Payment Instruments to a Customer via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body).&lt;br&gt;In Europe: You should perform Payer Authentication alongside the Authorization.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Payment Network Tokens**&lt;br&gt;Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.&lt;br&gt;A Payment Network Token will be automatically created and used in future payments if you are enabled for the service.&lt;br&gt;A Payment Network Token can also be [provisioned for an existing Instrument Identifier](#token-management_instrument-identifier_enroll-an-instrument-identifier-for-payment-network-token).&lt;br&gt;For more information about Payment Network Tokens see the Developer Guide.&lt;br&gt;&lt;br&gt;**Payments with Customers**&lt;br&gt;To perform a payment with the Customers default details specify the [Customer Id in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-token-id_liveconsole-tab-request-body).&lt;br&gt;To perform a payment with a particular Payment Instrument or Shipping Address &lt;br&gt;specify the [Payment Instrument or Shipping Address Ids in the payments request](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-customer-payment-instrument-and-shipping-address-token-id_liveconsole-tab-request-body). The availability of API features for a merchant may depend on the portfolio configuration and may need to be enabled at the portfolio level before they can be added to merchant accounts. 
@@ -1132,7 +1029,7 @@ namespace CyberSource.Api
         /// <param name="postCustomerRequest"></param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>PostCustomerRequest</returns>
-        public PostCustomerRequest PostCustomer (PostCustomerRequest postCustomerRequest, string profileId = null)
+        public PostCustomerRequest PostCustomer(PostCustomerRequest postCustomerRequest, string profileId = null)
         {
             logger.Debug("CALLING API \"PostCustomer\" STARTED");
             this.SetStatusCode(null);
@@ -1149,7 +1046,7 @@ namespace CyberSource.Api
         /// <param name="postCustomerRequest"></param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of PostCustomerRequest</returns>
-        public ApiResponse< PostCustomerRequest > PostCustomerWithHttpInfo (PostCustomerRequest postCustomerRequest, string profileId = null)
+        public ApiResponse< PostCustomerRequest > PostCustomerWithHttpInfo(PostCustomerRequest postCustomerRequest, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1163,7 +1060,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v2/customers";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1172,13 +1069,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1186,26 +1083,27 @@ namespace CyberSource.Api
 
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (postCustomerRequest != null && postCustomerRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                postCustomerRequest = (PostCustomerRequest)sdkTracker.InsertDeveloperIdTracker(postCustomerRequest, postCustomerRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(postCustomerRequest); // http body (model) parameter
+                postCustomerRequest = (PostCustomerRequest)sdkTracker.InsertDeveloperIdTracker(postCustomerRequest, postCustomerRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(postCustomerRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = postCustomerRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostCustomer,PostCustomerAsync,PostCustomerWithHttpInfo,PostCustomerAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PostCustomer,PostCustomerAsync,PostCustomerWithHttpInfo,PostCustomerAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1214,13 +1112,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PostCustomer,PostCustomerAsync,PostCustomerWithHttpInfo,PostCustomerAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PostCustomer,PostCustomerAsync,PostCustomerWithHttpInfo,PostCustomerAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1238,7 +1136,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PostCustomerRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PostCustomerRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostCustomerRequest),merchantConfig)); // Return statement
+                (PostCustomerRequest) ApiClient.Deserialize(localVarResponse, typeof(PostCustomerRequest))); // Return statement
         }
 
         /// <summary>
@@ -1248,7 +1146,7 @@ namespace CyberSource.Api
         /// <param name="postCustomerRequest"></param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of PostCustomerRequest</returns>
-        public async System.Threading.Tasks.Task<PostCustomerRequest> PostCustomerAsync (PostCustomerRequest postCustomerRequest, string profileId = null)
+        public async Task<PostCustomerRequest> PostCustomerAsync(PostCustomerRequest postCustomerRequest, string profileId = null)
         {
             logger.Debug("CALLING API \"PostCustomerAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1266,7 +1164,7 @@ namespace CyberSource.Api
         /// <param name="postCustomerRequest"></param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse (PostCustomerRequest)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PostCustomerRequest>> PostCustomerAsyncWithHttpInfo (PostCustomerRequest postCustomerRequest, string profileId = null)
+        public async Task<ApiResponse<PostCustomerRequest>> PostCustomerAsyncWithHttpInfo(PostCustomerRequest postCustomerRequest, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1280,7 +1178,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v2/customers";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1289,13 +1187,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1303,26 +1201,27 @@ namespace CyberSource.Api
 
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (postCustomerRequest != null && postCustomerRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                postCustomerRequest = (PostCustomerRequest)sdkTracker.InsertDeveloperIdTracker(postCustomerRequest, postCustomerRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(postCustomerRequest); // http body (model) parameter
+                postCustomerRequest = (PostCustomerRequest)sdkTracker.InsertDeveloperIdTracker(postCustomerRequest, postCustomerRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(postCustomerRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = postCustomerRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostCustomer,PostCustomerAsync,PostCustomerWithHttpInfo,PostCustomerAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PostCustomer,PostCustomerAsync,PostCustomerWithHttpInfo,PostCustomerAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1331,17 +1230,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PostCustomer,PostCustomerAsync,PostCustomerWithHttpInfo,PostCustomerAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PostCustomer,PostCustomerAsync,PostCustomerWithHttpInfo,PostCustomerAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1355,7 +1254,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PostCustomerRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PostCustomerRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostCustomerRequest), merchantConfig)); // Return statement
+                (PostCustomerRequest) ApiClient.Deserialize(localVarResponse, typeof(PostCustomerRequest))); // Return statement
         }
     }
 }

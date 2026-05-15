@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -39,7 +38,7 @@ namespace CyberSource.Api
         /// <param name="instrumentIdentifierId">The Id of an Instrument Identifier.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns></returns>
-        void DeleteInstrumentIdentifier (string instrumentIdentifierId, string profileId = null);
+        void DeleteInstrumentIdentifier(string instrumentIdentifierId, string profileId = null);
 
         /// <summary>
         /// Delete an Instrument Identifier
@@ -51,7 +50,7 @@ namespace CyberSource.Api
         /// <param name="instrumentIdentifierId">The Id of an Instrument Identifier.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> DeleteInstrumentIdentifierWithHttpInfo (string instrumentIdentifierId, string profileId = null);
+        ApiResponse<Object> DeleteInstrumentIdentifierWithHttpInfo(string instrumentIdentifierId, string profileId = null);
         /// <summary>
         /// Retrieve an Instrument Identifier
         /// </summary>
@@ -63,7 +62,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>PostInstrumentIdentifierRequest</returns>
-        PostInstrumentIdentifierRequest GetInstrumentIdentifier (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null);
+        PostInstrumentIdentifierRequest GetInstrumentIdentifier(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null);
 
         /// <summary>
         /// Retrieve an Instrument Identifier
@@ -76,7 +75,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>ApiResponse of PostInstrumentIdentifierRequest</returns>
-        ApiResponse<PostInstrumentIdentifierRequest> GetInstrumentIdentifierWithHttpInfo (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null);
+        ApiResponse<PostInstrumentIdentifierRequest> GetInstrumentIdentifierWithHttpInfo(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null);
         /// <summary>
         /// List Payment Instruments for an Instrument Identifier
         /// </summary>
@@ -89,8 +88,8 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
-        /// <returns>PaymentInstrumentList1</returns>
-        PaymentInstrumentList1 GetInstrumentIdentifierPaymentInstrumentsList (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null);
+        /// <returns>PaymentInstrumentList</returns>
+        PaymentInstrumentList GetInstrumentIdentifierPaymentInstrumentsList(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null);
 
         /// <summary>
         /// List Payment Instruments for an Instrument Identifier
@@ -104,8 +103,8 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
-        /// <returns>ApiResponse of PaymentInstrumentList1</returns>
-        ApiResponse<PaymentInstrumentList1> GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null);
+        /// <returns>ApiResponse of PaymentInstrumentList</returns>
+        ApiResponse<PaymentInstrumentList> GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null);
         /// <summary>
         /// Update an Instrument Identifier
         /// </summary>
@@ -119,7 +118,7 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>PatchInstrumentIdentifierRequest</returns>
-        PatchInstrumentIdentifierRequest PatchInstrumentIdentifier (string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null);
+        PatchInstrumentIdentifierRequest PatchInstrumentIdentifier(string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null);
 
         /// <summary>
         /// Update an Instrument Identifier
@@ -134,7 +133,7 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>ApiResponse of PatchInstrumentIdentifierRequest</returns>
-        ApiResponse<PatchInstrumentIdentifierRequest> PatchInstrumentIdentifierWithHttpInfo (string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null);
+        ApiResponse<PatchInstrumentIdentifierRequest> PatchInstrumentIdentifierWithHttpInfo(string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null);
         /// <summary>
         /// Create an Instrument Identifier
         /// </summary>
@@ -146,7 +145,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>PostInstrumentIdentifierRequest</returns>
-        PostInstrumentIdentifierRequest PostInstrumentIdentifier (PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null);
+        PostInstrumentIdentifierRequest PostInstrumentIdentifier(PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null);
 
         /// <summary>
         /// Create an Instrument Identifier
@@ -159,7 +158,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>ApiResponse of PostInstrumentIdentifierRequest</returns>
-        ApiResponse<PostInstrumentIdentifierRequest> PostInstrumentIdentifierWithHttpInfo (PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null);
+        ApiResponse<PostInstrumentIdentifierRequest> PostInstrumentIdentifierWithHttpInfo(PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null);
         /// <summary>
         /// Enroll an Instrument Identifier for Payment Network Token
         /// </summary>
@@ -171,7 +170,7 @@ namespace CyberSource.Api
         /// <param name="postInstrumentIdentifierEnrollmentRequest">Specify Enrollable Card details</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns></returns>
-        void PostInstrumentIdentifierEnrollment (string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null);
+        void PostInstrumentIdentifierEnrollment(string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null);
 
         /// <summary>
         /// Enroll an Instrument Identifier for Payment Network Token
@@ -184,7 +183,7 @@ namespace CyberSource.Api
         /// <param name="postInstrumentIdentifierEnrollmentRequest">Specify Enrollable Card details</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> PostInstrumentIdentifierEnrollmentWithHttpInfo (string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null);
+        ApiResponse<Object> PostInstrumentIdentifierEnrollmentWithHttpInfo(string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -197,7 +196,7 @@ namespace CyberSource.Api
         /// <param name="instrumentIdentifierId">The Id of an Instrument Identifier.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task DeleteInstrumentIdentifierAsync (string instrumentIdentifierId, string profileId = null);
+        System.Threading.Tasks.Task DeleteInstrumentIdentifierAsync(string instrumentIdentifierId, string profileId = null);
 
         /// <summary>
         /// Delete an Instrument Identifier
@@ -209,7 +208,7 @@ namespace CyberSource.Api
         /// <param name="instrumentIdentifierId">The Id of an Instrument Identifier.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteInstrumentIdentifierAsyncWithHttpInfo (string instrumentIdentifierId, string profileId = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> DeleteInstrumentIdentifierAsyncWithHttpInfo(string instrumentIdentifierId, string profileId = null);
         /// <summary>
         /// Retrieve an Instrument Identifier
         /// </summary>
@@ -221,7 +220,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>Task of PostInstrumentIdentifierRequest</returns>
-        System.Threading.Tasks.Task<PostInstrumentIdentifierRequest> GetInstrumentIdentifierAsync (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null);
+        System.Threading.Tasks.Task<PostInstrumentIdentifierRequest> GetInstrumentIdentifierAsync(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null);
 
         /// <summary>
         /// Retrieve an Instrument Identifier
@@ -234,7 +233,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>Task of ApiResponse (PostInstrumentIdentifierRequest)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PostInstrumentIdentifierRequest>> GetInstrumentIdentifierAsyncWithHttpInfo (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null);
+        System.Threading.Tasks.Task<ApiResponse<PostInstrumentIdentifierRequest>> GetInstrumentIdentifierAsyncWithHttpInfo(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null);
         /// <summary>
         /// List Payment Instruments for an Instrument Identifier
         /// </summary>
@@ -247,8 +246,8 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
-        /// <returns>Task of PaymentInstrumentList1</returns>
-        System.Threading.Tasks.Task<PaymentInstrumentList1> GetInstrumentIdentifierPaymentInstrumentsListAsync (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null);
+        /// <returns>Task of PaymentInstrumentList</returns>
+        System.Threading.Tasks.Task<PaymentInstrumentList> GetInstrumentIdentifierPaymentInstrumentsListAsync(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null);
 
         /// <summary>
         /// List Payment Instruments for an Instrument Identifier
@@ -262,8 +261,8 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
-        /// <returns>Task of ApiResponse (PaymentInstrumentList1)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PaymentInstrumentList1>> GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null);
+        /// <returns>Task of ApiResponse (PaymentInstrumentList)</returns>
+        System.Threading.Tasks.Task<ApiResponse<PaymentInstrumentList>> GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null);
         /// <summary>
         /// Update an Instrument Identifier
         /// </summary>
@@ -277,7 +276,7 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of PatchInstrumentIdentifierRequest</returns>
-        System.Threading.Tasks.Task<PatchInstrumentIdentifierRequest> PatchInstrumentIdentifierAsync (string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null);
+        System.Threading.Tasks.Task<PatchInstrumentIdentifierRequest> PatchInstrumentIdentifierAsync(string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null);
 
         /// <summary>
         /// Update an Instrument Identifier
@@ -292,7 +291,7 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of ApiResponse (PatchInstrumentIdentifierRequest)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PatchInstrumentIdentifierRequest>> PatchInstrumentIdentifierAsyncWithHttpInfo (string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null);
+        System.Threading.Tasks.Task<ApiResponse<PatchInstrumentIdentifierRequest>> PatchInstrumentIdentifierAsyncWithHttpInfo(string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null);
         /// <summary>
         /// Create an Instrument Identifier
         /// </summary>
@@ -304,7 +303,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>Task of PostInstrumentIdentifierRequest</returns>
-        System.Threading.Tasks.Task<PostInstrumentIdentifierRequest> PostInstrumentIdentifierAsync (PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null);
+        System.Threading.Tasks.Task<PostInstrumentIdentifierRequest> PostInstrumentIdentifierAsync(PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null);
 
         /// <summary>
         /// Create an Instrument Identifier
@@ -317,7 +316,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>Task of ApiResponse (PostInstrumentIdentifierRequest)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PostInstrumentIdentifierRequest>> PostInstrumentIdentifierAsyncWithHttpInfo (PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null);
+        System.Threading.Tasks.Task<ApiResponse<PostInstrumentIdentifierRequest>> PostInstrumentIdentifierAsyncWithHttpInfo(PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null);
         /// <summary>
         /// Enroll an Instrument Identifier for Payment Network Token
         /// </summary>
@@ -329,7 +328,7 @@ namespace CyberSource.Api
         /// <param name="postInstrumentIdentifierEnrollmentRequest">Specify Enrollable Card details</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task PostInstrumentIdentifierEnrollmentAsync (string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null);
+        System.Threading.Tasks.Task PostInstrumentIdentifierEnrollmentAsync(string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null);
 
         /// <summary>
         /// Enroll an Instrument Identifier for Payment Network Token
@@ -342,145 +341,31 @@ namespace CyberSource.Api
         /// <param name="postInstrumentIdentifierEnrollmentRequest">Specify Enrollable Card details</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo (string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null);
+        System.Threading.Tasks.Task<ApiResponse<Object>> PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo(string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class InstrumentIdentifierApi : IInstrumentIdentifierApi
+    public partial class InstrumentIdentifierApi : ApiBase, IInstrumentIdentifierApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="InstrumentIdentifierApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public InstrumentIdentifierApi(string basePath)
+        public InstrumentIdentifierApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InstrumentIdentifierApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public InstrumentIdentifierApi(Configuration configuration = null)
+        public InstrumentIdentifierApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -490,7 +375,7 @@ namespace CyberSource.Api
         /// <param name="instrumentIdentifierId">The Id of an Instrument Identifier.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns></returns>
-        public void DeleteInstrumentIdentifier (string instrumentIdentifierId, string profileId = null)
+        public void DeleteInstrumentIdentifier(string instrumentIdentifierId, string profileId = null)
         {
             logger.Debug("CALLING API \"DeleteInstrumentIdentifier\" STARTED");
             this.SetStatusCode(null);
@@ -504,7 +389,7 @@ namespace CyberSource.Api
         /// <param name="instrumentIdentifierId">The Id of an Instrument Identifier.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> DeleteInstrumentIdentifierWithHttpInfo (string instrumentIdentifierId, string profileId = null)
+        public ApiResponse<Object> DeleteInstrumentIdentifierWithHttpInfo(string instrumentIdentifierId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -518,7 +403,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers/{instrumentIdentifierId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -527,13 +412,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -541,13 +426,15 @@ namespace CyberSource.Api
 
             if (instrumentIdentifierId != null)
             {
-                localVarPathParams.Add("instrumentIdentifierId", Configuration.ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
+                localVarPathParams.Add("instrumentIdentifierId", ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (Method.Delete == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -556,20 +443,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "DeleteInstrumentIdentifier,DeleteInstrumentIdentifierAsync,DeleteInstrumentIdentifierWithHttpInfo,DeleteInstrumentIdentifierAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "DeleteInstrumentIdentifier,DeleteInstrumentIdentifierAsync,DeleteInstrumentIdentifierWithHttpInfo,DeleteInstrumentIdentifierAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -578,12 +466,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "DeleteInstrumentIdentifier,DeleteInstrumentIdentifierAsync,DeleteInstrumentIdentifierWithHttpInfo,DeleteInstrumentIdentifierAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "DeleteInstrumentIdentifier,DeleteInstrumentIdentifierAsync,DeleteInstrumentIdentifierWithHttpInfo,DeleteInstrumentIdentifierAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -612,7 +499,7 @@ namespace CyberSource.Api
         /// <param name="instrumentIdentifierId">The Id of an Instrument Identifier.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task DeleteInstrumentIdentifierAsync (string instrumentIdentifierId, string profileId = null)
+        public async Task DeleteInstrumentIdentifierAsync(string instrumentIdentifierId, string profileId = null)
         {
             logger.Debug("CALLING API \"DeleteInstrumentIdentifierAsync\" STARTED");
             this.SetStatusCode(null);
@@ -627,7 +514,7 @@ namespace CyberSource.Api
         /// <param name="instrumentIdentifierId">The Id of an Instrument Identifier.</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> DeleteInstrumentIdentifierAsyncWithHttpInfo (string instrumentIdentifierId, string profileId = null)
+        public async Task<ApiResponse<Object>> DeleteInstrumentIdentifierAsyncWithHttpInfo(string instrumentIdentifierId, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -641,7 +528,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers/{instrumentIdentifierId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -650,13 +537,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -664,13 +551,15 @@ namespace CyberSource.Api
 
             if (instrumentIdentifierId != null)
             {
-                localVarPathParams.Add("instrumentIdentifierId", Configuration.ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
+                localVarPathParams.Add("instrumentIdentifierId", ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (Method.Delete == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -679,20 +568,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "DeleteInstrumentIdentifier,DeleteInstrumentIdentifierAsync,DeleteInstrumentIdentifierWithHttpInfo,DeleteInstrumentIdentifierAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "DeleteInstrumentIdentifier,DeleteInstrumentIdentifierAsync,DeleteInstrumentIdentifierWithHttpInfo,DeleteInstrumentIdentifierAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -701,16 +590,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "DeleteInstrumentIdentifier,DeleteInstrumentIdentifierAsync,DeleteInstrumentIdentifierWithHttpInfo,DeleteInstrumentIdentifierAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "DeleteInstrumentIdentifier,DeleteInstrumentIdentifierAsync,DeleteInstrumentIdentifierWithHttpInfo,DeleteInstrumentIdentifierAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Delete, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -735,7 +623,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>PostInstrumentIdentifierRequest</returns>
-        public PostInstrumentIdentifierRequest GetInstrumentIdentifier (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null)
+        public PostInstrumentIdentifierRequest GetInstrumentIdentifier(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null)
         {
             logger.Debug("CALLING API \"GetInstrumentIdentifier\" STARTED");
             this.SetStatusCode(null);
@@ -753,7 +641,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>ApiResponse of PostInstrumentIdentifierRequest</returns>
-        public ApiResponse< PostInstrumentIdentifierRequest > GetInstrumentIdentifierWithHttpInfo (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null)
+        public ApiResponse< PostInstrumentIdentifierRequest > GetInstrumentIdentifierWithHttpInfo(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -767,7 +655,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers/{instrumentIdentifierId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -776,13 +664,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -790,18 +678,21 @@ namespace CyberSource.Api
 
             if (instrumentIdentifierId != null)
             {
-                localVarPathParams.Add("instrumentIdentifierId", Configuration.ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
+                localVarPathParams.Add("instrumentIdentifierId", ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (retrieveBinDetails != null)
             {
-                localVarQueryParams.Add("retrieveBinDetails", Configuration.ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
+                localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -810,20 +701,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetInstrumentIdentifier,GetInstrumentIdentifierAsync,GetInstrumentIdentifierWithHttpInfo,GetInstrumentIdentifierAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetInstrumentIdentifier,GetInstrumentIdentifierAsync,GetInstrumentIdentifierWithHttpInfo,GetInstrumentIdentifierAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -832,12 +724,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetInstrumentIdentifier,GetInstrumentIdentifierAsync,GetInstrumentIdentifierWithHttpInfo,GetInstrumentIdentifierAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetInstrumentIdentifier,GetInstrumentIdentifierAsync,GetInstrumentIdentifierWithHttpInfo,GetInstrumentIdentifierAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -855,7 +746,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PostInstrumentIdentifierRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PostInstrumentIdentifierRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostInstrumentIdentifierRequest),merchantConfig)); // Return statement
+                (PostInstrumentIdentifierRequest) ApiClient.Deserialize(localVarResponse, typeof(PostInstrumentIdentifierRequest))); // Return statement
         }
 
         /// <summary>
@@ -866,7 +757,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>Task of PostInstrumentIdentifierRequest</returns>
-        public async System.Threading.Tasks.Task<PostInstrumentIdentifierRequest> GetInstrumentIdentifierAsync (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null)
+        public async Task<PostInstrumentIdentifierRequest> GetInstrumentIdentifierAsync(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null)
         {
             logger.Debug("CALLING API \"GetInstrumentIdentifierAsync\" STARTED");
             this.SetStatusCode(null);
@@ -885,7 +776,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>Task of ApiResponse (PostInstrumentIdentifierRequest)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PostInstrumentIdentifierRequest>> GetInstrumentIdentifierAsyncWithHttpInfo (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null)
+        public async Task<ApiResponse<PostInstrumentIdentifierRequest>> GetInstrumentIdentifierAsyncWithHttpInfo(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -899,7 +790,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers/{instrumentIdentifierId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -908,13 +799,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -922,18 +813,21 @@ namespace CyberSource.Api
 
             if (instrumentIdentifierId != null)
             {
-                localVarPathParams.Add("instrumentIdentifierId", Configuration.ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
+                localVarPathParams.Add("instrumentIdentifierId", ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (retrieveBinDetails != null)
             {
-                localVarQueryParams.Add("retrieveBinDetails", Configuration.ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
+                localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -942,20 +836,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetInstrumentIdentifier,GetInstrumentIdentifierAsync,GetInstrumentIdentifierWithHttpInfo,GetInstrumentIdentifierAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetInstrumentIdentifier,GetInstrumentIdentifierAsync,GetInstrumentIdentifierWithHttpInfo,GetInstrumentIdentifierAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -964,16 +858,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetInstrumentIdentifier,GetInstrumentIdentifierAsync,GetInstrumentIdentifierWithHttpInfo,GetInstrumentIdentifierAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetInstrumentIdentifier,GetInstrumentIdentifierAsync,GetInstrumentIdentifierWithHttpInfo,GetInstrumentIdentifierAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -987,7 +880,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PostInstrumentIdentifierRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PostInstrumentIdentifierRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostInstrumentIdentifierRequest), merchantConfig)); // Return statement
+                (PostInstrumentIdentifierRequest) ApiClient.Deserialize(localVarResponse, typeof(PostInstrumentIdentifierRequest))); // Return statement
         }
         /// <summary>
         /// List Payment Instruments for an Instrument Identifier |  |  |  | | - -- | - -- | - -- | |**Instrument Identifiers**&lt;br&gt;An Instrument Identifier represents either a card number, or in the case of an ACH bank account, the routing &lt;br&gt;and account numbers.&lt;br&gt;The same token Id is returned for a specific card number or bank account &amp; routing number allowing the &lt;br&gt;Instrument Identifier Id to be used for cross-channel payment tracking.&lt;br&gt;An Instrument Identifier can exist independently but also be associated with a [Customer Payment Instrument](#token-management_customer-payment-instrument_create-a-customer-payment-instrument) &lt;br&gt;or [Standalone Payment Instrument](#token-management_payment-instrument_create-a-payment-instrument).|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Retrieving all Payment Instruments associated with an Instrument Identifier**&lt;br&gt;Your system can use this API to retrieve all Payment Instruments linked to an Instrument Identifier. 
@@ -998,12 +891,12 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
-        /// <returns>PaymentInstrumentList1</returns>
-        public PaymentInstrumentList1 GetInstrumentIdentifierPaymentInstrumentsList (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null)
+        /// <returns>PaymentInstrumentList</returns>
+        public PaymentInstrumentList GetInstrumentIdentifierPaymentInstrumentsList(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null)
         {
             logger.Debug("CALLING API \"GetInstrumentIdentifierPaymentInstrumentsList\" STARTED");
             this.SetStatusCode(null);
-            ApiResponse<PaymentInstrumentList1> localVarResponse = GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo(instrumentIdentifierId, profileId, retrieveBinDetails, offset, limit);
+            ApiResponse<PaymentInstrumentList> localVarResponse = GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo(instrumentIdentifierId, profileId, retrieveBinDetails, offset, limit);
             logger.Debug("CALLING API \"GetInstrumentIdentifierPaymentInstrumentsList\" ENDED");
             this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
@@ -1018,8 +911,8 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
-        /// <returns>ApiResponse of PaymentInstrumentList1</returns>
-        public ApiResponse< PaymentInstrumentList1 > GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null)
+        /// <returns>ApiResponse of PaymentInstrumentList</returns>
+        public ApiResponse< PaymentInstrumentList > GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1033,7 +926,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers/{instrumentIdentifierId}/paymentinstruments";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1042,13 +935,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1056,28 +949,33 @@ namespace CyberSource.Api
 
             if (instrumentIdentifierId != null)
             {
-                localVarPathParams.Add("instrumentIdentifierId", Configuration.ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
+                localVarPathParams.Add("instrumentIdentifierId", ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (retrieveBinDetails != null)
             {
-                localVarQueryParams.Add("retrieveBinDetails", Configuration.ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
+                localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (offset != null)
             {
-                localVarQueryParams.Add("offset", Configuration.ApiClient.ParameterToString(offset)); // query parameter
+                localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (limit != null)
             {
-                localVarQueryParams.Add("limit", Configuration.ApiClient.ParameterToString(limit)); // query parameter
+                localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1086,20 +984,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetInstrumentIdentifierPaymentInstrumentsList,GetInstrumentIdentifierPaymentInstrumentsListAsync,GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo,GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetInstrumentIdentifierPaymentInstrumentsList,GetInstrumentIdentifierPaymentInstrumentsListAsync,GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo,GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1108,12 +1007,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetInstrumentIdentifierPaymentInstrumentsList,GetInstrumentIdentifierPaymentInstrumentsListAsync,GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo,GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetInstrumentIdentifierPaymentInstrumentsList,GetInstrumentIdentifierPaymentInstrumentsListAsync,GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo,GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1129,9 +1027,9 @@ namespace CyberSource.Api
                 }
             }
 
-            return new ApiResponse<PaymentInstrumentList1>(localVarStatusCode,
+            return new ApiResponse<PaymentInstrumentList>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PaymentInstrumentList1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PaymentInstrumentList1),merchantConfig)); // Return statement
+                (PaymentInstrumentList) ApiClient.Deserialize(localVarResponse, typeof(PaymentInstrumentList))); // Return statement
         }
 
         /// <summary>
@@ -1143,12 +1041,12 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
-        /// <returns>Task of PaymentInstrumentList1</returns>
-        public async System.Threading.Tasks.Task<PaymentInstrumentList1> GetInstrumentIdentifierPaymentInstrumentsListAsync (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null)
+        /// <returns>Task of PaymentInstrumentList</returns>
+        public async Task<PaymentInstrumentList> GetInstrumentIdentifierPaymentInstrumentsListAsync(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null)
         {
             logger.Debug("CALLING API \"GetInstrumentIdentifierPaymentInstrumentsListAsync\" STARTED");
             this.SetStatusCode(null);
-            ApiResponse<PaymentInstrumentList1> localVarResponse = await GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo(instrumentIdentifierId, profileId, retrieveBinDetails, offset, limit);
+            ApiResponse<PaymentInstrumentList> localVarResponse = await GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo(instrumentIdentifierId, profileId, retrieveBinDetails, offset, limit);
             logger.Debug("CALLING API \"GetInstrumentIdentifierPaymentInstrumentsListAsync\" ENDED");
             this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
@@ -1164,8 +1062,8 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="offset">Starting record in zero-based dataset that should be returned as the first object in the array. Default is 0. (optional, default to 0)</param>
         /// <param name="limit">The maximum number that can be returned in the array starting from the offset record in zero-based dataset. Default is 20, maximum is 100. (optional, default to 20)</param>
-        /// <returns>Task of ApiResponse (PaymentInstrumentList1)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PaymentInstrumentList1>> GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo (string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null)
+        /// <returns>Task of ApiResponse (PaymentInstrumentList)</returns>
+        public async Task<ApiResponse<PaymentInstrumentList>> GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo(string instrumentIdentifierId, string profileId = null, bool? retrieveBinDetails = null, long? offset = null, long? limit = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1179,7 +1077,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers/{instrumentIdentifierId}/paymentinstruments";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1188,13 +1086,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1202,28 +1100,33 @@ namespace CyberSource.Api
 
             if (instrumentIdentifierId != null)
             {
-                localVarPathParams.Add("instrumentIdentifierId", Configuration.ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
+                localVarPathParams.Add("instrumentIdentifierId", ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (retrieveBinDetails != null)
             {
-                localVarQueryParams.Add("retrieveBinDetails", Configuration.ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
+                localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (offset != null)
             {
-                localVarQueryParams.Add("offset", Configuration.ApiClient.ParameterToString(offset)); // query parameter
+                localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (limit != null)
             {
-                localVarQueryParams.Add("limit", Configuration.ApiClient.ParameterToString(limit)); // query parameter
+                localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1232,20 +1135,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetInstrumentIdentifierPaymentInstrumentsList,GetInstrumentIdentifierPaymentInstrumentsListAsync,GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo,GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetInstrumentIdentifierPaymentInstrumentsList,GetInstrumentIdentifierPaymentInstrumentsListAsync,GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo,GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1254,16 +1157,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetInstrumentIdentifierPaymentInstrumentsList,GetInstrumentIdentifierPaymentInstrumentsListAsync,GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo,GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetInstrumentIdentifierPaymentInstrumentsList,GetInstrumentIdentifierPaymentInstrumentsListAsync,GetInstrumentIdentifierPaymentInstrumentsListWithHttpInfo,GetInstrumentIdentifierPaymentInstrumentsListAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1275,9 +1177,9 @@ namespace CyberSource.Api
                 }
             }
 
-            return new ApiResponse<PaymentInstrumentList1>(localVarStatusCode,
+            return new ApiResponse<PaymentInstrumentList>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PaymentInstrumentList1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PaymentInstrumentList1), merchantConfig)); // Return statement
+                (PaymentInstrumentList) ApiClient.Deserialize(localVarResponse, typeof(PaymentInstrumentList))); // Return statement
         }
         /// <summary>
         /// Update an Instrument Identifier |  |  |  | | - -- | - -- | - -- | |**Instrument Identifiers**&lt;br&gt;An Instrument Identifier represents either a card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;The same token Id is returned for a specific card number or bank account &amp; routing number allowing the Instrument Identifier Id to be used for cross-channel payment tracking.&lt;br&gt;An Instrument Identifier can exist independently but also be associated with a [Customer Payment Instrument](#token-management_customer-payment-instrument_create-a-customer-payment-instrument) or [Standalone Payment Instrument](#token-management_payment-instrument_create-a-payment-instrument).|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Updating an Instrument Identifier**&lt;br&gt;When an Instrument Identifier is used in a payment the **_previousTransactionId_** and **_originalAuthorizedAmount_** values are automatically recorded.&lt;br&gt;These values will be added for you to future Merchant Initiated Transaction payments.&lt;br&gt;Your system can use this API to update these values. 
@@ -1289,7 +1191,7 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>PatchInstrumentIdentifierRequest</returns>
-        public PatchInstrumentIdentifierRequest PatchInstrumentIdentifier (string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null)
+        public PatchInstrumentIdentifierRequest PatchInstrumentIdentifier(string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null)
         {
             logger.Debug("CALLING API \"PatchInstrumentIdentifier\" STARTED");
             this.SetStatusCode(null);
@@ -1309,7 +1211,7 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>ApiResponse of PatchInstrumentIdentifierRequest</returns>
-        public ApiResponse< PatchInstrumentIdentifierRequest > PatchInstrumentIdentifierWithHttpInfo (string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null)
+        public ApiResponse< PatchInstrumentIdentifierRequest > PatchInstrumentIdentifierWithHttpInfo(string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1329,7 +1231,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers/{instrumentIdentifierId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1338,13 +1240,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1352,40 +1254,44 @@ namespace CyberSource.Api
 
             if (instrumentIdentifierId != null)
             {
-                localVarPathParams.Add("instrumentIdentifierId", Configuration.ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
+                localVarPathParams.Add("instrumentIdentifierId", ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (retrieveBinDetails != null)
             {
-                localVarQueryParams.Add("retrieveBinDetails", Configuration.ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
+                localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (ifMatch != null)
             {
-                localVarHeaderParams.Add("if-match", Configuration.ApiClient.ParameterToString(ifMatch)); // header parameter
+                localVarHeaderParams.Add("if-match", ApiClient.ParameterToString(ifMatch)); // header parameter
             }
+
             if (patchInstrumentIdentifierRequest != null && patchInstrumentIdentifierRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                patchInstrumentIdentifierRequest = (PatchInstrumentIdentifierRequest)sdkTracker.InsertDeveloperIdTracker(patchInstrumentIdentifierRequest, patchInstrumentIdentifierRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(patchInstrumentIdentifierRequest); // http body (model) parameter
+                patchInstrumentIdentifierRequest = (PatchInstrumentIdentifierRequest)sdkTracker.InsertDeveloperIdTracker(patchInstrumentIdentifierRequest, patchInstrumentIdentifierRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(patchInstrumentIdentifierRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = patchInstrumentIdentifierRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PatchInstrumentIdentifier,PatchInstrumentIdentifierAsync,PatchInstrumentIdentifierWithHttpInfo,PatchInstrumentIdentifierAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PatchInstrumentIdentifier,PatchInstrumentIdentifierAsync,PatchInstrumentIdentifierWithHttpInfo,PatchInstrumentIdentifierAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1394,13 +1300,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PatchInstrumentIdentifier,PatchInstrumentIdentifierAsync,PatchInstrumentIdentifierWithHttpInfo,PatchInstrumentIdentifierAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PatchInstrumentIdentifier,PatchInstrumentIdentifierAsync,PatchInstrumentIdentifierWithHttpInfo,PatchInstrumentIdentifierAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1418,7 +1324,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PatchInstrumentIdentifierRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PatchInstrumentIdentifierRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PatchInstrumentIdentifierRequest),merchantConfig)); // Return statement
+                (PatchInstrumentIdentifierRequest) ApiClient.Deserialize(localVarResponse, typeof(PatchInstrumentIdentifierRequest))); // Return statement
         }
 
         /// <summary>
@@ -1431,7 +1337,7 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of PatchInstrumentIdentifierRequest</returns>
-        public async System.Threading.Tasks.Task<PatchInstrumentIdentifierRequest> PatchInstrumentIdentifierAsync (string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null)
+        public async Task<PatchInstrumentIdentifierRequest> PatchInstrumentIdentifierAsync(string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null)
         {
             logger.Debug("CALLING API \"PatchInstrumentIdentifierAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1452,7 +1358,7 @@ namespace CyberSource.Api
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <param name="ifMatch">Contains an ETag value from a GET request to make the request conditional. (optional)</param>
         /// <returns>Task of ApiResponse (PatchInstrumentIdentifierRequest)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PatchInstrumentIdentifierRequest>> PatchInstrumentIdentifierAsyncWithHttpInfo (string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null)
+        public async Task<ApiResponse<PatchInstrumentIdentifierRequest>> PatchInstrumentIdentifierAsyncWithHttpInfo(string instrumentIdentifierId, PatchInstrumentIdentifierRequest patchInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null, string ifMatch = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1472,7 +1378,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers/{instrumentIdentifierId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1481,13 +1387,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1495,40 +1401,44 @@ namespace CyberSource.Api
 
             if (instrumentIdentifierId != null)
             {
-                localVarPathParams.Add("instrumentIdentifierId", Configuration.ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
+                localVarPathParams.Add("instrumentIdentifierId", ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (retrieveBinDetails != null)
             {
-                localVarQueryParams.Add("retrieveBinDetails", Configuration.ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
+                localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (ifMatch != null)
             {
-                localVarHeaderParams.Add("if-match", Configuration.ApiClient.ParameterToString(ifMatch)); // header parameter
+                localVarHeaderParams.Add("if-match", ApiClient.ParameterToString(ifMatch)); // header parameter
             }
+
             if (patchInstrumentIdentifierRequest != null && patchInstrumentIdentifierRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                patchInstrumentIdentifierRequest = (PatchInstrumentIdentifierRequest)sdkTracker.InsertDeveloperIdTracker(patchInstrumentIdentifierRequest, patchInstrumentIdentifierRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(patchInstrumentIdentifierRequest); // http body (model) parameter
+                patchInstrumentIdentifierRequest = (PatchInstrumentIdentifierRequest)sdkTracker.InsertDeveloperIdTracker(patchInstrumentIdentifierRequest, patchInstrumentIdentifierRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(patchInstrumentIdentifierRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = patchInstrumentIdentifierRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PatchInstrumentIdentifier,PatchInstrumentIdentifierAsync,PatchInstrumentIdentifierWithHttpInfo,PatchInstrumentIdentifierAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PatchInstrumentIdentifier,PatchInstrumentIdentifierAsync,PatchInstrumentIdentifierWithHttpInfo,PatchInstrumentIdentifierAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1537,17 +1447,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PatchInstrumentIdentifier,PatchInstrumentIdentifierAsync,PatchInstrumentIdentifierWithHttpInfo,PatchInstrumentIdentifierAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PatchInstrumentIdentifier,PatchInstrumentIdentifierAsync,PatchInstrumentIdentifierWithHttpInfo,PatchInstrumentIdentifierAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1561,7 +1471,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PatchInstrumentIdentifierRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PatchInstrumentIdentifierRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PatchInstrumentIdentifierRequest), merchantConfig)); // Return statement
+                (PatchInstrumentIdentifierRequest) ApiClient.Deserialize(localVarResponse, typeof(PatchInstrumentIdentifierRequest))); // Return statement
         }
         /// <summary>
         /// Create an Instrument Identifier |  |  |  | | - -- | - -- | - -- | |**Instrument Identifiers**&lt;br&gt;An Instrument Identifier represents either a card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;The same token Id is returned for a specific card number or bank account &amp; routing number allowing the Instrument Identifier Id to be used for cross-channel payment tracking.&lt;br&gt;An Instrument Identifier can exist independently but also be associated with a [Customer Payment Instrument](#token-management_customer-payment-instrument_create-a-customer-payment-instrument) or [Standalone Payment Instrument](#token-management_payment-instrument_create-a-payment-instrument).&lt;br&gt;&lt;br&gt;**Creating an Instrument Identifier**&lt;br&gt;It is recommended you [create an Instrument Identifier via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-with-instrument-identifier-token-creation_liveconsole-tab-request-body), this can be for a zero amount.&lt;br&gt;An Instrument Identifier will also be created if you [create a Customer via a Payment Authorization](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-with-customer-token-creation_liveconsole-tab-request-body)&lt;br&gt;In Europe: You should perform Payer Authentication alongside the Authorization.|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Payment Network Tokens**&lt;br&gt;Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.&lt;br&gt;A Payment Network Token will be automatically created and used in future payments if you are enabled for the service.&lt;br&gt;A Payment Network Token can also be [provisioned for an existing Instrument Identifier](#token-management_instrument-identifier_enroll-an-instrument-identifier-for-payment-network-token).&lt;br&gt;For more information about Payment Network Tokens see the Developer Guide.&lt;br&gt;&lt;br&gt;**Payments with Instrument Identifiers**&lt;br&gt;To perform a payment with an Instrument Identifier simply specify the [Instrument Identifier Id in the payments request along with the expiration date, card type, &amp; billing address](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-using-tokens_authorization-with-instrument-identifier-token-id_liveconsole-tab-request-body).&lt;br&gt;When an Instrument Identifier is used in a payment the **_previousTransactionId_** and **_originalAuthorizedAmount_** values are automatically recorded.&lt;br&gt;These values will be added for you to future Merchant Initiated Transaction payments. 
@@ -1571,7 +1481,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>PostInstrumentIdentifierRequest</returns>
-        public PostInstrumentIdentifierRequest PostInstrumentIdentifier (PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null)
+        public PostInstrumentIdentifierRequest PostInstrumentIdentifier(PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null)
         {
             logger.Debug("CALLING API \"PostInstrumentIdentifier\" STARTED");
             this.SetStatusCode(null);
@@ -1589,7 +1499,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>ApiResponse of PostInstrumentIdentifierRequest</returns>
-        public ApiResponse< PostInstrumentIdentifierRequest > PostInstrumentIdentifierWithHttpInfo (PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null)
+        public ApiResponse< PostInstrumentIdentifierRequest > PostInstrumentIdentifierWithHttpInfo(PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1603,7 +1513,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1612,13 +1522,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1626,31 +1536,33 @@ namespace CyberSource.Api
 
             if (retrieveBinDetails != null)
             {
-                localVarQueryParams.Add("retrieveBinDetails", Configuration.ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
+                localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (postInstrumentIdentifierRequest != null && postInstrumentIdentifierRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                postInstrumentIdentifierRequest = (PostInstrumentIdentifierRequest)sdkTracker.InsertDeveloperIdTracker(postInstrumentIdentifierRequest, postInstrumentIdentifierRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(postInstrumentIdentifierRequest); // http body (model) parameter
+                postInstrumentIdentifierRequest = (PostInstrumentIdentifierRequest)sdkTracker.InsertDeveloperIdTracker(postInstrumentIdentifierRequest, postInstrumentIdentifierRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(postInstrumentIdentifierRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = postInstrumentIdentifierRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostInstrumentIdentifier,PostInstrumentIdentifierAsync,PostInstrumentIdentifierWithHttpInfo,PostInstrumentIdentifierAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PostInstrumentIdentifier,PostInstrumentIdentifierAsync,PostInstrumentIdentifierWithHttpInfo,PostInstrumentIdentifierAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1659,13 +1571,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PostInstrumentIdentifier,PostInstrumentIdentifierAsync,PostInstrumentIdentifierWithHttpInfo,PostInstrumentIdentifierAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PostInstrumentIdentifier,PostInstrumentIdentifierAsync,PostInstrumentIdentifierWithHttpInfo,PostInstrumentIdentifierAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1683,7 +1595,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PostInstrumentIdentifierRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PostInstrumentIdentifierRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostInstrumentIdentifierRequest),merchantConfig)); // Return statement
+                (PostInstrumentIdentifierRequest) ApiClient.Deserialize(localVarResponse, typeof(PostInstrumentIdentifierRequest))); // Return statement
         }
 
         /// <summary>
@@ -1694,7 +1606,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>Task of PostInstrumentIdentifierRequest</returns>
-        public async System.Threading.Tasks.Task<PostInstrumentIdentifierRequest> PostInstrumentIdentifierAsync (PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null)
+        public async Task<PostInstrumentIdentifierRequest> PostInstrumentIdentifierAsync(PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null)
         {
             logger.Debug("CALLING API \"PostInstrumentIdentifierAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1713,7 +1625,7 @@ namespace CyberSource.Api
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <param name="retrieveBinDetails">Retrieve the Bin Details of PAN or network token (optional)</param>
         /// <returns>Task of ApiResponse (PostInstrumentIdentifierRequest)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PostInstrumentIdentifierRequest>> PostInstrumentIdentifierAsyncWithHttpInfo (PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null)
+        public async Task<ApiResponse<PostInstrumentIdentifierRequest>> PostInstrumentIdentifierAsyncWithHttpInfo(PostInstrumentIdentifierRequest postInstrumentIdentifierRequest, string profileId = null, bool? retrieveBinDetails = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1727,7 +1639,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1736,13 +1648,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1750,31 +1662,33 @@ namespace CyberSource.Api
 
             if (retrieveBinDetails != null)
             {
-                localVarQueryParams.Add("retrieveBinDetails", Configuration.ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
+                localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (postInstrumentIdentifierRequest != null && postInstrumentIdentifierRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                postInstrumentIdentifierRequest = (PostInstrumentIdentifierRequest)sdkTracker.InsertDeveloperIdTracker(postInstrumentIdentifierRequest, postInstrumentIdentifierRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(postInstrumentIdentifierRequest); // http body (model) parameter
+                postInstrumentIdentifierRequest = (PostInstrumentIdentifierRequest)sdkTracker.InsertDeveloperIdTracker(postInstrumentIdentifierRequest, postInstrumentIdentifierRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(postInstrumentIdentifierRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = postInstrumentIdentifierRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostInstrumentIdentifier,PostInstrumentIdentifierAsync,PostInstrumentIdentifierWithHttpInfo,PostInstrumentIdentifierAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PostInstrumentIdentifier,PostInstrumentIdentifierAsync,PostInstrumentIdentifierWithHttpInfo,PostInstrumentIdentifierAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1783,17 +1697,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PostInstrumentIdentifier,PostInstrumentIdentifierAsync,PostInstrumentIdentifierWithHttpInfo,PostInstrumentIdentifierAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PostInstrumentIdentifier,PostInstrumentIdentifierAsync,PostInstrumentIdentifierWithHttpInfo,PostInstrumentIdentifierAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1807,7 +1721,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PostInstrumentIdentifierRequest>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PostInstrumentIdentifierRequest) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PostInstrumentIdentifierRequest), merchantConfig)); // Return statement
+                (PostInstrumentIdentifierRequest) ApiClient.Deserialize(localVarResponse, typeof(PostInstrumentIdentifierRequest))); // Return statement
         }
         /// <summary>
         /// Enroll an Instrument Identifier for Payment Network Token |  |  |  | | - -- | - -- | - -- | |**Instrument Identifiers**&lt;br&gt;An Instrument Identifier represents either a card number, or in the case of an ACH bank account, the routing and account number.&lt;br&gt;The same token Id is returned for a specific card number or bank account &amp; routing number allowing the Instrument Identifier Id to be used for cross-channel payment tracking.&lt;br&gt;An Instrument Identifier can exist independently but also be associated with a [Customer Payment Instrument](#token-management_customer-payment-instrument_create-a-customer-payment-instrument) or [Standalone Payment Instrument](#token-management_payment-instrument_create-a-payment-instrument).|&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;|**Enroll an Instrument Identifier for a Payment Network Token**&lt;br&gt;Your system can use this API to provision a Network token for an existing Instrument Identifier.&lt;br&gt;Network tokens perform better than regular card numbers and they are not necessarily invalidated when a cardholder loses their card, or it expires.&lt;br&gt;A Network token can be [provisioned when creating an Instrument Identifier](#token-management_instrument-identifier_create-an-instrument-identifier_samplerequests-dropdown_create-instrument-identifier-card-enroll-for-network-token_liveconsole-tab-request-body).This will occur automatically when creating a [Customer](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-with-customer-token-creation_liveconsole-tab-request-body), [Payment Instrument](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-create-default-payment-instrument-shipping-address-for-existing-customer_liveconsole-tab-request-body) or [Instrument Identifier](#payments_payments_process-a-payment_samplerequests-dropdown_authorization-with-token-create_authorization-with-instrument-identifier-token-creation_liveconsole-tab-request-body) via the Payments API.&lt;br&gt;For more information about Payment Network Tokens see the Developer Guide. 
@@ -1817,7 +1731,7 @@ namespace CyberSource.Api
         /// <param name="postInstrumentIdentifierEnrollmentRequest">Specify Enrollable Card details</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns></returns>
-        public void PostInstrumentIdentifierEnrollment (string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null)
+        public void PostInstrumentIdentifierEnrollment(string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null)
         {
             logger.Debug("CALLING API \"PostInstrumentIdentifierEnrollment\" STARTED");
             this.SetStatusCode(null);
@@ -1832,7 +1746,7 @@ namespace CyberSource.Api
         /// <param name="postInstrumentIdentifierEnrollmentRequest">Specify Enrollable Card details</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> PostInstrumentIdentifierEnrollmentWithHttpInfo (string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null)
+        public ApiResponse<Object> PostInstrumentIdentifierEnrollmentWithHttpInfo(string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1852,7 +1766,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers/{instrumentIdentifierId}/enrollment";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1861,13 +1775,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1875,31 +1789,33 @@ namespace CyberSource.Api
 
             if (instrumentIdentifierId != null)
             {
-                localVarPathParams.Add("instrumentIdentifierId", Configuration.ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
+                localVarPathParams.Add("instrumentIdentifierId", ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (postInstrumentIdentifierEnrollmentRequest != null && postInstrumentIdentifierEnrollmentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                postInstrumentIdentifierEnrollmentRequest = (PostInstrumentIdentifierEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(postInstrumentIdentifierEnrollmentRequest, postInstrumentIdentifierEnrollmentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(postInstrumentIdentifierEnrollmentRequest); // http body (model) parameter
+                postInstrumentIdentifierEnrollmentRequest = (PostInstrumentIdentifierEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(postInstrumentIdentifierEnrollmentRequest, postInstrumentIdentifierEnrollmentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(postInstrumentIdentifierEnrollmentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = postInstrumentIdentifierEnrollmentRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostInstrumentIdentifierEnrollment,PostInstrumentIdentifierEnrollmentAsync,PostInstrumentIdentifierEnrollmentWithHttpInfo,PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PostInstrumentIdentifierEnrollment,PostInstrumentIdentifierEnrollmentAsync,PostInstrumentIdentifierEnrollmentWithHttpInfo,PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1908,13 +1824,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PostInstrumentIdentifierEnrollment,PostInstrumentIdentifierEnrollmentAsync,PostInstrumentIdentifierEnrollmentWithHttpInfo,PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PostInstrumentIdentifierEnrollment,PostInstrumentIdentifierEnrollmentAsync,PostInstrumentIdentifierEnrollmentWithHttpInfo,PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1944,7 +1860,7 @@ namespace CyberSource.Api
         /// <param name="postInstrumentIdentifierEnrollmentRequest">Specify Enrollable Card details</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task PostInstrumentIdentifierEnrollmentAsync (string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null)
+        public async Task PostInstrumentIdentifierEnrollmentAsync(string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null)
         {
             logger.Debug("CALLING API \"PostInstrumentIdentifierEnrollmentAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1960,7 +1876,7 @@ namespace CyberSource.Api
         /// <param name="postInstrumentIdentifierEnrollmentRequest">Specify Enrollable Card details</param>
         /// <param name="profileId">The Id of a profile containing user specific TMS configuration. (optional)</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo (string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null)
+        public async Task<ApiResponse<Object>> PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo(string instrumentIdentifierId, PostInstrumentIdentifierEnrollmentRequest postInstrumentIdentifierEnrollmentRequest, string profileId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1980,7 +1896,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tms/v1/instrumentidentifiers/{instrumentIdentifierId}/enrollment";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1989,13 +1905,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -2003,31 +1919,33 @@ namespace CyberSource.Api
 
             if (instrumentIdentifierId != null)
             {
-                localVarPathParams.Add("instrumentIdentifierId", Configuration.ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
+                localVarPathParams.Add("instrumentIdentifierId", ApiClient.ParameterToString(instrumentIdentifierId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (profileId != null)
             {
-                localVarHeaderParams.Add("profile-id", Configuration.ApiClient.ParameterToString(profileId)); // header parameter
+                localVarHeaderParams.Add("profile-id", ApiClient.ParameterToString(profileId)); // header parameter
             }
+
             if (postInstrumentIdentifierEnrollmentRequest != null && postInstrumentIdentifierEnrollmentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                postInstrumentIdentifierEnrollmentRequest = (PostInstrumentIdentifierEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(postInstrumentIdentifierEnrollmentRequest, postInstrumentIdentifierEnrollmentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(postInstrumentIdentifierEnrollmentRequest); // http body (model) parameter
+                postInstrumentIdentifierEnrollmentRequest = (PostInstrumentIdentifierEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(postInstrumentIdentifierEnrollmentRequest, postInstrumentIdentifierEnrollmentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(postInstrumentIdentifierEnrollmentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = postInstrumentIdentifierEnrollmentRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PostInstrumentIdentifierEnrollment,PostInstrumentIdentifierEnrollmentAsync,PostInstrumentIdentifierEnrollmentWithHttpInfo,PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PostInstrumentIdentifierEnrollment,PostInstrumentIdentifierEnrollmentAsync,PostInstrumentIdentifierEnrollmentWithHttpInfo,PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -2036,17 +1954,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PostInstrumentIdentifierEnrollment,PostInstrumentIdentifierEnrollmentAsync,PostInstrumentIdentifierEnrollmentWithHttpInfo,PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PostInstrumentIdentifierEnrollment,PostInstrumentIdentifierEnrollmentAsync,PostInstrumentIdentifierEnrollmentWithHttpInfo,PostInstrumentIdentifierEnrollmentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {

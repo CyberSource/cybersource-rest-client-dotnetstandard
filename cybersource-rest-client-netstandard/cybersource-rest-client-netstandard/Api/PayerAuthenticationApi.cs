@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -38,7 +37,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="checkPayerAuthEnrollmentRequest"></param>
         /// <returns>RiskV1AuthenticationsPost201Response</returns>
-        RiskV1AuthenticationsPost201Response CheckPayerAuthEnrollment (CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest);
+        RiskV1AuthenticationsPost201Response CheckPayerAuthEnrollment(CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest);
 
         /// <summary>
         /// Check Payer Auth Enrollment
@@ -49,7 +48,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="checkPayerAuthEnrollmentRequest"></param>
         /// <returns>ApiResponse of RiskV1AuthenticationsPost201Response</returns>
-        ApiResponse<RiskV1AuthenticationsPost201Response> CheckPayerAuthEnrollmentWithHttpInfo (CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest);
+        ApiResponse<RiskV1AuthenticationsPost201Response> CheckPayerAuthEnrollmentWithHttpInfo(CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest);
         /// <summary>
         /// Setup Payer Auth
         /// </summary>
@@ -59,7 +58,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="payerAuthSetupRequest"></param>
         /// <returns>RiskV1AuthenticationSetupsPost201Response</returns>
-        RiskV1AuthenticationSetupsPost201Response PayerAuthSetup (PayerAuthSetupRequest payerAuthSetupRequest);
+        RiskV1AuthenticationSetupsPost201Response PayerAuthSetup(PayerAuthSetupRequest payerAuthSetupRequest);
 
         /// <summary>
         /// Setup Payer Auth
@@ -70,7 +69,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="payerAuthSetupRequest"></param>
         /// <returns>ApiResponse of RiskV1AuthenticationSetupsPost201Response</returns>
-        ApiResponse<RiskV1AuthenticationSetupsPost201Response> PayerAuthSetupWithHttpInfo (PayerAuthSetupRequest payerAuthSetupRequest);
+        ApiResponse<RiskV1AuthenticationSetupsPost201Response> PayerAuthSetupWithHttpInfo(PayerAuthSetupRequest payerAuthSetupRequest);
         /// <summary>
         /// Validate Authentication Results
         /// </summary>
@@ -80,7 +79,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateRequest"></param>
         /// <returns>RiskV1AuthenticationResultsPost201Response</returns>
-        RiskV1AuthenticationResultsPost201Response ValidateAuthenticationResults (ValidateRequest validateRequest);
+        RiskV1AuthenticationResultsPost201Response ValidateAuthenticationResults(ValidateRequest validateRequest);
 
         /// <summary>
         /// Validate Authentication Results
@@ -91,7 +90,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateRequest"></param>
         /// <returns>ApiResponse of RiskV1AuthenticationResultsPost201Response</returns>
-        ApiResponse<RiskV1AuthenticationResultsPost201Response> ValidateAuthenticationResultsWithHttpInfo (ValidateRequest validateRequest);
+        ApiResponse<RiskV1AuthenticationResultsPost201Response> ValidateAuthenticationResultsWithHttpInfo(ValidateRequest validateRequest);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -103,7 +102,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="checkPayerAuthEnrollmentRequest"></param>
         /// <returns>Task of RiskV1AuthenticationsPost201Response</returns>
-        System.Threading.Tasks.Task<RiskV1AuthenticationsPost201Response> CheckPayerAuthEnrollmentAsync (CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest);
+        System.Threading.Tasks.Task<RiskV1AuthenticationsPost201Response> CheckPayerAuthEnrollmentAsync(CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest);
 
         /// <summary>
         /// Check Payer Auth Enrollment
@@ -114,7 +113,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="checkPayerAuthEnrollmentRequest"></param>
         /// <returns>Task of ApiResponse (RiskV1AuthenticationsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RiskV1AuthenticationsPost201Response>> CheckPayerAuthEnrollmentAsyncWithHttpInfo (CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest);
+        System.Threading.Tasks.Task<ApiResponse<RiskV1AuthenticationsPost201Response>> CheckPayerAuthEnrollmentAsyncWithHttpInfo(CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest);
         /// <summary>
         /// Setup Payer Auth
         /// </summary>
@@ -124,7 +123,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="payerAuthSetupRequest"></param>
         /// <returns>Task of RiskV1AuthenticationSetupsPost201Response</returns>
-        System.Threading.Tasks.Task<RiskV1AuthenticationSetupsPost201Response> PayerAuthSetupAsync (PayerAuthSetupRequest payerAuthSetupRequest);
+        System.Threading.Tasks.Task<RiskV1AuthenticationSetupsPost201Response> PayerAuthSetupAsync(PayerAuthSetupRequest payerAuthSetupRequest);
 
         /// <summary>
         /// Setup Payer Auth
@@ -135,7 +134,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="payerAuthSetupRequest"></param>
         /// <returns>Task of ApiResponse (RiskV1AuthenticationSetupsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RiskV1AuthenticationSetupsPost201Response>> PayerAuthSetupAsyncWithHttpInfo (PayerAuthSetupRequest payerAuthSetupRequest);
+        System.Threading.Tasks.Task<ApiResponse<RiskV1AuthenticationSetupsPost201Response>> PayerAuthSetupAsyncWithHttpInfo(PayerAuthSetupRequest payerAuthSetupRequest);
         /// <summary>
         /// Validate Authentication Results
         /// </summary>
@@ -145,7 +144,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateRequest"></param>
         /// <returns>Task of RiskV1AuthenticationResultsPost201Response</returns>
-        System.Threading.Tasks.Task<RiskV1AuthenticationResultsPost201Response> ValidateAuthenticationResultsAsync (ValidateRequest validateRequest);
+        System.Threading.Tasks.Task<RiskV1AuthenticationResultsPost201Response> ValidateAuthenticationResultsAsync(ValidateRequest validateRequest);
 
         /// <summary>
         /// Validate Authentication Results
@@ -156,145 +155,31 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateRequest"></param>
         /// <returns>Task of ApiResponse (RiskV1AuthenticationResultsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RiskV1AuthenticationResultsPost201Response>> ValidateAuthenticationResultsAsyncWithHttpInfo (ValidateRequest validateRequest);
+        System.Threading.Tasks.Task<ApiResponse<RiskV1AuthenticationResultsPost201Response>> ValidateAuthenticationResultsAsyncWithHttpInfo(ValidateRequest validateRequest);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class PayerAuthenticationApi : IPayerAuthenticationApi
+    public partial class PayerAuthenticationApi : ApiBase, IPayerAuthenticationApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PayerAuthenticationApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public PayerAuthenticationApi(string basePath)
+        public PayerAuthenticationApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PayerAuthenticationApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public PayerAuthenticationApi(Configuration configuration = null)
+        public PayerAuthenticationApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -303,7 +188,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="checkPayerAuthEnrollmentRequest"></param>
         /// <returns>RiskV1AuthenticationsPost201Response</returns>
-        public RiskV1AuthenticationsPost201Response CheckPayerAuthEnrollment (CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest)
+        public RiskV1AuthenticationsPost201Response CheckPayerAuthEnrollment(CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest)
         {
             logger.Debug("CALLING API \"CheckPayerAuthEnrollment\" STARTED");
             this.SetStatusCode(null);
@@ -319,7 +204,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="checkPayerAuthEnrollmentRequest"></param>
         /// <returns>ApiResponse of RiskV1AuthenticationsPost201Response</returns>
-        public ApiResponse< RiskV1AuthenticationsPost201Response > CheckPayerAuthEnrollmentWithHttpInfo (CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest)
+        public ApiResponse< RiskV1AuthenticationsPost201Response > CheckPayerAuthEnrollmentWithHttpInfo(CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -333,7 +218,7 @@ namespace CyberSource.Api
             var localVarPath = $"/risk/v1/authentications";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -342,13 +227,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -357,21 +242,21 @@ namespace CyberSource.Api
             if (checkPayerAuthEnrollmentRequest != null && checkPayerAuthEnrollmentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                checkPayerAuthEnrollmentRequest = (CheckPayerAuthEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(checkPayerAuthEnrollmentRequest, checkPayerAuthEnrollmentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(checkPayerAuthEnrollmentRequest); // http body (model) parameter
+                checkPayerAuthEnrollmentRequest = (CheckPayerAuthEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(checkPayerAuthEnrollmentRequest, checkPayerAuthEnrollmentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(checkPayerAuthEnrollmentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = checkPayerAuthEnrollmentRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -380,13 +265,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -404,7 +289,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1AuthenticationsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1AuthenticationsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationsPost201Response),merchantConfig)); // Return statement
+                (RiskV1AuthenticationsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -413,7 +298,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="checkPayerAuthEnrollmentRequest"></param>
         /// <returns>Task of RiskV1AuthenticationsPost201Response</returns>
-        public async System.Threading.Tasks.Task<RiskV1AuthenticationsPost201Response> CheckPayerAuthEnrollmentAsync (CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest)
+        public async Task<RiskV1AuthenticationsPost201Response> CheckPayerAuthEnrollmentAsync(CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest)
         {
             logger.Debug("CALLING API \"CheckPayerAuthEnrollmentAsync\" STARTED");
             this.SetStatusCode(null);
@@ -430,7 +315,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="checkPayerAuthEnrollmentRequest"></param>
         /// <returns>Task of ApiResponse (RiskV1AuthenticationsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<RiskV1AuthenticationsPost201Response>> CheckPayerAuthEnrollmentAsyncWithHttpInfo (CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest)
+        public async Task<ApiResponse<RiskV1AuthenticationsPost201Response>> CheckPayerAuthEnrollmentAsyncWithHttpInfo(CheckPayerAuthEnrollmentRequest checkPayerAuthEnrollmentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -444,7 +329,7 @@ namespace CyberSource.Api
             var localVarPath = $"/risk/v1/authentications";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -453,13 +338,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -468,21 +353,21 @@ namespace CyberSource.Api
             if (checkPayerAuthEnrollmentRequest != null && checkPayerAuthEnrollmentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                checkPayerAuthEnrollmentRequest = (CheckPayerAuthEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(checkPayerAuthEnrollmentRequest, checkPayerAuthEnrollmentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(checkPayerAuthEnrollmentRequest); // http body (model) parameter
+                checkPayerAuthEnrollmentRequest = (CheckPayerAuthEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(checkPayerAuthEnrollmentRequest, checkPayerAuthEnrollmentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(checkPayerAuthEnrollmentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = checkPayerAuthEnrollmentRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -491,17 +376,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CheckPayerAuthEnrollment,CheckPayerAuthEnrollmentAsync,CheckPayerAuthEnrollmentWithHttpInfo,CheckPayerAuthEnrollmentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -515,7 +400,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1AuthenticationsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1AuthenticationsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationsPost201Response), merchantConfig)); // Return statement
+                (RiskV1AuthenticationsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationsPost201Response))); // Return statement
         }
         /// <summary>
         /// Setup Payer Auth A new service for Merchants to get reference_id for Digital Wallets to use in place of BIN number in Cardinal. Set up file while authenticating with Cardinal. This service should be called by Merchant when payment instrument chosen or changes. This service has to be called before enrollment check. The availability of API features for a merchant may depend on the portfolio configuration and may need to be enabled at the portfolio level before they can be added to merchant accounts.
@@ -523,7 +408,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="payerAuthSetupRequest"></param>
         /// <returns>RiskV1AuthenticationSetupsPost201Response</returns>
-        public RiskV1AuthenticationSetupsPost201Response PayerAuthSetup (PayerAuthSetupRequest payerAuthSetupRequest)
+        public RiskV1AuthenticationSetupsPost201Response PayerAuthSetup(PayerAuthSetupRequest payerAuthSetupRequest)
         {
             logger.Debug("CALLING API \"PayerAuthSetup\" STARTED");
             this.SetStatusCode(null);
@@ -539,7 +424,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="payerAuthSetupRequest"></param>
         /// <returns>ApiResponse of RiskV1AuthenticationSetupsPost201Response</returns>
-        public ApiResponse< RiskV1AuthenticationSetupsPost201Response > PayerAuthSetupWithHttpInfo (PayerAuthSetupRequest payerAuthSetupRequest)
+        public ApiResponse< RiskV1AuthenticationSetupsPost201Response > PayerAuthSetupWithHttpInfo(PayerAuthSetupRequest payerAuthSetupRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -553,7 +438,7 @@ namespace CyberSource.Api
             var localVarPath = $"/risk/v1/authentication-setups";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -562,13 +447,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -577,21 +462,21 @@ namespace CyberSource.Api
             if (payerAuthSetupRequest != null && payerAuthSetupRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                payerAuthSetupRequest = (PayerAuthSetupRequest)sdkTracker.InsertDeveloperIdTracker(payerAuthSetupRequest, payerAuthSetupRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(payerAuthSetupRequest); // http body (model) parameter
+                payerAuthSetupRequest = (PayerAuthSetupRequest)sdkTracker.InsertDeveloperIdTracker(payerAuthSetupRequest, payerAuthSetupRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(payerAuthSetupRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = payerAuthSetupRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -600,13 +485,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -624,7 +509,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1AuthenticationSetupsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1AuthenticationSetupsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationSetupsPost201Response),merchantConfig)); // Return statement
+                (RiskV1AuthenticationSetupsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationSetupsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -633,7 +518,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="payerAuthSetupRequest"></param>
         /// <returns>Task of RiskV1AuthenticationSetupsPost201Response</returns>
-        public async System.Threading.Tasks.Task<RiskV1AuthenticationSetupsPost201Response> PayerAuthSetupAsync (PayerAuthSetupRequest payerAuthSetupRequest)
+        public async Task<RiskV1AuthenticationSetupsPost201Response> PayerAuthSetupAsync(PayerAuthSetupRequest payerAuthSetupRequest)
         {
             logger.Debug("CALLING API \"PayerAuthSetupAsync\" STARTED");
             this.SetStatusCode(null);
@@ -650,7 +535,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="payerAuthSetupRequest"></param>
         /// <returns>Task of ApiResponse (RiskV1AuthenticationSetupsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<RiskV1AuthenticationSetupsPost201Response>> PayerAuthSetupAsyncWithHttpInfo (PayerAuthSetupRequest payerAuthSetupRequest)
+        public async Task<ApiResponse<RiskV1AuthenticationSetupsPost201Response>> PayerAuthSetupAsyncWithHttpInfo(PayerAuthSetupRequest payerAuthSetupRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -664,7 +549,7 @@ namespace CyberSource.Api
             var localVarPath = $"/risk/v1/authentication-setups";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -673,13 +558,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -688,21 +573,21 @@ namespace CyberSource.Api
             if (payerAuthSetupRequest != null && payerAuthSetupRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                payerAuthSetupRequest = (PayerAuthSetupRequest)sdkTracker.InsertDeveloperIdTracker(payerAuthSetupRequest, payerAuthSetupRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(payerAuthSetupRequest); // http body (model) parameter
+                payerAuthSetupRequest = (PayerAuthSetupRequest)sdkTracker.InsertDeveloperIdTracker(payerAuthSetupRequest, payerAuthSetupRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(payerAuthSetupRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = payerAuthSetupRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -711,17 +596,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PayerAuthSetup,PayerAuthSetupAsync,PayerAuthSetupWithHttpInfo,PayerAuthSetupAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -735,7 +620,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1AuthenticationSetupsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1AuthenticationSetupsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationSetupsPost201Response), merchantConfig)); // Return statement
+                (RiskV1AuthenticationSetupsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationSetupsPost201Response))); // Return statement
         }
         /// <summary>
         /// Validate Authentication Results This call retrieves and validates the authentication results from issuer and allows the merchant to proceed with processing the payment. 
@@ -743,7 +628,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateRequest"></param>
         /// <returns>RiskV1AuthenticationResultsPost201Response</returns>
-        public RiskV1AuthenticationResultsPost201Response ValidateAuthenticationResults (ValidateRequest validateRequest)
+        public RiskV1AuthenticationResultsPost201Response ValidateAuthenticationResults(ValidateRequest validateRequest)
         {
             logger.Debug("CALLING API \"ValidateAuthenticationResults\" STARTED");
             this.SetStatusCode(null);
@@ -759,7 +644,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateRequest"></param>
         /// <returns>ApiResponse of RiskV1AuthenticationResultsPost201Response</returns>
-        public ApiResponse< RiskV1AuthenticationResultsPost201Response > ValidateAuthenticationResultsWithHttpInfo (ValidateRequest validateRequest)
+        public ApiResponse< RiskV1AuthenticationResultsPost201Response > ValidateAuthenticationResultsWithHttpInfo(ValidateRequest validateRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -773,7 +658,7 @@ namespace CyberSource.Api
             var localVarPath = $"/risk/v1/authentication-results";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -782,13 +667,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -797,21 +682,21 @@ namespace CyberSource.Api
             if (validateRequest != null && validateRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                validateRequest = (ValidateRequest)sdkTracker.InsertDeveloperIdTracker(validateRequest, validateRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(validateRequest); // http body (model) parameter
+                validateRequest = (ValidateRequest)sdkTracker.InsertDeveloperIdTracker(validateRequest, validateRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(validateRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = validateRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -820,13 +705,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -844,7 +729,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1AuthenticationResultsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1AuthenticationResultsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationResultsPost201Response),merchantConfig)); // Return statement
+                (RiskV1AuthenticationResultsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationResultsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -853,7 +738,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateRequest"></param>
         /// <returns>Task of RiskV1AuthenticationResultsPost201Response</returns>
-        public async System.Threading.Tasks.Task<RiskV1AuthenticationResultsPost201Response> ValidateAuthenticationResultsAsync (ValidateRequest validateRequest)
+        public async Task<RiskV1AuthenticationResultsPost201Response> ValidateAuthenticationResultsAsync(ValidateRequest validateRequest)
         {
             logger.Debug("CALLING API \"ValidateAuthenticationResultsAsync\" STARTED");
             this.SetStatusCode(null);
@@ -870,7 +755,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateRequest"></param>
         /// <returns>Task of ApiResponse (RiskV1AuthenticationResultsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<RiskV1AuthenticationResultsPost201Response>> ValidateAuthenticationResultsAsyncWithHttpInfo (ValidateRequest validateRequest)
+        public async Task<ApiResponse<RiskV1AuthenticationResultsPost201Response>> ValidateAuthenticationResultsAsyncWithHttpInfo(ValidateRequest validateRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -884,7 +769,7 @@ namespace CyberSource.Api
             var localVarPath = $"/risk/v1/authentication-results";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -893,13 +778,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -908,21 +793,21 @@ namespace CyberSource.Api
             if (validateRequest != null && validateRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                validateRequest = (ValidateRequest)sdkTracker.InsertDeveloperIdTracker(validateRequest, validateRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(validateRequest); // http body (model) parameter
+                validateRequest = (ValidateRequest)sdkTracker.InsertDeveloperIdTracker(validateRequest, validateRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(validateRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = validateRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -931,17 +816,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "ValidateAuthenticationResults,ValidateAuthenticationResultsAsync,ValidateAuthenticationResultsWithHttpInfo,ValidateAuthenticationResultsAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -955,7 +840,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1AuthenticationResultsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1AuthenticationResultsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationResultsPost201Response), merchantConfig)); // Return statement
+                (RiskV1AuthenticationResultsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(RiskV1AuthenticationResultsPost201Response))); // Return statement
         }
     }
 }

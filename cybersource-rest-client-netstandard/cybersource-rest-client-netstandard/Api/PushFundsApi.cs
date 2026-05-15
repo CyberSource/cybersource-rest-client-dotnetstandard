@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -44,7 +43,7 @@ namespace CyberSource.Api
         /// <param name="vCCorrelationId"></param>
         /// <param name="vCOrganizationId"></param>
         /// <returns>PushFunds201Response</returns>
-        PushFunds201Response CreatePushFundsTransfer (PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId);
+        PushFunds201Response CreatePushFundsTransfer(PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId);
 
         /// <summary>
         /// Process a Push Funds Transfer
@@ -61,7 +60,7 @@ namespace CyberSource.Api
         /// <param name="vCCorrelationId"></param>
         /// <param name="vCOrganizationId"></param>
         /// <returns>ApiResponse of PushFunds201Response</returns>
-        ApiResponse<PushFunds201Response> CreatePushFundsTransferWithHttpInfo (PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId);
+        ApiResponse<PushFunds201Response> CreatePushFundsTransferWithHttpInfo(PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -79,7 +78,7 @@ namespace CyberSource.Api
         /// <param name="vCCorrelationId"></param>
         /// <param name="vCOrganizationId"></param>
         /// <returns>Task of PushFunds201Response</returns>
-        System.Threading.Tasks.Task<PushFunds201Response> CreatePushFundsTransferAsync (PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId);
+        System.Threading.Tasks.Task<PushFunds201Response> CreatePushFundsTransferAsync(PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId);
 
         /// <summary>
         /// Process a Push Funds Transfer
@@ -96,145 +95,31 @@ namespace CyberSource.Api
         /// <param name="vCCorrelationId"></param>
         /// <param name="vCOrganizationId"></param>
         /// <returns>Task of ApiResponse (PushFunds201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PushFunds201Response>> CreatePushFundsTransferAsyncWithHttpInfo (PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId);
+        System.Threading.Tasks.Task<ApiResponse<PushFunds201Response>> CreatePushFundsTransferAsyncWithHttpInfo(PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class PushFundsApi : IPushFundsApi
+    public partial class PushFundsApi : ApiBase, IPushFundsApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PushFundsApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public PushFundsApi(string basePath)
+        public PushFundsApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushFundsApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public PushFundsApi(Configuration configuration = null)
+        public PushFundsApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -249,7 +134,7 @@ namespace CyberSource.Api
         /// <param name="vCCorrelationId"></param>
         /// <param name="vCOrganizationId"></param>
         /// <returns>PushFunds201Response</returns>
-        public PushFunds201Response CreatePushFundsTransfer (PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId)
+        public PushFunds201Response CreatePushFundsTransfer(PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId)
         {
             logger.Debug("CALLING API \"CreatePushFundsTransfer\" STARTED");
             this.SetStatusCode(null);
@@ -271,7 +156,7 @@ namespace CyberSource.Api
         /// <param name="vCCorrelationId"></param>
         /// <param name="vCOrganizationId"></param>
         /// <returns>ApiResponse of PushFunds201Response</returns>
-        public ApiResponse< PushFunds201Response > CreatePushFundsTransferWithHttpInfo (PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId)
+        public ApiResponse< PushFunds201Response > CreatePushFundsTransferWithHttpInfo(PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -321,7 +206,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v1/push-funds-transfer";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -330,13 +215,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -344,46 +229,52 @@ namespace CyberSource.Api
 
             if (contentType != null)
             {
-                localVarHeaderParams.Add("Content-Type", Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+                localVarHeaderParams.Add("Content-Type", ApiClient.ParameterToString(contentType)); // header parameter
             }
+
             if (xRequestid != null)
             {
-                localVarHeaderParams.Add("x-requestid", Configuration.ApiClient.ParameterToString(xRequestid)); // header parameter
+                localVarHeaderParams.Add("x-requestid", ApiClient.ParameterToString(xRequestid)); // header parameter
             }
+
             if (vCMerchantId != null)
             {
-                localVarHeaderParams.Add("v-c-merchant-id", Configuration.ApiClient.ParameterToString(vCMerchantId)); // header parameter
+                localVarHeaderParams.Add("v-c-merchant-id", ApiClient.ParameterToString(vCMerchantId)); // header parameter
             }
+
             if (vCPermissions != null)
             {
-                localVarHeaderParams.Add("v-c-permissions", Configuration.ApiClient.ParameterToString(vCPermissions)); // header parameter
+                localVarHeaderParams.Add("v-c-permissions", ApiClient.ParameterToString(vCPermissions)); // header parameter
             }
+
             if (vCCorrelationId != null)
             {
-                localVarHeaderParams.Add("v-c-correlation-id", Configuration.ApiClient.ParameterToString(vCCorrelationId)); // header parameter
+                localVarHeaderParams.Add("v-c-correlation-id", ApiClient.ParameterToString(vCCorrelationId)); // header parameter
             }
+
             if (vCOrganizationId != null)
             {
-                localVarHeaderParams.Add("v-c-organization-id", Configuration.ApiClient.ParameterToString(vCOrganizationId)); // header parameter
+                localVarHeaderParams.Add("v-c-organization-id", ApiClient.ParameterToString(vCOrganizationId)); // header parameter
             }
+
             if (pushFundsRequest != null && pushFundsRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                pushFundsRequest = (PushFundsRequest)sdkTracker.InsertDeveloperIdTracker(pushFundsRequest, pushFundsRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(pushFundsRequest); // http body (model) parameter
+                pushFundsRequest = (PushFundsRequest)sdkTracker.InsertDeveloperIdTracker(pushFundsRequest, pushFundsRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(pushFundsRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = pushFundsRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreatePushFundsTransfer,CreatePushFundsTransferAsync,CreatePushFundsTransferWithHttpInfo,CreatePushFundsTransferAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreatePushFundsTransfer,CreatePushFundsTransferAsync,CreatePushFundsTransferWithHttpInfo,CreatePushFundsTransferAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -392,13 +283,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreatePushFundsTransfer,CreatePushFundsTransferAsync,CreatePushFundsTransferWithHttpInfo,CreatePushFundsTransferAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreatePushFundsTransfer,CreatePushFundsTransferAsync,CreatePushFundsTransferWithHttpInfo,CreatePushFundsTransferAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -416,7 +307,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PushFunds201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PushFunds201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PushFunds201Response),merchantConfig)); // Return statement
+                (PushFunds201Response) ApiClient.Deserialize(localVarResponse, typeof(PushFunds201Response))); // Return statement
         }
 
         /// <summary>
@@ -431,7 +322,7 @@ namespace CyberSource.Api
         /// <param name="vCCorrelationId"></param>
         /// <param name="vCOrganizationId"></param>
         /// <returns>Task of PushFunds201Response</returns>
-        public async System.Threading.Tasks.Task<PushFunds201Response> CreatePushFundsTransferAsync (PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId)
+        public async Task<PushFunds201Response> CreatePushFundsTransferAsync(PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId)
         {
             logger.Debug("CALLING API \"CreatePushFundsTransferAsync\" STARTED");
             this.SetStatusCode(null);
@@ -454,7 +345,7 @@ namespace CyberSource.Api
         /// <param name="vCCorrelationId"></param>
         /// <param name="vCOrganizationId"></param>
         /// <returns>Task of ApiResponse (PushFunds201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PushFunds201Response>> CreatePushFundsTransferAsyncWithHttpInfo (PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId)
+        public async Task<ApiResponse<PushFunds201Response>> CreatePushFundsTransferAsyncWithHttpInfo(PushFundsRequest pushFundsRequest, string contentType, string xRequestid, string vCMerchantId, string vCPermissions, string vCCorrelationId, string vCOrganizationId)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -504,7 +395,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v1/push-funds-transfer";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -513,13 +404,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -527,46 +418,52 @@ namespace CyberSource.Api
 
             if (contentType != null)
             {
-                localVarHeaderParams.Add("Content-Type", Configuration.ApiClient.ParameterToString(contentType)); // header parameter
+                localVarHeaderParams.Add("Content-Type", ApiClient.ParameterToString(contentType)); // header parameter
             }
+
             if (xRequestid != null)
             {
-                localVarHeaderParams.Add("x-requestid", Configuration.ApiClient.ParameterToString(xRequestid)); // header parameter
+                localVarHeaderParams.Add("x-requestid", ApiClient.ParameterToString(xRequestid)); // header parameter
             }
+
             if (vCMerchantId != null)
             {
-                localVarHeaderParams.Add("v-c-merchant-id", Configuration.ApiClient.ParameterToString(vCMerchantId)); // header parameter
+                localVarHeaderParams.Add("v-c-merchant-id", ApiClient.ParameterToString(vCMerchantId)); // header parameter
             }
+
             if (vCPermissions != null)
             {
-                localVarHeaderParams.Add("v-c-permissions", Configuration.ApiClient.ParameterToString(vCPermissions)); // header parameter
+                localVarHeaderParams.Add("v-c-permissions", ApiClient.ParameterToString(vCPermissions)); // header parameter
             }
+
             if (vCCorrelationId != null)
             {
-                localVarHeaderParams.Add("v-c-correlation-id", Configuration.ApiClient.ParameterToString(vCCorrelationId)); // header parameter
+                localVarHeaderParams.Add("v-c-correlation-id", ApiClient.ParameterToString(vCCorrelationId)); // header parameter
             }
+
             if (vCOrganizationId != null)
             {
-                localVarHeaderParams.Add("v-c-organization-id", Configuration.ApiClient.ParameterToString(vCOrganizationId)); // header parameter
+                localVarHeaderParams.Add("v-c-organization-id", ApiClient.ParameterToString(vCOrganizationId)); // header parameter
             }
+
             if (pushFundsRequest != null && pushFundsRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                pushFundsRequest = (PushFundsRequest)sdkTracker.InsertDeveloperIdTracker(pushFundsRequest, pushFundsRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(pushFundsRequest); // http body (model) parameter
+                pushFundsRequest = (PushFundsRequest)sdkTracker.InsertDeveloperIdTracker(pushFundsRequest, pushFundsRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(pushFundsRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = pushFundsRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreatePushFundsTransfer,CreatePushFundsTransferAsync,CreatePushFundsTransferWithHttpInfo,CreatePushFundsTransferAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreatePushFundsTransfer,CreatePushFundsTransferAsync,CreatePushFundsTransferWithHttpInfo,CreatePushFundsTransferAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -575,17 +472,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreatePushFundsTransfer,CreatePushFundsTransferAsync,CreatePushFundsTransferWithHttpInfo,CreatePushFundsTransferAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreatePushFundsTransfer,CreatePushFundsTransferAsync,CreatePushFundsTransferWithHttpInfo,CreatePushFundsTransferAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -599,7 +496,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PushFunds201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PushFunds201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PushFunds201Response), merchantConfig)); // Return statement
+                (PushFunds201Response) ApiClient.Deserialize(localVarResponse, typeof(PushFunds201Response))); // Return statement
         }
     }
 }

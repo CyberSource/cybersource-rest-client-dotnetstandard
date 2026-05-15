@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -38,7 +37,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateExportComplianceRequest"></param>
         /// <returns>RiskV1ExportComplianceInquiriesPost201Response</returns>
-        RiskV1ExportComplianceInquiriesPost201Response ValidateExportCompliance (ValidateExportComplianceRequest validateExportComplianceRequest);
+        RiskV1ExportComplianceInquiriesPost201Response ValidateExportCompliance(ValidateExportComplianceRequest validateExportComplianceRequest);
 
         /// <summary>
         /// Validate export compliance
@@ -49,7 +48,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateExportComplianceRequest"></param>
         /// <returns>ApiResponse of RiskV1ExportComplianceInquiriesPost201Response</returns>
-        ApiResponse<RiskV1ExportComplianceInquiriesPost201Response> ValidateExportComplianceWithHttpInfo (ValidateExportComplianceRequest validateExportComplianceRequest);
+        ApiResponse<RiskV1ExportComplianceInquiriesPost201Response> ValidateExportComplianceWithHttpInfo(ValidateExportComplianceRequest validateExportComplianceRequest);
         /// <summary>
         /// Verify customer address
         /// </summary>
@@ -59,7 +58,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="verifyCustomerAddressRequest"></param>
         /// <returns>RiskV1AddressVerificationsPost201Response</returns>
-        RiskV1AddressVerificationsPost201Response VerifyCustomerAddress (VerifyCustomerAddressRequest verifyCustomerAddressRequest);
+        RiskV1AddressVerificationsPost201Response VerifyCustomerAddress(VerifyCustomerAddressRequest verifyCustomerAddressRequest);
 
         /// <summary>
         /// Verify customer address
@@ -70,7 +69,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="verifyCustomerAddressRequest"></param>
         /// <returns>ApiResponse of RiskV1AddressVerificationsPost201Response</returns>
-        ApiResponse<RiskV1AddressVerificationsPost201Response> VerifyCustomerAddressWithHttpInfo (VerifyCustomerAddressRequest verifyCustomerAddressRequest);
+        ApiResponse<RiskV1AddressVerificationsPost201Response> VerifyCustomerAddressWithHttpInfo(VerifyCustomerAddressRequest verifyCustomerAddressRequest);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -82,7 +81,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateExportComplianceRequest"></param>
         /// <returns>Task of RiskV1ExportComplianceInquiriesPost201Response</returns>
-        System.Threading.Tasks.Task<RiskV1ExportComplianceInquiriesPost201Response> ValidateExportComplianceAsync (ValidateExportComplianceRequest validateExportComplianceRequest);
+        System.Threading.Tasks.Task<RiskV1ExportComplianceInquiriesPost201Response> ValidateExportComplianceAsync(ValidateExportComplianceRequest validateExportComplianceRequest);
 
         /// <summary>
         /// Validate export compliance
@@ -93,7 +92,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateExportComplianceRequest"></param>
         /// <returns>Task of ApiResponse (RiskV1ExportComplianceInquiriesPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RiskV1ExportComplianceInquiriesPost201Response>> ValidateExportComplianceAsyncWithHttpInfo (ValidateExportComplianceRequest validateExportComplianceRequest);
+        System.Threading.Tasks.Task<ApiResponse<RiskV1ExportComplianceInquiriesPost201Response>> ValidateExportComplianceAsyncWithHttpInfo(ValidateExportComplianceRequest validateExportComplianceRequest);
         /// <summary>
         /// Verify customer address
         /// </summary>
@@ -103,7 +102,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="verifyCustomerAddressRequest"></param>
         /// <returns>Task of RiskV1AddressVerificationsPost201Response</returns>
-        System.Threading.Tasks.Task<RiskV1AddressVerificationsPost201Response> VerifyCustomerAddressAsync (VerifyCustomerAddressRequest verifyCustomerAddressRequest);
+        System.Threading.Tasks.Task<RiskV1AddressVerificationsPost201Response> VerifyCustomerAddressAsync(VerifyCustomerAddressRequest verifyCustomerAddressRequest);
 
         /// <summary>
         /// Verify customer address
@@ -114,145 +113,31 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="verifyCustomerAddressRequest"></param>
         /// <returns>Task of ApiResponse (RiskV1AddressVerificationsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RiskV1AddressVerificationsPost201Response>> VerifyCustomerAddressAsyncWithHttpInfo (VerifyCustomerAddressRequest verifyCustomerAddressRequest);
+        System.Threading.Tasks.Task<ApiResponse<RiskV1AddressVerificationsPost201Response>> VerifyCustomerAddressAsyncWithHttpInfo(VerifyCustomerAddressRequest verifyCustomerAddressRequest);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class VerificationApi : IVerificationApi
+    public partial class VerificationApi : ApiBase, IVerificationApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="VerificationApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public VerificationApi(string basePath)
+        public VerificationApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VerificationApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public VerificationApi(Configuration configuration = null)
+        public VerificationApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -261,7 +146,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateExportComplianceRequest"></param>
         /// <returns>RiskV1ExportComplianceInquiriesPost201Response</returns>
-        public RiskV1ExportComplianceInquiriesPost201Response ValidateExportCompliance (ValidateExportComplianceRequest validateExportComplianceRequest)
+        public RiskV1ExportComplianceInquiriesPost201Response ValidateExportCompliance(ValidateExportComplianceRequest validateExportComplianceRequest)
         {
             logger.Debug("CALLING API \"ValidateExportCompliance\" STARTED");
             this.SetStatusCode(null);
@@ -277,7 +162,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateExportComplianceRequest"></param>
         /// <returns>ApiResponse of RiskV1ExportComplianceInquiriesPost201Response</returns>
-        public ApiResponse< RiskV1ExportComplianceInquiriesPost201Response > ValidateExportComplianceWithHttpInfo (ValidateExportComplianceRequest validateExportComplianceRequest)
+        public ApiResponse< RiskV1ExportComplianceInquiriesPost201Response > ValidateExportComplianceWithHttpInfo(ValidateExportComplianceRequest validateExportComplianceRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -291,7 +176,7 @@ namespace CyberSource.Api
             var localVarPath = $"/risk/v1/export-compliance-inquiries";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -300,13 +185,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -315,21 +200,21 @@ namespace CyberSource.Api
             if (validateExportComplianceRequest != null && validateExportComplianceRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                validateExportComplianceRequest = (ValidateExportComplianceRequest)sdkTracker.InsertDeveloperIdTracker(validateExportComplianceRequest, validateExportComplianceRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(validateExportComplianceRequest); // http body (model) parameter
+                validateExportComplianceRequest = (ValidateExportComplianceRequest)sdkTracker.InsertDeveloperIdTracker(validateExportComplianceRequest, validateExportComplianceRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(validateExportComplianceRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = validateExportComplianceRequest; // byte array
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ValidateExportCompliance,ValidateExportComplianceAsync,ValidateExportComplianceWithHttpInfo,ValidateExportComplianceAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "ValidateExportCompliance,ValidateExportComplianceAsync,ValidateExportComplianceWithHttpInfo,ValidateExportComplianceAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -338,13 +223,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "ValidateExportCompliance,ValidateExportComplianceAsync,ValidateExportComplianceWithHttpInfo,ValidateExportComplianceAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "ValidateExportCompliance,ValidateExportComplianceAsync,ValidateExportComplianceWithHttpInfo,ValidateExportComplianceAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -362,7 +247,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1ExportComplianceInquiriesPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1ExportComplianceInquiriesPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1ExportComplianceInquiriesPost201Response),merchantConfig)); // Return statement
+                (RiskV1ExportComplianceInquiriesPost201Response) ApiClient.Deserialize(localVarResponse, typeof(RiskV1ExportComplianceInquiriesPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -371,7 +256,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateExportComplianceRequest"></param>
         /// <returns>Task of RiskV1ExportComplianceInquiriesPost201Response</returns>
-        public async System.Threading.Tasks.Task<RiskV1ExportComplianceInquiriesPost201Response> ValidateExportComplianceAsync (ValidateExportComplianceRequest validateExportComplianceRequest)
+        public async Task<RiskV1ExportComplianceInquiriesPost201Response> ValidateExportComplianceAsync(ValidateExportComplianceRequest validateExportComplianceRequest)
         {
             logger.Debug("CALLING API \"ValidateExportComplianceAsync\" STARTED");
             this.SetStatusCode(null);
@@ -388,7 +273,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateExportComplianceRequest"></param>
         /// <returns>Task of ApiResponse (RiskV1ExportComplianceInquiriesPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<RiskV1ExportComplianceInquiriesPost201Response>> ValidateExportComplianceAsyncWithHttpInfo (ValidateExportComplianceRequest validateExportComplianceRequest)
+        public async Task<ApiResponse<RiskV1ExportComplianceInquiriesPost201Response>> ValidateExportComplianceAsyncWithHttpInfo(ValidateExportComplianceRequest validateExportComplianceRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -402,7 +287,7 @@ namespace CyberSource.Api
             var localVarPath = $"/risk/v1/export-compliance-inquiries";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -411,13 +296,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -426,21 +311,21 @@ namespace CyberSource.Api
             if (validateExportComplianceRequest != null && validateExportComplianceRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                validateExportComplianceRequest = (ValidateExportComplianceRequest)sdkTracker.InsertDeveloperIdTracker(validateExportComplianceRequest, validateExportComplianceRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(validateExportComplianceRequest); // http body (model) parameter
+                validateExportComplianceRequest = (ValidateExportComplianceRequest)sdkTracker.InsertDeveloperIdTracker(validateExportComplianceRequest, validateExportComplianceRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(validateExportComplianceRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = validateExportComplianceRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ValidateExportCompliance,ValidateExportComplianceAsync,ValidateExportComplianceWithHttpInfo,ValidateExportComplianceAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "ValidateExportCompliance,ValidateExportComplianceAsync,ValidateExportComplianceWithHttpInfo,ValidateExportComplianceAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -449,17 +334,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "ValidateExportCompliance,ValidateExportComplianceAsync,ValidateExportComplianceWithHttpInfo,ValidateExportComplianceAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "ValidateExportCompliance,ValidateExportComplianceAsync,ValidateExportComplianceWithHttpInfo,ValidateExportComplianceAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -473,7 +358,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1ExportComplianceInquiriesPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1ExportComplianceInquiriesPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1ExportComplianceInquiriesPost201Response), merchantConfig)); // Return statement
+                (RiskV1ExportComplianceInquiriesPost201Response) ApiClient.Deserialize(localVarResponse, typeof(RiskV1ExportComplianceInquiriesPost201Response))); // Return statement
         }
         /// <summary>
         /// Verify customer address This call verifies that the customer address submitted is valid.
@@ -481,7 +366,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="verifyCustomerAddressRequest"></param>
         /// <returns>RiskV1AddressVerificationsPost201Response</returns>
-        public RiskV1AddressVerificationsPost201Response VerifyCustomerAddress (VerifyCustomerAddressRequest verifyCustomerAddressRequest)
+        public RiskV1AddressVerificationsPost201Response VerifyCustomerAddress(VerifyCustomerAddressRequest verifyCustomerAddressRequest)
         {
             logger.Debug("CALLING API \"VerifyCustomerAddress\" STARTED");
             this.SetStatusCode(null);
@@ -497,7 +382,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="verifyCustomerAddressRequest"></param>
         /// <returns>ApiResponse of RiskV1AddressVerificationsPost201Response</returns>
-        public ApiResponse< RiskV1AddressVerificationsPost201Response > VerifyCustomerAddressWithHttpInfo (VerifyCustomerAddressRequest verifyCustomerAddressRequest)
+        public ApiResponse< RiskV1AddressVerificationsPost201Response > VerifyCustomerAddressWithHttpInfo(VerifyCustomerAddressRequest verifyCustomerAddressRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -511,7 +396,7 @@ namespace CyberSource.Api
             var localVarPath = $"/risk/v1/address-verifications";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -520,13 +405,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -535,21 +420,21 @@ namespace CyberSource.Api
             if (verifyCustomerAddressRequest != null && verifyCustomerAddressRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                verifyCustomerAddressRequest = (VerifyCustomerAddressRequest)sdkTracker.InsertDeveloperIdTracker(verifyCustomerAddressRequest, verifyCustomerAddressRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(verifyCustomerAddressRequest); // http body (model) parameter
+                verifyCustomerAddressRequest = (VerifyCustomerAddressRequest)sdkTracker.InsertDeveloperIdTracker(verifyCustomerAddressRequest, verifyCustomerAddressRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(verifyCustomerAddressRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = verifyCustomerAddressRequest; // byte array
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VerifyCustomerAddress,VerifyCustomerAddressAsync,VerifyCustomerAddressWithHttpInfo,VerifyCustomerAddressAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VerifyCustomerAddress,VerifyCustomerAddressAsync,VerifyCustomerAddressWithHttpInfo,VerifyCustomerAddressAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -558,13 +443,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VerifyCustomerAddress,VerifyCustomerAddressAsync,VerifyCustomerAddressWithHttpInfo,VerifyCustomerAddressAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VerifyCustomerAddress,VerifyCustomerAddressAsync,VerifyCustomerAddressWithHttpInfo,VerifyCustomerAddressAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -582,7 +467,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1AddressVerificationsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1AddressVerificationsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1AddressVerificationsPost201Response),merchantConfig)); // Return statement
+                (RiskV1AddressVerificationsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(RiskV1AddressVerificationsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -591,7 +476,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="verifyCustomerAddressRequest"></param>
         /// <returns>Task of RiskV1AddressVerificationsPost201Response</returns>
-        public async System.Threading.Tasks.Task<RiskV1AddressVerificationsPost201Response> VerifyCustomerAddressAsync (VerifyCustomerAddressRequest verifyCustomerAddressRequest)
+        public async Task<RiskV1AddressVerificationsPost201Response> VerifyCustomerAddressAsync(VerifyCustomerAddressRequest verifyCustomerAddressRequest)
         {
             logger.Debug("CALLING API \"VerifyCustomerAddressAsync\" STARTED");
             this.SetStatusCode(null);
@@ -608,7 +493,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="verifyCustomerAddressRequest"></param>
         /// <returns>Task of ApiResponse (RiskV1AddressVerificationsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<RiskV1AddressVerificationsPost201Response>> VerifyCustomerAddressAsyncWithHttpInfo (VerifyCustomerAddressRequest verifyCustomerAddressRequest)
+        public async Task<ApiResponse<RiskV1AddressVerificationsPost201Response>> VerifyCustomerAddressAsyncWithHttpInfo(VerifyCustomerAddressRequest verifyCustomerAddressRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -622,7 +507,7 @@ namespace CyberSource.Api
             var localVarPath = $"/risk/v1/address-verifications";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -631,13 +516,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -646,21 +531,21 @@ namespace CyberSource.Api
             if (verifyCustomerAddressRequest != null && verifyCustomerAddressRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                verifyCustomerAddressRequest = (VerifyCustomerAddressRequest)sdkTracker.InsertDeveloperIdTracker(verifyCustomerAddressRequest, verifyCustomerAddressRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(verifyCustomerAddressRequest); // http body (model) parameter
+                verifyCustomerAddressRequest = (VerifyCustomerAddressRequest)sdkTracker.InsertDeveloperIdTracker(verifyCustomerAddressRequest, verifyCustomerAddressRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(verifyCustomerAddressRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = verifyCustomerAddressRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VerifyCustomerAddress,VerifyCustomerAddressAsync,VerifyCustomerAddressWithHttpInfo,VerifyCustomerAddressAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VerifyCustomerAddress,VerifyCustomerAddressAsync,VerifyCustomerAddressWithHttpInfo,VerifyCustomerAddressAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -669,17 +554,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VerifyCustomerAddress,VerifyCustomerAddressAsync,VerifyCustomerAddressWithHttpInfo,VerifyCustomerAddressAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VerifyCustomerAddress,VerifyCustomerAddressAsync,VerifyCustomerAddressWithHttpInfo,VerifyCustomerAddressAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -693,7 +578,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<RiskV1AddressVerificationsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (RiskV1AddressVerificationsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(RiskV1AddressVerificationsPost201Response), merchantConfig)); // Return statement
+                (RiskV1AddressVerificationsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(RiskV1AddressVerificationsPost201Response))); // Return statement
         }
     }
 }

@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -38,7 +37,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taxRequest"></param>
         /// <returns>VasV2PaymentsPost201Response</returns>
-        VasV2PaymentsPost201Response CalculateTax (TaxRequest taxRequest);
+        VasV2PaymentsPost201Response CalculateTax(TaxRequest taxRequest);
 
         /// <summary>
         /// Calculate Taxes
@@ -49,7 +48,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taxRequest"></param>
         /// <returns>ApiResponse of VasV2PaymentsPost201Response</returns>
-        ApiResponse<VasV2PaymentsPost201Response> CalculateTaxWithHttpInfo (TaxRequest taxRequest);
+        ApiResponse<VasV2PaymentsPost201Response> CalculateTaxWithHttpInfo(TaxRequest taxRequest);
         /// <summary>
         /// Void Taxes
         /// </summary>
@@ -60,7 +59,7 @@ namespace CyberSource.Api
         /// <param name="voidTaxRequest"></param>
         /// <param name="id">The tax ID returned from a previous request.</param>
         /// <returns>VasV2TaxVoid200Response</returns>
-        VasV2TaxVoid200Response VoidTax (VoidTaxRequest voidTaxRequest, string id);
+        VasV2TaxVoid200Response VoidTax(VoidTaxRequest voidTaxRequest, string id);
 
         /// <summary>
         /// Void Taxes
@@ -72,7 +71,7 @@ namespace CyberSource.Api
         /// <param name="voidTaxRequest"></param>
         /// <param name="id">The tax ID returned from a previous request.</param>
         /// <returns>ApiResponse of VasV2TaxVoid200Response</returns>
-        ApiResponse<VasV2TaxVoid200Response> VoidTaxWithHttpInfo (VoidTaxRequest voidTaxRequest, string id);
+        ApiResponse<VasV2TaxVoid200Response> VoidTaxWithHttpInfo(VoidTaxRequest voidTaxRequest, string id);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -84,7 +83,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taxRequest"></param>
         /// <returns>Task of VasV2PaymentsPost201Response</returns>
-        System.Threading.Tasks.Task<VasV2PaymentsPost201Response> CalculateTaxAsync (TaxRequest taxRequest);
+        System.Threading.Tasks.Task<VasV2PaymentsPost201Response> CalculateTaxAsync(TaxRequest taxRequest);
 
         /// <summary>
         /// Calculate Taxes
@@ -95,7 +94,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taxRequest"></param>
         /// <returns>Task of ApiResponse (VasV2PaymentsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VasV2PaymentsPost201Response>> CalculateTaxAsyncWithHttpInfo (TaxRequest taxRequest);
+        System.Threading.Tasks.Task<ApiResponse<VasV2PaymentsPost201Response>> CalculateTaxAsyncWithHttpInfo(TaxRequest taxRequest);
         /// <summary>
         /// Void Taxes
         /// </summary>
@@ -106,7 +105,7 @@ namespace CyberSource.Api
         /// <param name="voidTaxRequest"></param>
         /// <param name="id">The tax ID returned from a previous request.</param>
         /// <returns>Task of VasV2TaxVoid200Response</returns>
-        System.Threading.Tasks.Task<VasV2TaxVoid200Response> VoidTaxAsync (VoidTaxRequest voidTaxRequest, string id);
+        System.Threading.Tasks.Task<VasV2TaxVoid200Response> VoidTaxAsync(VoidTaxRequest voidTaxRequest, string id);
 
         /// <summary>
         /// Void Taxes
@@ -118,145 +117,31 @@ namespace CyberSource.Api
         /// <param name="voidTaxRequest"></param>
         /// <param name="id">The tax ID returned from a previous request.</param>
         /// <returns>Task of ApiResponse (VasV2TaxVoid200Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VasV2TaxVoid200Response>> VoidTaxAsyncWithHttpInfo (VoidTaxRequest voidTaxRequest, string id);
+        System.Threading.Tasks.Task<ApiResponse<VasV2TaxVoid200Response>> VoidTaxAsyncWithHttpInfo(VoidTaxRequest voidTaxRequest, string id);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class TaxesApi : ITaxesApi
+    public partial class TaxesApi : ApiBase, ITaxesApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TaxesApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public TaxesApi(string basePath)
+        public TaxesApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TaxesApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public TaxesApi(Configuration configuration = null)
+        public TaxesApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -265,7 +150,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taxRequest"></param>
         /// <returns>VasV2PaymentsPost201Response</returns>
-        public VasV2PaymentsPost201Response CalculateTax (TaxRequest taxRequest)
+        public VasV2PaymentsPost201Response CalculateTax(TaxRequest taxRequest)
         {
             logger.Debug("CALLING API \"CalculateTax\" STARTED");
             this.SetStatusCode(null);
@@ -281,7 +166,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taxRequest"></param>
         /// <returns>ApiResponse of VasV2PaymentsPost201Response</returns>
-        public ApiResponse< VasV2PaymentsPost201Response > CalculateTaxWithHttpInfo (TaxRequest taxRequest)
+        public ApiResponse< VasV2PaymentsPost201Response > CalculateTaxWithHttpInfo(TaxRequest taxRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -295,7 +180,7 @@ namespace CyberSource.Api
             var localVarPath = $"/vas/v2/tax";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -304,13 +189,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -319,21 +204,21 @@ namespace CyberSource.Api
             if (taxRequest != null && taxRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                taxRequest = (TaxRequest)sdkTracker.InsertDeveloperIdTracker(taxRequest, taxRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(taxRequest); // http body (model) parameter
+                taxRequest = (TaxRequest)sdkTracker.InsertDeveloperIdTracker(taxRequest, taxRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(taxRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = taxRequest; // byte array
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CalculateTax,CalculateTaxAsync,CalculateTaxWithHttpInfo,CalculateTaxAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CalculateTax,CalculateTaxAsync,CalculateTaxWithHttpInfo,CalculateTaxAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -342,13 +227,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CalculateTax,CalculateTaxAsync,CalculateTaxWithHttpInfo,CalculateTaxAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CalculateTax,CalculateTaxAsync,CalculateTaxWithHttpInfo,CalculateTaxAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -366,7 +251,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<VasV2PaymentsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (VasV2PaymentsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(VasV2PaymentsPost201Response),merchantConfig)); // Return statement
+                (VasV2PaymentsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(VasV2PaymentsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -375,7 +260,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taxRequest"></param>
         /// <returns>Task of VasV2PaymentsPost201Response</returns>
-        public async System.Threading.Tasks.Task<VasV2PaymentsPost201Response> CalculateTaxAsync (TaxRequest taxRequest)
+        public async Task<VasV2PaymentsPost201Response> CalculateTaxAsync(TaxRequest taxRequest)
         {
             logger.Debug("CALLING API \"CalculateTaxAsync\" STARTED");
             this.SetStatusCode(null);
@@ -392,7 +277,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="taxRequest"></param>
         /// <returns>Task of ApiResponse (VasV2PaymentsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VasV2PaymentsPost201Response>> CalculateTaxAsyncWithHttpInfo (TaxRequest taxRequest)
+        public async Task<ApiResponse<VasV2PaymentsPost201Response>> CalculateTaxAsyncWithHttpInfo(TaxRequest taxRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -406,7 +291,7 @@ namespace CyberSource.Api
             var localVarPath = $"/vas/v2/tax";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -415,13 +300,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -430,21 +315,21 @@ namespace CyberSource.Api
             if (taxRequest != null && taxRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                taxRequest = (TaxRequest)sdkTracker.InsertDeveloperIdTracker(taxRequest, taxRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(taxRequest); // http body (model) parameter
+                taxRequest = (TaxRequest)sdkTracker.InsertDeveloperIdTracker(taxRequest, taxRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(taxRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = taxRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CalculateTax,CalculateTaxAsync,CalculateTaxWithHttpInfo,CalculateTaxAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CalculateTax,CalculateTaxAsync,CalculateTaxWithHttpInfo,CalculateTaxAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -453,17 +338,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CalculateTax,CalculateTaxAsync,CalculateTaxWithHttpInfo,CalculateTaxAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CalculateTax,CalculateTaxAsync,CalculateTaxWithHttpInfo,CalculateTaxAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -477,7 +362,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<VasV2PaymentsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (VasV2PaymentsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(VasV2PaymentsPost201Response), merchantConfig)); // Return statement
+                (VasV2PaymentsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(VasV2PaymentsPost201Response))); // Return statement
         }
         /// <summary>
         /// Void Taxes Pass the Tax Request ID in the PATCH request to void the committed tax calculation.
@@ -486,7 +371,7 @@ namespace CyberSource.Api
         /// <param name="voidTaxRequest"></param>
         /// <param name="id">The tax ID returned from a previous request.</param>
         /// <returns>VasV2TaxVoid200Response</returns>
-        public VasV2TaxVoid200Response VoidTax (VoidTaxRequest voidTaxRequest, string id)
+        public VasV2TaxVoid200Response VoidTax(VoidTaxRequest voidTaxRequest, string id)
         {
             logger.Debug("CALLING API \"VoidTax\" STARTED");
             this.SetStatusCode(null);
@@ -503,7 +388,7 @@ namespace CyberSource.Api
         /// <param name="voidTaxRequest"></param>
         /// <param name="id">The tax ID returned from a previous request.</param>
         /// <returns>ApiResponse of VasV2TaxVoid200Response</returns>
-        public ApiResponse< VasV2TaxVoid200Response > VoidTaxWithHttpInfo (VoidTaxRequest voidTaxRequest, string id)
+        public ApiResponse< VasV2TaxVoid200Response > VoidTaxWithHttpInfo(VoidTaxRequest voidTaxRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -523,7 +408,7 @@ namespace CyberSource.Api
             var localVarPath = $"/vas/v2/tax/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -532,13 +417,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -546,27 +431,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (voidTaxRequest != null && voidTaxRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                voidTaxRequest = (VoidTaxRequest)sdkTracker.InsertDeveloperIdTracker(voidTaxRequest, voidTaxRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(voidTaxRequest); // http body (model) parameter
+                voidTaxRequest = (VoidTaxRequest)sdkTracker.InsertDeveloperIdTracker(voidTaxRequest, voidTaxRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(voidTaxRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = voidTaxRequest; // byte array
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VoidTax,VoidTaxAsync,VoidTaxWithHttpInfo,VoidTaxAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VoidTax,VoidTaxAsync,VoidTaxWithHttpInfo,VoidTaxAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -575,13 +461,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VoidTax,VoidTaxAsync,VoidTaxWithHttpInfo,VoidTaxAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VoidTax,VoidTaxAsync,VoidTaxWithHttpInfo,VoidTaxAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -599,7 +485,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<VasV2TaxVoid200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (VasV2TaxVoid200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(VasV2TaxVoid200Response),merchantConfig)); // Return statement
+                (VasV2TaxVoid200Response) ApiClient.Deserialize(localVarResponse, typeof(VasV2TaxVoid200Response))); // Return statement
         }
 
         /// <summary>
@@ -609,7 +495,7 @@ namespace CyberSource.Api
         /// <param name="voidTaxRequest"></param>
         /// <param name="id">The tax ID returned from a previous request.</param>
         /// <returns>Task of VasV2TaxVoid200Response</returns>
-        public async System.Threading.Tasks.Task<VasV2TaxVoid200Response> VoidTaxAsync (VoidTaxRequest voidTaxRequest, string id)
+        public async Task<VasV2TaxVoid200Response> VoidTaxAsync(VoidTaxRequest voidTaxRequest, string id)
         {
             logger.Debug("CALLING API \"VoidTaxAsync\" STARTED");
             this.SetStatusCode(null);
@@ -627,7 +513,7 @@ namespace CyberSource.Api
         /// <param name="voidTaxRequest"></param>
         /// <param name="id">The tax ID returned from a previous request.</param>
         /// <returns>Task of ApiResponse (VasV2TaxVoid200Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VasV2TaxVoid200Response>> VoidTaxAsyncWithHttpInfo (VoidTaxRequest voidTaxRequest, string id)
+        public async Task<ApiResponse<VasV2TaxVoid200Response>> VoidTaxAsyncWithHttpInfo(VoidTaxRequest voidTaxRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -647,7 +533,7 @@ namespace CyberSource.Api
             var localVarPath = $"/vas/v2/tax/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -656,13 +542,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -670,27 +556,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (voidTaxRequest != null && voidTaxRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                voidTaxRequest = (VoidTaxRequest)sdkTracker.InsertDeveloperIdTracker(voidTaxRequest, voidTaxRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(voidTaxRequest); // http body (model) parameter
+                voidTaxRequest = (VoidTaxRequest)sdkTracker.InsertDeveloperIdTracker(voidTaxRequest, voidTaxRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(voidTaxRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = voidTaxRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VoidTax,VoidTaxAsync,VoidTaxWithHttpInfo,VoidTaxAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VoidTax,VoidTaxAsync,VoidTaxWithHttpInfo,VoidTaxAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -699,17 +586,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VoidTax,VoidTaxAsync,VoidTaxWithHttpInfo,VoidTaxAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VoidTax,VoidTaxAsync,VoidTaxWithHttpInfo,VoidTaxAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -723,7 +610,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<VasV2TaxVoid200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (VasV2TaxVoid200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(VasV2TaxVoid200Response), merchantConfig)); // Return statement
+                (VasV2TaxVoid200Response) ApiClient.Deserialize(localVarResponse, typeof(VasV2TaxVoid200Response))); // Return statement
         }
     }
 }

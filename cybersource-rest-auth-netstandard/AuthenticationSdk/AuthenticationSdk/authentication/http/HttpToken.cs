@@ -30,6 +30,32 @@ namespace AuthenticationSdk.authentication.http
             }
         }
 
+        #region NEW METHODS
+        public HttpToken(IMerchantCredentialSettings merchantCredentialSettings, IMerchantRequestSettings merchantRequestSettings)
+        {
+            // Properties that are not dependent on merchant configuration
+            SignatureAlgorithm = Constants.SignatureAlgorithm;
+            GmtDateTime = DateTime.Now.ToUniversalTime().ToString("r");
+
+            // Properties that are dependent on merchant configuration
+            RequestJsonData = merchantRequestSettings.RequestJsonData; // NEED TO CHECK
+            HostName = merchantCredentialSettings.HostName;
+            MerchantId = merchantCredentialSettings.MerchantId;
+            MerchantSecretKey = merchantCredentialSettings.MerchantSecretKey;
+            MerchantKeyId = merchantCredentialSettings.MerchantKeyId;
+            HttpSignRequestTarget = merchantRequestSettings.RequestType.ToLower() + " " + merchantRequestSettings.RequestTarget;
+
+            bool.TryParse(merchantCredentialSettings.UseMetaKey, out bool tempUseMetaKey);
+
+            UseMetaKey = tempUseMetaKey;
+
+            if (UseMetaKey)
+            {
+                PortfolioId = merchantCredentialSettings.PortfolioId;
+            }
+        }
+        #endregion
+
         public string SignatureAlgorithm { get; set; }
 
         public string GmtDateTime { get; set; }

@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -38,7 +37,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
         /// <returns>PtsV2PaymentsVoidsPost201Response</returns>
-        PtsV2PaymentsVoidsPost201Response MitVoid (MitVoidRequest mitVoidRequest);
+        PtsV2PaymentsVoidsPost201Response MitVoid(MitVoidRequest mitVoidRequest);
 
         /// <summary>
         /// Timeout Void
@@ -49,7 +48,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
         /// <returns>ApiResponse of PtsV2PaymentsVoidsPost201Response</returns>
-        ApiResponse<PtsV2PaymentsVoidsPost201Response> MitVoidWithHttpInfo (MitVoidRequest mitVoidRequest);
+        ApiResponse<PtsV2PaymentsVoidsPost201Response> MitVoidWithHttpInfo(MitVoidRequest mitVoidRequest);
         /// <summary>
         /// Void a Capture
         /// </summary>
@@ -60,7 +59,7 @@ namespace CyberSource.Api
         /// <param name="voidCaptureRequest"></param>
         /// <param name="id">The capture ID returned from a previous capture request.</param>
         /// <returns>PtsV2PaymentsVoidsPost201Response</returns>
-        PtsV2PaymentsVoidsPost201Response VoidCapture (VoidCaptureRequest voidCaptureRequest, string id);
+        PtsV2PaymentsVoidsPost201Response VoidCapture(VoidCaptureRequest voidCaptureRequest, string id);
 
         /// <summary>
         /// Void a Capture
@@ -72,7 +71,7 @@ namespace CyberSource.Api
         /// <param name="voidCaptureRequest"></param>
         /// <param name="id">The capture ID returned from a previous capture request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsVoidsPost201Response</returns>
-        ApiResponse<PtsV2PaymentsVoidsPost201Response> VoidCaptureWithHttpInfo (VoidCaptureRequest voidCaptureRequest, string id);
+        ApiResponse<PtsV2PaymentsVoidsPost201Response> VoidCaptureWithHttpInfo(VoidCaptureRequest voidCaptureRequest, string id);
         /// <summary>
         /// Void a Credit
         /// </summary>
@@ -83,7 +82,7 @@ namespace CyberSource.Api
         /// <param name="voidCreditRequest"></param>
         /// <param name="id">The credit ID returned from a previous credit request.</param>
         /// <returns>PtsV2PaymentsVoidsPost201Response</returns>
-        PtsV2PaymentsVoidsPost201Response VoidCredit (VoidCreditRequest voidCreditRequest, string id);
+        PtsV2PaymentsVoidsPost201Response VoidCredit(VoidCreditRequest voidCreditRequest, string id);
 
         /// <summary>
         /// Void a Credit
@@ -95,7 +94,7 @@ namespace CyberSource.Api
         /// <param name="voidCreditRequest"></param>
         /// <param name="id">The credit ID returned from a previous credit request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsVoidsPost201Response</returns>
-        ApiResponse<PtsV2PaymentsVoidsPost201Response> VoidCreditWithHttpInfo (VoidCreditRequest voidCreditRequest, string id);
+        ApiResponse<PtsV2PaymentsVoidsPost201Response> VoidCreditWithHttpInfo(VoidCreditRequest voidCreditRequest, string id);
         /// <summary>
         /// Void a Payment
         /// </summary>
@@ -106,7 +105,7 @@ namespace CyberSource.Api
         /// <param name="voidPaymentRequest"></param>
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <returns>PtsV2PaymentsVoidsPost201Response</returns>
-        PtsV2PaymentsVoidsPost201Response VoidPayment (VoidPaymentRequest voidPaymentRequest, string id);
+        PtsV2PaymentsVoidsPost201Response VoidPayment(VoidPaymentRequest voidPaymentRequest, string id);
 
         /// <summary>
         /// Void a Payment
@@ -118,7 +117,7 @@ namespace CyberSource.Api
         /// <param name="voidPaymentRequest"></param>
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsVoidsPost201Response</returns>
-        ApiResponse<PtsV2PaymentsVoidsPost201Response> VoidPaymentWithHttpInfo (VoidPaymentRequest voidPaymentRequest, string id);
+        ApiResponse<PtsV2PaymentsVoidsPost201Response> VoidPaymentWithHttpInfo(VoidPaymentRequest voidPaymentRequest, string id);
         /// <summary>
         /// Void a Refund
         /// </summary>
@@ -129,7 +128,7 @@ namespace CyberSource.Api
         /// <param name="voidRefundRequest"></param>
         /// <param name="id">The refund ID returned from a previous refund request.</param>
         /// <returns>PtsV2PaymentsVoidsPost201Response</returns>
-        PtsV2PaymentsVoidsPost201Response VoidRefund (VoidRefundRequest voidRefundRequest, string id);
+        PtsV2PaymentsVoidsPost201Response VoidRefund(VoidRefundRequest voidRefundRequest, string id);
 
         /// <summary>
         /// Void a Refund
@@ -141,7 +140,7 @@ namespace CyberSource.Api
         /// <param name="voidRefundRequest"></param>
         /// <param name="id">The refund ID returned from a previous refund request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsVoidsPost201Response</returns>
-        ApiResponse<PtsV2PaymentsVoidsPost201Response> VoidRefundWithHttpInfo (VoidRefundRequest voidRefundRequest, string id);
+        ApiResponse<PtsV2PaymentsVoidsPost201Response> VoidRefundWithHttpInfo(VoidRefundRequest voidRefundRequest, string id);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -153,7 +152,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> MitVoidAsync (MitVoidRequest mitVoidRequest);
+        System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> MitVoidAsync(MitVoidRequest mitVoidRequest);
 
         /// <summary>
         /// Timeout Void
@@ -164,7 +163,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> MitVoidAsyncWithHttpInfo (MitVoidRequest mitVoidRequest);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> MitVoidAsyncWithHttpInfo(MitVoidRequest mitVoidRequest);
         /// <summary>
         /// Void a Capture
         /// </summary>
@@ -175,7 +174,7 @@ namespace CyberSource.Api
         /// <param name="voidCaptureRequest"></param>
         /// <param name="id">The capture ID returned from a previous capture request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidCaptureAsync (VoidCaptureRequest voidCaptureRequest, string id);
+        System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidCaptureAsync(VoidCaptureRequest voidCaptureRequest, string id);
 
         /// <summary>
         /// Void a Capture
@@ -187,7 +186,7 @@ namespace CyberSource.Api
         /// <param name="voidCaptureRequest"></param>
         /// <param name="id">The capture ID returned from a previous capture request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCaptureAsyncWithHttpInfo (VoidCaptureRequest voidCaptureRequest, string id);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCaptureAsyncWithHttpInfo(VoidCaptureRequest voidCaptureRequest, string id);
         /// <summary>
         /// Void a Credit
         /// </summary>
@@ -198,7 +197,7 @@ namespace CyberSource.Api
         /// <param name="voidCreditRequest"></param>
         /// <param name="id">The credit ID returned from a previous credit request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidCreditAsync (VoidCreditRequest voidCreditRequest, string id);
+        System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidCreditAsync(VoidCreditRequest voidCreditRequest, string id);
 
         /// <summary>
         /// Void a Credit
@@ -210,7 +209,7 @@ namespace CyberSource.Api
         /// <param name="voidCreditRequest"></param>
         /// <param name="id">The credit ID returned from a previous credit request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCreditAsyncWithHttpInfo (VoidCreditRequest voidCreditRequest, string id);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCreditAsyncWithHttpInfo(VoidCreditRequest voidCreditRequest, string id);
         /// <summary>
         /// Void a Payment
         /// </summary>
@@ -221,7 +220,7 @@ namespace CyberSource.Api
         /// <param name="voidPaymentRequest"></param>
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidPaymentAsync (VoidPaymentRequest voidPaymentRequest, string id);
+        System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidPaymentAsync(VoidPaymentRequest voidPaymentRequest, string id);
 
         /// <summary>
         /// Void a Payment
@@ -233,7 +232,7 @@ namespace CyberSource.Api
         /// <param name="voidPaymentRequest"></param>
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidPaymentAsyncWithHttpInfo (VoidPaymentRequest voidPaymentRequest, string id);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidPaymentAsyncWithHttpInfo(VoidPaymentRequest voidPaymentRequest, string id);
         /// <summary>
         /// Void a Refund
         /// </summary>
@@ -244,7 +243,7 @@ namespace CyberSource.Api
         /// <param name="voidRefundRequest"></param>
         /// <param name="id">The refund ID returned from a previous refund request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidRefundAsync (VoidRefundRequest voidRefundRequest, string id);
+        System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidRefundAsync(VoidRefundRequest voidRefundRequest, string id);
 
         /// <summary>
         /// Void a Refund
@@ -256,145 +255,31 @@ namespace CyberSource.Api
         /// <param name="voidRefundRequest"></param>
         /// <param name="id">The refund ID returned from a previous refund request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidRefundAsyncWithHttpInfo (VoidRefundRequest voidRefundRequest, string id);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidRefundAsyncWithHttpInfo(VoidRefundRequest voidRefundRequest, string id);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class VoidApi : IVoidApi
+    public partial class VoidApi : ApiBase, IVoidApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="VoidApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public VoidApi(string basePath)
+        public VoidApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VoidApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public VoidApi(Configuration configuration = null)
+        public VoidApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -403,7 +288,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
         /// <returns>PtsV2PaymentsVoidsPost201Response</returns>
-        public PtsV2PaymentsVoidsPost201Response MitVoid (MitVoidRequest mitVoidRequest)
+        public PtsV2PaymentsVoidsPost201Response MitVoid(MitVoidRequest mitVoidRequest)
         {
             logger.Debug("CALLING API \"MitVoid\" STARTED");
             this.SetStatusCode(null);
@@ -419,7 +304,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
         /// <returns>ApiResponse of PtsV2PaymentsVoidsPost201Response</returns>
-        public ApiResponse< PtsV2PaymentsVoidsPost201Response > MitVoidWithHttpInfo (MitVoidRequest mitVoidRequest)
+        public ApiResponse< PtsV2PaymentsVoidsPost201Response > MitVoidWithHttpInfo(MitVoidRequest mitVoidRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -433,7 +318,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -442,13 +327,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -457,21 +342,21 @@ namespace CyberSource.Api
             if (mitVoidRequest != null && mitVoidRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                mitVoidRequest = (MitVoidRequest)sdkTracker.InsertDeveloperIdTracker(mitVoidRequest, mitVoidRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(mitVoidRequest); // http body (model) parameter
+                mitVoidRequest = (MitVoidRequest)sdkTracker.InsertDeveloperIdTracker(mitVoidRequest, mitVoidRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(mitVoidRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = mitVoidRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "MitVoid,MitVoidAsync,MitVoidWithHttpInfo,MitVoidAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "MitVoid,MitVoidAsync,MitVoidWithHttpInfo,MitVoidAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -480,13 +365,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "MitVoid,MitVoidAsync,MitVoidWithHttpInfo,MitVoidAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "MitVoid,MitVoidAsync,MitVoidWithHttpInfo,MitVoidAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -504,7 +389,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsVoidsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsVoidsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsVoidsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -513,7 +398,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> MitVoidAsync (MitVoidRequest mitVoidRequest)
+        public async Task<PtsV2PaymentsVoidsPost201Response> MitVoidAsync(MitVoidRequest mitVoidRequest)
         {
             logger.Debug("CALLING API \"MitVoidAsync\" STARTED");
             this.SetStatusCode(null);
@@ -530,7 +415,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitVoidRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> MitVoidAsyncWithHttpInfo (MitVoidRequest mitVoidRequest)
+        public async Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> MitVoidAsyncWithHttpInfo(MitVoidRequest mitVoidRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -544,7 +429,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -553,13 +438,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -568,21 +453,21 @@ namespace CyberSource.Api
             if (mitVoidRequest != null && mitVoidRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                mitVoidRequest = (MitVoidRequest)sdkTracker.InsertDeveloperIdTracker(mitVoidRequest, mitVoidRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(mitVoidRequest); // http body (model) parameter
+                mitVoidRequest = (MitVoidRequest)sdkTracker.InsertDeveloperIdTracker(mitVoidRequest, mitVoidRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(mitVoidRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = mitVoidRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "MitVoid,MitVoidAsync,MitVoidWithHttpInfo,MitVoidAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "MitVoid,MitVoidAsync,MitVoidWithHttpInfo,MitVoidAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -591,17 +476,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "MitVoid,MitVoidAsync,MitVoidWithHttpInfo,MitVoidAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "MitVoid,MitVoidAsync,MitVoidWithHttpInfo,MitVoidAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -615,7 +500,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsVoidsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsVoidsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response), merchantConfig)); // Return statement
+                (PtsV2PaymentsVoidsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response))); // Return statement
         }
         /// <summary>
         /// Void a Capture Refund a capture API is only used, if you have requested Capture independenlty using [/pts/v2/payments/{id}/captures](https://developer.cybersource.com/api-reference-assets/index.html#payments_capture) API call. Include the capture ID in the POST request to cancel the capture. 
@@ -624,7 +509,7 @@ namespace CyberSource.Api
         /// <param name="voidCaptureRequest"></param>
         /// <param name="id">The capture ID returned from a previous capture request.</param>
         /// <returns>PtsV2PaymentsVoidsPost201Response</returns>
-        public PtsV2PaymentsVoidsPost201Response VoidCapture (VoidCaptureRequest voidCaptureRequest, string id)
+        public PtsV2PaymentsVoidsPost201Response VoidCapture(VoidCaptureRequest voidCaptureRequest, string id)
         {
             logger.Debug("CALLING API \"VoidCapture\" STARTED");
             this.SetStatusCode(null);
@@ -641,7 +526,7 @@ namespace CyberSource.Api
         /// <param name="voidCaptureRequest"></param>
         /// <param name="id">The capture ID returned from a previous capture request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsVoidsPost201Response</returns>
-        public ApiResponse< PtsV2PaymentsVoidsPost201Response > VoidCaptureWithHttpInfo (VoidCaptureRequest voidCaptureRequest, string id)
+        public ApiResponse< PtsV2PaymentsVoidsPost201Response > VoidCaptureWithHttpInfo(VoidCaptureRequest voidCaptureRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -661,7 +546,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/captures/{id}/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -670,13 +555,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -684,27 +569,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (voidCaptureRequest != null && voidCaptureRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                voidCaptureRequest = (VoidCaptureRequest)sdkTracker.InsertDeveloperIdTracker(voidCaptureRequest, voidCaptureRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(voidCaptureRequest); // http body (model) parameter
+                voidCaptureRequest = (VoidCaptureRequest)sdkTracker.InsertDeveloperIdTracker(voidCaptureRequest, voidCaptureRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(voidCaptureRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = voidCaptureRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VoidCapture,VoidCaptureAsync,VoidCaptureWithHttpInfo,VoidCaptureAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VoidCapture,VoidCaptureAsync,VoidCaptureWithHttpInfo,VoidCaptureAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -713,13 +599,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VoidCapture,VoidCaptureAsync,VoidCaptureWithHttpInfo,VoidCaptureAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VoidCapture,VoidCaptureAsync,VoidCaptureWithHttpInfo,VoidCaptureAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -737,7 +623,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsVoidsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsVoidsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsVoidsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -747,7 +633,7 @@ namespace CyberSource.Api
         /// <param name="voidCaptureRequest"></param>
         /// <param name="id">The capture ID returned from a previous capture request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidCaptureAsync (VoidCaptureRequest voidCaptureRequest, string id)
+        public async Task<PtsV2PaymentsVoidsPost201Response> VoidCaptureAsync(VoidCaptureRequest voidCaptureRequest, string id)
         {
             logger.Debug("CALLING API \"VoidCaptureAsync\" STARTED");
             this.SetStatusCode(null);
@@ -765,7 +651,7 @@ namespace CyberSource.Api
         /// <param name="voidCaptureRequest"></param>
         /// <param name="id">The capture ID returned from a previous capture request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCaptureAsyncWithHttpInfo (VoidCaptureRequest voidCaptureRequest, string id)
+        public async Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCaptureAsyncWithHttpInfo(VoidCaptureRequest voidCaptureRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -785,7 +671,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/captures/{id}/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -794,13 +680,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -808,27 +694,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (voidCaptureRequest != null && voidCaptureRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                voidCaptureRequest = (VoidCaptureRequest)sdkTracker.InsertDeveloperIdTracker(voidCaptureRequest, voidCaptureRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(voidCaptureRequest); // http body (model) parameter
+                voidCaptureRequest = (VoidCaptureRequest)sdkTracker.InsertDeveloperIdTracker(voidCaptureRequest, voidCaptureRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(voidCaptureRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = voidCaptureRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VoidCapture,VoidCaptureAsync,VoidCaptureWithHttpInfo,VoidCaptureAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VoidCapture,VoidCaptureAsync,VoidCaptureWithHttpInfo,VoidCaptureAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -837,17 +724,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VoidCapture,VoidCaptureAsync,VoidCaptureWithHttpInfo,VoidCaptureAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VoidCapture,VoidCaptureAsync,VoidCaptureWithHttpInfo,VoidCaptureAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -861,7 +748,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsVoidsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsVoidsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response), merchantConfig)); // Return statement
+                (PtsV2PaymentsVoidsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response))); // Return statement
         }
         /// <summary>
         /// Void a Credit Include the credit ID in the POST request to cancel the credit.
@@ -870,7 +757,7 @@ namespace CyberSource.Api
         /// <param name="voidCreditRequest"></param>
         /// <param name="id">The credit ID returned from a previous credit request.</param>
         /// <returns>PtsV2PaymentsVoidsPost201Response</returns>
-        public PtsV2PaymentsVoidsPost201Response VoidCredit (VoidCreditRequest voidCreditRequest, string id)
+        public PtsV2PaymentsVoidsPost201Response VoidCredit(VoidCreditRequest voidCreditRequest, string id)
         {
             logger.Debug("CALLING API \"VoidCredit\" STARTED");
             this.SetStatusCode(null);
@@ -887,7 +774,7 @@ namespace CyberSource.Api
         /// <param name="voidCreditRequest"></param>
         /// <param name="id">The credit ID returned from a previous credit request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsVoidsPost201Response</returns>
-        public ApiResponse< PtsV2PaymentsVoidsPost201Response > VoidCreditWithHttpInfo (VoidCreditRequest voidCreditRequest, string id)
+        public ApiResponse< PtsV2PaymentsVoidsPost201Response > VoidCreditWithHttpInfo(VoidCreditRequest voidCreditRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -907,7 +794,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/credits/{id}/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -916,13 +803,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -930,27 +817,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (voidCreditRequest != null && voidCreditRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                voidCreditRequest = (VoidCreditRequest)sdkTracker.InsertDeveloperIdTracker(voidCreditRequest, voidCreditRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(voidCreditRequest); // http body (model) parameter
+                voidCreditRequest = (VoidCreditRequest)sdkTracker.InsertDeveloperIdTracker(voidCreditRequest, voidCreditRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(voidCreditRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = voidCreditRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VoidCredit,VoidCreditAsync,VoidCreditWithHttpInfo,VoidCreditAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VoidCredit,VoidCreditAsync,VoidCreditWithHttpInfo,VoidCreditAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -959,13 +847,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VoidCredit,VoidCreditAsync,VoidCreditWithHttpInfo,VoidCreditAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VoidCredit,VoidCreditAsync,VoidCreditWithHttpInfo,VoidCreditAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -983,7 +871,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsVoidsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsVoidsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsVoidsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -993,7 +881,7 @@ namespace CyberSource.Api
         /// <param name="voidCreditRequest"></param>
         /// <param name="id">The credit ID returned from a previous credit request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidCreditAsync (VoidCreditRequest voidCreditRequest, string id)
+        public async Task<PtsV2PaymentsVoidsPost201Response> VoidCreditAsync(VoidCreditRequest voidCreditRequest, string id)
         {
             logger.Debug("CALLING API \"VoidCreditAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1011,7 +899,7 @@ namespace CyberSource.Api
         /// <param name="voidCreditRequest"></param>
         /// <param name="id">The credit ID returned from a previous credit request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCreditAsyncWithHttpInfo (VoidCreditRequest voidCreditRequest, string id)
+        public async Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCreditAsyncWithHttpInfo(VoidCreditRequest voidCreditRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1031,7 +919,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/credits/{id}/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1040,13 +928,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1054,27 +942,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (voidCreditRequest != null && voidCreditRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                voidCreditRequest = (VoidCreditRequest)sdkTracker.InsertDeveloperIdTracker(voidCreditRequest, voidCreditRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(voidCreditRequest); // http body (model) parameter
+                voidCreditRequest = (VoidCreditRequest)sdkTracker.InsertDeveloperIdTracker(voidCreditRequest, voidCreditRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(voidCreditRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = voidCreditRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VoidCredit,VoidCreditAsync,VoidCreditWithHttpInfo,VoidCreditAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VoidCredit,VoidCreditAsync,VoidCreditWithHttpInfo,VoidCreditAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1083,17 +972,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VoidCredit,VoidCreditAsync,VoidCreditWithHttpInfo,VoidCreditAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VoidCredit,VoidCreditAsync,VoidCreditWithHttpInfo,VoidCreditAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1107,7 +996,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsVoidsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsVoidsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response), merchantConfig)); // Return statement
+                (PtsV2PaymentsVoidsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response))); // Return statement
         }
         /// <summary>
         /// Void a Payment Void a Payment API is only used, if you have requested Authorization and Capture together in [/pts/v2/payments](https://developer.cybersource.com/api-reference-assets/index.html#payments_payments) API call. Include the payment ID in the POST request to cancel the payment. 
@@ -1116,7 +1005,7 @@ namespace CyberSource.Api
         /// <param name="voidPaymentRequest"></param>
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <returns>PtsV2PaymentsVoidsPost201Response</returns>
-        public PtsV2PaymentsVoidsPost201Response VoidPayment (VoidPaymentRequest voidPaymentRequest, string id)
+        public PtsV2PaymentsVoidsPost201Response VoidPayment(VoidPaymentRequest voidPaymentRequest, string id)
         {
             logger.Debug("CALLING API \"VoidPayment\" STARTED");
             this.SetStatusCode(null);
@@ -1133,7 +1022,7 @@ namespace CyberSource.Api
         /// <param name="voidPaymentRequest"></param>
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsVoidsPost201Response</returns>
-        public ApiResponse< PtsV2PaymentsVoidsPost201Response > VoidPaymentWithHttpInfo (VoidPaymentRequest voidPaymentRequest, string id)
+        public ApiResponse< PtsV2PaymentsVoidsPost201Response > VoidPaymentWithHttpInfo(VoidPaymentRequest voidPaymentRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1153,7 +1042,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payments/{id}/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1162,13 +1051,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1176,27 +1065,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (voidPaymentRequest != null && voidPaymentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                voidPaymentRequest = (VoidPaymentRequest)sdkTracker.InsertDeveloperIdTracker(voidPaymentRequest, voidPaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(voidPaymentRequest); // http body (model) parameter
+                voidPaymentRequest = (VoidPaymentRequest)sdkTracker.InsertDeveloperIdTracker(voidPaymentRequest, voidPaymentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(voidPaymentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = voidPaymentRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VoidPayment,VoidPaymentAsync,VoidPaymentWithHttpInfo,VoidPaymentAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VoidPayment,VoidPaymentAsync,VoidPaymentWithHttpInfo,VoidPaymentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1205,13 +1095,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VoidPayment,VoidPaymentAsync,VoidPaymentWithHttpInfo,VoidPaymentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VoidPayment,VoidPaymentAsync,VoidPaymentWithHttpInfo,VoidPaymentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1229,7 +1119,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsVoidsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsVoidsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsVoidsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -1239,7 +1129,7 @@ namespace CyberSource.Api
         /// <param name="voidPaymentRequest"></param>
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidPaymentAsync (VoidPaymentRequest voidPaymentRequest, string id)
+        public async Task<PtsV2PaymentsVoidsPost201Response> VoidPaymentAsync(VoidPaymentRequest voidPaymentRequest, string id)
         {
             logger.Debug("CALLING API \"VoidPaymentAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1257,7 +1147,7 @@ namespace CyberSource.Api
         /// <param name="voidPaymentRequest"></param>
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidPaymentAsyncWithHttpInfo (VoidPaymentRequest voidPaymentRequest, string id)
+        public async Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidPaymentAsyncWithHttpInfo(VoidPaymentRequest voidPaymentRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1277,7 +1167,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payments/{id}/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1286,13 +1176,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1300,27 +1190,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (voidPaymentRequest != null && voidPaymentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                voidPaymentRequest = (VoidPaymentRequest)sdkTracker.InsertDeveloperIdTracker(voidPaymentRequest, voidPaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(voidPaymentRequest); // http body (model) parameter
+                voidPaymentRequest = (VoidPaymentRequest)sdkTracker.InsertDeveloperIdTracker(voidPaymentRequest, voidPaymentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(voidPaymentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = voidPaymentRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VoidPayment,VoidPaymentAsync,VoidPaymentWithHttpInfo,VoidPaymentAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VoidPayment,VoidPaymentAsync,VoidPaymentWithHttpInfo,VoidPaymentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1329,17 +1220,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VoidPayment,VoidPaymentAsync,VoidPaymentWithHttpInfo,VoidPaymentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VoidPayment,VoidPaymentAsync,VoidPaymentWithHttpInfo,VoidPaymentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1353,7 +1244,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsVoidsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsVoidsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response), merchantConfig)); // Return statement
+                (PtsV2PaymentsVoidsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response))); // Return statement
         }
         /// <summary>
         /// Void a Refund Include the refund ID in the POST request to cancel the refund.
@@ -1362,7 +1253,7 @@ namespace CyberSource.Api
         /// <param name="voidRefundRequest"></param>
         /// <param name="id">The refund ID returned from a previous refund request.</param>
         /// <returns>PtsV2PaymentsVoidsPost201Response</returns>
-        public PtsV2PaymentsVoidsPost201Response VoidRefund (VoidRefundRequest voidRefundRequest, string id)
+        public PtsV2PaymentsVoidsPost201Response VoidRefund(VoidRefundRequest voidRefundRequest, string id)
         {
             logger.Debug("CALLING API \"VoidRefund\" STARTED");
             this.SetStatusCode(null);
@@ -1379,7 +1270,7 @@ namespace CyberSource.Api
         /// <param name="voidRefundRequest"></param>
         /// <param name="id">The refund ID returned from a previous refund request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsVoidsPost201Response</returns>
-        public ApiResponse< PtsV2PaymentsVoidsPost201Response > VoidRefundWithHttpInfo (VoidRefundRequest voidRefundRequest, string id)
+        public ApiResponse< PtsV2PaymentsVoidsPost201Response > VoidRefundWithHttpInfo(VoidRefundRequest voidRefundRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1399,7 +1290,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/refunds/{id}/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1408,13 +1299,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1422,27 +1313,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (voidRefundRequest != null && voidRefundRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                voidRefundRequest = (VoidRefundRequest)sdkTracker.InsertDeveloperIdTracker(voidRefundRequest, voidRefundRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(voidRefundRequest); // http body (model) parameter
+                voidRefundRequest = (VoidRefundRequest)sdkTracker.InsertDeveloperIdTracker(voidRefundRequest, voidRefundRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(voidRefundRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = voidRefundRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VoidRefund,VoidRefundAsync,VoidRefundWithHttpInfo,VoidRefundAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VoidRefund,VoidRefundAsync,VoidRefundWithHttpInfo,VoidRefundAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1451,13 +1343,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VoidRefund,VoidRefundAsync,VoidRefundWithHttpInfo,VoidRefundAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VoidRefund,VoidRefundAsync,VoidRefundWithHttpInfo,VoidRefundAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1475,7 +1367,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsVoidsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsVoidsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsVoidsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -1485,7 +1377,7 @@ namespace CyberSource.Api
         /// <param name="voidRefundRequest"></param>
         /// <param name="id">The refund ID returned from a previous refund request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidRefundAsync (VoidRefundRequest voidRefundRequest, string id)
+        public async Task<PtsV2PaymentsVoidsPost201Response> VoidRefundAsync(VoidRefundRequest voidRefundRequest, string id)
         {
             logger.Debug("CALLING API \"VoidRefundAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1503,7 +1395,7 @@ namespace CyberSource.Api
         /// <param name="voidRefundRequest"></param>
         /// <param name="id">The refund ID returned from a previous refund request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidRefundAsyncWithHttpInfo (VoidRefundRequest voidRefundRequest, string id)
+        public async Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidRefundAsyncWithHttpInfo(VoidRefundRequest voidRefundRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1523,7 +1415,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/refunds/{id}/voids";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1532,13 +1424,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1546,27 +1438,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (voidRefundRequest != null && voidRefundRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                voidRefundRequest = (VoidRefundRequest)sdkTracker.InsertDeveloperIdTracker(voidRefundRequest, voidRefundRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(voidRefundRequest); // http body (model) parameter
+                voidRefundRequest = (VoidRefundRequest)sdkTracker.InsertDeveloperIdTracker(voidRefundRequest, voidRefundRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(voidRefundRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = voidRefundRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "VoidRefund,VoidRefundAsync,VoidRefundWithHttpInfo,VoidRefundAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "VoidRefund,VoidRefundAsync,VoidRefundWithHttpInfo,VoidRefundAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1575,17 +1468,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "VoidRefund,VoidRefundAsync,VoidRefundWithHttpInfo,VoidRefundAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "VoidRefund,VoidRefundAsync,VoidRefundWithHttpInfo,VoidRefundAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1599,7 +1492,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsVoidsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsVoidsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response), merchantConfig)); // Return statement
+                (PtsV2PaymentsVoidsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsVoidsPost201Response))); // Return statement
         }
     }
 }

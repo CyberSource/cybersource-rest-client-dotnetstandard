@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -41,7 +40,7 @@ namespace CyberSource.Api
         /// <param name="permissionId">permission that you are trying to search user on. (optional)</param>
         /// <param name="roleId">role of the user you are trying to search on. (optional)</param>
         /// <returns>UmsV1UsersGet200Response</returns>
-        UmsV1UsersGet200Response GetUsers (string organizationId = null, string userName = null, string permissionId = null, string roleId = null);
+        UmsV1UsersGet200Response GetUsers(string organizationId = null, string userName = null, string permissionId = null, string roleId = null);
 
         /// <summary>
         /// Get User Information - Deprecated
@@ -55,7 +54,7 @@ namespace CyberSource.Api
         /// <param name="permissionId">permission that you are trying to search user on. (optional)</param>
         /// <param name="roleId">role of the user you are trying to search on. (optional)</param>
         /// <returns>ApiResponse of UmsV1UsersGet200Response</returns>
-        ApiResponse<UmsV1UsersGet200Response> GetUsersWithHttpInfo (string organizationId = null, string userName = null, string permissionId = null, string roleId = null);
+        ApiResponse<UmsV1UsersGet200Response> GetUsersWithHttpInfo(string organizationId = null, string userName = null, string permissionId = null, string roleId = null);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -70,7 +69,7 @@ namespace CyberSource.Api
         /// <param name="permissionId">permission that you are trying to search user on. (optional)</param>
         /// <param name="roleId">role of the user you are trying to search on. (optional)</param>
         /// <returns>Task of UmsV1UsersGet200Response</returns>
-        System.Threading.Tasks.Task<UmsV1UsersGet200Response> GetUsersAsync (string organizationId = null, string userName = null, string permissionId = null, string roleId = null);
+        System.Threading.Tasks.Task<UmsV1UsersGet200Response> GetUsersAsync(string organizationId = null, string userName = null, string permissionId = null, string roleId = null);
 
         /// <summary>
         /// Get User Information - Deprecated
@@ -84,145 +83,31 @@ namespace CyberSource.Api
         /// <param name="permissionId">permission that you are trying to search user on. (optional)</param>
         /// <param name="roleId">role of the user you are trying to search on. (optional)</param>
         /// <returns>Task of ApiResponse (UmsV1UsersGet200Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UmsV1UsersGet200Response>> GetUsersAsyncWithHttpInfo (string organizationId = null, string userName = null, string permissionId = null, string roleId = null);
+        System.Threading.Tasks.Task<ApiResponse<UmsV1UsersGet200Response>> GetUsersAsyncWithHttpInfo(string organizationId = null, string userName = null, string permissionId = null, string roleId = null);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class UserManagementApi : IUserManagementApi
+    public partial class UserManagementApi : ApiBase, IUserManagementApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="UserManagementApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public UserManagementApi(string basePath)
+        public UserManagementApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserManagementApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public UserManagementApi(Configuration configuration = null)
+        public UserManagementApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -234,7 +119,7 @@ namespace CyberSource.Api
         /// <param name="permissionId">permission that you are trying to search user on. (optional)</param>
         /// <param name="roleId">role of the user you are trying to search on. (optional)</param>
         /// <returns>UmsV1UsersGet200Response</returns>
-        public UmsV1UsersGet200Response GetUsers (string organizationId = null, string userName = null, string permissionId = null, string roleId = null)
+        public UmsV1UsersGet200Response GetUsers(string organizationId = null, string userName = null, string permissionId = null, string roleId = null)
         {
             logger.Debug("CALLING API \"GetUsers\" STARTED");
             this.SetStatusCode(null);
@@ -253,7 +138,7 @@ namespace CyberSource.Api
         /// <param name="permissionId">permission that you are trying to search user on. (optional)</param>
         /// <param name="roleId">role of the user you are trying to search on. (optional)</param>
         /// <returns>ApiResponse of UmsV1UsersGet200Response</returns>
-        public ApiResponse< UmsV1UsersGet200Response > GetUsersWithHttpInfo (string organizationId = null, string userName = null, string permissionId = null, string roleId = null)
+        public ApiResponse< UmsV1UsersGet200Response > GetUsersWithHttpInfo(string organizationId = null, string userName = null, string permissionId = null, string roleId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -261,7 +146,7 @@ namespace CyberSource.Api
             var localVarPath = $"/ums/v1/users";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -270,13 +155,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -284,24 +169,28 @@ namespace CyberSource.Api
 
             if (organizationId != null)
             {
-                localVarQueryParams.Add("organizationId", Configuration.ApiClient.ParameterToString(organizationId)); // query parameter
+                localVarQueryParams.Add("organizationId", ApiClient.ParameterToString(organizationId)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (userName != null)
             {
-                localVarQueryParams.Add("userName", Configuration.ApiClient.ParameterToString(userName)); // query parameter
+                localVarQueryParams.Add("userName", ApiClient.ParameterToString(userName)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (permissionId != null)
             {
-                localVarQueryParams.Add("permissionId", Configuration.ApiClient.ParameterToString(permissionId)); // query parameter
+                localVarQueryParams.Add("permissionId", ApiClient.ParameterToString(permissionId)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (roleId != null)
             {
-                localVarQueryParams.Add("roleId", Configuration.ApiClient.ParameterToString(roleId)); // query parameter
+                localVarQueryParams.Add("roleId", ApiClient.ParameterToString(roleId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -310,20 +199,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetUsers,GetUsersAsync,GetUsersWithHttpInfo,GetUsersAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetUsers,GetUsersAsync,GetUsersWithHttpInfo,GetUsersAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -332,12 +222,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetUsers,GetUsersAsync,GetUsersWithHttpInfo,GetUsersAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetUsers,GetUsersAsync,GetUsersWithHttpInfo,GetUsersAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -355,7 +244,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<UmsV1UsersGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (UmsV1UsersGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(UmsV1UsersGet200Response),merchantConfig)); // Return statement
+                (UmsV1UsersGet200Response) ApiClient.Deserialize(localVarResponse, typeof(UmsV1UsersGet200Response))); // Return statement
         }
 
         /// <summary>
@@ -367,7 +256,7 @@ namespace CyberSource.Api
         /// <param name="permissionId">permission that you are trying to search user on. (optional)</param>
         /// <param name="roleId">role of the user you are trying to search on. (optional)</param>
         /// <returns>Task of UmsV1UsersGet200Response</returns>
-        public async System.Threading.Tasks.Task<UmsV1UsersGet200Response> GetUsersAsync (string organizationId = null, string userName = null, string permissionId = null, string roleId = null)
+        public async Task<UmsV1UsersGet200Response> GetUsersAsync(string organizationId = null, string userName = null, string permissionId = null, string roleId = null)
         {
             logger.Debug("CALLING API \"GetUsersAsync\" STARTED");
             this.SetStatusCode(null);
@@ -387,7 +276,7 @@ namespace CyberSource.Api
         /// <param name="permissionId">permission that you are trying to search user on. (optional)</param>
         /// <param name="roleId">role of the user you are trying to search on. (optional)</param>
         /// <returns>Task of ApiResponse (UmsV1UsersGet200Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<UmsV1UsersGet200Response>> GetUsersAsyncWithHttpInfo (string organizationId = null, string userName = null, string permissionId = null, string roleId = null)
+        public async Task<ApiResponse<UmsV1UsersGet200Response>> GetUsersAsyncWithHttpInfo(string organizationId = null, string userName = null, string permissionId = null, string roleId = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -395,7 +284,7 @@ namespace CyberSource.Api
             var localVarPath = $"/ums/v1/users";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -404,13 +293,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -418,24 +307,28 @@ namespace CyberSource.Api
 
             if (organizationId != null)
             {
-                localVarQueryParams.Add("organizationId", Configuration.ApiClient.ParameterToString(organizationId)); // query parameter
+                localVarQueryParams.Add("organizationId", ApiClient.ParameterToString(organizationId)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (userName != null)
             {
-                localVarQueryParams.Add("userName", Configuration.ApiClient.ParameterToString(userName)); // query parameter
+                localVarQueryParams.Add("userName", ApiClient.ParameterToString(userName)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (permissionId != null)
             {
-                localVarQueryParams.Add("permissionId", Configuration.ApiClient.ParameterToString(permissionId)); // query parameter
+                localVarQueryParams.Add("permissionId", ApiClient.ParameterToString(permissionId)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (roleId != null)
             {
-                localVarQueryParams.Add("roleId", Configuration.ApiClient.ParameterToString(roleId)); // query parameter
+                localVarQueryParams.Add("roleId", ApiClient.ParameterToString(roleId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -444,20 +337,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetUsers,GetUsersAsync,GetUsersWithHttpInfo,GetUsersAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetUsers,GetUsersAsync,GetUsersWithHttpInfo,GetUsersAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -466,16 +359,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetUsers,GetUsersAsync,GetUsersWithHttpInfo,GetUsersAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetUsers,GetUsersAsync,GetUsersWithHttpInfo,GetUsersAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -489,7 +381,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<UmsV1UsersGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (UmsV1UsersGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(UmsV1UsersGet200Response), merchantConfig)); // Return statement
+                (UmsV1UsersGet200Response) ApiClient.Deserialize(localVarResponse, typeof(UmsV1UsersGet200Response))); // Return statement
         }
     }
 }

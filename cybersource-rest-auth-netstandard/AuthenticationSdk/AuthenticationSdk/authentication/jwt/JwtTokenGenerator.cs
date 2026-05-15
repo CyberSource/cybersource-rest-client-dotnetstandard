@@ -6,7 +6,6 @@ using System.Text;
 using AuthenticationSdk.core;
 using AuthenticationSdk.util;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Digests;
@@ -18,24 +17,6 @@ namespace AuthenticationSdk.authentication.jwt
 {
     public class JwtTokenGenerator : ITokenGenerator
     {
-        private readonly MerchantConfig _merchantConfig;
-        private readonly JwtToken _jwtToken;
-        private readonly bool _isResponseMLEForApi;
-
-
-        public JwtTokenGenerator(MerchantConfig merchantConfig, bool isResponseMLEForApi)
-        {
-            _isResponseMLEForApi = isResponseMLEForApi;
-            _merchantConfig = merchantConfig;
-            _jwtToken = new JwtToken(_merchantConfig);
-        }
-
-        public Token GetToken()
-        {
-            _jwtToken.BearerToken = SetToken();
-            return _jwtToken;
-        }
-
         private static string GenerateDigest(string requestJsonData)
         {
             using (var sha256Hash = SHA256.Create())
@@ -46,12 +27,64 @@ namespace AuthenticationSdk.authentication.jwt
             }
         }
 
-        private string SetToken()
+        private string ExtractResourcePath(string requestTarget)
         {
-            var payloadClaimSet = GetPayloadClaimSet();
-            var headerClaimSet = GetHeaderClaimSet();
+            if (string.IsNullOrEmpty(requestTarget))
+            {
+                return string.Empty;
+            }
 
-            var x5Cert = _jwtToken.Certificate;
+            // Split the string to remove the query params
+            var parts = requestTarget.Split('?');
+            return parts[0];
+        }
+
+        #region NEW PROPERTIES
+        private readonly IMerchantCredentialSettings _merchantCredentialSettings;
+        private readonly IMerchantRequestSettings _merchantRequestSettings;
+        private readonly IMerchantMLESettings _merchantMLESettings;
+        private readonly JwtToken _jwtToken;
+        private readonly bool _isResponseMLEForApi;
+        private readonly bool _isSharedSecret;
+        #endregion
+
+        #region NEW CONSTRUCTOR
+        public JwtTokenGenerator(IMerchantCredentialSettings merchantCredentialSettings, IMerchantRequestSettings merchantRequestSettings, IMerchantMLESettings merchantMLESettings, bool isResponseMLEForApi)
+        {
+            _isResponseMLEForApi = isResponseMLEForApi;
+            _merchantCredentialSettings = merchantCredentialSettings;
+            _merchantRequestSettings = merchantRequestSettings;
+            _merchantMLESettings = merchantMLESettings;
+            _isSharedSecret = merchantCredentialSettings.IsSharedSecretKeyType();
+
+            _jwtToken = new JwtToken(_merchantCredentialSettings, _merchantRequestSettings, _isSharedSecret);
+        }
+        #endregion
+
+        #region NEW METHODS
+        public Token GetToken()
+        {
+            if (_isSharedSecret)
+            {
+                _jwtToken.BearerToken = SetTokenWithSharedSecret(_jwtToken);
+            }
+            else
+            {
+                _jwtToken.BearerToken = SetToken(_jwtToken);
+            }
+            return _jwtToken;
+        }
+
+        /// <summary>
+        /// Generates a JWT token signed with RS256 using the P12 certificate's private key.
+        /// </summary>
+        private string SetToken(JwtToken jwtTokenValue)
+        {
+            var payloadClaimSet = GetPayloadClaimSet(jwtTokenValue);
+            var headerClaimSet = GetHeaderClaimSet(jwtTokenValue);
+
+            var x5Cert = jwtTokenValue.Certificate;
+
             if (x5Cert == null)
             {
                 throw new CryptographicException(
@@ -72,9 +105,9 @@ namespace AuthenticationSdk.authentication.jwt
             string headerJson = headerClaimSet.ToString(Newtonsoft.Json.Formatting.None);
 
             // JWS compact serialization: Base64Url(header) + "." + Base64Url(payload)
-            string headerEncoded  = Base64UrlEncoder.Encode(Encoding.UTF8.GetBytes(headerJson));
+            string headerEncoded = Base64UrlEncoder.Encode(Encoding.UTF8.GetBytes(headerJson));
             string payloadEncoded = Base64UrlEncoder.Encode(Encoding.UTF8.GetBytes(jwtBody));
-            string signingInput   = headerEncoded + "." + payloadEncoded;
+            string signingInput = headerEncoded + "." + payloadEncoded;
 
             // Sign with RS256
             byte[] signingInputBytes = Encoding.ASCII.GetBytes(signingInput);
@@ -101,14 +134,44 @@ namespace AuthenticationSdk.authentication.jwt
             return token;
         }
 
-        private JObject GetPayloadClaimSet()
+        /// <summary>
+        /// Generates a JWT token signed with HS256 (HMAC-SHA256) using the merchant's shared secret key.
+        /// </summary>
+        private string SetTokenWithSharedSecret(JwtToken jwtTokenValue)
+        {
+            var payloadClaimSet = GetPayloadClaimSet(jwtTokenValue);
+            var headerClaimSet = GetSharedSecretHeaderClaimSet(jwtTokenValue);
+
+            var jwtBody = payloadClaimSet.ToString(Newtonsoft.Json.Formatting.None);
+            string headerJson = headerClaimSet.ToString(Newtonsoft.Json.Formatting.None);
+
+            // JWS compact serialization: Base64Url(header) + "." + Base64Url(payload)
+            string headerEncoded = Base64UrlEncoder.Encode(Encoding.UTF8.GetBytes(headerJson));
+            string payloadEncoded = Base64UrlEncoder.Encode(Encoding.UTF8.GetBytes(jwtBody));
+            string signingInput = headerEncoded + "." + payloadEncoded;
+
+            // Sign with HMAC-SHA256
+            byte[] signingInputBytes = Encoding.ASCII.GetBytes(signingInput);
+            byte[] secretKeyBytes = Convert.FromBase64String(jwtTokenValue.MerchantSecretKey);
+
+            byte[] signatureBytes;
+            using (var hmac = new HMACSHA256(secretKeyBytes))
+            {
+                signatureBytes = hmac.ComputeHash(signingInputBytes);
+            }
+
+            string token = signingInput + "." + Base64UrlEncoder.Encode(signatureBytes);
+            return token;
+        }
+
+        private JObject GetPayloadClaimSet(JwtToken jwtTokenValue)
         {
             var jwtPayload = new JObject();
 
             // Setting the JWT digest and digest Algorithm when a POST, PUT, or PATCH request is made
-            if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
+            if (_merchantRequestSettings.RequestType.Equals("POST", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PUT", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
             {
-                var digest = GenerateDigest(_jwtToken.RequestJsonData);
+                var digest = GenerateDigest(jwtTokenValue.RequestJsonData);
                 jwtPayload["digest"] = digest;
                 jwtPayload["digestAlgorithm"] = "SHA-256";
             }
@@ -119,40 +182,43 @@ namespace AuthenticationSdk.authentication.jwt
             jwtPayload["exp"] = currentTime + 120; // The exp claim is set to 2 mins more than the iat claim
 
             // Set the request method, host and resource path in the JWT body as per the specification for all request types
-            jwtPayload["request-method"] = _merchantConfig.RequestType?.ToUpper();
-            jwtPayload["request-host"] = _merchantConfig.RunEnvironment;
-            jwtPayload["request-resource-path"] = ExtractResourcePath(_merchantConfig.RequestTarget);
+            jwtPayload["request-method"] = _merchantRequestSettings.RequestType?.ToUpper();
+            jwtPayload["request-host"] = _merchantCredentialSettings.RunEnvironment;
+            jwtPayload["request-resource-path"] = ExtractResourcePath(_merchantRequestSettings.RequestTarget);
 
             // Choose issuer claim in the JWT body as per the use_metakey flag in the config file
             string issuer;
-            if (!string.IsNullOrEmpty(_merchantConfig.UseMetaKey) && 
-                bool.TryParse(_merchantConfig.UseMetaKey, out bool useMetaKey) && useMetaKey)
+            if (!string.IsNullOrEmpty(_merchantCredentialSettings.UseMetaKey) &&
+                bool.TryParse(_merchantCredentialSettings.UseMetaKey, out bool useMetaKey) && useMetaKey)
             {
-                issuer = _merchantConfig.PortfolioId;
+                issuer = _merchantCredentialSettings.PortfolioId;
             }
             else
             {
-                issuer = _merchantConfig.MerchantId;
+                issuer = _merchantCredentialSettings.MerchantId;
             }
 
             jwtPayload["iss"] = issuer;
             jwtPayload["jti"] = Guid.NewGuid().ToString();
             jwtPayload["v-c-jwt-version"] = "2";
-            jwtPayload["v-c-merchant-id"] = _merchantConfig.MerchantId;
+            jwtPayload["v-c-merchant-id"] = _merchantCredentialSettings.MerchantId;
 
             if (_isResponseMLEForApi)
             {
                 // Validate and auto-extract Response MLE KID if needed
-                string validatedKid = util.MLEUtility.ValidateAndAutoExtractResponseMleKid(_merchantConfig);
+                string validatedKid = MLEUtility.ValidateAndAutoExtractResponseMleKid(issuer, _merchantMLESettings);
                 jwtPayload["v-c-response-mle-kid"] = validatedKid;
             }
 
             return jwtPayload;
         }
 
-        private JObject GetHeaderClaimSet()
+        /// <summary>
+        /// RS256 header for JWT with P12 certificate.
+        /// </summary>
+        private JObject GetHeaderClaimSet(JwtToken jwtTokenValue)
         {
-            var x5Cert = _jwtToken.Certificate;
+            var x5Cert = jwtTokenValue.Certificate;
             var serialNumber = CertificateUtility.ExtractSerialNumber(x5Cert);
 
             return new JObject
@@ -163,16 +229,18 @@ namespace AuthenticationSdk.authentication.jwt
             };
         }
 
-        private string ExtractResourcePath(string requestTarget)
+        /// <summary>
+        /// HS256 header for JWT with SHARED_SECRET.
+        /// </summary>
+        private JObject GetSharedSecretHeaderClaimSet(JwtToken jwtTokenValue)
         {
-            if (string.IsNullOrEmpty(requestTarget))
+            return new JObject
             {
-                return string.Empty;
-            }
-
-            // Split the string to remove the query params
-            var parts = requestTarget.Split('?');
-            return parts[0];
+                ["alg"] = "HS256",
+                ["kid"] = jwtTokenValue.MerchantKeyId,
+                ["typ"] = "JWT"
+            };
         }
+        #endregion
     }
 }

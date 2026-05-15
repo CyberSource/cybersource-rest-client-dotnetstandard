@@ -7,137 +7,133 @@ namespace AuthenticationSdk.authentication.http
 {
     public class HttpTokenGenerator : ITokenGenerator
     {
-        private readonly MerchantConfig _merchantConfig;
-        private readonly HttpToken _httpToken;
-
-        public HttpTokenGenerator(MerchantConfig merchantConfig)
-        {
-            _merchantConfig = merchantConfig;
-            _httpToken = new HttpToken(_merchantConfig);
-        }
-
-        public Token GetToken()
-        {
-            try
-            {
-                _httpToken.SignatureParam = SetSignatureParam();
-                return _httpToken;
-            }
-            catch (TokenGenerationException)
-            {
-                // Re-throw token generation exceptions as-is
-                throw;
-            }
-            catch (Exception e)
-            {
-                throw new TokenGenerationException("HTTP", $"Failed to generate HTTP signature token: {e.Message}", e);
-            }
-        }
-
-        private string SetSignatureParam()
-        {
-            var signature = string.Empty;
-
-            if (_merchantConfig.IsGetRequest || _merchantConfig.IsDeleteRequest)
-            {
-                // Category 1 : GET / DELETE
-                signature = SignatureForCategory1();
-            }
-            else if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
-            {
-                // Category 2 : POST / PUT / PATCH 
-                signature = SignatureForCategory2();
-            }
-
-            return signature;
-        }
-
-        private string SignatureForCategory1()
+        private string SignatureForCategory1(HttpToken httpTokenValue)
         {
             var signatureString = new StringBuilder();
             var signatureHeaderValue = new StringBuilder();
             const string getOrDeleteHeaders = "host date request-target v-c-merchant-id";
 
-            signatureString.Append($"\nhost: {_httpToken.HostName}")
-                           .Append($"\ndate: {_httpToken.GmtDateTime}")
-                           .Append($"\nrequest-target: {_httpToken.HttpSignRequestTarget}")
+            signatureString.Append($"\nhost: {httpTokenValue.HostName}")
+                           .Append($"\ndate: {httpTokenValue.GmtDateTime}")
+                           .Append($"\nrequest-target: {httpTokenValue.HttpSignRequestTarget}")
                            .Append($"\nv-c-merchant-id: ");
 
-            if (_httpToken.UseMetaKey == true)
+            if (httpTokenValue.UseMetaKey == true)
             {
-                signatureString.Append(_httpToken.PortfolioId);
+                signatureString.Append(httpTokenValue.PortfolioId);
             }
             else
             {
-                signatureString.Append(_httpToken.MerchantId);
+                signatureString.Append(httpTokenValue.MerchantId);
             }
 
             signatureString.Remove(0, 1);
 
             var signatureByteString = Encoding.UTF8.GetBytes(signatureString.ToString());
-            var decodedKey = Convert.FromBase64String(_httpToken.MerchantSecretKey);
+            var decodedKey = Convert.FromBase64String(httpTokenValue.MerchantSecretKey);
             var aKeyId = new HMACSHA256(decodedKey);
             var hashmessage = aKeyId.ComputeHash(signatureByteString);
             var base64EncodedSignature = Convert.ToBase64String(hashmessage);
 
-            signatureHeaderValue.Append($"keyid=\"{_httpToken.MerchantKeyId}\"")
-                                .Append($", algorithm=\"{_httpToken.SignatureAlgorithm}\"")
+            signatureHeaderValue.Append($"keyid=\"{httpTokenValue.MerchantKeyId}\"")
+                                .Append($", algorithm=\"{httpTokenValue.SignatureAlgorithm}\"")
                                 .Append($", headers=\"{getOrDeleteHeaders}\"")
                                 .Append($", signature=\"{base64EncodedSignature}\"");
 
             return signatureHeaderValue.ToString();
         }
 
-        private string SignatureForCategory2()
+        private string SignatureForCategory2(HttpToken httpTokenValue)
         {
             var signatureString = new StringBuilder();
             var signatureHeaderValue = new StringBuilder();
-            _httpToken.Digest = GenerateDigest();
+            httpTokenValue.Digest = GenerateDigest(httpTokenValue);
             const string postOrPutHeaders = "host date request-target digest v-c-merchant-id";
 
-            signatureString.Append($"\nhost: {_httpToken.HostName}")
-                           .Append($"\ndate: {_httpToken.GmtDateTime}")
-                           .Append($"\nrequest-target: {_httpToken.HttpSignRequestTarget}")
-                           .Append($"\ndigest: {_httpToken.Digest}")
+            signatureString.Append($"\nhost: {httpTokenValue.HostName}")
+                           .Append($"\ndate: {httpTokenValue.GmtDateTime}")
+                           .Append($"\nrequest-target: {httpTokenValue.HttpSignRequestTarget}")
+                           .Append($"\ndigest: {httpTokenValue.Digest}")
                            .Append($"\nv-c-merchant-id: ");
 
-            if (_httpToken.UseMetaKey == true)
+            if (httpTokenValue.UseMetaKey == true)
             {
-                signatureString.Append(_httpToken.PortfolioId);
+                signatureString.Append(httpTokenValue.PortfolioId);
             }
             else
             {
-                signatureString.Append(_httpToken.MerchantId);
+                signatureString.Append(httpTokenValue.MerchantId);
             }
 
             signatureString.Remove(0, 1);
 
             var signatureByteString = Encoding.UTF8.GetBytes(signatureString.ToString());
-            var decodedKey = Convert.FromBase64String(_httpToken.MerchantSecretKey);
+            var decodedKey = Convert.FromBase64String(httpTokenValue.MerchantSecretKey);
             var aKeyId = new HMACSHA256(decodedKey);
             var hashmessage = aKeyId.ComputeHash(signatureByteString);
             var base64EncodedSignature = Convert.ToBase64String(hashmessage);
 
-            signatureHeaderValue.Append($"keyid=\"{_httpToken.MerchantKeyId}\"")
-                                .Append($", algorithm=\"{_httpToken.SignatureAlgorithm}\"")
+            signatureHeaderValue.Append($"keyid=\"{httpTokenValue.MerchantKeyId}\"")
+                                .Append($", algorithm=\"{httpTokenValue.SignatureAlgorithm}\"")
                                 .Append($", headers=\"{postOrPutHeaders}\"")
                                 .Append($", signature=\"{base64EncodedSignature}\"");
 
             return signatureHeaderValue.ToString();
         }
 
-        private string GenerateDigest()
+        private string GenerateDigest(HttpToken httpTokenValue)
         {
             string digest;
 
             using (var sha256Hash = SHA256.Create())
             {
-                var payloadBytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(_httpToken.RequestJsonData));
+                var payloadBytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(httpTokenValue.RequestJsonData));
                 digest = Convert.ToBase64String(payloadBytes);
                 digest = "SHA-256=" + digest;
             }
 
             return digest;
         }
+
+        #region NEW PROPERTIES
+        private readonly IMerchantCredentialSettings _merchantCredentialSettings;
+        private readonly IMerchantRequestSettings _merchantRequestSettings;
+        private readonly HttpToken _httpToken;
+        #endregion
+
+        #region NEW CONSTRUCTOR
+        public HttpTokenGenerator(IMerchantCredentialSettings merchantCredentialSettings, IMerchantRequestSettings merchantRequestSettings)
+        {
+            _merchantCredentialSettings = merchantCredentialSettings;
+            _merchantRequestSettings = merchantRequestSettings;
+            _httpToken = new HttpToken(_merchantCredentialSettings, _merchantRequestSettings);
+        }
+        #endregion
+
+        #region NEW METHODS
+        public Token GetToken()
+        {
+            _httpToken.SignatureParam = SetSignatureParam(_httpToken);
+            return _httpToken;
+        }
+
+        private string SetSignatureParam(HttpToken httpToken)
+        {
+            var signature = string.Empty;
+
+            if (_merchantRequestSettings.RequestType.Equals("GET", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("DELETE", StringComparison.InvariantCultureIgnoreCase))
+            {
+                // Category 1 : GET / DELETE
+                signature = SignatureForCategory1(httpToken);
+            }
+            else if (_merchantRequestSettings.RequestType.Equals("POST", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PUT", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
+            {
+                // Category 2 : POST / PUT / PATCH 
+                signature = SignatureForCategory2(httpToken);
+            }
+
+            return signature;
+        }
+        #endregion
     }
 }

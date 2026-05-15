@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -38,7 +37,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateCaptureContextRequest"></param>
         /// <returns>string</returns>
-        string GenerateCaptureContext (GenerateCaptureContextRequest generateCaptureContextRequest);
+        string GenerateCaptureContext(GenerateCaptureContextRequest generateCaptureContextRequest);
 
         /// <summary>
         /// Generate Capture Context
@@ -49,7 +48,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateCaptureContextRequest"></param>
         /// <returns>ApiResponse of string</returns>
-        ApiResponse<string> GenerateCaptureContextWithHttpInfo (GenerateCaptureContextRequest generateCaptureContextRequest);
+        ApiResponse<string> GenerateCaptureContextWithHttpInfo(GenerateCaptureContextRequest generateCaptureContextRequest);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -61,7 +60,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateCaptureContextRequest"></param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> GenerateCaptureContextAsync (GenerateCaptureContextRequest generateCaptureContextRequest);
+        System.Threading.Tasks.Task<string> GenerateCaptureContextAsync(GenerateCaptureContextRequest generateCaptureContextRequest);
 
         /// <summary>
         /// Generate Capture Context
@@ -72,145 +71,31 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateCaptureContextRequest"></param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> GenerateCaptureContextAsyncWithHttpInfo (GenerateCaptureContextRequest generateCaptureContextRequest);
+        System.Threading.Tasks.Task<ApiResponse<string>> GenerateCaptureContextAsyncWithHttpInfo(GenerateCaptureContextRequest generateCaptureContextRequest);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class MicroformIntegrationApi : IMicroformIntegrationApi
+    public partial class MicroformIntegrationApi : ApiBase, IMicroformIntegrationApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MicroformIntegrationApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public MicroformIntegrationApi(string basePath)
+        public MicroformIntegrationApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MicroformIntegrationApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public MicroformIntegrationApi(Configuration configuration = null)
+        public MicroformIntegrationApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -219,7 +104,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateCaptureContextRequest"></param>
         /// <returns>string</returns>
-        public string GenerateCaptureContext (GenerateCaptureContextRequest generateCaptureContextRequest)
+        public string GenerateCaptureContext(GenerateCaptureContextRequest generateCaptureContextRequest)
         {
             logger.Debug("CALLING API \"GenerateCaptureContext\" STARTED");
             this.SetStatusCode(null);
@@ -235,7 +120,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateCaptureContextRequest"></param>
         /// <returns>ApiResponse of string</returns>
-        public ApiResponse< string > GenerateCaptureContextWithHttpInfo (GenerateCaptureContextRequest generateCaptureContextRequest)
+        public ApiResponse< string > GenerateCaptureContextWithHttpInfo(GenerateCaptureContextRequest generateCaptureContextRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -249,7 +134,7 @@ namespace CyberSource.Api
             var localVarPath = $"/microform/v2/sessions";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -258,13 +143,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/jwt"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -273,21 +158,21 @@ namespace CyberSource.Api
             if (generateCaptureContextRequest != null && generateCaptureContextRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                generateCaptureContextRequest = (GenerateCaptureContextRequest)sdkTracker.InsertDeveloperIdTracker(generateCaptureContextRequest, generateCaptureContextRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(generateCaptureContextRequest); // http body (model) parameter
+                generateCaptureContextRequest = (GenerateCaptureContextRequest)sdkTracker.InsertDeveloperIdTracker(generateCaptureContextRequest, generateCaptureContextRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(generateCaptureContextRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = generateCaptureContextRequest; // byte array
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GenerateCaptureContext,GenerateCaptureContextAsync,GenerateCaptureContextWithHttpInfo,GenerateCaptureContextAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GenerateCaptureContext,GenerateCaptureContextAsync,GenerateCaptureContextWithHttpInfo,GenerateCaptureContextAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -296,13 +181,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GenerateCaptureContext,GenerateCaptureContextAsync,GenerateCaptureContextWithHttpInfo,GenerateCaptureContextAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GenerateCaptureContext,GenerateCaptureContextAsync,GenerateCaptureContextWithHttpInfo,GenerateCaptureContextAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -320,7 +205,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<string>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (string) Configuration.ApiClient.Deserialize(localVarResponse, typeof(string),merchantConfig)); // Return statement
+                (string) ApiClient.Deserialize(localVarResponse, typeof(string))); // Return statement
         }
 
         /// <summary>
@@ -329,7 +214,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateCaptureContextRequest"></param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> GenerateCaptureContextAsync (GenerateCaptureContextRequest generateCaptureContextRequest)
+        public async Task<string> GenerateCaptureContextAsync(GenerateCaptureContextRequest generateCaptureContextRequest)
         {
             logger.Debug("CALLING API \"GenerateCaptureContextAsync\" STARTED");
             this.SetStatusCode(null);
@@ -346,7 +231,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="generateCaptureContextRequest"></param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> GenerateCaptureContextAsyncWithHttpInfo (GenerateCaptureContextRequest generateCaptureContextRequest)
+        public async Task<ApiResponse<string>> GenerateCaptureContextAsyncWithHttpInfo(GenerateCaptureContextRequest generateCaptureContextRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -360,7 +245,7 @@ namespace CyberSource.Api
             var localVarPath = $"/microform/v2/sessions";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -369,13 +254,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/jwt"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -384,21 +269,21 @@ namespace CyberSource.Api
             if (generateCaptureContextRequest != null && generateCaptureContextRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                generateCaptureContextRequest = (GenerateCaptureContextRequest)sdkTracker.InsertDeveloperIdTracker(generateCaptureContextRequest, generateCaptureContextRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(generateCaptureContextRequest); // http body (model) parameter
+                generateCaptureContextRequest = (GenerateCaptureContextRequest)sdkTracker.InsertDeveloperIdTracker(generateCaptureContextRequest, generateCaptureContextRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(generateCaptureContextRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = generateCaptureContextRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GenerateCaptureContext,GenerateCaptureContextAsync,GenerateCaptureContextWithHttpInfo,GenerateCaptureContextAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GenerateCaptureContext,GenerateCaptureContextAsync,GenerateCaptureContextWithHttpInfo,GenerateCaptureContextAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -407,17 +292,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GenerateCaptureContext,GenerateCaptureContextAsync,GenerateCaptureContextWithHttpInfo,GenerateCaptureContextAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GenerateCaptureContext,GenerateCaptureContextAsync,GenerateCaptureContextWithHttpInfo,GenerateCaptureContextAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -431,7 +316,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<string>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (string) Configuration.ApiClient.Deserialize(localVarResponse, typeof(string), merchantConfig)); // Return statement
+                (string) ApiClient.Deserialize(localVarResponse, typeof(string))); // Return statement
         }
     }
 }

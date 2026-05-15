@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -38,7 +37,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
         /// <returns>InvoicingV2InvoicesPost201Response</returns>
-        InvoicingV2InvoicesPost201Response CreateInvoice (CreateInvoiceRequest createInvoiceRequest);
+        InvoicingV2InvoicesPost201Response CreateInvoice(CreateInvoiceRequest createInvoiceRequest);
 
         /// <summary>
         /// Create a New Invoice
@@ -49,7 +48,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
         /// <returns>ApiResponse of InvoicingV2InvoicesPost201Response</returns>
-        ApiResponse<InvoicingV2InvoicesPost201Response> CreateInvoiceWithHttpInfo (CreateInvoiceRequest createInvoiceRequest);
+        ApiResponse<InvoicingV2InvoicesPost201Response> CreateInvoiceWithHttpInfo(CreateInvoiceRequest createInvoiceRequest);
         /// <summary>
         /// Get a List of Invoices
         /// </summary>
@@ -61,7 +60,7 @@ namespace CyberSource.Api
         /// <param name="limit">Maximum number of items you would like returned.</param>
         /// <param name="status">The status of the invoice.  Possible values:   - DRAFT   - CREATED   - SENT   - PARTIAL   - PAID   - CANCELED  (optional)</param>
         /// <returns>InvoicingV2InvoicesAllGet200Response</returns>
-        InvoicingV2InvoicesAllGet200Response GetAllInvoices (int? offset, int? limit, string status = null);
+        InvoicingV2InvoicesAllGet200Response GetAllInvoices(int? offset, int? limit, string status = null);
 
         /// <summary>
         /// Get a List of Invoices
@@ -74,7 +73,7 @@ namespace CyberSource.Api
         /// <param name="limit">Maximum number of items you would like returned.</param>
         /// <param name="status">The status of the invoice.  Possible values:   - DRAFT   - CREATED   - SENT   - PARTIAL   - PAID   - CANCELED  (optional)</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesAllGet200Response</returns>
-        ApiResponse<InvoicingV2InvoicesAllGet200Response> GetAllInvoicesWithHttpInfo (int? offset, int? limit, string status = null);
+        ApiResponse<InvoicingV2InvoicesAllGet200Response> GetAllInvoicesWithHttpInfo(int? offset, int? limit, string status = null);
         /// <summary>
         /// Get Invoice Details
         /// </summary>
@@ -84,7 +83,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>InvoicingV2InvoicesGet200Response</returns>
-        InvoicingV2InvoicesGet200Response GetInvoice (string id);
+        InvoicingV2InvoicesGet200Response GetInvoice(string id);
 
         /// <summary>
         /// Get Invoice Details
@@ -95,7 +94,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesGet200Response</returns>
-        ApiResponse<InvoicingV2InvoicesGet200Response> GetInvoiceWithHttpInfo (string id);
+        ApiResponse<InvoicingV2InvoicesGet200Response> GetInvoiceWithHttpInfo(string id);
         /// <summary>
         /// Cancel an Invoice
         /// </summary>
@@ -105,7 +104,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>InvoicingV2InvoicesCancel200Response</returns>
-        InvoicingV2InvoicesCancel200Response PerformCancelAction (string id);
+        InvoicingV2InvoicesCancel200Response PerformCancelAction(string id);
 
         /// <summary>
         /// Cancel an Invoice
@@ -116,7 +115,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesCancel200Response</returns>
-        ApiResponse<InvoicingV2InvoicesCancel200Response> PerformCancelActionWithHttpInfo (string id);
+        ApiResponse<InvoicingV2InvoicesCancel200Response> PerformCancelActionWithHttpInfo(string id);
         /// <summary>
         /// Publish an Invoice
         /// </summary>
@@ -126,7 +125,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>InvoicingV2InvoicesPublish200Response</returns>
-        InvoicingV2InvoicesPublish200Response PerformPublishAction (string id);
+        InvoicingV2InvoicesPublish200Response PerformPublishAction(string id);
 
         /// <summary>
         /// Publish an Invoice
@@ -137,7 +136,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesPublish200Response</returns>
-        ApiResponse<InvoicingV2InvoicesPublish200Response> PerformPublishActionWithHttpInfo (string id);
+        ApiResponse<InvoicingV2InvoicesPublish200Response> PerformPublishActionWithHttpInfo(string id);
         /// <summary>
         /// Send an Invoice
         /// </summary>
@@ -147,7 +146,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>InvoicingV2InvoicesSend200Response</returns>
-        InvoicingV2InvoicesSend200Response PerformSendAction (string id);
+        InvoicingV2InvoicesSend200Response PerformSendAction(string id);
 
         /// <summary>
         /// Send an Invoice
@@ -158,7 +157,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesSend200Response</returns>
-        ApiResponse<InvoicingV2InvoicesSend200Response> PerformSendActionWithHttpInfo (string id);
+        ApiResponse<InvoicingV2InvoicesSend200Response> PerformSendActionWithHttpInfo(string id);
         /// <summary>
         /// Update an Invoice
         /// </summary>
@@ -169,7 +168,7 @@ namespace CyberSource.Api
         /// <param name="id">The invoice number.</param>
         /// <param name="updateInvoiceRequest">Updating the invoice does not resend the invoice automatically. You must resend the invoice separately.</param>
         /// <returns>InvoicingV2InvoicesPut200Response</returns>
-        InvoicingV2InvoicesPut200Response UpdateInvoice (string id, UpdateInvoiceRequest updateInvoiceRequest);
+        InvoicingV2InvoicesPut200Response UpdateInvoice(string id, UpdateInvoiceRequest updateInvoiceRequest);
 
         /// <summary>
         /// Update an Invoice
@@ -181,7 +180,7 @@ namespace CyberSource.Api
         /// <param name="id">The invoice number.</param>
         /// <param name="updateInvoiceRequest">Updating the invoice does not resend the invoice automatically. You must resend the invoice separately.</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesPut200Response</returns>
-        ApiResponse<InvoicingV2InvoicesPut200Response> UpdateInvoiceWithHttpInfo (string id, UpdateInvoiceRequest updateInvoiceRequest);
+        ApiResponse<InvoicingV2InvoicesPut200Response> UpdateInvoiceWithHttpInfo(string id, UpdateInvoiceRequest updateInvoiceRequest);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -193,7 +192,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
         /// <returns>Task of InvoicingV2InvoicesPost201Response</returns>
-        System.Threading.Tasks.Task<InvoicingV2InvoicesPost201Response> CreateInvoiceAsync (CreateInvoiceRequest createInvoiceRequest);
+        System.Threading.Tasks.Task<InvoicingV2InvoicesPost201Response> CreateInvoiceAsync(CreateInvoiceRequest createInvoiceRequest);
 
         /// <summary>
         /// Create a New Invoice
@@ -204,7 +203,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesPost201Response>> CreateInvoiceAsyncWithHttpInfo (CreateInvoiceRequest createInvoiceRequest);
+        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesPost201Response>> CreateInvoiceAsyncWithHttpInfo(CreateInvoiceRequest createInvoiceRequest);
         /// <summary>
         /// Get a List of Invoices
         /// </summary>
@@ -216,7 +215,7 @@ namespace CyberSource.Api
         /// <param name="limit">Maximum number of items you would like returned.</param>
         /// <param name="status">The status of the invoice.  Possible values:   - DRAFT   - CREATED   - SENT   - PARTIAL   - PAID   - CANCELED  (optional)</param>
         /// <returns>Task of InvoicingV2InvoicesAllGet200Response</returns>
-        System.Threading.Tasks.Task<InvoicingV2InvoicesAllGet200Response> GetAllInvoicesAsync (int? offset, int? limit, string status = null);
+        System.Threading.Tasks.Task<InvoicingV2InvoicesAllGet200Response> GetAllInvoicesAsync(int? offset, int? limit, string status = null);
 
         /// <summary>
         /// Get a List of Invoices
@@ -229,7 +228,7 @@ namespace CyberSource.Api
         /// <param name="limit">Maximum number of items you would like returned.</param>
         /// <param name="status">The status of the invoice.  Possible values:   - DRAFT   - CREATED   - SENT   - PARTIAL   - PAID   - CANCELED  (optional)</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesAllGet200Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesAllGet200Response>> GetAllInvoicesAsyncWithHttpInfo (int? offset, int? limit, string status = null);
+        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesAllGet200Response>> GetAllInvoicesAsyncWithHttpInfo(int? offset, int? limit, string status = null);
         /// <summary>
         /// Get Invoice Details
         /// </summary>
@@ -239,7 +238,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of InvoicingV2InvoicesGet200Response</returns>
-        System.Threading.Tasks.Task<InvoicingV2InvoicesGet200Response> GetInvoiceAsync (string id);
+        System.Threading.Tasks.Task<InvoicingV2InvoicesGet200Response> GetInvoiceAsync(string id);
 
         /// <summary>
         /// Get Invoice Details
@@ -250,7 +249,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesGet200Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesGet200Response>> GetInvoiceAsyncWithHttpInfo (string id);
+        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesGet200Response>> GetInvoiceAsyncWithHttpInfo(string id);
         /// <summary>
         /// Cancel an Invoice
         /// </summary>
@@ -260,7 +259,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of InvoicingV2InvoicesCancel200Response</returns>
-        System.Threading.Tasks.Task<InvoicingV2InvoicesCancel200Response> PerformCancelActionAsync (string id);
+        System.Threading.Tasks.Task<InvoicingV2InvoicesCancel200Response> PerformCancelActionAsync(string id);
 
         /// <summary>
         /// Cancel an Invoice
@@ -271,7 +270,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesCancel200Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesCancel200Response>> PerformCancelActionAsyncWithHttpInfo (string id);
+        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesCancel200Response>> PerformCancelActionAsyncWithHttpInfo(string id);
         /// <summary>
         /// Publish an Invoice
         /// </summary>
@@ -281,7 +280,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of InvoicingV2InvoicesPublish200Response</returns>
-        System.Threading.Tasks.Task<InvoicingV2InvoicesPublish200Response> PerformPublishActionAsync (string id);
+        System.Threading.Tasks.Task<InvoicingV2InvoicesPublish200Response> PerformPublishActionAsync(string id);
 
         /// <summary>
         /// Publish an Invoice
@@ -292,7 +291,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesPublish200Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesPublish200Response>> PerformPublishActionAsyncWithHttpInfo (string id);
+        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesPublish200Response>> PerformPublishActionAsyncWithHttpInfo(string id);
         /// <summary>
         /// Send an Invoice
         /// </summary>
@@ -302,7 +301,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of InvoicingV2InvoicesSend200Response</returns>
-        System.Threading.Tasks.Task<InvoicingV2InvoicesSend200Response> PerformSendActionAsync (string id);
+        System.Threading.Tasks.Task<InvoicingV2InvoicesSend200Response> PerformSendActionAsync(string id);
 
         /// <summary>
         /// Send an Invoice
@@ -313,7 +312,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesSend200Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesSend200Response>> PerformSendActionAsyncWithHttpInfo (string id);
+        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesSend200Response>> PerformSendActionAsyncWithHttpInfo(string id);
         /// <summary>
         /// Update an Invoice
         /// </summary>
@@ -324,7 +323,7 @@ namespace CyberSource.Api
         /// <param name="id">The invoice number.</param>
         /// <param name="updateInvoiceRequest">Updating the invoice does not resend the invoice automatically. You must resend the invoice separately.</param>
         /// <returns>Task of InvoicingV2InvoicesPut200Response</returns>
-        System.Threading.Tasks.Task<InvoicingV2InvoicesPut200Response> UpdateInvoiceAsync (string id, UpdateInvoiceRequest updateInvoiceRequest);
+        System.Threading.Tasks.Task<InvoicingV2InvoicesPut200Response> UpdateInvoiceAsync(string id, UpdateInvoiceRequest updateInvoiceRequest);
 
         /// <summary>
         /// Update an Invoice
@@ -336,145 +335,31 @@ namespace CyberSource.Api
         /// <param name="id">The invoice number.</param>
         /// <param name="updateInvoiceRequest">Updating the invoice does not resend the invoice automatically. You must resend the invoice separately.</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesPut200Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesPut200Response>> UpdateInvoiceAsyncWithHttpInfo (string id, UpdateInvoiceRequest updateInvoiceRequest);
+        System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesPut200Response>> UpdateInvoiceAsyncWithHttpInfo(string id, UpdateInvoiceRequest updateInvoiceRequest);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class InvoicesApi : IInvoicesApi
+    public partial class InvoicesApi : ApiBase, IInvoicesApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoicesApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public InvoicesApi(string basePath)
+        public InvoicesApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoicesApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public InvoicesApi(Configuration configuration = null)
+        public InvoicesApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -483,7 +368,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
         /// <returns>InvoicingV2InvoicesPost201Response</returns>
-        public InvoicingV2InvoicesPost201Response CreateInvoice (CreateInvoiceRequest createInvoiceRequest)
+        public InvoicingV2InvoicesPost201Response CreateInvoice(CreateInvoiceRequest createInvoiceRequest)
         {
             logger.Debug("CALLING API \"CreateInvoice\" STARTED");
             this.SetStatusCode(null);
@@ -499,7 +384,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
         /// <returns>ApiResponse of InvoicingV2InvoicesPost201Response</returns>
-        public ApiResponse< InvoicingV2InvoicesPost201Response > CreateInvoiceWithHttpInfo (CreateInvoiceRequest createInvoiceRequest)
+        public ApiResponse< InvoicingV2InvoicesPost201Response > CreateInvoiceWithHttpInfo(CreateInvoiceRequest createInvoiceRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -513,7 +398,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -522,7 +407,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -531,7 +416,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -540,21 +425,21 @@ namespace CyberSource.Api
             if (createInvoiceRequest != null && createInvoiceRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createInvoiceRequest = (CreateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(createInvoiceRequest, createInvoiceRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createInvoiceRequest); // http body (model) parameter
+                createInvoiceRequest = (CreateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(createInvoiceRequest, createInvoiceRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createInvoiceRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createInvoiceRequest; // byte array
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateInvoice,CreateInvoiceAsync,CreateInvoiceWithHttpInfo,CreateInvoiceAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreateInvoice,CreateInvoiceAsync,CreateInvoiceWithHttpInfo,CreateInvoiceAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -563,13 +448,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreateInvoice,CreateInvoiceAsync,CreateInvoiceWithHttpInfo,CreateInvoiceAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreateInvoice,CreateInvoiceAsync,CreateInvoiceWithHttpInfo,CreateInvoiceAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -587,7 +472,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPost201Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesPost201Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -596,7 +481,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
         /// <returns>Task of InvoicingV2InvoicesPost201Response</returns>
-        public async System.Threading.Tasks.Task<InvoicingV2InvoicesPost201Response> CreateInvoiceAsync (CreateInvoiceRequest createInvoiceRequest)
+        public async Task<InvoicingV2InvoicesPost201Response> CreateInvoiceAsync(CreateInvoiceRequest createInvoiceRequest)
         {
             logger.Debug("CALLING API \"CreateInvoiceAsync\" STARTED");
             this.SetStatusCode(null);
@@ -613,7 +498,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createInvoiceRequest"></param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesPost201Response>> CreateInvoiceAsyncWithHttpInfo (CreateInvoiceRequest createInvoiceRequest)
+        public async Task<ApiResponse<InvoicingV2InvoicesPost201Response>> CreateInvoiceAsyncWithHttpInfo(CreateInvoiceRequest createInvoiceRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -627,7 +512,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -636,7 +521,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -645,7 +530,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -654,21 +539,21 @@ namespace CyberSource.Api
             if (createInvoiceRequest != null && createInvoiceRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createInvoiceRequest = (CreateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(createInvoiceRequest, createInvoiceRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createInvoiceRequest); // http body (model) parameter
+                createInvoiceRequest = (CreateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(createInvoiceRequest, createInvoiceRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createInvoiceRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createInvoiceRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateInvoice,CreateInvoiceAsync,CreateInvoiceWithHttpInfo,CreateInvoiceAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreateInvoice,CreateInvoiceAsync,CreateInvoiceWithHttpInfo,CreateInvoiceAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -677,17 +562,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreateInvoice,CreateInvoiceAsync,CreateInvoiceWithHttpInfo,CreateInvoiceAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreateInvoice,CreateInvoiceAsync,CreateInvoiceWithHttpInfo,CreateInvoiceAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -701,7 +586,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPost201Response), merchantConfig)); // Return statement
+                (InvoicingV2InvoicesPost201Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPost201Response))); // Return statement
         }
         /// <summary>
         /// Get a List of Invoices Provides a (filtered) list of invoices that have been created in your account. You can filter the list based on Invoice Status by setting the status query parameter to one of DRAFT, CREATED, SENT, PARTIAL, PAID or CANCELED.
@@ -711,7 +596,7 @@ namespace CyberSource.Api
         /// <param name="limit">Maximum number of items you would like returned.</param>
         /// <param name="status">The status of the invoice.  Possible values:   - DRAFT   - CREATED   - SENT   - PARTIAL   - PAID   - CANCELED  (optional)</param>
         /// <returns>InvoicingV2InvoicesAllGet200Response</returns>
-        public InvoicingV2InvoicesAllGet200Response GetAllInvoices (int? offset, int? limit, string status = null)
+        public InvoicingV2InvoicesAllGet200Response GetAllInvoices(int? offset, int? limit, string status = null)
         {
             logger.Debug("CALLING API \"GetAllInvoices\" STARTED");
             this.SetStatusCode(null);
@@ -729,7 +614,7 @@ namespace CyberSource.Api
         /// <param name="limit">Maximum number of items you would like returned.</param>
         /// <param name="status">The status of the invoice.  Possible values:   - DRAFT   - CREATED   - SENT   - PARTIAL   - PAID   - CANCELED  (optional)</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesAllGet200Response</returns>
-        public ApiResponse< InvoicingV2InvoicesAllGet200Response > GetAllInvoicesWithHttpInfo (int? offset, int? limit, string status = null)
+        public ApiResponse< InvoicingV2InvoicesAllGet200Response > GetAllInvoicesWithHttpInfo(int? offset, int? limit, string status = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -749,7 +634,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -758,7 +643,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -767,7 +652,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -775,19 +660,22 @@ namespace CyberSource.Api
 
             if (offset != null)
             {
-                localVarQueryParams.Add("offset", Configuration.ApiClient.ParameterToString(offset)); // query parameter
+                localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (limit != null)
             {
-                localVarQueryParams.Add("limit", Configuration.ApiClient.ParameterToString(limit)); // query parameter
+                localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (status != null)
             {
-                localVarQueryParams.Add("status", Configuration.ApiClient.ParameterToString(status)); // query parameter
+                localVarQueryParams.Add("status", ApiClient.ParameterToString(status)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -796,20 +684,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetAllInvoices,GetAllInvoicesAsync,GetAllInvoicesWithHttpInfo,GetAllInvoicesAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetAllInvoices,GetAllInvoicesAsync,GetAllInvoicesWithHttpInfo,GetAllInvoicesAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -818,12 +707,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetAllInvoices,GetAllInvoicesAsync,GetAllInvoicesWithHttpInfo,GetAllInvoicesAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetAllInvoices,GetAllInvoicesAsync,GetAllInvoicesWithHttpInfo,GetAllInvoicesAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -841,7 +729,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesAllGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesAllGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesAllGet200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesAllGet200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesAllGet200Response))); // Return statement
         }
 
         /// <summary>
@@ -852,7 +740,7 @@ namespace CyberSource.Api
         /// <param name="limit">Maximum number of items you would like returned.</param>
         /// <param name="status">The status of the invoice.  Possible values:   - DRAFT   - CREATED   - SENT   - PARTIAL   - PAID   - CANCELED  (optional)</param>
         /// <returns>Task of InvoicingV2InvoicesAllGet200Response</returns>
-        public async System.Threading.Tasks.Task<InvoicingV2InvoicesAllGet200Response> GetAllInvoicesAsync (int? offset, int? limit, string status = null)
+        public async Task<InvoicingV2InvoicesAllGet200Response> GetAllInvoicesAsync(int? offset, int? limit, string status = null)
         {
             logger.Debug("CALLING API \"GetAllInvoicesAsync\" STARTED");
             this.SetStatusCode(null);
@@ -871,7 +759,7 @@ namespace CyberSource.Api
         /// <param name="limit">Maximum number of items you would like returned.</param>
         /// <param name="status">The status of the invoice.  Possible values:   - DRAFT   - CREATED   - SENT   - PARTIAL   - PAID   - CANCELED  (optional)</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesAllGet200Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesAllGet200Response>> GetAllInvoicesAsyncWithHttpInfo (int? offset, int? limit, string status = null)
+        public async Task<ApiResponse<InvoicingV2InvoicesAllGet200Response>> GetAllInvoicesAsyncWithHttpInfo(int? offset, int? limit, string status = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -891,7 +779,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -900,7 +788,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -909,7 +797,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -917,19 +805,22 @@ namespace CyberSource.Api
 
             if (offset != null)
             {
-                localVarQueryParams.Add("offset", Configuration.ApiClient.ParameterToString(offset)); // query parameter
+                localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (limit != null)
             {
-                localVarQueryParams.Add("limit", Configuration.ApiClient.ParameterToString(limit)); // query parameter
+                localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (status != null)
             {
-                localVarQueryParams.Add("status", Configuration.ApiClient.ParameterToString(status)); // query parameter
+                localVarQueryParams.Add("status", ApiClient.ParameterToString(status)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -938,20 +829,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetAllInvoices,GetAllInvoicesAsync,GetAllInvoicesWithHttpInfo,GetAllInvoicesAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetAllInvoices,GetAllInvoicesAsync,GetAllInvoicesWithHttpInfo,GetAllInvoicesAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -960,16 +851,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetAllInvoices,GetAllInvoicesAsync,GetAllInvoicesWithHttpInfo,GetAllInvoicesAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetAllInvoices,GetAllInvoicesAsync,GetAllInvoicesWithHttpInfo,GetAllInvoicesAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -983,7 +873,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesAllGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesAllGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesAllGet200Response), merchantConfig)); // Return statement
+                (InvoicingV2InvoicesAllGet200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesAllGet200Response))); // Return statement
         }
         /// <summary>
         /// Get Invoice Details You can retrieve details of a specific invoice. This can be used to check the Invoice status and get a list of invoice payments in the invoice history section of the response. For each payment transaction you can use the Transaction Details API to get more details on the payment transaction.
@@ -991,7 +881,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>InvoicingV2InvoicesGet200Response</returns>
-        public InvoicingV2InvoicesGet200Response GetInvoice (string id)
+        public InvoicingV2InvoicesGet200Response GetInvoice(string id)
         {
             logger.Debug("CALLING API \"GetInvoice\" STARTED");
             this.SetStatusCode(null);
@@ -1007,7 +897,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesGet200Response</returns>
-        public ApiResponse< InvoicingV2InvoicesGet200Response > GetInvoiceWithHttpInfo (string id)
+        public ApiResponse< InvoicingV2InvoicesGet200Response > GetInvoiceWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1021,7 +911,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1030,7 +920,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1039,7 +929,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1047,9 +937,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1058,20 +949,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetInvoice,GetInvoiceAsync,GetInvoiceWithHttpInfo,GetInvoiceAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetInvoice,GetInvoiceAsync,GetInvoiceWithHttpInfo,GetInvoiceAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1080,12 +972,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetInvoice,GetInvoiceAsync,GetInvoiceWithHttpInfo,GetInvoiceAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetInvoice,GetInvoiceAsync,GetInvoiceWithHttpInfo,GetInvoiceAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1103,7 +994,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesGet200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesGet200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesGet200Response))); // Return statement
         }
 
         /// <summary>
@@ -1112,7 +1003,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of InvoicingV2InvoicesGet200Response</returns>
-        public async System.Threading.Tasks.Task<InvoicingV2InvoicesGet200Response> GetInvoiceAsync (string id)
+        public async Task<InvoicingV2InvoicesGet200Response> GetInvoiceAsync(string id)
         {
             logger.Debug("CALLING API \"GetInvoiceAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1129,7 +1020,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesGet200Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesGet200Response>> GetInvoiceAsyncWithHttpInfo (string id)
+        public async Task<ApiResponse<InvoicingV2InvoicesGet200Response>> GetInvoiceAsyncWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1143,7 +1034,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1152,7 +1043,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1161,7 +1052,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1169,9 +1060,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1180,20 +1072,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetInvoice,GetInvoiceAsync,GetInvoiceWithHttpInfo,GetInvoiceAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetInvoice,GetInvoiceAsync,GetInvoiceWithHttpInfo,GetInvoiceAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1202,16 +1094,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetInvoice,GetInvoiceAsync,GetInvoiceWithHttpInfo,GetInvoiceAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetInvoice,GetInvoiceAsync,GetInvoiceWithHttpInfo,GetInvoiceAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1225,7 +1116,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesGet200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesGet200Response), merchantConfig)); // Return statement
+                (InvoicingV2InvoicesGet200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesGet200Response))); // Return statement
         }
         /// <summary>
         /// Cancel an Invoice You can cancel an invoice if no payment is made to it. You cannot cancel partially or fully paid invoices.
@@ -1233,7 +1124,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>InvoicingV2InvoicesCancel200Response</returns>
-        public InvoicingV2InvoicesCancel200Response PerformCancelAction (string id)
+        public InvoicingV2InvoicesCancel200Response PerformCancelAction(string id)
         {
             logger.Debug("CALLING API \"PerformCancelAction\" STARTED");
             this.SetStatusCode(null);
@@ -1249,7 +1140,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesCancel200Response</returns>
-        public ApiResponse< InvoicingV2InvoicesCancel200Response > PerformCancelActionWithHttpInfo (string id)
+        public ApiResponse< InvoicingV2InvoicesCancel200Response > PerformCancelActionWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1263,7 +1154,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices/{id}/cancelation";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1272,7 +1163,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1281,7 +1172,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1289,9 +1180,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1300,20 +1192,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PerformCancelAction,PerformCancelActionAsync,PerformCancelActionWithHttpInfo,PerformCancelActionAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PerformCancelAction,PerformCancelActionAsync,PerformCancelActionWithHttpInfo,PerformCancelActionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1322,12 +1215,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PerformCancelAction,PerformCancelActionAsync,PerformCancelActionWithHttpInfo,PerformCancelActionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PerformCancelAction,PerformCancelActionAsync,PerformCancelActionWithHttpInfo,PerformCancelActionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1345,7 +1237,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesCancel200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesCancel200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesCancel200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesCancel200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesCancel200Response))); // Return statement
         }
 
         /// <summary>
@@ -1354,7 +1246,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of InvoicingV2InvoicesCancel200Response</returns>
-        public async System.Threading.Tasks.Task<InvoicingV2InvoicesCancel200Response> PerformCancelActionAsync (string id)
+        public async Task<InvoicingV2InvoicesCancel200Response> PerformCancelActionAsync(string id)
         {
             logger.Debug("CALLING API \"PerformCancelActionAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1371,7 +1263,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesCancel200Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesCancel200Response>> PerformCancelActionAsyncWithHttpInfo (string id)
+        public async Task<ApiResponse<InvoicingV2InvoicesCancel200Response>> PerformCancelActionAsyncWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1385,7 +1277,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices/{id}/cancelation";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1394,7 +1286,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1403,7 +1295,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1411,9 +1303,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1422,20 +1315,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PerformCancelAction,PerformCancelActionAsync,PerformCancelActionWithHttpInfo,PerformCancelActionAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PerformCancelAction,PerformCancelActionAsync,PerformCancelActionWithHttpInfo,PerformCancelActionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1444,16 +1337,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PerformCancelAction,PerformCancelActionAsync,PerformCancelActionWithHttpInfo,PerformCancelActionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PerformCancelAction,PerformCancelActionAsync,PerformCancelActionWithHttpInfo,PerformCancelActionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1467,7 +1359,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesCancel200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesCancel200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesCancel200Response), merchantConfig)); // Return statement
+                (InvoicingV2InvoicesCancel200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesCancel200Response))); // Return statement
         }
         /// <summary>
         /// Publish an Invoice You can publish an invoice in DRAFT status. After invoking this method, the invoice status is changed to CREATED.
@@ -1475,7 +1367,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>InvoicingV2InvoicesPublish200Response</returns>
-        public InvoicingV2InvoicesPublish200Response PerformPublishAction (string id)
+        public InvoicingV2InvoicesPublish200Response PerformPublishAction(string id)
         {
             logger.Debug("CALLING API \"PerformPublishAction\" STARTED");
             this.SetStatusCode(null);
@@ -1491,7 +1383,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesPublish200Response</returns>
-        public ApiResponse< InvoicingV2InvoicesPublish200Response > PerformPublishActionWithHttpInfo (string id)
+        public ApiResponse< InvoicingV2InvoicesPublish200Response > PerformPublishActionWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1505,7 +1397,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices/{id}/publication";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1514,7 +1406,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1523,7 +1415,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1531,9 +1423,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1542,20 +1435,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PerformPublishAction,PerformPublishActionAsync,PerformPublishActionWithHttpInfo,PerformPublishActionAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PerformPublishAction,PerformPublishActionAsync,PerformPublishActionWithHttpInfo,PerformPublishActionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1564,12 +1458,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PerformPublishAction,PerformPublishActionAsync,PerformPublishActionWithHttpInfo,PerformPublishActionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PerformPublishAction,PerformPublishActionAsync,PerformPublishActionWithHttpInfo,PerformPublishActionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1587,7 +1480,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesPublish200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesPublish200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPublish200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesPublish200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPublish200Response))); // Return statement
         }
 
         /// <summary>
@@ -1596,7 +1489,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of InvoicingV2InvoicesPublish200Response</returns>
-        public async System.Threading.Tasks.Task<InvoicingV2InvoicesPublish200Response> PerformPublishActionAsync (string id)
+        public async Task<InvoicingV2InvoicesPublish200Response> PerformPublishActionAsync(string id)
         {
             logger.Debug("CALLING API \"PerformPublishActionAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1613,7 +1506,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesPublish200Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesPublish200Response>> PerformPublishActionAsyncWithHttpInfo (string id)
+        public async Task<ApiResponse<InvoicingV2InvoicesPublish200Response>> PerformPublishActionAsyncWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1627,7 +1520,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices/{id}/publication";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1636,7 +1529,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1645,7 +1538,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1653,9 +1546,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1664,20 +1558,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PerformPublishAction,PerformPublishActionAsync,PerformPublishActionWithHttpInfo,PerformPublishActionAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PerformPublishAction,PerformPublishActionAsync,PerformPublishActionWithHttpInfo,PerformPublishActionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1686,16 +1580,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PerformPublishAction,PerformPublishActionAsync,PerformPublishActionWithHttpInfo,PerformPublishActionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PerformPublishAction,PerformPublishActionAsync,PerformPublishActionWithHttpInfo,PerformPublishActionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1709,7 +1602,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesPublish200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesPublish200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPublish200Response), merchantConfig)); // Return statement
+                (InvoicingV2InvoicesPublish200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPublish200Response))); // Return statement
         }
         /// <summary>
         /// Send an Invoice You can send an invoice in draft or created state or resend a sent or partially paid invoice. Fully paid or canceled invoices cannot be resent.
@@ -1717,7 +1610,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>InvoicingV2InvoicesSend200Response</returns>
-        public InvoicingV2InvoicesSend200Response PerformSendAction (string id)
+        public InvoicingV2InvoicesSend200Response PerformSendAction(string id)
         {
             logger.Debug("CALLING API \"PerformSendAction\" STARTED");
             this.SetStatusCode(null);
@@ -1733,7 +1626,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesSend200Response</returns>
-        public ApiResponse< InvoicingV2InvoicesSend200Response > PerformSendActionWithHttpInfo (string id)
+        public ApiResponse< InvoicingV2InvoicesSend200Response > PerformSendActionWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1747,7 +1640,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices/{id}/delivery";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1756,7 +1649,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1765,7 +1658,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1773,9 +1666,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1784,20 +1678,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PerformSendAction,PerformSendActionAsync,PerformSendActionWithHttpInfo,PerformSendActionAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PerformSendAction,PerformSendActionAsync,PerformSendActionWithHttpInfo,PerformSendActionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1806,12 +1701,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PerformSendAction,PerformSendActionAsync,PerformSendActionWithHttpInfo,PerformSendActionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PerformSendAction,PerformSendActionAsync,PerformSendActionWithHttpInfo,PerformSendActionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1829,7 +1723,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesSend200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesSend200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesSend200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesSend200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesSend200Response))); // Return statement
         }
 
         /// <summary>
@@ -1838,7 +1732,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of InvoicingV2InvoicesSend200Response</returns>
-        public async System.Threading.Tasks.Task<InvoicingV2InvoicesSend200Response> PerformSendActionAsync (string id)
+        public async Task<InvoicingV2InvoicesSend200Response> PerformSendActionAsync(string id)
         {
             logger.Debug("CALLING API \"PerformSendActionAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1855,7 +1749,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">The invoice number.</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesSend200Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesSend200Response>> PerformSendActionAsyncWithHttpInfo (string id)
+        public async Task<ApiResponse<InvoicingV2InvoicesSend200Response>> PerformSendActionAsyncWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1869,7 +1763,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices/{id}/delivery";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1878,7 +1772,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1887,7 +1781,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1895,9 +1789,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1906,20 +1801,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "PerformSendAction,PerformSendActionAsync,PerformSendActionWithHttpInfo,PerformSendActionAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PerformSendAction,PerformSendActionAsync,PerformSendActionWithHttpInfo,PerformSendActionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1928,16 +1823,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "PerformSendAction,PerformSendActionAsync,PerformSendActionWithHttpInfo,PerformSendActionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "PerformSendAction,PerformSendActionAsync,PerformSendActionWithHttpInfo,PerformSendActionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1951,7 +1845,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesSend200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesSend200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesSend200Response), merchantConfig)); // Return statement
+                (InvoicingV2InvoicesSend200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesSend200Response))); // Return statement
         }
         /// <summary>
         /// Update an Invoice You can update all information except the invoice number till any payment is received for an invoice. Invoices that are partially or fully paid or cancelled cannot be updated.
@@ -1960,7 +1854,7 @@ namespace CyberSource.Api
         /// <param name="id">The invoice number.</param>
         /// <param name="updateInvoiceRequest">Updating the invoice does not resend the invoice automatically. You must resend the invoice separately.</param>
         /// <returns>InvoicingV2InvoicesPut200Response</returns>
-        public InvoicingV2InvoicesPut200Response UpdateInvoice (string id, UpdateInvoiceRequest updateInvoiceRequest)
+        public InvoicingV2InvoicesPut200Response UpdateInvoice(string id, UpdateInvoiceRequest updateInvoiceRequest)
         {
             logger.Debug("CALLING API \"UpdateInvoice\" STARTED");
             this.SetStatusCode(null);
@@ -1977,7 +1871,7 @@ namespace CyberSource.Api
         /// <param name="id">The invoice number.</param>
         /// <param name="updateInvoiceRequest">Updating the invoice does not resend the invoice automatically. You must resend the invoice separately.</param>
         /// <returns>ApiResponse of InvoicingV2InvoicesPut200Response</returns>
-        public ApiResponse< InvoicingV2InvoicesPut200Response > UpdateInvoiceWithHttpInfo (string id, UpdateInvoiceRequest updateInvoiceRequest)
+        public ApiResponse< InvoicingV2InvoicesPut200Response > UpdateInvoiceWithHttpInfo(string id, UpdateInvoiceRequest updateInvoiceRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1997,7 +1891,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -2006,7 +1900,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -2015,7 +1909,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -2023,27 +1917,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (updateInvoiceRequest != null && updateInvoiceRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                updateInvoiceRequest = (UpdateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(updateInvoiceRequest, updateInvoiceRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(updateInvoiceRequest); // http body (model) parameter
+                updateInvoiceRequest = (UpdateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(updateInvoiceRequest, updateInvoiceRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(updateInvoiceRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = updateInvoiceRequest; // byte array
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "UpdateInvoice,UpdateInvoiceAsync,UpdateInvoiceWithHttpInfo,UpdateInvoiceAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateInvoice,UpdateInvoiceAsync,UpdateInvoiceWithHttpInfo,UpdateInvoiceAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -2052,13 +1947,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "UpdateInvoice,UpdateInvoiceAsync,UpdateInvoiceWithHttpInfo,UpdateInvoiceAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdateInvoice,UpdateInvoiceAsync,UpdateInvoiceWithHttpInfo,UpdateInvoiceAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -2076,7 +1971,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesPut200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesPut200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPut200Response),merchantConfig)); // Return statement
+                (InvoicingV2InvoicesPut200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPut200Response))); // Return statement
         }
 
         /// <summary>
@@ -2086,7 +1981,7 @@ namespace CyberSource.Api
         /// <param name="id">The invoice number.</param>
         /// <param name="updateInvoiceRequest">Updating the invoice does not resend the invoice automatically. You must resend the invoice separately.</param>
         /// <returns>Task of InvoicingV2InvoicesPut200Response</returns>
-        public async System.Threading.Tasks.Task<InvoicingV2InvoicesPut200Response> UpdateInvoiceAsync (string id, UpdateInvoiceRequest updateInvoiceRequest)
+        public async Task<InvoicingV2InvoicesPut200Response> UpdateInvoiceAsync(string id, UpdateInvoiceRequest updateInvoiceRequest)
         {
             logger.Debug("CALLING API \"UpdateInvoiceAsync\" STARTED");
             this.SetStatusCode(null);
@@ -2104,7 +1999,7 @@ namespace CyberSource.Api
         /// <param name="id">The invoice number.</param>
         /// <param name="updateInvoiceRequest">Updating the invoice does not resend the invoice automatically. You must resend the invoice separately.</param>
         /// <returns>Task of ApiResponse (InvoicingV2InvoicesPut200Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<InvoicingV2InvoicesPut200Response>> UpdateInvoiceAsyncWithHttpInfo (string id, UpdateInvoiceRequest updateInvoiceRequest)
+        public async Task<ApiResponse<InvoicingV2InvoicesPut200Response>> UpdateInvoiceAsyncWithHttpInfo(string id, UpdateInvoiceRequest updateInvoiceRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -2124,7 +2019,7 @@ namespace CyberSource.Api
             var localVarPath = $"/invoicing/v2/invoices/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -2133,7 +2028,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -2142,7 +2037,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -2150,27 +2045,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (updateInvoiceRequest != null && updateInvoiceRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                updateInvoiceRequest = (UpdateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(updateInvoiceRequest, updateInvoiceRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(updateInvoiceRequest); // http body (model) parameter
+                updateInvoiceRequest = (UpdateInvoiceRequest)sdkTracker.InsertDeveloperIdTracker(updateInvoiceRequest, updateInvoiceRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(updateInvoiceRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = updateInvoiceRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "UpdateInvoice,UpdateInvoiceAsync,UpdateInvoiceWithHttpInfo,UpdateInvoiceAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateInvoice,UpdateInvoiceAsync,UpdateInvoiceWithHttpInfo,UpdateInvoiceAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -2179,17 +2075,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "UpdateInvoice,UpdateInvoiceAsync,UpdateInvoiceWithHttpInfo,UpdateInvoiceAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdateInvoice,UpdateInvoiceAsync,UpdateInvoiceWithHttpInfo,UpdateInvoiceAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -2203,7 +2099,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<InvoicingV2InvoicesPut200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (InvoicingV2InvoicesPut200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPut200Response), merchantConfig)); // Return statement
+                (InvoicingV2InvoicesPut200Response) ApiClient.Deserialize(localVarResponse, typeof(InvoicingV2InvoicesPut200Response))); // Return statement
         }
     }
 }

@@ -12,12 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -37,7 +36,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="paymentCredentialsReference">The paymentCredentialsReference field contained within the Transient token returned from a successful Unified Checkout transaction. </param>
         /// <returns>string</returns>
-        string GetPaymentCredentialsForTransientToken (string paymentCredentialsReference);
+        string GetPaymentCredentialsForTransientToken(string paymentCredentialsReference);
 
         /// <summary>
         /// Get Payment Credentials
@@ -48,7 +47,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="paymentCredentialsReference">The paymentCredentialsReference field contained within the Transient token returned from a successful Unified Checkout transaction. </param>
         /// <returns>ApiResponse of string</returns>
-        ApiResponse<string> GetPaymentCredentialsForTransientTokenWithHttpInfo (string paymentCredentialsReference);
+        ApiResponse<string> GetPaymentCredentialsForTransientTokenWithHttpInfo(string paymentCredentialsReference);
         /// <summary>
         /// Get Transient Token Data
         /// </summary>
@@ -58,7 +57,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transientToken">Transient Token returned by the Unified Checkout application. </param>
         /// <returns></returns>
-        void GetTransactionForTransientToken (string transientToken);
+        void GetTransactionForTransientToken(string transientToken);
 
         /// <summary>
         /// Get Transient Token Data
@@ -69,7 +68,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transientToken">Transient Token returned by the Unified Checkout application. </param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> GetTransactionForTransientTokenWithHttpInfo (string transientToken);
+        ApiResponse<Object> GetTransactionForTransientTokenWithHttpInfo(string transientToken);
         /// <summary>
         /// Get Transient Token Data v2
         /// </summary>
@@ -79,7 +78,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jti">The jti within the Transient Token jwt returned by the Unified Checkout application </param>
         /// <returns></returns>
-        void GetTransactionForTransientTokenJTI (string jti);
+        void GetTransactionForTransientTokenJTI(string jti);
 
         /// <summary>
         /// Get Transient Token Data v2
@@ -90,7 +89,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jti">The jti within the Transient Token jwt returned by the Unified Checkout application </param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> GetTransactionForTransientTokenJTIWithHttpInfo (string jti);
+        ApiResponse<Object> GetTransactionForTransientTokenJTIWithHttpInfo(string jti);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -102,7 +101,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="paymentCredentialsReference">The paymentCredentialsReference field contained within the Transient token returned from a successful Unified Checkout transaction. </param>
         /// <returns>Task of string</returns>
-        System.Threading.Tasks.Task<string> GetPaymentCredentialsForTransientTokenAsync (string paymentCredentialsReference);
+        System.Threading.Tasks.Task<string> GetPaymentCredentialsForTransientTokenAsync(string paymentCredentialsReference);
 
         /// <summary>
         /// Get Payment Credentials
@@ -113,7 +112,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="paymentCredentialsReference">The paymentCredentialsReference field contained within the Transient token returned from a successful Unified Checkout transaction. </param>
         /// <returns>Task of ApiResponse (string)</returns>
-        System.Threading.Tasks.Task<ApiResponse<string>> GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo (string paymentCredentialsReference);
+        System.Threading.Tasks.Task<ApiResponse<string>> GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo(string paymentCredentialsReference);
         /// <summary>
         /// Get Transient Token Data
         /// </summary>
@@ -123,7 +122,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transientToken">Transient Token returned by the Unified Checkout application. </param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task GetTransactionForTransientTokenAsync (string transientToken);
+        System.Threading.Tasks.Task GetTransactionForTransientTokenAsync(string transientToken);
 
         /// <summary>
         /// Get Transient Token Data
@@ -134,7 +133,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transientToken">Transient Token returned by the Unified Checkout application. </param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> GetTransactionForTransientTokenAsyncWithHttpInfo (string transientToken);
+        System.Threading.Tasks.Task<ApiResponse<Object>> GetTransactionForTransientTokenAsyncWithHttpInfo(string transientToken);
         /// <summary>
         /// Get Transient Token Data v2
         /// </summary>
@@ -144,7 +143,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jti">The jti within the Transient Token jwt returned by the Unified Checkout application </param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task GetTransactionForTransientTokenJTIAsync (string jti);
+        System.Threading.Tasks.Task GetTransactionForTransientTokenJTIAsync(string jti);
 
         /// <summary>
         /// Get Transient Token Data v2
@@ -155,145 +154,31 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jti">The jti within the Transient Token jwt returned by the Unified Checkout application </param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<Object>> GetTransactionForTransientTokenJTIAsyncWithHttpInfo (string jti);
+        System.Threading.Tasks.Task<ApiResponse<Object>> GetTransactionForTransientTokenJTIAsyncWithHttpInfo(string jti);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class TransientTokenDataV2Api : ITransientTokenDataV2Api
+    public partial class TransientTokenDataV2Api : ApiBase, ITransientTokenDataV2Api
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TransientTokenDataV2Api"/> class.
         /// </summary>
         /// <returns></returns>
-        public TransientTokenDataV2Api(string basePath)
+        public TransientTokenDataV2Api(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TransientTokenDataV2Api"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public TransientTokenDataV2Api(Configuration configuration = null)
+        public TransientTokenDataV2Api(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -302,7 +187,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="paymentCredentialsReference">The paymentCredentialsReference field contained within the Transient token returned from a successful Unified Checkout transaction. </param>
         /// <returns>string</returns>
-        public string GetPaymentCredentialsForTransientToken (string paymentCredentialsReference)
+        public string GetPaymentCredentialsForTransientToken(string paymentCredentialsReference)
         {
             logger.Debug("CALLING API \"GetPaymentCredentialsForTransientToken\" STARTED");
             this.SetStatusCode(null);
@@ -318,7 +203,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="paymentCredentialsReference">The paymentCredentialsReference field contained within the Transient token returned from a successful Unified Checkout transaction. </param>
         /// <returns>ApiResponse of string</returns>
-        public ApiResponse< string > GetPaymentCredentialsForTransientTokenWithHttpInfo (string paymentCredentialsReference)
+        public ApiResponse< string > GetPaymentCredentialsForTransientTokenWithHttpInfo(string paymentCredentialsReference)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -332,7 +217,7 @@ namespace CyberSource.Api
             var localVarPath = $"/flex/v2/payment-credentials/{paymentCredentialsReference}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -341,13 +226,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/jwt"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -355,9 +240,10 @@ namespace CyberSource.Api
 
             if (paymentCredentialsReference != null)
             {
-                localVarPathParams.Add("paymentCredentialsReference", Configuration.ApiClient.ParameterToString(paymentCredentialsReference)); // path parameter
+                localVarPathParams.Add("paymentCredentialsReference", ApiClient.ParameterToString(paymentCredentialsReference)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -366,20 +252,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetPaymentCredentialsForTransientToken,GetPaymentCredentialsForTransientTokenAsync,GetPaymentCredentialsForTransientTokenWithHttpInfo,GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetPaymentCredentialsForTransientToken,GetPaymentCredentialsForTransientTokenAsync,GetPaymentCredentialsForTransientTokenWithHttpInfo,GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -388,12 +275,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetPaymentCredentialsForTransientToken,GetPaymentCredentialsForTransientTokenAsync,GetPaymentCredentialsForTransientTokenWithHttpInfo,GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetPaymentCredentialsForTransientToken,GetPaymentCredentialsForTransientTokenAsync,GetPaymentCredentialsForTransientTokenWithHttpInfo,GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -411,7 +297,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<string>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (string) Configuration.ApiClient.Deserialize(localVarResponse, typeof(string),merchantConfig)); // Return statement
+                (string) ApiClient.Deserialize(localVarResponse, typeof(string))); // Return statement
         }
 
         /// <summary>
@@ -420,7 +306,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="paymentCredentialsReference">The paymentCredentialsReference field contained within the Transient token returned from a successful Unified Checkout transaction. </param>
         /// <returns>Task of string</returns>
-        public async System.Threading.Tasks.Task<string> GetPaymentCredentialsForTransientTokenAsync (string paymentCredentialsReference)
+        public async Task<string> GetPaymentCredentialsForTransientTokenAsync(string paymentCredentialsReference)
         {
             logger.Debug("CALLING API \"GetPaymentCredentialsForTransientTokenAsync\" STARTED");
             this.SetStatusCode(null);
@@ -437,7 +323,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="paymentCredentialsReference">The paymentCredentialsReference field contained within the Transient token returned from a successful Unified Checkout transaction. </param>
         /// <returns>Task of ApiResponse (string)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<string>> GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo (string paymentCredentialsReference)
+        public async Task<ApiResponse<string>> GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo(string paymentCredentialsReference)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -451,7 +337,7 @@ namespace CyberSource.Api
             var localVarPath = $"/flex/v2/payment-credentials/{paymentCredentialsReference}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -460,13 +346,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/jwt"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -474,9 +360,10 @@ namespace CyberSource.Api
 
             if (paymentCredentialsReference != null)
             {
-                localVarPathParams.Add("paymentCredentialsReference", Configuration.ApiClient.ParameterToString(paymentCredentialsReference)); // path parameter
+                localVarPathParams.Add("paymentCredentialsReference", ApiClient.ParameterToString(paymentCredentialsReference)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -485,20 +372,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetPaymentCredentialsForTransientToken,GetPaymentCredentialsForTransientTokenAsync,GetPaymentCredentialsForTransientTokenWithHttpInfo,GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetPaymentCredentialsForTransientToken,GetPaymentCredentialsForTransientTokenAsync,GetPaymentCredentialsForTransientTokenWithHttpInfo,GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -507,16 +394,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetPaymentCredentialsForTransientToken,GetPaymentCredentialsForTransientTokenAsync,GetPaymentCredentialsForTransientTokenWithHttpInfo,GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetPaymentCredentialsForTransientToken,GetPaymentCredentialsForTransientTokenAsync,GetPaymentCredentialsForTransientTokenWithHttpInfo,GetPaymentCredentialsForTransientTokenAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -530,7 +416,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<string>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (string) Configuration.ApiClient.Deserialize(localVarResponse, typeof(string), merchantConfig)); // Return statement
+                (string) ApiClient.Deserialize(localVarResponse, typeof(string))); // Return statement
         }
         /// <summary>
         /// Get Transient Token Data Retrieve the data captured by Unified Checkout. This API is used to retrieve the detailed data represented by the Transient Token. This API will not return PCI payment data (PAN). Include the Request ID in the GET request to retrieve the transaction details.
@@ -538,7 +424,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transientToken">Transient Token returned by the Unified Checkout application. </param>
         /// <returns></returns>
-        public void GetTransactionForTransientToken (string transientToken)
+        public void GetTransactionForTransientToken(string transientToken)
         {
             logger.Debug("CALLING API \"GetTransactionForTransientToken\" STARTED");
             this.SetStatusCode(null);
@@ -551,7 +437,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transientToken">Transient Token returned by the Unified Checkout application. </param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> GetTransactionForTransientTokenWithHttpInfo (string transientToken)
+        public ApiResponse<Object> GetTransactionForTransientTokenWithHttpInfo(string transientToken)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -565,7 +451,7 @@ namespace CyberSource.Api
             var localVarPath = $"/up/v1/payment-details/{transientToken}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -574,13 +460,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -588,9 +474,10 @@ namespace CyberSource.Api
 
             if (transientToken != null)
             {
-                localVarPathParams.Add("transientToken", Configuration.ApiClient.ParameterToString(transientToken)); // path parameter
+                localVarPathParams.Add("transientToken", ApiClient.ParameterToString(transientToken)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -599,20 +486,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetTransactionForTransientToken,GetTransactionForTransientTokenAsync,GetTransactionForTransientTokenWithHttpInfo,GetTransactionForTransientTokenAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetTransactionForTransientToken,GetTransactionForTransientTokenAsync,GetTransactionForTransientTokenWithHttpInfo,GetTransactionForTransientTokenAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -621,12 +509,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetTransactionForTransientToken,GetTransactionForTransientTokenAsync,GetTransactionForTransientTokenWithHttpInfo,GetTransactionForTransientTokenAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetTransactionForTransientToken,GetTransactionForTransientTokenAsync,GetTransactionForTransientTokenWithHttpInfo,GetTransactionForTransientTokenAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -654,7 +541,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transientToken">Transient Token returned by the Unified Checkout application. </param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task GetTransactionForTransientTokenAsync (string transientToken)
+        public async Task GetTransactionForTransientTokenAsync(string transientToken)
         {
             logger.Debug("CALLING API \"GetTransactionForTransientTokenAsync\" STARTED");
             this.SetStatusCode(null);
@@ -668,7 +555,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="transientToken">Transient Token returned by the Unified Checkout application. </param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> GetTransactionForTransientTokenAsyncWithHttpInfo (string transientToken)
+        public async Task<ApiResponse<Object>> GetTransactionForTransientTokenAsyncWithHttpInfo(string transientToken)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -682,7 +569,7 @@ namespace CyberSource.Api
             var localVarPath = $"/up/v1/payment-details/{transientToken}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -691,13 +578,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -705,9 +592,10 @@ namespace CyberSource.Api
 
             if (transientToken != null)
             {
-                localVarPathParams.Add("transientToken", Configuration.ApiClient.ParameterToString(transientToken)); // path parameter
+                localVarPathParams.Add("transientToken", ApiClient.ParameterToString(transientToken)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -716,20 +604,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetTransactionForTransientToken,GetTransactionForTransientTokenAsync,GetTransactionForTransientTokenWithHttpInfo,GetTransactionForTransientTokenAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetTransactionForTransientToken,GetTransactionForTransientTokenAsync,GetTransactionForTransientTokenWithHttpInfo,GetTransactionForTransientTokenAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -738,16 +626,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetTransactionForTransientToken,GetTransactionForTransientTokenAsync,GetTransactionForTransientTokenWithHttpInfo,GetTransactionForTransientTokenAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetTransactionForTransientToken,GetTransactionForTransientTokenAsync,GetTransactionForTransientTokenWithHttpInfo,GetTransactionForTransientTokenAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -770,7 +657,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jti">The jti within the Transient Token jwt returned by the Unified Checkout application </param>
         /// <returns></returns>
-        public void GetTransactionForTransientTokenJTI (string jti)
+        public void GetTransactionForTransientTokenJTI(string jti)
         {
             logger.Debug("CALLING API \"GetTransactionForTransientTokenJTI\" STARTED");
             this.SetStatusCode(null);
@@ -783,7 +670,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jti">The jti within the Transient Token jwt returned by the Unified Checkout application </param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<Object> GetTransactionForTransientTokenJTIWithHttpInfo (string jti)
+        public ApiResponse<Object> GetTransactionForTransientTokenJTIWithHttpInfo(string jti)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -797,7 +684,7 @@ namespace CyberSource.Api
             var localVarPath = $"/flex/v2/payment-details/{jti}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -806,13 +693,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -820,9 +707,10 @@ namespace CyberSource.Api
 
             if (jti != null)
             {
-                localVarPathParams.Add("jti", Configuration.ApiClient.ParameterToString(jti)); // path parameter
+                localVarPathParams.Add("jti", ApiClient.ParameterToString(jti)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -831,20 +719,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetTransactionForTransientTokenJTI,GetTransactionForTransientTokenJTIAsync,GetTransactionForTransientTokenJTIWithHttpInfo,GetTransactionForTransientTokenJTIAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetTransactionForTransientTokenJTI,GetTransactionForTransientTokenJTIAsync,GetTransactionForTransientTokenJTIWithHttpInfo,GetTransactionForTransientTokenJTIAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -853,12 +742,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetTransactionForTransientTokenJTI,GetTransactionForTransientTokenJTIAsync,GetTransactionForTransientTokenJTIWithHttpInfo,GetTransactionForTransientTokenJTIAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetTransactionForTransientTokenJTI,GetTransactionForTransientTokenJTIAsync,GetTransactionForTransientTokenJTIWithHttpInfo,GetTransactionForTransientTokenJTIAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -886,7 +774,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jti">The jti within the Transient Token jwt returned by the Unified Checkout application </param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task GetTransactionForTransientTokenJTIAsync (string jti)
+        public async Task GetTransactionForTransientTokenJTIAsync(string jti)
         {
             logger.Debug("CALLING API \"GetTransactionForTransientTokenJTIAsync\" STARTED");
             this.SetStatusCode(null);
@@ -900,7 +788,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="jti">The jti within the Transient Token jwt returned by the Unified Checkout application </param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<Object>> GetTransactionForTransientTokenJTIAsyncWithHttpInfo (string jti)
+        public async Task<ApiResponse<Object>> GetTransactionForTransientTokenJTIAsyncWithHttpInfo(string jti)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -914,7 +802,7 @@ namespace CyberSource.Api
             var localVarPath = $"/flex/v2/payment-details/{jti}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -923,13 +811,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -937,9 +825,10 @@ namespace CyberSource.Api
 
             if (jti != null)
             {
-                localVarPathParams.Add("jti", Configuration.ApiClient.ParameterToString(jti)); // path parameter
+                localVarPathParams.Add("jti", ApiClient.ParameterToString(jti)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -948,20 +837,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetTransactionForTransientTokenJTI,GetTransactionForTransientTokenJTIAsync,GetTransactionForTransientTokenJTIWithHttpInfo,GetTransactionForTransientTokenJTIAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetTransactionForTransientTokenJTI,GetTransactionForTransientTokenJTIAsync,GetTransactionForTransientTokenJTIWithHttpInfo,GetTransactionForTransientTokenJTIAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -970,16 +859,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetTransactionForTransientTokenJTI,GetTransactionForTransientTokenJTIAsync,GetTransactionForTransientTokenJTIWithHttpInfo,GetTransactionForTransientTokenJTIAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetTransactionForTransientTokenJTI,GetTransactionForTransientTokenJTIAsync,GetTransactionForTransientTokenJTIWithHttpInfo,GetTransactionForTransientTokenJTIAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {

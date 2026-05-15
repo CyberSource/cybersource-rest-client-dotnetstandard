@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -37,7 +36,7 @@ namespace CyberSource.Api
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>TssV2GetEmvTags200Response</returns>
-        TssV2GetEmvTags200Response GetEmvTags ();
+        TssV2GetEmvTags200Response GetEmvTags();
 
         /// <summary>
         /// Retrieve the EMV Dictionary
@@ -47,7 +46,7 @@ namespace CyberSource.Api
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of TssV2GetEmvTags200Response</returns>
-        ApiResponse<TssV2GetEmvTags200Response> GetEmvTagsWithHttpInfo ();
+        ApiResponse<TssV2GetEmvTags200Response> GetEmvTagsWithHttpInfo();
         /// <summary>
         /// Parse an EMV String
         /// </summary>
@@ -57,7 +56,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>TssV2PostEmvTags200Response</returns>
-        TssV2PostEmvTags200Response ParseEmvTags (Body body);
+        TssV2PostEmvTags200Response ParseEmvTags(Body body);
 
         /// <summary>
         /// Parse an EMV String
@@ -68,7 +67,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>ApiResponse of TssV2PostEmvTags200Response</returns>
-        ApiResponse<TssV2PostEmvTags200Response> ParseEmvTagsWithHttpInfo (Body body);
+        ApiResponse<TssV2PostEmvTags200Response> ParseEmvTagsWithHttpInfo(Body body);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -79,7 +78,7 @@ namespace CyberSource.Api
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of TssV2GetEmvTags200Response</returns>
-        System.Threading.Tasks.Task<TssV2GetEmvTags200Response> GetEmvTagsAsync ();
+        System.Threading.Tasks.Task<TssV2GetEmvTags200Response> GetEmvTagsAsync();
 
         /// <summary>
         /// Retrieve the EMV Dictionary
@@ -89,7 +88,7 @@ namespace CyberSource.Api
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (TssV2GetEmvTags200Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<TssV2GetEmvTags200Response>> GetEmvTagsAsyncWithHttpInfo ();
+        System.Threading.Tasks.Task<ApiResponse<TssV2GetEmvTags200Response>> GetEmvTagsAsyncWithHttpInfo();
         /// <summary>
         /// Parse an EMV String
         /// </summary>
@@ -99,7 +98,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>Task of TssV2PostEmvTags200Response</returns>
-        System.Threading.Tasks.Task<TssV2PostEmvTags200Response> ParseEmvTagsAsync (Body body);
+        System.Threading.Tasks.Task<TssV2PostEmvTags200Response> ParseEmvTagsAsync(Body body);
 
         /// <summary>
         /// Parse an EMV String
@@ -110,145 +109,31 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>Task of ApiResponse (TssV2PostEmvTags200Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<TssV2PostEmvTags200Response>> ParseEmvTagsAsyncWithHttpInfo (Body body);
+        System.Threading.Tasks.Task<ApiResponse<TssV2PostEmvTags200Response>> ParseEmvTagsAsyncWithHttpInfo(Body body);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class EMVTagDetailsApi : IEMVTagDetailsApi
+    public partial class EMVTagDetailsApi : ApiBase, IEMVTagDetailsApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="EMVTagDetailsApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public EMVTagDetailsApi(string basePath)
+        public EMVTagDetailsApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EMVTagDetailsApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public EMVTagDetailsApi(Configuration configuration = null)
+        public EMVTagDetailsApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -256,7 +141,7 @@ namespace CyberSource.Api
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>TssV2GetEmvTags200Response</returns>
-        public TssV2GetEmvTags200Response GetEmvTags ()
+        public TssV2GetEmvTags200Response GetEmvTags()
         {
             logger.Debug("CALLING API \"GetEmvTags\" STARTED");
             this.SetStatusCode(null);
@@ -271,7 +156,7 @@ namespace CyberSource.Api
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of TssV2GetEmvTags200Response</returns>
-        public ApiResponse< TssV2GetEmvTags200Response > GetEmvTagsWithHttpInfo ()
+        public ApiResponse< TssV2GetEmvTags200Response > GetEmvTagsWithHttpInfo()
         {
             LogUtility logUtility = new LogUtility();
 
@@ -279,7 +164,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tss/v2/transactions/emvTagDetails";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -288,13 +173,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -308,20 +193,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetEmvTags,GetEmvTagsAsync,GetEmvTagsWithHttpInfo,GetEmvTagsAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetEmvTags,GetEmvTagsAsync,GetEmvTagsWithHttpInfo,GetEmvTagsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -330,12 +216,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetEmvTags,GetEmvTagsAsync,GetEmvTagsWithHttpInfo,GetEmvTagsAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetEmvTags,GetEmvTagsAsync,GetEmvTagsWithHttpInfo,GetEmvTagsAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -353,7 +238,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<TssV2GetEmvTags200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (TssV2GetEmvTags200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TssV2GetEmvTags200Response),merchantConfig)); // Return statement
+                (TssV2GetEmvTags200Response) ApiClient.Deserialize(localVarResponse, typeof(TssV2GetEmvTags200Response))); // Return statement
         }
 
         /// <summary>
@@ -361,7 +246,7 @@ namespace CyberSource.Api
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of TssV2GetEmvTags200Response</returns>
-        public async System.Threading.Tasks.Task<TssV2GetEmvTags200Response> GetEmvTagsAsync ()
+        public async Task<TssV2GetEmvTags200Response> GetEmvTagsAsync()
         {
             logger.Debug("CALLING API \"GetEmvTagsAsync\" STARTED");
             this.SetStatusCode(null);
@@ -377,7 +262,7 @@ namespace CyberSource.Api
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (TssV2GetEmvTags200Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<TssV2GetEmvTags200Response>> GetEmvTagsAsyncWithHttpInfo ()
+        public async Task<ApiResponse<TssV2GetEmvTags200Response>> GetEmvTagsAsyncWithHttpInfo()
         {
             LogUtility logUtility = new LogUtility();
 
@@ -385,7 +270,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tss/v2/transactions/emvTagDetails";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -394,13 +279,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -414,20 +299,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetEmvTags,GetEmvTagsAsync,GetEmvTagsWithHttpInfo,GetEmvTagsAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetEmvTags,GetEmvTagsAsync,GetEmvTagsWithHttpInfo,GetEmvTagsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -436,16 +321,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetEmvTags,GetEmvTagsAsync,GetEmvTagsWithHttpInfo,GetEmvTagsAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetEmvTags,GetEmvTagsAsync,GetEmvTagsWithHttpInfo,GetEmvTagsAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -459,7 +343,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<TssV2GetEmvTags200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (TssV2GetEmvTags200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TssV2GetEmvTags200Response), merchantConfig)); // Return statement
+                (TssV2GetEmvTags200Response) ApiClient.Deserialize(localVarResponse, typeof(TssV2GetEmvTags200Response))); // Return statement
         }
         /// <summary>
         /// Parse an EMV String Pass an EMV Tag-Length-Value (TLV) string for parsing.
@@ -467,7 +351,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>TssV2PostEmvTags200Response</returns>
-        public TssV2PostEmvTags200Response ParseEmvTags (Body body)
+        public TssV2PostEmvTags200Response ParseEmvTags(Body body)
         {
             logger.Debug("CALLING API \"ParseEmvTags\" STARTED");
             this.SetStatusCode(null);
@@ -483,7 +367,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>ApiResponse of TssV2PostEmvTags200Response</returns>
-        public ApiResponse< TssV2PostEmvTags200Response > ParseEmvTagsWithHttpInfo (Body body)
+        public ApiResponse< TssV2PostEmvTags200Response > ParseEmvTagsWithHttpInfo(Body body)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -497,7 +381,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tss/v2/transactions/emvTagDetails";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -506,13 +390,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -521,21 +405,21 @@ namespace CyberSource.Api
             if (body != null && body.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                body = (Body)sdkTracker.InsertDeveloperIdTracker(body, body.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(body); // http body (model) parameter
+                body = (Body)sdkTracker.InsertDeveloperIdTracker(body, body.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(body); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = body; // byte array
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ParseEmvTags,ParseEmvTagsAsync,ParseEmvTagsWithHttpInfo,ParseEmvTagsAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "ParseEmvTags,ParseEmvTagsAsync,ParseEmvTagsWithHttpInfo,ParseEmvTagsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -544,13 +428,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "ParseEmvTags,ParseEmvTagsAsync,ParseEmvTagsWithHttpInfo,ParseEmvTagsAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "ParseEmvTags,ParseEmvTagsAsync,ParseEmvTagsWithHttpInfo,ParseEmvTagsAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -568,7 +452,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<TssV2PostEmvTags200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (TssV2PostEmvTags200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TssV2PostEmvTags200Response),merchantConfig)); // Return statement
+                (TssV2PostEmvTags200Response) ApiClient.Deserialize(localVarResponse, typeof(TssV2PostEmvTags200Response))); // Return statement
         }
 
         /// <summary>
@@ -577,7 +461,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>Task of TssV2PostEmvTags200Response</returns>
-        public async System.Threading.Tasks.Task<TssV2PostEmvTags200Response> ParseEmvTagsAsync (Body body)
+        public async Task<TssV2PostEmvTags200Response> ParseEmvTagsAsync(Body body)
         {
             logger.Debug("CALLING API \"ParseEmvTagsAsync\" STARTED");
             this.SetStatusCode(null);
@@ -594,7 +478,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="body"></param>
         /// <returns>Task of ApiResponse (TssV2PostEmvTags200Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<TssV2PostEmvTags200Response>> ParseEmvTagsAsyncWithHttpInfo (Body body)
+        public async Task<ApiResponse<TssV2PostEmvTags200Response>> ParseEmvTagsAsyncWithHttpInfo(Body body)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -608,7 +492,7 @@ namespace CyberSource.Api
             var localVarPath = $"/tss/v2/transactions/emvTagDetails";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -617,13 +501,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -632,21 +516,21 @@ namespace CyberSource.Api
             if (body != null && body.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                body = (Body)sdkTracker.InsertDeveloperIdTracker(body, body.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(body); // http body (model) parameter
+                body = (Body)sdkTracker.InsertDeveloperIdTracker(body, body.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(body); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = body; // byte array
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ParseEmvTags,ParseEmvTagsAsync,ParseEmvTagsWithHttpInfo,ParseEmvTagsAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "ParseEmvTags,ParseEmvTagsAsync,ParseEmvTagsWithHttpInfo,ParseEmvTagsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -655,17 +539,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "ParseEmvTags,ParseEmvTagsAsync,ParseEmvTagsWithHttpInfo,ParseEmvTagsAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "ParseEmvTags,ParseEmvTagsAsync,ParseEmvTagsWithHttpInfo,ParseEmvTagsAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -679,7 +563,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<TssV2PostEmvTags200Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (TssV2PostEmvTags200Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(TssV2PostEmvTags200Response), merchantConfig)); // Return statement
+                (TssV2PostEmvTags200Response) ApiClient.Deserialize(localVarResponse, typeof(TssV2PostEmvTags200Response))); // Return statement
         }
     }
 }

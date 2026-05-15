@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -39,7 +38,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <param name="authReversalRequest"></param>
         /// <returns>PtsV2PaymentsReversalsPost201Response</returns>
-        PtsV2PaymentsReversalsPost201Response AuthReversal (string id, AuthReversalRequest authReversalRequest);
+        PtsV2PaymentsReversalsPost201Response AuthReversal(string id, AuthReversalRequest authReversalRequest);
 
         /// <summary>
         /// Process an Authorization Reversal
@@ -51,7 +50,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <param name="authReversalRequest"></param>
         /// <returns>ApiResponse of PtsV2PaymentsReversalsPost201Response</returns>
-        ApiResponse<PtsV2PaymentsReversalsPost201Response> AuthReversalWithHttpInfo (string id, AuthReversalRequest authReversalRequest);
+        ApiResponse<PtsV2PaymentsReversalsPost201Response> AuthReversalWithHttpInfo(string id, AuthReversalRequest authReversalRequest);
         /// <summary>
         /// Timeout Reversal
         /// </summary>
@@ -61,7 +60,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitReversalRequest"></param>
         /// <returns>PtsV2PaymentsReversalsPost201Response</returns>
-        PtsV2PaymentsReversalsPost201Response MitReversal (MitReversalRequest mitReversalRequest);
+        PtsV2PaymentsReversalsPost201Response MitReversal(MitReversalRequest mitReversalRequest);
 
         /// <summary>
         /// Timeout Reversal
@@ -72,7 +71,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitReversalRequest"></param>
         /// <returns>ApiResponse of PtsV2PaymentsReversalsPost201Response</returns>
-        ApiResponse<PtsV2PaymentsReversalsPost201Response> MitReversalWithHttpInfo (MitReversalRequest mitReversalRequest);
+        ApiResponse<PtsV2PaymentsReversalsPost201Response> MitReversalWithHttpInfo(MitReversalRequest mitReversalRequest);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -85,7 +84,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <param name="authReversalRequest"></param>
         /// <returns>Task of PtsV2PaymentsReversalsPost201Response</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsReversalsPost201Response> AuthReversalAsync (string id, AuthReversalRequest authReversalRequest);
+        System.Threading.Tasks.Task<PtsV2PaymentsReversalsPost201Response> AuthReversalAsync(string id, AuthReversalRequest authReversalRequest);
 
         /// <summary>
         /// Process an Authorization Reversal
@@ -97,7 +96,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <param name="authReversalRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsReversalsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsReversalsPost201Response>> AuthReversalAsyncWithHttpInfo (string id, AuthReversalRequest authReversalRequest);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsReversalsPost201Response>> AuthReversalAsyncWithHttpInfo(string id, AuthReversalRequest authReversalRequest);
         /// <summary>
         /// Timeout Reversal
         /// </summary>
@@ -107,7 +106,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitReversalRequest"></param>
         /// <returns>Task of PtsV2PaymentsReversalsPost201Response</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsReversalsPost201Response> MitReversalAsync (MitReversalRequest mitReversalRequest);
+        System.Threading.Tasks.Task<PtsV2PaymentsReversalsPost201Response> MitReversalAsync(MitReversalRequest mitReversalRequest);
 
         /// <summary>
         /// Timeout Reversal
@@ -118,145 +117,31 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitReversalRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsReversalsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsReversalsPost201Response>> MitReversalAsyncWithHttpInfo (MitReversalRequest mitReversalRequest);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsReversalsPost201Response>> MitReversalAsyncWithHttpInfo(MitReversalRequest mitReversalRequest);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class ReversalApi : IReversalApi
+    public partial class ReversalApi : ApiBase, IReversalApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ReversalApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public ReversalApi(string basePath)
+        public ReversalApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReversalApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public ReversalApi(Configuration configuration = null)
+        public ReversalApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -266,7 +151,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <param name="authReversalRequest"></param>
         /// <returns>PtsV2PaymentsReversalsPost201Response</returns>
-        public PtsV2PaymentsReversalsPost201Response AuthReversal (string id, AuthReversalRequest authReversalRequest)
+        public PtsV2PaymentsReversalsPost201Response AuthReversal(string id, AuthReversalRequest authReversalRequest)
         {
             logger.Debug("CALLING API \"AuthReversal\" STARTED");
             this.SetStatusCode(null);
@@ -283,7 +168,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <param name="authReversalRequest"></param>
         /// <returns>ApiResponse of PtsV2PaymentsReversalsPost201Response</returns>
-        public ApiResponse< PtsV2PaymentsReversalsPost201Response > AuthReversalWithHttpInfo (string id, AuthReversalRequest authReversalRequest)
+        public ApiResponse< PtsV2PaymentsReversalsPost201Response > AuthReversalWithHttpInfo(string id, AuthReversalRequest authReversalRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -303,7 +188,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payments/{id}/reversals";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -312,13 +197,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -326,27 +211,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (authReversalRequest != null && authReversalRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                authReversalRequest = (AuthReversalRequest)sdkTracker.InsertDeveloperIdTracker(authReversalRequest, authReversalRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(authReversalRequest); // http body (model) parameter
+                authReversalRequest = (AuthReversalRequest)sdkTracker.InsertDeveloperIdTracker(authReversalRequest, authReversalRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(authReversalRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = authReversalRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "AuthReversal,AuthReversalAsync,AuthReversalWithHttpInfo,AuthReversalAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "AuthReversal,AuthReversalAsync,AuthReversalWithHttpInfo,AuthReversalAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -355,13 +241,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "AuthReversal,AuthReversalAsync,AuthReversalWithHttpInfo,AuthReversalAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "AuthReversal,AuthReversalAsync,AuthReversalWithHttpInfo,AuthReversalAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -379,7 +265,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsReversalsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsReversalsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsReversalsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -389,7 +275,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <param name="authReversalRequest"></param>
         /// <returns>Task of PtsV2PaymentsReversalsPost201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsReversalsPost201Response> AuthReversalAsync (string id, AuthReversalRequest authReversalRequest)
+        public async Task<PtsV2PaymentsReversalsPost201Response> AuthReversalAsync(string id, AuthReversalRequest authReversalRequest)
         {
             logger.Debug("CALLING API \"AuthReversalAsync\" STARTED");
             this.SetStatusCode(null);
@@ -407,7 +293,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <param name="authReversalRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsReversalsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsReversalsPost201Response>> AuthReversalAsyncWithHttpInfo (string id, AuthReversalRequest authReversalRequest)
+        public async Task<ApiResponse<PtsV2PaymentsReversalsPost201Response>> AuthReversalAsyncWithHttpInfo(string id, AuthReversalRequest authReversalRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -427,7 +313,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payments/{id}/reversals";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -436,13 +322,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -450,27 +336,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (authReversalRequest != null && authReversalRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                authReversalRequest = (AuthReversalRequest)sdkTracker.InsertDeveloperIdTracker(authReversalRequest, authReversalRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(authReversalRequest); // http body (model) parameter
+                authReversalRequest = (AuthReversalRequest)sdkTracker.InsertDeveloperIdTracker(authReversalRequest, authReversalRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(authReversalRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = authReversalRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "AuthReversal,AuthReversalAsync,AuthReversalWithHttpInfo,AuthReversalAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "AuthReversal,AuthReversalAsync,AuthReversalWithHttpInfo,AuthReversalAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -479,17 +366,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "AuthReversal,AuthReversalAsync,AuthReversalWithHttpInfo,AuthReversalAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "AuthReversal,AuthReversalAsync,AuthReversalWithHttpInfo,AuthReversalAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -503,7 +390,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsReversalsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsReversalsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response), merchantConfig)); // Return statement
+                (PtsV2PaymentsReversalsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response))); // Return statement
         }
         /// <summary>
         /// Timeout Reversal This is to reverse a previous payment that merchant does not receive a reply(Mostly due to Timeout). To use this feature/API, make sure to pass unique value to field - clientReferenceInformation -&gt; transactionId in [/pts/v2/payments](https://developer.cybersource.com/api-reference-assets/index.html#payments_payments) API call and use same transactionId in this API request payload to reverse the payment.
@@ -511,7 +398,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitReversalRequest"></param>
         /// <returns>PtsV2PaymentsReversalsPost201Response</returns>
-        public PtsV2PaymentsReversalsPost201Response MitReversal (MitReversalRequest mitReversalRequest)
+        public PtsV2PaymentsReversalsPost201Response MitReversal(MitReversalRequest mitReversalRequest)
         {
             logger.Debug("CALLING API \"MitReversal\" STARTED");
             this.SetStatusCode(null);
@@ -527,7 +414,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitReversalRequest"></param>
         /// <returns>ApiResponse of PtsV2PaymentsReversalsPost201Response</returns>
-        public ApiResponse< PtsV2PaymentsReversalsPost201Response > MitReversalWithHttpInfo (MitReversalRequest mitReversalRequest)
+        public ApiResponse< PtsV2PaymentsReversalsPost201Response > MitReversalWithHttpInfo(MitReversalRequest mitReversalRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -541,7 +428,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/reversals";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -550,13 +437,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -565,21 +452,21 @@ namespace CyberSource.Api
             if (mitReversalRequest != null && mitReversalRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                mitReversalRequest = (MitReversalRequest)sdkTracker.InsertDeveloperIdTracker(mitReversalRequest, mitReversalRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(mitReversalRequest); // http body (model) parameter
+                mitReversalRequest = (MitReversalRequest)sdkTracker.InsertDeveloperIdTracker(mitReversalRequest, mitReversalRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(mitReversalRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = mitReversalRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "MitReversal,MitReversalAsync,MitReversalWithHttpInfo,MitReversalAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "MitReversal,MitReversalAsync,MitReversalWithHttpInfo,MitReversalAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -588,13 +475,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "MitReversal,MitReversalAsync,MitReversalWithHttpInfo,MitReversalAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "MitReversal,MitReversalAsync,MitReversalWithHttpInfo,MitReversalAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -612,7 +499,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsReversalsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsReversalsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsReversalsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -621,7 +508,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitReversalRequest"></param>
         /// <returns>Task of PtsV2PaymentsReversalsPost201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsReversalsPost201Response> MitReversalAsync (MitReversalRequest mitReversalRequest)
+        public async Task<PtsV2PaymentsReversalsPost201Response> MitReversalAsync(MitReversalRequest mitReversalRequest)
         {
             logger.Debug("CALLING API \"MitReversalAsync\" STARTED");
             this.SetStatusCode(null);
@@ -638,7 +525,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="mitReversalRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsReversalsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsReversalsPost201Response>> MitReversalAsyncWithHttpInfo (MitReversalRequest mitReversalRequest)
+        public async Task<ApiResponse<PtsV2PaymentsReversalsPost201Response>> MitReversalAsyncWithHttpInfo(MitReversalRequest mitReversalRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -652,7 +539,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/reversals";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -661,13 +548,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -676,21 +563,21 @@ namespace CyberSource.Api
             if (mitReversalRequest != null && mitReversalRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                mitReversalRequest = (MitReversalRequest)sdkTracker.InsertDeveloperIdTracker(mitReversalRequest, mitReversalRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(mitReversalRequest); // http body (model) parameter
+                mitReversalRequest = (MitReversalRequest)sdkTracker.InsertDeveloperIdTracker(mitReversalRequest, mitReversalRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(mitReversalRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = mitReversalRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "MitReversal,MitReversalAsync,MitReversalWithHttpInfo,MitReversalAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "MitReversal,MitReversalAsync,MitReversalWithHttpInfo,MitReversalAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -699,17 +586,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "MitReversal,MitReversalAsync,MitReversalWithHttpInfo,MitReversalAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "MitReversal,MitReversalAsync,MitReversalWithHttpInfo,MitReversalAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -723,7 +610,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsReversalsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsReversalsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response), merchantConfig)); // Return statement
+                (PtsV2PaymentsReversalsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsReversalsPost201Response))); // Return statement
         }
     }
 }

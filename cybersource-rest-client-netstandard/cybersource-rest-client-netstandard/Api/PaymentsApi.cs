@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -39,7 +38,7 @@ namespace CyberSource.Api
         /// <param name="orderPaymentRequest"></param>
         /// <param name="id">Request identifier number for the order request. </param>
         /// <returns>PtsV2PaymentsOrderPost201Response</returns>
-        PtsV2PaymentsOrderPost201Response CreateOrderRequest (OrderPaymentRequest orderPaymentRequest, string id);
+        PtsV2PaymentsOrderPost201Response CreateOrderRequest(OrderPaymentRequest orderPaymentRequest, string id);
 
         /// <summary>
         /// Create a Payment Order Request
@@ -51,7 +50,7 @@ namespace CyberSource.Api
         /// <param name="orderPaymentRequest"></param>
         /// <param name="id">Request identifier number for the order request. </param>
         /// <returns>ApiResponse of PtsV2PaymentsOrderPost201Response</returns>
-        ApiResponse<PtsV2PaymentsOrderPost201Response> CreateOrderRequestWithHttpInfo (OrderPaymentRequest orderPaymentRequest, string id);
+        ApiResponse<PtsV2PaymentsOrderPost201Response> CreateOrderRequestWithHttpInfo(OrderPaymentRequest orderPaymentRequest, string id);
         /// <summary>
         /// Process a Payment
         /// </summary>
@@ -61,7 +60,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
         /// <returns>PtsV2PaymentsPost201Response</returns>
-        PtsV2PaymentsPost201Response CreatePayment (CreatePaymentRequest createPaymentRequest);
+        PtsV2PaymentsPost201Response CreatePayment(CreatePaymentRequest createPaymentRequest);
 
         /// <summary>
         /// Process a Payment
@@ -72,7 +71,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
         /// <returns>ApiResponse of PtsV2PaymentsPost201Response</returns>
-        ApiResponse<PtsV2PaymentsPost201Response> CreatePaymentWithHttpInfo (CreatePaymentRequest createPaymentRequest);
+        ApiResponse<PtsV2PaymentsPost201Response> CreatePaymentWithHttpInfo(CreatePaymentRequest createPaymentRequest);
         /// <summary>
         /// Create Alternative Payments Sessions Request
         /// </summary>
@@ -82,7 +81,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSessionReq"></param>
         /// <returns>PtsV2PaymentsPost201Response2</returns>
-        PtsV2PaymentsPost201Response2 CreateSessionRequest (CreateSessionReq createSessionReq);
+        PtsV2PaymentsPost201Response2 CreateSessionRequest(CreateSessionReq createSessionReq);
 
         /// <summary>
         /// Create Alternative Payments Sessions Request
@@ -93,7 +92,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSessionReq"></param>
         /// <returns>ApiResponse of PtsV2PaymentsPost201Response2</returns>
-        ApiResponse<PtsV2PaymentsPost201Response2> CreateSessionRequestWithHttpInfo (CreateSessionReq createSessionReq);
+        ApiResponse<PtsV2PaymentsPost201Response2> CreateSessionRequestWithHttpInfo(CreateSessionReq createSessionReq);
         /// <summary>
         /// Increment an Authorization
         /// </summary>
@@ -104,7 +103,7 @@ namespace CyberSource.Api
         /// <param name="id">The ID returned from the original authorization request.</param>
         /// <param name="incrementAuthRequest"></param>
         /// <returns>PtsV2IncrementalAuthorizationPatch201Response</returns>
-        PtsV2IncrementalAuthorizationPatch201Response IncrementAuth (string id, IncrementAuthRequest incrementAuthRequest);
+        PtsV2IncrementalAuthorizationPatch201Response IncrementAuth(string id, IncrementAuthRequest incrementAuthRequest);
 
         /// <summary>
         /// Increment an Authorization
@@ -116,7 +115,7 @@ namespace CyberSource.Api
         /// <param name="id">The ID returned from the original authorization request.</param>
         /// <param name="incrementAuthRequest"></param>
         /// <returns>ApiResponse of PtsV2IncrementalAuthorizationPatch201Response</returns>
-        ApiResponse<PtsV2IncrementalAuthorizationPatch201Response> IncrementAuthWithHttpInfo (string id, IncrementAuthRequest incrementAuthRequest);
+        ApiResponse<PtsV2IncrementalAuthorizationPatch201Response> IncrementAuthWithHttpInfo(string id, IncrementAuthRequest incrementAuthRequest);
         /// <summary>
         /// Check a Payment Status
         /// </summary>
@@ -127,7 +126,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment id whose status needs to be checked and updated.</param>
         /// <param name="refreshPaymentStatusRequest"></param>
         /// <returns>PtsV2PaymentsPost201Response1</returns>
-        PtsV2PaymentsPost201Response1 RefreshPaymentStatus (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
+        PtsV2PaymentsPost201Response1 RefreshPaymentStatus(string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
 
         /// <summary>
         /// Check a Payment Status
@@ -139,7 +138,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment id whose status needs to be checked and updated.</param>
         /// <param name="refreshPaymentStatusRequest"></param>
         /// <returns>ApiResponse of PtsV2PaymentsPost201Response1</returns>
-        ApiResponse<PtsV2PaymentsPost201Response1> RefreshPaymentStatusWithHttpInfo (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
+        ApiResponse<PtsV2PaymentsPost201Response1> RefreshPaymentStatusWithHttpInfo(string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
         /// <summary>
         /// Update Alternative Payments Sessions Request
         /// </summary>
@@ -150,7 +149,7 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>PtsV2PaymentsPost201Response2</returns>
-        PtsV2PaymentsPost201Response2 UpdateSessionReq (CreateSessionRequest createSessionRequest, string id);
+        PtsV2PaymentsPost201Response2 UpdateSessionReq(CreateSessionRequest createSessionRequest, string id);
 
         /// <summary>
         /// Update Alternative Payments Sessions Request
@@ -162,7 +161,7 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsPost201Response2</returns>
-        ApiResponse<PtsV2PaymentsPost201Response2> UpdateSessionReqWithHttpInfo (CreateSessionRequest createSessionRequest, string id);
+        ApiResponse<PtsV2PaymentsPost201Response2> UpdateSessionReqWithHttpInfo(CreateSessionRequest createSessionRequest, string id);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -175,7 +174,7 @@ namespace CyberSource.Api
         /// <param name="orderPaymentRequest"></param>
         /// <param name="id">Request identifier number for the order request. </param>
         /// <returns>Task of PtsV2PaymentsOrderPost201Response</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsOrderPost201Response> CreateOrderRequestAsync (OrderPaymentRequest orderPaymentRequest, string id);
+        System.Threading.Tasks.Task<PtsV2PaymentsOrderPost201Response> CreateOrderRequestAsync(OrderPaymentRequest orderPaymentRequest, string id);
 
         /// <summary>
         /// Create a Payment Order Request
@@ -187,7 +186,7 @@ namespace CyberSource.Api
         /// <param name="orderPaymentRequest"></param>
         /// <param name="id">Request identifier number for the order request. </param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsOrderPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsOrderPost201Response>> CreateOrderRequestAsyncWithHttpInfo (OrderPaymentRequest orderPaymentRequest, string id);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsOrderPost201Response>> CreateOrderRequestAsyncWithHttpInfo(OrderPaymentRequest orderPaymentRequest, string id);
         /// <summary>
         /// Process a Payment
         /// </summary>
@@ -197,7 +196,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
         /// <returns>Task of PtsV2PaymentsPost201Response</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsPost201Response> CreatePaymentAsync (CreatePaymentRequest createPaymentRequest);
+        System.Threading.Tasks.Task<PtsV2PaymentsPost201Response> CreatePaymentAsync(CreatePaymentRequest createPaymentRequest);
 
         /// <summary>
         /// Process a Payment
@@ -208,7 +207,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response>> CreatePaymentAsyncWithHttpInfo (CreatePaymentRequest createPaymentRequest);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response>> CreatePaymentAsyncWithHttpInfo(CreatePaymentRequest createPaymentRequest);
         /// <summary>
         /// Create Alternative Payments Sessions Request
         /// </summary>
@@ -218,7 +217,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSessionReq"></param>
         /// <returns>Task of PtsV2PaymentsPost201Response2</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsPost201Response2> CreateSessionRequestAsync (CreateSessionReq createSessionReq);
+        System.Threading.Tasks.Task<PtsV2PaymentsPost201Response2> CreateSessionRequestAsync(CreateSessionReq createSessionReq);
 
         /// <summary>
         /// Create Alternative Payments Sessions Request
@@ -229,7 +228,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSessionReq"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response2)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response2>> CreateSessionRequestAsyncWithHttpInfo (CreateSessionReq createSessionReq);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response2>> CreateSessionRequestAsyncWithHttpInfo(CreateSessionReq createSessionReq);
         /// <summary>
         /// Increment an Authorization
         /// </summary>
@@ -240,7 +239,7 @@ namespace CyberSource.Api
         /// <param name="id">The ID returned from the original authorization request.</param>
         /// <param name="incrementAuthRequest"></param>
         /// <returns>Task of PtsV2IncrementalAuthorizationPatch201Response</returns>
-        System.Threading.Tasks.Task<PtsV2IncrementalAuthorizationPatch201Response> IncrementAuthAsync (string id, IncrementAuthRequest incrementAuthRequest);
+        System.Threading.Tasks.Task<PtsV2IncrementalAuthorizationPatch201Response> IncrementAuthAsync(string id, IncrementAuthRequest incrementAuthRequest);
 
         /// <summary>
         /// Increment an Authorization
@@ -252,7 +251,7 @@ namespace CyberSource.Api
         /// <param name="id">The ID returned from the original authorization request.</param>
         /// <param name="incrementAuthRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2IncrementalAuthorizationPatch201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2IncrementalAuthorizationPatch201Response>> IncrementAuthAsyncWithHttpInfo (string id, IncrementAuthRequest incrementAuthRequest);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2IncrementalAuthorizationPatch201Response>> IncrementAuthAsyncWithHttpInfo(string id, IncrementAuthRequest incrementAuthRequest);
         /// <summary>
         /// Check a Payment Status
         /// </summary>
@@ -263,7 +262,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment id whose status needs to be checked and updated.</param>
         /// <param name="refreshPaymentStatusRequest"></param>
         /// <returns>Task of PtsV2PaymentsPost201Response1</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsPost201Response1> RefreshPaymentStatusAsync (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
+        System.Threading.Tasks.Task<PtsV2PaymentsPost201Response1> RefreshPaymentStatusAsync(string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
 
         /// <summary>
         /// Check a Payment Status
@@ -275,7 +274,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment id whose status needs to be checked and updated.</param>
         /// <param name="refreshPaymentStatusRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response1)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response1>> RefreshPaymentStatusAsyncWithHttpInfo (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response1>> RefreshPaymentStatusAsyncWithHttpInfo(string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest);
         /// <summary>
         /// Update Alternative Payments Sessions Request
         /// </summary>
@@ -286,7 +285,7 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>Task of PtsV2PaymentsPost201Response2</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsPost201Response2> UpdateSessionReqAsync (CreateSessionRequest createSessionRequest, string id);
+        System.Threading.Tasks.Task<PtsV2PaymentsPost201Response2> UpdateSessionReqAsync(CreateSessionRequest createSessionRequest, string id);
 
         /// <summary>
         /// Update Alternative Payments Sessions Request
@@ -298,145 +297,31 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response2)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response2>> UpdateSessionReqAsyncWithHttpInfo (CreateSessionRequest createSessionRequest, string id);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response2>> UpdateSessionReqAsyncWithHttpInfo(CreateSessionRequest createSessionRequest, string id);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class PaymentsApi : IPaymentsApi
+    public partial class PaymentsApi : ApiBase, IPaymentsApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentsApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public PaymentsApi(string basePath)
+        public PaymentsApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentsApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public PaymentsApi(Configuration configuration = null)
+        public PaymentsApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -446,7 +331,7 @@ namespace CyberSource.Api
         /// <param name="orderPaymentRequest"></param>
         /// <param name="id">Request identifier number for the order request. </param>
         /// <returns>PtsV2PaymentsOrderPost201Response</returns>
-        public PtsV2PaymentsOrderPost201Response CreateOrderRequest (OrderPaymentRequest orderPaymentRequest, string id)
+        public PtsV2PaymentsOrderPost201Response CreateOrderRequest(OrderPaymentRequest orderPaymentRequest, string id)
         {
             logger.Debug("CALLING API \"CreateOrderRequest\" STARTED");
             this.SetStatusCode(null);
@@ -463,7 +348,7 @@ namespace CyberSource.Api
         /// <param name="orderPaymentRequest"></param>
         /// <param name="id">Request identifier number for the order request. </param>
         /// <returns>ApiResponse of PtsV2PaymentsOrderPost201Response</returns>
-        public ApiResponse< PtsV2PaymentsOrderPost201Response > CreateOrderRequestWithHttpInfo (OrderPaymentRequest orderPaymentRequest, string id)
+        public ApiResponse< PtsV2PaymentsOrderPost201Response > CreateOrderRequestWithHttpInfo(OrderPaymentRequest orderPaymentRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -483,7 +368,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payment-references/{id}/intents";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -492,13 +377,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -506,27 +391,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (orderPaymentRequest != null && orderPaymentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                orderPaymentRequest = (OrderPaymentRequest)sdkTracker.InsertDeveloperIdTracker(orderPaymentRequest, orderPaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(orderPaymentRequest); // http body (model) parameter
+                orderPaymentRequest = (OrderPaymentRequest)sdkTracker.InsertDeveloperIdTracker(orderPaymentRequest, orderPaymentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(orderPaymentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = orderPaymentRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateOrderRequest,CreateOrderRequestAsync,CreateOrderRequestWithHttpInfo,CreateOrderRequestAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreateOrderRequest,CreateOrderRequestAsync,CreateOrderRequestWithHttpInfo,CreateOrderRequestAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -535,13 +421,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreateOrderRequest,CreateOrderRequestAsync,CreateOrderRequestWithHttpInfo,CreateOrderRequestAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreateOrderRequest,CreateOrderRequestAsync,CreateOrderRequestWithHttpInfo,CreateOrderRequestAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -559,7 +445,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsOrderPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsOrderPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsOrderPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsOrderPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsOrderPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -569,7 +455,7 @@ namespace CyberSource.Api
         /// <param name="orderPaymentRequest"></param>
         /// <param name="id">Request identifier number for the order request. </param>
         /// <returns>Task of PtsV2PaymentsOrderPost201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsOrderPost201Response> CreateOrderRequestAsync (OrderPaymentRequest orderPaymentRequest, string id)
+        public async Task<PtsV2PaymentsOrderPost201Response> CreateOrderRequestAsync(OrderPaymentRequest orderPaymentRequest, string id)
         {
             logger.Debug("CALLING API \"CreateOrderRequestAsync\" STARTED");
             this.SetStatusCode(null);
@@ -587,7 +473,7 @@ namespace CyberSource.Api
         /// <param name="orderPaymentRequest"></param>
         /// <param name="id">Request identifier number for the order request. </param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsOrderPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsOrderPost201Response>> CreateOrderRequestAsyncWithHttpInfo (OrderPaymentRequest orderPaymentRequest, string id)
+        public async Task<ApiResponse<PtsV2PaymentsOrderPost201Response>> CreateOrderRequestAsyncWithHttpInfo(OrderPaymentRequest orderPaymentRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -607,7 +493,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payment-references/{id}/intents";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -616,13 +502,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -630,27 +516,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (orderPaymentRequest != null && orderPaymentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                orderPaymentRequest = (OrderPaymentRequest)sdkTracker.InsertDeveloperIdTracker(orderPaymentRequest, orderPaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(orderPaymentRequest); // http body (model) parameter
+                orderPaymentRequest = (OrderPaymentRequest)sdkTracker.InsertDeveloperIdTracker(orderPaymentRequest, orderPaymentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(orderPaymentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = orderPaymentRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateOrderRequest,CreateOrderRequestAsync,CreateOrderRequestWithHttpInfo,CreateOrderRequestAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreateOrderRequest,CreateOrderRequestAsync,CreateOrderRequestWithHttpInfo,CreateOrderRequestAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -659,17 +546,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreateOrderRequest,CreateOrderRequestAsync,CreateOrderRequestWithHttpInfo,CreateOrderRequestAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreateOrderRequest,CreateOrderRequestAsync,CreateOrderRequestWithHttpInfo,CreateOrderRequestAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -683,7 +570,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsOrderPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsOrderPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsOrderPost201Response), merchantConfig)); // Return statement
+                (PtsV2PaymentsOrderPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsOrderPost201Response))); // Return statement
         }
         /// <summary>
         /// Process a Payment A payment authorizes the amount for the transaction. There are a number of supported payment features, such as E-commerce and Card Present - Credit Card/Debit Card, Echeck, e-Wallets, Level II/III Data, etc..  A payment response includes the status of the request. It also includes processor-specific information when the request is successful and errors if unsuccessful. See the [Payments Developer Guides Page](https://developer.cybersource.com/docs/cybs/en-us/payments/developer/ctv/rest/payments/payments-intro.html).  Authorization can be requested with Capture, Decision Manager, Payer Authentication(3ds), and Token Creation. 
@@ -691,7 +578,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
         /// <returns>PtsV2PaymentsPost201Response</returns>
-        public PtsV2PaymentsPost201Response CreatePayment (CreatePaymentRequest createPaymentRequest)
+        public PtsV2PaymentsPost201Response CreatePayment(CreatePaymentRequest createPaymentRequest)
         {
             logger.Debug("CALLING API \"CreatePayment\" STARTED");
             this.SetStatusCode(null);
@@ -707,7 +594,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
         /// <returns>ApiResponse of PtsV2PaymentsPost201Response</returns>
-        public ApiResponse< PtsV2PaymentsPost201Response > CreatePaymentWithHttpInfo (CreatePaymentRequest createPaymentRequest)
+        public ApiResponse< PtsV2PaymentsPost201Response > CreatePaymentWithHttpInfo(CreatePaymentRequest createPaymentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -721,7 +608,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payments";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -730,13 +617,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -745,21 +632,21 @@ namespace CyberSource.Api
             if (createPaymentRequest != null && createPaymentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createPaymentRequest = (CreatePaymentRequest)sdkTracker.InsertDeveloperIdTracker(createPaymentRequest, createPaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createPaymentRequest); // http body (model) parameter
+                createPaymentRequest = (CreatePaymentRequest)sdkTracker.InsertDeveloperIdTracker(createPaymentRequest, createPaymentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createPaymentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createPaymentRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreatePayment,CreatePaymentAsync,CreatePaymentWithHttpInfo,CreatePaymentAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreatePayment,CreatePaymentAsync,CreatePaymentWithHttpInfo,CreatePaymentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -768,13 +655,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreatePayment,CreatePaymentAsync,CreatePaymentWithHttpInfo,CreatePaymentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreatePayment,CreatePaymentAsync,CreatePaymentWithHttpInfo,CreatePaymentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -792,7 +679,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response),merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -801,7 +688,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
         /// <returns>Task of PtsV2PaymentsPost201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsPost201Response> CreatePaymentAsync (CreatePaymentRequest createPaymentRequest)
+        public async Task<PtsV2PaymentsPost201Response> CreatePaymentAsync(CreatePaymentRequest createPaymentRequest)
         {
             logger.Debug("CALLING API \"CreatePaymentAsync\" STARTED");
             this.SetStatusCode(null);
@@ -818,7 +705,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createPaymentRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response>> CreatePaymentAsyncWithHttpInfo (CreatePaymentRequest createPaymentRequest)
+        public async Task<ApiResponse<PtsV2PaymentsPost201Response>> CreatePaymentAsyncWithHttpInfo(CreatePaymentRequest createPaymentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -832,7 +719,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payments";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -841,13 +728,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -856,21 +743,21 @@ namespace CyberSource.Api
             if (createPaymentRequest != null && createPaymentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createPaymentRequest = (CreatePaymentRequest)sdkTracker.InsertDeveloperIdTracker(createPaymentRequest, createPaymentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createPaymentRequest); // http body (model) parameter
+                createPaymentRequest = (CreatePaymentRequest)sdkTracker.InsertDeveloperIdTracker(createPaymentRequest, createPaymentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createPaymentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createPaymentRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreatePayment,CreatePaymentAsync,CreatePaymentWithHttpInfo,CreatePaymentAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreatePayment,CreatePaymentAsync,CreatePaymentWithHttpInfo,CreatePaymentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -879,17 +766,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreatePayment,CreatePaymentAsync,CreatePaymentWithHttpInfo,CreatePaymentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreatePayment,CreatePaymentAsync,CreatePaymentWithHttpInfo,CreatePaymentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -903,7 +790,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response), merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response))); // Return statement
         }
         /// <summary>
         /// Create Alternative Payments Sessions Request Create Alternative Payments Sessions Request
@@ -911,7 +798,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSessionReq"></param>
         /// <returns>PtsV2PaymentsPost201Response2</returns>
-        public PtsV2PaymentsPost201Response2 CreateSessionRequest (CreateSessionReq createSessionReq)
+        public PtsV2PaymentsPost201Response2 CreateSessionRequest(CreateSessionReq createSessionReq)
         {
             logger.Debug("CALLING API \"CreateSessionRequest\" STARTED");
             this.SetStatusCode(null);
@@ -927,7 +814,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSessionReq"></param>
         /// <returns>ApiResponse of PtsV2PaymentsPost201Response2</returns>
-        public ApiResponse< PtsV2PaymentsPost201Response2 > CreateSessionRequestWithHttpInfo (CreateSessionReq createSessionReq)
+        public ApiResponse< PtsV2PaymentsPost201Response2 > CreateSessionRequestWithHttpInfo(CreateSessionReq createSessionReq)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -941,7 +828,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payment-references";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -950,13 +837,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -965,21 +852,21 @@ namespace CyberSource.Api
             if (createSessionReq != null && createSessionReq.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createSessionReq = (CreateSessionReq)sdkTracker.InsertDeveloperIdTracker(createSessionReq, createSessionReq.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createSessionReq); // http body (model) parameter
+                createSessionReq = (CreateSessionReq)sdkTracker.InsertDeveloperIdTracker(createSessionReq, createSessionReq.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createSessionReq); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createSessionReq; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateSessionRequest,CreateSessionRequestAsync,CreateSessionRequestWithHttpInfo,CreateSessionRequestAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreateSessionRequest,CreateSessionRequestAsync,CreateSessionRequestWithHttpInfo,CreateSessionRequestAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -988,13 +875,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreateSessionRequest,CreateSessionRequestAsync,CreateSessionRequestWithHttpInfo,CreateSessionRequestAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreateSessionRequest,CreateSessionRequestAsync,CreateSessionRequestWithHttpInfo,CreateSessionRequestAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1012,7 +899,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response2>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response2) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2),merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response2) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2))); // Return statement
         }
 
         /// <summary>
@@ -1021,7 +908,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSessionReq"></param>
         /// <returns>Task of PtsV2PaymentsPost201Response2</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsPost201Response2> CreateSessionRequestAsync (CreateSessionReq createSessionReq)
+        public async Task<PtsV2PaymentsPost201Response2> CreateSessionRequestAsync(CreateSessionReq createSessionReq)
         {
             logger.Debug("CALLING API \"CreateSessionRequestAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1038,7 +925,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSessionReq"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response2)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response2>> CreateSessionRequestAsyncWithHttpInfo (CreateSessionReq createSessionReq)
+        public async Task<ApiResponse<PtsV2PaymentsPost201Response2>> CreateSessionRequestAsyncWithHttpInfo(CreateSessionReq createSessionReq)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1052,7 +939,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payment-references";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1061,13 +948,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1076,21 +963,21 @@ namespace CyberSource.Api
             if (createSessionReq != null && createSessionReq.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createSessionReq = (CreateSessionReq)sdkTracker.InsertDeveloperIdTracker(createSessionReq, createSessionReq.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createSessionReq); // http body (model) parameter
+                createSessionReq = (CreateSessionReq)sdkTracker.InsertDeveloperIdTracker(createSessionReq, createSessionReq.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createSessionReq); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createSessionReq; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateSessionRequest,CreateSessionRequestAsync,CreateSessionRequestWithHttpInfo,CreateSessionRequestAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreateSessionRequest,CreateSessionRequestAsync,CreateSessionRequestWithHttpInfo,CreateSessionRequestAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1099,17 +986,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreateSessionRequest,CreateSessionRequestAsync,CreateSessionRequestWithHttpInfo,CreateSessionRequestAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreateSessionRequest,CreateSessionRequestAsync,CreateSessionRequestWithHttpInfo,CreateSessionRequestAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1123,7 +1010,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response2>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response2) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2), merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response2) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2))); // Return statement
         }
         /// <summary>
         /// Increment an Authorization Use this service to authorize additional charges in a lodging or autorental transaction. Include the ID returned from the original authorization in the PATCH request to add additional charges to that authorization. 
@@ -1132,7 +1019,7 @@ namespace CyberSource.Api
         /// <param name="id">The ID returned from the original authorization request.</param>
         /// <param name="incrementAuthRequest"></param>
         /// <returns>PtsV2IncrementalAuthorizationPatch201Response</returns>
-        public PtsV2IncrementalAuthorizationPatch201Response IncrementAuth (string id, IncrementAuthRequest incrementAuthRequest)
+        public PtsV2IncrementalAuthorizationPatch201Response IncrementAuth(string id, IncrementAuthRequest incrementAuthRequest)
         {
             logger.Debug("CALLING API \"IncrementAuth\" STARTED");
             this.SetStatusCode(null);
@@ -1149,7 +1036,7 @@ namespace CyberSource.Api
         /// <param name="id">The ID returned from the original authorization request.</param>
         /// <param name="incrementAuthRequest"></param>
         /// <returns>ApiResponse of PtsV2IncrementalAuthorizationPatch201Response</returns>
-        public ApiResponse< PtsV2IncrementalAuthorizationPatch201Response > IncrementAuthWithHttpInfo (string id, IncrementAuthRequest incrementAuthRequest)
+        public ApiResponse< PtsV2IncrementalAuthorizationPatch201Response > IncrementAuthWithHttpInfo(string id, IncrementAuthRequest incrementAuthRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1169,7 +1056,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payments/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1178,13 +1065,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1192,27 +1079,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (incrementAuthRequest != null && incrementAuthRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                incrementAuthRequest = (IncrementAuthRequest)sdkTracker.InsertDeveloperIdTracker(incrementAuthRequest, incrementAuthRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(incrementAuthRequest); // http body (model) parameter
+                incrementAuthRequest = (IncrementAuthRequest)sdkTracker.InsertDeveloperIdTracker(incrementAuthRequest, incrementAuthRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(incrementAuthRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = incrementAuthRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "IncrementAuth,IncrementAuthAsync,IncrementAuthWithHttpInfo,IncrementAuthAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "IncrementAuth,IncrementAuthAsync,IncrementAuthWithHttpInfo,IncrementAuthAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1221,13 +1109,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "IncrementAuth,IncrementAuthAsync,IncrementAuthWithHttpInfo,IncrementAuthAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "IncrementAuth,IncrementAuthAsync,IncrementAuthWithHttpInfo,IncrementAuthAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1245,7 +1133,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2IncrementalAuthorizationPatch201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2IncrementalAuthorizationPatch201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2IncrementalAuthorizationPatch201Response),merchantConfig)); // Return statement
+                (PtsV2IncrementalAuthorizationPatch201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2IncrementalAuthorizationPatch201Response))); // Return statement
         }
 
         /// <summary>
@@ -1255,7 +1143,7 @@ namespace CyberSource.Api
         /// <param name="id">The ID returned from the original authorization request.</param>
         /// <param name="incrementAuthRequest"></param>
         /// <returns>Task of PtsV2IncrementalAuthorizationPatch201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2IncrementalAuthorizationPatch201Response> IncrementAuthAsync (string id, IncrementAuthRequest incrementAuthRequest)
+        public async Task<PtsV2IncrementalAuthorizationPatch201Response> IncrementAuthAsync(string id, IncrementAuthRequest incrementAuthRequest)
         {
             logger.Debug("CALLING API \"IncrementAuthAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1273,7 +1161,7 @@ namespace CyberSource.Api
         /// <param name="id">The ID returned from the original authorization request.</param>
         /// <param name="incrementAuthRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2IncrementalAuthorizationPatch201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2IncrementalAuthorizationPatch201Response>> IncrementAuthAsyncWithHttpInfo (string id, IncrementAuthRequest incrementAuthRequest)
+        public async Task<ApiResponse<PtsV2IncrementalAuthorizationPatch201Response>> IncrementAuthAsyncWithHttpInfo(string id, IncrementAuthRequest incrementAuthRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1293,7 +1181,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payments/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1302,13 +1190,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1316,27 +1204,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (incrementAuthRequest != null && incrementAuthRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                incrementAuthRequest = (IncrementAuthRequest)sdkTracker.InsertDeveloperIdTracker(incrementAuthRequest, incrementAuthRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(incrementAuthRequest); // http body (model) parameter
+                incrementAuthRequest = (IncrementAuthRequest)sdkTracker.InsertDeveloperIdTracker(incrementAuthRequest, incrementAuthRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(incrementAuthRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = incrementAuthRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "IncrementAuth,IncrementAuthAsync,IncrementAuthWithHttpInfo,IncrementAuthAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "IncrementAuth,IncrementAuthAsync,IncrementAuthWithHttpInfo,IncrementAuthAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1345,17 +1234,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "IncrementAuth,IncrementAuthAsync,IncrementAuthWithHttpInfo,IncrementAuthAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "IncrementAuth,IncrementAuthAsync,IncrementAuthWithHttpInfo,IncrementAuthAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1369,7 +1258,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2IncrementalAuthorizationPatch201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2IncrementalAuthorizationPatch201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2IncrementalAuthorizationPatch201Response), merchantConfig)); // Return statement
+                (PtsV2IncrementalAuthorizationPatch201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2IncrementalAuthorizationPatch201Response))); // Return statement
         }
         /// <summary>
         /// Check a Payment Status Checks and updates the payment status 
@@ -1378,7 +1267,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment id whose status needs to be checked and updated.</param>
         /// <param name="refreshPaymentStatusRequest"></param>
         /// <returns>PtsV2PaymentsPost201Response1</returns>
-        public PtsV2PaymentsPost201Response1 RefreshPaymentStatus (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
+        public PtsV2PaymentsPost201Response1 RefreshPaymentStatus(string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
         {
             logger.Debug("CALLING API \"RefreshPaymentStatus\" STARTED");
             this.SetStatusCode(null);
@@ -1395,7 +1284,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment id whose status needs to be checked and updated.</param>
         /// <param name="refreshPaymentStatusRequest"></param>
         /// <returns>ApiResponse of PtsV2PaymentsPost201Response1</returns>
-        public ApiResponse< PtsV2PaymentsPost201Response1 > RefreshPaymentStatusWithHttpInfo (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
+        public ApiResponse< PtsV2PaymentsPost201Response1 > RefreshPaymentStatusWithHttpInfo(string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1415,7 +1304,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/refresh-payment-status/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1424,13 +1313,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1438,27 +1327,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (refreshPaymentStatusRequest != null && refreshPaymentStatusRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                refreshPaymentStatusRequest = (RefreshPaymentStatusRequest)sdkTracker.InsertDeveloperIdTracker(refreshPaymentStatusRequest, refreshPaymentStatusRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(refreshPaymentStatusRequest); // http body (model) parameter
+                refreshPaymentStatusRequest = (RefreshPaymentStatusRequest)sdkTracker.InsertDeveloperIdTracker(refreshPaymentStatusRequest, refreshPaymentStatusRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(refreshPaymentStatusRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = refreshPaymentStatusRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "RefreshPaymentStatus,RefreshPaymentStatusAsync,RefreshPaymentStatusWithHttpInfo,RefreshPaymentStatusAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "RefreshPaymentStatus,RefreshPaymentStatusAsync,RefreshPaymentStatusWithHttpInfo,RefreshPaymentStatusAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1467,13 +1357,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "RefreshPaymentStatus,RefreshPaymentStatusAsync,RefreshPaymentStatusWithHttpInfo,RefreshPaymentStatusAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "RefreshPaymentStatus,RefreshPaymentStatusAsync,RefreshPaymentStatusWithHttpInfo,RefreshPaymentStatusAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1491,7 +1381,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response1>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response1),merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response1) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response1))); // Return statement
         }
 
         /// <summary>
@@ -1501,7 +1391,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment id whose status needs to be checked and updated.</param>
         /// <param name="refreshPaymentStatusRequest"></param>
         /// <returns>Task of PtsV2PaymentsPost201Response1</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsPost201Response1> RefreshPaymentStatusAsync (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
+        public async Task<PtsV2PaymentsPost201Response1> RefreshPaymentStatusAsync(string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
         {
             logger.Debug("CALLING API \"RefreshPaymentStatusAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1519,7 +1409,7 @@ namespace CyberSource.Api
         /// <param name="id">The payment id whose status needs to be checked and updated.</param>
         /// <param name="refreshPaymentStatusRequest"></param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response1)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response1>> RefreshPaymentStatusAsyncWithHttpInfo (string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
+        public async Task<ApiResponse<PtsV2PaymentsPost201Response1>> RefreshPaymentStatusAsyncWithHttpInfo(string id, RefreshPaymentStatusRequest refreshPaymentStatusRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1539,7 +1429,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/refresh-payment-status/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1548,13 +1438,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1562,27 +1452,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (refreshPaymentStatusRequest != null && refreshPaymentStatusRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                refreshPaymentStatusRequest = (RefreshPaymentStatusRequest)sdkTracker.InsertDeveloperIdTracker(refreshPaymentStatusRequest, refreshPaymentStatusRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(refreshPaymentStatusRequest); // http body (model) parameter
+                refreshPaymentStatusRequest = (RefreshPaymentStatusRequest)sdkTracker.InsertDeveloperIdTracker(refreshPaymentStatusRequest, refreshPaymentStatusRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(refreshPaymentStatusRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = refreshPaymentStatusRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "RefreshPaymentStatus,RefreshPaymentStatusAsync,RefreshPaymentStatusWithHttpInfo,RefreshPaymentStatusAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "RefreshPaymentStatus,RefreshPaymentStatusAsync,RefreshPaymentStatusWithHttpInfo,RefreshPaymentStatusAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1591,17 +1482,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "RefreshPaymentStatus,RefreshPaymentStatusAsync,RefreshPaymentStatusWithHttpInfo,RefreshPaymentStatusAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "RefreshPaymentStatus,RefreshPaymentStatusAsync,RefreshPaymentStatusWithHttpInfo,RefreshPaymentStatusAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1615,7 +1506,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response1>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response1), merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response1) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response1))); // Return statement
         }
         /// <summary>
         /// Update Alternative Payments Sessions Request Update Alternative Payments Sessions Request
@@ -1624,7 +1515,7 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>PtsV2PaymentsPost201Response2</returns>
-        public PtsV2PaymentsPost201Response2 UpdateSessionReq (CreateSessionRequest createSessionRequest, string id)
+        public PtsV2PaymentsPost201Response2 UpdateSessionReq(CreateSessionRequest createSessionRequest, string id)
         {
             logger.Debug("CALLING API \"UpdateSessionReq\" STARTED");
             this.SetStatusCode(null);
@@ -1641,7 +1532,7 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsPost201Response2</returns>
-        public ApiResponse< PtsV2PaymentsPost201Response2 > UpdateSessionReqWithHttpInfo (CreateSessionRequest createSessionRequest, string id)
+        public ApiResponse< PtsV2PaymentsPost201Response2 > UpdateSessionReqWithHttpInfo(CreateSessionRequest createSessionRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1661,7 +1552,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payment-references/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1670,13 +1561,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1684,27 +1575,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (createSessionRequest != null && createSessionRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createSessionRequest = (CreateSessionRequest)sdkTracker.InsertDeveloperIdTracker(createSessionRequest, createSessionRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createSessionRequest); // http body (model) parameter
+                createSessionRequest = (CreateSessionRequest)sdkTracker.InsertDeveloperIdTracker(createSessionRequest, createSessionRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createSessionRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createSessionRequest; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1713,13 +1605,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1737,7 +1629,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response2>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response2) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2),merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response2) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2))); // Return statement
         }
 
         /// <summary>
@@ -1747,7 +1639,7 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>Task of PtsV2PaymentsPost201Response2</returns>
-        public async System.Threading.Tasks.Task<PtsV2PaymentsPost201Response2> UpdateSessionReqAsync (CreateSessionRequest createSessionRequest, string id)
+        public async Task<PtsV2PaymentsPost201Response2> UpdateSessionReqAsync(CreateSessionRequest createSessionRequest, string id)
         {
             logger.Debug("CALLING API \"UpdateSessionReqAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1765,7 +1657,7 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response2)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response2>> UpdateSessionReqAsyncWithHttpInfo (CreateSessionRequest createSessionRequest, string id)
+        public async Task<ApiResponse<PtsV2PaymentsPost201Response2>> UpdateSessionReqAsyncWithHttpInfo(CreateSessionRequest createSessionRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1785,7 +1677,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/payment-references/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1794,13 +1686,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1808,27 +1700,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (createSessionRequest != null && createSessionRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createSessionRequest = (CreateSessionRequest)sdkTracker.InsertDeveloperIdTracker(createSessionRequest, createSessionRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createSessionRequest); // http body (model) parameter
+                createSessionRequest = (CreateSessionRequest)sdkTracker.InsertDeveloperIdTracker(createSessionRequest, createSessionRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createSessionRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createSessionRequest; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1837,17 +1730,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1861,7 +1754,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2PaymentsPost201Response2>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2PaymentsPost201Response2) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2), merchantConfig)); // Return statement
+                (PtsV2PaymentsPost201Response2) ApiClient.Deserialize(localVarResponse, typeof(PtsV2PaymentsPost201Response2))); // Return statement
         }
     }
 }

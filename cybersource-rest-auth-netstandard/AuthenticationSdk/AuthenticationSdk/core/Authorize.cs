@@ -29,177 +29,6 @@ namespace AuthenticationSdk.core
             }
         }
 
-        /**
-         * @return an HttpToken object (HTTP Signature Headers),
-         * based on the Merchant Configuration passed to the Constructor of Authorize Class
-         */
-        public HttpToken GetSignature()
-        {
-            try
-            {
-                if (_merchantConfig != null)
-                {
-                    LogMerchantDetails();
-
-                    Enumerations.ValidateRequestType(_merchantConfig.RequestType);
-
-                    if (string.IsNullOrEmpty(_merchantConfig.MerchantId) || string.IsNullOrEmpty(_merchantConfig.MerchantKeyId) || string.IsNullOrEmpty(_merchantConfig.MerchantSecretKey))
-                    {
-                        throw new ConfigurationException("Missing or Empty Credentials for HTTP Signature: MerchantID, MerchantKeyID, or MerchantSecretKey is required");
-                    }
-
-                    var signatureObj = (HttpToken)new HttpTokenGenerator(_merchantConfig).GetToken();
-
-                    if (_merchantConfig.IsGetRequest || _merchantConfig.IsDeleteRequest)
-                    {
-                        _logger.Debug("Content-Type: application/json");
-                    }
-                    else if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
-                    {
-                        _logger.Debug("Content-Type: application/hal+json");
-                    }
-
-                    _logger.Debug($"v-c-merchant-id: {signatureObj.MerchantId}");
-                    _logger.Debug($"Date: {signatureObj.GmtDateTime}");
-                    _logger.Debug($"Host: {signatureObj.HostName}");
-
-                    if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
-                    {
-                        logUtility.LogDebugMessage(_logger, $"digest: {signatureObj.Digest}");
-                    }
-
-                    logUtility.LogDebugMessage(_logger, $"Signature : {signatureObj.SignatureParam}");
-
-                    return signatureObj;
-                }
-
-                return null;
-            }
-            catch (ConfigurationException)
-            {
-                // Re-throw configuration exceptions as-is
-                throw;
-            }
-            catch (TokenGenerationException)
-            {
-                // Re-throw token generation exceptions as-is
-                throw;
-            }
-            catch (Exception e)
-            {
-                _logger.Error($"HTTP Signature generation failed: {e.Message}", e);
-                throw new TokenGenerationException("HTTP", $"Failed to generate HTTP signature: {e.Message}", e);
-            }
-        }
-
-        /**
-         * @return a JwtToken object (JWT Bearer Token), 
-         * based on the Merchant Configuration passed to the Constructor of Authorize Class
-         */
-        public JwtToken GetToken(bool isResponseMLEForApi = false)
-        {
-            try
-            {
-                if (_merchantConfig != null)
-                {
-                    LogMerchantDetails();
-
-                    Enumerations.ValidateRequestType(_merchantConfig.RequestType);
-
-                    if (string.IsNullOrEmpty(_merchantConfig.MerchantId) || string.IsNullOrEmpty(_merchantConfig.KeyAlias) || string.IsNullOrEmpty(_merchantConfig.KeyPass))
-                    {
-                        throw new ConfigurationException("Missing or Empty Credentials for JWT Token: MerchantID, KeyAlias, or KeyPassphrase is required");
-                    }
-
-                    var tokenObj = (JwtToken)new JwtTokenGenerator(_merchantConfig, isResponseMLEForApi).GetToken();
-
-                    if (_merchantConfig.IsGetRequest || _merchantConfig.IsDeleteRequest)
-                    {
-                        _logger.Debug("Content-Type: application/json");
-                    }
-                    else if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
-                    {
-                        _logger.Debug("Content-Type: application/hal+json");
-                    }
-
-                    //logUtility.LogDebugMessage(_logger, $"Authorization : Bearer {tokenObj.BearerToken}");
-
-                    return tokenObj;
-                }
-
-                return null;
-            }
-            catch (ConfigurationException)
-            {
-                // Re-throw configuration exceptions as-is
-                throw;
-            }
-            catch (TokenGenerationException)
-            {
-                // Re-throw token generation exceptions as-is
-                throw;
-            }
-            catch (Exception e)
-            {
-                _logger.Error($"JWT Token generation failed: {e.Message}", e);
-                throw new TokenGenerationException("JWT", $"Failed to generate JWT token: {e.Message}", e);
-            }
-        }
-
-        /**
-         * @return a OAuthToken object (OAuth Bearer Token), 
-         * based on the Merchant Configuration passed to the Constructor of Authorize Class
-         */
-        public OAuthToken GetOAuthToken()
-        {
-            try
-            {
-                if (_merchantConfig != null)
-                {
-                    LogMerchantDetails();
-
-                    Enumerations.ValidateRequestType(_merchantConfig.RequestType);
-
-                    if (string.IsNullOrEmpty(_merchantConfig.AccessToken) || string.IsNullOrEmpty(_merchantConfig.RefreshToken))
-                    {
-                        throw new ConfigurationException("Missing or Empty Credentials for OAuth Token: AccessToken or RefreshToken is required");
-                    }
-
-                    var tokenObj = (OAuthToken)new OAuthTokenGenerator(_merchantConfig).GetToken();
-
-                    if (_merchantConfig.IsGetRequest || _merchantConfig.IsDeleteRequest)
-                    {
-                        _logger.Debug("Content-Type: application/json");
-                    }
-                    else if (_merchantConfig.IsPostRequest || _merchantConfig.IsPutRequest || _merchantConfig.IsPatchRequest)
-                    {
-                        _logger.Debug("Content-Type: application/hal+json");
-                    }
-
-                    //logUtility.LogDebugMessage(_logger, $"Authorization : Bearer {tokenObj.AccessToken}");
-
-                    return tokenObj;
-                }
-
-                return null;
-            }
-            catch (ConfigurationException)
-            {
-                // Re-throw configuration exceptions as-is
-                throw;
-            }
-            catch (TokenGenerationException)
-            {
-                // Re-throw token generation exceptions as-is
-                throw;
-            }
-            catch (Exception e)
-            {
-                _logger.Error($"OAuth Token generation failed: {e.Message}", e);
-                throw new TokenGenerationException("OAuth", $"Failed to generate OAuth token: {e.Message}", e);
-            }
-        }
-
         private void LogMerchantDetails()
         {
             try
@@ -222,5 +51,110 @@ namespace AuthenticationSdk.core
                 throw new AuthenticationException("LOG_ERROR", $"Failed to log merchant configuration details: {e.Message}", e);
             }
         }
+
+        #region Properties
+        private readonly IMerchantRequestSettings _merchantRequestSettings;
+        private readonly IMerchantCredentialSettings _merchantCredentialSettings;
+        private readonly IMerchantMLESettings _merchantMLESettings;
+        #endregion Properties
+
+        #region Constructor
+        public Authorize(IMerchantCredentialSettings merchantCredentialSettings, IMerchantRequestSettings merchantRequestSettings, IMerchantMLESettings merchantMLESettings)
+        {
+            _merchantRequestSettings = merchantRequestSettings;
+            _merchantCredentialSettings = merchantCredentialSettings;
+            _merchantMLESettings = merchantMLESettings;
+
+            logUtility = new LogUtility();
+
+            if (_logger == null)
+            {
+                _logger = LogManager.GetCurrentClassLogger();
+            }
+        }
+        #endregion Constructor
+
+        #region Methods
+        public HttpToken GetSignature()
+        {
+            try
+            {
+                var signatureObject = (HttpToken)new HttpTokenGenerator(_merchantCredentialSettings, _merchantRequestSettings).GetToken();
+
+                _logger.Debug($"v-c-merchant-id: {signatureObject.MerchantId}");
+                _logger.Debug($"Date: {signatureObject.GmtDateTime}");
+                _logger.Debug($"Host: {signatureObject.HostName}");
+
+                if (_merchantRequestSettings.RequestType.Equals("GET", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("DELETE", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    _logger.Debug("Content-Type: application/json");
+                }
+                else if (_merchantRequestSettings.RequestType.Equals("POST", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PUT", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    _logger.Debug("Content-Type: application/hal+json");
+                    logUtility.LogDebugMessage(_logger, $"digest: {signatureObject.Digest}");
+                }
+
+                logUtility.LogDebugMessage(_logger, $"Signature : {signatureObject.SignatureParam}");
+
+                return signatureObject;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                throw e;
+            }
+        }
+
+        public JwtToken GetToken(bool isResponseMLEForApi = false)
+        {
+            try
+            {
+                var tokenObject = (JwtToken) new JwtTokenGenerator(_merchantCredentialSettings, _merchantRequestSettings, _merchantMLESettings, isResponseMLEForApi).GetToken();
+
+                if (_merchantRequestSettings.RequestType.Equals("GET", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("DELETE", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    _logger.Debug("Content-Type: application/json");
+                }
+                else if (_merchantRequestSettings.RequestType.Equals("POST", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PUT", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    _logger.Debug("Content-Type: application/hal+json");
+                }
+
+                //logUtility.LogDebugMessage(_logger, $"Authorization : Bearer {tokenObject.BearerToken}");
+
+                return tokenObject;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                throw e;
+            }
+        }
+
+        public OAuthToken GetOAuthToken()
+        {
+            try
+            {
+                var tokenObject = (OAuthToken)new OAuthTokenGenerator(_merchantCredentialSettings).GetToken();
+
+                if (_merchantRequestSettings.RequestType.Equals("GET", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("DELETE", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    _logger.Debug("Content-Type: application/json");
+                }
+                else if (_merchantRequestSettings.RequestType.Equals("POST", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PUT", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    _logger.Debug("Content-Type: application/hal+json");
+                }
+
+                return tokenObject;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                throw e;
+            }
+        }
+        #endregion Methods
     }
 }

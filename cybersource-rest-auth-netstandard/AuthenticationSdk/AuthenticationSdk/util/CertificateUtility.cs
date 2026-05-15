@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -64,9 +65,25 @@ namespace AuthenticationSdk.util
             }
         }
 
+        /// <summary>
+        /// Loads certificates from a PEM file.
+        /// </summary>
+        /// <param name="certificateFilePath">The path to the PEM certificate file. Must be a valid file path.</param>
+        /// <returns>An X509Certificate2Collection containing the loaded certificates.</returns>
+        /// <exception cref="ArgumentException">If the certificate file path is null or empty.</exception>
+        /// <exception cref="IOException">If the file cannot be read due to I/O errors.</exception>
+        /// <exception cref="UnauthorizedAccessException">If access to the file is denied.</exception>
         public static X509Certificate2Collection LoadCertificatesFromPemFile(string certificateFilePath)
         {
-            byte[] certBytes = File.ReadAllBytes(certificateFilePath);
+            byte[] certBytes = null;
+            try
+            {
+                certBytes = File.ReadAllBytes(certificateFilePath);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             var collection = new X509Certificate2Collection();
             collection.Import(certBytes);
@@ -164,7 +181,7 @@ namespace AuthenticationSdk.util
         /// <param name="alias">The certificate alias to search for</param>
         /// <returns>The matching X509Certificate2, or null if not found</returns>
         /// <exception cref="ArgumentException">If required parameters are invalid</exception>
-        public static X509Certificate2 GetCertificateByAliasFromP12(string filePath, string password, string alias)
+        public static X509Certificate2 GetCertificateByAliasFromP12(string filePath, SecureString password, string alias)
         {
             if (string.IsNullOrEmpty(filePath))
             {
@@ -185,7 +202,7 @@ namespace AuthenticationSdk.util
             try
             {
                 X509Certificate2Collection collection = new X509Certificate2Collection();
-                collection.Import(filePath, password, X509KeyStorageFlags.Exportable);
+                collection.Import(filePath, new System.Net.NetworkCredential(string.Empty, password).Password, X509KeyStorageFlags.Exportable);
 
                 foreach (X509Certificate2 cert in collection)
                 {
@@ -215,7 +232,7 @@ namespace AuthenticationSdk.util
         /// <param name="filePath">The path to the PKCS12 (.p12/.pfx) file</param>
         /// <param name="password">The password to unlock the keystore</param>
         /// <returns>True if the P12 is CyberSource-generated, false otherwise</returns>
-        public static bool IsP12GeneratedByCyberSource(string filePath, string password)
+        public static bool IsP12GeneratedByCyberSource(string filePath, SecureString password)
         {
             try
             {
@@ -255,7 +272,7 @@ namespace AuthenticationSdk.util
         /// <param name="password">Password for the P12 file</param>
         /// <param name="merchantId">The merchant ID to match against the CN in the certificate subject</param>
         /// <returns>The serial number extracted from the certificate's subject, or null if not found</returns>
-        public static string ExtractResponseMleKidFromP12(string filePath, string password, string merchantId)
+        public static string ExtractResponseMleKidFromP12(string filePath, SecureString password, string merchantId)
         {
             try
             {
@@ -263,7 +280,7 @@ namespace AuthenticationSdk.util
 
                 // Load all certificates from P12 file
                 X509Certificate2Collection collection = new X509Certificate2Collection();
-                collection.Import(filePath, password, X509KeyStorageFlags.Exportable);
+                collection.Import(filePath, new System.Net.NetworkCredential(string.Empty, password).Password, X509KeyStorageFlags.Exportable);
 
                 if (collection.Count == 0)
                 {

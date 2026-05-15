@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 {{^netStandard}}
@@ -14,8 +15,10 @@ using System.Web;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
+using System.Security;
+using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
+using NLog;
 {{#netStandard}}
 using RestSharp.Portable;
 using RestSharp.Portable.HttpClient;
@@ -25,9 +28,6 @@ using RestSharp;
 {{/netStandard}}
 using AuthenticationSdk.core;
 using AuthenticationSdk.util;
-using NLog;
-using System.Security;
-using System.Security.Cryptography.X509Certificates;
 using CyberSource.Utilities;
 
 namespace {{packageName}}.Client
@@ -37,91 +37,11 @@ namespace {{packageName}}.Client
     /// </summary>
     {{>visibility}} partial class ApiClient
     {
-        public class RestClientFactory
-        {
-            private static readonly ConcurrentDictionary<int, Lazy<RestClient>> _restClientInstances = new ConcurrentDictionary<int, Lazy<RestClient>>();
-
-            public static RestClient GetRestClient(MerchantConfig merchantConfig, RestClientOptions clientOptions)
-            {
-                int MaxServicePointIdleTime;
-                int DefaultConnectionLimit;
-                int Timeout;
-
-                if (merchantConfig != null)
-                {
-                    DefaultConnectionLimit = int.Parse(merchantConfig.MaxConnectionPoolSize);
-                    MaxServicePointIdleTime = int.Parse(merchantConfig.KeepAliveTime);
-                    Timeout = int.Parse(merchantConfig.TimeOut);
-                }
-                else
-                {
-                    DefaultConnectionLimit = int.Parse(Constants.DefaultMaxConnectionPoolSize);
-                    MaxServicePointIdleTime = int.Parse(Constants.DefaultKeepAliveTime);
-                    Timeout = int.Parse(Constants.DEFAULT_TIME_OUT);
-                }
-
-                var handler = new StandardSocketsHttpHandler
-                {
-                    PooledConnectionIdleTimeout = TimeSpan.FromMilliseconds(MaxServicePointIdleTime),
-                    MaxConnectionsPerServer = DefaultConnectionLimit
-                };
-
-                var httpClient = new HttpClient(handler);
-                httpClient.Timeout = TimeSpan.FromMilliseconds(Timeout);
-
-                int hash = GetHashOfRestClientOptions(clientOptions);
-
-                if (!_restClientInstances.TryGetValue(hash, out Lazy<RestClient> lazyClient))
-                {
-                    lazyClient = _restClientInstances.GetOrAdd(
-                                     hash,
-                                     _ => new Lazy<RestClient>(() => new RestClient(httpClient, clientOptions)));
-                }
-
-                return lazyClient.Value;
-            }
-
-            private static int GetHashOfRestClientOptions(RestClientOptions clientOptions)
-            {
-                unchecked
-                {
-                    int hashCode = 41;
-                    if (clientOptions.BaseUrl != null)
-                        hashCode = hashCode * 43 + clientOptions.BaseUrl.GetHashCode();
-                    
-                    if (clientOptions.ClientCertificates != null)
-                    {
-                        foreach (X509Certificate cert in clientOptions.ClientCertificates)
-                        {
-                            if (cert != null)
-                                hashCode = hashCode * 43 + cert.GetHashCode();
-                        }
-                    }
-                    
-                    if (clientOptions.Proxy != null)
-                    {
-                        var webProxy = (WebProxy)clientOptions.Proxy;
-                        if (webProxy.Address != null)
-                            hashCode = hashCode * 43 + webProxy.Address.GetHashCode();
-                        var cred = webProxy.Credentials as NetworkCredential;
-                        if (cred != null)
-                        {
-                            if (cred.UserName != null)
-                                hashCode = hashCode * 43 + cred.UserName.GetHashCode();
-                            if (cred.Domain != null)
-                                hashCode = hashCode * 43 + cred.Domain.GetHashCode();
-                        }
-                    }
-                    
-                    if (clientOptions.Timeout != null)
-                        hashCode = hashCode * 43 + clientOptions.Timeout.GetHashCode();
-                    if (clientOptions.UserAgent != null)
-                        hashCode = hashCode * 43 + clientOptions.UserAgent.GetHashCode();
-
-                    return hashCode;
-                }
-            }
-        }
+        #region Private Properties
+        private readonly IMerchantCredentialSettings _merchantCredentialSettings;
+        private readonly IMerchantMLESettings _merchantMLESettings;
+        private readonly IMerchantNetworkSettings _merchantNetworkSettings;
+        private readonly IMerchantLegacySettings _merchantLegacySettings;
 
         private JsonSerializerSettings serializerSettings = new JsonSerializerSettings
         {
@@ -129,84 +49,12 @@ namespace {{packageName}}.Client
         };
 
         /// <summary>
-        /// Allows for extending request processing for <see cref="ApiClient"/> generated code.
+        /// Internal class logger
         /// </summary>
-        /// <param name="request">The RestSharp request object</param>
-        partial void InterceptRequest(RestRequest request); // CHANGED
+        private static Logger logger;
+        #endregion Private Properties
 
-        /// <summary>
-        /// Allows for extending response processing for <see cref="ApiClient"/> generated code.
-        /// </summary>
-        /// <param name="request">The RestSharp request object</param>
-        /// <param name="response">The RestSharp response object</param>
-        partial void InterceptResponse(RestRequest request, RestResponse response); // CHANGED
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApiClient" /> class
-        /// with default configuration and base path ({{{basePath}}}).
-        /// </summary>
-        public ApiClient()
-        {
-            Configuration = Configuration.Default;
-            {{#netStandard}}
-            RestClient.IgnoreResponseStatusCode = true;
-            {{/netStandard}}
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApiClient" /> class
-        /// with default base path ({{{basePath}}}).
-        /// </summary>
-        /// <param name="config">An instance of Configuration.</param>
-        public ApiClient(Configuration config = null)
-        {
-            if (config == null)
-                Configuration = Configuration.Default;
-            else
-                Configuration = config;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-            {{#netStandard}}
-            RestClient.IgnoreResponseStatusCode = true;
-            {{/netStandard}}
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApiClient" /> class
-        /// with default configuration.
-        /// </summary>
-        /// <param name="basePath">The base path.</param>
-        public ApiClient(string basePath = "{{{basePath}}}")
-        {
-           if (string.IsNullOrEmpty(basePath))
-                throw new ArgumentException("basePath cannot be empty");
-
-            {{#netStandard}}
-            RestClient.IgnoreResponseStatusCode = true;
-            {{/netStandard}}
-            Configuration = Configuration.Default;
-        }
-
-        /// <summary>
-        /// Gets or sets the default API client for making HTTP calls.
-        /// </summary>
-        /// <value>The default API client.</value>
-        [Obsolete("ApiClient.Default is deprecated, please use 'Configuration.Default.ApiClient' instead.")]
-        public static ApiClient Default;
-
-        /// <summary>
-        /// Gets or sets the Configuration.
-        /// </summary>
-        /// <value>An instance of the Configuration.</value>
-        public Configuration Configuration { get; set; }
-
+        #region Public Properties
         /// <summary>
         /// Sets the Accept Header Type.
         /// </summary>
@@ -224,165 +72,66 @@ namespace {{packageName}}.Client
         /// </summary>
         /// <value>An instance of the Configuration.</value>
         public string DownloadResponseFileName { get; set; }
+        #endregion Public Properties
 
+        #region Constructors
         /// <summary>
-        /// Internal class logger
+        /// Initializes a new instance of the <see cref="ApiClient" /> class
+        /// with default configuration and base path ({{{basePath}}}).
         /// </summary>
-        private static Logger logger;
-
-        // Creates and sets up a RestRequest prior to a call.
-        private RestRequest PrepareRequest(
-            string path, Method method, Dictionary<string, string> queryParams, object postBody,
-            Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
-            Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
-            string contentType, bool isResponseMLEForApi = false)
+        public ApiClient()
         {
-            //1.set in the defaultHeaders of configuration
-
-            // Change to path(Request Target) to be sent to Authentication SDK
-            // Include Query Params in the Request target
-            var firstQueryParam = true;
-            foreach (var param in queryParams)
-            {
-                // URL-encode both key and value to handle special characters properly
-                var key = Uri.EscapeDataString(param.Key);
-                var val = Uri.EscapeDataString(param.Value);
-
-                if (!firstQueryParam)
-                {
-                    path = path + "&" + key + "=" + val;
-                }
-                else
-                {
-                    path = path + "?" + key + "=" + val;
-                    firstQueryParam = false;
-                }
-            }
-
-            var request = new RestRequest(path, method);
-            {{#netStandard}}
-            // disable ResetSharp.Portable built-in serialization
-            request.Serializer = null;
-            {{/netStandard}}
-
-            // add path parameter, if any
-            foreach(var param in pathParams)
-                request.AddParameter(param.Key, param.Value, ParameterType.UrlSegment);
-
-            // add header parameter, if any
-            // 2. passed to this function
-            foreach (var param in headerParams)
-            {
-                if (param.Key == "Authorization")
-                {
-                    request.AddParameter("Authorization", string.Format("Bearer " + param.Value),
-                        ParameterType.HttpHeader);
-                }
-                else
-                    request.AddHeader(param.Key, param.Value);
-            }
-
-            Dictionary<string, string> authenticationHeaders;
-            if (postBody == null)
-            {
-                authenticationHeaders = CallAuthenticationHeaders(method.ToString(), path, isResponseMLEForApi: isResponseMLEForApi);
-            }
-            else
-            {
-                authenticationHeaders = CallAuthenticationHeaders(method.ToString(), path, postBody.ToString(), isResponseMLEForApi: isResponseMLEForApi);
-            }
-
-            foreach (var param in authenticationHeaders)
-            {
-                if (param.Key == "Authorization")
-                {
-                    request.AddParameter("Authorization", string.Format("Bearer " + param.Value),
-                        ParameterType.HttpHeader);
-                }
-                else
-                {
-                    if (request.Parameters.Any(x => string.Equals(x.Name, param.Key, StringComparison.OrdinalIgnoreCase) && x.Type == ParameterType.HttpHeader))
-                    {
-                        continue;
-                    }
-                    request.AddHeader(param.Key, param.Value);
-                }
-            }
-
-            // add query parameter, if any
-            // foreach(var param in queryParams)
-            //     request.AddQueryParameter(param.Key, param.Value);
-
-            // add form parameter, if any
-            foreach(var param in formParams)
-                request.AddParameter(param.Key, param.Value);
-
-            // add file parameter, if any
-            //foreach(var param in fileParams)
-            //{
-                {{#netStandard}}
-                //request.AddFile(param.Value);
-                {{/netStandard}}
-                {{^netStandard}}
-                {{^supportsUWP}}
-                //request.AddFile(param.Value.Name, param.Value.FileName, param.Value.ContentType);
-                {{/supportsUWP}}
-                {{#supportsUWP}}
-                //byte[] paramWriter = null;
-                //param.Value.Writer = delegate (Stream stream) { paramWriter = ToByteArray(stream); };
-                //request.AddFile(param.Value.Name, param.Value.FileName, param.Value.ContentType);
-                {{/supportsUWP}}
-                {{/netStandard}}
-            //}
-
-            if (postBody != null) // http body (model or byte[]) parameter
-            {
-                if (postBody.GetType() == typeof(string))
-                {
-                    if (contentType == "application/x-www-form-urlencoded")
-                    {
-                        var bodyParams = JsonConvert.DeserializeObject<Dictionary<string, string>>((string)postBody);
-                        foreach (KeyValuePair<string, string> param in bodyParams)
-                        {
-                            {{#netStandard}}
-                            request.AddParameter(new Parameter { Value = param.Value, Type = ParameterType.GetOrPost, Name = param.Key });
-                            {{/netStandard}}
-                            {{^netStandard}}
-                            request.AddParameter(param.Key, param.Value, ParameterType.GetOrPost);
-                            {{/netStandard}}
-                        }
-                    }
-                    else if (contentType.Contains("multipart/form-data"))
-                    {
-                        request.AddBody(postBody, "multipart/form-data");
-                        request.AddHeader("Content-Type", contentType); //required to set in case of file params
-                    }
-                    else
-                    {
-                        {{#netStandard}}
-                        // request.AddParameter(new Parameter { Value = postBody, Type = ParameterType.RequestBody, ContentType = "application/json" });
-                        request.AddJsonBody(postBody);
-                        {{/netStandard}}
-                        {{^netStandard}}
-                        // request.AddParameter("application/json", postBody, ParameterType.RequestBody);
-                        request.AddJsonBody(postBody);
-                        {{/netStandard}}
-                    }
-                }
-                else if (postBody.GetType() == typeof(byte[]))
-                {
-                    {{#netStandard}}
-                    request.AddParameter(new Parameter { Value = postBody, Type = ParameterType.RequestBody, ContentType = contentType });
-                    {{/netStandard}}
-                    {{^netStandard}}
-                    request.AddParameter(contentType, postBody, ParameterType.RequestBody);
-                    {{/netStandard}}
-                }
-            }
-
-            return request;
+            throw new ArgumentNullException("Configuration", "This constructor is deprecated. Please use the constructor that takes an IConfiguration object instead.");
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApiClient" /> class
+        /// with default base path ({{{basePath}}}).
+        /// </summary>
+        /// <param name="config">An instance of IConfiguration.</param>
+        public ApiClient(IConfiguration config = null)
+        {
+            config = config ?? throw new ArgumentNullException(nameof(config), "Configuration cannot be null");
+
+            _merchantLegacySettings = config.MerchantLegacySettings;
+            _merchantCredentialSettings = config.MerchantCredentialSettings;
+            _merchantMLESettings = config.MerchantMLESettings;
+            _merchantNetworkSettings = config.MerchantNetworkSettings;
+            {{#netStandard}}
+            RestClient.IgnoreResponseStatusCode = true;
+            {{/netStandard}}
+
+            logger ??= LogManager.GetCurrentClassLogger();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApiClient" /> class
+        /// with default configuration.
+        /// </summary>
+        /// <param name="basePath">The base path.</param>
+        [Obsolete("Use the constructor that takes an IConfiguration object instead.")]
+        public ApiClient(string basePath = "{{{basePath}}}")
+        {
+            throw new ArgumentNullException(nameof(basePath), "This constructor is deprecated. Please use the constructor that takes an IConfiguration object instead.");
+        }
+        #endregion Constructors
+
+        #region Legacy Methods
+        /// <summary>
+        /// Allows for extending request processing for <see cref="ApiClient"/> generated code.
+        /// </summary>
+        /// <param name="request">The RestSharp request object</param>
+        partial void InterceptRequest(RestRequest request); // CHANGED
+
+        /// <summary>
+        /// Allows for extending response processing for <see cref="ApiClient"/> generated code.
+        /// </summary>
+        /// <param name="request">The RestSharp request object</param>
+        /// <param name="response">The RestSharp response object</param>
+        partial void InterceptResponse(RestRequest request, RestResponse response); // CHANGED
+        #endregion Legacy Methods
+
+        #region Public Methods
         /// <summary>
         /// Makes the HTTP request (Sync).
         /// </summary>
@@ -420,15 +169,13 @@ namespace {{packageName}}.Client
             //check if the Response is to be downloaded as a file, this value to be set by the calling API class
             var request = PrepareRequest(
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, contentType,isResponseMLEForApi);
+                pathParams, contentType, isResponseMLEForApi);
 
-            MerchantConfig merchantConfig = new MerchantConfig(merchantConfigDictionary: Configuration.MerchantConfigDictionaryObj, mapToControlMLEonAPI: Configuration.MapToControlMLEonAPI, responseMlePrivateKey: Configuration.ResponseMlePrivateKey);
-
-            var newRestClientOptions = GetRestClientOptions(merchantConfig, Configuration.UserAgent, TimeSpan.FromMilliseconds(Configuration.Timeout));
+            var newRestClientOptions = GetRestClientOptions(_merchantNetworkSettings, _merchantCredentialSettings, _merchantLegacySettings.UserAgent, TimeSpan.FromMilliseconds(_merchantNetworkSettings.TimeOut));
 
             // RestClient.ClearHandlers();
 
-            var actualRestClient = RestClientFactory.GetRestClient(merchantConfig, newRestClientOptions);
+            var actualRestClient = RestClientFactory.GetRestClient(_merchantNetworkSettings, newRestClientOptions);
 
             // Logging Request Headers
             var headerPrintOutput = new StringBuilder();
@@ -444,7 +191,7 @@ namespace {{packageName}}.Client
 
             InterceptRequest(request);
             {{#netStandard}}
-            response = RestClient.Execute(request).Result;
+            var response = RestClient.Execute(request).Result;
             {{/netStandard}}
             {{^netStandard}}
             {{^supportsUWP}}
@@ -452,13 +199,15 @@ namespace {{packageName}}.Client
             {{/supportsUWP}}
             {{#supportsUWP}}
             // Using async method to perform sync call (uwp-only)
-            response = RestClient.ExecuteTaskAsync(request).Result;
+            var response = RestClient.ExecuteTaskAsync(request).Result;
             {{/supportsUWP}}
             {{/netStandard}}
             InterceptResponse(request, response);
-			
-			// check if Response MLE is enabled, then decrypt the response content and then deserialize
-            ResponseMleHandler.DecryptMleResponseIfNeeded(response,merchantConfig);
+
+            // check if Response MLE is enabled, then decrypt the response content and then deserialize
+            ResponseMleHandler.DecryptMleResponseIfNeeded(response, _merchantCredentialSettings, _merchantMLESettings);
+
+            _merchantLegacySettings.DefaultHeader.Clear();
 
             // Logging Response Headers
             httpResponseStatusCode = (int)response.StatusCode;
@@ -474,86 +223,13 @@ namespace {{packageName}}.Client
             }
 
             logger.Debug($"HTTP Response Headers :\n{logUtility.MaskSensitiveData(responseHeadersBuilder.ToString())}");
-           
+
             if (!string.IsNullOrEmpty(httpResponseData))
             {
                 logger.Debug($"HTTP Response Body :\n{logUtility.MaskSensitiveData(httpResponseData)}");
             }
 
             return response;
-        }
-
-        private RestClientOptions GetRestClientOptions(MerchantConfig merchantConfig, string userAgent, TimeSpan timeout)
-        {
-            RestClientOptions clientOptions = new RestClientOptions();
-
-            clientOptions.UserAgent = userAgent;
-            clientOptions.Timeout = timeout;
-
-            IWebProxy webProxy = null;
-
-            if (bool.TryParse(merchantConfig.UseProxy, out bool useProxy) && useProxy)
-            {
-                if (!string.IsNullOrWhiteSpace(merchantConfig.ProxyAddress) && int.TryParse(merchantConfig.ProxyPort, out int proxyPortTest))
-                {
-                    WebProxy proxy = new WebProxy(merchantConfig.ProxyAddress, proxyPortTest);
-
-                    if (!string.IsNullOrWhiteSpace(merchantConfig.ProxyUsername) && !string.IsNullOrWhiteSpace(merchantConfig.ProxyPassword))
-                    {
-                        proxy.Credentials = new NetworkCredential(merchantConfig.ProxyUsername, merchantConfig.ProxyPassword);
-                    }
-
-                    webProxy = proxy;
-                }
-            }
-
-            if (webProxy != null)
-            {
-                clientOptions.Proxy = webProxy;
-            }
-
-            if (bool.TryParse(merchantConfig.EnableClientCert, out bool enableClientCert) && enableClientCert)
-            {
-                string clientCertDirectory = merchantConfig.ClientCertDirectory;
-                string clientCertFile = merchantConfig.ClientCertFile;
-                SecureString clientCertPassword = new SecureString();
-
-                foreach (char c in merchantConfig.ClientCertPassword)
-                {
-                    clientCertPassword.AppendChar(c);
-                }
-                clientCertPassword.MakeReadOnly();
-
-                string fileName = Path.Combine(clientCertDirectory, clientCertFile);
-
-                // Importing Certificates
-                var certificate = new X509Certificate2(fileName, clientCertPassword);
-                clientCertPassword.Dispose();
-                clientOptions.ClientCertificates = new X509CertificateCollection { certificate };
-            }
-
-            if (!string.IsNullOrWhiteSpace(merchantConfig.IntermediateHost))
-            {
-                //change with intermediate hostname if present
-                //supporting both for http or https for intermediate url
-                if (merchantConfig.IntermediateHost.StartsWith("http://") || merchantConfig.IntermediateHost.StartsWith("https://"))
-                {
-                    //RestClient = new RestClient(merchantConfig.IntermediateHost);
-                    clientOptions.BaseUrl = new Uri(merchantConfig.IntermediateHost);
-                }
-                else
-                {
-                    //RestClient = new RestClient("https://" + merchantConfig.IntermediateHost);
-                    clientOptions.BaseUrl = new Uri("https://" + merchantConfig.IntermediateHost);
-                }
-            }
-            else
-            {
-                //RestClient = new RestClient("https://" + merchantConfig.HostName);
-                clientOptions.BaseUrl = new Uri("https://" + merchantConfig.HostName);
-            }
-
-            return clientOptions;
         }
 
         {{#supportsAsync}}
@@ -580,7 +256,11 @@ namespace {{packageName}}.Client
 
             var request = PrepareRequest(
                 path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, contentType,isResponseMLEForApi);
+                pathParams, contentType, isResponseMLEForApi);
+
+            var newRestClientOptions = GetRestClientOptions(_merchantNetworkSettings, _merchantCredentialSettings, _merchantLegacySettings.UserAgent, TimeSpan.FromMilliseconds(_merchantNetworkSettings.TimeOut));
+
+            var actualRestClient = RestClientFactory.GetRestClient(_merchantNetworkSettings, newRestClientOptions);
 
             // Logging Request Headers
             var headerPrintOutput = new StringBuilder();
@@ -594,18 +274,14 @@ namespace {{packageName}}.Client
 
             logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
 
-            MerchantConfig merchantConfig = new MerchantConfig(merchantConfigDictionary: Configuration.MerchantConfigDictionaryObj, mapToControlMLEonAPI: Configuration.MapToControlMLEonAPI, responseMlePrivateKey: Configuration.ResponseMlePrivateKey);
-
-            var newRestClientOptions = GetRestClientOptions(merchantConfig, Configuration.UserAgent, TimeSpan.FromMilliseconds(Configuration.Timeout));
-
-            var actualRestClient = RestClientFactory.GetRestClient(merchantConfig, newRestClientOptions);
-
             InterceptRequest(request);
             var response = await actualRestClient.Execute{{^netStandard}}Async{{/netStandard}}(request);
             InterceptResponse(request, response);
-			
-			// check if Response MLE is enabled, then decrypt the response content and then deserialize
-            ResponseMleHandler.DecryptMleResponseIfNeeded(response,merchantConfig);
+
+            // check if Response MLE is enabled, then decrypt the response content and then deserialize
+            ResponseMleHandler.DecryptMleResponseIfNeeded(response, _merchantCredentialSettings, _merchantMLESettings);
+
+            _merchantLegacySettings.DefaultHeader.Clear();
 
             // Logging Response Headers
             var httpResponseStatusCode = (int)response.StatusCode;
@@ -631,16 +307,6 @@ namespace {{packageName}}.Client
         }{{/supportsAsync}}
 
         /// <summary>
-        /// Escape string (url-encoded).
-        /// </summary>
-        /// <param name="str">String to be escaped.</param>
-        /// <returns>Escaped string.</returns>
-        public string EscapeString(string str)
-        {
-            return UrlEncode(str);
-        }
-
-        /// <summary>
         /// Create FileParameter based on Stream.
         /// </summary>
         /// <param name="name">Parameter name.</param>
@@ -663,10 +329,12 @@ namespace {{packageName}}.Client
         /// <returns>Formatted string.</returns>
         public string ParameterToString(object obj)
         {
-            if (obj is DateTime) {
+            if (obj is DateTime)
+            {
                 string outDateTime = null;
 
-                if (((DateTime)obj).TimeOfDay.CompareTo(new TimeSpan(0, 0, 0)) == 0) {
+                if (((DateTime)obj).TimeOfDay.CompareTo(new TimeSpan(0, 0, 0)) == 0)
+                {
                     outDateTime = ((DateTime?)obj).Value.ToString("yyyy-MM-dd");
                 }
                 else
@@ -676,8 +344,9 @@ namespace {{packageName}}.Client
 
                 return outDateTime;
             }
-            else if (obj is DateTimeOffset) {
-                return ((DateTimeOffset)obj).ToString (Configuration.DateTimeFormat);
+            else if (obj is DateTimeOffset)
+            {
+                return ((DateTimeOffset)obj).ToString(_merchantLegacySettings.DateTimeFormat);
             }
             else if (obj is IList)
             {
@@ -691,7 +360,7 @@ namespace {{packageName}}.Client
                 return flattenedString.ToString();
             }
             else
-                return Convert.ToString (obj);
+                return Convert.ToString(obj);
         }
 
         /// <summary>
@@ -700,7 +369,7 @@ namespace {{packageName}}.Client
         /// <param name="response">The HTTP response.</param>
         /// <param name="type">Object type.</param>
         /// <returns>Object representation of the JSON string.</returns>
-        public object Deserialize(RestResponse response, Type type, MerchantConfig merchantConfig) // CHANGED
+        public object Deserialize(RestResponse response, Type type) // CHANGED
         {
             {{^netStandard}}IList<Parameter>{{/netStandard}}{{#netStandard}}IHttpHeaders{{/netStandard}} headers = response.Headers.ToList<Parameter>();
             if (type == typeof(byte[])) // return byte array
@@ -712,9 +381,9 @@ namespace {{packageName}}.Client
             {
                 if (headers != null)
                 {
-                    var filePath = string.IsNullOrEmpty(Configuration.TempFolderPath)
+                    var filePath = string.IsNullOrEmpty(_merchantLegacySettings.TempFolderPath)
                         ? Path.GetTempPath()
-                        : Configuration.TempFolderPath;
+                        : _merchantLegacySettings.TempFolderPath;
                     var regex = new Regex(@"Content-Disposition=.*filename=['""]?([^'""\s]+)['""]?$");
                     foreach (var header in headers)
                     {
@@ -739,9 +408,9 @@ namespace {{packageName}}.Client
                 return stream;
             }
 
-            if ( type == typeof(DateTime?)) // return a datetime object
+            if (type == typeof(DateTime?)) // return a datetime object
             {
-                return DateTime.Parse(response.Content,  null, System.Globalization.DateTimeStyles.RoundtripKind);
+                return DateTime.Parse(response.Content, null, System.Globalization.DateTimeStyles.RoundtripKind);
             }
 
 
@@ -829,16 +498,6 @@ namespace {{packageName}}.Client
         }
 
         /// <summary>
-        /// Encode string in base64 format.
-        /// </summary>
-        /// <param name="text">String to be encoded.</param>
-        /// <returns>Encoded string.</returns>
-        public static string Base64Encode(string text)
-        {
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
-        }
-
-        /// <summary>
         /// Dynamically cast the object into target type.
         /// Ref: http://stackoverflow.com/questions/4925718/c-dynamic-runtime-cast
         /// </summary>
@@ -858,7 +517,7 @@ namespace {{packageName}}.Client
         /// <returns>Byte array</returns>
         public static byte[] ReadAsBytes(Stream input)
         {
-            byte[] buffer = new byte[16*1024];
+            byte[] buffer = new byte[16 * 1024];
             using (MemoryStream ms = new MemoryStream())
             {
                 int read;
@@ -868,6 +527,368 @@ namespace {{packageName}}.Client
                 }
                 return ms.ToArray();
             }
+        }
+
+        /// <summary>
+        /// Sanitize filename by removing the path
+        /// </summary>
+        /// <param name="filename">Filename</param>
+        /// <returns>Filename</returns>
+        public static string SanitizeFilename(string filename)
+        {
+            Match match = Regex.Match(filename, @".*[/\\](.*)$");
+
+            if (match.Success)
+            {
+                return match.Groups[1].Value;
+            }
+            else
+            {
+                return filename;
+            }
+        }
+
+        /// <summary>
+        /// Generate Request Authentication Headers using the Authentication SDK
+        /// </summary>
+        /// <param name="requestType">GET/POST/PUT/PATCH/DELETE</param>
+        /// <param name="requestTarget">Resource Path</param>
+        /// <param name="requestJsonData">Request Payload</param>
+        public void CallAuthenticationHeaders(IMerchantRequestSettings merchantRequestSettings, bool isResponseMLEForApi = false)
+        {
+            var authorize = new Authorize(_merchantCredentialSettings, merchantRequestSettings, _merchantMLESettings);
+
+            //these are the Request Headers to be sent along with the HTTP Request
+            var authenticationHeaders = new Dictionary<string, string>();
+
+            if (_merchantCredentialSettings.AuthenticationType.Equals("JWT", StringComparison.InvariantCultureIgnoreCase))
+            {
+                //generate token and set JWT token headers
+                var jwtToken = authorize.GetToken(isResponseMLEForApi);
+                authenticationHeaders.Add("Authorization", jwtToken.BearerToken);
+            }
+            else if (_merchantCredentialSettings.AuthenticationType.Equals("HTTP_SIGNATURE", StringComparison.InvariantCultureIgnoreCase))
+            {
+                //generate signature and set HTTP Signature headers
+                var httpSign = authorize.GetSignature();
+                authenticationHeaders.Add("v-c-merchant-id", httpSign.MerchantId);
+                authenticationHeaders.Add("Date", httpSign.GmtDateTime);
+                authenticationHeaders.Add("Host", httpSign.HostName);
+                authenticationHeaders.Add("Signature", httpSign.SignatureParam);
+
+                if (merchantRequestSettings.RequestType.Equals("POST", StringComparison.InvariantCultureIgnoreCase) || merchantRequestSettings.RequestType.Equals("PUT", StringComparison.InvariantCultureIgnoreCase) || merchantRequestSettings.RequestType.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    authenticationHeaders.Add("Digest", httpSign.Digest);
+                }
+            }
+            else if (_merchantCredentialSettings.AuthenticationType.Equals("OAUTH", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var oAuthToken = authorize.GetOAuthToken();
+                authenticationHeaders.Add("Authorization", oAuthToken.AccessToken);
+            }
+
+            if (!string.IsNullOrEmpty(_merchantNetworkSettings.SdkClientId))
+            {
+                authenticationHeaders.Add("v-c-client-id", _merchantNetworkSettings.SdkClientId);
+            }
+
+            // Add SDK telemetry headers
+            if (!string.IsNullOrEmpty(_merchantCredentialSettings.MerchantId))
+            {
+                authenticationHeaders.Add("v-c-sdk-telemetry-merchant-id", _merchantCredentialSettings.MerchantId);
+            }
+
+            if (_merchantNetworkSettings.IsSDK)
+            {
+                authenticationHeaders.Add("v-c-sdk-telemetry-mcp", "true");
+            }
+
+            // if (!string.IsNullOrEmpty(Configuration.SolutionId))
+            // {
+            //     authenticationHeaders.Add("v-c-solution-id", Configuration.SolutionId);
+            // }
+
+            //Set the Configuration
+            _merchantLegacySettings.DefaultHeader = authenticationHeaders;
+        }
+        #endregion Public Methods
+
+        #region Private Methods
+        /// <summary>
+        /// Creates the RestSharp request object by adding all the parameters and headers to be sent in the HTTP Request.
+        /// </summary>
+        /// <param name="path">API Request Path</param>
+        /// <param name="method">HTTP Method</param>
+        /// <param name="queryParams">Dictionary of query parameters as string keys with string values</param>
+        /// <param name="postBody">Object of the request body payload</param>
+        /// <param name="headerParams">Dictionary of header parameters as string keys with string values</param>
+        /// <param name="formParams">Dictionary of form parameters as string keys with string values</param>
+        /// <param name="fileParams">Dictionary of file parameters as string keys with FileParameter values</param>
+        /// <param name="pathParams">Dictionary of path parameters as string keys with string values</param>
+        /// <param name="contentType">Content type of the request payload</param>
+        /// <param name="isResponseMLEForApi">Boolean value denoting whether the API response is expected to be encrypted by MLE</param>
+        /// <returns>Request</returns>
+        private RestRequest PrepareRequest(
+            string path, Method method, Dictionary<string, string> queryParams, object postBody,
+            Dictionary<string, string> headerParams, Dictionary<string, string> formParams,
+            Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
+            string contentType, bool isResponseMLEForApi = false)
+        {
+            //1.set in the defaultHeaders of configuration
+
+            // Change to path(Request Target) to be sent to Authentication SDK
+            // Include Query Params in the Request target
+            var firstQueryParam = true;
+            foreach (var param in queryParams)
+            {
+                var key = param.Key;
+                var val = param.Value;
+
+                if (!firstQueryParam)
+                {
+                    path = path + "&" + key + "=" + val;
+                }
+                else
+                {
+                    path = path + "?" + key + "=" + val;
+                    firstQueryParam = false;
+                }
+            }
+
+            var request = new RestRequest(path, method);
+            {{#netStandard}}
+            // disable RestSharp.Portable built-in serialization
+            request.Serializer = null;
+            {{/netStandard}}
+
+            // add path parameter, if any
+            foreach (var param in pathParams)
+                request.AddParameter(param.Key, param.Value, ParameterType.UrlSegment);
+
+            // add header parameter, if any
+            // 2. passed to this function
+            foreach (var param in headerParams)
+            {
+                if (param.Key == "Authorization")
+                {
+                    request.AddParameter("Authorization", string.Format("Bearer " + param.Value),
+                        ParameterType.HttpHeader);
+                }
+                else
+                    request.AddHeader(param.Key, param.Value);
+            }
+
+            var _requestTarget = Uri.EscapeUriString(path);
+            var _requestMethod = method.ToString();
+            IMerchantRequestSettings _merchantRequestSettings;
+
+            if (postBody == null)
+            {
+                _merchantRequestSettings = new MerchantRequestSettingsFactory().Create(_requestMethod, _requestTarget, null);
+                CallAuthenticationHeaders(_merchantRequestSettings, isResponseMLEForApi);
+            }
+            else
+            {
+                _merchantRequestSettings = new MerchantRequestSettingsFactory().Create(_requestMethod, _requestTarget, postBody.ToString());
+                CallAuthenticationHeaders(_merchantRequestSettings, isResponseMLEForApi);
+            }
+
+            foreach (var param in _merchantLegacySettings.DefaultHeader)
+            {
+                if (param.Key == "Authorization")
+                {
+                    request.AddParameter("Authorization", string.Format("Bearer " + param.Value),
+                        ParameterType.HttpHeader);
+                }
+                else
+                {
+                    if (request.Parameters.Any(x => string.Equals(x.Name, param.Key, StringComparison.OrdinalIgnoreCase) && x.Type == ParameterType.HttpHeader))
+                    {
+                        continue;
+                    }
+                    request.AddHeader(param.Key, param.Value);
+                }
+            }
+
+            // add query parameter, if any
+            // foreach(var param in queryParams)
+            //     request.AddQueryParameter(param.Key, param.Value);
+
+            // add form parameter, if any
+            foreach (var param in formParams)
+                request.AddParameter(param.Key, param.Value);
+
+            // add file parameter, if any
+            //foreach(var param in fileParams)
+            //{
+                {{#netStandard}}
+                //request.AddFile(param.Value);
+                {{/netStandard}}
+                {{^netStandard}}
+                {{^supportsUWP}}
+                //request.AddFile(param.Value.Name, param.Value.FileName, param.Value.ContentType);
+                {{/supportsUWP}}
+                {{#supportsUWP}}
+                //byte[] paramWriter = null;
+                //param.Value.Writer = delegate (Stream stream) { paramWriter = ToByteArray(stream); };
+                //request.AddFile(param.Value.Name, param.Value.FileName, param.Value.ContentType);
+                {{/supportsUWP}}
+                {{/netStandard}}
+            //}
+
+            if (postBody != null) // http body (model or byte[]) parameter
+            {
+                if (postBody.GetType() == typeof(string))
+                {
+                    if (contentType == "application/x-www-form-urlencoded")
+                    {
+                        var bodyParams = JsonConvert.DeserializeObject<Dictionary<string, string>>((string)postBody);
+                        foreach (KeyValuePair<string, string> param in bodyParams)
+                        {
+                            {{#netStandard}}
+                            request.AddParameter(new Parameter { Value = param.Value, Type = ParameterType.GetOrPost, Name = param.Key });
+                            {{/netStandard}}
+                            {{^netStandard}}
+                            request.AddParameter(param.Key, param.Value, ParameterType.GetOrPost);
+                            {{/netStandard}}
+                        }
+                    }
+                    else if (contentType.Contains("multipart/form-data"))
+                    {
+                        request.AddBody(postBody, "multipart/form-data");
+                        request.AddHeader("Content-Type", contentType); //required to set in case of file params
+                    }
+                    else
+                    {
+                        {{#netStandard}}
+                        // request.AddParameter(new Parameter { Value = postBody, Type = ParameterType.RequestBody, ContentType = "application/json" });
+                        request.AddJsonBody(postBody);
+                        {{/netStandard}}
+                        {{^netStandard}}
+                        // request.AddParameter("application/json", postBody, ParameterType.RequestBody);
+                        request.AddJsonBody(postBody);
+                        {{/netStandard}}
+                    }
+                }
+                else if (postBody.GetType() == typeof(byte[]))
+                {
+                    {{#netStandard}}
+                    request.AddParameter(new Parameter { Value = postBody, Type = ParameterType.RequestBody, ContentType = contentType });
+                    {{/netStandard}}
+                    {{^netStandard}}
+                    request.AddParameter(contentType, postBody, ParameterType.RequestBody);
+                    {{/netStandard}}
+                }
+            }
+
+            return request;
+        }
+
+        /// <summary>
+        /// Gets the RestClientOptions based on the merchant network settings and merchant credential settings,
+        /// including proxy configuration and client certificate configuration if applicable.
+        /// </summary>
+        /// <param name="merchantNetworkSettings">Object of IMerchantNetworkSettings containing network settings</param>
+        /// <param name="merchantCredentialSettings">Object of IMerchantCredentialSettings containing merchant credentials</param>
+        /// <param name="userAgent">HTTP User Agent</param>
+        /// <param name="timeout">HTTP timeout (milliseconds)</param>
+        /// <returns>RestClientOptions</returns>
+        private RestClientOptions GetRestClientOptions(IMerchantNetworkSettings merchantNetworkSettings, IMerchantCredentialSettings merchantCredentialSettings, string userAgent, TimeSpan timeout)
+        {
+            RestClientOptions clientOptions = new RestClientOptions();
+
+            clientOptions.UserAgent = userAgent;
+            clientOptions.Timeout = timeout;
+
+            IWebProxy webProxy = null;
+
+            if (merchantNetworkSettings.UseProxy != null)
+            {
+                if (bool.Parse(merchantNetworkSettings.UseProxy))
+                {
+                    if (!string.IsNullOrWhiteSpace(merchantNetworkSettings.ProxyAddress) && int.TryParse(merchantNetworkSettings.ProxyPort, out int proxyPortTest))
+                    {
+                        WebProxy proxy = new WebProxy(merchantNetworkSettings.ProxyAddress, proxyPortTest);
+
+                        if (!string.IsNullOrWhiteSpace(merchantNetworkSettings.ProxyUsername) && !string.IsNullOrWhiteSpace(merchantNetworkSettings.ProxyPassword))
+                        {
+                            proxy.Credentials = new NetworkCredential(merchantNetworkSettings.ProxyUsername, merchantNetworkSettings.ProxyPassword);
+                        }
+
+                        webProxy = proxy;
+                    }
+                }
+            }
+
+            if (webProxy != null)
+            {
+                clientOptions.Proxy = webProxy;
+            }
+
+            if (Equals(bool.Parse(merchantCredentialSettings.EnableClientCert), true))
+            {
+                string clientCertDirectory = merchantCredentialSettings.ClientCertDirectory;
+                string clientCertFile = merchantCredentialSettings.ClientCertFile;
+                SecureString clientCertPassword = new SecureString();
+
+                foreach (char c in merchantCredentialSettings.ClientCertPassword)
+                {
+                    clientCertPassword.AppendChar(c);
+                }
+                clientCertPassword.MakeReadOnly();
+
+                string fileName = Path.Combine(clientCertDirectory, clientCertFile);
+
+                // Importing Certificates
+                var certificate = new X509Certificate2(fileName, clientCertPassword);
+                clientCertPassword.Dispose();
+                clientOptions.ClientCertificates = new X509CertificateCollection { certificate };
+            }
+
+            if (!string.IsNullOrWhiteSpace(merchantCredentialSettings.IntermediateHost))
+            {
+                //change with intermediate hostname if present
+                //supporting both for http or https for intermediate url
+                if (merchantCredentialSettings.IntermediateHost.StartsWith("http://") || merchantCredentialSettings.IntermediateHost.StartsWith("https://"))
+                {
+                    //RestClient = new RestClient(merchantConfig.IntermediateHost);
+                    clientOptions.BaseUrl = new Uri(merchantCredentialSettings.IntermediateHost);
+                }
+                else
+                {
+                    //RestClient = new RestClient("https://" + merchantConfig.IntermediateHost);
+                    clientOptions.BaseUrl = new Uri("https://" + merchantCredentialSettings.IntermediateHost);
+                }
+            }
+            else
+            {
+                //RestClient = new RestClient("https://" + merchantConfig.HostName);
+                clientOptions.BaseUrl = new Uri("https://" + merchantCredentialSettings.HostName);
+            }
+
+            return clientOptions;
+        }
+        #endregion Private Methods
+
+        #region Legacy Methods
+        /// <summary>
+        /// Escape string (url-encoded).
+        /// </summary>
+        /// <param name="str">String to be escaped.</param>
+        /// <returns>Escaped string.</returns>
+        public string EscapeString(string str)
+        {
+            return UrlEncode(str);
+        }
+
+        /// <summary>
+        /// Encode string in base64 format.
+        /// </summary>
+        /// <param name="text">String to be encoded.</param>
+        /// <returns>Encoded string.</returns>
+        public static string Base64Encode(string text)
+        {
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
         }
 
         /// <summary>
@@ -905,25 +926,6 @@ namespace {{packageName}}.Client
 
             return sb.ToString();
         }
-
-        /// <summary>
-        /// Sanitize filename by removing the path
-        /// </summary>
-        /// <param name="filename">Filename</param>
-        /// <returns>Filename</returns>
-        public static string SanitizeFilename(string filename)
-        {
-            Match match = Regex.Match(filename, @".*[/\\](.*)$");
-
-            if (match.Success)
-            {
-                return match.Groups[1].Value;
-            }
-            else
-            {
-                return filename;
-            }
-        }
         {{^netStandard}}
         {{#supportsUWP}}
         /// <summary>
@@ -941,66 +943,6 @@ namespace {{packageName}}.Client
         }
         {{/supportsUWP}}
         {{/netStandard}}
-
-        /// <summary>
-        /// Generate Request Authentication Headers using the Authentication SDK
-        /// </summary>
-        /// <param name="requestType">GET/POST/PUT/PATCH/DELETE</param>
-        /// <param name="requestTarget">Resource Path</param>
-        /// <param name="requestJsonData">Request Payload</param>
-        /// <returns>Dictionary containing the authentication headers for this request</returns>
-        private Dictionary<string, string> CallAuthenticationHeaders(string requestType, string requestTarget, string requestJsonData = null, bool isResponseMLEForApi = false)
-        {
-            requestTarget = Uri.EscapeUriString(requestTarget);
-
-            var merchantConfig = Configuration.MerchantConfigDictionaryObj != null
-                ? new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey)
-                : new MerchantConfig();
-
-            merchantConfig.RequestType = requestType;
-            merchantConfig.RequestTarget = requestTarget;
-            merchantConfig.RequestJsonData = requestJsonData;
-
-            var authorize = new Authorize(merchantConfig);
-
-            //these are the Request Headers to be sent along with the HTTP Request
-            var authenticationHeaders = new Dictionary<string, string>();
-
-            if (merchantConfig.IsJwtTokenAuthType)
-            {
-                //generate token and set JWT token headers
-                var jwtToken = authorize.GetToken(isResponseMLEForApi);
-                authenticationHeaders.Add("Authorization", jwtToken.BearerToken);
-            }
-            else if (merchantConfig.IsHttpSignAuthType)
-            {
-                //generate signature and set HTTP Signature headers
-                var httpSign = authorize.GetSignature();
-                authenticationHeaders.Add("v-c-merchant-id", httpSign.MerchantId);
-                authenticationHeaders.Add("Date", httpSign.GmtDateTime);
-                authenticationHeaders.Add("Host", httpSign.HostName);
-                authenticationHeaders.Add("Signature", httpSign.SignatureParam);
-
-                if (merchantConfig.IsPostRequest || merchantConfig.IsPutRequest || merchantConfig.IsPatchRequest)
-                    authenticationHeaders.Add("Digest", httpSign.Digest);
-            }
-            else if (merchantConfig.IsOAuthTokenAuthType)
-            {
-                var oAuthToken = authorize.GetOAuthToken();
-                authenticationHeaders.Add("Authorization", oAuthToken.AccessToken);
-            }
-
-            if (!string.IsNullOrEmpty(Configuration.ClientId))
-            {
-                authenticationHeaders.Add("v-c-client-id", Configuration.ClientId);
-            }
-
-            // if (!string.IsNullOrEmpty(Configuration.SolutionId))
-            // {
-            //     authenticationHeaders.Add("v-c-solution-id", Configuration.SolutionId);
-            // }
-
-            return authenticationHeaders;
-        }
+        #endregion Legacy Methods
     }
 }

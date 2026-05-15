@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -33,378 +32,264 @@ namespace CyberSource.Api
         /// Cancel a purchase intent
         /// </summary>
         /// <remarks>
-        /// Cancels an existing purchase intent identified by the transaction ID.
+        /// Cancel an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer decides to abandon the purchase before payment credentials have been used. Requires device information and assurance data for identity verification. Returns status CANCELLED (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required before cancellation can proceed.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId"></param>
         /// <param name="agenticCancelPurchaseIntentRequest">Unique identifier for the purchase intent instruction.</param>
         /// <returns>AgenticCreatePurchaseIntentResponse200</returns>
-        AgenticCreatePurchaseIntentResponse200 CancelPurchaseIntent (string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest);
+        AgenticCreatePurchaseIntentResponse200 CancelPurchaseIntent(string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest);
 
         /// <summary>
         /// Cancel a purchase intent
         /// </summary>
         /// <remarks>
-        /// Cancels an existing purchase intent identified by the transaction ID.
+        /// Cancel an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer decides to abandon the purchase before payment credentials have been used. Requires device information and assurance data for identity verification. Returns status CANCELLED (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required before cancellation can proceed.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId"></param>
         /// <param name="agenticCancelPurchaseIntentRequest">Unique identifier for the purchase intent instruction.</param>
         /// <returns>ApiResponse of AgenticCreatePurchaseIntentResponse200</returns>
-        ApiResponse<AgenticCreatePurchaseIntentResponse200> CancelPurchaseIntentWithHttpInfo (string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest);
+        ApiResponse<AgenticCreatePurchaseIntentResponse200> CancelPurchaseIntentWithHttpInfo(string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest);
         /// <summary>
         /// Confirm transaction events
         /// </summary>
         /// <remarks>
-        /// Agents send the confirm transaction events to notify the payment processing is done
+        /// Confirm transaction events for a completed purchase. The agent calls this endpoint after the payment has been submitted to notify the Intelligent Commerce Connect of the transaction outcome. The request includes processor information (transaction type, status, approval codes), order details (shipping, tracking, product information), and merchant information. Returns HTTP 202 acknowledging receipt of the confirmation.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticConfirmTransactionEventsRequest"></param>
         /// <returns>AgenticConfirmTransactionEventsResponse202</returns>
-        AgenticConfirmTransactionEventsResponse202 ConfirmTransactionEvents (string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest);
+        AgenticConfirmTransactionEventsResponse202 ConfirmTransactionEvents(string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest);
 
         /// <summary>
         /// Confirm transaction events
         /// </summary>
         /// <remarks>
-        /// Agents send the confirm transaction events to notify the payment processing is done
+        /// Confirm transaction events for a completed purchase. The agent calls this endpoint after the payment has been submitted to notify the Intelligent Commerce Connect of the transaction outcome. The request includes processor information (transaction type, status, approval codes), order details (shipping, tracking, product information), and merchant information. Returns HTTP 202 acknowledging receipt of the confirmation.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticConfirmTransactionEventsRequest"></param>
         /// <returns>ApiResponse of AgenticConfirmTransactionEventsResponse202</returns>
-        ApiResponse<AgenticConfirmTransactionEventsResponse202> ConfirmTransactionEventsWithHttpInfo (string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest);
+        ApiResponse<AgenticConfirmTransactionEventsResponse202> ConfirmTransactionEventsWithHttpInfo(string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest);
         /// <summary>
         /// Initiate a purchase intent
         /// </summary>
         /// <remarks>
-        /// Creates a new purchase intent with the provided details.
+        /// Create a new purchase intent (instruction) for an agentic transaction. The agent calls this endpoint after a card has been enrolled to define what the consumer wants to buy. The request includes payment instrument references, device and assurance data, mandates (spending limits, merchant preferences, and product descriptions), and optional buyer information. Return an instructionId (HTTP 200) if the intent is created immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. The instructionId returned is used in all subsequent operations - update, cancel, retrieve credentials, and confirm transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCreatePurchaseIntentRequest"></param>
         /// <returns>AgenticCreatePurchaseIntentResponse200</returns>
-        AgenticCreatePurchaseIntentResponse200 InitiatePurchaseIntent (AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest);
+        AgenticCreatePurchaseIntentResponse200 InitiatePurchaseIntent(AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest);
 
         /// <summary>
         /// Initiate a purchase intent
         /// </summary>
         /// <remarks>
-        /// Creates a new purchase intent with the provided details.
+        /// Create a new purchase intent (instruction) for an agentic transaction. The agent calls this endpoint after a card has been enrolled to define what the consumer wants to buy. The request includes payment instrument references, device and assurance data, mandates (spending limits, merchant preferences, and product descriptions), and optional buyer information. Return an instructionId (HTTP 200) if the intent is created immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. The instructionId returned is used in all subsequent operations - update, cancel, retrieve credentials, and confirm transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCreatePurchaseIntentRequest"></param>
         /// <returns>ApiResponse of AgenticCreatePurchaseIntentResponse200</returns>
-        ApiResponse<AgenticCreatePurchaseIntentResponse200> InitiatePurchaseIntentWithHttpInfo (AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest);
+        ApiResponse<AgenticCreatePurchaseIntentResponse200> InitiatePurchaseIntentWithHttpInfo(AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest);
         /// <summary>
         /// Retrieve payment credentials
         /// </summary>
         /// <remarks>
-        /// Retrieve a customer&#39;s tokenized payment credentials to complete the transaction.
+        /// Retrieve tokenized payment credentials for a purchase intent to complete the transaction at a merchant. The agent calls this endpoint after a purchase intent has been created and approved, providing transaction-level details including order information, merchant details, payment options, and production information. Returns COMPLETED (HTTP 200) with a signed payload containing encrypted payment credentials (authorization token and JWS-signed payload), or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required. The signed payload is used by the merchant&#39;s payment processor to complete the transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticRetrievePaymentCredentialsRequest"></param>
         /// <returns>AgenticRetrievePaymentCredentialsResponse200</returns>
-        AgenticRetrievePaymentCredentialsResponse200 RetrievePaymentCredentials (string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest);
+        AgenticRetrievePaymentCredentialsResponse200 RetrievePaymentCredentials(string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest);
 
         /// <summary>
         /// Retrieve payment credentials
         /// </summary>
         /// <remarks>
-        /// Retrieve a customer&#39;s tokenized payment credentials to complete the transaction.
+        /// Retrieve tokenized payment credentials for a purchase intent to complete the transaction at a merchant. The agent calls this endpoint after a purchase intent has been created and approved, providing transaction-level details including order information, merchant details, payment options, and production information. Returns COMPLETED (HTTP 200) with a signed payload containing encrypted payment credentials (authorization token and JWS-signed payload), or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required. The signed payload is used by the merchant&#39;s payment processor to complete the transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticRetrievePaymentCredentialsRequest"></param>
         /// <returns>ApiResponse of AgenticRetrievePaymentCredentialsResponse200</returns>
-        ApiResponse<AgenticRetrievePaymentCredentialsResponse200> RetrievePaymentCredentialsWithHttpInfo (string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest);
+        ApiResponse<AgenticRetrievePaymentCredentialsResponse200> RetrievePaymentCredentialsWithHttpInfo(string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest);
         /// <summary>
         /// Update a purchase intent
         /// </summary>
         /// <remarks>
-        /// Updates an existing purchase intent identified by the transaction ID.
+        /// Update an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer modifies their order — for example, changing the quantity, updating mandates, switching payment instruments, or changing shipping details. The request body has the same structure as the initiate request. Returns the same instructionId (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required for the updated intent.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticUpdatePurchaseIntentRequest"></param>
         /// <returns>AgenticCreatePurchaseIntentResponse200</returns>
-        AgenticCreatePurchaseIntentResponse200 UpdatePurchaseIntent (string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest);
+        AgenticCreatePurchaseIntentResponse200 UpdatePurchaseIntent(string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest);
 
         /// <summary>
         /// Update a purchase intent
         /// </summary>
         /// <remarks>
-        /// Updates an existing purchase intent identified by the transaction ID.
+        /// Update an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer modifies their order — for example, changing the quantity, updating mandates, switching payment instruments, or changing shipping details. The request body has the same structure as the initiate request. Returns the same instructionId (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required for the updated intent.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticUpdatePurchaseIntentRequest"></param>
         /// <returns>ApiResponse of AgenticCreatePurchaseIntentResponse200</returns>
-        ApiResponse<AgenticCreatePurchaseIntentResponse200> UpdatePurchaseIntentWithHttpInfo (string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest);
+        ApiResponse<AgenticCreatePurchaseIntentResponse200> UpdatePurchaseIntentWithHttpInfo(string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
         /// Cancel a purchase intent
         /// </summary>
         /// <remarks>
-        /// Cancels an existing purchase intent identified by the transaction ID.
+        /// Cancel an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer decides to abandon the purchase before payment credentials have been used. Requires device information and assurance data for identity verification. Returns status CANCELLED (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required before cancellation can proceed.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId"></param>
         /// <param name="agenticCancelPurchaseIntentRequest">Unique identifier for the purchase intent instruction.</param>
         /// <returns>Task of AgenticCreatePurchaseIntentResponse200</returns>
-        System.Threading.Tasks.Task<AgenticCreatePurchaseIntentResponse200> CancelPurchaseIntentAsync (string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest);
+        System.Threading.Tasks.Task<AgenticCreatePurchaseIntentResponse200> CancelPurchaseIntentAsync(string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest);
 
         /// <summary>
         /// Cancel a purchase intent
         /// </summary>
         /// <remarks>
-        /// Cancels an existing purchase intent identified by the transaction ID.
+        /// Cancel an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer decides to abandon the purchase before payment credentials have been used. Requires device information and assurance data for identity verification. Returns status CANCELLED (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required before cancellation can proceed.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId"></param>
         /// <param name="agenticCancelPurchaseIntentRequest">Unique identifier for the purchase intent instruction.</param>
         /// <returns>Task of ApiResponse (AgenticCreatePurchaseIntentResponse200)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> CancelPurchaseIntentAsyncWithHttpInfo (string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest);
+        System.Threading.Tasks.Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> CancelPurchaseIntentAsyncWithHttpInfo(string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest);
         /// <summary>
         /// Confirm transaction events
         /// </summary>
         /// <remarks>
-        /// Agents send the confirm transaction events to notify the payment processing is done
+        /// Confirm transaction events for a completed purchase. The agent calls this endpoint after the payment has been submitted to notify the Intelligent Commerce Connect of the transaction outcome. The request includes processor information (transaction type, status, approval codes), order details (shipping, tracking, product information), and merchant information. Returns HTTP 202 acknowledging receipt of the confirmation.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticConfirmTransactionEventsRequest"></param>
         /// <returns>Task of AgenticConfirmTransactionEventsResponse202</returns>
-        System.Threading.Tasks.Task<AgenticConfirmTransactionEventsResponse202> ConfirmTransactionEventsAsync (string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest);
+        System.Threading.Tasks.Task<AgenticConfirmTransactionEventsResponse202> ConfirmTransactionEventsAsync(string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest);
 
         /// <summary>
         /// Confirm transaction events
         /// </summary>
         /// <remarks>
-        /// Agents send the confirm transaction events to notify the payment processing is done
+        /// Confirm transaction events for a completed purchase. The agent calls this endpoint after the payment has been submitted to notify the Intelligent Commerce Connect of the transaction outcome. The request includes processor information (transaction type, status, approval codes), order details (shipping, tracking, product information), and merchant information. Returns HTTP 202 acknowledging receipt of the confirmation.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticConfirmTransactionEventsRequest"></param>
         /// <returns>Task of ApiResponse (AgenticConfirmTransactionEventsResponse202)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AgenticConfirmTransactionEventsResponse202>> ConfirmTransactionEventsAsyncWithHttpInfo (string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest);
+        System.Threading.Tasks.Task<ApiResponse<AgenticConfirmTransactionEventsResponse202>> ConfirmTransactionEventsAsyncWithHttpInfo(string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest);
         /// <summary>
         /// Initiate a purchase intent
         /// </summary>
         /// <remarks>
-        /// Creates a new purchase intent with the provided details.
+        /// Create a new purchase intent (instruction) for an agentic transaction. The agent calls this endpoint after a card has been enrolled to define what the consumer wants to buy. The request includes payment instrument references, device and assurance data, mandates (spending limits, merchant preferences, and product descriptions), and optional buyer information. Return an instructionId (HTTP 200) if the intent is created immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. The instructionId returned is used in all subsequent operations - update, cancel, retrieve credentials, and confirm transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCreatePurchaseIntentRequest"></param>
         /// <returns>Task of AgenticCreatePurchaseIntentResponse200</returns>
-        System.Threading.Tasks.Task<AgenticCreatePurchaseIntentResponse200> InitiatePurchaseIntentAsync (AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest);
+        System.Threading.Tasks.Task<AgenticCreatePurchaseIntentResponse200> InitiatePurchaseIntentAsync(AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest);
 
         /// <summary>
         /// Initiate a purchase intent
         /// </summary>
         /// <remarks>
-        /// Creates a new purchase intent with the provided details.
+        /// Create a new purchase intent (instruction) for an agentic transaction. The agent calls this endpoint after a card has been enrolled to define what the consumer wants to buy. The request includes payment instrument references, device and assurance data, mandates (spending limits, merchant preferences, and product descriptions), and optional buyer information. Return an instructionId (HTTP 200) if the intent is created immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. The instructionId returned is used in all subsequent operations - update, cancel, retrieve credentials, and confirm transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCreatePurchaseIntentRequest"></param>
         /// <returns>Task of ApiResponse (AgenticCreatePurchaseIntentResponse200)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> InitiatePurchaseIntentAsyncWithHttpInfo (AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest);
+        System.Threading.Tasks.Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> InitiatePurchaseIntentAsyncWithHttpInfo(AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest);
         /// <summary>
         /// Retrieve payment credentials
         /// </summary>
         /// <remarks>
-        /// Retrieve a customer&#39;s tokenized payment credentials to complete the transaction.
+        /// Retrieve tokenized payment credentials for a purchase intent to complete the transaction at a merchant. The agent calls this endpoint after a purchase intent has been created and approved, providing transaction-level details including order information, merchant details, payment options, and production information. Returns COMPLETED (HTTP 200) with a signed payload containing encrypted payment credentials (authorization token and JWS-signed payload), or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required. The signed payload is used by the merchant&#39;s payment processor to complete the transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticRetrievePaymentCredentialsRequest"></param>
         /// <returns>Task of AgenticRetrievePaymentCredentialsResponse200</returns>
-        System.Threading.Tasks.Task<AgenticRetrievePaymentCredentialsResponse200> RetrievePaymentCredentialsAsync (string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest);
+        System.Threading.Tasks.Task<AgenticRetrievePaymentCredentialsResponse200> RetrievePaymentCredentialsAsync(string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest);
 
         /// <summary>
         /// Retrieve payment credentials
         /// </summary>
         /// <remarks>
-        /// Retrieve a customer&#39;s tokenized payment credentials to complete the transaction.
+        /// Retrieve tokenized payment credentials for a purchase intent to complete the transaction at a merchant. The agent calls this endpoint after a purchase intent has been created and approved, providing transaction-level details including order information, merchant details, payment options, and production information. Returns COMPLETED (HTTP 200) with a signed payload containing encrypted payment credentials (authorization token and JWS-signed payload), or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required. The signed payload is used by the merchant&#39;s payment processor to complete the transaction.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticRetrievePaymentCredentialsRequest"></param>
         /// <returns>Task of ApiResponse (AgenticRetrievePaymentCredentialsResponse200)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AgenticRetrievePaymentCredentialsResponse200>> RetrievePaymentCredentialsAsyncWithHttpInfo (string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest);
+        System.Threading.Tasks.Task<ApiResponse<AgenticRetrievePaymentCredentialsResponse200>> RetrievePaymentCredentialsAsyncWithHttpInfo(string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest);
         /// <summary>
         /// Update a purchase intent
         /// </summary>
         /// <remarks>
-        /// Updates an existing purchase intent identified by the transaction ID.
+        /// Update an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer modifies their order — for example, changing the quantity, updating mandates, switching payment instruments, or changing shipping details. The request body has the same structure as the initiate request. Returns the same instructionId (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required for the updated intent.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticUpdatePurchaseIntentRequest"></param>
         /// <returns>Task of AgenticCreatePurchaseIntentResponse200</returns>
-        System.Threading.Tasks.Task<AgenticCreatePurchaseIntentResponse200> UpdatePurchaseIntentAsync (string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest);
+        System.Threading.Tasks.Task<AgenticCreatePurchaseIntentResponse200> UpdatePurchaseIntentAsync(string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest);
 
         /// <summary>
         /// Update a purchase intent
         /// </summary>
         /// <remarks>
-        /// Updates an existing purchase intent identified by the transaction ID.
+        /// Update an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer modifies their order — for example, changing the quantity, updating mandates, switching payment instruments, or changing shipping details. The request body has the same structure as the initiate request. Returns the same instructionId (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required for the updated intent.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticUpdatePurchaseIntentRequest"></param>
         /// <returns>Task of ApiResponse (AgenticCreatePurchaseIntentResponse200)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> UpdatePurchaseIntentAsyncWithHttpInfo (string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest);
+        System.Threading.Tasks.Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> UpdatePurchaseIntentAsyncWithHttpInfo(string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class InstructionsApi : IInstructionsApi
+    public partial class InstructionsApi : ApiBase, IInstructionsApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="InstructionsApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public InstructionsApi(string basePath)
+        public InstructionsApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InstructionsApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public InstructionsApi(Configuration configuration = null)
+        public InstructionsApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
-        }
-
-        /// <summary>
-        /// Cancel a purchase intent Cancels an existing purchase intent identified by the transaction ID.
+        /// Cancel a purchase intent Cancel an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer decides to abandon the purchase before payment credentials have been used. Requires device information and assurance data for identity verification. Returns status CANCELLED (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required before cancellation can proceed.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId"></param>
         /// <param name="agenticCancelPurchaseIntentRequest">Unique identifier for the purchase intent instruction.</param>
         /// <returns>AgenticCreatePurchaseIntentResponse200</returns>
-        public AgenticCreatePurchaseIntentResponse200 CancelPurchaseIntent (string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest)
+        public AgenticCreatePurchaseIntentResponse200 CancelPurchaseIntent(string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest)
         {
             logger.Debug("CALLING API \"CancelPurchaseIntent\" STARTED");
             this.SetStatusCode(null);
@@ -415,13 +300,13 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Cancel a purchase intent Cancels an existing purchase intent identified by the transaction ID.
+        /// Cancel a purchase intent Cancel an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer decides to abandon the purchase before payment credentials have been used. Requires device information and assurance data for identity verification. Returns status CANCELLED (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required before cancellation can proceed.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId"></param>
         /// <param name="agenticCancelPurchaseIntentRequest">Unique identifier for the purchase intent instruction.</param>
         /// <returns>ApiResponse of AgenticCreatePurchaseIntentResponse200</returns>
-        public ApiResponse< AgenticCreatePurchaseIntentResponse200 > CancelPurchaseIntentWithHttpInfo (string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest)
+        public ApiResponse< AgenticCreatePurchaseIntentResponse200 > CancelPurchaseIntentWithHttpInfo(string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -441,7 +326,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/instructions/{instructionId}/cancel";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -450,13 +335,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -464,27 +349,28 @@ namespace CyberSource.Api
 
             if (instructionId != null)
             {
-                localVarPathParams.Add("instructionId", Configuration.ApiClient.ParameterToString(instructionId)); // path parameter
+                localVarPathParams.Add("instructionId", ApiClient.ParameterToString(instructionId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (agenticCancelPurchaseIntentRequest != null && agenticCancelPurchaseIntentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticCancelPurchaseIntentRequest = (AgenticCancelPurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCancelPurchaseIntentRequest, agenticCancelPurchaseIntentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticCancelPurchaseIntentRequest); // http body (model) parameter
+                agenticCancelPurchaseIntentRequest = (AgenticCancelPurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCancelPurchaseIntentRequest, agenticCancelPurchaseIntentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticCancelPurchaseIntentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticCancelPurchaseIntentRequest; // byte array
             }
-            
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CancelPurchaseIntent,CancelPurchaseIntentAsync,CancelPurchaseIntentWithHttpInfo,CancelPurchaseIntentAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CancelPurchaseIntent,CancelPurchaseIntentAsync,CancelPurchaseIntentWithHttpInfo,CancelPurchaseIntentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -493,13 +379,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CancelPurchaseIntent,CancelPurchaseIntentAsync,CancelPurchaseIntentWithHttpInfo,CancelPurchaseIntentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CancelPurchaseIntent,CancelPurchaseIntentAsync,CancelPurchaseIntentWithHttpInfo,CancelPurchaseIntentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -517,17 +403,17 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticCreatePurchaseIntentResponse200>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticCreatePurchaseIntentResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200),merchantConfig)); // Return statement
+                (AgenticCreatePurchaseIntentResponse200) ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200))); // Return statement
         }
 
         /// <summary>
-        /// Cancel a purchase intent Cancels an existing purchase intent identified by the transaction ID.
+        /// Cancel a purchase intent Cancel an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer decides to abandon the purchase before payment credentials have been used. Requires device information and assurance data for identity verification. Returns status CANCELLED (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required before cancellation can proceed.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId"></param>
         /// <param name="agenticCancelPurchaseIntentRequest">Unique identifier for the purchase intent instruction.</param>
         /// <returns>Task of AgenticCreatePurchaseIntentResponse200</returns>
-        public async System.Threading.Tasks.Task<AgenticCreatePurchaseIntentResponse200> CancelPurchaseIntentAsync (string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest)
+        public async Task<AgenticCreatePurchaseIntentResponse200> CancelPurchaseIntentAsync(string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest)
         {
             logger.Debug("CALLING API \"CancelPurchaseIntentAsync\" STARTED");
             this.SetStatusCode(null);
@@ -539,13 +425,13 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Cancel a purchase intent Cancels an existing purchase intent identified by the transaction ID.
+        /// Cancel a purchase intent Cancel an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer decides to abandon the purchase before payment credentials have been used. Requires device information and assurance data for identity verification. Returns status CANCELLED (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required before cancellation can proceed.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId"></param>
         /// <param name="agenticCancelPurchaseIntentRequest">Unique identifier for the purchase intent instruction.</param>
         /// <returns>Task of ApiResponse (AgenticCreatePurchaseIntentResponse200)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> CancelPurchaseIntentAsyncWithHttpInfo (string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest)
+        public async Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> CancelPurchaseIntentAsyncWithHttpInfo(string instructionId, AgenticCancelPurchaseIntentRequest agenticCancelPurchaseIntentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -565,7 +451,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/instructions/{instructionId}/cancel";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -574,13 +460,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -588,27 +474,28 @@ namespace CyberSource.Api
 
             if (instructionId != null)
             {
-                localVarPathParams.Add("instructionId", Configuration.ApiClient.ParameterToString(instructionId)); // path parameter
+                localVarPathParams.Add("instructionId", ApiClient.ParameterToString(instructionId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (agenticCancelPurchaseIntentRequest != null && agenticCancelPurchaseIntentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticCancelPurchaseIntentRequest = (AgenticCancelPurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCancelPurchaseIntentRequest, agenticCancelPurchaseIntentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticCancelPurchaseIntentRequest); // http body (model) parameter
+                agenticCancelPurchaseIntentRequest = (AgenticCancelPurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCancelPurchaseIntentRequest, agenticCancelPurchaseIntentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticCancelPurchaseIntentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticCancelPurchaseIntentRequest; // byte array
             }
 
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CancelPurchaseIntent,CancelPurchaseIntentAsync,CancelPurchaseIntentWithHttpInfo,CancelPurchaseIntentAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CancelPurchaseIntent,CancelPurchaseIntentAsync,CancelPurchaseIntentWithHttpInfo,CancelPurchaseIntentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -617,17 +504,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CancelPurchaseIntent,CancelPurchaseIntentAsync,CancelPurchaseIntentWithHttpInfo,CancelPurchaseIntentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CancelPurchaseIntent,CancelPurchaseIntentAsync,CancelPurchaseIntentWithHttpInfo,CancelPurchaseIntentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -641,16 +528,16 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticCreatePurchaseIntentResponse200>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticCreatePurchaseIntentResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200), merchantConfig)); // Return statement
+                (AgenticCreatePurchaseIntentResponse200) ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200))); // Return statement
         }
         /// <summary>
-        /// Confirm transaction events Agents send the confirm transaction events to notify the payment processing is done
+        /// Confirm transaction events Confirm transaction events for a completed purchase. The agent calls this endpoint after the payment has been submitted to notify the Intelligent Commerce Connect of the transaction outcome. The request includes processor information (transaction type, status, approval codes), order details (shipping, tracking, product information), and merchant information. Returns HTTP 202 acknowledging receipt of the confirmation.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticConfirmTransactionEventsRequest"></param>
         /// <returns>AgenticConfirmTransactionEventsResponse202</returns>
-        public AgenticConfirmTransactionEventsResponse202 ConfirmTransactionEvents (string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest)
+        public AgenticConfirmTransactionEventsResponse202 ConfirmTransactionEvents(string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest)
         {
             logger.Debug("CALLING API \"ConfirmTransactionEvents\" STARTED");
             this.SetStatusCode(null);
@@ -661,13 +548,13 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Confirm transaction events Agents send the confirm transaction events to notify the payment processing is done
+        /// Confirm transaction events Confirm transaction events for a completed purchase. The agent calls this endpoint after the payment has been submitted to notify the Intelligent Commerce Connect of the transaction outcome. The request includes processor information (transaction type, status, approval codes), order details (shipping, tracking, product information), and merchant information. Returns HTTP 202 acknowledging receipt of the confirmation.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticConfirmTransactionEventsRequest"></param>
         /// <returns>ApiResponse of AgenticConfirmTransactionEventsResponse202</returns>
-        public ApiResponse< AgenticConfirmTransactionEventsResponse202 > ConfirmTransactionEventsWithHttpInfo (string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest)
+        public ApiResponse< AgenticConfirmTransactionEventsResponse202 > ConfirmTransactionEventsWithHttpInfo(string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -687,7 +574,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/instructions/{instructionId}/confirmations";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -696,13 +583,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -710,27 +597,28 @@ namespace CyberSource.Api
 
             if (instructionId != null)
             {
-                localVarPathParams.Add("instructionId", Configuration.ApiClient.ParameterToString(instructionId)); // path parameter
+                localVarPathParams.Add("instructionId", ApiClient.ParameterToString(instructionId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (agenticConfirmTransactionEventsRequest != null && agenticConfirmTransactionEventsRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticConfirmTransactionEventsRequest = (AgenticConfirmTransactionEventsRequest)sdkTracker.InsertDeveloperIdTracker(agenticConfirmTransactionEventsRequest, agenticConfirmTransactionEventsRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticConfirmTransactionEventsRequest); // http body (model) parameter
+                agenticConfirmTransactionEventsRequest = (AgenticConfirmTransactionEventsRequest)sdkTracker.InsertDeveloperIdTracker(agenticConfirmTransactionEventsRequest, agenticConfirmTransactionEventsRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticConfirmTransactionEventsRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticConfirmTransactionEventsRequest; // byte array
             }
-            
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ConfirmTransactionEvents,ConfirmTransactionEventsAsync,ConfirmTransactionEventsWithHttpInfo,ConfirmTransactionEventsAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "ConfirmTransactionEvents,ConfirmTransactionEventsAsync,ConfirmTransactionEventsWithHttpInfo,ConfirmTransactionEventsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -739,13 +627,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "ConfirmTransactionEvents,ConfirmTransactionEventsAsync,ConfirmTransactionEventsWithHttpInfo,ConfirmTransactionEventsAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "ConfirmTransactionEvents,ConfirmTransactionEventsAsync,ConfirmTransactionEventsWithHttpInfo,ConfirmTransactionEventsAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -763,17 +651,17 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticConfirmTransactionEventsResponse202>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticConfirmTransactionEventsResponse202) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticConfirmTransactionEventsResponse202),merchantConfig)); // Return statement
+                (AgenticConfirmTransactionEventsResponse202) ApiClient.Deserialize(localVarResponse, typeof(AgenticConfirmTransactionEventsResponse202))); // Return statement
         }
 
         /// <summary>
-        /// Confirm transaction events Agents send the confirm transaction events to notify the payment processing is done
+        /// Confirm transaction events Confirm transaction events for a completed purchase. The agent calls this endpoint after the payment has been submitted to notify the Intelligent Commerce Connect of the transaction outcome. The request includes processor information (transaction type, status, approval codes), order details (shipping, tracking, product information), and merchant information. Returns HTTP 202 acknowledging receipt of the confirmation.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticConfirmTransactionEventsRequest"></param>
         /// <returns>Task of AgenticConfirmTransactionEventsResponse202</returns>
-        public async System.Threading.Tasks.Task<AgenticConfirmTransactionEventsResponse202> ConfirmTransactionEventsAsync (string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest)
+        public async Task<AgenticConfirmTransactionEventsResponse202> ConfirmTransactionEventsAsync(string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest)
         {
             logger.Debug("CALLING API \"ConfirmTransactionEventsAsync\" STARTED");
             this.SetStatusCode(null);
@@ -785,13 +673,13 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Confirm transaction events Agents send the confirm transaction events to notify the payment processing is done
+        /// Confirm transaction events Confirm transaction events for a completed purchase. The agent calls this endpoint after the payment has been submitted to notify the Intelligent Commerce Connect of the transaction outcome. The request includes processor information (transaction type, status, approval codes), order details (shipping, tracking, product information), and merchant information. Returns HTTP 202 acknowledging receipt of the confirmation.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticConfirmTransactionEventsRequest"></param>
         /// <returns>Task of ApiResponse (AgenticConfirmTransactionEventsResponse202)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<AgenticConfirmTransactionEventsResponse202>> ConfirmTransactionEventsAsyncWithHttpInfo (string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest)
+        public async Task<ApiResponse<AgenticConfirmTransactionEventsResponse202>> ConfirmTransactionEventsAsyncWithHttpInfo(string instructionId, AgenticConfirmTransactionEventsRequest agenticConfirmTransactionEventsRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -811,7 +699,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/instructions/{instructionId}/confirmations";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -820,13 +708,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -834,27 +722,28 @@ namespace CyberSource.Api
 
             if (instructionId != null)
             {
-                localVarPathParams.Add("instructionId", Configuration.ApiClient.ParameterToString(instructionId)); // path parameter
+                localVarPathParams.Add("instructionId", ApiClient.ParameterToString(instructionId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (agenticConfirmTransactionEventsRequest != null && agenticConfirmTransactionEventsRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticConfirmTransactionEventsRequest = (AgenticConfirmTransactionEventsRequest)sdkTracker.InsertDeveloperIdTracker(agenticConfirmTransactionEventsRequest, agenticConfirmTransactionEventsRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticConfirmTransactionEventsRequest); // http body (model) parameter
+                agenticConfirmTransactionEventsRequest = (AgenticConfirmTransactionEventsRequest)sdkTracker.InsertDeveloperIdTracker(agenticConfirmTransactionEventsRequest, agenticConfirmTransactionEventsRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticConfirmTransactionEventsRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticConfirmTransactionEventsRequest; // byte array
             }
 
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ConfirmTransactionEvents,ConfirmTransactionEventsAsync,ConfirmTransactionEventsWithHttpInfo,ConfirmTransactionEventsAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "ConfirmTransactionEvents,ConfirmTransactionEventsAsync,ConfirmTransactionEventsWithHttpInfo,ConfirmTransactionEventsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -863,17 +752,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "ConfirmTransactionEvents,ConfirmTransactionEventsAsync,ConfirmTransactionEventsWithHttpInfo,ConfirmTransactionEventsAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "ConfirmTransactionEvents,ConfirmTransactionEventsAsync,ConfirmTransactionEventsWithHttpInfo,ConfirmTransactionEventsAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -887,15 +776,15 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticConfirmTransactionEventsResponse202>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticConfirmTransactionEventsResponse202) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticConfirmTransactionEventsResponse202), merchantConfig)); // Return statement
+                (AgenticConfirmTransactionEventsResponse202) ApiClient.Deserialize(localVarResponse, typeof(AgenticConfirmTransactionEventsResponse202))); // Return statement
         }
         /// <summary>
-        /// Initiate a purchase intent Creates a new purchase intent with the provided details.
+        /// Initiate a purchase intent Create a new purchase intent (instruction) for an agentic transaction. The agent calls this endpoint after a card has been enrolled to define what the consumer wants to buy. The request includes payment instrument references, device and assurance data, mandates (spending limits, merchant preferences, and product descriptions), and optional buyer information. Return an instructionId (HTTP 200) if the intent is created immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. The instructionId returned is used in all subsequent operations - update, cancel, retrieve credentials, and confirm transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCreatePurchaseIntentRequest"></param>
         /// <returns>AgenticCreatePurchaseIntentResponse200</returns>
-        public AgenticCreatePurchaseIntentResponse200 InitiatePurchaseIntent (AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest)
+        public AgenticCreatePurchaseIntentResponse200 InitiatePurchaseIntent(AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest)
         {
             logger.Debug("CALLING API \"InitiatePurchaseIntent\" STARTED");
             this.SetStatusCode(null);
@@ -906,12 +795,12 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Initiate a purchase intent Creates a new purchase intent with the provided details.
+        /// Initiate a purchase intent Create a new purchase intent (instruction) for an agentic transaction. The agent calls this endpoint after a card has been enrolled to define what the consumer wants to buy. The request includes payment instrument references, device and assurance data, mandates (spending limits, merchant preferences, and product descriptions), and optional buyer information. Return an instructionId (HTTP 200) if the intent is created immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. The instructionId returned is used in all subsequent operations - update, cancel, retrieve credentials, and confirm transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCreatePurchaseIntentRequest"></param>
         /// <returns>ApiResponse of AgenticCreatePurchaseIntentResponse200</returns>
-        public ApiResponse< AgenticCreatePurchaseIntentResponse200 > InitiatePurchaseIntentWithHttpInfo (AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest)
+        public ApiResponse< AgenticCreatePurchaseIntentResponse200 > InitiatePurchaseIntentWithHttpInfo(AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -925,7 +814,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/instructions";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -934,13 +823,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -949,21 +838,21 @@ namespace CyberSource.Api
             if (agenticCreatePurchaseIntentRequest != null && agenticCreatePurchaseIntentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticCreatePurchaseIntentRequest = (AgenticCreatePurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCreatePurchaseIntentRequest, agenticCreatePurchaseIntentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticCreatePurchaseIntentRequest); // http body (model) parameter
+                agenticCreatePurchaseIntentRequest = (AgenticCreatePurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCreatePurchaseIntentRequest, agenticCreatePurchaseIntentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticCreatePurchaseIntentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticCreatePurchaseIntentRequest; // byte array
             }
-            
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "InitiatePurchaseIntent,InitiatePurchaseIntentAsync,InitiatePurchaseIntentWithHttpInfo,InitiatePurchaseIntentAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "InitiatePurchaseIntent,InitiatePurchaseIntentAsync,InitiatePurchaseIntentWithHttpInfo,InitiatePurchaseIntentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -972,13 +861,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "InitiatePurchaseIntent,InitiatePurchaseIntentAsync,InitiatePurchaseIntentWithHttpInfo,InitiatePurchaseIntentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "InitiatePurchaseIntent,InitiatePurchaseIntentAsync,InitiatePurchaseIntentWithHttpInfo,InitiatePurchaseIntentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -996,16 +885,16 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticCreatePurchaseIntentResponse200>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticCreatePurchaseIntentResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200),merchantConfig)); // Return statement
+                (AgenticCreatePurchaseIntentResponse200) ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200))); // Return statement
         }
 
         /// <summary>
-        /// Initiate a purchase intent Creates a new purchase intent with the provided details.
+        /// Initiate a purchase intent Create a new purchase intent (instruction) for an agentic transaction. The agent calls this endpoint after a card has been enrolled to define what the consumer wants to buy. The request includes payment instrument references, device and assurance data, mandates (spending limits, merchant preferences, and product descriptions), and optional buyer information. Return an instructionId (HTTP 200) if the intent is created immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. The instructionId returned is used in all subsequent operations - update, cancel, retrieve credentials, and confirm transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCreatePurchaseIntentRequest"></param>
         /// <returns>Task of AgenticCreatePurchaseIntentResponse200</returns>
-        public async System.Threading.Tasks.Task<AgenticCreatePurchaseIntentResponse200> InitiatePurchaseIntentAsync (AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest)
+        public async Task<AgenticCreatePurchaseIntentResponse200> InitiatePurchaseIntentAsync(AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest)
         {
             logger.Debug("CALLING API \"InitiatePurchaseIntentAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1017,12 +906,12 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Initiate a purchase intent Creates a new purchase intent with the provided details.
+        /// Initiate a purchase intent Create a new purchase intent (instruction) for an agentic transaction. The agent calls this endpoint after a card has been enrolled to define what the consumer wants to buy. The request includes payment instrument references, device and assurance data, mandates (spending limits, merchant preferences, and product descriptions), and optional buyer information. Return an instructionId (HTTP 200) if the intent is created immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. The instructionId returned is used in all subsequent operations - update, cancel, retrieve credentials, and confirm transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCreatePurchaseIntentRequest"></param>
         /// <returns>Task of ApiResponse (AgenticCreatePurchaseIntentResponse200)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> InitiatePurchaseIntentAsyncWithHttpInfo (AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest)
+        public async Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> InitiatePurchaseIntentAsyncWithHttpInfo(AgenticCreatePurchaseIntentRequest agenticCreatePurchaseIntentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1036,7 +925,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/instructions";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1045,13 +934,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1060,21 +949,21 @@ namespace CyberSource.Api
             if (agenticCreatePurchaseIntentRequest != null && agenticCreatePurchaseIntentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticCreatePurchaseIntentRequest = (AgenticCreatePurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCreatePurchaseIntentRequest, agenticCreatePurchaseIntentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticCreatePurchaseIntentRequest); // http body (model) parameter
+                agenticCreatePurchaseIntentRequest = (AgenticCreatePurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCreatePurchaseIntentRequest, agenticCreatePurchaseIntentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticCreatePurchaseIntentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticCreatePurchaseIntentRequest; // byte array
             }
 
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "InitiatePurchaseIntent,InitiatePurchaseIntentAsync,InitiatePurchaseIntentWithHttpInfo,InitiatePurchaseIntentAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "InitiatePurchaseIntent,InitiatePurchaseIntentAsync,InitiatePurchaseIntentWithHttpInfo,InitiatePurchaseIntentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1083,17 +972,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "InitiatePurchaseIntent,InitiatePurchaseIntentAsync,InitiatePurchaseIntentWithHttpInfo,InitiatePurchaseIntentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "InitiatePurchaseIntent,InitiatePurchaseIntentAsync,InitiatePurchaseIntentWithHttpInfo,InitiatePurchaseIntentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1107,16 +996,16 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticCreatePurchaseIntentResponse200>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticCreatePurchaseIntentResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200), merchantConfig)); // Return statement
+                (AgenticCreatePurchaseIntentResponse200) ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200))); // Return statement
         }
         /// <summary>
-        /// Retrieve payment credentials Retrieve a customer&#39;s tokenized payment credentials to complete the transaction.
+        /// Retrieve payment credentials Retrieve tokenized payment credentials for a purchase intent to complete the transaction at a merchant. The agent calls this endpoint after a purchase intent has been created and approved, providing transaction-level details including order information, merchant details, payment options, and production information. Returns COMPLETED (HTTP 200) with a signed payload containing encrypted payment credentials (authorization token and JWS-signed payload), or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required. The signed payload is used by the merchant&#39;s payment processor to complete the transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticRetrievePaymentCredentialsRequest"></param>
         /// <returns>AgenticRetrievePaymentCredentialsResponse200</returns>
-        public AgenticRetrievePaymentCredentialsResponse200 RetrievePaymentCredentials (string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest)
+        public AgenticRetrievePaymentCredentialsResponse200 RetrievePaymentCredentials(string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest)
         {
             logger.Debug("CALLING API \"RetrievePaymentCredentials\" STARTED");
             this.SetStatusCode(null);
@@ -1127,13 +1016,13 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Retrieve payment credentials Retrieve a customer&#39;s tokenized payment credentials to complete the transaction.
+        /// Retrieve payment credentials Retrieve tokenized payment credentials for a purchase intent to complete the transaction at a merchant. The agent calls this endpoint after a purchase intent has been created and approved, providing transaction-level details including order information, merchant details, payment options, and production information. Returns COMPLETED (HTTP 200) with a signed payload containing encrypted payment credentials (authorization token and JWS-signed payload), or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required. The signed payload is used by the merchant&#39;s payment processor to complete the transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticRetrievePaymentCredentialsRequest"></param>
         /// <returns>ApiResponse of AgenticRetrievePaymentCredentialsResponse200</returns>
-        public ApiResponse< AgenticRetrievePaymentCredentialsResponse200 > RetrievePaymentCredentialsWithHttpInfo (string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest)
+        public ApiResponse< AgenticRetrievePaymentCredentialsResponse200 > RetrievePaymentCredentialsWithHttpInfo(string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1153,7 +1042,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/instructions/{instructionId}/credentials";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1162,13 +1051,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1176,27 +1065,28 @@ namespace CyberSource.Api
 
             if (instructionId != null)
             {
-                localVarPathParams.Add("instructionId", Configuration.ApiClient.ParameterToString(instructionId)); // path parameter
+                localVarPathParams.Add("instructionId", ApiClient.ParameterToString(instructionId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (agenticRetrievePaymentCredentialsRequest != null && agenticRetrievePaymentCredentialsRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticRetrievePaymentCredentialsRequest = (AgenticRetrievePaymentCredentialsRequest)sdkTracker.InsertDeveloperIdTracker(agenticRetrievePaymentCredentialsRequest, agenticRetrievePaymentCredentialsRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticRetrievePaymentCredentialsRequest); // http body (model) parameter
+                agenticRetrievePaymentCredentialsRequest = (AgenticRetrievePaymentCredentialsRequest)sdkTracker.InsertDeveloperIdTracker(agenticRetrievePaymentCredentialsRequest, agenticRetrievePaymentCredentialsRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticRetrievePaymentCredentialsRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticRetrievePaymentCredentialsRequest; // byte array
             }
-            
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "RetrievePaymentCredentials,RetrievePaymentCredentialsAsync,RetrievePaymentCredentialsWithHttpInfo,RetrievePaymentCredentialsAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "RetrievePaymentCredentials,RetrievePaymentCredentialsAsync,RetrievePaymentCredentialsWithHttpInfo,RetrievePaymentCredentialsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1205,13 +1095,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "RetrievePaymentCredentials,RetrievePaymentCredentialsAsync,RetrievePaymentCredentialsWithHttpInfo,RetrievePaymentCredentialsAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "RetrievePaymentCredentials,RetrievePaymentCredentialsAsync,RetrievePaymentCredentialsWithHttpInfo,RetrievePaymentCredentialsAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1229,17 +1119,17 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticRetrievePaymentCredentialsResponse200>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticRetrievePaymentCredentialsResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticRetrievePaymentCredentialsResponse200),merchantConfig)); // Return statement
+                (AgenticRetrievePaymentCredentialsResponse200) ApiClient.Deserialize(localVarResponse, typeof(AgenticRetrievePaymentCredentialsResponse200))); // Return statement
         }
 
         /// <summary>
-        /// Retrieve payment credentials Retrieve a customer&#39;s tokenized payment credentials to complete the transaction.
+        /// Retrieve payment credentials Retrieve tokenized payment credentials for a purchase intent to complete the transaction at a merchant. The agent calls this endpoint after a purchase intent has been created and approved, providing transaction-level details including order information, merchant details, payment options, and production information. Returns COMPLETED (HTTP 200) with a signed payload containing encrypted payment credentials (authorization token and JWS-signed payload), or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required. The signed payload is used by the merchant&#39;s payment processor to complete the transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticRetrievePaymentCredentialsRequest"></param>
         /// <returns>Task of AgenticRetrievePaymentCredentialsResponse200</returns>
-        public async System.Threading.Tasks.Task<AgenticRetrievePaymentCredentialsResponse200> RetrievePaymentCredentialsAsync (string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest)
+        public async Task<AgenticRetrievePaymentCredentialsResponse200> RetrievePaymentCredentialsAsync(string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest)
         {
             logger.Debug("CALLING API \"RetrievePaymentCredentialsAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1251,13 +1141,13 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Retrieve payment credentials Retrieve a customer&#39;s tokenized payment credentials to complete the transaction.
+        /// Retrieve payment credentials Retrieve tokenized payment credentials for a purchase intent to complete the transaction at a merchant. The agent calls this endpoint after a purchase intent has been created and approved, providing transaction-level details including order information, merchant details, payment options, and production information. Returns COMPLETED (HTTP 200) with a signed payload containing encrypted payment credentials (authorization token and JWS-signed payload), or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required. The signed payload is used by the merchant&#39;s payment processor to complete the transaction.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticRetrievePaymentCredentialsRequest"></param>
         /// <returns>Task of ApiResponse (AgenticRetrievePaymentCredentialsResponse200)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<AgenticRetrievePaymentCredentialsResponse200>> RetrievePaymentCredentialsAsyncWithHttpInfo (string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest)
+        public async Task<ApiResponse<AgenticRetrievePaymentCredentialsResponse200>> RetrievePaymentCredentialsAsyncWithHttpInfo(string instructionId, AgenticRetrievePaymentCredentialsRequest agenticRetrievePaymentCredentialsRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1277,7 +1167,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/instructions/{instructionId}/credentials";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1286,13 +1176,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1300,27 +1190,28 @@ namespace CyberSource.Api
 
             if (instructionId != null)
             {
-                localVarPathParams.Add("instructionId", Configuration.ApiClient.ParameterToString(instructionId)); // path parameter
+                localVarPathParams.Add("instructionId", ApiClient.ParameterToString(instructionId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (agenticRetrievePaymentCredentialsRequest != null && agenticRetrievePaymentCredentialsRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticRetrievePaymentCredentialsRequest = (AgenticRetrievePaymentCredentialsRequest)sdkTracker.InsertDeveloperIdTracker(agenticRetrievePaymentCredentialsRequest, agenticRetrievePaymentCredentialsRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticRetrievePaymentCredentialsRequest); // http body (model) parameter
+                agenticRetrievePaymentCredentialsRequest = (AgenticRetrievePaymentCredentialsRequest)sdkTracker.InsertDeveloperIdTracker(agenticRetrievePaymentCredentialsRequest, agenticRetrievePaymentCredentialsRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticRetrievePaymentCredentialsRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticRetrievePaymentCredentialsRequest; // byte array
             }
 
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "RetrievePaymentCredentials,RetrievePaymentCredentialsAsync,RetrievePaymentCredentialsWithHttpInfo,RetrievePaymentCredentialsAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "RetrievePaymentCredentials,RetrievePaymentCredentialsAsync,RetrievePaymentCredentialsWithHttpInfo,RetrievePaymentCredentialsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1329,17 +1220,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "RetrievePaymentCredentials,RetrievePaymentCredentialsAsync,RetrievePaymentCredentialsWithHttpInfo,RetrievePaymentCredentialsAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "RetrievePaymentCredentials,RetrievePaymentCredentialsAsync,RetrievePaymentCredentialsWithHttpInfo,RetrievePaymentCredentialsAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1353,16 +1244,16 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticRetrievePaymentCredentialsResponse200>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticRetrievePaymentCredentialsResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticRetrievePaymentCredentialsResponse200), merchantConfig)); // Return statement
+                (AgenticRetrievePaymentCredentialsResponse200) ApiClient.Deserialize(localVarResponse, typeof(AgenticRetrievePaymentCredentialsResponse200))); // Return statement
         }
         /// <summary>
-        /// Update a purchase intent Updates an existing purchase intent identified by the transaction ID.
+        /// Update a purchase intent Update an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer modifies their order — for example, changing the quantity, updating mandates, switching payment instruments, or changing shipping details. The request body has the same structure as the initiate request. Returns the same instructionId (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required for the updated intent.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticUpdatePurchaseIntentRequest"></param>
         /// <returns>AgenticCreatePurchaseIntentResponse200</returns>
-        public AgenticCreatePurchaseIntentResponse200 UpdatePurchaseIntent (string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest)
+        public AgenticCreatePurchaseIntentResponse200 UpdatePurchaseIntent(string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest)
         {
             logger.Debug("CALLING API \"UpdatePurchaseIntent\" STARTED");
             this.SetStatusCode(null);
@@ -1373,13 +1264,13 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Update a purchase intent Updates an existing purchase intent identified by the transaction ID.
+        /// Update a purchase intent Update an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer modifies their order — for example, changing the quantity, updating mandates, switching payment instruments, or changing shipping details. The request body has the same structure as the initiate request. Returns the same instructionId (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required for the updated intent.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticUpdatePurchaseIntentRequest"></param>
         /// <returns>ApiResponse of AgenticCreatePurchaseIntentResponse200</returns>
-        public ApiResponse< AgenticCreatePurchaseIntentResponse200 > UpdatePurchaseIntentWithHttpInfo (string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest)
+        public ApiResponse< AgenticCreatePurchaseIntentResponse200 > UpdatePurchaseIntentWithHttpInfo(string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1399,7 +1290,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/instructions/{instructionId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1408,13 +1299,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1422,27 +1313,28 @@ namespace CyberSource.Api
 
             if (instructionId != null)
             {
-                localVarPathParams.Add("instructionId", Configuration.ApiClient.ParameterToString(instructionId)); // path parameter
+                localVarPathParams.Add("instructionId", ApiClient.ParameterToString(instructionId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (agenticUpdatePurchaseIntentRequest != null && agenticUpdatePurchaseIntentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticUpdatePurchaseIntentRequest = (AgenticUpdatePurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticUpdatePurchaseIntentRequest, agenticUpdatePurchaseIntentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticUpdatePurchaseIntentRequest); // http body (model) parameter
+                agenticUpdatePurchaseIntentRequest = (AgenticUpdatePurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticUpdatePurchaseIntentRequest, agenticUpdatePurchaseIntentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticUpdatePurchaseIntentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticUpdatePurchaseIntentRequest; // byte array
             }
-            
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "UpdatePurchaseIntent,UpdatePurchaseIntentAsync,UpdatePurchaseIntentWithHttpInfo,UpdatePurchaseIntentAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdatePurchaseIntent,UpdatePurchaseIntentAsync,UpdatePurchaseIntentWithHttpInfo,UpdatePurchaseIntentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1451,13 +1343,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "UpdatePurchaseIntent,UpdatePurchaseIntentAsync,UpdatePurchaseIntentWithHttpInfo,UpdatePurchaseIntentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdatePurchaseIntent,UpdatePurchaseIntentAsync,UpdatePurchaseIntentWithHttpInfo,UpdatePurchaseIntentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1475,17 +1367,17 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticCreatePurchaseIntentResponse200>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticCreatePurchaseIntentResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200),merchantConfig)); // Return statement
+                (AgenticCreatePurchaseIntentResponse200) ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200))); // Return statement
         }
 
         /// <summary>
-        /// Update a purchase intent Updates an existing purchase intent identified by the transaction ID.
+        /// Update a purchase intent Update an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer modifies their order — for example, changing the quantity, updating mandates, switching payment instruments, or changing shipping details. The request body has the same structure as the initiate request. Returns the same instructionId (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required for the updated intent.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticUpdatePurchaseIntentRequest"></param>
         /// <returns>Task of AgenticCreatePurchaseIntentResponse200</returns>
-        public async System.Threading.Tasks.Task<AgenticCreatePurchaseIntentResponse200> UpdatePurchaseIntentAsync (string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest)
+        public async Task<AgenticCreatePurchaseIntentResponse200> UpdatePurchaseIntentAsync(string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest)
         {
             logger.Debug("CALLING API \"UpdatePurchaseIntentAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1497,13 +1389,13 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Update a purchase intent Updates an existing purchase intent identified by the transaction ID.
+        /// Update a purchase intent Update an existing purchase intent (instruction) identified by its instructionId. The agent calls this endpoint when the consumer modifies their order — for example, changing the quantity, updating mandates, switching payment instruments, or changing shipping details. The request body has the same structure as the initiate request. Returns the same instructionId (HTTP 200) on success, or PENDING (HTTP 202) with pendingEvents if additional cardholder authentication is required for the updated intent.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="instructionId">Unique identifier for the purchase intent instruction.</param>
         /// <param name="agenticUpdatePurchaseIntentRequest"></param>
         /// <returns>Task of ApiResponse (AgenticCreatePurchaseIntentResponse200)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> UpdatePurchaseIntentAsyncWithHttpInfo (string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest)
+        public async Task<ApiResponse<AgenticCreatePurchaseIntentResponse200>> UpdatePurchaseIntentAsyncWithHttpInfo(string instructionId, AgenticUpdatePurchaseIntentRequest agenticUpdatePurchaseIntentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1523,7 +1415,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/instructions/{instructionId}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1532,13 +1424,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1546,27 +1438,28 @@ namespace CyberSource.Api
 
             if (instructionId != null)
             {
-                localVarPathParams.Add("instructionId", Configuration.ApiClient.ParameterToString(instructionId)); // path parameter
+                localVarPathParams.Add("instructionId", ApiClient.ParameterToString(instructionId)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (agenticUpdatePurchaseIntentRequest != null && agenticUpdatePurchaseIntentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticUpdatePurchaseIntentRequest = (AgenticUpdatePurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticUpdatePurchaseIntentRequest, agenticUpdatePurchaseIntentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticUpdatePurchaseIntentRequest); // http body (model) parameter
+                agenticUpdatePurchaseIntentRequest = (AgenticUpdatePurchaseIntentRequest)sdkTracker.InsertDeveloperIdTracker(agenticUpdatePurchaseIntentRequest, agenticUpdatePurchaseIntentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticUpdatePurchaseIntentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticUpdatePurchaseIntentRequest; // byte array
             }
 
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "UpdatePurchaseIntent,UpdatePurchaseIntentAsync,UpdatePurchaseIntentWithHttpInfo,UpdatePurchaseIntentAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdatePurchaseIntent,UpdatePurchaseIntentAsync,UpdatePurchaseIntentWithHttpInfo,UpdatePurchaseIntentAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1575,17 +1468,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "UpdatePurchaseIntent,UpdatePurchaseIntentAsync,UpdatePurchaseIntentWithHttpInfo,UpdatePurchaseIntentAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdatePurchaseIntent,UpdatePurchaseIntentAsync,UpdatePurchaseIntentWithHttpInfo,UpdatePurchaseIntentAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1599,7 +1492,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticCreatePurchaseIntentResponse200>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticCreatePurchaseIntentResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200), merchantConfig)); // Return statement
+                (AgenticCreatePurchaseIntentResponse200) ApiClient.Deserialize(localVarResponse, typeof(AgenticCreatePurchaseIntentResponse200))); // Return statement
         }
     }
 }

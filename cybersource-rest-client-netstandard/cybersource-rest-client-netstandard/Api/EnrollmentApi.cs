@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -33,193 +32,79 @@ namespace CyberSource.Api
         /// Enroll a card
         /// </summary>
         /// <remarks>
-        /// Enroll a card for tokenization during the customer&#39;s account registration or when the customer starts a new purchase intent.
+        /// Enroll a payment card for agentic or e-commerce transactions. This is typically the first step in the Intelligent Commerce payment lifecycle — the agent calls this endpoint to register a consumer&#39;s card, creating a tokenized reference that can be used in subsequent purchase instructions and payment credential retrieval. Requires device information, consumer identity, billing details, and payment instrument references. Returns a status of ACTIVE (HTTP 200) if enrollment completes immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. Call this endpoint when a consumer wants to add a new payment card or when setting up a card for agentic payment flows.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCardEnrollmentRequest"></param>
         /// <returns>AgenticCardEnrollmentResponse200</returns>
-        AgenticCardEnrollmentResponse200 EnrollCard (AgenticCardEnrollmentRequest agenticCardEnrollmentRequest);
+        AgenticCardEnrollmentResponse200 EnrollCard(AgenticCardEnrollmentRequest agenticCardEnrollmentRequest);
 
         /// <summary>
         /// Enroll a card
         /// </summary>
         /// <remarks>
-        /// Enroll a card for tokenization during the customer&#39;s account registration or when the customer starts a new purchase intent.
+        /// Enroll a payment card for agentic or e-commerce transactions. This is typically the first step in the Intelligent Commerce payment lifecycle — the agent calls this endpoint to register a consumer&#39;s card, creating a tokenized reference that can be used in subsequent purchase instructions and payment credential retrieval. Requires device information, consumer identity, billing details, and payment instrument references. Returns a status of ACTIVE (HTTP 200) if enrollment completes immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. Call this endpoint when a consumer wants to add a new payment card or when setting up a card for agentic payment flows.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCardEnrollmentRequest"></param>
         /// <returns>ApiResponse of AgenticCardEnrollmentResponse200</returns>
-        ApiResponse<AgenticCardEnrollmentResponse200> EnrollCardWithHttpInfo (AgenticCardEnrollmentRequest agenticCardEnrollmentRequest);
+        ApiResponse<AgenticCardEnrollmentResponse200> EnrollCardWithHttpInfo(AgenticCardEnrollmentRequest agenticCardEnrollmentRequest);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
         /// Enroll a card
         /// </summary>
         /// <remarks>
-        /// Enroll a card for tokenization during the customer&#39;s account registration or when the customer starts a new purchase intent.
+        /// Enroll a payment card for agentic or e-commerce transactions. This is typically the first step in the Intelligent Commerce payment lifecycle — the agent calls this endpoint to register a consumer&#39;s card, creating a tokenized reference that can be used in subsequent purchase instructions and payment credential retrieval. Requires device information, consumer identity, billing details, and payment instrument references. Returns a status of ACTIVE (HTTP 200) if enrollment completes immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. Call this endpoint when a consumer wants to add a new payment card or when setting up a card for agentic payment flows.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCardEnrollmentRequest"></param>
         /// <returns>Task of AgenticCardEnrollmentResponse200</returns>
-        System.Threading.Tasks.Task<AgenticCardEnrollmentResponse200> EnrollCardAsync (AgenticCardEnrollmentRequest agenticCardEnrollmentRequest);
+        System.Threading.Tasks.Task<AgenticCardEnrollmentResponse200> EnrollCardAsync(AgenticCardEnrollmentRequest agenticCardEnrollmentRequest);
 
         /// <summary>
         /// Enroll a card
         /// </summary>
         /// <remarks>
-        /// Enroll a card for tokenization during the customer&#39;s account registration or when the customer starts a new purchase intent.
+        /// Enroll a payment card for agentic or e-commerce transactions. This is typically the first step in the Intelligent Commerce payment lifecycle — the agent calls this endpoint to register a consumer&#39;s card, creating a tokenized reference that can be used in subsequent purchase instructions and payment credential retrieval. Requires device information, consumer identity, billing details, and payment instrument references. Returns a status of ACTIVE (HTTP 200) if enrollment completes immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. Call this endpoint when a consumer wants to add a new payment card or when setting up a card for agentic payment flows.
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCardEnrollmentRequest"></param>
         /// <returns>Task of ApiResponse (AgenticCardEnrollmentResponse200)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AgenticCardEnrollmentResponse200>> EnrollCardAsyncWithHttpInfo (AgenticCardEnrollmentRequest agenticCardEnrollmentRequest);
+        System.Threading.Tasks.Task<ApiResponse<AgenticCardEnrollmentResponse200>> EnrollCardAsyncWithHttpInfo(AgenticCardEnrollmentRequest agenticCardEnrollmentRequest);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class EnrollmentApi : IEnrollmentApi
+    public partial class EnrollmentApi : ApiBase, IEnrollmentApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="EnrollmentApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public EnrollmentApi(string basePath)
+        public EnrollmentApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EnrollmentApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public EnrollmentApi(Configuration configuration = null)
+        public EnrollmentApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
-        }
-
-        /// <summary>
-        /// Enroll a card Enroll a card for tokenization during the customer&#39;s account registration or when the customer starts a new purchase intent.
+        /// Enroll a card Enroll a payment card for agentic or e-commerce transactions. This is typically the first step in the Intelligent Commerce payment lifecycle — the agent calls this endpoint to register a consumer&#39;s card, creating a tokenized reference that can be used in subsequent purchase instructions and payment credential retrieval. Requires device information, consumer identity, billing details, and payment instrument references. Returns a status of ACTIVE (HTTP 200) if enrollment completes immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. Call this endpoint when a consumer wants to add a new payment card or when setting up a card for agentic payment flows.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCardEnrollmentRequest"></param>
         /// <returns>AgenticCardEnrollmentResponse200</returns>
-        public AgenticCardEnrollmentResponse200 EnrollCard (AgenticCardEnrollmentRequest agenticCardEnrollmentRequest)
+        public AgenticCardEnrollmentResponse200 EnrollCard(AgenticCardEnrollmentRequest agenticCardEnrollmentRequest)
         {
             logger.Debug("CALLING API \"EnrollCard\" STARTED");
             this.SetStatusCode(null);
@@ -230,12 +115,12 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Enroll a card Enroll a card for tokenization during the customer&#39;s account registration or when the customer starts a new purchase intent.
+        /// Enroll a card Enroll a payment card for agentic or e-commerce transactions. This is typically the first step in the Intelligent Commerce payment lifecycle — the agent calls this endpoint to register a consumer&#39;s card, creating a tokenized reference that can be used in subsequent purchase instructions and payment credential retrieval. Requires device information, consumer identity, billing details, and payment instrument references. Returns a status of ACTIVE (HTTP 200) if enrollment completes immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. Call this endpoint when a consumer wants to add a new payment card or when setting up a card for agentic payment flows.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCardEnrollmentRequest"></param>
         /// <returns>ApiResponse of AgenticCardEnrollmentResponse200</returns>
-        public ApiResponse< AgenticCardEnrollmentResponse200 > EnrollCardWithHttpInfo (AgenticCardEnrollmentRequest agenticCardEnrollmentRequest)
+        public ApiResponse< AgenticCardEnrollmentResponse200 > EnrollCardWithHttpInfo(AgenticCardEnrollmentRequest agenticCardEnrollmentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -249,7 +134,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/tokens";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -258,13 +143,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -273,21 +158,21 @@ namespace CyberSource.Api
             if (agenticCardEnrollmentRequest != null && agenticCardEnrollmentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticCardEnrollmentRequest = (AgenticCardEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCardEnrollmentRequest, agenticCardEnrollmentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticCardEnrollmentRequest); // http body (model) parameter
+                agenticCardEnrollmentRequest = (AgenticCardEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCardEnrollmentRequest, agenticCardEnrollmentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticCardEnrollmentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticCardEnrollmentRequest; // byte array
             }
-            
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "EnrollCard,EnrollCardAsync,EnrollCardWithHttpInfo,EnrollCardAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "EnrollCard,EnrollCardAsync,EnrollCardWithHttpInfo,EnrollCardAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -296,13 +181,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "EnrollCard,EnrollCardAsync,EnrollCardWithHttpInfo,EnrollCardAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "EnrollCard,EnrollCardAsync,EnrollCardWithHttpInfo,EnrollCardAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -320,16 +205,16 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticCardEnrollmentResponse200>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticCardEnrollmentResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticCardEnrollmentResponse200),merchantConfig)); // Return statement
+                (AgenticCardEnrollmentResponse200) ApiClient.Deserialize(localVarResponse, typeof(AgenticCardEnrollmentResponse200))); // Return statement
         }
 
         /// <summary>
-        /// Enroll a card Enroll a card for tokenization during the customer&#39;s account registration or when the customer starts a new purchase intent.
+        /// Enroll a card Enroll a payment card for agentic or e-commerce transactions. This is typically the first step in the Intelligent Commerce payment lifecycle — the agent calls this endpoint to register a consumer&#39;s card, creating a tokenized reference that can be used in subsequent purchase instructions and payment credential retrieval. Requires device information, consumer identity, billing details, and payment instrument references. Returns a status of ACTIVE (HTTP 200) if enrollment completes immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. Call this endpoint when a consumer wants to add a new payment card or when setting up a card for agentic payment flows.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCardEnrollmentRequest"></param>
         /// <returns>Task of AgenticCardEnrollmentResponse200</returns>
-        public async System.Threading.Tasks.Task<AgenticCardEnrollmentResponse200> EnrollCardAsync (AgenticCardEnrollmentRequest agenticCardEnrollmentRequest)
+        public async Task<AgenticCardEnrollmentResponse200> EnrollCardAsync(AgenticCardEnrollmentRequest agenticCardEnrollmentRequest)
         {
             logger.Debug("CALLING API \"EnrollCardAsync\" STARTED");
             this.SetStatusCode(null);
@@ -341,12 +226,12 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Enroll a card Enroll a card for tokenization during the customer&#39;s account registration or when the customer starts a new purchase intent.
+        /// Enroll a card Enroll a payment card for agentic or e-commerce transactions. This is typically the first step in the Intelligent Commerce payment lifecycle — the agent calls this endpoint to register a consumer&#39;s card, creating a tokenized reference that can be used in subsequent purchase instructions and payment credential retrieval. Requires device information, consumer identity, billing details, and payment instrument references. Returns a status of ACTIVE (HTTP 200) if enrollment completes immediately, or PENDING (HTTP 202) with pendingEvents if cardholder authentication is required. Call this endpoint when a consumer wants to add a new payment card or when setting up a card for agentic payment flows.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="agenticCardEnrollmentRequest"></param>
         /// <returns>Task of ApiResponse (AgenticCardEnrollmentResponse200)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<AgenticCardEnrollmentResponse200>> EnrollCardAsyncWithHttpInfo (AgenticCardEnrollmentRequest agenticCardEnrollmentRequest)
+        public async Task<ApiResponse<AgenticCardEnrollmentResponse200>> EnrollCardAsyncWithHttpInfo(AgenticCardEnrollmentRequest agenticCardEnrollmentRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -360,7 +245,7 @@ namespace CyberSource.Api
             var localVarPath = $"/acp/v1/tokens";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -369,13 +254,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -384,21 +269,21 @@ namespace CyberSource.Api
             if (agenticCardEnrollmentRequest != null && agenticCardEnrollmentRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                agenticCardEnrollmentRequest = (AgenticCardEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCardEnrollmentRequest, agenticCardEnrollmentRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(agenticCardEnrollmentRequest); // http body (model) parameter
+                agenticCardEnrollmentRequest = (AgenticCardEnrollmentRequest)sdkTracker.InsertDeveloperIdTracker(agenticCardEnrollmentRequest, agenticCardEnrollmentRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(agenticCardEnrollmentRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = agenticCardEnrollmentRequest; // byte array
             }
 
-			string inboundMLEStatus = "mandatory";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "EnrollCard,EnrollCardAsync,EnrollCardWithHttpInfo,EnrollCardAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "mandatory";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "EnrollCard,EnrollCardAsync,EnrollCardWithHttpInfo,EnrollCardAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -407,17 +292,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "EnrollCard,EnrollCardAsync,EnrollCardWithHttpInfo,EnrollCardAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "EnrollCard,EnrollCardAsync,EnrollCardWithHttpInfo,EnrollCardAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -431,7 +316,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<AgenticCardEnrollmentResponse200>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (AgenticCardEnrollmentResponse200) Configuration.ApiClient.Deserialize(localVarResponse, typeof(AgenticCardEnrollmentResponse200), merchantConfig)); // Return statement
+                (AgenticCardEnrollmentResponse200) ApiClient.Deserialize(localVarResponse, typeof(AgenticCardEnrollmentResponse200))); // Return statement
         }
     }
 }

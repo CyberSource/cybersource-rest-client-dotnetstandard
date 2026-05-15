@@ -10,7 +10,25 @@ namespace CyberSource.Utilities.CaptureContext
 {
     public static class CaptureContextParsingUtility
     {
-        public static JObject parseCaptureContextResponse(string jwtToken, Configuration config)
+        private static async Task<string> FetchPublicKeyFromApi(string kid, string runEnvironment)
+        {
+            string publicKey = null;
+            try
+            {
+                publicKey = await PublicKeyApiController.FetchPublicKeyAsync(kid, runEnvironment);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+
+            Cache.AddPublicKeyToCache(publicKey, runEnvironment, kid);
+            return publicKey;
+        }
+
+        #region NEW METHODS
+        public static JObject parseCaptureContextResponse(string jwtToken, IConfiguration config)
         {
             bool verifyJWT = true;
             // Parse JWT Token for any malformations
@@ -30,7 +48,7 @@ namespace CyberSource.Utilities.CaptureContext
                 throw new Exception("JWT token does not contain 'kid' in header");
             }
 
-            var runEnvironment = config.MerchantConfigDictionaryObj.ContainsKey("runEnvironment") ? config.MerchantConfigDictionaryObj["runEnvironment"] : Constants.HostName;
+            var runEnvironment = config.MerchantCredentialSettings.RunEnvironment;
 
             string publicKey = "";
             bool isPublicKeyFromCache = false;
@@ -88,22 +106,6 @@ namespace CyberSource.Utilities.CaptureContext
 
             return jsonPayLoad;
         }
-
-        private static async Task<string> FetchPublicKeyFromApi(string kid, string runEnvironment)
-        {
-            string publicKey = null;
-            try
-            {
-                publicKey = await PublicKeyApiController.FetchPublicKeyAsync(kid, runEnvironment);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                throw;
-            }
-
-            Cache.AddPublicKeyToCache(publicKey, runEnvironment, kid);
-            return publicKey;
-        }
+        #endregion NEW METHODS
     }
 }

@@ -85,6 +85,86 @@ This feature provides an implementation of Message Level Encryption (MLE) for AP
 
 More information about this new MLE feature can be found in this file : [MLE.md](MLE.md)
 
+### JWT Authentication with Symmetric Key (Shared Secret / HS256 HMAC-SHA256) Support
+
+[![Generic badge](https://img.shields.io/badge/JWT_SHARED_SECRET-NEW-GREEN.svg)](https://shields.io/)
+
+> **⚠️ HTTP Signature Deprecation Notice:** HTTP Signature authentication (`HTTP_SIGNATURE`) is being deprecated. JWT with Shared Secret (HS256 / HMAC-SHA256) is the **recommended migration path** — it uses the **same** `merchantKeyId` and `merchantsecretKey` credentials, requires only two property changes, and enables MLE (Message Level Encryption) support that HTTP Signature does not provide.
+
+JWT authentication now supports two key types, configurable via the `jwtKeyType` property:
+
+| `jwtKeyType` | Algorithm | Credentials Required |
+|---|---|---|
+| `P12` (default) | RS256 (asymmetric, RSA-SHA256) | `keysDirectory`, `keyFilename`, `keyAlias`, `keyPass` |
+| `SHARED_SECRET` | HS256 (symmetric, HMAC-SHA256) | `merchantKeyId`, `merchantsecretKey` |
+
+The default value is `P12`, which preserves full backward compatibility with existing configurations.
+
+#### Configuration for JWT with P12 (default — no changes needed)
+
+```csharp
+_configurationDictionary.Add("authenticationType", "JWT");
+_configurationDictionary.Add("merchantID", "your_merchant_id");
+_configurationDictionary.Add("runEnvironment", "apitest.cybersource.com");
+// jwtKeyType defaults to P12 if omitted
+_configurationDictionary.Add("keyAlias", "your_merchant_id");
+_configurationDictionary.Add("keyPass", "your_merchant_id");
+_configurationDictionary.Add("keyFilename", "your_merchant_id");
+_configurationDictionary.Add("keysDirectory", @"path\to\p12\directory");
+```
+
+#### Configuration for JWT with Shared Secret
+
+```csharp
+_configurationDictionary.Add("authenticationType", "JWT");
+_configurationDictionary.Add("merchantID", "your_merchant_id");
+_configurationDictionary.Add("runEnvironment", "apitest.cybersource.com");
+_configurationDictionary.Add("jwtKeyType", "SHARED_SECRET");
+_configurationDictionary.Add("merchantKeyId", "your_key_id");
+_configurationDictionary.Add("merchantsecretKey", "your_base64_encoded_shared_secret");
+```
+
+> **Note:** When `jwtKeyType` is set to `SHARED_SECRET`, the P12-related properties (`keysDirectory`, `keyFilename`, `keyAlias`, `keyPass`) are not required and will be ignored. Conversely, when using `P12`, the `merchantKeyId` and `merchantsecretKey` properties are not required for JWT authentication.
+
+#### Migrating from HTTP Signature to JWT with Shared Secret (HS256 / HMAC-SHA256)
+
+If you are currently using HTTP Signature authentication, migrating to JWT with Shared Secret requires only **two property changes** — your credentials remain the same:
+
+```csharp
+// BEFORE (HTTP Signature — deprecated)
+_configurationDictionary.Add("authenticationType", "HTTP_SIGNATURE");
+_configurationDictionary.Add("merchantKeyId", "your_key_id");
+_configurationDictionary.Add("merchantsecretKey", "your_shared_secret");
+
+// AFTER (JWT with Shared Secret / HS256 HMAC-SHA256 — recommended)
+_configurationDictionary.Add("authenticationType", "JWT");             // changed
+_configurationDictionary.Add("jwtKeyType", "SHARED_SECRET");           // added — uses HS256 (HMAC-SHA256)
+_configurationDictionary.Add("merchantKeyId", "your_key_id");          // same
+_configurationDictionary.Add("merchantsecretKey", "your_shared_secret"); // same
+```
+
+#### Using MLE with Shared Secret Credentials
+
+MLE (Message Level Encryption) is fully supported with the `SHARED_SECRET` key type. When using `jwtKeyType=SHARED_SECRET` with MLE, you must provide the MLE public certificate separately via the `mleForRequestPublicCertPath` property, since there is no P12 file to auto-extract the MLE certificate from. The request MLE public certificate can be downloaded from the CyberSource Business Center:
+
+- **Test**: <https://businesscentertest.cybersource.com/ebc2>
+- **Production**: <https://businesscenter.cybersource.com/ebc2>
+
+```csharp
+_configurationDictionary.Add("authenticationType", "JWT");
+_configurationDictionary.Add("merchantID", "your_merchant_id");
+_configurationDictionary.Add("runEnvironment", "apitest.cybersource.com");
+_configurationDictionary.Add("jwtKeyType", "SHARED_SECRET");
+_configurationDictionary.Add("merchantKeyId", "your_key_id");
+_configurationDictionary.Add("merchantsecretKey", "your_base64_encoded_shared_secret");
+
+// Request MLE configuration
+_configurationDictionary.Add("enableRequestMLEForOptionalApisGlobally", "true");
+_configurationDictionary.Add("mleForRequestPublicCertPath", @"C:\path\to\mle\public\cert.pem");
+```
+
+For more details on MLE configuration options (including Response MLE), see [MLE.md](MLE.md).
+
 ### MetaKey Support
 
 A Meta Key is a single key that can be used by one, some, or all merchants (or accounts, if created by a Portfolio user) in the portfolio.
@@ -92,6 +172,8 @@ A Meta Key is a single key that can be used by one, some, or all merchants (or a
 The Portfolio or Parent Account owns the key and is considered the transaction submitter when a Meta Key is used, while the merchant owns the transaction.
 
 MIDs continue to be able to create keys for themselves, even if a Meta Key is generated.
+
+MetaKey works with all three authentication types: HTTP Signature, JWT (P12), and JWT with Shared Secret.
 
 Further information on MetaKey can be found in [New Business Center User Guide](https://developer.cybersource.com/library/documentation/dev_guides/Business_Center/New_Business_Center_User_Guide.pdf).
 

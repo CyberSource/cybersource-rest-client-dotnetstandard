@@ -26,6 +26,12 @@ namespace AuthenticationSdk.util
 
         public static readonly string AuthMechanismOAuth = "oauth";
 
+        public static readonly string JwtKeyTypeP12 = "P12";
+
+        public static readonly string JwtKeyTypeSharedSecret = "SHARED_SECRET";
+
+        public static readonly string InvalidJwtKeyTypeErrorMessage = "Invalid value for jwtKeyType in merchant configuration. Value must be 'P12' or 'SHARED_SECRET'. ";
+
         public static readonly string ErrorPrefix = "Error: ";
 
         public static readonly string WarningPrefix = "Warning: ";

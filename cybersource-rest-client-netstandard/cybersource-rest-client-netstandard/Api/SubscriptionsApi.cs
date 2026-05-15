@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -39,7 +38,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="processMissedPayments">Indicates if missed payments should be processed from the period when the subscription was suspended. By default, this is set to true. When any option other than \&quot;Ask each time before reactivating\&quot; is selected in the reactivation settings, the value that you enter will be ignored.  (optional, default to true)</param>
         /// <returns>ActivateSubscriptionResponse</returns>
-        ActivateSubscriptionResponse ActivateSubscription (string id, bool? processMissedPayments = null);
+        ActivateSubscriptionResponse ActivateSubscription(string id, bool? processMissedPayments = null);
 
         /// <summary>
         /// Reactivating a Suspended Subscription
@@ -51,7 +50,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="processMissedPayments">Indicates if missed payments should be processed from the period when the subscription was suspended. By default, this is set to true. When any option other than \&quot;Ask each time before reactivating\&quot; is selected in the reactivation settings, the value that you enter will be ignored.  (optional, default to true)</param>
         /// <returns>ApiResponse of ActivateSubscriptionResponse</returns>
-        ApiResponse<ActivateSubscriptionResponse> ActivateSubscriptionWithHttpInfo (string id, bool? processMissedPayments = null);
+        ApiResponse<ActivateSubscriptionResponse> ActivateSubscriptionWithHttpInfo(string id, bool? processMissedPayments = null);
         /// <summary>
         /// Cancel a Subscription
         /// </summary>
@@ -61,7 +60,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>CancelSubscriptionResponse</returns>
-        CancelSubscriptionResponse CancelSubscription (string id);
+        CancelSubscriptionResponse CancelSubscription(string id);
 
         /// <summary>
         /// Cancel a Subscription
@@ -72,7 +71,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>ApiResponse of CancelSubscriptionResponse</returns>
-        ApiResponse<CancelSubscriptionResponse> CancelSubscriptionWithHttpInfo (string id);
+        ApiResponse<CancelSubscriptionResponse> CancelSubscriptionWithHttpInfo(string id);
         /// <summary>
         /// Create a Subscription
         /// </summary>
@@ -82,7 +81,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSubscriptionRequest"></param>
         /// <returns>CreateSubscriptionResponse</returns>
-        CreateSubscriptionResponse CreateSubscription (CreateSubscriptionRequest createSubscriptionRequest);
+        CreateSubscriptionResponse CreateSubscription(CreateSubscriptionRequest createSubscriptionRequest);
 
         /// <summary>
         /// Create a Subscription
@@ -93,7 +92,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSubscriptionRequest"></param>
         /// <returns>ApiResponse of CreateSubscriptionResponse</returns>
-        ApiResponse<CreateSubscriptionResponse> CreateSubscriptionWithHttpInfo (CreateSubscriptionRequest createSubscriptionRequest);
+        ApiResponse<CreateSubscriptionResponse> CreateSubscriptionWithHttpInfo(CreateSubscriptionRequest createSubscriptionRequest);
         /// <summary>
         /// Get a List of Subscriptions
         /// </summary>
@@ -106,8 +105,9 @@ namespace CyberSource.Api
         /// <param name="code">Filter by Subscription Code (optional)</param>
         /// <param name="status">Filter by Subscription Status (optional)</param>
         /// <param name="customerId">Filter by Customer Id (optional)</param>
+        /// <param name="clientReferenceInformationCode">Filter by Client Reference Information Code / Merchant Reference Number (optional)</param>
         /// <returns>GetAllSubscriptionsResponse</returns>
-        GetAllSubscriptionsResponse GetAllSubscriptions (int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null);
+        GetAllSubscriptionsResponse GetAllSubscriptions(int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null, string clientReferenceInformationCode = null);
 
         /// <summary>
         /// Get a List of Subscriptions
@@ -121,8 +121,9 @@ namespace CyberSource.Api
         /// <param name="code">Filter by Subscription Code (optional)</param>
         /// <param name="status">Filter by Subscription Status (optional)</param>
         /// <param name="customerId">Filter by Customer Id (optional)</param>
+        /// <param name="clientReferenceInformationCode">Filter by Client Reference Information Code / Merchant Reference Number (optional)</param>
         /// <returns>ApiResponse of GetAllSubscriptionsResponse</returns>
-        ApiResponse<GetAllSubscriptionsResponse> GetAllSubscriptionsWithHttpInfo (int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null);
+        ApiResponse<GetAllSubscriptionsResponse> GetAllSubscriptionsWithHttpInfo(int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null, string clientReferenceInformationCode = null);
         /// <summary>
         /// Get a Subscription
         /// </summary>
@@ -132,7 +133,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>GetSubscriptionResponse</returns>
-        GetSubscriptionResponse GetSubscription (string id);
+        GetSubscriptionResponse GetSubscription(string id);
 
         /// <summary>
         /// Get a Subscription
@@ -143,7 +144,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>ApiResponse of GetSubscriptionResponse</returns>
-        ApiResponse<GetSubscriptionResponse> GetSubscriptionWithHttpInfo (string id);
+        ApiResponse<GetSubscriptionResponse> GetSubscriptionWithHttpInfo(string id);
         /// <summary>
         /// Get a Subscription Code
         /// </summary>
@@ -152,7 +153,7 @@ namespace CyberSource.Api
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>GetSubscriptionCodeResponse</returns>
-        GetSubscriptionCodeResponse GetSubscriptionCode ();
+        GetSubscriptionCodeResponse GetSubscriptionCode();
 
         /// <summary>
         /// Get a Subscription Code
@@ -162,7 +163,57 @@ namespace CyberSource.Api
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of GetSubscriptionCodeResponse</returns>
-        ApiResponse<GetSubscriptionCodeResponse> GetSubscriptionCodeWithHttpInfo ();
+        ApiResponse<GetSubscriptionCodeResponse> GetSubscriptionCodeWithHttpInfo();
+        /// <summary>
+        /// Get Payments for a Subscription
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a list of payments for a specific subscription by its ID. 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="offset">Page offset number. (optional)</param>
+        /// <param name="limit">Number of items to be returned. Default - &#x60;20&#x60;, Max - &#x60;100&#x60;  (optional)</param>
+        /// <param name="scheduledPaymentsCount">Number of existing scheduled payments to be returned. Default - &#x60;5&#x60;, Max - &#x60;9999&#x60;  (optional)</param>
+        /// <returns>GetSubscriptionsPaymentsResponse</returns>
+        GetSubscriptionsPaymentsResponse SubscriptionsIdPaymentsGet(string id, int? offset = null, int? limit = null, int? scheduledPaymentsCount = null);
+
+        /// <summary>
+        /// Get Payments for a Subscription
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a list of payments for a specific subscription by its ID. 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="offset">Page offset number. (optional)</param>
+        /// <param name="limit">Number of items to be returned. Default - &#x60;20&#x60;, Max - &#x60;100&#x60;  (optional)</param>
+        /// <param name="scheduledPaymentsCount">Number of existing scheduled payments to be returned. Default - &#x60;5&#x60;, Max - &#x60;9999&#x60;  (optional)</param>
+        /// <returns>ApiResponse of GetSubscriptionsPaymentsResponse</returns>
+        ApiResponse<GetSubscriptionsPaymentsResponse> SubscriptionsIdPaymentsGetWithHttpInfo(string id, int? offset = null, int? limit = null, int? scheduledPaymentsCount = null);
+        /// <summary>
+        /// Update Payments for a subscription
+        /// </summary>
+        /// <remarks>
+        /// Modifies the state of a subscription&#39;s payments. Currently, the only possible modifications are \&quot;skipping\&quot; and \&quot;restoring\&quot; payments.  Marking a payment as \&quot;skipped\&quot; means it will not be processed when its scheduled time arrives. \&quot;Restoring\&quot; a payment removes it from the list of payments to be skipped. 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="updatePayments">Modify payments of a subscription</param>
+        /// <returns>GetSubscriptionsPaymentsResponse1</returns>
+        GetSubscriptionsPaymentsResponse1 SubscriptionsIdPaymentsPut(string id, UpdatePayments updatePayments);
+
+        /// <summary>
+        /// Update Payments for a subscription
+        /// </summary>
+        /// <remarks>
+        /// Modifies the state of a subscription&#39;s payments. Currently, the only possible modifications are \&quot;skipping\&quot; and \&quot;restoring\&quot; payments.  Marking a payment as \&quot;skipped\&quot; means it will not be processed when its scheduled time arrives. \&quot;Restoring\&quot; a payment removes it from the list of payments to be skipped. 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="updatePayments">Modify payments of a subscription</param>
+        /// <returns>ApiResponse of GetSubscriptionsPaymentsResponse1</returns>
+        ApiResponse<GetSubscriptionsPaymentsResponse1> SubscriptionsIdPaymentsPutWithHttpInfo(string id, UpdatePayments updatePayments);
         /// <summary>
         /// Suspend a Subscription
         /// </summary>
@@ -172,7 +223,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>SuspendSubscriptionResponse</returns>
-        SuspendSubscriptionResponse SuspendSubscription (string id);
+        SuspendSubscriptionResponse SuspendSubscription(string id);
 
         /// <summary>
         /// Suspend a Subscription
@@ -183,7 +234,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>ApiResponse of SuspendSubscriptionResponse</returns>
-        ApiResponse<SuspendSubscriptionResponse> SuspendSubscriptionWithHttpInfo (string id);
+        ApiResponse<SuspendSubscriptionResponse> SuspendSubscriptionWithHttpInfo(string id);
         /// <summary>
         /// Update a Subscription
         /// </summary>
@@ -194,7 +245,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="updateSubscription">Update Subscription</param>
         /// <returns>UpdateSubscriptionResponse</returns>
-        UpdateSubscriptionResponse UpdateSubscription (string id, UpdateSubscription updateSubscription);
+        UpdateSubscriptionResponse UpdateSubscription(string id, UpdateSubscription updateSubscription);
 
         /// <summary>
         /// Update a Subscription
@@ -206,7 +257,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="updateSubscription">Update Subscription</param>
         /// <returns>ApiResponse of UpdateSubscriptionResponse</returns>
-        ApiResponse<UpdateSubscriptionResponse> UpdateSubscriptionWithHttpInfo (string id, UpdateSubscription updateSubscription);
+        ApiResponse<UpdateSubscriptionResponse> UpdateSubscriptionWithHttpInfo(string id, UpdateSubscription updateSubscription);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -219,7 +270,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="processMissedPayments">Indicates if missed payments should be processed from the period when the subscription was suspended. By default, this is set to true. When any option other than \&quot;Ask each time before reactivating\&quot; is selected in the reactivation settings, the value that you enter will be ignored.  (optional, default to true)</param>
         /// <returns>Task of ActivateSubscriptionResponse</returns>
-        System.Threading.Tasks.Task<ActivateSubscriptionResponse> ActivateSubscriptionAsync (string id, bool? processMissedPayments = null);
+        System.Threading.Tasks.Task<ActivateSubscriptionResponse> ActivateSubscriptionAsync(string id, bool? processMissedPayments = null);
 
         /// <summary>
         /// Reactivating a Suspended Subscription
@@ -231,7 +282,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="processMissedPayments">Indicates if missed payments should be processed from the period when the subscription was suspended. By default, this is set to true. When any option other than \&quot;Ask each time before reactivating\&quot; is selected in the reactivation settings, the value that you enter will be ignored.  (optional, default to true)</param>
         /// <returns>Task of ApiResponse (ActivateSubscriptionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<ActivateSubscriptionResponse>> ActivateSubscriptionAsyncWithHttpInfo (string id, bool? processMissedPayments = null);
+        System.Threading.Tasks.Task<ApiResponse<ActivateSubscriptionResponse>> ActivateSubscriptionAsyncWithHttpInfo(string id, bool? processMissedPayments = null);
         /// <summary>
         /// Cancel a Subscription
         /// </summary>
@@ -241,7 +292,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of CancelSubscriptionResponse</returns>
-        System.Threading.Tasks.Task<CancelSubscriptionResponse> CancelSubscriptionAsync (string id);
+        System.Threading.Tasks.Task<CancelSubscriptionResponse> CancelSubscriptionAsync(string id);
 
         /// <summary>
         /// Cancel a Subscription
@@ -252,7 +303,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of ApiResponse (CancelSubscriptionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CancelSubscriptionResponse>> CancelSubscriptionAsyncWithHttpInfo (string id);
+        System.Threading.Tasks.Task<ApiResponse<CancelSubscriptionResponse>> CancelSubscriptionAsyncWithHttpInfo(string id);
         /// <summary>
         /// Create a Subscription
         /// </summary>
@@ -262,7 +313,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSubscriptionRequest"></param>
         /// <returns>Task of CreateSubscriptionResponse</returns>
-        System.Threading.Tasks.Task<CreateSubscriptionResponse> CreateSubscriptionAsync (CreateSubscriptionRequest createSubscriptionRequest);
+        System.Threading.Tasks.Task<CreateSubscriptionResponse> CreateSubscriptionAsync(CreateSubscriptionRequest createSubscriptionRequest);
 
         /// <summary>
         /// Create a Subscription
@@ -273,7 +324,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSubscriptionRequest"></param>
         /// <returns>Task of ApiResponse (CreateSubscriptionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CreateSubscriptionResponse>> CreateSubscriptionAsyncWithHttpInfo (CreateSubscriptionRequest createSubscriptionRequest);
+        System.Threading.Tasks.Task<ApiResponse<CreateSubscriptionResponse>> CreateSubscriptionAsyncWithHttpInfo(CreateSubscriptionRequest createSubscriptionRequest);
         /// <summary>
         /// Get a List of Subscriptions
         /// </summary>
@@ -286,8 +337,9 @@ namespace CyberSource.Api
         /// <param name="code">Filter by Subscription Code (optional)</param>
         /// <param name="status">Filter by Subscription Status (optional)</param>
         /// <param name="customerId">Filter by Customer Id (optional)</param>
+        /// <param name="clientReferenceInformationCode">Filter by Client Reference Information Code / Merchant Reference Number (optional)</param>
         /// <returns>Task of GetAllSubscriptionsResponse</returns>
-        System.Threading.Tasks.Task<GetAllSubscriptionsResponse> GetAllSubscriptionsAsync (int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null);
+        System.Threading.Tasks.Task<GetAllSubscriptionsResponse> GetAllSubscriptionsAsync(int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null, string clientReferenceInformationCode = null);
 
         /// <summary>
         /// Get a List of Subscriptions
@@ -301,8 +353,9 @@ namespace CyberSource.Api
         /// <param name="code">Filter by Subscription Code (optional)</param>
         /// <param name="status">Filter by Subscription Status (optional)</param>
         /// <param name="customerId">Filter by Customer Id (optional)</param>
+        /// <param name="clientReferenceInformationCode">Filter by Client Reference Information Code / Merchant Reference Number (optional)</param>
         /// <returns>Task of ApiResponse (GetAllSubscriptionsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetAllSubscriptionsResponse>> GetAllSubscriptionsAsyncWithHttpInfo (int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null);
+        System.Threading.Tasks.Task<ApiResponse<GetAllSubscriptionsResponse>> GetAllSubscriptionsAsyncWithHttpInfo(int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null, string clientReferenceInformationCode = null);
         /// <summary>
         /// Get a Subscription
         /// </summary>
@@ -312,7 +365,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of GetSubscriptionResponse</returns>
-        System.Threading.Tasks.Task<GetSubscriptionResponse> GetSubscriptionAsync (string id);
+        System.Threading.Tasks.Task<GetSubscriptionResponse> GetSubscriptionAsync(string id);
 
         /// <summary>
         /// Get a Subscription
@@ -323,7 +376,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of ApiResponse (GetSubscriptionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetSubscriptionResponse>> GetSubscriptionAsyncWithHttpInfo (string id);
+        System.Threading.Tasks.Task<ApiResponse<GetSubscriptionResponse>> GetSubscriptionAsyncWithHttpInfo(string id);
         /// <summary>
         /// Get a Subscription Code
         /// </summary>
@@ -332,7 +385,7 @@ namespace CyberSource.Api
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of GetSubscriptionCodeResponse</returns>
-        System.Threading.Tasks.Task<GetSubscriptionCodeResponse> GetSubscriptionCodeAsync ();
+        System.Threading.Tasks.Task<GetSubscriptionCodeResponse> GetSubscriptionCodeAsync();
 
         /// <summary>
         /// Get a Subscription Code
@@ -342,7 +395,57 @@ namespace CyberSource.Api
         /// </remarks>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (GetSubscriptionCodeResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetSubscriptionCodeResponse>> GetSubscriptionCodeAsyncWithHttpInfo ();
+        System.Threading.Tasks.Task<ApiResponse<GetSubscriptionCodeResponse>> GetSubscriptionCodeAsyncWithHttpInfo();
+        /// <summary>
+        /// Get Payments for a Subscription
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a list of payments for a specific subscription by its ID. 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="offset">Page offset number. (optional)</param>
+        /// <param name="limit">Number of items to be returned. Default - &#x60;20&#x60;, Max - &#x60;100&#x60;  (optional)</param>
+        /// <param name="scheduledPaymentsCount">Number of existing scheduled payments to be returned. Default - &#x60;5&#x60;, Max - &#x60;9999&#x60;  (optional)</param>
+        /// <returns>Task of GetSubscriptionsPaymentsResponse</returns>
+        System.Threading.Tasks.Task<GetSubscriptionsPaymentsResponse> SubscriptionsIdPaymentsGetAsync(string id, int? offset = null, int? limit = null, int? scheduledPaymentsCount = null);
+
+        /// <summary>
+        /// Get Payments for a Subscription
+        /// </summary>
+        /// <remarks>
+        /// Retrieve a list of payments for a specific subscription by its ID. 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="offset">Page offset number. (optional)</param>
+        /// <param name="limit">Number of items to be returned. Default - &#x60;20&#x60;, Max - &#x60;100&#x60;  (optional)</param>
+        /// <param name="scheduledPaymentsCount">Number of existing scheduled payments to be returned. Default - &#x60;5&#x60;, Max - &#x60;9999&#x60;  (optional)</param>
+        /// <returns>Task of ApiResponse (GetSubscriptionsPaymentsResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<GetSubscriptionsPaymentsResponse>> SubscriptionsIdPaymentsGetAsyncWithHttpInfo(string id, int? offset = null, int? limit = null, int? scheduledPaymentsCount = null);
+        /// <summary>
+        /// Update Payments for a subscription
+        /// </summary>
+        /// <remarks>
+        /// Modifies the state of a subscription&#39;s payments. Currently, the only possible modifications are \&quot;skipping\&quot; and \&quot;restoring\&quot; payments.  Marking a payment as \&quot;skipped\&quot; means it will not be processed when its scheduled time arrives. \&quot;Restoring\&quot; a payment removes it from the list of payments to be skipped. 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="updatePayments">Modify payments of a subscription</param>
+        /// <returns>Task of GetSubscriptionsPaymentsResponse1</returns>
+        System.Threading.Tasks.Task<GetSubscriptionsPaymentsResponse1> SubscriptionsIdPaymentsPutAsync(string id, UpdatePayments updatePayments);
+
+        /// <summary>
+        /// Update Payments for a subscription
+        /// </summary>
+        /// <remarks>
+        /// Modifies the state of a subscription&#39;s payments. Currently, the only possible modifications are \&quot;skipping\&quot; and \&quot;restoring\&quot; payments.  Marking a payment as \&quot;skipped\&quot; means it will not be processed when its scheduled time arrives. \&quot;Restoring\&quot; a payment removes it from the list of payments to be skipped. 
+        /// </remarks>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="updatePayments">Modify payments of a subscription</param>
+        /// <returns>Task of ApiResponse (GetSubscriptionsPaymentsResponse1)</returns>
+        System.Threading.Tasks.Task<ApiResponse<GetSubscriptionsPaymentsResponse1>> SubscriptionsIdPaymentsPutAsyncWithHttpInfo(string id, UpdatePayments updatePayments);
         /// <summary>
         /// Suspend a Subscription
         /// </summary>
@@ -352,7 +455,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of SuspendSubscriptionResponse</returns>
-        System.Threading.Tasks.Task<SuspendSubscriptionResponse> SuspendSubscriptionAsync (string id);
+        System.Threading.Tasks.Task<SuspendSubscriptionResponse> SuspendSubscriptionAsync(string id);
 
         /// <summary>
         /// Suspend a Subscription
@@ -363,7 +466,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of ApiResponse (SuspendSubscriptionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SuspendSubscriptionResponse>> SuspendSubscriptionAsyncWithHttpInfo (string id);
+        System.Threading.Tasks.Task<ApiResponse<SuspendSubscriptionResponse>> SuspendSubscriptionAsyncWithHttpInfo(string id);
         /// <summary>
         /// Update a Subscription
         /// </summary>
@@ -374,7 +477,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="updateSubscription">Update Subscription</param>
         /// <returns>Task of UpdateSubscriptionResponse</returns>
-        System.Threading.Tasks.Task<UpdateSubscriptionResponse> UpdateSubscriptionAsync (string id, UpdateSubscription updateSubscription);
+        System.Threading.Tasks.Task<UpdateSubscriptionResponse> UpdateSubscriptionAsync(string id, UpdateSubscription updateSubscription);
 
         /// <summary>
         /// Update a Subscription
@@ -386,145 +489,31 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="updateSubscription">Update Subscription</param>
         /// <returns>Task of ApiResponse (UpdateSubscriptionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UpdateSubscriptionResponse>> UpdateSubscriptionAsyncWithHttpInfo (string id, UpdateSubscription updateSubscription);
+        System.Threading.Tasks.Task<ApiResponse<UpdateSubscriptionResponse>> UpdateSubscriptionAsyncWithHttpInfo(string id, UpdateSubscription updateSubscription);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class SubscriptionsApi : ISubscriptionsApi
+    public partial class SubscriptionsApi : ApiBase, ISubscriptionsApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SubscriptionsApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public SubscriptionsApi(string basePath)
+        public SubscriptionsApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SubscriptionsApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public SubscriptionsApi(Configuration configuration = null)
+        public SubscriptionsApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -534,7 +523,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="processMissedPayments">Indicates if missed payments should be processed from the period when the subscription was suspended. By default, this is set to true. When any option other than \&quot;Ask each time before reactivating\&quot; is selected in the reactivation settings, the value that you enter will be ignored.  (optional, default to true)</param>
         /// <returns>ActivateSubscriptionResponse</returns>
-        public ActivateSubscriptionResponse ActivateSubscription (string id, bool? processMissedPayments = null)
+        public ActivateSubscriptionResponse ActivateSubscription(string id, bool? processMissedPayments = null)
         {
             logger.Debug("CALLING API \"ActivateSubscription\" STARTED");
             this.SetStatusCode(null);
@@ -551,7 +540,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="processMissedPayments">Indicates if missed payments should be processed from the period when the subscription was suspended. By default, this is set to true. When any option other than \&quot;Ask each time before reactivating\&quot; is selected in the reactivation settings, the value that you enter will be ignored.  (optional, default to true)</param>
         /// <returns>ApiResponse of ActivateSubscriptionResponse</returns>
-        public ApiResponse< ActivateSubscriptionResponse > ActivateSubscriptionWithHttpInfo (string id, bool? processMissedPayments = null)
+        public ApiResponse< ActivateSubscriptionResponse > ActivateSubscriptionWithHttpInfo(string id, bool? processMissedPayments = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -565,7 +554,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/{id}/activate";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -574,7 +563,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -583,7 +572,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -591,14 +580,16 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (processMissedPayments != null)
             {
-                localVarQueryParams.Add("processMissedPayments", Configuration.ApiClient.ParameterToString(processMissedPayments)); // query parameter
+                localVarQueryParams.Add("processMissedPayments", ApiClient.ParameterToString(processMissedPayments)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -607,20 +598,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ActivateSubscription,ActivateSubscriptionAsync,ActivateSubscriptionWithHttpInfo,ActivateSubscriptionAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "ActivateSubscription,ActivateSubscriptionAsync,ActivateSubscriptionWithHttpInfo,ActivateSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -629,12 +621,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "ActivateSubscription,ActivateSubscriptionAsync,ActivateSubscriptionWithHttpInfo,ActivateSubscriptionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "ActivateSubscription,ActivateSubscriptionAsync,ActivateSubscriptionWithHttpInfo,ActivateSubscriptionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -652,7 +643,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<ActivateSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (ActivateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ActivateSubscriptionResponse),merchantConfig)); // Return statement
+                (ActivateSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(ActivateSubscriptionResponse))); // Return statement
         }
 
         /// <summary>
@@ -662,7 +653,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="processMissedPayments">Indicates if missed payments should be processed from the period when the subscription was suspended. By default, this is set to true. When any option other than \&quot;Ask each time before reactivating\&quot; is selected in the reactivation settings, the value that you enter will be ignored.  (optional, default to true)</param>
         /// <returns>Task of ActivateSubscriptionResponse</returns>
-        public async System.Threading.Tasks.Task<ActivateSubscriptionResponse> ActivateSubscriptionAsync (string id, bool? processMissedPayments = null)
+        public async Task<ActivateSubscriptionResponse> ActivateSubscriptionAsync(string id, bool? processMissedPayments = null)
         {
             logger.Debug("CALLING API \"ActivateSubscriptionAsync\" STARTED");
             this.SetStatusCode(null);
@@ -680,7 +671,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="processMissedPayments">Indicates if missed payments should be processed from the period when the subscription was suspended. By default, this is set to true. When any option other than \&quot;Ask each time before reactivating\&quot; is selected in the reactivation settings, the value that you enter will be ignored.  (optional, default to true)</param>
         /// <returns>Task of ApiResponse (ActivateSubscriptionResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<ActivateSubscriptionResponse>> ActivateSubscriptionAsyncWithHttpInfo (string id, bool? processMissedPayments = null)
+        public async Task<ApiResponse<ActivateSubscriptionResponse>> ActivateSubscriptionAsyncWithHttpInfo(string id, bool? processMissedPayments = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -694,7 +685,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/{id}/activate";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -703,7 +694,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -712,7 +703,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -720,14 +711,16 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (processMissedPayments != null)
             {
-                localVarQueryParams.Add("processMissedPayments", Configuration.ApiClient.ParameterToString(processMissedPayments)); // query parameter
+                localVarQueryParams.Add("processMissedPayments", ApiClient.ParameterToString(processMissedPayments)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -736,20 +729,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "ActivateSubscription,ActivateSubscriptionAsync,ActivateSubscriptionWithHttpInfo,ActivateSubscriptionAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "ActivateSubscription,ActivateSubscriptionAsync,ActivateSubscriptionWithHttpInfo,ActivateSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -758,16 +751,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "ActivateSubscription,ActivateSubscriptionAsync,ActivateSubscriptionWithHttpInfo,ActivateSubscriptionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "ActivateSubscription,ActivateSubscriptionAsync,ActivateSubscriptionWithHttpInfo,ActivateSubscriptionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -781,7 +773,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<ActivateSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (ActivateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(ActivateSubscriptionResponse), merchantConfig)); // Return statement
+                (ActivateSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(ActivateSubscriptionResponse))); // Return statement
         }
         /// <summary>
         /// Cancel a Subscription Cancel a Subscription
@@ -789,7 +781,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>CancelSubscriptionResponse</returns>
-        public CancelSubscriptionResponse CancelSubscription (string id)
+        public CancelSubscriptionResponse CancelSubscription(string id)
         {
             logger.Debug("CALLING API \"CancelSubscription\" STARTED");
             this.SetStatusCode(null);
@@ -805,7 +797,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>ApiResponse of CancelSubscriptionResponse</returns>
-        public ApiResponse< CancelSubscriptionResponse > CancelSubscriptionWithHttpInfo (string id)
+        public ApiResponse< CancelSubscriptionResponse > CancelSubscriptionWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -819,7 +811,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/{id}/cancel";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -828,7 +820,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -837,7 +829,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -845,9 +837,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -856,20 +849,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CancelSubscription,CancelSubscriptionAsync,CancelSubscriptionWithHttpInfo,CancelSubscriptionAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CancelSubscription,CancelSubscriptionAsync,CancelSubscriptionWithHttpInfo,CancelSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -878,12 +872,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CancelSubscription,CancelSubscriptionAsync,CancelSubscriptionWithHttpInfo,CancelSubscriptionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CancelSubscription,CancelSubscriptionAsync,CancelSubscriptionWithHttpInfo,CancelSubscriptionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -901,7 +894,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<CancelSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (CancelSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CancelSubscriptionResponse),merchantConfig)); // Return statement
+                (CancelSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(CancelSubscriptionResponse))); // Return statement
         }
 
         /// <summary>
@@ -910,7 +903,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of CancelSubscriptionResponse</returns>
-        public async System.Threading.Tasks.Task<CancelSubscriptionResponse> CancelSubscriptionAsync (string id)
+        public async Task<CancelSubscriptionResponse> CancelSubscriptionAsync(string id)
         {
             logger.Debug("CALLING API \"CancelSubscriptionAsync\" STARTED");
             this.SetStatusCode(null);
@@ -927,7 +920,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of ApiResponse (CancelSubscriptionResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<CancelSubscriptionResponse>> CancelSubscriptionAsyncWithHttpInfo (string id)
+        public async Task<ApiResponse<CancelSubscriptionResponse>> CancelSubscriptionAsyncWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -941,7 +934,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/{id}/cancel";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -950,7 +943,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -959,7 +952,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -967,9 +960,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -978,20 +972,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CancelSubscription,CancelSubscriptionAsync,CancelSubscriptionWithHttpInfo,CancelSubscriptionAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CancelSubscription,CancelSubscriptionAsync,CancelSubscriptionWithHttpInfo,CancelSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1000,16 +994,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CancelSubscription,CancelSubscriptionAsync,CancelSubscriptionWithHttpInfo,CancelSubscriptionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CancelSubscription,CancelSubscriptionAsync,CancelSubscriptionWithHttpInfo,CancelSubscriptionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1023,7 +1016,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<CancelSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (CancelSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CancelSubscriptionResponse), merchantConfig)); // Return statement
+                (CancelSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(CancelSubscriptionResponse))); // Return statement
         }
         /// <summary>
         /// Create a Subscription Create a Recurring Billing Subscription
@@ -1031,7 +1024,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSubscriptionRequest"></param>
         /// <returns>CreateSubscriptionResponse</returns>
-        public CreateSubscriptionResponse CreateSubscription (CreateSubscriptionRequest createSubscriptionRequest)
+        public CreateSubscriptionResponse CreateSubscription(CreateSubscriptionRequest createSubscriptionRequest)
         {
             logger.Debug("CALLING API \"CreateSubscription\" STARTED");
             this.SetStatusCode(null);
@@ -1047,7 +1040,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSubscriptionRequest"></param>
         /// <returns>ApiResponse of CreateSubscriptionResponse</returns>
-        public ApiResponse< CreateSubscriptionResponse > CreateSubscriptionWithHttpInfo (CreateSubscriptionRequest createSubscriptionRequest)
+        public ApiResponse< CreateSubscriptionResponse > CreateSubscriptionWithHttpInfo(CreateSubscriptionRequest createSubscriptionRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1061,7 +1054,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1070,7 +1063,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1079,7 +1072,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1088,21 +1081,21 @@ namespace CyberSource.Api
             if (createSubscriptionRequest != null && createSubscriptionRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createSubscriptionRequest = (CreateSubscriptionRequest)sdkTracker.InsertDeveloperIdTracker(createSubscriptionRequest, createSubscriptionRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createSubscriptionRequest); // http body (model) parameter
+                createSubscriptionRequest = (CreateSubscriptionRequest)sdkTracker.InsertDeveloperIdTracker(createSubscriptionRequest, createSubscriptionRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createSubscriptionRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createSubscriptionRequest; // byte array
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateSubscription,CreateSubscriptionAsync,CreateSubscriptionWithHttpInfo,CreateSubscriptionAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreateSubscription,CreateSubscriptionAsync,CreateSubscriptionWithHttpInfo,CreateSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1111,13 +1104,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreateSubscription,CreateSubscriptionAsync,CreateSubscriptionWithHttpInfo,CreateSubscriptionAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreateSubscription,CreateSubscriptionAsync,CreateSubscriptionWithHttpInfo,CreateSubscriptionAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1135,7 +1128,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<CreateSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (CreateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CreateSubscriptionResponse),merchantConfig)); // Return statement
+                (CreateSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(CreateSubscriptionResponse))); // Return statement
         }
 
         /// <summary>
@@ -1144,7 +1137,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSubscriptionRequest"></param>
         /// <returns>Task of CreateSubscriptionResponse</returns>
-        public async System.Threading.Tasks.Task<CreateSubscriptionResponse> CreateSubscriptionAsync (CreateSubscriptionRequest createSubscriptionRequest)
+        public async Task<CreateSubscriptionResponse> CreateSubscriptionAsync(CreateSubscriptionRequest createSubscriptionRequest)
         {
             logger.Debug("CALLING API \"CreateSubscriptionAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1161,7 +1154,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createSubscriptionRequest"></param>
         /// <returns>Task of ApiResponse (CreateSubscriptionResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<CreateSubscriptionResponse>> CreateSubscriptionAsyncWithHttpInfo (CreateSubscriptionRequest createSubscriptionRequest)
+        public async Task<ApiResponse<CreateSubscriptionResponse>> CreateSubscriptionAsyncWithHttpInfo(CreateSubscriptionRequest createSubscriptionRequest)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1175,7 +1168,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1184,7 +1177,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1193,7 +1186,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1202,21 +1195,21 @@ namespace CyberSource.Api
             if (createSubscriptionRequest != null && createSubscriptionRequest.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createSubscriptionRequest = (CreateSubscriptionRequest)sdkTracker.InsertDeveloperIdTracker(createSubscriptionRequest, createSubscriptionRequest.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createSubscriptionRequest); // http body (model) parameter
+                createSubscriptionRequest = (CreateSubscriptionRequest)sdkTracker.InsertDeveloperIdTracker(createSubscriptionRequest, createSubscriptionRequest.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createSubscriptionRequest); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createSubscriptionRequest; // byte array
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "CreateSubscription,CreateSubscriptionAsync,CreateSubscriptionWithHttpInfo,CreateSubscriptionAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreateSubscription,CreateSubscriptionAsync,CreateSubscriptionWithHttpInfo,CreateSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1225,17 +1218,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "CreateSubscription,CreateSubscriptionAsync,CreateSubscriptionWithHttpInfo,CreateSubscriptionAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "CreateSubscription,CreateSubscriptionAsync,CreateSubscriptionWithHttpInfo,CreateSubscriptionAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1249,7 +1242,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<CreateSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (CreateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(CreateSubscriptionResponse), merchantConfig)); // Return statement
+                (CreateSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(CreateSubscriptionResponse))); // Return statement
         }
         /// <summary>
         /// Get a List of Subscriptions Retrieve Subscriptions by Subscription Code &amp; Subscription Status. 
@@ -1260,12 +1253,13 @@ namespace CyberSource.Api
         /// <param name="code">Filter by Subscription Code (optional)</param>
         /// <param name="status">Filter by Subscription Status (optional)</param>
         /// <param name="customerId">Filter by Customer Id (optional)</param>
+        /// <param name="clientReferenceInformationCode">Filter by Client Reference Information Code / Merchant Reference Number (optional)</param>
         /// <returns>GetAllSubscriptionsResponse</returns>
-        public GetAllSubscriptionsResponse GetAllSubscriptions (int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null)
+        public GetAllSubscriptionsResponse GetAllSubscriptions(int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null, string clientReferenceInformationCode = null)
         {
             logger.Debug("CALLING API \"GetAllSubscriptions\" STARTED");
             this.SetStatusCode(null);
-            ApiResponse<GetAllSubscriptionsResponse> localVarResponse = GetAllSubscriptionsWithHttpInfo(offset, limit, code, status, customerId);
+            ApiResponse<GetAllSubscriptionsResponse> localVarResponse = GetAllSubscriptionsWithHttpInfo(offset, limit, code, status, customerId, clientReferenceInformationCode);
             logger.Debug("CALLING API \"GetAllSubscriptions\" ENDED");
             this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
@@ -1280,8 +1274,9 @@ namespace CyberSource.Api
         /// <param name="code">Filter by Subscription Code (optional)</param>
         /// <param name="status">Filter by Subscription Status (optional)</param>
         /// <param name="customerId">Filter by Customer Id (optional)</param>
+        /// <param name="clientReferenceInformationCode">Filter by Client Reference Information Code / Merchant Reference Number (optional)</param>
         /// <returns>ApiResponse of GetAllSubscriptionsResponse</returns>
-        public ApiResponse< GetAllSubscriptionsResponse > GetAllSubscriptionsWithHttpInfo (int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null)
+        public ApiResponse< GetAllSubscriptionsResponse > GetAllSubscriptionsWithHttpInfo(int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null, string clientReferenceInformationCode = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1289,7 +1284,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1298,7 +1293,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1307,7 +1302,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1315,29 +1310,40 @@ namespace CyberSource.Api
 
             if (offset != null)
             {
-                localVarQueryParams.Add("offset", Configuration.ApiClient.ParameterToString(offset)); // query parameter
+                localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (limit != null)
             {
-                localVarQueryParams.Add("limit", Configuration.ApiClient.ParameterToString(limit)); // query parameter
+                localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (code != null)
             {
-                localVarQueryParams.Add("code", Configuration.ApiClient.ParameterToString(code)); // query parameter
+                localVarQueryParams.Add("code", ApiClient.ParameterToString(code)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (status != null)
             {
-                localVarQueryParams.Add("status", Configuration.ApiClient.ParameterToString(status)); // query parameter
+                localVarQueryParams.Add("status", ApiClient.ParameterToString(status)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (customerId != null)
             {
-                localVarQueryParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // query parameter
+                localVarQueryParams.Add("customerId", ApiClient.ParameterToString(customerId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
+            if (clientReferenceInformationCode != null)
+            {
+                localVarQueryParams.Add("clientReferenceInformationCode", ApiClient.ParameterToString(clientReferenceInformationCode)); // query parameter
+            }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1346,20 +1352,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetAllSubscriptions,GetAllSubscriptionsAsync,GetAllSubscriptionsWithHttpInfo,GetAllSubscriptionsAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetAllSubscriptions,GetAllSubscriptionsAsync,GetAllSubscriptionsWithHttpInfo,GetAllSubscriptionsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1368,12 +1375,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetAllSubscriptions,GetAllSubscriptionsAsync,GetAllSubscriptionsWithHttpInfo,GetAllSubscriptionsAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetAllSubscriptions,GetAllSubscriptionsAsync,GetAllSubscriptionsWithHttpInfo,GetAllSubscriptionsAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1391,7 +1397,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetAllSubscriptionsResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetAllSubscriptionsResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetAllSubscriptionsResponse),merchantConfig)); // Return statement
+                (GetAllSubscriptionsResponse) ApiClient.Deserialize(localVarResponse, typeof(GetAllSubscriptionsResponse))); // Return statement
         }
 
         /// <summary>
@@ -1403,12 +1409,13 @@ namespace CyberSource.Api
         /// <param name="code">Filter by Subscription Code (optional)</param>
         /// <param name="status">Filter by Subscription Status (optional)</param>
         /// <param name="customerId">Filter by Customer Id (optional)</param>
+        /// <param name="clientReferenceInformationCode">Filter by Client Reference Information Code / Merchant Reference Number (optional)</param>
         /// <returns>Task of GetAllSubscriptionsResponse</returns>
-        public async System.Threading.Tasks.Task<GetAllSubscriptionsResponse> GetAllSubscriptionsAsync (int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null)
+        public async Task<GetAllSubscriptionsResponse> GetAllSubscriptionsAsync(int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null, string clientReferenceInformationCode = null)
         {
             logger.Debug("CALLING API \"GetAllSubscriptionsAsync\" STARTED");
             this.SetStatusCode(null);
-            ApiResponse<GetAllSubscriptionsResponse> localVarResponse = await GetAllSubscriptionsAsyncWithHttpInfo(offset, limit, code, status, customerId);
+            ApiResponse<GetAllSubscriptionsResponse> localVarResponse = await GetAllSubscriptionsAsyncWithHttpInfo(offset, limit, code, status, customerId, clientReferenceInformationCode);
             logger.Debug("CALLING API \"GetAllSubscriptionsAsync\" ENDED");
             this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
@@ -1424,8 +1431,9 @@ namespace CyberSource.Api
         /// <param name="code">Filter by Subscription Code (optional)</param>
         /// <param name="status">Filter by Subscription Status (optional)</param>
         /// <param name="customerId">Filter by Customer Id (optional)</param>
+        /// <param name="clientReferenceInformationCode">Filter by Client Reference Information Code / Merchant Reference Number (optional)</param>
         /// <returns>Task of ApiResponse (GetAllSubscriptionsResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<GetAllSubscriptionsResponse>> GetAllSubscriptionsAsyncWithHttpInfo (int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null)
+        public async Task<ApiResponse<GetAllSubscriptionsResponse>> GetAllSubscriptionsAsyncWithHttpInfo(int? offset = null, int? limit = null, string code = null, string status = null, string customerId = null, string clientReferenceInformationCode = null)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1433,7 +1441,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1442,7 +1450,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1451,7 +1459,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1459,29 +1467,40 @@ namespace CyberSource.Api
 
             if (offset != null)
             {
-                localVarQueryParams.Add("offset", Configuration.ApiClient.ParameterToString(offset)); // query parameter
+                localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (limit != null)
             {
-                localVarQueryParams.Add("limit", Configuration.ApiClient.ParameterToString(limit)); // query parameter
+                localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (code != null)
             {
-                localVarQueryParams.Add("code", Configuration.ApiClient.ParameterToString(code)); // query parameter
+                localVarQueryParams.Add("code", ApiClient.ParameterToString(code)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (status != null)
             {
-                localVarQueryParams.Add("status", Configuration.ApiClient.ParameterToString(status)); // query parameter
+                localVarQueryParams.Add("status", ApiClient.ParameterToString(status)); // query parameter
             }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (customerId != null)
             {
-                localVarQueryParams.Add("customerId", Configuration.ApiClient.ParameterToString(customerId)); // query parameter
+                localVarQueryParams.Add("customerId", ApiClient.ParameterToString(customerId)); // query parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
+            if (clientReferenceInformationCode != null)
+            {
+                localVarQueryParams.Add("clientReferenceInformationCode", ApiClient.ParameterToString(clientReferenceInformationCode)); // query parameter
+            }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1490,20 +1509,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetAllSubscriptions,GetAllSubscriptionsAsync,GetAllSubscriptionsWithHttpInfo,GetAllSubscriptionsAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetAllSubscriptions,GetAllSubscriptionsAsync,GetAllSubscriptionsWithHttpInfo,GetAllSubscriptionsAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1512,16 +1531,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetAllSubscriptions,GetAllSubscriptionsAsync,GetAllSubscriptionsWithHttpInfo,GetAllSubscriptionsAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetAllSubscriptions,GetAllSubscriptionsAsync,GetAllSubscriptionsWithHttpInfo,GetAllSubscriptionsAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1535,7 +1553,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetAllSubscriptionsResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetAllSubscriptionsResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetAllSubscriptionsResponse), merchantConfig)); // Return statement
+                (GetAllSubscriptionsResponse) ApiClient.Deserialize(localVarResponse, typeof(GetAllSubscriptionsResponse))); // Return statement
         }
         /// <summary>
         /// Get a Subscription Get a Subscription by Subscription Id
@@ -1543,7 +1561,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>GetSubscriptionResponse</returns>
-        public GetSubscriptionResponse GetSubscription (string id)
+        public GetSubscriptionResponse GetSubscription(string id)
         {
             logger.Debug("CALLING API \"GetSubscription\" STARTED");
             this.SetStatusCode(null);
@@ -1559,7 +1577,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>ApiResponse of GetSubscriptionResponse</returns>
-        public ApiResponse< GetSubscriptionResponse > GetSubscriptionWithHttpInfo (string id)
+        public ApiResponse< GetSubscriptionResponse > GetSubscriptionWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1573,7 +1591,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1582,7 +1600,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1591,7 +1609,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1599,9 +1617,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1610,20 +1629,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetSubscription,GetSubscriptionAsync,GetSubscriptionWithHttpInfo,GetSubscriptionAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetSubscription,GetSubscriptionAsync,GetSubscriptionWithHttpInfo,GetSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1632,12 +1652,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetSubscription,GetSubscriptionAsync,GetSubscriptionWithHttpInfo,GetSubscriptionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetSubscription,GetSubscriptionAsync,GetSubscriptionWithHttpInfo,GetSubscriptionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1655,7 +1674,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionResponse),merchantConfig)); // Return statement
+                (GetSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionResponse))); // Return statement
         }
 
         /// <summary>
@@ -1664,7 +1683,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of GetSubscriptionResponse</returns>
-        public async System.Threading.Tasks.Task<GetSubscriptionResponse> GetSubscriptionAsync (string id)
+        public async Task<GetSubscriptionResponse> GetSubscriptionAsync(string id)
         {
             logger.Debug("CALLING API \"GetSubscriptionAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1681,7 +1700,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of ApiResponse (GetSubscriptionResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<GetSubscriptionResponse>> GetSubscriptionAsyncWithHttpInfo (string id)
+        public async Task<ApiResponse<GetSubscriptionResponse>> GetSubscriptionAsyncWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1695,7 +1714,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1704,7 +1723,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1713,7 +1732,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1721,9 +1740,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Get == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -1732,20 +1752,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetSubscription,GetSubscriptionAsync,GetSubscriptionWithHttpInfo,GetSubscriptionAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetSubscription,GetSubscriptionAsync,GetSubscriptionWithHttpInfo,GetSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1754,16 +1774,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetSubscription,GetSubscriptionAsync,GetSubscriptionWithHttpInfo,GetSubscriptionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetSubscription,GetSubscriptionAsync,GetSubscriptionWithHttpInfo,GetSubscriptionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1777,14 +1796,14 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionResponse), merchantConfig)); // Return statement
+                (GetSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionResponse))); // Return statement
         }
         /// <summary>
         /// Get a Subscription Code Get a Unique Subscription Code
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>GetSubscriptionCodeResponse</returns>
-        public GetSubscriptionCodeResponse GetSubscriptionCode ()
+        public GetSubscriptionCodeResponse GetSubscriptionCode()
         {
             logger.Debug("CALLING API \"GetSubscriptionCode\" STARTED");
             this.SetStatusCode(null);
@@ -1799,7 +1818,7 @@ namespace CyberSource.Api
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of GetSubscriptionCodeResponse</returns>
-        public ApiResponse< GetSubscriptionCodeResponse > GetSubscriptionCodeWithHttpInfo ()
+        public ApiResponse< GetSubscriptionCodeResponse > GetSubscriptionCodeWithHttpInfo()
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1807,7 +1826,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/code";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1816,7 +1835,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1825,7 +1844,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1839,20 +1858,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetSubscriptionCode,GetSubscriptionCodeAsync,GetSubscriptionCodeWithHttpInfo,GetSubscriptionCodeAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetSubscriptionCode,GetSubscriptionCodeAsync,GetSubscriptionCodeWithHttpInfo,GetSubscriptionCodeAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1861,12 +1881,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetSubscriptionCode,GetSubscriptionCodeAsync,GetSubscriptionCodeWithHttpInfo,GetSubscriptionCodeAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetSubscriptionCode,GetSubscriptionCodeAsync,GetSubscriptionCodeWithHttpInfo,GetSubscriptionCodeAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -1884,7 +1903,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetSubscriptionCodeResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetSubscriptionCodeResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionCodeResponse),merchantConfig)); // Return statement
+                (GetSubscriptionCodeResponse) ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionCodeResponse))); // Return statement
         }
 
         /// <summary>
@@ -1892,7 +1911,7 @@ namespace CyberSource.Api
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of GetSubscriptionCodeResponse</returns>
-        public async System.Threading.Tasks.Task<GetSubscriptionCodeResponse> GetSubscriptionCodeAsync ()
+        public async Task<GetSubscriptionCodeResponse> GetSubscriptionCodeAsync()
         {
             logger.Debug("CALLING API \"GetSubscriptionCodeAsync\" STARTED");
             this.SetStatusCode(null);
@@ -1908,7 +1927,7 @@ namespace CyberSource.Api
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (GetSubscriptionCodeResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<GetSubscriptionCodeResponse>> GetSubscriptionCodeAsyncWithHttpInfo ()
+        public async Task<ApiResponse<GetSubscriptionCodeResponse>> GetSubscriptionCodeAsyncWithHttpInfo()
         {
             LogUtility logUtility = new LogUtility();
 
@@ -1916,7 +1935,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/code";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -1925,7 +1944,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -1934,7 +1953,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -1948,20 +1967,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "GetSubscriptionCode,GetSubscriptionCodeAsync,GetSubscriptionCodeWithHttpInfo,GetSubscriptionCodeAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetSubscriptionCode,GetSubscriptionCodeAsync,GetSubscriptionCodeWithHttpInfo,GetSubscriptionCodeAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -1970,16 +1989,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "GetSubscriptionCode,GetSubscriptionCodeAsync,GetSubscriptionCodeWithHttpInfo,GetSubscriptionCodeAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "GetSubscriptionCode,GetSubscriptionCodeAsync,GetSubscriptionCodeWithHttpInfo,GetSubscriptionCodeAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1993,7 +2011,540 @@ namespace CyberSource.Api
 
             return new ApiResponse<GetSubscriptionCodeResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (GetSubscriptionCodeResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionCodeResponse), merchantConfig)); // Return statement
+                (GetSubscriptionCodeResponse) ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionCodeResponse))); // Return statement
+        }
+        /// <summary>
+        /// Get Payments for a Subscription Retrieve a list of payments for a specific subscription by its ID. 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="offset">Page offset number. (optional)</param>
+        /// <param name="limit">Number of items to be returned. Default - &#x60;20&#x60;, Max - &#x60;100&#x60;  (optional)</param>
+        /// <param name="scheduledPaymentsCount">Number of existing scheduled payments to be returned. Default - &#x60;5&#x60;, Max - &#x60;9999&#x60;  (optional)</param>
+        /// <returns>GetSubscriptionsPaymentsResponse</returns>
+        public GetSubscriptionsPaymentsResponse SubscriptionsIdPaymentsGet(string id, int? offset = null, int? limit = null, int? scheduledPaymentsCount = null)
+        {
+            logger.Debug("CALLING API \"SubscriptionsIdPaymentsGet\" STARTED");
+            this.SetStatusCode(null);
+            ApiResponse<GetSubscriptionsPaymentsResponse> localVarResponse = SubscriptionsIdPaymentsGetWithHttpInfo(id, offset, limit, scheduledPaymentsCount);
+            logger.Debug("CALLING API \"SubscriptionsIdPaymentsGet\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get Payments for a Subscription Retrieve a list of payments for a specific subscription by its ID. 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="offset">Page offset number. (optional)</param>
+        /// <param name="limit">Number of items to be returned. Default - &#x60;20&#x60;, Max - &#x60;100&#x60;  (optional)</param>
+        /// <param name="scheduledPaymentsCount">Number of existing scheduled payments to be returned. Default - &#x60;5&#x60;, Max - &#x60;9999&#x60;  (optional)</param>
+        /// <returns>ApiResponse of GetSubscriptionsPaymentsResponse</returns>
+        public ApiResponse< GetSubscriptionsPaymentsResponse > SubscriptionsIdPaymentsGetWithHttpInfo(string id, int? offset = null, int? limit = null, int? scheduledPaymentsCount = null)
+        {
+            LogUtility logUtility = new LogUtility();
+
+            // verify the required parameter 'id' is set
+            if (id == null)
+            {
+                logger.Error("ApiException : Missing required parameter 'id' when calling SubscriptionsApi->SubscriptionsIdPaymentsGet");
+                throw new ApiException(400, "Missing required parameter 'id' when calling SubscriptionsApi->SubscriptionsIdPaymentsGet");
+            }
+
+            var localVarPath = $"/rbs/v1/subscriptions/{id}/payments";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+                "application/json"
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+                "application/json"
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (id != null)
+            {
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
+            if (offset != null)
+            {
+                localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
+            if (limit != null)
+            {
+                localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
+            if (scheduledPaymentsCount != null)
+            {
+                localVarQueryParams.Add("scheduledPaymentsCount", ApiClient.ParameterToString(scheduledPaymentsCount)); // query parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
+            if (Method.Get == Method.Post)
+            {
+                localVarPostBody = "{}";
+            }
+            else
+            {
+                localVarPostBody = null;
+            }
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
+            {
+                localVarPostBody = filePostBodyAndDelimiter[0];
+                localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
+            }
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "SubscriptionsIdPaymentsGet,SubscriptionsIdPaymentsGetAsync,SubscriptionsIdPaymentsGetWithHttpInfo,SubscriptionsIdPaymentsGetAsyncWithHttpInfo"))
+            {
+                try
+                {
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
+                }
+                catch (Exception e)
+                {
+                    logger.Error("Failed to encrypt request body {}", e.Message, e);
+                    throw new Exception($"Failed to encrypt request body: {e.Message}", e);
+                }
+            }
+
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "SubscriptionsIdPaymentsGet,SubscriptionsIdPaymentsGetAsync,SubscriptionsIdPaymentsGetWithHttpInfo,SubscriptionsIdPaymentsGetAsyncWithHttpInfo");
+
+
+            // make the HTTP request
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("SubscriptionsIdPaymentsGet", localVarResponse);
+                if (exception != null)
+                {
+                    logger.Error($"Exception : {exception.Message}");
+                    throw exception;
+                }
+            }
+
+            return new ApiResponse<GetSubscriptionsPaymentsResponse>(localVarStatusCode,
+                localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
+                (GetSubscriptionsPaymentsResponse) ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionsPaymentsResponse))); // Return statement
+        }
+
+        /// <summary>
+        /// Get Payments for a Subscription Retrieve a list of payments for a specific subscription by its ID. 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="offset">Page offset number. (optional)</param>
+        /// <param name="limit">Number of items to be returned. Default - &#x60;20&#x60;, Max - &#x60;100&#x60;  (optional)</param>
+        /// <param name="scheduledPaymentsCount">Number of existing scheduled payments to be returned. Default - &#x60;5&#x60;, Max - &#x60;9999&#x60;  (optional)</param>
+        /// <returns>Task of GetSubscriptionsPaymentsResponse</returns>
+        public async Task<GetSubscriptionsPaymentsResponse> SubscriptionsIdPaymentsGetAsync(string id, int? offset = null, int? limit = null, int? scheduledPaymentsCount = null)
+        {
+            logger.Debug("CALLING API \"SubscriptionsIdPaymentsGetAsync\" STARTED");
+            this.SetStatusCode(null);
+            ApiResponse<GetSubscriptionsPaymentsResponse> localVarResponse = await SubscriptionsIdPaymentsGetAsyncWithHttpInfo(id, offset, limit, scheduledPaymentsCount);
+            logger.Debug("CALLING API \"SubscriptionsIdPaymentsGetAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
+            return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Get Payments for a Subscription Retrieve a list of payments for a specific subscription by its ID. 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="offset">Page offset number. (optional)</param>
+        /// <param name="limit">Number of items to be returned. Default - &#x60;20&#x60;, Max - &#x60;100&#x60;  (optional)</param>
+        /// <param name="scheduledPaymentsCount">Number of existing scheduled payments to be returned. Default - &#x60;5&#x60;, Max - &#x60;9999&#x60;  (optional)</param>
+        /// <returns>Task of ApiResponse (GetSubscriptionsPaymentsResponse)</returns>
+        public async Task<ApiResponse<GetSubscriptionsPaymentsResponse>> SubscriptionsIdPaymentsGetAsyncWithHttpInfo(string id, int? offset = null, int? limit = null, int? scheduledPaymentsCount = null)
+        {
+            LogUtility logUtility = new LogUtility();
+
+            // verify the required parameter 'id' is set
+            if (id == null)
+            {
+                logger.Error("ApiException : Missing required parameter 'id' when calling SubscriptionsApi->SubscriptionsIdPaymentsGet");
+                throw new ApiException(400, "Missing required parameter 'id' when calling SubscriptionsApi->SubscriptionsIdPaymentsGet");
+            }
+
+            var localVarPath = $"/rbs/v1/subscriptions/{id}/payments";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+                "application/json"
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+                "application/json"
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (id != null)
+            {
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
+            if (offset != null)
+            {
+                localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
+            if (limit != null)
+            {
+                localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
+            if (scheduledPaymentsCount != null)
+            {
+                localVarQueryParams.Add("scheduledPaymentsCount", ApiClient.ParameterToString(scheduledPaymentsCount)); // query parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+
+            if (Method.Get == Method.Post)
+            {
+                localVarPostBody = "{}";
+            }
+            else
+            {
+                localVarPostBody = null;
+            }
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
+            {
+                localVarPostBody = filePostBodyAndDelimiter[0];
+                localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
+            }
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "SubscriptionsIdPaymentsGet,SubscriptionsIdPaymentsGetAsync,SubscriptionsIdPaymentsGetWithHttpInfo,SubscriptionsIdPaymentsGetAsyncWithHttpInfo"))
+            {
+                try
+                {
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
+                }
+                catch (Exception e)
+                {
+                    logger.Error("Failed to encrypt request body {}", e.Message, e);
+                    throw new Exception($"Failed to encrypt request body: {e.Message}", e);
+                }
+            }
+
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "SubscriptionsIdPaymentsGet,SubscriptionsIdPaymentsGetAsync,SubscriptionsIdPaymentsGetWithHttpInfo,SubscriptionsIdPaymentsGetAsyncWithHttpInfo");
+
+
+            // make the HTTP request
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
+                Method.Get, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("SubscriptionsIdPaymentsGet", localVarResponse);
+                if (exception != null)
+                {
+                    logger.Error($"Exception : {exception.Message}");
+                    throw exception;
+                }
+            }
+
+            return new ApiResponse<GetSubscriptionsPaymentsResponse>(localVarStatusCode,
+                localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
+                (GetSubscriptionsPaymentsResponse) ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionsPaymentsResponse))); // Return statement
+        }
+        /// <summary>
+        /// Update Payments for a subscription Modifies the state of a subscription&#39;s payments. Currently, the only possible modifications are \&quot;skipping\&quot; and \&quot;restoring\&quot; payments.  Marking a payment as \&quot;skipped\&quot; means it will not be processed when its scheduled time arrives. \&quot;Restoring\&quot; a payment removes it from the list of payments to be skipped. 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="updatePayments">Modify payments of a subscription</param>
+        /// <returns>GetSubscriptionsPaymentsResponse1</returns>
+        public GetSubscriptionsPaymentsResponse1 SubscriptionsIdPaymentsPut(string id, UpdatePayments updatePayments)
+        {
+            logger.Debug("CALLING API \"SubscriptionsIdPaymentsPut\" STARTED");
+            this.SetStatusCode(null);
+            ApiResponse<GetSubscriptionsPaymentsResponse1> localVarResponse = SubscriptionsIdPaymentsPutWithHttpInfo(id, updatePayments);
+            logger.Debug("CALLING API \"SubscriptionsIdPaymentsPut\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update Payments for a subscription Modifies the state of a subscription&#39;s payments. Currently, the only possible modifications are \&quot;skipping\&quot; and \&quot;restoring\&quot; payments.  Marking a payment as \&quot;skipped\&quot; means it will not be processed when its scheduled time arrives. \&quot;Restoring\&quot; a payment removes it from the list of payments to be skipped. 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="updatePayments">Modify payments of a subscription</param>
+        /// <returns>ApiResponse of GetSubscriptionsPaymentsResponse1</returns>
+        public ApiResponse< GetSubscriptionsPaymentsResponse1 > SubscriptionsIdPaymentsPutWithHttpInfo(string id, UpdatePayments updatePayments)
+        {
+            LogUtility logUtility = new LogUtility();
+
+            // verify the required parameter 'id' is set
+            if (id == null)
+            {
+                logger.Error("ApiException : Missing required parameter 'id' when calling SubscriptionsApi->SubscriptionsIdPaymentsPut");
+                throw new ApiException(400, "Missing required parameter 'id' when calling SubscriptionsApi->SubscriptionsIdPaymentsPut");
+            }
+            // verify the required parameter 'updatePayments' is set
+            if (updatePayments == null)
+            {
+                logger.Error("ApiException : Missing required parameter 'updatePayments' when calling SubscriptionsApi->SubscriptionsIdPaymentsPut");
+                throw new ApiException(400, "Missing required parameter 'updatePayments' when calling SubscriptionsApi->SubscriptionsIdPaymentsPut");
+            }
+
+            var localVarPath = $"/rbs/v1/subscriptions/{id}/payments";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+                "application/json"
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+                "application/json"
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (id != null)
+            {
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
+            if (updatePayments != null && updatePayments.GetType() != typeof(byte[]))
+            {
+                SdkTracker sdkTracker = new SdkTracker();
+                updatePayments = (UpdatePayments)sdkTracker.InsertDeveloperIdTracker(updatePayments, updatePayments.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(updatePayments); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = updatePayments; // byte array
+            }
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "SubscriptionsIdPaymentsPut,SubscriptionsIdPaymentsPutAsync,SubscriptionsIdPaymentsPutWithHttpInfo,SubscriptionsIdPaymentsPutAsyncWithHttpInfo"))
+            {
+                try
+                {
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
+                }
+                catch (Exception e)
+                {
+                    logger.Error("Failed to encrypt request body {}", e.Message, e);
+                    throw new Exception($"Failed to encrypt request body: {e.Message}", e);
+                }
+            }
+
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "SubscriptionsIdPaymentsPut,SubscriptionsIdPaymentsPutAsync,SubscriptionsIdPaymentsPutWithHttpInfo,SubscriptionsIdPaymentsPutAsyncWithHttpInfo");
+
+            logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
+
+
+            // make the HTTP request
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("SubscriptionsIdPaymentsPut", localVarResponse);
+                if (exception != null)
+                {
+                    logger.Error($"Exception : {exception.Message}");
+                    throw exception;
+                }
+            }
+
+            return new ApiResponse<GetSubscriptionsPaymentsResponse1>(localVarStatusCode,
+                localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
+                (GetSubscriptionsPaymentsResponse1) ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionsPaymentsResponse1))); // Return statement
+        }
+
+        /// <summary>
+        /// Update Payments for a subscription Modifies the state of a subscription&#39;s payments. Currently, the only possible modifications are \&quot;skipping\&quot; and \&quot;restoring\&quot; payments.  Marking a payment as \&quot;skipped\&quot; means it will not be processed when its scheduled time arrives. \&quot;Restoring\&quot; a payment removes it from the list of payments to be skipped. 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="updatePayments">Modify payments of a subscription</param>
+        /// <returns>Task of GetSubscriptionsPaymentsResponse1</returns>
+        public async Task<GetSubscriptionsPaymentsResponse1> SubscriptionsIdPaymentsPutAsync(string id, UpdatePayments updatePayments)
+        {
+            logger.Debug("CALLING API \"SubscriptionsIdPaymentsPutAsync\" STARTED");
+            this.SetStatusCode(null);
+            ApiResponse<GetSubscriptionsPaymentsResponse1> localVarResponse = await SubscriptionsIdPaymentsPutAsyncWithHttpInfo(id, updatePayments);
+            logger.Debug("CALLING API \"SubscriptionsIdPaymentsPutAsync\" ENDED");
+            this.SetStatusCode(localVarResponse.StatusCode);
+            return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Update Payments for a subscription Modifies the state of a subscription&#39;s payments. Currently, the only possible modifications are \&quot;skipping\&quot; and \&quot;restoring\&quot; payments.  Marking a payment as \&quot;skipped\&quot; means it will not be processed when its scheduled time arrives. \&quot;Restoring\&quot; a payment removes it from the list of payments to be skipped. 
+        /// </summary>
+        /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="id">Subscription Id</param>
+        /// <param name="updatePayments">Modify payments of a subscription</param>
+        /// <returns>Task of ApiResponse (GetSubscriptionsPaymentsResponse1)</returns>
+        public async Task<ApiResponse<GetSubscriptionsPaymentsResponse1>> SubscriptionsIdPaymentsPutAsyncWithHttpInfo(string id, UpdatePayments updatePayments)
+        {
+            LogUtility logUtility = new LogUtility();
+
+            // verify the required parameter 'id' is set
+            if (id == null)
+            {
+                logger.Error("ApiException : Missing required parameter 'id' when calling SubscriptionsApi->SubscriptionsIdPaymentsPut");
+                throw new ApiException(400, "Missing required parameter 'id' when calling SubscriptionsApi->SubscriptionsIdPaymentsPut");
+            }
+            // verify the required parameter 'updatePayments' is set
+            if (updatePayments == null)
+            {
+                logger.Error("ApiException : Missing required parameter 'updatePayments' when calling SubscriptionsApi->SubscriptionsIdPaymentsPut");
+                throw new ApiException(400, "Missing required parameter 'updatePayments' when calling SubscriptionsApi->SubscriptionsIdPaymentsPut");
+            }
+
+            var localVarPath = $"/rbs/v1/subscriptions/{id}/payments";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+                "application/json"
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+                "application/json"
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+            {
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+            }
+
+            if (id != null)
+            {
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
+            }
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
+            if (updatePayments != null && updatePayments.GetType() != typeof(byte[]))
+            {
+                SdkTracker sdkTracker = new SdkTracker();
+                updatePayments = (UpdatePayments)sdkTracker.InsertDeveloperIdTracker(updatePayments, updatePayments.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(updatePayments); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = updatePayments; // byte array
+            }
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "SubscriptionsIdPaymentsPut,SubscriptionsIdPaymentsPutAsync,SubscriptionsIdPaymentsPutWithHttpInfo,SubscriptionsIdPaymentsPutAsyncWithHttpInfo"))
+            {
+                try
+                {
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
+                }
+                catch (Exception e)
+                {
+                    logger.Error("Failed to encrypt request body {}", e.Message, e);
+                    throw new Exception($"Failed to encrypt request body: {e.Message}", e);
+                }
+            }
+
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "SubscriptionsIdPaymentsPut,SubscriptionsIdPaymentsPutAsync,SubscriptionsIdPaymentsPutWithHttpInfo,SubscriptionsIdPaymentsPutAsyncWithHttpInfo");
+
+            logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
+
+
+            // make the HTTP request
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
+                Method.Put, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("SubscriptionsIdPaymentsPut", localVarResponse);
+                if (exception != null)
+                {
+                    logger.Error($"Exception : {exception.Message}");
+                    throw exception;
+                }
+            }
+
+            return new ApiResponse<GetSubscriptionsPaymentsResponse1>(localVarStatusCode,
+                localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
+                (GetSubscriptionsPaymentsResponse1) ApiClient.Deserialize(localVarResponse, typeof(GetSubscriptionsPaymentsResponse1))); // Return statement
         }
         /// <summary>
         /// Suspend a Subscription Suspend a Subscription 
@@ -2001,7 +2552,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>SuspendSubscriptionResponse</returns>
-        public SuspendSubscriptionResponse SuspendSubscription (string id)
+        public SuspendSubscriptionResponse SuspendSubscription(string id)
         {
             logger.Debug("CALLING API \"SuspendSubscription\" STARTED");
             this.SetStatusCode(null);
@@ -2017,7 +2568,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>ApiResponse of SuspendSubscriptionResponse</returns>
-        public ApiResponse< SuspendSubscriptionResponse > SuspendSubscriptionWithHttpInfo (string id)
+        public ApiResponse< SuspendSubscriptionResponse > SuspendSubscriptionWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -2031,7 +2582,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/{id}/suspend";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -2040,7 +2591,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -2049,7 +2600,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -2057,9 +2608,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -2068,20 +2620,21 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "SuspendSubscription,SuspendSubscriptionAsync,SuspendSubscriptionWithHttpInfo,SuspendSubscriptionAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "SuspendSubscription,SuspendSubscriptionAsync,SuspendSubscriptionWithHttpInfo,SuspendSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -2090,12 +2643,11 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "SuspendSubscription,SuspendSubscriptionAsync,SuspendSubscriptionWithHttpInfo,SuspendSubscriptionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "SuspendSubscription,SuspendSubscriptionAsync,SuspendSubscriptionWithHttpInfo,SuspendSubscriptionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -2113,7 +2665,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<SuspendSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (SuspendSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(SuspendSubscriptionResponse),merchantConfig)); // Return statement
+                (SuspendSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(SuspendSubscriptionResponse))); // Return statement
         }
 
         /// <summary>
@@ -2122,7 +2674,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of SuspendSubscriptionResponse</returns>
-        public async System.Threading.Tasks.Task<SuspendSubscriptionResponse> SuspendSubscriptionAsync (string id)
+        public async Task<SuspendSubscriptionResponse> SuspendSubscriptionAsync(string id)
         {
             logger.Debug("CALLING API \"SuspendSubscriptionAsync\" STARTED");
             this.SetStatusCode(null);
@@ -2139,7 +2691,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">Subscription Id</param>
         /// <returns>Task of ApiResponse (SuspendSubscriptionResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<SuspendSubscriptionResponse>> SuspendSubscriptionAsyncWithHttpInfo (string id)
+        public async Task<ApiResponse<SuspendSubscriptionResponse>> SuspendSubscriptionAsyncWithHttpInfo(string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -2153,7 +2705,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/{id}/suspend";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -2162,7 +2714,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -2171,7 +2723,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -2179,9 +2731,10 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (Method.Post == Method.Post)
             {
                 localVarPostBody = "{}";
@@ -2190,20 +2743,20 @@ namespace CyberSource.Api
             {
                 localVarPostBody = null;
             }
-            String[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
-            if(null!= filePostBodyAndDelimiter)
+
+            string[] filePostBodyAndDelimiter = MultipartHelpers.BuildPostBodyForFiles(localVarFileParams);
+            if (null != filePostBodyAndDelimiter)
             {
                 localVarPostBody = filePostBodyAndDelimiter[0];
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "SuspendSubscription,SuspendSubscriptionAsync,SuspendSubscriptionWithHttpInfo,SuspendSubscriptionAsyncWithHttpInfo"))
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "SuspendSubscription,SuspendSubscriptionAsync,SuspendSubscriptionWithHttpInfo,SuspendSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -2212,16 +2765,15 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "SuspendSubscription,SuspendSubscriptionAsync,SuspendSubscriptionWithHttpInfo,SuspendSubscriptionAsyncWithHttpInfo");
-
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "SuspendSubscription,SuspendSubscriptionAsync,SuspendSubscriptionWithHttpInfo,SuspendSubscriptionAsyncWithHttpInfo");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -2235,7 +2787,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<SuspendSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (SuspendSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(SuspendSubscriptionResponse), merchantConfig)); // Return statement
+                (SuspendSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(SuspendSubscriptionResponse))); // Return statement
         }
         /// <summary>
         /// Update a Subscription Update a Subscription by Subscription Id
@@ -2244,7 +2796,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="updateSubscription">Update Subscription</param>
         /// <returns>UpdateSubscriptionResponse</returns>
-        public UpdateSubscriptionResponse UpdateSubscription (string id, UpdateSubscription updateSubscription)
+        public UpdateSubscriptionResponse UpdateSubscription(string id, UpdateSubscription updateSubscription)
         {
             logger.Debug("CALLING API \"UpdateSubscription\" STARTED");
             this.SetStatusCode(null);
@@ -2261,7 +2813,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="updateSubscription">Update Subscription</param>
         /// <returns>ApiResponse of UpdateSubscriptionResponse</returns>
-        public ApiResponse< UpdateSubscriptionResponse > UpdateSubscriptionWithHttpInfo (string id, UpdateSubscription updateSubscription)
+        public ApiResponse< UpdateSubscriptionResponse > UpdateSubscriptionWithHttpInfo(string id, UpdateSubscription updateSubscription)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -2281,7 +2833,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -2290,7 +2842,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -2299,7 +2851,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -2307,27 +2859,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (updateSubscription != null && updateSubscription.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                updateSubscription = (UpdateSubscription)sdkTracker.InsertDeveloperIdTracker(updateSubscription, updateSubscription.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(updateSubscription); // http body (model) parameter
+                updateSubscription = (UpdateSubscription)sdkTracker.InsertDeveloperIdTracker(updateSubscription, updateSubscription.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(updateSubscription); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = updateSubscription; // byte array
             }
-            
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "UpdateSubscription,UpdateSubscriptionAsync,UpdateSubscriptionWithHttpInfo,UpdateSubscriptionAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateSubscription,UpdateSubscriptionAsync,UpdateSubscriptionWithHttpInfo,UpdateSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -2336,13 +2889,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "UpdateSubscription,UpdateSubscriptionAsync,UpdateSubscriptionWithHttpInfo,UpdateSubscriptionAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdateSubscription,UpdateSubscriptionAsync,UpdateSubscriptionWithHttpInfo,UpdateSubscriptionAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -2360,7 +2913,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<UpdateSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (UpdateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(UpdateSubscriptionResponse),merchantConfig)); // Return statement
+                (UpdateSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(UpdateSubscriptionResponse))); // Return statement
         }
 
         /// <summary>
@@ -2370,7 +2923,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="updateSubscription">Update Subscription</param>
         /// <returns>Task of UpdateSubscriptionResponse</returns>
-        public async System.Threading.Tasks.Task<UpdateSubscriptionResponse> UpdateSubscriptionAsync (string id, UpdateSubscription updateSubscription)
+        public async Task<UpdateSubscriptionResponse> UpdateSubscriptionAsync(string id, UpdateSubscription updateSubscription)
         {
             logger.Debug("CALLING API \"UpdateSubscriptionAsync\" STARTED");
             this.SetStatusCode(null);
@@ -2388,7 +2941,7 @@ namespace CyberSource.Api
         /// <param name="id">Subscription Id</param>
         /// <param name="updateSubscription">Update Subscription</param>
         /// <returns>Task of ApiResponse (UpdateSubscriptionResponse)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<UpdateSubscriptionResponse>> UpdateSubscriptionAsyncWithHttpInfo (string id, UpdateSubscription updateSubscription)
+        public async Task<ApiResponse<UpdateSubscriptionResponse>> UpdateSubscriptionAsyncWithHttpInfo(string id, UpdateSubscription updateSubscription)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -2408,7 +2961,7 @@ namespace CyberSource.Api
             var localVarPath = $"/rbs/v1/subscriptions/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -2417,7 +2970,7 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
@@ -2426,7 +2979,7 @@ namespace CyberSource.Api
                 "application/json;charset=utf-8",
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -2434,27 +2987,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (updateSubscription != null && updateSubscription.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                updateSubscription = (UpdateSubscription)sdkTracker.InsertDeveloperIdTracker(updateSubscription, updateSubscription.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(updateSubscription); // http body (model) parameter
+                updateSubscription = (UpdateSubscription)sdkTracker.InsertDeveloperIdTracker(updateSubscription, updateSubscription.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(updateSubscription); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = updateSubscription; // byte array
             }
 
-			string inboundMLEStatus = "false";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "UpdateSubscription,UpdateSubscriptionAsync,UpdateSubscriptionWithHttpInfo,UpdateSubscriptionAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "false";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateSubscription,UpdateSubscriptionAsync,UpdateSubscriptionWithHttpInfo,UpdateSubscriptionAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -2463,17 +3017,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "UpdateSubscription,UpdateSubscriptionAsync,UpdateSubscriptionWithHttpInfo,UpdateSubscriptionAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdateSubscription,UpdateSubscriptionAsync,UpdateSubscriptionWithHttpInfo,UpdateSubscriptionAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -2487,7 +3041,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<UpdateSubscriptionResponse>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (UpdateSubscriptionResponse) Configuration.ApiClient.Deserialize(localVarResponse, typeof(UpdateSubscriptionResponse), merchantConfig)); // Return statement
+                (UpdateSubscriptionResponse) ApiClient.Deserialize(localVarResponse, typeof(UpdateSubscriptionResponse))); // Return statement
         }
     }
 }

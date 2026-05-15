@@ -7,14 +7,7 @@ namespace AuthenticationSdk.authentication.oauth
 {
     public class OAuthTokenGenerator : ITokenGenerator
     {
-        private readonly MerchantConfig _merchantConfig;
         private readonly OAuthToken _oauthtoken;
-
-        public OAuthTokenGenerator(MerchantConfig merchantConfig)
-        {
-            _merchantConfig = merchantConfig;
-            _oauthtoken = new OAuthToken(_merchantConfig);
-        }
 
         public Token GetToken()
         {
@@ -47,5 +40,17 @@ namespace AuthenticationSdk.authentication.oauth
                 throw new TokenGenerationException("OAuth", $"Failed to generate OAuth token: {e.Message}", e);
             }
         }
+
+        #region NEW PROPERTIES
+        private readonly IMerchantCredentialSettings _merchantCredentialSettings;
+        #endregion
+
+        #region NEW CONSTRUCTOR
+        public OAuthTokenGenerator(IMerchantCredentialSettings merchantCredentialSettings)
+        {
+            _merchantCredentialSettings = merchantCredentialSettings;
+            _oauthtoken = new OAuthToken(_merchantCredentialSettings);
+        }
+        #endregion
     }
 }

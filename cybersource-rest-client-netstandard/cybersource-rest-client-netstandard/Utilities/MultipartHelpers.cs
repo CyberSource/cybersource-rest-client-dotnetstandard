@@ -22,8 +22,15 @@ namespace CyberSource.Utilities
                 string fileContent = null;
                 using (var reader = new StreamReader(fileParam.Value.GetFile()))
                 {
-                    fileContent = reader.ReadToEnd();
-                    // fileContent now contains the content of the file as a string  
+                    try
+                    {
+                        fileContent = reader.ReadToEnd();
+                        // fileContent now contains the content of the file as a string
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
                 }
                 localVarForFileNameAndContent.Add(fileName, fileContent);
             }

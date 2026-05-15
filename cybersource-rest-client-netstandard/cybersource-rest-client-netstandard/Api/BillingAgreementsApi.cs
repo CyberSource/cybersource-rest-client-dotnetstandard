@@ -12,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Model;
-using NLog;
 using AuthenticationSdk.util;
 using CyberSource.Utilities.Tracking;
-using AuthenticationSdk.core;
 using CyberSource.Utilities;
 
 namespace CyberSource.Api
@@ -39,7 +38,7 @@ namespace CyberSource.Api
         /// <param name="modifyBillingAgreement"></param>
         /// <param name="id">ID for de-registration or cancellation of Billing Agreement</param>
         /// <returns>PtsV2ModifyBillingAgreementPost201Response</returns>
-        PtsV2ModifyBillingAgreementPost201Response BillingAgreementsDeRegistration (ModifyBillingAgreement modifyBillingAgreement, string id);
+        PtsV2ModifyBillingAgreementPost201Response BillingAgreementsDeRegistration(ModifyBillingAgreement modifyBillingAgreement, string id);
 
         /// <summary>
         /// Modify a Billing Agreement
@@ -51,7 +50,7 @@ namespace CyberSource.Api
         /// <param name="modifyBillingAgreement"></param>
         /// <param name="id">ID for de-registration or cancellation of Billing Agreement</param>
         /// <returns>ApiResponse of PtsV2ModifyBillingAgreementPost201Response</returns>
-        ApiResponse<PtsV2ModifyBillingAgreementPost201Response> BillingAgreementsDeRegistrationWithHttpInfo (ModifyBillingAgreement modifyBillingAgreement, string id);
+        ApiResponse<PtsV2ModifyBillingAgreementPost201Response> BillingAgreementsDeRegistrationWithHttpInfo(ModifyBillingAgreement modifyBillingAgreement, string id);
         /// <summary>
         /// Standing Instruction intimation
         /// </summary>
@@ -62,7 +61,7 @@ namespace CyberSource.Api
         /// <param name="intimateBillingAgreement"></param>
         /// <param name="id">ID for intimation of Billing Agreement</param>
         /// <returns>PtsV2CreditsPost201Response1</returns>
-        PtsV2CreditsPost201Response1 BillingAgreementsIntimation (IntimateBillingAgreement intimateBillingAgreement, string id);
+        PtsV2CreditsPost201Response1 BillingAgreementsIntimation(IntimateBillingAgreement intimateBillingAgreement, string id);
 
         /// <summary>
         /// Standing Instruction intimation
@@ -74,7 +73,7 @@ namespace CyberSource.Api
         /// <param name="intimateBillingAgreement"></param>
         /// <param name="id">ID for intimation of Billing Agreement</param>
         /// <returns>ApiResponse of PtsV2CreditsPost201Response1</returns>
-        ApiResponse<PtsV2CreditsPost201Response1> BillingAgreementsIntimationWithHttpInfo (IntimateBillingAgreement intimateBillingAgreement, string id);
+        ApiResponse<PtsV2CreditsPost201Response1> BillingAgreementsIntimationWithHttpInfo(IntimateBillingAgreement intimateBillingAgreement, string id);
         /// <summary>
         /// Create a Billing Agreement
         /// </summary>
@@ -84,7 +83,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createBillingAgreement"></param>
         /// <returns>PtsV2CreateBillingAgreementPost201Response</returns>
-        PtsV2CreateBillingAgreementPost201Response BillingAgreementsRegistration (CreateBillingAgreement createBillingAgreement);
+        PtsV2CreateBillingAgreementPost201Response BillingAgreementsRegistration(CreateBillingAgreement createBillingAgreement);
 
         /// <summary>
         /// Create a Billing Agreement
@@ -95,7 +94,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createBillingAgreement"></param>
         /// <returns>ApiResponse of PtsV2CreateBillingAgreementPost201Response</returns>
-        ApiResponse<PtsV2CreateBillingAgreementPost201Response> BillingAgreementsRegistrationWithHttpInfo (CreateBillingAgreement createBillingAgreement);
+        ApiResponse<PtsV2CreateBillingAgreementPost201Response> BillingAgreementsRegistrationWithHttpInfo(CreateBillingAgreement createBillingAgreement);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -108,7 +107,7 @@ namespace CyberSource.Api
         /// <param name="modifyBillingAgreement"></param>
         /// <param name="id">ID for de-registration or cancellation of Billing Agreement</param>
         /// <returns>Task of PtsV2ModifyBillingAgreementPost201Response</returns>
-        System.Threading.Tasks.Task<PtsV2ModifyBillingAgreementPost201Response> BillingAgreementsDeRegistrationAsync (ModifyBillingAgreement modifyBillingAgreement, string id);
+        System.Threading.Tasks.Task<PtsV2ModifyBillingAgreementPost201Response> BillingAgreementsDeRegistrationAsync(ModifyBillingAgreement modifyBillingAgreement, string id);
 
         /// <summary>
         /// Modify a Billing Agreement
@@ -120,7 +119,7 @@ namespace CyberSource.Api
         /// <param name="modifyBillingAgreement"></param>
         /// <param name="id">ID for de-registration or cancellation of Billing Agreement</param>
         /// <returns>Task of ApiResponse (PtsV2ModifyBillingAgreementPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2ModifyBillingAgreementPost201Response>> BillingAgreementsDeRegistrationAsyncWithHttpInfo (ModifyBillingAgreement modifyBillingAgreement, string id);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2ModifyBillingAgreementPost201Response>> BillingAgreementsDeRegistrationAsyncWithHttpInfo(ModifyBillingAgreement modifyBillingAgreement, string id);
         /// <summary>
         /// Standing Instruction intimation
         /// </summary>
@@ -131,7 +130,7 @@ namespace CyberSource.Api
         /// <param name="intimateBillingAgreement"></param>
         /// <param name="id">ID for intimation of Billing Agreement</param>
         /// <returns>Task of PtsV2CreditsPost201Response1</returns>
-        System.Threading.Tasks.Task<PtsV2CreditsPost201Response1> BillingAgreementsIntimationAsync (IntimateBillingAgreement intimateBillingAgreement, string id);
+        System.Threading.Tasks.Task<PtsV2CreditsPost201Response1> BillingAgreementsIntimationAsync(IntimateBillingAgreement intimateBillingAgreement, string id);
 
         /// <summary>
         /// Standing Instruction intimation
@@ -143,7 +142,7 @@ namespace CyberSource.Api
         /// <param name="intimateBillingAgreement"></param>
         /// <param name="id">ID for intimation of Billing Agreement</param>
         /// <returns>Task of ApiResponse (PtsV2CreditsPost201Response1)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2CreditsPost201Response1>> BillingAgreementsIntimationAsyncWithHttpInfo (IntimateBillingAgreement intimateBillingAgreement, string id);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2CreditsPost201Response1>> BillingAgreementsIntimationAsyncWithHttpInfo(IntimateBillingAgreement intimateBillingAgreement, string id);
         /// <summary>
         /// Create a Billing Agreement
         /// </summary>
@@ -153,7 +152,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createBillingAgreement"></param>
         /// <returns>Task of PtsV2CreateBillingAgreementPost201Response</returns>
-        System.Threading.Tasks.Task<PtsV2CreateBillingAgreementPost201Response> BillingAgreementsRegistrationAsync (CreateBillingAgreement createBillingAgreement);
+        System.Threading.Tasks.Task<PtsV2CreateBillingAgreementPost201Response> BillingAgreementsRegistrationAsync(CreateBillingAgreement createBillingAgreement);
 
         /// <summary>
         /// Create a Billing Agreement
@@ -164,145 +163,31 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createBillingAgreement"></param>
         /// <returns>Task of ApiResponse (PtsV2CreateBillingAgreementPost201Response)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2CreateBillingAgreementPost201Response>> BillingAgreementsRegistrationAsyncWithHttpInfo (CreateBillingAgreement createBillingAgreement);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2CreateBillingAgreementPost201Response>> BillingAgreementsRegistrationAsyncWithHttpInfo(CreateBillingAgreement createBillingAgreement);
         #endregion Asynchronous Operations
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public partial class BillingAgreementsApi : IBillingAgreementsApi
+    public partial class BillingAgreementsApi : ApiBase, IBillingAgreementsApi
     {
-        private static Logger logger;
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
-        private int? _statusCode;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BillingAgreementsApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public BillingAgreementsApi(string basePath)
+        public BillingAgreementsApi(string basePath) : base(basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BillingAgreementsApi"/> class
-        /// using Configuration object
+        /// using IConfiguration object
         /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
+        /// <param name="configuration">An instance of IConfiguration</param>
         /// <returns></returns>
-        public BillingAgreementsApi(Configuration configuration = null)
+        public BillingAgreementsApi(IConfiguration configuration = null) : base(configuration)
         {
-            if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
-            else
-                Configuration = configuration;
-
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
-
-            Configuration.ApiClient.Configuration = Configuration;
-
-            if (logger == null)
-            {
-                logger = LogManager.GetCurrentClassLogger();
-            }
-        }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return Configuration.ApiClient.RestClient.Options.BaseUrl.ToString();
-        }
-
-        /// <summary>
-        /// Sets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        [Obsolete("SetBasePath is deprecated, please do 'Configuration.ApiClient = new ApiClient(\"http://new-path\")' instead.")]
-        public void SetBasePath(string basePath)
-        {
-            // do nothing
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    logger.Error("InvalidOperationException : Multicast delegate for ExceptionFactory is unsupported.");
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Gets the default header.
-        /// </summary>
-        /// <returns>Dictionary of HTTP header</returns>
-        [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
-        public Dictionary<string, string> DefaultHeader()
-        {
-            return Configuration.DefaultHeader;
-        }
-
-        /// <summary>
-        /// Add default header.
-        /// </summary>
-        /// <param name="key">Header field name.</param>
-        /// <param name="value">Header field value.</param>
-        /// <returns></returns>
-        [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
-        public void AddDefaultHeader(string key, string value)
-        {
-            Configuration.AddDefaultHeader(key, value);
-        }
-
-        /// <summary>
-        /// Retrieves the status code being set for the most recently executed API request.
-        /// </summary>
-        /// <returns>Status Code of previous request</returns>
-        public int GetStatusCode()
-        {
-            return this._statusCode == null ? 0 : (int) this._statusCode;
-        }
-
-        /// <summary>
-        /// Sets the value of status code for the most recently executed API request, in order to be retrieved later.
-        /// </summary>
-        /// <param name="statusCode">Status Code to be set</param>
-        /// <returns></returns>
-        public void SetStatusCode(int? statusCode)
-        {
-            this._statusCode = statusCode;
         }
 
         /// <summary>
@@ -312,7 +197,7 @@ namespace CyberSource.Api
         /// <param name="modifyBillingAgreement"></param>
         /// <param name="id">ID for de-registration or cancellation of Billing Agreement</param>
         /// <returns>PtsV2ModifyBillingAgreementPost201Response</returns>
-        public PtsV2ModifyBillingAgreementPost201Response BillingAgreementsDeRegistration (ModifyBillingAgreement modifyBillingAgreement, string id)
+        public PtsV2ModifyBillingAgreementPost201Response BillingAgreementsDeRegistration(ModifyBillingAgreement modifyBillingAgreement, string id)
         {
             logger.Debug("CALLING API \"BillingAgreementsDeRegistration\" STARTED");
             this.SetStatusCode(null);
@@ -329,7 +214,7 @@ namespace CyberSource.Api
         /// <param name="modifyBillingAgreement"></param>
         /// <param name="id">ID for de-registration or cancellation of Billing Agreement</param>
         /// <returns>ApiResponse of PtsV2ModifyBillingAgreementPost201Response</returns>
-        public ApiResponse< PtsV2ModifyBillingAgreementPost201Response > BillingAgreementsDeRegistrationWithHttpInfo (ModifyBillingAgreement modifyBillingAgreement, string id)
+        public ApiResponse< PtsV2ModifyBillingAgreementPost201Response > BillingAgreementsDeRegistrationWithHttpInfo(ModifyBillingAgreement modifyBillingAgreement, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -349,7 +234,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/billing-agreements/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -358,13 +243,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -372,27 +257,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (modifyBillingAgreement != null && modifyBillingAgreement.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                modifyBillingAgreement = (ModifyBillingAgreement)sdkTracker.InsertDeveloperIdTracker(modifyBillingAgreement, modifyBillingAgreement.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(modifyBillingAgreement); // http body (model) parameter
+                modifyBillingAgreement = (ModifyBillingAgreement)sdkTracker.InsertDeveloperIdTracker(modifyBillingAgreement, modifyBillingAgreement.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(modifyBillingAgreement); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = modifyBillingAgreement; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -401,13 +287,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -425,7 +311,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2ModifyBillingAgreementPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2ModifyBillingAgreementPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2ModifyBillingAgreementPost201Response),merchantConfig)); // Return statement
+                (PtsV2ModifyBillingAgreementPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2ModifyBillingAgreementPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -435,7 +321,7 @@ namespace CyberSource.Api
         /// <param name="modifyBillingAgreement"></param>
         /// <param name="id">ID for de-registration or cancellation of Billing Agreement</param>
         /// <returns>Task of PtsV2ModifyBillingAgreementPost201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2ModifyBillingAgreementPost201Response> BillingAgreementsDeRegistrationAsync (ModifyBillingAgreement modifyBillingAgreement, string id)
+        public async Task<PtsV2ModifyBillingAgreementPost201Response> BillingAgreementsDeRegistrationAsync(ModifyBillingAgreement modifyBillingAgreement, string id)
         {
             logger.Debug("CALLING API \"BillingAgreementsDeRegistrationAsync\" STARTED");
             this.SetStatusCode(null);
@@ -453,7 +339,7 @@ namespace CyberSource.Api
         /// <param name="modifyBillingAgreement"></param>
         /// <param name="id">ID for de-registration or cancellation of Billing Agreement</param>
         /// <returns>Task of ApiResponse (PtsV2ModifyBillingAgreementPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2ModifyBillingAgreementPost201Response>> BillingAgreementsDeRegistrationAsyncWithHttpInfo (ModifyBillingAgreement modifyBillingAgreement, string id)
+        public async Task<ApiResponse<PtsV2ModifyBillingAgreementPost201Response>> BillingAgreementsDeRegistrationAsyncWithHttpInfo(ModifyBillingAgreement modifyBillingAgreement, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -473,7 +359,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/billing-agreements/{id}";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -482,13 +368,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -496,27 +382,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (modifyBillingAgreement != null && modifyBillingAgreement.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                modifyBillingAgreement = (ModifyBillingAgreement)sdkTracker.InsertDeveloperIdTracker(modifyBillingAgreement, modifyBillingAgreement.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(modifyBillingAgreement); // http body (model) parameter
+                modifyBillingAgreement = (ModifyBillingAgreement)sdkTracker.InsertDeveloperIdTracker(modifyBillingAgreement, modifyBillingAgreement.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(modifyBillingAgreement); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = modifyBillingAgreement; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -525,17 +412,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "BillingAgreementsDeRegistration,BillingAgreementsDeRegistrationAsync,BillingAgreementsDeRegistrationWithHttpInfo,BillingAgreementsDeRegistrationAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Patch, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -549,7 +436,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2ModifyBillingAgreementPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2ModifyBillingAgreementPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2ModifyBillingAgreementPost201Response), merchantConfig)); // Return statement
+                (PtsV2ModifyBillingAgreementPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2ModifyBillingAgreementPost201Response))); // Return statement
         }
         /// <summary>
         /// Standing Instruction intimation Standing Instruction with or without Token.
@@ -558,7 +445,7 @@ namespace CyberSource.Api
         /// <param name="intimateBillingAgreement"></param>
         /// <param name="id">ID for intimation of Billing Agreement</param>
         /// <returns>PtsV2CreditsPost201Response1</returns>
-        public PtsV2CreditsPost201Response1 BillingAgreementsIntimation (IntimateBillingAgreement intimateBillingAgreement, string id)
+        public PtsV2CreditsPost201Response1 BillingAgreementsIntimation(IntimateBillingAgreement intimateBillingAgreement, string id)
         {
             logger.Debug("CALLING API \"BillingAgreementsIntimation\" STARTED");
             this.SetStatusCode(null);
@@ -575,7 +462,7 @@ namespace CyberSource.Api
         /// <param name="intimateBillingAgreement"></param>
         /// <param name="id">ID for intimation of Billing Agreement</param>
         /// <returns>ApiResponse of PtsV2CreditsPost201Response1</returns>
-        public ApiResponse< PtsV2CreditsPost201Response1 > BillingAgreementsIntimationWithHttpInfo (IntimateBillingAgreement intimateBillingAgreement, string id)
+        public ApiResponse< PtsV2CreditsPost201Response1 > BillingAgreementsIntimationWithHttpInfo(IntimateBillingAgreement intimateBillingAgreement, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -595,7 +482,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/billing-agreements/{id}/intimations";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -604,13 +491,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -618,27 +505,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (intimateBillingAgreement != null && intimateBillingAgreement.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                intimateBillingAgreement = (IntimateBillingAgreement)sdkTracker.InsertDeveloperIdTracker(intimateBillingAgreement, intimateBillingAgreement.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(intimateBillingAgreement); // http body (model) parameter
+                intimateBillingAgreement = (IntimateBillingAgreement)sdkTracker.InsertDeveloperIdTracker(intimateBillingAgreement, intimateBillingAgreement.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(intimateBillingAgreement); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = intimateBillingAgreement; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -647,13 +535,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -671,7 +559,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2CreditsPost201Response1>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2CreditsPost201Response1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreditsPost201Response1),merchantConfig)); // Return statement
+                (PtsV2CreditsPost201Response1) ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreditsPost201Response1))); // Return statement
         }
 
         /// <summary>
@@ -681,7 +569,7 @@ namespace CyberSource.Api
         /// <param name="intimateBillingAgreement"></param>
         /// <param name="id">ID for intimation of Billing Agreement</param>
         /// <returns>Task of PtsV2CreditsPost201Response1</returns>
-        public async System.Threading.Tasks.Task<PtsV2CreditsPost201Response1> BillingAgreementsIntimationAsync (IntimateBillingAgreement intimateBillingAgreement, string id)
+        public async Task<PtsV2CreditsPost201Response1> BillingAgreementsIntimationAsync(IntimateBillingAgreement intimateBillingAgreement, string id)
         {
             logger.Debug("CALLING API \"BillingAgreementsIntimationAsync\" STARTED");
             this.SetStatusCode(null);
@@ -699,7 +587,7 @@ namespace CyberSource.Api
         /// <param name="intimateBillingAgreement"></param>
         /// <param name="id">ID for intimation of Billing Agreement</param>
         /// <returns>Task of ApiResponse (PtsV2CreditsPost201Response1)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2CreditsPost201Response1>> BillingAgreementsIntimationAsyncWithHttpInfo (IntimateBillingAgreement intimateBillingAgreement, string id)
+        public async Task<ApiResponse<PtsV2CreditsPost201Response1>> BillingAgreementsIntimationAsyncWithHttpInfo(IntimateBillingAgreement intimateBillingAgreement, string id)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -719,7 +607,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/billing-agreements/{id}/intimations";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -728,13 +616,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -742,27 +630,28 @@ namespace CyberSource.Api
 
             if (id != null)
             {
-                localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+                localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
             logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+
             if (intimateBillingAgreement != null && intimateBillingAgreement.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                intimateBillingAgreement = (IntimateBillingAgreement)sdkTracker.InsertDeveloperIdTracker(intimateBillingAgreement, intimateBillingAgreement.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(intimateBillingAgreement); // http body (model) parameter
+                intimateBillingAgreement = (IntimateBillingAgreement)sdkTracker.InsertDeveloperIdTracker(intimateBillingAgreement, intimateBillingAgreement.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(intimateBillingAgreement); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = intimateBillingAgreement; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -771,17 +660,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "BillingAgreementsIntimation,BillingAgreementsIntimationAsync,BillingAgreementsIntimationWithHttpInfo,BillingAgreementsIntimationAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -795,7 +684,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2CreditsPost201Response1>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2CreditsPost201Response1) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreditsPost201Response1), merchantConfig)); // Return statement
+                (PtsV2CreditsPost201Response1) ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreditsPost201Response1))); // Return statement
         }
         /// <summary>
         /// Create a Billing Agreement #### Standing Instruction: Standing Instruction with or without Token. Transaction amount in case First payment is coming along with registration. Only 2 decimal places allowed  #### Create Mandate: You can create a mandate through the direct debit mandate flow. Possible create mandate status values:   - Pending—the create mandate request was successfully processed.   - Failed—the create mandate request was not accepted.  #### Import Mandate: In the Bacs scheme, a mandate is created with a status of active. Direct debit collections can be made against it immediately. You can import a mandate to the CyberSource database when:   - You have existing customers with signed, active mandates   - You manage mandates outside of CyberSource.  When you import an existing mandate to the CyberSource database, provide a unique value for the mandate ID or the request results in an error. If an import mandate request is not accepted, the import mandate status value is failed. 
@@ -803,7 +692,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createBillingAgreement"></param>
         /// <returns>PtsV2CreateBillingAgreementPost201Response</returns>
-        public PtsV2CreateBillingAgreementPost201Response BillingAgreementsRegistration (CreateBillingAgreement createBillingAgreement)
+        public PtsV2CreateBillingAgreementPost201Response BillingAgreementsRegistration(CreateBillingAgreement createBillingAgreement)
         {
             logger.Debug("CALLING API \"BillingAgreementsRegistration\" STARTED");
             this.SetStatusCode(null);
@@ -819,7 +708,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createBillingAgreement"></param>
         /// <returns>ApiResponse of PtsV2CreateBillingAgreementPost201Response</returns>
-        public ApiResponse< PtsV2CreateBillingAgreementPost201Response > BillingAgreementsRegistrationWithHttpInfo (CreateBillingAgreement createBillingAgreement)
+        public ApiResponse< PtsV2CreateBillingAgreementPost201Response > BillingAgreementsRegistrationWithHttpInfo(CreateBillingAgreement createBillingAgreement)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -833,7 +722,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/billing-agreements";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -842,13 +731,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -857,21 +746,21 @@ namespace CyberSource.Api
             if (createBillingAgreement != null && createBillingAgreement.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createBillingAgreement = (CreateBillingAgreement)sdkTracker.InsertDeveloperIdTracker(createBillingAgreement, createBillingAgreement.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createBillingAgreement); // http body (model) parameter
+                createBillingAgreement = (CreateBillingAgreement)sdkTracker.InsertDeveloperIdTracker(createBillingAgreement, createBillingAgreement.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createBillingAgreement); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createBillingAgreement; // byte array
             }
-            
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo"))
+
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -880,13 +769,13 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            RestResponse localVarResponse = (RestResponse) ApiClient.CallApi(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
@@ -904,7 +793,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2CreateBillingAgreementPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2CreateBillingAgreementPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreateBillingAgreementPost201Response),merchantConfig)); // Return statement
+                (PtsV2CreateBillingAgreementPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreateBillingAgreementPost201Response))); // Return statement
         }
 
         /// <summary>
@@ -913,7 +802,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createBillingAgreement"></param>
         /// <returns>Task of PtsV2CreateBillingAgreementPost201Response</returns>
-        public async System.Threading.Tasks.Task<PtsV2CreateBillingAgreementPost201Response> BillingAgreementsRegistrationAsync (CreateBillingAgreement createBillingAgreement)
+        public async Task<PtsV2CreateBillingAgreementPost201Response> BillingAgreementsRegistrationAsync(CreateBillingAgreement createBillingAgreement)
         {
             logger.Debug("CALLING API \"BillingAgreementsRegistrationAsync\" STARTED");
             this.SetStatusCode(null);
@@ -930,7 +819,7 @@ namespace CyberSource.Api
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="createBillingAgreement"></param>
         /// <returns>Task of ApiResponse (PtsV2CreateBillingAgreementPost201Response)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<PtsV2CreateBillingAgreementPost201Response>> BillingAgreementsRegistrationAsyncWithHttpInfo (CreateBillingAgreement createBillingAgreement)
+        public async Task<ApiResponse<PtsV2CreateBillingAgreementPost201Response>> BillingAgreementsRegistrationAsyncWithHttpInfo(CreateBillingAgreement createBillingAgreement)
         {
             LogUtility logUtility = new LogUtility();
 
@@ -944,7 +833,7 @@ namespace CyberSource.Api
             var localVarPath = $"/pts/v2/billing-agreements";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
-            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
             var localVarFormParams = new Dictionary<string, string>();
             var localVarFileParams = new Dictionary<string, FileParameter>();
             object localVarPostBody = null;
@@ -953,13 +842,13 @@ namespace CyberSource.Api
             string[] localVarHttpContentTypes = new string[] {
                 "application/json;charset=utf-8"
             };
-            string localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
                 "application/hal+json;charset=utf-8"
             };
-            string localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
             {
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -968,21 +857,21 @@ namespace CyberSource.Api
             if (createBillingAgreement != null && createBillingAgreement.GetType() != typeof(byte[]))
             {
                 SdkTracker sdkTracker = new SdkTracker();
-                createBillingAgreement = (CreateBillingAgreement)sdkTracker.InsertDeveloperIdTracker(createBillingAgreement, createBillingAgreement.GetType().Name, Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["runEnvironment"], Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj.ContainsKey("defaultDeveloperId")? Configuration.ApiClient.Configuration.MerchantConfigDictionaryObj["defaultDeveloperId"]:"");
-                localVarPostBody = Configuration.ApiClient.Serialize(createBillingAgreement); // http body (model) parameter
+                createBillingAgreement = (CreateBillingAgreement)sdkTracker.InsertDeveloperIdTracker(createBillingAgreement, createBillingAgreement.GetType().Name, Configuration.MerchantCredentialSettings.RunEnvironment, Configuration.MerchantNetworkSettings.DefaultDeveloperId);
+                localVarPostBody = ApiClient.Serialize(createBillingAgreement); // http body (model) parameter
             }
             else
             {
                 localVarPostBody = createBillingAgreement; // byte array
             }
 
-			string inboundMLEStatus = "optional";            
-			MerchantConfig merchantConfig = new MerchantConfig(Configuration.MerchantConfigDictionaryObj, Configuration.MapToControlMLEonAPI, Configuration.ResponseMlePrivateKey);
-            if (MLEUtility.CheckIsMLEForAPI(merchantConfig, inboundMLEStatus, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo"))
+
+            string inboundMLEStatus = "optional";
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo"))
             {
                 try
                 {
-                    localVarPostBody = MLEUtility.EncryptRequestPayload(merchantConfig, localVarPostBody);
+                    localVarPostBody = MLEUtility.EncryptRequestPayload(Configuration.MerchantCredentialSettings, Configuration.MerchantMLESettings, localVarPostBody);
                 }
                 catch (Exception e)
                 {
@@ -991,17 +880,17 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(merchantConfig, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "BillingAgreementsRegistration,BillingAgreementsRegistrationAsync,BillingAgreementsRegistrationWithHttpInfo,BillingAgreementsRegistrationAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
             // make the HTTP request
-            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
+            RestResponse localVarResponse = (RestResponse)await ApiClient.CallApiAsync(localVarPath,
                 Method.Post, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
                 localVarPathParams, localVarHttpContentType, isResponseMLEForApi);
 
-            int localVarStatusCode = (int)localVarResponse.StatusCode;
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -1015,7 +904,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<PtsV2CreateBillingAgreementPost201Response>(localVarStatusCode,
                 localVarResponse.Headers.GroupBy(h => h.Name).ToDictionary(x => x.Key, x => string.Join(", ", x.Select(h => h.Value.ToString()))),
-                (PtsV2CreateBillingAgreementPost201Response) Configuration.ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreateBillingAgreementPost201Response), merchantConfig)); // Return statement
+                (PtsV2CreateBillingAgreementPost201Response) ApiClient.Deserialize(localVarResponse, typeof(PtsV2CreateBillingAgreementPost201Response))); // Return statement
         }
     }
 }

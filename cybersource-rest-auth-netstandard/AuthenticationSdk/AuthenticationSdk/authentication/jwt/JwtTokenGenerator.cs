@@ -27,18 +27,6 @@ namespace AuthenticationSdk.authentication.jwt
             }
         }
 
-        private string ExtractResourcePath(string requestTarget)
-        {
-            if (string.IsNullOrEmpty(requestTarget))
-            {
-                return string.Empty;
-            }
-
-            // Split the string to remove the query params
-            var parts = requestTarget.Split('?');
-            return parts[0];
-        }
-
         #region NEW PROPERTIES
         private readonly IMerchantCredentialSettings _merchantCredentialSettings;
         private readonly IMerchantRequestSettings _merchantRequestSettings;
@@ -184,7 +172,7 @@ namespace AuthenticationSdk.authentication.jwt
             // Set the request method, host and resource path in the JWT body as per the specification for all request types
             jwtPayload["request-method"] = _merchantRequestSettings.RequestType?.ToUpper();
             jwtPayload["request-host"] = _merchantCredentialSettings.RunEnvironment;
-            jwtPayload["request-resource-path"] = ExtractResourcePath(_merchantRequestSettings.RequestTarget);
+            jwtPayload["request-resource-path"] = _merchantRequestSettings.RequestTarget;
 
             // Choose issuer claim in the JWT body as per the use_metakey flag in the config file
             string issuer;

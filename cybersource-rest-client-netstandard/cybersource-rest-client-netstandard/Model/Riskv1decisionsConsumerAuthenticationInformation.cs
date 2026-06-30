@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Riskv1decisionsConsumerAuthenticationInformation" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Riskv1decisionsConsumerAuthenticationInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Riskv1decisionsConsumerAuthenticationInformation" /> class.
@@ -125,280 +125,320 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets StrongAuthentication
         /// </summary>
-        [DataMember(Name="strongAuthentication", EmitDefaultValue=false)]
+        [JsonPropertyName("strongAuthentication")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1decisionsConsumerAuthenticationInformationStrongAuthentication StrongAuthentication { get; set; }
 
         /// <summary>
         /// An override field that a merchant can pass in to set the challenge window size to display to the end cardholder.  The ACS (Active Control Server) will reply with content that is formatted appropriately to this window size to allow for the best user experience.  The sizes are width x height in pixels of the window displayed in the cardholder browser window.  01 - 250x400  02 - 390x400  03 - 500x600  04 - 600x400  05 - Full page 
         /// </summary>
         /// <value>An override field that a merchant can pass in to set the challenge window size to display to the end cardholder.  The ACS (Active Control Server) will reply with content that is formatted appropriately to this window size to allow for the best user experience.  The sizes are width x height in pixels of the window displayed in the cardholder browser window.  01 - 250x400  02 - 390x400  03 - 500x600  04 - 600x400  05 - Full page </value>
-        [DataMember(Name="acsWindowSize", EmitDefaultValue=false)]
+        [JsonPropertyName("acsWindowSize")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcsWindowSize { get; set; }
 
         /// <summary>
         /// Data that documents and supports a specific authentication process. 
         /// </summary>
         /// <value>Data that documents and supports a specific authentication process. </value>
-        [DataMember(Name="alternateAuthenticationData", EmitDefaultValue=false)]
+        [JsonPropertyName("alternateAuthenticationData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AlternateAuthenticationData { get; set; }
 
         /// <summary>
         /// Date and time in UTC of the cardholder authentication. Format: YYYYMMDDHHMM 
         /// </summary>
         /// <value>Date and time in UTC of the cardholder authentication. Format: YYYYMMDDHHMM </value>
-        [DataMember(Name="alternateAuthenticationDate", EmitDefaultValue=false)]
+        [JsonPropertyName("alternateAuthenticationDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AlternateAuthenticationDate { get; set; }
 
         /// <summary>
         /// Mechanism used by the cardholder to authenticate to the 3D Secure requestor. Possible values: - &#x60;01&#x60;: No authentication occurred - &#x60;02&#x60;: Login using merchant system credentials - &#x60;03&#x60;: Login using Federated ID - &#x60;04&#x60;: Login using issuer credentials - &#x60;05&#x60;: Login using third-party authenticator - &#x60;06&#x60;: Login using FIDO Authenticator 
         /// </summary>
         /// <value>Mechanism used by the cardholder to authenticate to the 3D Secure requestor. Possible values: - &#x60;01&#x60;: No authentication occurred - &#x60;02&#x60;: Login using merchant system credentials - &#x60;03&#x60;: Login using Federated ID - &#x60;04&#x60;: Login using issuer credentials - &#x60;05&#x60;: Login using third-party authenticator - &#x60;06&#x60;: Login using FIDO Authenticator </value>
-        [DataMember(Name="alternateAuthenticationMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("alternateAuthenticationMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AlternateAuthenticationMethod { get; set; }
 
         /// <summary>
         /// The date/time of the authentication at the 3DS servers. RISK update authorization service in auth request payload with value returned in &#x60;consumerAuthenticationInformation.alternateAuthenticationData&#x60; if merchant calls via CYBS or field can be provided by merchant in authorization request if calling an external 3DS provider.  This field is supported for Cartes Bancaires Fast&#39;R transactions on Credit Mutuel-CIC. Format: YYYYMMDDHHMMSS 
         /// </summary>
         /// <value>The date/time of the authentication at the 3DS servers. RISK update authorization service in auth request payload with value returned in &#x60;consumerAuthenticationInformation.alternateAuthenticationData&#x60; if merchant calls via CYBS or field can be provided by merchant in authorization request if calling an external 3DS provider.  This field is supported for Cartes Bancaires Fast&#39;R transactions on Credit Mutuel-CIC. Format: YYYYMMDDHHMMSS </value>
-        [DataMember(Name="authenticationDate", EmitDefaultValue=false)]
+        [JsonPropertyName("authenticationDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthenticationDate { get; set; }
 
         /// <summary>
         /// Payer authentication transaction identifier passed to link the check enrollment and validate authentication messages.For Rupay,this is passed only in Re-Send OTP usecase. **Note**: Required for Standard integration, Rupay Seamless server to server integration for enroll service. Required for Hybrid integration for validate service. 
         /// </summary>
         /// <value>Payer authentication transaction identifier passed to link the check enrollment and validate authentication messages.For Rupay,this is passed only in Re-Send OTP usecase. **Note**: Required for Standard integration, Rupay Seamless server to server integration for enroll service. Required for Hybrid integration for validate service. </value>
-        [DataMember(Name="authenticationTransactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("authenticationTransactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthenticationTransactionId { get; set; }
 
         /// <summary>
         /// This  field is only applicable to Rupay and is optional. Merchant will have to pass a valid value from 01 through 07 which indicates the transaction flow. Below are the possible values. 01:NW- Transaction performed at domestic merchant. 02:TW- Transaction performed at domestic merchant along with Token provisioning. 03:IT- Transaction performed at International merchant. 04:AT- Authentication Transaction Only. 05:AW- Authentication transaction for provisioning. 06:DI- Domestic InApp Transaction. 07:II- International InApp transaction. 08:GC- Guest Checkout 09:ST- SI Authentication Transaction only 10:SW- SI Authorization along with token provisioning 
         /// </summary>
         /// <value>This  field is only applicable to Rupay and is optional. Merchant will have to pass a valid value from 01 through 07 which indicates the transaction flow. Below are the possible values. 01:NW- Transaction performed at domestic merchant. 02:TW- Transaction performed at domestic merchant along with Token provisioning. 03:IT- Transaction performed at International merchant. 04:AT- Authentication Transaction Only. 05:AW- Authentication transaction for provisioning. 06:DI- Domestic InApp Transaction. 07:II- International InApp transaction. 08:GC- Guest Checkout 09:ST- SI Authentication Transaction only 10:SW- SI Authorization along with token provisioning </value>
-        [DataMember(Name="transactionFlowIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionFlowIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? TransactionFlowIndicator { get; set; }
 
         /// <summary>
         /// Possible values: - &#x60;01&#x60;: No preference - &#x60;02&#x60;: No challenge request - &#x60;03&#x60;: Challenge requested (3D Secure requestor preference) - &#x60;04&#x60;: Challenge requested (mandate) - &#x60;05&#x60;: No challenge requested (transactional risk analysis is already performed) - &#x60;06&#x60;: No challenge requested (Data share only) - &#x60;07&#x60;: No challenge requested (strong consumer authentication is already performed) - &#x60;08&#x60;: No challenge requested (utilize whitelist exemption if no challenge required) - &#x60;09&#x60;: Challenge requested (whitelist prompt requested if challenge required) **Note** This field will default to &#x60;01&#x60; on merchant configuration and can be overridden by the merchant. EMV 3D Secure version 2.1.0 supports values &#x60;01-04&#x60;. Version 2.2.0 supports values &#x60;01-09&#x60;. 
         /// </summary>
         /// <value>Possible values: - &#x60;01&#x60;: No preference - &#x60;02&#x60;: No challenge request - &#x60;03&#x60;: Challenge requested (3D Secure requestor preference) - &#x60;04&#x60;: Challenge requested (mandate) - &#x60;05&#x60;: No challenge requested (transactional risk analysis is already performed) - &#x60;06&#x60;: No challenge requested (Data share only) - &#x60;07&#x60;: No challenge requested (strong consumer authentication is already performed) - &#x60;08&#x60;: No challenge requested (utilize whitelist exemption if no challenge required) - &#x60;09&#x60;: Challenge requested (whitelist prompt requested if challenge required) **Note** This field will default to &#x60;01&#x60; on merchant configuration and can be overridden by the merchant. EMV 3D Secure version 2.1.0 supports values &#x60;01-04&#x60;. Version 2.2.0 supports values &#x60;01-09&#x60;. </value>
-        [DataMember(Name="challengeCode", EmitDefaultValue=false)]
+        [JsonPropertyName("challengeCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ChallengeCode { get; set; }
 
         /// <summary>
         /// The &#x60;consumerAuthenticationInformation.challengeCode&#x60; indicates the authentication type/level, or challenge, that was presented to the cardholder at checkout by the merchant when calling the Carte Bancaire 3DS servers via CYBS RISK services. It conveys to the issuer the alternative authentication methods that the consumer used. 
         /// </summary>
         /// <value>The &#x60;consumerAuthenticationInformation.challengeCode&#x60; indicates the authentication type/level, or challenge, that was presented to the cardholder at checkout by the merchant when calling the Carte Bancaire 3DS servers via CYBS RISK services. It conveys to the issuer the alternative authentication methods that the consumer used. </value>
-        [DataMember(Name="challengeStatus", EmitDefaultValue=false)]
+        [JsonPropertyName("challengeStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ChallengeStatus { get; set; }
 
         /// <summary>
         /// An alias that uniquely identifies the customer&#39;s account and credit card on file. Note This field is required if Tokenization is enabled in the merchant profile settings. 
         /// </summary>
         /// <value>An alias that uniquely identifies the customer&#39;s account and credit card on file. Note This field is required if Tokenization is enabled in the merchant profile settings. </value>
-        [DataMember(Name="customerCardAlias", EmitDefaultValue=false)]
+        [JsonPropertyName("customerCardAlias")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerCardAlias { get; set; }
 
         /// <summary>
         /// Indicates whether the 3DS Requestor requests the ACS to utilize Decoupled Authentication and agrees to utilize Decoupled Authentication if the ACS confirms its use.  Possible Values:  Y - Decoupled Authentication is supported and preferred if challenge is necessary  N - Do not use Decoupled Authentication  **Default Value**: N 
         /// </summary>
         /// <value>Indicates whether the 3DS Requestor requests the ACS to utilize Decoupled Authentication and agrees to utilize Decoupled Authentication if the ACS confirms its use.  Possible Values:  Y - Decoupled Authentication is supported and preferred if challenge is necessary  N - Do not use Decoupled Authentication  **Default Value**: N </value>
-        [DataMember(Name="decoupledAuthenticationIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("decoupledAuthenticationIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DecoupledAuthenticationIndicator { get; set; }
 
         /// <summary>
         /// Indicates the maximum amount of time that the 3DS Requestor will wait for an ACS (Active control server) to provide the results of a Decoupled Authentication transaction (in minutes). Possible Values: Numeric values between 1 and 10080 accepted. 
         /// </summary>
         /// <value>Indicates the maximum amount of time that the 3DS Requestor will wait for an ACS (Active control server) to provide the results of a Decoupled Authentication transaction (in minutes). Possible Values: Numeric values between 1 and 10080 accepted. </value>
-        [DataMember(Name="decoupledAuthenticationMaxTime", EmitDefaultValue=false)]
+        [JsonPropertyName("decoupledAuthenticationMaxTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DecoupledAuthenticationMaxTime { get; set; }
 
         /// <summary>
         /// Indicates that the card being used is the one designated as the primary payment card for purchase. Recommended for Discover ProtectBuy. 
         /// </summary>
         /// <value>Indicates that the card being used is the one designated as the primary payment card for purchase. Recommended for Discover ProtectBuy. </value>
-        [DataMember(Name="defaultCard", EmitDefaultValue=false)]
+        [JsonPropertyName("defaultCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DefaultCard { get; set; }
 
         /// <summary>
         /// Determines the channel that the transaction came through. Possible Values: SDK/Browser/3RI. 3RI - 3DS request initiated. 
         /// </summary>
         /// <value>Determines the channel that the transaction came through. Possible Values: SDK/Browser/3RI. 3RI - 3DS request initiated. </value>
-        [DataMember(Name="deviceChannel", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceChannel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeviceChannel { get; set; }
 
         /// <summary>
         /// An integer value greater than 1 indicating the max number of permitted authorizations for installment payments. **Note** This is required if the merchant and cardholder have agreed to installment payments. 
         /// </summary>
         /// <value>An integer value greater than 1 indicating the max number of permitted authorizations for installment payments. **Note** This is required if the merchant and cardholder have agreed to installment payments. </value>
-        [DataMember(Name="installmentTotalCount", EmitDefaultValue=false)]
+        [JsonPropertyName("installmentTotalCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? InstallmentTotalCount { get; set; }
 
         /// <summary>
         /// Calculated by merchants as per PSD2** RTS** (EEA** card fraud divided by all EEA card volumes). Possible Values: 1 &#x3D; Represents fraud rate &lt;&#x3D;1  2 &#x3D; Represents fraud rate &gt;1 and &lt;&#x3D;6  3 &#x3D; Represents fraud rate &gt;6 and &lt;&#x3D;13  4 &#x3D; Represents fraud rate &gt;13 and &lt;&#x3D;25  5 &#x3D; Represents fraud rate &gt;25  EEA** &#x3D; European Economic Area RTS** &#x3D; Regulatory Technical Standards PSD2** &#x3D; Payment Services Directive 
         /// </summary>
         /// <value>Calculated by merchants as per PSD2** RTS** (EEA** card fraud divided by all EEA card volumes). Possible Values: 1 &#x3D; Represents fraud rate &lt;&#x3D;1  2 &#x3D; Represents fraud rate &gt;1 and &lt;&#x3D;6  3 &#x3D; Represents fraud rate &gt;6 and &lt;&#x3D;13  4 &#x3D; Represents fraud rate &gt;13 and &lt;&#x3D;25  5 &#x3D; Represents fraud rate &gt;25  EEA** &#x3D; European Economic Area RTS** &#x3D; Regulatory Technical Standards PSD2** &#x3D; Payment Services Directive </value>
-        [DataMember(Name="merchantFraudRate", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantFraudRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantFraudRate { get; set; }
 
         /// <summary>
         /// Indicates whether the customer has opted in for marketing offers. Recommended for Discover ProtectBuy. 
         /// </summary>
         /// <value>Indicates whether the customer has opted in for marketing offers. Recommended for Discover ProtectBuy. </value>
-        [DataMember(Name="marketingOptIn", EmitDefaultValue=false)]
+        [JsonPropertyName("marketingOptIn")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? MarketingOptIn { get; set; }
 
         /// <summary>
         /// Indicates origin of the marketing offer. Recommended for Discover ProtectBuy. 
         /// </summary>
         /// <value>Indicates origin of the marketing offer. Recommended for Discover ProtectBuy. </value>
-        [DataMember(Name="marketingSource", EmitDefaultValue=false)]
+        [JsonPropertyName("marketingSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MarketingSource { get; set; }
 
         /// <summary>
         /// Merchant category code. **Important** Required only for Visa Secure transactions in Brazil. Do not use this request field for any other types of transactions. 
         /// </summary>
         /// <value>Merchant category code. **Important** Required only for Visa Secure transactions in Brazil. Do not use this request field for any other types of transactions. </value>
-        [DataMember(Name="mcc", EmitDefaultValue=false)]
+        [JsonPropertyName("mcc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Mcc { get; set; }
 
         /// <summary>
         /// Risk Score provided by merchants. This is specific for CB transactions. 
         /// </summary>
         /// <value>Risk Score provided by merchants. This is specific for CB transactions. </value>
-        [DataMember(Name="merchantScore", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantScore")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? MerchantScore { get; set; }
 
         /// <summary>
         /// Category of the message for a specific use case. Possible values:  - &#x60;01&#x60;: PA- payment authentication - &#x60;02&#x60;: NPA- non-payment authentication - &#x60;03-79&#x60;: Reserved for EMVCo future use (values invalid until defined by EMVCo) - &#x60;80-99&#x60;: Reserved for DS use 
         /// </summary>
         /// <value>Category of the message for a specific use case. Possible values:  - &#x60;01&#x60;: PA- payment authentication - &#x60;02&#x60;: NPA- non-payment authentication - &#x60;03-79&#x60;: Reserved for EMVCo future use (values invalid until defined by EMVCo) - &#x60;80-99&#x60;: Reserved for DS use </value>
-        [DataMember(Name="messageCategory", EmitDefaultValue=false)]
+        [JsonPropertyName("messageCategory")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MessageCategory { get; set; }
 
         /// <summary>
         /// Non-Payer Authentication Indicator. Possible values: - &#x60;01&#x60;: Add card - &#x60;02&#x60;: Maintain card information - &#x60;03&#x60;: Cardholder verification for EMV token - &#x60;04-80&#x60; Reserved for EMVCo - &#x60;80-90&#x60; Reserved DS 
         /// </summary>
         /// <value>Non-Payer Authentication Indicator. Possible values: - &#x60;01&#x60;: Add card - &#x60;02&#x60;: Maintain card information - &#x60;03&#x60;: Cardholder verification for EMV token - &#x60;04-80&#x60; Reserved for EMVCo - &#x60;80-90&#x60; Reserved DS </value>
-        [DataMember(Name="npaCode", EmitDefaultValue=false)]
+        [JsonPropertyName("npaCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NpaCode { get; set; }
 
         /// <summary>
         /// Specifies the Brazilian payment account type used for the transaction. This field overrides other payment types that might be specified in the request. Use one of the following values for this field: - &#x60;NA&#x60;: Not applicable. Do not override other payment types that are specified in the request. - &#x60;CR&#x60;: Credit card. - &#x60;DB&#x60;: Debit card. - &#x60;VSAVR&#x60;: Visa Vale Refeicao - &#x60;VSAVA&#x60;: Visa Vale Alimentacao **Important** Required only for Visa Secure transactions in Brazil. Do not use this request field for any other types of transactions. 
         /// </summary>
         /// <value>Specifies the Brazilian payment account type used for the transaction. This field overrides other payment types that might be specified in the request. Use one of the following values for this field: - &#x60;NA&#x60;: Not applicable. Do not override other payment types that are specified in the request. - &#x60;CR&#x60;: Credit card. - &#x60;DB&#x60;: Debit card. - &#x60;VSAVR&#x60;: Visa Vale Refeicao - &#x60;VSAVA&#x60;: Visa Vale Alimentacao **Important** Required only for Visa Secure transactions in Brazil. Do not use this request field for any other types of transactions. </value>
-        [DataMember(Name="overridePaymentMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("overridePaymentMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OverridePaymentMethod { get; set; }
 
         /// <summary>
         /// Two-character [ISO Standard Country Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).. 
         /// </summary>
         /// <value>Two-character [ISO Standard Country Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).. </value>
-        [DataMember(Name="overrideCountryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("overrideCountryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OverrideCountryCode { get; set; }
 
         /// <summary>
         /// This field carry data that the ACS can use to verify the authentication process. 
         /// </summary>
         /// <value>This field carry data that the ACS can use to verify the authentication process. </value>
-        [DataMember(Name="priorAuthenticationData", EmitDefaultValue=false)]
+        [JsonPropertyName("priorAuthenticationData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PriorAuthenticationData { get; set; }
 
         /// <summary>
         /// Mechanism used by the Cardholder to previously authenticate to the 3DS Requestor.  01 - Frictionless authentication occurred by ACS  02 - Cardholder challenge occurred by ACS  03 - AVS verified  04 - Other issuer methods  05-79 - Reserved for EMVCo future use (values invalid until defined by EMVCo)  80-99 - Reserved for DS use 
         /// </summary>
         /// <value>Mechanism used by the Cardholder to previously authenticate to the 3DS Requestor.  01 - Frictionless authentication occurred by ACS  02 - Cardholder challenge occurred by ACS  03 - AVS verified  04 - Other issuer methods  05-79 - Reserved for EMVCo future use (values invalid until defined by EMVCo)  80-99 - Reserved for DS use </value>
-        [DataMember(Name="priorAuthenticationMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("priorAuthenticationMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PriorAuthenticationMethod { get; set; }
 
         /// <summary>
         /// This data element contains a ACS Transaction ID for a prior authenticated transaction. For example, the first recurring transaction that was authenticated with the cardholder 
         /// </summary>
         /// <value>This data element contains a ACS Transaction ID for a prior authenticated transaction. For example, the first recurring transaction that was authenticated with the cardholder </value>
-        [DataMember(Name="priorAuthenticationReferenceId", EmitDefaultValue=false)]
+        [JsonPropertyName("priorAuthenticationReferenceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PriorAuthenticationReferenceId { get; set; }
 
         /// <summary>
         /// Date and time in UTC of the prior cardholder authentication. Format – YYYYMMDDHHMM 
         /// </summary>
         /// <value>Date and time in UTC of the prior cardholder authentication. Format – YYYYMMDDHHMM </value>
-        [DataMember(Name="priorAuthenticationTime", EmitDefaultValue=false)]
+        [JsonPropertyName("priorAuthenticationTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PriorAuthenticationTime { get; set; }
 
         /// <summary>
         /// Specifies the product code, which designates the type of transaction. Specify one of the following values for this field: - AIR: Airline purchase Important Required for American Express SafeKey (U.S.). - &#x60;ACC&#x60;: Accommodation Rental - &#x60;ACF&#x60;: Account funding - &#x60;CHA&#x60;: Check acceptance - &#x60;DIG&#x60;: Digital Goods - &#x60;DSP&#x60;: Cash Dispensing - &#x60;GAS&#x60;: Fuel - &#x60;GEN&#x60;: General Retail - &#x60;LUX&#x60;: Luxury Retail - &#x60;PAL&#x60;: Prepaid activation and load - &#x60;PHY&#x60;: Goods or services purchase - &#x60;QCT&#x60;: Quasi-cash transaction - &#x60;REN&#x60;: Car Rental - &#x60;RES&#x60;: Restaurant - &#x60;SVC&#x60;: Services - &#x60;TBD&#x60;: Other - &#x60;TRA&#x60;: Travel **Important** Required for Visa Secure transactions in Brazil. Do not use this request field for any other types of transactions. 
         /// </summary>
         /// <value>Specifies the product code, which designates the type of transaction. Specify one of the following values for this field: - AIR: Airline purchase Important Required for American Express SafeKey (U.S.). - &#x60;ACC&#x60;: Accommodation Rental - &#x60;ACF&#x60;: Account funding - &#x60;CHA&#x60;: Check acceptance - &#x60;DIG&#x60;: Digital Goods - &#x60;DSP&#x60;: Cash Dispensing - &#x60;GAS&#x60;: Fuel - &#x60;GEN&#x60;: General Retail - &#x60;LUX&#x60;: Luxury Retail - &#x60;PAL&#x60;: Prepaid activation and load - &#x60;PHY&#x60;: Goods or services purchase - &#x60;QCT&#x60;: Quasi-cash transaction - &#x60;REN&#x60;: Car Rental - &#x60;RES&#x60;: Restaurant - &#x60;SVC&#x60;: Services - &#x60;TBD&#x60;: Other - &#x60;TRA&#x60;: Travel **Important** Required for Visa Secure transactions in Brazil. Do not use this request field for any other types of transactions. </value>
-        [DataMember(Name="productCode", EmitDefaultValue=false)]
+        [JsonPropertyName("productCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductCode { get; set; }
 
         /// <summary>
         /// The URL of the merchant&#39;s return page. CyberSource adds this return URL to the step-up JWT and returns it in the response of the Payer Authentication enrollment call. The merchant&#39;s return URL page serves as a listening URL. Once the bank session completes, the merchant receives a POST to their URL. This response contains the completed bank session&#39;s transactionId. The merchant&#39;s return page should capture the transaction ID and send it in the Payer Authentication validation call. 
         /// </summary>
         /// <value>The URL of the merchant&#39;s return page. CyberSource adds this return URL to the step-up JWT and returns it in the response of the Payer Authentication enrollment call. The merchant&#39;s return URL page serves as a listening URL. Once the bank session completes, the merchant receives a POST to their URL. This response contains the completed bank session&#39;s transactionId. The merchant&#39;s return page should capture the transaction ID and send it in the Payer Authentication validation call. </value>
-        [DataMember(Name="returnUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("returnUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReturnUrl { get; set; }
 
         /// <summary>
         /// Cardinal&#39;s directory server assigned 3DS Requestor ID value
         /// </summary>
         /// <value>Cardinal&#39;s directory server assigned 3DS Requestor ID value</value>
-        [DataMember(Name="requestorId", EmitDefaultValue=false)]
+        [JsonPropertyName("requestorId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestorId { get; set; }
 
         /// <summary>
         /// Indicates the type of 3RI request.  Possible Values:  01 - Recurring transaction  02 - Installment transaction  03 - Add card  04 - Maintain card  05 - Account verification  06 - Split/delayed shipment  07 - Top-up  08 - Mail Order  09 - Telephone Order  10 - Whitelist status check  11 - Other payment 
         /// </summary>
         /// <value>Indicates the type of 3RI request.  Possible Values:  01 - Recurring transaction  02 - Installment transaction  03 - Add card  04 - Maintain card  05 - Account verification  06 - Split/delayed shipment  07 - Top-up  08 - Mail Order  09 - Telephone Order  10 - Whitelist status check  11 - Other payment </value>
-        [DataMember(Name="requestorInitiatedAuthenticationIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("requestorInitiatedAuthenticationIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestorInitiatedAuthenticationIndicator { get; set; }
 
         /// <summary>
         /// Cardinal&#39;s directory server assigned 3DS Requestor Name value
         /// </summary>
         /// <value>Cardinal&#39;s directory server assigned 3DS Requestor Name value</value>
-        [DataMember(Name="requestorName", EmitDefaultValue=false)]
+        [JsonPropertyName("requestorName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestorName { get; set; }
 
         /// <summary>
         /// Reference ID that corresponds to the device fingerprinting data that was collected previously. Note Required for Hybrid integration. 
         /// </summary>
         /// <value>Reference ID that corresponds to the device fingerprinting data that was collected previously. Note Required for Hybrid integration. </value>
-        [DataMember(Name="referenceId", EmitDefaultValue=false)]
+        [JsonPropertyName("referenceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReferenceId { get; set; }
 
         /// <summary>
         /// This field indicates the maximum amount of time for all 3DS 2.0 messages to be communicated between all components (in minutes).  Possible Values:  Greater than or equal to 05 (05 is the minimum timeout to set)  Cardinal Default is set to 15  NOTE: This field is a required 3DS 2.0 field and Cardinal sends in a default of 15 if nothing is passed 
         /// </summary>
         /// <value>This field indicates the maximum amount of time for all 3DS 2.0 messages to be communicated between all components (in minutes).  Possible Values:  Greater than or equal to 05 (05 is the minimum timeout to set)  Cardinal Default is set to 15  NOTE: This field is a required 3DS 2.0 field and Cardinal sends in a default of 15 if nothing is passed </value>
-        [DataMember(Name="sdkMaxTimeout", EmitDefaultValue=false)]
+        [JsonPropertyName("sdkMaxTimeout")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SdkMaxTimeout { get; set; }
 
         /// <summary>
         /// Indicates dedicated payment processes and procedures were used, potential secure corporate payment exemption applies. Possible Values : 0/1 
         /// </summary>
         /// <value>Indicates dedicated payment processes and procedures were used, potential secure corporate payment exemption applies. Possible Values : 0/1 </value>
-        [DataMember(Name="secureCorporatePaymentIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("secureCorporatePaymentIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecureCorporatePaymentIndicator { get; set; }
 
         /// <summary>
         /// Transaction mode identifier. Identifies the channel from which the transaction originates. Possible values:  - &#x60;M&#x60;: MOTO (Mail Order Telephone Order) - &#x60;R&#x60;: Retail - &#x60;S&#x60;: eCommerce - &#x60;P&#x60;: Mobile Device - &#x60;T&#x60;: Tablet 
         /// </summary>
         /// <value>Transaction mode identifier. Identifies the channel from which the transaction originates. Possible values:  - &#x60;M&#x60;: MOTO (Mail Order Telephone Order) - &#x60;R&#x60;: Retail - &#x60;S&#x60;: eCommerce - &#x60;P&#x60;: Mobile Device - &#x60;T&#x60;: Tablet </value>
-        [DataMember(Name="transactionMode", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionMode { get; set; }
 
         /// <summary>
         /// Enables the communication of trusted beneficiary/whitelist status between the ACS, the DS and the 3DS Requestor.  Possible Values:  Y - 3DS Requestor is whitelisted by cardholder  N - 3DS Requestor is not whitelisted by cardholder 
         /// </summary>
         /// <value>Enables the communication of trusted beneficiary/whitelist status between the ACS, the DS and the 3DS Requestor.  Possible Values:  Y - 3DS Requestor is whitelisted by cardholder  N - 3DS Requestor is not whitelisted by cardholder </value>
-        [DataMember(Name="whiteListStatus", EmitDefaultValue=false)]
+        [JsonPropertyName("whiteListStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WhiteListStatus { get; set; }
 
         /// <summary>
         /// Risk Assessment from Mastercard. This is to be sent by merchant if they would like to request a score
         /// </summary>
         /// <value>Risk Assessment from Mastercard. This is to be sent by merchant if they would like to request a score</value>
-        [DataMember(Name="scoreRequest", EmitDefaultValue=false)]
+        [JsonPropertyName("scoreRequest")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? ScoreRequest { get; set; }
 
         /// <summary>
@@ -409,46 +449,46 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1decisionsConsumerAuthenticationInformation {\n");
-            if (StrongAuthentication != null) sb.Append("  StrongAuthentication: ").Append(StrongAuthentication).Append("\n");
-            if (AcsWindowSize != null) sb.Append("  AcsWindowSize: ").Append(AcsWindowSize).Append("\n");
-            if (AlternateAuthenticationData != null) sb.Append("  AlternateAuthenticationData: ").Append(AlternateAuthenticationData).Append("\n");
-            if (AlternateAuthenticationDate != null) sb.Append("  AlternateAuthenticationDate: ").Append(AlternateAuthenticationDate).Append("\n");
-            if (AlternateAuthenticationMethod != null) sb.Append("  AlternateAuthenticationMethod: ").Append(AlternateAuthenticationMethod).Append("\n");
-            if (AuthenticationDate != null) sb.Append("  AuthenticationDate: ").Append(AuthenticationDate).Append("\n");
-            if (AuthenticationTransactionId != null) sb.Append("  AuthenticationTransactionId: ").Append(AuthenticationTransactionId).Append("\n");
-            if (TransactionFlowIndicator != null) sb.Append("  TransactionFlowIndicator: ").Append(TransactionFlowIndicator).Append("\n");
-            if (ChallengeCode != null) sb.Append("  ChallengeCode: ").Append(ChallengeCode).Append("\n");
-            if (ChallengeStatus != null) sb.Append("  ChallengeStatus: ").Append(ChallengeStatus).Append("\n");
-            if (CustomerCardAlias != null) sb.Append("  CustomerCardAlias: ").Append(CustomerCardAlias).Append("\n");
-            if (DecoupledAuthenticationIndicator != null) sb.Append("  DecoupledAuthenticationIndicator: ").Append(DecoupledAuthenticationIndicator).Append("\n");
-            if (DecoupledAuthenticationMaxTime != null) sb.Append("  DecoupledAuthenticationMaxTime: ").Append(DecoupledAuthenticationMaxTime).Append("\n");
-            if (DefaultCard != null) sb.Append("  DefaultCard: ").Append(DefaultCard).Append("\n");
-            if (DeviceChannel != null) sb.Append("  DeviceChannel: ").Append(DeviceChannel).Append("\n");
-            if (InstallmentTotalCount != null) sb.Append("  InstallmentTotalCount: ").Append(InstallmentTotalCount).Append("\n");
-            if (MerchantFraudRate != null) sb.Append("  MerchantFraudRate: ").Append(MerchantFraudRate).Append("\n");
-            if (MarketingOptIn != null) sb.Append("  MarketingOptIn: ").Append(MarketingOptIn).Append("\n");
-            if (MarketingSource != null) sb.Append("  MarketingSource: ").Append(MarketingSource).Append("\n");
-            if (Mcc != null) sb.Append("  Mcc: ").Append(Mcc).Append("\n");
-            if (MerchantScore != null) sb.Append("  MerchantScore: ").Append(MerchantScore).Append("\n");
-            if (MessageCategory != null) sb.Append("  MessageCategory: ").Append(MessageCategory).Append("\n");
-            if (NpaCode != null) sb.Append("  NpaCode: ").Append(NpaCode).Append("\n");
-            if (OverridePaymentMethod != null) sb.Append("  OverridePaymentMethod: ").Append(OverridePaymentMethod).Append("\n");
-            if (OverrideCountryCode != null) sb.Append("  OverrideCountryCode: ").Append(OverrideCountryCode).Append("\n");
-            if (PriorAuthenticationData != null) sb.Append("  PriorAuthenticationData: ").Append(PriorAuthenticationData).Append("\n");
-            if (PriorAuthenticationMethod != null) sb.Append("  PriorAuthenticationMethod: ").Append(PriorAuthenticationMethod).Append("\n");
-            if (PriorAuthenticationReferenceId != null) sb.Append("  PriorAuthenticationReferenceId: ").Append(PriorAuthenticationReferenceId).Append("\n");
-            if (PriorAuthenticationTime != null) sb.Append("  PriorAuthenticationTime: ").Append(PriorAuthenticationTime).Append("\n");
-            if (ProductCode != null) sb.Append("  ProductCode: ").Append(ProductCode).Append("\n");
-            if (ReturnUrl != null) sb.Append("  ReturnUrl: ").Append(ReturnUrl).Append("\n");
-            if (RequestorId != null) sb.Append("  RequestorId: ").Append(RequestorId).Append("\n");
-            if (RequestorInitiatedAuthenticationIndicator != null) sb.Append("  RequestorInitiatedAuthenticationIndicator: ").Append(RequestorInitiatedAuthenticationIndicator).Append("\n");
-            if (RequestorName != null) sb.Append("  RequestorName: ").Append(RequestorName).Append("\n");
-            if (ReferenceId != null) sb.Append("  ReferenceId: ").Append(ReferenceId).Append("\n");
-            if (SdkMaxTimeout != null) sb.Append("  SdkMaxTimeout: ").Append(SdkMaxTimeout).Append("\n");
-            if (SecureCorporatePaymentIndicator != null) sb.Append("  SecureCorporatePaymentIndicator: ").Append(SecureCorporatePaymentIndicator).Append("\n");
-            if (TransactionMode != null) sb.Append("  TransactionMode: ").Append(TransactionMode).Append("\n");
-            if (WhiteListStatus != null) sb.Append("  WhiteListStatus: ").Append(WhiteListStatus).Append("\n");
-            if (ScoreRequest != null) sb.Append("  ScoreRequest: ").Append(ScoreRequest).Append("\n");
+            if (StrongAuthentication != null) sb.Append("  StrongAuthentication: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "strongAuthentication", StrongAuthentication.ToString())).Append("\n");
+            if (AcsWindowSize != null) sb.Append("  AcsWindowSize: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "acsWindowSize", AcsWindowSize.ToString())).Append("\n");
+            if (AlternateAuthenticationData != null) sb.Append("  AlternateAuthenticationData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "alternateAuthenticationData", AlternateAuthenticationData.ToString())).Append("\n");
+            if (AlternateAuthenticationDate != null) sb.Append("  AlternateAuthenticationDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "alternateAuthenticationDate", AlternateAuthenticationDate.ToString())).Append("\n");
+            if (AlternateAuthenticationMethod != null) sb.Append("  AlternateAuthenticationMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "alternateAuthenticationMethod", AlternateAuthenticationMethod.ToString())).Append("\n");
+            if (AuthenticationDate != null) sb.Append("  AuthenticationDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "authenticationDate", AuthenticationDate.ToString())).Append("\n");
+            if (AuthenticationTransactionId != null) sb.Append("  AuthenticationTransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "authenticationTransactionId", AuthenticationTransactionId.ToString())).Append("\n");
+            if (TransactionFlowIndicator != null) sb.Append("  TransactionFlowIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "transactionFlowIndicator", TransactionFlowIndicator.ToString())).Append("\n");
+            if (ChallengeCode != null) sb.Append("  ChallengeCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "challengeCode", ChallengeCode.ToString())).Append("\n");
+            if (ChallengeStatus != null) sb.Append("  ChallengeStatus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "challengeStatus", ChallengeStatus.ToString())).Append("\n");
+            if (CustomerCardAlias != null) sb.Append("  CustomerCardAlias: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "customerCardAlias", CustomerCardAlias.ToString())).Append("\n");
+            if (DecoupledAuthenticationIndicator != null) sb.Append("  DecoupledAuthenticationIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "decoupledAuthenticationIndicator", DecoupledAuthenticationIndicator.ToString())).Append("\n");
+            if (DecoupledAuthenticationMaxTime != null) sb.Append("  DecoupledAuthenticationMaxTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "decoupledAuthenticationMaxTime", DecoupledAuthenticationMaxTime.ToString())).Append("\n");
+            if (DefaultCard != null) sb.Append("  DefaultCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "defaultCard", DefaultCard.ToString())).Append("\n");
+            if (DeviceChannel != null) sb.Append("  DeviceChannel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "deviceChannel", DeviceChannel.ToString())).Append("\n");
+            if (InstallmentTotalCount != null) sb.Append("  InstallmentTotalCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "installmentTotalCount", InstallmentTotalCount.ToString())).Append("\n");
+            if (MerchantFraudRate != null) sb.Append("  MerchantFraudRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "merchantFraudRate", MerchantFraudRate.ToString())).Append("\n");
+            if (MarketingOptIn != null) sb.Append("  MarketingOptIn: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "marketingOptIn", MarketingOptIn.ToString())).Append("\n");
+            if (MarketingSource != null) sb.Append("  MarketingSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "marketingSource", MarketingSource.ToString())).Append("\n");
+            if (Mcc != null) sb.Append("  Mcc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "mcc", Mcc.ToString())).Append("\n");
+            if (MerchantScore != null) sb.Append("  MerchantScore: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "merchantScore", MerchantScore.ToString())).Append("\n");
+            if (MessageCategory != null) sb.Append("  MessageCategory: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "messageCategory", MessageCategory.ToString())).Append("\n");
+            if (NpaCode != null) sb.Append("  NpaCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "npaCode", NpaCode.ToString())).Append("\n");
+            if (OverridePaymentMethod != null) sb.Append("  OverridePaymentMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "overridePaymentMethod", OverridePaymentMethod.ToString())).Append("\n");
+            if (OverrideCountryCode != null) sb.Append("  OverrideCountryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "overrideCountryCode", OverrideCountryCode.ToString())).Append("\n");
+            if (PriorAuthenticationData != null) sb.Append("  PriorAuthenticationData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "priorAuthenticationData", PriorAuthenticationData.ToString())).Append("\n");
+            if (PriorAuthenticationMethod != null) sb.Append("  PriorAuthenticationMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "priorAuthenticationMethod", PriorAuthenticationMethod.ToString())).Append("\n");
+            if (PriorAuthenticationReferenceId != null) sb.Append("  PriorAuthenticationReferenceId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "priorAuthenticationReferenceId", PriorAuthenticationReferenceId.ToString())).Append("\n");
+            if (PriorAuthenticationTime != null) sb.Append("  PriorAuthenticationTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "priorAuthenticationTime", PriorAuthenticationTime.ToString())).Append("\n");
+            if (ProductCode != null) sb.Append("  ProductCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "productCode", ProductCode.ToString())).Append("\n");
+            if (ReturnUrl != null) sb.Append("  ReturnUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "returnUrl", ReturnUrl.ToString())).Append("\n");
+            if (RequestorId != null) sb.Append("  RequestorId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "requestorId", RequestorId.ToString())).Append("\n");
+            if (RequestorInitiatedAuthenticationIndicator != null) sb.Append("  RequestorInitiatedAuthenticationIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "requestorInitiatedAuthenticationIndicator", RequestorInitiatedAuthenticationIndicator.ToString())).Append("\n");
+            if (RequestorName != null) sb.Append("  RequestorName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "requestorName", RequestorName.ToString())).Append("\n");
+            if (ReferenceId != null) sb.Append("  ReferenceId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "referenceId", ReferenceId.ToString())).Append("\n");
+            if (SdkMaxTimeout != null) sb.Append("  SdkMaxTimeout: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "sdkMaxTimeout", SdkMaxTimeout.ToString())).Append("\n");
+            if (SecureCorporatePaymentIndicator != null) sb.Append("  SecureCorporatePaymentIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "secureCorporatePaymentIndicator", SecureCorporatePaymentIndicator.ToString())).Append("\n");
+            if (TransactionMode != null) sb.Append("  TransactionMode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "transactionMode", TransactionMode.ToString())).Append("\n");
+            if (WhiteListStatus != null) sb.Append("  WhiteListStatus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "whiteListStatus", WhiteListStatus.ToString())).Append("\n");
+            if (ScoreRequest != null) sb.Append("  ScoreRequest: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsConsumerAuthenticationInformation", "scoreRequest", ScoreRequest.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -459,7 +499,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1decisionsConsumerAuthenticationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

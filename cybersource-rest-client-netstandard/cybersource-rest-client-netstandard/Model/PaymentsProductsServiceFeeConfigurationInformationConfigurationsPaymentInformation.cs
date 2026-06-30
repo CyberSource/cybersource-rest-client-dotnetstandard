@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Payment types accepted by this merchant. The supported values are: MASTERDEBIT, MASTERCREDIT, VISACREDIT, VISADEBIT, DISCOVERCREDIT, AMEXCREDIT, ECHECK  Possible values: - MASTERDEBIT - MASTERCREDIT - VISACREDIT - VISADEBIT - DISCOVERCREDIT - AMEXCREDIT - ECHECK
         /// </summary>
         /// <value>Payment types accepted by this merchant. The supported values are: MASTERDEBIT, MASTERCREDIT, VISACREDIT, VISADEBIT, DISCOVERCREDIT, AMEXCREDIT, ECHECK  Possible values: - MASTERDEBIT - MASTERCREDIT - VISACREDIT - VISADEBIT - DISCOVERCREDIT - AMEXCREDIT - ECHECK</value>
-        [DataMember(Name="paymentType", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentType { get; set; }
 
         /// <summary>
         /// Fee type for the selected payment type. Supported values are: Flat or Percentage.   Possible values: - FLAT - PERCENTAGE
         /// </summary>
         /// <value>Fee type for the selected payment type. Supported values are: Flat or Percentage.   Possible values: - FLAT - PERCENTAGE</value>
-        [DataMember(Name="feeType", EmitDefaultValue=false)]
+        [JsonPropertyName("feeType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FeeType { get; set; }
 
         /// <summary>
         /// Fee Amount of the selected payment type if you chose Flat fee type. 
         /// </summary>
         /// <value>Fee Amount of the selected payment type if you chose Flat fee type. </value>
-        [DataMember(Name="feeAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("feeAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? FeeAmount { get; set; }
 
         /// <summary>
         /// Percentage of the selected payment type if you chose Percentage Fee type. Supported values use numbers with decimals. For example, 1.0 
         /// </summary>
         /// <value>Percentage of the selected payment type if you chose Percentage Fee type. Supported values use numbers with decimals. For example, 1.0 </value>
-        [DataMember(Name="percentage", EmitDefaultValue=false)]
+        [JsonPropertyName("percentage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? Percentage { get; set; }
 
         /// <summary>
         /// Fee cap for the selected payment type. Supported values use numbers with decimals. For example, 1.0 
         /// </summary>
         /// <value>Fee cap for the selected payment type. Supported values use numbers with decimals. For example, 1.0 </value>
-        [DataMember(Name="feeCap", EmitDefaultValue=false)]
+        [JsonPropertyName("feeCap")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? FeeCap { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PaymentsProductsServiceFeeConfigurationInformationConfigurationsPaymentInformation {\n");
-            if (PaymentType != null) sb.Append("  PaymentType: ").Append(PaymentType).Append("\n");
-            if (FeeType != null) sb.Append("  FeeType: ").Append(FeeType).Append("\n");
-            if (FeeAmount != null) sb.Append("  FeeAmount: ").Append(FeeAmount).Append("\n");
-            if (Percentage != null) sb.Append("  Percentage: ").Append(Percentage).Append("\n");
-            if (FeeCap != null) sb.Append("  FeeCap: ").Append(FeeCap).Append("\n");
+            if (PaymentType != null) sb.Append("  PaymentType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsServiceFeeConfigurationInformationConfigurationsPaymentInformation", "paymentType", PaymentType.ToString())).Append("\n");
+            if (FeeType != null) sb.Append("  FeeType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsServiceFeeConfigurationInformationConfigurationsPaymentInformation", "feeType", FeeType.ToString())).Append("\n");
+            if (FeeAmount != null) sb.Append("  FeeAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsServiceFeeConfigurationInformationConfigurationsPaymentInformation", "feeAmount", FeeAmount.ToString())).Append("\n");
+            if (Percentage != null) sb.Append("  Percentage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsServiceFeeConfigurationInformationConfigurationsPaymentInformation", "percentage", Percentage.ToString())).Append("\n");
+            if (FeeCap != null) sb.Append("  FeeCap: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsServiceFeeConfigurationInformationConfigurationsPaymentInformation", "feeCap", FeeCap.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PaymentsProductsServiceFeeConfigurationInformationConfigurationsPaymentInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

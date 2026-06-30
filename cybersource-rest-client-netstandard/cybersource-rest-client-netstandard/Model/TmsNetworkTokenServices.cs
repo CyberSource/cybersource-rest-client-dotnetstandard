@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -52,37 +52,43 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Notifications
         /// </summary>
-        [DataMember(Name="notifications", EmitDefaultValue=false)]
+        [JsonPropertyName("notifications")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsNetworkTokenServicesNotifications Notifications { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentCredentials
         /// </summary>
-        [DataMember(Name="paymentCredentials", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentCredentials")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsNetworkTokenServicesPaymentCredentials PaymentCredentials { get; set; }
 
         /// <summary>
         /// Gets or Sets SynchronousProvisioning
         /// </summary>
-        [DataMember(Name="synchronousProvisioning", EmitDefaultValue=false)]
+        [JsonPropertyName("synchronousProvisioning")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsNetworkTokenServicesSynchronousProvisioning SynchronousProvisioning { get; set; }
 
         /// <summary>
         /// Gets or Sets VisaTokenService
         /// </summary>
-        [DataMember(Name="visaTokenService", EmitDefaultValue=false)]
+        [JsonPropertyName("visaTokenService")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsNetworkTokenServicesVisaTokenService VisaTokenService { get; set; }
 
         /// <summary>
         /// Gets or Sets MastercardDigitalEnablementService
         /// </summary>
-        [DataMember(Name="mastercardDigitalEnablementService", EmitDefaultValue=false)]
+        [JsonPropertyName("mastercardDigitalEnablementService")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsNetworkTokenServicesMastercardDigitalEnablementService MastercardDigitalEnablementService { get; set; }
 
         /// <summary>
         /// Gets or Sets AmericanExpressTokenService
         /// </summary>
-        [DataMember(Name="americanExpressTokenService", EmitDefaultValue=false)]
+        [JsonPropertyName("americanExpressTokenService")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsNetworkTokenServicesAmericanExpressTokenService AmericanExpressTokenService { get; set; }
 
         /// <summary>
@@ -93,12 +99,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsNetworkTokenServices {\n");
-            if (Notifications != null) sb.Append("  Notifications: ").Append(Notifications).Append("\n");
-            if (PaymentCredentials != null) sb.Append("  PaymentCredentials: ").Append(PaymentCredentials).Append("\n");
-            if (SynchronousProvisioning != null) sb.Append("  SynchronousProvisioning: ").Append(SynchronousProvisioning).Append("\n");
-            if (VisaTokenService != null) sb.Append("  VisaTokenService: ").Append(VisaTokenService).Append("\n");
-            if (MastercardDigitalEnablementService != null) sb.Append("  MastercardDigitalEnablementService: ").Append(MastercardDigitalEnablementService).Append("\n");
-            if (AmericanExpressTokenService != null) sb.Append("  AmericanExpressTokenService: ").Append(AmericanExpressTokenService).Append("\n");
+            if (Notifications != null) sb.Append("  Notifications: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNetworkTokenServices", "notifications", Notifications.ToString())).Append("\n");
+            if (PaymentCredentials != null) sb.Append("  PaymentCredentials: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNetworkTokenServices", "paymentCredentials", PaymentCredentials.ToString())).Append("\n");
+            if (SynchronousProvisioning != null) sb.Append("  SynchronousProvisioning: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNetworkTokenServices", "synchronousProvisioning", SynchronousProvisioning.ToString())).Append("\n");
+            if (VisaTokenService != null) sb.Append("  VisaTokenService: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNetworkTokenServices", "visaTokenService", VisaTokenService.ToString())).Append("\n");
+            if (MastercardDigitalEnablementService != null) sb.Append("  MastercardDigitalEnablementService: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNetworkTokenServices", "mastercardDigitalEnablementService", MastercardDigitalEnablementService.ToString())).Append("\n");
+            if (AmericanExpressTokenService != null) sb.Append("  AmericanExpressTokenService: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNetworkTokenServices", "americanExpressTokenService", AmericanExpressTokenService.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -109,7 +115,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsNetworkTokenServices", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

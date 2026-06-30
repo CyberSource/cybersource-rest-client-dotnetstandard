@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using AuthenticationSdk.util.jwtExceptions;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Crypto.Signers;
 using Org.BouncyCastle.Security;
+using System.Text.Json;
 
 namespace AuthenticationSdk.util
 {
@@ -40,7 +40,7 @@ namespace AuthenticationSdk.util
                 // We'll verify this to ensure the token is fully compliant.
                 try
                 {
-                    JsonConvert.DeserializeObject(payloadJson);
+                    JsonDocument.Parse(payloadJson);
                 }
                 catch (JsonException jsonEx)
                 {
@@ -62,7 +62,7 @@ namespace AuthenticationSdk.util
             }
         }
 
-        public static IDictionary<string, object> GetJwtHeaders(string jwtToken)
+        public static IDictionary<string, JsonElement> GetJwtHeaders(string jwtToken)
         {
             return JwtCompact.DecodeHeaders(jwtToken);
         }
@@ -94,15 +94,15 @@ namespace AuthenticationSdk.util
 
                 // Step 3: Dynamically determine the algorithm from the JWT's header.
                 var headers = JwtCompact.DecodeHeaders(jwtValue);
-                if (!headers.TryGetValue("alg", out var alg))
+                if (!headers.TryGetValue("alg", out JsonElement alg))
                 {
                     throw new ArgumentException("JWT header is missing the 'alg' parameter.");
                 }
 
-                string algStr = alg as string;
+                string algStr = alg.GetString();
                 if (algStr == null)
                 {
-                    throw new ArgumentException($"JWT header 'alg' must be a string, but found: {alg?.GetType().Name ?? "null"} ({alg}).");
+                    throw new ArgumentException($"JWT header 'alg' must be a string, but found: {alg.ValueKind} ({alg}).");
                 }
 
                 var supportedRsaAlgorithms = new[] { "RS256", "RS384", "RS512" };
@@ -176,7 +176,7 @@ namespace AuthenticationSdk.util
             Dictionary<string, string> jwk;
             try
             {
-                jwk = JsonConvert.DeserializeObject<Dictionary<string, string>>(jwkJson);
+                jwk = JsonSerializer.Deserialize<Dictionary<string, string>>(jwkJson);
             }
             catch (JsonException ex)
             {

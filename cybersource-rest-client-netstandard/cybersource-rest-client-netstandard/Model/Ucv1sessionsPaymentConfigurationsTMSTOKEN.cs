@@ -17,15 +17,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
     /// <summary>
-    /// Allows a single Token Management Service (TMS) token to be presented within the Unified Checkout user interface. This enables customers to complete a payment using an existing stored credential.  Supported token types: - customer - instrumentIdentifiers - paymentInstruments  **Important note:** If a customer token ID is provided and token creation (tokenCreate) is enabled for a paymentInstrument or instrumentIdentifier within the Complete Mandate, Unified Checkout will create a new payment instrument or instrument identifier and associate it with the specified customer token. 
+    /// Allows a single Token Management Service (TMS) token to be presented within the Unified Checkout user interface. This enables customers to complete a payment using an existing stored credential.  Supported token types: - customer - instrumentIdentifiers - paymentInstruments&lt;br&gt;&lt;br&gt;  The allowedPaymentTypes field must also include TMS_TOKEN as shown below for the token to show in Unified Checkout:    \&quot;allowedPaymentTypes\&quot;: [\&quot;TMS-TOKEN\&quot;] &lt;br&gt;&lt;br&gt;  **Important note:** If a customer token ID is provided and token creation (tokenCreate) is enabled for a paymentInstrument or instrumentIdentifier within the Complete Mandate, Unified Checkout will create a new payment instrument or instrument identifier and associate it with the specified customer token. 
     /// </summary>
     [DataContract]
     public partial class Ucv1sessionsPaymentConfigurationsTMSTOKEN :  IEquatable<Ucv1sessionsPaymentConfigurationsTMSTOKEN>, IValidatableObject
@@ -46,21 +46,24 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Customer
         /// </summary>
-        [DataMember(Name="customer", EmitDefaultValue=false)]
+        [JsonPropertyName("customer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsPaymentConfigurationsTMSTOKENCustomer Customer { get; set; }
 
         /// <summary>
         /// List of existing payment instrument tokens associated with the customer. 
         /// </summary>
         /// <value>List of existing payment instrument tokens associated with the customer. </value>
-        [DataMember(Name="paymentInstruments", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInstruments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ucv1sessionsPaymentConfigurationsTMSTOKENPaymentInstruments> PaymentInstruments { get; set; }
 
         /// <summary>
         /// List of existing instrument identifier tokens. If not supplied, the default token type for the merchant&#39;s token vault is used. 
         /// </summary>
         /// <value>List of existing instrument identifier tokens. If not supplied, the default token type for the merchant&#39;s token vault is used. </value>
-        [DataMember(Name="instrumentIdentifiers", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentIdentifiers")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ucv1sessionsPaymentConfigurationsTMSTOKENInstrumentIdentifiers> InstrumentIdentifiers { get; set; }
 
         /// <summary>
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsPaymentConfigurationsTMSTOKEN {\n");
-            if (Customer != null) sb.Append("  Customer: ").Append(Customer).Append("\n");
-            if (PaymentInstruments != null) sb.Append("  PaymentInstruments: ").Append(PaymentInstruments).Append("\n");
-            if (InstrumentIdentifiers != null) sb.Append("  InstrumentIdentifiers: ").Append(InstrumentIdentifiers).Append("\n");
+            if (Customer != null) sb.Append("  Customer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsPaymentConfigurationsTMSTOKEN", "customer", Customer.ToString())).Append("\n");
+            if (PaymentInstruments != null) sb.Append("  PaymentInstruments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsPaymentConfigurationsTMSTOKEN", "paymentInstruments", PaymentInstruments.ToString())).Append("\n");
+            if (InstrumentIdentifiers != null) sb.Append("  InstrumentIdentifiers: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsPaymentConfigurationsTMSTOKEN", "instrumentIdentifiers", InstrumentIdentifiers.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsPaymentConfigurationsTMSTOKEN", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

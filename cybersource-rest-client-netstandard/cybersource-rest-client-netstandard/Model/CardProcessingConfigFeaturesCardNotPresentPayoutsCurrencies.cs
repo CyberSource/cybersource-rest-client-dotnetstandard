@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -54,49 +54,56 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Enabled
         /// </summary>
-        [DataMember(Name="enabled", EmitDefaultValue=false)]
+        [JsonPropertyName("enabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Enabled { get; set; }
 
         /// <summary>
         /// Indicates whether the card-present transaction is activated for the selected currency. If both enabledCardPresent and enabledCardNotPresent are set to null, then enabledCardPresent will have the value of enabled. 
         /// </summary>
         /// <value>Indicates whether the card-present transaction is activated for the selected currency. If both enabledCardPresent and enabledCardNotPresent are set to null, then enabledCardPresent will have the value of enabled. </value>
-        [DataMember(Name="enabledCardPresent", EmitDefaultValue=false)]
+        [JsonPropertyName("enabledCardPresent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnabledCardPresent { get; set; }
 
         /// <summary>
         /// Indicates whether the card-present transaction is activated for the selected currency. If both enabledCardPresent and enabledCardNotPresent are set to null, then enabledCardNotPresent will have the value of enabled. 
         /// </summary>
         /// <value>Indicates whether the card-present transaction is activated for the selected currency. If both enabledCardPresent and enabledCardNotPresent are set to null, then enabledCardNotPresent will have the value of enabled. </value>
-        [DataMember(Name="enabledCardNotPresent", EmitDefaultValue=false)]
+        [JsonPropertyName("enabledCardNotPresent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnabledCardNotPresent { get; set; }
 
         /// <summary>
         /// Merchant ID assigned by an acquirer or a processor. Should not be overriden by any other party.
         /// </summary>
         /// <value>Merchant ID assigned by an acquirer or a processor. Should not be overriden by any other party.</value>
-        [DataMember(Name="merchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantId { get; set; }
 
         /// <summary>
         /// The &#39;Terminal Id&#39; aka TID, is an identifier used for with your payments processor. Depending on the processor and payment acceptance type this may also be the default Terminal ID used for Card Present and Virtual Terminal transactions. 
         /// </summary>
         /// <value>The &#39;Terminal Id&#39; aka TID, is an identifier used for with your payments processor. Depending on the processor and payment acceptance type this may also be the default Terminal ID used for Card Present and Virtual Terminal transactions. </value>
-        [DataMember(Name="terminalId", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalId { get; set; }
 
         /// <summary>
         /// Applicable for Prisma (prisma) processor.
         /// </summary>
         /// <value>Applicable for Prisma (prisma) processor.</value>
-        [DataMember(Name="terminalIds", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalIds")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> TerminalIds { get; set; }
 
         /// <summary>
         /// Service Establishment Number (a.k.a. SE Number) is a unique ten-digit number assigned by American Express to a merchant that accepts American Express cards. 10 digit number provided by acquirer currency. This may be unique for each currency, however it depends on the way the processor is set up for the merchant. 
         /// </summary>
         /// <value>Service Establishment Number (a.k.a. SE Number) is a unique ten-digit number assigned by American Express to a merchant that accepts American Express cards. 10 digit number provided by acquirer currency. This may be unique for each currency, however it depends on the way the processor is set up for the merchant. </value>
-        [DataMember(Name="serviceEnablementNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("serviceEnablementNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ServiceEnablementNumber { get; set; }
 
         /// <summary>
@@ -107,13 +114,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CardProcessingConfigFeaturesCardNotPresentPayoutsCurrencies {\n");
-            if (Enabled != null) sb.Append("  Enabled: ").Append(Enabled).Append("\n");
-            if (EnabledCardPresent != null) sb.Append("  EnabledCardPresent: ").Append(EnabledCardPresent).Append("\n");
-            if (EnabledCardNotPresent != null) sb.Append("  EnabledCardNotPresent: ").Append(EnabledCardNotPresent).Append("\n");
-            if (MerchantId != null) sb.Append("  MerchantId: ").Append(MerchantId).Append("\n");
-            if (TerminalId != null) sb.Append("  TerminalId: ").Append(TerminalId).Append("\n");
-            if (TerminalIds != null) sb.Append("  TerminalIds: ").Append(TerminalIds).Append("\n");
-            if (ServiceEnablementNumber != null) sb.Append("  ServiceEnablementNumber: ").Append(ServiceEnablementNumber).Append("\n");
+            if (Enabled != null) sb.Append("  Enabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayoutsCurrencies", "enabled", Enabled.ToString())).Append("\n");
+            if (EnabledCardPresent != null) sb.Append("  EnabledCardPresent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayoutsCurrencies", "enabledCardPresent", EnabledCardPresent.ToString())).Append("\n");
+            if (EnabledCardNotPresent != null) sb.Append("  EnabledCardNotPresent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayoutsCurrencies", "enabledCardNotPresent", EnabledCardNotPresent.ToString())).Append("\n");
+            if (MerchantId != null) sb.Append("  MerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayoutsCurrencies", "merchantId", MerchantId.ToString())).Append("\n");
+            if (TerminalId != null) sb.Append("  TerminalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayoutsCurrencies", "terminalId", TerminalId.ToString())).Append("\n");
+            if (TerminalIds != null) sb.Append("  TerminalIds: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayoutsCurrencies", "terminalIds", TerminalIds.ToString())).Append("\n");
+            if (ServiceEnablementNumber != null) sb.Append("  ServiceEnablementNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayoutsCurrencies", "serviceEnablementNumber", ServiceEnablementNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -124,7 +131,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CardProcessingConfigFeaturesCardNotPresentPayoutsCurrencies", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -174,7 +174,7 @@ namespace {{packageName}}.{{apiPackage}}
             {
                 localVarPathParams.Add("{{baseName}}", ApiClient.ParameterToString({{paramName}})); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             {{/pathParams}}
             {{#queryParams}}
@@ -182,7 +182,7 @@ namespace {{packageName}}.{{apiPackage}}
             {
                 localVarQueryParams.Add("{{baseName}}", ApiClient.ParameterToString({{paramName}})); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             {{/queryParams}}
             {{#headerParams}}
@@ -354,7 +354,7 @@ namespace {{packageName}}.{{apiPackage}}
             {
                 localVarPathParams.Add("{{baseName}}", ApiClient.ParameterToString({{paramName}})); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             {{/pathParams}}
             {{#queryParams}}
@@ -362,7 +362,7 @@ namespace {{packageName}}.{{apiPackage}}
             {
                 localVarQueryParams.Add("{{baseName}}", ApiClient.ParameterToString({{paramName}})); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             {{/queryParams}}
             {{#headerParams}}

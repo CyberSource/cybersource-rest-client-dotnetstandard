@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -40,7 +40,7 @@ namespace CyberSource.Model
         /// <param name="Description">Description.</param>
         /// <param name="DefaultSettings">DefaultSettings.</param>
         /// <param name="SubscriptionType">&#39;The subscription type for which report definition is required. By default the type will be CUSTOM.&#39; Valid Values: - CLASSIC - CUSTOM - STANDARD .</param>
-        public ReportingV3ReportDefinitionsGet200ResponseReportDefinitions(string Type = default(string), int? ReportDefinitionId = default(int?), string ReportDefintionName = default(string), List<string> SupportedFormats = default(List<string>), string Description = default(string), ReportingV3ReportDefinitionsNameGet200ResponseDefaultSettings DefaultSettings = default(ReportingV3ReportDefinitionsNameGet200ResponseDefaultSettings), string SubscriptionType = default(string))
+        public ReportingV3ReportDefinitionsGet200ResponseReportDefinitions(string Type = default(string), int? ReportDefinitionId = default(int?), string ReportDefintionName = default(string), List<string> SupportedFormats = default(List<string>), string Description = default(string), ReportDefinitionDefaultSettings DefaultSettings = default(ReportDefinitionDefaultSettings), string SubscriptionType = default(string))
         {
             this.Type = Type;
             this.ReportDefinitionId = ReportDefinitionId;
@@ -54,45 +54,52 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// | Id  |         Definition Class          | | - -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | 210 | TransactionRequestClass           | | 211 | PaymentBatchDetailClass           | | 212 | ExceptionDetailClass              | | 213 | ProcessorSettlementDetailClass    | | 214 | ProcessorEventsDetailClass        | | 215 | FundingDetailClass                | | 216 | AgingDetailClass                  | | 217 | ChargebackAndRetrievalDetailClass | | 218 | DepositDetailClass                | | 219 | FeeDetailClass                    | | 220 | InvoiceSummaryClass               | | 221 | PayerAuthDetailClass              | | 222 | ConversionDetailClass             | | 225 | BillableTransactionsDetailClass   | | 270 | JPTransactionDetailClass          | | 271 | ServiceFeeDetailClass             | | 310 | GatewayTransactionRequestClass    | | 400 | DecisionManagerEventDetailClass   | | 401 | DecisionManagerDetailClass        | | 410 | FeeSummaryClass                   | | 420 | TaxCalculationClass               | | 520 | POSTerminalExceptionClass         | | 620 | SubscriptionDetailClass           | | 630 | StandardBillingDataPackageClass   | | 706 | StandardMonthlyFeeClass           | 
         /// </summary>
         /// <value>| Id  |         Definition Class          | | - -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | 210 | TransactionRequestClass           | | 211 | PaymentBatchDetailClass           | | 212 | ExceptionDetailClass              | | 213 | ProcessorSettlementDetailClass    | | 214 | ProcessorEventsDetailClass        | | 215 | FundingDetailClass                | | 216 | AgingDetailClass                  | | 217 | ChargebackAndRetrievalDetailClass | | 218 | DepositDetailClass                | | 219 | FeeDetailClass                    | | 220 | InvoiceSummaryClass               | | 221 | PayerAuthDetailClass              | | 222 | ConversionDetailClass             | | 225 | BillableTransactionsDetailClass   | | 270 | JPTransactionDetailClass          | | 271 | ServiceFeeDetailClass             | | 310 | GatewayTransactionRequestClass    | | 400 | DecisionManagerEventDetailClass   | | 401 | DecisionManagerDetailClass        | | 410 | FeeSummaryClass                   | | 420 | TaxCalculationClass               | | 520 | POSTerminalExceptionClass         | | 620 | SubscriptionDetailClass           | | 630 | StandardBillingDataPackageClass   | | 706 | StandardMonthlyFeeClass           | </value>
-        [DataMember(Name="reportDefinitionId", EmitDefaultValue=false)]
+        [JsonPropertyName("reportDefinitionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? ReportDefinitionId { get; set; }
 
         /// <summary>
         /// Gets or Sets ReportDefintionName
         /// </summary>
-        [DataMember(Name="reportDefintionName", EmitDefaultValue=false)]
+        [JsonPropertyName("reportDefintionName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportDefintionName { get; set; }
 
         /// <summary>
         /// Gets or Sets SupportedFormats
         /// </summary>
-        [DataMember(Name="supportedFormats", EmitDefaultValue=false)]
+        [JsonPropertyName("supportedFormats")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> SupportedFormats { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets DefaultSettings
         /// </summary>
-        [DataMember(Name="defaultSettings", EmitDefaultValue=false)]
-        public ReportingV3ReportDefinitionsNameGet200ResponseDefaultSettings DefaultSettings { get; set; }
+        [JsonPropertyName("defaultSettings")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public ReportDefinitionDefaultSettings DefaultSettings { get; set; }
 
         /// <summary>
         /// &#39;The subscription type for which report definition is required. By default the type will be CUSTOM.&#39; Valid Values: - CLASSIC - CUSTOM - STANDARD 
         /// </summary>
         /// <value>&#39;The subscription type for which report definition is required. By default the type will be CUSTOM.&#39; Valid Values: - CLASSIC - CUSTOM - STANDARD </value>
-        [DataMember(Name="subscriptionType", EmitDefaultValue=false)]
+        [JsonPropertyName("subscriptionType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubscriptionType { get; set; }
 
         /// <summary>
@@ -103,13 +110,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3ReportDefinitionsGet200ResponseReportDefinitions {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (ReportDefinitionId != null) sb.Append("  ReportDefinitionId: ").Append(ReportDefinitionId).Append("\n");
-            if (ReportDefintionName != null) sb.Append("  ReportDefintionName: ").Append(ReportDefintionName).Append("\n");
-            if (SupportedFormats != null) sb.Append("  SupportedFormats: ").Append(SupportedFormats).Append("\n");
-            if (Description != null) sb.Append("  Description: ").Append(Description).Append("\n");
-            if (DefaultSettings != null) sb.Append("  DefaultSettings: ").Append(DefaultSettings).Append("\n");
-            if (SubscriptionType != null) sb.Append("  SubscriptionType: ").Append(SubscriptionType).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsGet200ResponseReportDefinitions", "type", Type.ToString())).Append("\n");
+            if (ReportDefinitionId != null) sb.Append("  ReportDefinitionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsGet200ResponseReportDefinitions", "reportDefinitionId", ReportDefinitionId.ToString())).Append("\n");
+            if (ReportDefintionName != null) sb.Append("  ReportDefintionName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsGet200ResponseReportDefinitions", "reportDefintionName", ReportDefintionName.ToString())).Append("\n");
+            if (SupportedFormats != null) sb.Append("  SupportedFormats: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsGet200ResponseReportDefinitions", "supportedFormats", SupportedFormats.ToString())).Append("\n");
+            if (Description != null) sb.Append("  Description: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsGet200ResponseReportDefinitions", "description", Description.ToString())).Append("\n");
+            if (DefaultSettings != null) sb.Append("  DefaultSettings: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsGet200ResponseReportDefinitions", "defaultSettings", DefaultSettings.ToString())).Append("\n");
+            if (SubscriptionType != null) sb.Append("  SubscriptionType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsGet200ResponseReportDefinitions", "subscriptionType", SubscriptionType.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -120,7 +127,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3ReportDefinitionsGet200ResponseReportDefinitions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

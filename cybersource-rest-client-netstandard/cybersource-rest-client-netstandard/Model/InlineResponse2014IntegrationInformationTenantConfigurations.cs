@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// The solutionId is the unique identifier for this system resource. Partner can use it to reference the specific solution through out the system. 
         /// </summary>
         /// <value>The solutionId is the unique identifier for this system resource. Partner can use it to reference the specific solution through out the system. </value>
-        [DataMember(Name="solutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("solutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SolutionId { get; set; }
 
         /// <summary>
         /// The tenantConfigurationId is the unique identifier for this system resource. You will see various places where it must be referenced in the URI path, or when querying the hierarchy for ancestors or descendants. 
         /// </summary>
         /// <value>The tenantConfigurationId is the unique identifier for this system resource. You will see various places where it must be referenced in the URI path, or when querying the hierarchy for ancestors or descendants. </value>
-        [DataMember(Name="tenantConfigurationId", EmitDefaultValue=false)]
+        [JsonPropertyName("tenantConfigurationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TenantConfigurationId { get; set; }
 
         /// <summary>
         /// Possible values: - LIVE - INACTIVE - TEST
         /// </summary>
         /// <value>Possible values: - LIVE - INACTIVE - TEST</value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Time of request in UTC.
         /// </summary>
         /// <value>Time of request in UTC.</value>
-        [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("submitTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? SubmitTimeUtc { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2014IntegrationInformationTenantConfigurations {\n");
-            if (SolutionId != null) sb.Append("  SolutionId: ").Append(SolutionId).Append("\n");
-            if (TenantConfigurationId != null) sb.Append("  TenantConfigurationId: ").Append(TenantConfigurationId).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
+            if (SolutionId != null) sb.Append("  SolutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014IntegrationInformationTenantConfigurations", "solutionId", SolutionId.ToString())).Append("\n");
+            if (TenantConfigurationId != null) sb.Append("  TenantConfigurationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014IntegrationInformationTenantConfigurations", "tenantConfigurationId", TenantConfigurationId.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014IntegrationInformationTenantConfigurations", "status", Status.ToString())).Append("\n");
+            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014IntegrationInformationTenantConfigurations", "submitTimeUtc", SubmitTimeUtc.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2014IntegrationInformationTenantConfigurations", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

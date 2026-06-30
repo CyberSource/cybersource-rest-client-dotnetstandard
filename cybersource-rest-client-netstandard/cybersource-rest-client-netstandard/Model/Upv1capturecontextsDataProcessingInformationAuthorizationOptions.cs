@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,55 +57,63 @@ namespace CyberSource.Model
         /// The AFT indicator
         /// </summary>
         /// <value>The AFT indicator</value>
-        [DataMember(Name="aftIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("aftIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AftIndicator { get; set; }
 
         /// <summary>
         /// The authorization indicator
         /// </summary>
         /// <value>The authorization indicator</value>
-        [DataMember(Name="authIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("authIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthIndicator { get; set; }
 
         /// <summary>
         /// Ignore the CV result
         /// </summary>
         /// <value>Ignore the CV result</value>
-        [DataMember(Name="ignoreCvResult", EmitDefaultValue=false)]
+        [JsonPropertyName("ignoreCvResult")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IgnoreCvResult { get; set; }
 
         /// <summary>
         /// Ignore the AVS result
         /// </summary>
         /// <value>Ignore the AVS result</value>
-        [DataMember(Name="ignoreAvsResult", EmitDefaultValue=false)]
+        [JsonPropertyName("ignoreAvsResult")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IgnoreAvsResult { get; set; }
 
         /// <summary>
         /// Gets or Sets Initiator
         /// </summary>
-        [DataMember(Name="initiator", EmitDefaultValue=false)]
+        [JsonPropertyName("initiator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataProcessingInformationAuthorizationOptionsInitiator Initiator { get; set; }
 
         /// <summary>
         /// The business application Id
         /// </summary>
         /// <value>The business application Id</value>
-        [DataMember(Name="businessApplicationId", EmitDefaultValue=false)]
+        [JsonPropertyName("businessApplicationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessApplicationId { get; set; }
 
         /// <summary>
         /// The commerce indicator
         /// </summary>
         /// <value>The commerce indicator</value>
-        [DataMember(Name="commerceIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("commerceIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommerceIndicator { get; set; }
 
         /// <summary>
         /// The processing instruction
         /// </summary>
         /// <value>The processing instruction</value>
-        [DataMember(Name="processingInstruction", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInstruction")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessingInstruction { get; set; }
 
         /// <summary>
@@ -116,14 +124,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Upv1capturecontextsDataProcessingInformationAuthorizationOptions {\n");
-            if (AftIndicator != null) sb.Append("  AftIndicator: ").Append(AftIndicator).Append("\n");
-            if (AuthIndicator != null) sb.Append("  AuthIndicator: ").Append(AuthIndicator).Append("\n");
-            if (IgnoreCvResult != null) sb.Append("  IgnoreCvResult: ").Append(IgnoreCvResult).Append("\n");
-            if (IgnoreAvsResult != null) sb.Append("  IgnoreAvsResult: ").Append(IgnoreAvsResult).Append("\n");
-            if (Initiator != null) sb.Append("  Initiator: ").Append(Initiator).Append("\n");
-            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(BusinessApplicationId).Append("\n");
-            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CommerceIndicator).Append("\n");
-            if (ProcessingInstruction != null) sb.Append("  ProcessingInstruction: ").Append(ProcessingInstruction).Append("\n");
+            if (AftIndicator != null) sb.Append("  AftIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataProcessingInformationAuthorizationOptions", "aftIndicator", AftIndicator.ToString())).Append("\n");
+            if (AuthIndicator != null) sb.Append("  AuthIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataProcessingInformationAuthorizationOptions", "authIndicator", AuthIndicator.ToString())).Append("\n");
+            if (IgnoreCvResult != null) sb.Append("  IgnoreCvResult: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataProcessingInformationAuthorizationOptions", "ignoreCvResult", IgnoreCvResult.ToString())).Append("\n");
+            if (IgnoreAvsResult != null) sb.Append("  IgnoreAvsResult: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataProcessingInformationAuthorizationOptions", "ignoreAvsResult", IgnoreAvsResult.ToString())).Append("\n");
+            if (Initiator != null) sb.Append("  Initiator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataProcessingInformationAuthorizationOptions", "initiator", Initiator.ToString())).Append("\n");
+            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataProcessingInformationAuthorizationOptions", "businessApplicationId", BusinessApplicationId.ToString())).Append("\n");
+            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataProcessingInformationAuthorizationOptions", "commerceIndicator", CommerceIndicator.ToString())).Append("\n");
+            if (ProcessingInstruction != null) sb.Append("  ProcessingInstruction: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataProcessingInformationAuthorizationOptions", "processingInstruction", ProcessingInstruction.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -134,7 +142,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Upv1capturecontextsDataProcessingInformationAuthorizationOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

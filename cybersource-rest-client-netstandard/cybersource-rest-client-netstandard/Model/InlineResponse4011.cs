@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -54,45 +54,52 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse4011Links Links { get; set; }
 
         /// <summary>
         /// Valid Values:   * FORBIDDEN_RESPONSE   * VALIDATION_ERROR   * UNSUPPORTED_MEDIA_TYPE   * MALFORMED_PAYLOAD_ERROR   * SERVER_ERROR 
         /// </summary>
         /// <value>Valid Values:   * FORBIDDEN_RESPONSE   * VALIDATION_ERROR   * UNSUPPORTED_MEDIA_TYPE   * MALFORMED_PAYLOAD_ERROR   * SERVER_ERROR </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Gets or Sets CorrelationId
         /// </summary>
-        [DataMember(Name="correlationId", EmitDefaultValue=false)]
+        [JsonPropertyName("correlationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CorrelationId { get; set; }
 
         /// <summary>
         /// Gets or Sets Detail
         /// </summary>
-        [DataMember(Name="detail", EmitDefaultValue=false)]
+        [JsonPropertyName("detail")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Detail { get; set; }
 
         /// <summary>
         /// Gets or Sets Fields
         /// </summary>
-        [DataMember(Name="fields", EmitDefaultValue=false)]
+        [JsonPropertyName("fields")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<InlineResponse4011Fields> Fields { get; set; }
 
         /// <summary>
         /// Valid Values:   * cybsapi.forbidden.response   * cybsapi.validation.error   * cybsapi.media.notsupported 
         /// </summary>
         /// <value>Valid Values:   * cybsapi.forbidden.response   * cybsapi.validation.error   * cybsapi.media.notsupported </value>
-        [DataMember(Name="localizationKey", EmitDefaultValue=false)]
+        [JsonPropertyName("localizationKey")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LocalizationKey { get; set; }
 
         /// <summary>
         /// Gets or Sets Message
         /// </summary>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
@@ -103,13 +110,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse4011 {\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (CorrelationId != null) sb.Append("  CorrelationId: ").Append(CorrelationId).Append("\n");
-            if (Detail != null) sb.Append("  Detail: ").Append(Detail).Append("\n");
-            if (Fields != null) sb.Append("  Fields: ").Append(Fields).Append("\n");
-            if (LocalizationKey != null) sb.Append("  LocalizationKey: ").Append(LocalizationKey).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse4011", "_links", Links.ToString())).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse4011", "code", Code.ToString())).Append("\n");
+            if (CorrelationId != null) sb.Append("  CorrelationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse4011", "correlationId", CorrelationId.ToString())).Append("\n");
+            if (Detail != null) sb.Append("  Detail: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse4011", "detail", Detail.ToString())).Append("\n");
+            if (Fields != null) sb.Append("  Fields: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse4011", "fields", Fields.ToString())).Append("\n");
+            if (LocalizationKey != null) sb.Append("  LocalizationKey: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse4011", "localizationKey", LocalizationKey.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse4011", "message", Message.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -120,7 +127,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse4011", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

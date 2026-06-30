@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsIntegrationInformationTenantConfigurations" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Boardingv1registrationsIntegrationInformationTenantConfigurations() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsIntegrationInformationTenantConfigurations" /> class.
@@ -50,13 +50,15 @@ namespace CyberSource.Model
         /// The solutionId is the unique identifier for this system resource. Partner can use it to reference the specific solution through out the system. 
         /// </summary>
         /// <value>The solutionId is the unique identifier for this system resource. Partner can use it to reference the specific solution through out the system. </value>
-        [DataMember(Name="solutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("solutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SolutionId { get; set; }
 
         /// <summary>
         /// Gets or Sets TenantInformation
         /// </summary>
-        [DataMember(Name="tenantInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("tenantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Boardingv1registrationsIntegrationInformationTenantInformation TenantInformation { get; set; }
 
         /// <summary>
@@ -67,8 +69,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Boardingv1registrationsIntegrationInformationTenantConfigurations {\n");
-            if (SolutionId != null) sb.Append("  SolutionId: ").Append(SolutionId).Append("\n");
-            if (TenantInformation != null) sb.Append("  TenantInformation: ").Append(TenantInformation).Append("\n");
+            if (SolutionId != null) sb.Append("  SolutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsIntegrationInformationTenantConfigurations", "solutionId", SolutionId.ToString())).Append("\n");
+            if (TenantInformation != null) sb.Append("  TenantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsIntegrationInformationTenantConfigurations", "tenantInformation", TenantInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -79,7 +81,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Boardingv1registrationsIntegrationInformationTenantConfigurations", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

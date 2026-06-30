@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,34 +51,39 @@ namespace CyberSource.Model
         /// Indicates the reason why a request succeeded or failed and possible action to take if a request fails.  For details, see the appendix of reason codes in the documentation for the relevant payment method. 
         /// </summary>
         /// <value>Indicates the reason why a request succeeded or failed and possible action to take if a request fails.  For details, see the appendix of reason codes in the documentation for the relevant payment method. </value>
-        [DataMember(Name="reasonCode", EmitDefaultValue=false)]
+        [JsonPropertyName("reasonCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReasonCode { get; set; }
 
         /// <summary>
         /// Indicates whether the service request was successful. Possible values:  - &#x60;-1&#x60;: An error occurred. - &#x60;0&#x60;: The request was declined. - &#x60;1&#x60;: The request was successful. 
         /// </summary>
         /// <value>Indicates whether the service request was successful. Possible values:  - &#x60;-1&#x60;: An error occurred. - &#x60;0&#x60;: The request was declined. - &#x60;1&#x60;: The request was successful. </value>
-        [DataMember(Name="rCode", EmitDefaultValue=false)]
+        [JsonPropertyName("rCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RCode { get; set; }
 
         /// <summary>
         /// One-word description of the result of the application. 
         /// </summary>
         /// <value>One-word description of the result of the application. </value>
-        [DataMember(Name="rFlag", EmitDefaultValue=false)]
+        [JsonPropertyName("rFlag")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RFlag { get; set; }
 
         /// <summary>
         /// Gets or Sets Applications
         /// </summary>
-        [DataMember(Name="applications", EmitDefaultValue=false)]
+        [JsonPropertyName("applications")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<TssV2TransactionsPost201ResponseEmbeddedApplicationInformationApplications> Applications { get; set; }
 
         /// <summary>
         /// The description for this field is not available.
         /// </summary>
         /// <value>The description for this field is not available.</value>
-        [DataMember(Name="returnCode", EmitDefaultValue=false)]
+        [JsonPropertyName("returnCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? ReturnCode { get; set; }
 
         /// <summary>
@@ -89,11 +94,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsPost201ResponseEmbeddedApplicationInformation {\n");
-            if (ReasonCode != null) sb.Append("  ReasonCode: ").Append(ReasonCode).Append("\n");
-            if (RCode != null) sb.Append("  RCode: ").Append(RCode).Append("\n");
-            if (RFlag != null) sb.Append("  RFlag: ").Append(RFlag).Append("\n");
-            if (Applications != null) sb.Append("  Applications: ").Append(Applications).Append("\n");
-            if (ReturnCode != null) sb.Append("  ReturnCode: ").Append(ReturnCode).Append("\n");
+            if (ReasonCode != null) sb.Append("  ReasonCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedApplicationInformation", "reasonCode", ReasonCode.ToString())).Append("\n");
+            if (RCode != null) sb.Append("  RCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedApplicationInformation", "rCode", RCode.ToString())).Append("\n");
+            if (RFlag != null) sb.Append("  RFlag: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedApplicationInformation", "rFlag", RFlag.ToString())).Append("\n");
+            if (Applications != null) sb.Append("  Applications: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedApplicationInformation", "applications", Applications.ToString())).Append("\n");
+            if (ReturnCode != null) sb.Append("  ReturnCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedApplicationInformation", "returnCode", ReturnCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,7 +109,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsPost201ResponseEmbeddedApplicationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

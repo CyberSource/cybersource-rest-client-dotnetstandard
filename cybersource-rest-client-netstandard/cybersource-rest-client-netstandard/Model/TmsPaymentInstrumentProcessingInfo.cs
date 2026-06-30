@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,13 +45,15 @@ namespace CyberSource.Model
         /// Flag that indicates that this is a payment for a bill or for an existing contractual loan. Possible Values: - &#x60;true&#x60;: Bill payment or loan payment. - &#x60;false&#x60; (default): Not a bill payment or loan payment. # For processor-specific details, see the &#x60;bill_payment&#x60; field description in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/) 
         /// </summary>
         /// <value>Flag that indicates that this is a payment for a bill or for an existing contractual loan. Possible Values: - &#x60;true&#x60;: Bill payment or loan payment. - &#x60;false&#x60; (default): Not a bill payment or loan payment. # For processor-specific details, see the &#x60;bill_payment&#x60; field description in [Credit Card Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/CC_Svcs_SCMP_API/html/) </value>
-        [DataMember(Name="billPaymentProgramEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("billPaymentProgramEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? BillPaymentProgramEnabled { get; set; }
 
         /// <summary>
         /// Gets or Sets BankTransferOptions
         /// </summary>
-        [DataMember(Name="bankTransferOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("bankTransferOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsPaymentInstrumentProcessingInfoBankTransferOptions BankTransferOptions { get; set; }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsPaymentInstrumentProcessingInfo {\n");
-            if (BillPaymentProgramEnabled != null) sb.Append("  BillPaymentProgramEnabled: ").Append(BillPaymentProgramEnabled).Append("\n");
-            if (BankTransferOptions != null) sb.Append("  BankTransferOptions: ").Append(BankTransferOptions).Append("\n");
+            if (BillPaymentProgramEnabled != null) sb.Append("  BillPaymentProgramEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsPaymentInstrumentProcessingInfo", "billPaymentProgramEnabled", BillPaymentProgramEnabled.ToString())).Append("\n");
+            if (BankTransferOptions != null) sb.Append("  BankTransferOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsPaymentInstrumentProcessingInfo", "bankTransferOptions", BankTransferOptions.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,7 +76,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsPaymentInstrumentProcessingInfo", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -105,218 +105,250 @@ namespace CyberSource.Model
         /// The remaining amount which can be refunded.
         /// </summary>
         /// <value>The remaining amount which can be refunded.</value>
-        [DataMember(Name="refundBalance", EmitDefaultValue=false)]
+        [JsonPropertyName("refundBalance")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RefundBalance { get; set; }
 
         /// <summary>
         /// Amount being charged as gift wrap fee. 
         /// </summary>
         /// <value>Amount being charged as gift wrap fee. </value>
-        [DataMember(Name="giftWrapAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("giftWrapAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string GiftWrapAmount { get; set; }
 
         /// <summary>
         /// Invoice amount.  The invoice amount issued by the Merchant to the Cardholder, which includes VAT (excluding items such as TIPS or CASHBACK). For transactions that do not have applicable Benefit Laws, the field may be entered as zeros.  This field is only applicable for Uruguay market.  Example: 100.00  Uruguay  The value for this field corresponds to the following data in the TC 33 capture file:  - Record: CP01 TCR9 - Position: 7-18 - Field: Invoice Amount 
         /// </summary>
         /// <value>Invoice amount.  The invoice amount issued by the Merchant to the Cardholder, which includes VAT (excluding items such as TIPS or CASHBACK). For transactions that do not have applicable Benefit Laws, the field may be entered as zeros.  This field is only applicable for Uruguay market.  Example: 100.00  Uruguay  The value for this field corresponds to the following data in the TC 33 capture file:  - Record: CP01 TCR9 - Position: 7-18 - Field: Invoice Amount </value>
-        [DataMember(Name="invoiceAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InvoiceAmount { get; set; }
 
         /// <summary>
         /// Grand total for the order. This value cannot be negative. You can include a decimal point (.), but no other special characters. CyberSource truncates the amount to the correct number of decimal places.  **Note** For CTV, FDCCompass, Paymentech processors, the maximum length for this field is 12.  **Important** Some processors have specific requirements and limitations, such as maximum amounts and maximum field lengths.  If your processor supports zero amount authorizations, you can set this field to 0 for the authorization to check if the card is lost or stolen.   #### Card Present Required to include either this field or &#x60;orderInformation.lineItems[].unitPrice&#x60; for the order.  #### Invoicing / Pay By Link Required for creating a new invoice or payment link.  #### PIN Debit Amount you requested for the PIN debit purchase. This value is returned for partial authorizations. The issuing bank can approve a partial amount if the balance on the debit card is less than the requested transaction amount.  Required field for PIN Debit purchase and PIN Debit credit requests. Optional field for PIN Debit reversal requests.  #### GPX This field is optional for reversing an authorization or credit; however, for all other processors, these fields are required.  #### DCC with a Third-Party Provider Set this field to the converted amount that was returned by the DCC provider. You must include either this field or the 1st line item in the order and the specific line-order amount in your request.   #### DCC for First Data Not used. 
         /// </summary>
         /// <value>Grand total for the order. This value cannot be negative. You can include a decimal point (.), but no other special characters. CyberSource truncates the amount to the correct number of decimal places.  **Note** For CTV, FDCCompass, Paymentech processors, the maximum length for this field is 12.  **Important** Some processors have specific requirements and limitations, such as maximum amounts and maximum field lengths.  If your processor supports zero amount authorizations, you can set this field to 0 for the authorization to check if the card is lost or stolen.   #### Card Present Required to include either this field or &#x60;orderInformation.lineItems[].unitPrice&#x60; for the order.  #### Invoicing / Pay By Link Required for creating a new invoice or payment link.  #### PIN Debit Amount you requested for the PIN debit purchase. This value is returned for partial authorizations. The issuing bank can approve a partial amount if the balance on the debit card is less than the requested transaction amount.  Required field for PIN Debit purchase and PIN Debit credit requests. Optional field for PIN Debit reversal requests.  #### GPX This field is optional for reversing an authorization or credit; however, for all other processors, these fields are required.  #### DCC with a Third-Party Provider Set this field to the converted amount that was returned by the DCC provider. You must include either this field or the 1st line item in the order and the specific line-order amount in your request.   #### DCC for First Data Not used. </value>
-        [DataMember(Name="totalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalAmount { get; set; }
 
         /// <summary>
         /// Subtotal amount of all the items.This amount (which is the value of all items in the cart, not including the additional amounts such as tax, shipping, etc.) cannot change after a sessions request. When there is a change to any of the additional amounts, this field should be resent in the order request. When the sub total amount changes, you must initiate a new transaction starting with a sessions request. Note The amount value must be a non-negative number containing 2 decimal places and limited to 7 digits before the decimal point. This value can not be changed after a sessions request. 
         /// </summary>
         /// <value>Subtotal amount of all the items.This amount (which is the value of all items in the cart, not including the additional amounts such as tax, shipping, etc.) cannot change after a sessions request. When there is a change to any of the additional amounts, this field should be resent in the order request. When the sub total amount changes, you must initiate a new transaction starting with a sessions request. Note The amount value must be a non-negative number containing 2 decimal places and limited to 7 digits before the decimal point. This value can not be changed after a sessions request. </value>
-        [DataMember(Name="subTotalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("subTotalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubTotalAmount { get; set; }
 
         /// <summary>
         /// Currency used for the order. Use the three-character [ISO Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)  #### Used by **Authorization** Required field.  **Authorization Reversal** For an authorization reversal (&#x60;reversalInformation&#x60;) or a capture (&#x60;processingOptions.capture&#x60; is set to &#x60;true&#x60;), you must use the same currency that you used in your payment authorization request.  #### PIN Debit Currency for the amount you requested for the PIN debit purchase. This value is returned for partial authorizations. The issuing bank can approve a partial amount if the balance on the debit card is less than the requested transaction amount. For the possible values, see the [ISO Standard Currency Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/currencies.pdf). Returned by PIN debit purchase.  For PIN debit reversal requests, you must use the same currency that was used for the PIN debit purchase or PIN debit credit that you are reversing. For the possible values, see the [ISO Standard Currency Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/currencies.pdf).  Required field for PIN Debit purchase and PIN Debit credit requests. Optional field for PIN Debit reversal requests.  #### GPX This field is optional for reversing an authorization or credit.  #### DCC for First Data Your local currency.  #### Tax Calculation Required for international tax and value added tax only. Optional for U.S. and Canadian taxes. Your local currency. 
         /// </summary>
         /// <value>Currency used for the order. Use the three-character [ISO Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)  #### Used by **Authorization** Required field.  **Authorization Reversal** For an authorization reversal (&#x60;reversalInformation&#x60;) or a capture (&#x60;processingOptions.capture&#x60; is set to &#x60;true&#x60;), you must use the same currency that you used in your payment authorization request.  #### PIN Debit Currency for the amount you requested for the PIN debit purchase. This value is returned for partial authorizations. The issuing bank can approve a partial amount if the balance on the debit card is less than the requested transaction amount. For the possible values, see the [ISO Standard Currency Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/currencies.pdf). Returned by PIN debit purchase.  For PIN debit reversal requests, you must use the same currency that was used for the PIN debit purchase or PIN debit credit that you are reversing. For the possible values, see the [ISO Standard Currency Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/currencies.pdf).  Required field for PIN Debit purchase and PIN Debit credit requests. Optional field for PIN Debit reversal requests.  #### GPX This field is optional for reversing an authorization or credit.  #### DCC for First Data Your local currency.  #### Tax Calculation Required for international tax and value added tax only. Optional for U.S. and Canadian taxes. Your local currency. </value>
-        [DataMember(Name="currency", EmitDefaultValue=false)]
+        [JsonPropertyName("currency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Currency { get; set; }
 
         /// <summary>
         /// Total discount amount applied to the order. 
         /// </summary>
         /// <value>Total discount amount applied to the order. </value>
-        [DataMember(Name="discountAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("discountAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscountAmount { get; set; }
 
         /// <summary>
         /// Total charges for any import or export duties included in the order. 
         /// </summary>
         /// <value>Total charges for any import or export duties included in the order. </value>
-        [DataMember(Name="dutyAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("dutyAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DutyAmount { get; set; }
 
         /// <summary>
         /// Gratuity or tip amount for restaurants. Allowed only when industryDatatype&#x3D;restaurant. When your customer uses a debit card or prepaid card, and you receive a partial authorization, the payment networks recommend that you do not submit a capture amount that is higher than the authorized amount. When the capture amount exceeds the partial amount that was approved, the issuer has chargeback rights for the excess amount.  Used by **Capture** Optional field.  #### CyberSource through VisaNet Restaurant data is supported only on CyberSource through VisaNet when card is present. 
         /// </summary>
         /// <value>Gratuity or tip amount for restaurants. Allowed only when industryDatatype&#x3D;restaurant. When your customer uses a debit card or prepaid card, and you receive a partial authorization, the payment networks recommend that you do not submit a capture amount that is higher than the authorized amount. When the capture amount exceeds the partial amount that was approved, the issuer has chargeback rights for the excess amount.  Used by **Capture** Optional field.  #### CyberSource through VisaNet Restaurant data is supported only on CyberSource through VisaNet when card is present. </value>
-        [DataMember(Name="gratuityAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("gratuityAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string GratuityAmount { get; set; }
 
         /// <summary>
         /// Total tax amount for all the items in the order. 
         /// </summary>
         /// <value>Total tax amount for all the items in the order. </value>
-        [DataMember(Name="taxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAmount { get; set; }
 
         /// <summary>
         /// Flag that indicates whether a national tax is included in the order total.  Possible values:   - **0**: national tax not included  - **1**: national tax included 
         /// </summary>
         /// <value>Flag that indicates whether a national tax is included in the order total.  Possible values:   - **0**: national tax not included  - **1**: national tax included </value>
-        [DataMember(Name="nationalTaxIncluded", EmitDefaultValue=false)]
+        [JsonPropertyName("nationalTaxIncluded")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NationalTaxIncluded { get; set; }
 
         /// <summary>
         /// Flag that indicates how the merchant manages discounts.  Possible values:   - **0**: no invoice level discount included  - **1**: tax calculated on the postdiscount invoice total  - **2**: tax calculated on the prediscount invoice total 
         /// </summary>
         /// <value>Flag that indicates how the merchant manages discounts.  Possible values:   - **0**: no invoice level discount included  - **1**: tax calculated on the postdiscount invoice total  - **2**: tax calculated on the prediscount invoice total </value>
-        [DataMember(Name="taxAppliedAfterDiscount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAppliedAfterDiscount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAppliedAfterDiscount { get; set; }
 
         /// <summary>
         /// Flag that indicates how you calculate tax.  Possible values:   - **0**: net prices with tax calculated at line item level  - **1**: net prices with tax calculated at invoice level  - **2**: gross prices with tax provided at line item level  - **3**: gross prices with tax provided at invoice level  - **4**: no tax applies on the invoice for the transaction 
         /// </summary>
         /// <value>Flag that indicates how you calculate tax.  Possible values:   - **0**: net prices with tax calculated at line item level  - **1**: net prices with tax calculated at invoice level  - **2**: gross prices with tax provided at line item level  - **3**: gross prices with tax provided at invoice level  - **4**: no tax applies on the invoice for the transaction </value>
-        [DataMember(Name="taxAppliedLevel", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAppliedLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAppliedLevel { get; set; }
 
         /// <summary>
         /// For tax amounts that can be categorized as one tax type.  This field contains the tax type code that corresponds to the entry in the _lineItems.taxAmount_ field.  Possible values:   - **056**: sales tax (U.S only)  - **TX~**: all taxes (Canada only)   Note ~ &#x3D; space. 
         /// </summary>
         /// <value>For tax amounts that can be categorized as one tax type.  This field contains the tax type code that corresponds to the entry in the _lineItems.taxAmount_ field.  Possible values:   - **056**: sales tax (U.S only)  - **TX~**: all taxes (Canada only)   Note ~ &#x3D; space. </value>
-        [DataMember(Name="taxTypeCode", EmitDefaultValue=false)]
+        [JsonPropertyName("taxTypeCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxTypeCode { get; set; }
 
         /// <summary>
         /// Total freight or shipping and handling charges for the order. When you include this field in your request, you must also include the **totalAmount** field. 
         /// </summary>
         /// <value>Total freight or shipping and handling charges for the order. When you include this field in your request, you must also include the **totalAmount** field. </value>
-        [DataMember(Name="freightAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("freightAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FreightAmount { get; set; }
 
         /// <summary>
         /// Set this field to the converted amount that was returned by the DCC provider. 
         /// </summary>
         /// <value>Set this field to the converted amount that was returned by the DCC provider. </value>
-        [DataMember(Name="foreignAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("foreignAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ForeignAmount { get; set; }
 
         /// <summary>
         /// Set this field to the converted amount that was returned by the DCC provider. 
         /// </summary>
         /// <value>Set this field to the converted amount that was returned by the DCC provider. </value>
-        [DataMember(Name="foreignCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("foreignCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ForeignCurrency { get; set; }
 
         /// <summary>
         /// Exchange rate returned by the DCC service. Includes a decimal point and a maximum of 4 decimal places. 
         /// </summary>
         /// <value>Exchange rate returned by the DCC service. Includes a decimal point and a maximum of 4 decimal places. </value>
-        [DataMember(Name="exchangeRate", EmitDefaultValue=false)]
+        [JsonPropertyName("exchangeRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExchangeRate { get; set; }
 
         /// <summary>
         /// Time stamp for the exchange rate. This value is returned by the DCC service.  Format: &#x60;YYYYMMDD~HH:MM&#x60;  where ~ denotes a space. 
         /// </summary>
         /// <value>Time stamp for the exchange rate. This value is returned by the DCC service.  Format: &#x60;YYYYMMDD~HH:MM&#x60;  where ~ denotes a space. </value>
-        [DataMember(Name="exchangeRateTimeStamp", EmitDefaultValue=false)]
+        [JsonPropertyName("exchangeRateTimeStamp")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExchangeRateTimeStamp { get; set; }
 
         /// <summary>
         /// Gets or Sets Surcharge
         /// </summary>
-        [DataMember(Name="surcharge", EmitDefaultValue=false)]
+        [JsonPropertyName("surcharge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsOrderInformationAmountDetailsSurcharge Surcharge { get; set; }
 
         /// <summary>
         /// This is a multicurrency field. It contains the transaction amount (field 4), converted to the Currency used to bill the cardholder&#39;s account. This field is returned for OCT transactions. 
         /// </summary>
         /// <value>This is a multicurrency field. It contains the transaction amount (field 4), converted to the Currency used to bill the cardholder&#39;s account. This field is returned for OCT transactions. </value>
-        [DataMember(Name="settlementAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementAmount { get; set; }
 
         /// <summary>
         /// This is a multicurrency-only field. It contains a 3-digit numeric code that identifies the currency used by the issuer to bill the cardholder&#39;s account. This field is returned for OCT transactions. 
         /// </summary>
         /// <value>This is a multicurrency-only field. It contains a 3-digit numeric code that identifies the currency used by the issuer to bill the cardholder&#39;s account. This field is returned for OCT transactions. </value>
-        [DataMember(Name="settlementCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementCurrency { get; set; }
 
         /// <summary>
         /// Gets or Sets AmexAdditionalAmounts
         /// </summary>
-        [DataMember(Name="amexAdditionalAmounts", EmitDefaultValue=false)]
+        [JsonPropertyName("amexAdditionalAmounts")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsOrderInformationAmountDetailsAmexAdditionalAmounts> AmexAdditionalAmounts { get; set; }
 
         /// <summary>
         /// Gets or Sets TaxDetails
         /// </summary>
-        [DataMember(Name="taxDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("taxDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsOrderInformationAmountDetailsTaxDetails> TaxDetails { get; set; }
 
         /// <summary>
         /// Service fee. Required for service fee transactions. 
         /// </summary>
         /// <value>Service fee. Required for service fee transactions. </value>
-        [DataMember(Name="serviceFeeAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("serviceFeeAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ServiceFeeAmount { get; set; }
 
         /// <summary>
         /// Amount in your original local pricing currency.  This value cannot be negative. You can include a decimal point (.) in this field to denote the currency exponent, but you cannot include any other special characters.  If needed, CyberSource truncates the amount to the correct number of decimal places. 
         /// </summary>
         /// <value>Amount in your original local pricing currency.  This value cannot be negative. You can include a decimal point (.) in this field to denote the currency exponent, but you cannot include any other special characters.  If needed, CyberSource truncates the amount to the correct number of decimal places. </value>
-        [DataMember(Name="originalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("originalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalAmount { get; set; }
 
         /// <summary>
         /// Your local pricing currency code.  For the possible values, see the [ISO Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf) 
         /// </summary>
         /// <value>Your local pricing currency code.  For the possible values, see the [ISO Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf) </value>
-        [DataMember(Name="originalCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("originalCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalCurrency { get; set; }
 
         /// <summary>
         /// Cashback amount in the acquirer&#39;s currency. If a cashback amount is included in the request, it must be included in the &#x60;orderInformation.amountDetails.totalAmount&#x60; value.  This field is supported only on CyberSource through VisaNet.  #### Used by **Authorization** Optional. **Authorization Reversal** Optional.  #### PIN debit Optional field for PIN debit purchase, PIN debit credit or PIN debit reversal. 
         /// </summary>
         /// <value>Cashback amount in the acquirer&#39;s currency. If a cashback amount is included in the request, it must be included in the &#x60;orderInformation.amountDetails.totalAmount&#x60; value.  This field is supported only on CyberSource through VisaNet.  #### Used by **Authorization** Optional. **Authorization Reversal** Optional.  #### PIN debit Optional field for PIN debit purchase, PIN debit credit or PIN debit reversal. </value>
-        [DataMember(Name="cashbackAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("cashbackAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CashbackAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets CurrencyConversion
         /// </summary>
-        [DataMember(Name="currencyConversion", EmitDefaultValue=false)]
+        [JsonPropertyName("currencyConversion")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsOrderInformationAmountDetailsCurrencyConversion CurrencyConversion { get; set; }
 
         /// <summary>
         /// Gets or Sets OctSurcharge
         /// </summary>
-        [DataMember(Name="oct-surcharge", EmitDefaultValue=false)]
+        [JsonPropertyName("oct-surcharge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsOrderInformationAmountDetailsOctsurcharge OctSurcharge { get; set; }
 
         /// <summary>
         /// Gets or Sets Order
         /// </summary>
-        [DataMember(Name="order", EmitDefaultValue=false)]
+        [JsonPropertyName("order")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsOrderInformationAmountDetailsOrder Order { get; set; }
 
         /// <summary>
         /// This API Field contains the anticipated amount details. This supports use cases where the Merchant does not wish to have funds held against the account, but needs to confirm an amount prior to authorization, such as for a trial subscription, reservation service, or loyalty program. In an account verification, the anticipated amount is used to confirm the account has availability to accept purchases. 
         /// </summary>
         /// <value>This API Field contains the anticipated amount details. This supports use cases where the Merchant does not wish to have funds held against the account, but needs to confirm an amount prior to authorization, such as for a trial subscription, reservation service, or loyalty program. In an account verification, the anticipated amount is used to confirm the account has availability to accept purchases. </value>
-        [DataMember(Name="anticipatedAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("anticipatedAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AnticipatedAmount { get; set; }
 
         /// <summary>
@@ -327,38 +359,38 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsOrderInformationAmountDetails {\n");
-            if (RefundBalance != null) sb.Append("  RefundBalance: ").Append(RefundBalance).Append("\n");
-            if (GiftWrapAmount != null) sb.Append("  GiftWrapAmount: ").Append(GiftWrapAmount).Append("\n");
-            if (InvoiceAmount != null) sb.Append("  InvoiceAmount: ").Append(InvoiceAmount).Append("\n");
-            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(TotalAmount).Append("\n");
-            if (SubTotalAmount != null) sb.Append("  SubTotalAmount: ").Append(SubTotalAmount).Append("\n");
-            if (Currency != null) sb.Append("  Currency: ").Append(Currency).Append("\n");
-            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(DiscountAmount).Append("\n");
-            if (DutyAmount != null) sb.Append("  DutyAmount: ").Append(DutyAmount).Append("\n");
-            if (GratuityAmount != null) sb.Append("  GratuityAmount: ").Append(GratuityAmount).Append("\n");
-            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
-            if (NationalTaxIncluded != null) sb.Append("  NationalTaxIncluded: ").Append(NationalTaxIncluded).Append("\n");
-            if (TaxAppliedAfterDiscount != null) sb.Append("  TaxAppliedAfterDiscount: ").Append(TaxAppliedAfterDiscount).Append("\n");
-            if (TaxAppliedLevel != null) sb.Append("  TaxAppliedLevel: ").Append(TaxAppliedLevel).Append("\n");
-            if (TaxTypeCode != null) sb.Append("  TaxTypeCode: ").Append(TaxTypeCode).Append("\n");
-            if (FreightAmount != null) sb.Append("  FreightAmount: ").Append(FreightAmount).Append("\n");
-            if (ForeignAmount != null) sb.Append("  ForeignAmount: ").Append(ForeignAmount).Append("\n");
-            if (ForeignCurrency != null) sb.Append("  ForeignCurrency: ").Append(ForeignCurrency).Append("\n");
-            if (ExchangeRate != null) sb.Append("  ExchangeRate: ").Append(ExchangeRate).Append("\n");
-            if (ExchangeRateTimeStamp != null) sb.Append("  ExchangeRateTimeStamp: ").Append(ExchangeRateTimeStamp).Append("\n");
-            if (Surcharge != null) sb.Append("  Surcharge: ").Append(Surcharge).Append("\n");
-            if (SettlementAmount != null) sb.Append("  SettlementAmount: ").Append(SettlementAmount).Append("\n");
-            if (SettlementCurrency != null) sb.Append("  SettlementCurrency: ").Append(SettlementCurrency).Append("\n");
-            if (AmexAdditionalAmounts != null) sb.Append("  AmexAdditionalAmounts: ").Append(AmexAdditionalAmounts).Append("\n");
-            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(TaxDetails).Append("\n");
-            if (ServiceFeeAmount != null) sb.Append("  ServiceFeeAmount: ").Append(ServiceFeeAmount).Append("\n");
-            if (OriginalAmount != null) sb.Append("  OriginalAmount: ").Append(OriginalAmount).Append("\n");
-            if (OriginalCurrency != null) sb.Append("  OriginalCurrency: ").Append(OriginalCurrency).Append("\n");
-            if (CashbackAmount != null) sb.Append("  CashbackAmount: ").Append(CashbackAmount).Append("\n");
-            if (CurrencyConversion != null) sb.Append("  CurrencyConversion: ").Append(CurrencyConversion).Append("\n");
-            if (OctSurcharge != null) sb.Append("  OctSurcharge: ").Append(OctSurcharge).Append("\n");
-            if (Order != null) sb.Append("  Order: ").Append(Order).Append("\n");
-            if (AnticipatedAmount != null) sb.Append("  AnticipatedAmount: ").Append(AnticipatedAmount).Append("\n");
+            if (RefundBalance != null) sb.Append("  RefundBalance: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "refundBalance", RefundBalance.ToString())).Append("\n");
+            if (GiftWrapAmount != null) sb.Append("  GiftWrapAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "giftWrapAmount", GiftWrapAmount.ToString())).Append("\n");
+            if (InvoiceAmount != null) sb.Append("  InvoiceAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "invoiceAmount", InvoiceAmount.ToString())).Append("\n");
+            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "totalAmount", TotalAmount.ToString())).Append("\n");
+            if (SubTotalAmount != null) sb.Append("  SubTotalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "subTotalAmount", SubTotalAmount.ToString())).Append("\n");
+            if (Currency != null) sb.Append("  Currency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "currency", Currency.ToString())).Append("\n");
+            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "discountAmount", DiscountAmount.ToString())).Append("\n");
+            if (DutyAmount != null) sb.Append("  DutyAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "dutyAmount", DutyAmount.ToString())).Append("\n");
+            if (GratuityAmount != null) sb.Append("  GratuityAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "gratuityAmount", GratuityAmount.ToString())).Append("\n");
+            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "taxAmount", TaxAmount.ToString())).Append("\n");
+            if (NationalTaxIncluded != null) sb.Append("  NationalTaxIncluded: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "nationalTaxIncluded", NationalTaxIncluded.ToString())).Append("\n");
+            if (TaxAppliedAfterDiscount != null) sb.Append("  TaxAppliedAfterDiscount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "taxAppliedAfterDiscount", TaxAppliedAfterDiscount.ToString())).Append("\n");
+            if (TaxAppliedLevel != null) sb.Append("  TaxAppliedLevel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "taxAppliedLevel", TaxAppliedLevel.ToString())).Append("\n");
+            if (TaxTypeCode != null) sb.Append("  TaxTypeCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "taxTypeCode", TaxTypeCode.ToString())).Append("\n");
+            if (FreightAmount != null) sb.Append("  FreightAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "freightAmount", FreightAmount.ToString())).Append("\n");
+            if (ForeignAmount != null) sb.Append("  ForeignAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "foreignAmount", ForeignAmount.ToString())).Append("\n");
+            if (ForeignCurrency != null) sb.Append("  ForeignCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "foreignCurrency", ForeignCurrency.ToString())).Append("\n");
+            if (ExchangeRate != null) sb.Append("  ExchangeRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "exchangeRate", ExchangeRate.ToString())).Append("\n");
+            if (ExchangeRateTimeStamp != null) sb.Append("  ExchangeRateTimeStamp: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "exchangeRateTimeStamp", ExchangeRateTimeStamp.ToString())).Append("\n");
+            if (Surcharge != null) sb.Append("  Surcharge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "surcharge", Surcharge.ToString())).Append("\n");
+            if (SettlementAmount != null) sb.Append("  SettlementAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "settlementAmount", SettlementAmount.ToString())).Append("\n");
+            if (SettlementCurrency != null) sb.Append("  SettlementCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "settlementCurrency", SettlementCurrency.ToString())).Append("\n");
+            if (AmexAdditionalAmounts != null) sb.Append("  AmexAdditionalAmounts: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "amexAdditionalAmounts", AmexAdditionalAmounts.ToString())).Append("\n");
+            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "taxDetails", TaxDetails.ToString())).Append("\n");
+            if (ServiceFeeAmount != null) sb.Append("  ServiceFeeAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "serviceFeeAmount", ServiceFeeAmount.ToString())).Append("\n");
+            if (OriginalAmount != null) sb.Append("  OriginalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "originalAmount", OriginalAmount.ToString())).Append("\n");
+            if (OriginalCurrency != null) sb.Append("  OriginalCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "originalCurrency", OriginalCurrency.ToString())).Append("\n");
+            if (CashbackAmount != null) sb.Append("  CashbackAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "cashbackAmount", CashbackAmount.ToString())).Append("\n");
+            if (CurrencyConversion != null) sb.Append("  CurrencyConversion: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "currencyConversion", CurrencyConversion.ToString())).Append("\n");
+            if (OctSurcharge != null) sb.Append("  OctSurcharge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "oct-surcharge", OctSurcharge.ToString())).Append("\n");
+            if (Order != null) sb.Append("  Order: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "order", Order.ToString())).Append("\n");
+            if (AnticipatedAmount != null) sb.Append("  AnticipatedAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationAmountDetails", "anticipatedAmount", AnticipatedAmount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -369,7 +401,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsOrderInformationAmountDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

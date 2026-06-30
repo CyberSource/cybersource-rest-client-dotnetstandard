@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,42 +53,48 @@ namespace CyberSource.Model
         /// Postal code for the address from which the goods are shipped, which is used to establish nexus. The default is the postal code associated with your CyberSource account.  The postal code must consist of 5 to 9 digits. When the billing country is the U.S., the 9-digit postal code must follow this format:  &#x60;[5 digits][dash][4 digits]&#x60;  Example 12345-6789  When the billing country is Canada, the 6-digit postal code must follow this format:  &#x60;[alpha][numeric][alpha][space] [numeric][alpha][numeric]&#x60;  Example A1B 2C3  This field is frequently used for Level II and Level III transactions. 
         /// </summary>
         /// <value>Postal code for the address from which the goods are shipped, which is used to establish nexus. The default is the postal code associated with your CyberSource account.  The postal code must consist of 5 to 9 digits. When the billing country is the U.S., the 9-digit postal code must follow this format:  &#x60;[5 digits][dash][4 digits]&#x60;  Example 12345-6789  When the billing country is Canada, the 6-digit postal code must follow this format:  &#x60;[alpha][numeric][alpha][space] [numeric][alpha][numeric]&#x60;  Example A1B 2C3  This field is frequently used for Level II and Level III transactions. </value>
-        [DataMember(Name="shipFromPostalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("shipFromPostalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShipFromPostalCode { get; set; }
 
         /// <summary>
         /// Shipment tracking number provided by the merchant. Used to track the shipment of goods to the customer. 
         /// </summary>
         /// <value>Shipment tracking number provided by the merchant. Used to track the shipment of goods to the customer. </value>
-        [DataMember(Name="trackingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("trackingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TrackingNumber { get; set; }
 
         /// <summary>
         /// URL where the customer can track their shipment. Provides real-time tracking information for the delivery. 
         /// </summary>
         /// <value>URL where the customer can track their shipment. Provides real-time tracking information for the delivery. </value>
-        [DataMember(Name="trackingUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("trackingUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TrackingUrl { get; set; }
 
         /// <summary>
         /// Name of the shipping carrier/company handling the delivery. 
         /// </summary>
         /// <value>Name of the shipping carrier/company handling the delivery. </value>
-        [DataMember(Name="shippingCarrier", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingCarrier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShippingCarrier { get; set; }
 
         /// <summary>
         /// Estimated delivery date for the shipment provided by Merchant. Format: YYYYMMDD (e.g., 20251115 for November 15, 2025) 
         /// </summary>
         /// <value>Estimated delivery date for the shipment provided by Merchant. Format: YYYYMMDD (e.g., 20251115 for November 15, 2025) </value>
-        [DataMember(Name="estimatedDeliveryDate", EmitDefaultValue=false)]
+        [JsonPropertyName("estimatedDeliveryDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EstimatedDeliveryDate { get; set; }
 
         /// <summary>
         /// Shipping method for the product. Possible values:   - &#x60;lowcost&#x60;: Lowest-cost service  - &#x60;sameday&#x60;: Courier or same-day service  - &#x60;oneday&#x60;: Next-day or overnight service  - &#x60;twoday&#x60;: Two-day service  - &#x60;threeday&#x60;: Three-day service  - &#x60;pickup&#x60;: Store pick-up  - &#x60;other&#x60;: Other shipping method  - &#x60;none&#x60;: No shipping method because product is a service or subscription  Klarna Advantage Plus additional values:  - &#x60;TO_DOOR&#x60;: Delivery to door  - &#x60;TO_CURB&#x60;: Delivery to curb  - &#x60;TO_MAILBOX&#x60;: Delivery to mailbox  - &#x60;PICKUP_BOX&#x60;: Pickup from box  - &#x60;PICKUP_POINT&#x60;: Pickup from point  - &#x60;PICKUP_STORE&#x60;: Pickup from store  - &#x60;PICKUP_WAREHOUSE&#x60;: Pickup from warehouse  - &#x60;DIGITAL_EMAIL&#x60;: Digital delivery via email  - &#x60;DIGITAL_DOWNLOAD&#x60;: Digital download  - &#x60;DIGITAL_OTHER&#x60;: Other digital delivery  - &#x60;PHYSICAL_OTHER&#x60;: Other physical delivery 
         /// </summary>
         /// <value>Shipping method for the product. Possible values:   - &#x60;lowcost&#x60;: Lowest-cost service  - &#x60;sameday&#x60;: Courier or same-day service  - &#x60;oneday&#x60;: Next-day or overnight service  - &#x60;twoday&#x60;: Two-day service  - &#x60;threeday&#x60;: Three-day service  - &#x60;pickup&#x60;: Store pick-up  - &#x60;other&#x60;: Other shipping method  - &#x60;none&#x60;: No shipping method because product is a service or subscription  Klarna Advantage Plus additional values:  - &#x60;TO_DOOR&#x60;: Delivery to door  - &#x60;TO_CURB&#x60;: Delivery to curb  - &#x60;TO_MAILBOX&#x60;: Delivery to mailbox  - &#x60;PICKUP_BOX&#x60;: Pickup from box  - &#x60;PICKUP_POINT&#x60;: Pickup from point  - &#x60;PICKUP_STORE&#x60;: Pickup from store  - &#x60;PICKUP_WAREHOUSE&#x60;: Pickup from warehouse  - &#x60;DIGITAL_EMAIL&#x60;: Digital delivery via email  - &#x60;DIGITAL_DOWNLOAD&#x60;: Digital download  - &#x60;DIGITAL_OTHER&#x60;: Other digital delivery  - &#x60;PHYSICAL_OTHER&#x60;: Other physical delivery </value>
-        [DataMember(Name="shippingMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShippingMethod { get; set; }
 
         /// <summary>
@@ -99,12 +105,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidcapturesOrderInformationShippingDetails {\n");
-            if (ShipFromPostalCode != null) sb.Append("  ShipFromPostalCode: ").Append(ShipFromPostalCode).Append("\n");
-            if (TrackingNumber != null) sb.Append("  TrackingNumber: ").Append(TrackingNumber).Append("\n");
-            if (TrackingUrl != null) sb.Append("  TrackingUrl: ").Append(TrackingUrl).Append("\n");
-            if (ShippingCarrier != null) sb.Append("  ShippingCarrier: ").Append(ShippingCarrier).Append("\n");
-            if (EstimatedDeliveryDate != null) sb.Append("  EstimatedDeliveryDate: ").Append(EstimatedDeliveryDate).Append("\n");
-            if (ShippingMethod != null) sb.Append("  ShippingMethod: ").Append(ShippingMethod).Append("\n");
+            if (ShipFromPostalCode != null) sb.Append("  ShipFromPostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationShippingDetails", "shipFromPostalCode", ShipFromPostalCode.ToString())).Append("\n");
+            if (TrackingNumber != null) sb.Append("  TrackingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationShippingDetails", "trackingNumber", TrackingNumber.ToString())).Append("\n");
+            if (TrackingUrl != null) sb.Append("  TrackingUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationShippingDetails", "trackingUrl", TrackingUrl.ToString())).Append("\n");
+            if (ShippingCarrier != null) sb.Append("  ShippingCarrier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationShippingDetails", "shippingCarrier", ShippingCarrier.ToString())).Append("\n");
+            if (EstimatedDeliveryDate != null) sb.Append("  EstimatedDeliveryDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationShippingDetails", "estimatedDeliveryDate", EstimatedDeliveryDate.ToString())).Append("\n");
+            if (ShippingMethod != null) sb.Append("  ShippingMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationShippingDetails", "shippingMethod", ShippingMethod.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,7 +121,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidcapturesOrderInformationShippingDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

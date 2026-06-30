@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="DeviceDeAssociateV3Request" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected DeviceDeAssociateV3Request() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="DeviceDeAssociateV3Request" /> class.
@@ -50,14 +50,16 @@ namespace CyberSource.Model
         /// ID of the device to be de-associated.
         /// </summary>
         /// <value>ID of the device to be de-associated.</value>
-        [DataMember(Name="deviceId", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeviceId { get; set; }
 
         /// <summary>
         /// A field representing value of either account id or portfolio id.
         /// </summary>
         /// <value>A field representing value of either account id or portfolio id.</value>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
@@ -68,8 +70,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class DeviceDeAssociateV3Request {\n");
-            if (DeviceId != null) sb.Append("  DeviceId: ").Append(DeviceId).Append("\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
+            if (DeviceId != null) sb.Append("  DeviceId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DeviceDeAssociateV3Request", "deviceId", DeviceId.ToString())).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DeviceDeAssociateV3Request", "organizationId", OrganizationId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -80,7 +82,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("DeviceDeAssociateV3Request", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

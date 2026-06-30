@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// Reporting date of transaction. Format: YYYYMMDD. Defaults to current date if not specified. Optional for U.S., Canadian, international tax, and value added taxes. 
         /// </summary>
         /// <value>Reporting date of transaction. Format: YYYYMMDD. Defaults to current date if not specified. Optional for U.S., Canadian, international tax, and value added taxes. </value>
-        [DataMember(Name="reportingDate", EmitDefaultValue=false)]
+        [JsonPropertyName("reportingDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportingDate { get; set; }
 
         /// <summary>
         /// If a past or future date is specified in &#x60;orderInformation.invoiceDetails.invoiceDate&#x60;, then provide the reason for that for audit purposes. Typical reasons include: &#39;Return&#39;, &#39;Layaway&#39;, &#39;Imported&#39;.  Optional for U.S., Canadian, international tax, and value added taxes. 
         /// </summary>
         /// <value>If a past or future date is specified in &#x60;orderInformation.invoiceDetails.invoiceDate&#x60;, then provide the reason for that for audit purposes. Typical reasons include: &#39;Return&#39;, &#39;Layaway&#39;, &#39;Imported&#39;.  Optional for U.S., Canadian, international tax, and value added taxes. </value>
-        [DataMember(Name="dateOverrideReason", EmitDefaultValue=false)]
+        [JsonPropertyName("dateOverrideReason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DateOverrideReason { get; set; }
 
         /// <summary>
         /// Comma-separated list of states or provinces in which merchandise is taxable. Note merchandise may be still be non-taxable or tax exempt depending on the product taxability. Indicate the type of product you are selling in the product code field for product-level taxability rules to be applied. Do not use both the &#x60;taxInformation.nexus&#x60; and &#x60;taxInformation.noNexus&#x60; fields in your request. If you do not include this field in a tax calculation service request, the tax system makes its calculations as if you have nexus in every US state or Canadian province. Use the [State, Province, and Territory Codes for the United States and Canada](https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf).  If you indicate you do not have nexus in the destination state, jurisdiction level fields are left blank in the Tax Detail Report.  Optional field for U.S. and Canadian taxes only. Either this field or &#x60;taxInformation.noNexus&#x60; is required if you do not have nexus in every state or province.  Not applicable for international and value added taxes. 
         /// </summary>
         /// <value>Comma-separated list of states or provinces in which merchandise is taxable. Note merchandise may be still be non-taxable or tax exempt depending on the product taxability. Indicate the type of product you are selling in the product code field for product-level taxability rules to be applied. Do not use both the &#x60;taxInformation.nexus&#x60; and &#x60;taxInformation.noNexus&#x60; fields in your request. If you do not include this field in a tax calculation service request, the tax system makes its calculations as if you have nexus in every US state or Canadian province. Use the [State, Province, and Territory Codes for the United States and Canada](https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf).  If you indicate you do not have nexus in the destination state, jurisdiction level fields are left blank in the Tax Detail Report.  Optional field for U.S. and Canadian taxes only. Either this field or &#x60;taxInformation.noNexus&#x60; is required if you do not have nexus in every state or province.  Not applicable for international and value added taxes. </value>
-        [DataMember(Name="nexus", EmitDefaultValue=false)]
+        [JsonPropertyName("nexus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> Nexus { get; set; }
 
         /// <summary>
         /// Comma-separated list of states or provinces where you do not have nexus. Check with a tax advisor to determine where your business has nexus. Do not use both the &#x60;taxInformation.nexus&#x60; and &#x60;taxInformation.noNexus&#x60; fields in your request. If you do not include this field in a tax calculation service request, the tax system makes its calculations as if you have nexus in every US state or Canadian province. Use the [State, Province, and Territory Codes for the United States and Canada](https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf).  If you indicate you do not have nexus in the destination state, jurisdiction level fields are left blank in the Tax Detail Report.  Optional field for U.S. and Canadian taxes only. Either this field or &#x60;taxInformation.nexus&#x60; is required if you do not have nexus in every state or province.  Not applicable for international and value added taxes. 
         /// </summary>
         /// <value>Comma-separated list of states or provinces where you do not have nexus. Check with a tax advisor to determine where your business has nexus. Do not use both the &#x60;taxInformation.nexus&#x60; and &#x60;taxInformation.noNexus&#x60; fields in your request. If you do not include this field in a tax calculation service request, the tax system makes its calculations as if you have nexus in every US state or Canadian province. Use the [State, Province, and Territory Codes for the United States and Canada](https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf).  If you indicate you do not have nexus in the destination state, jurisdiction level fields are left blank in the Tax Detail Report.  Optional field for U.S. and Canadian taxes only. Either this field or &#x60;taxInformation.nexus&#x60; is required if you do not have nexus in every state or province.  Not applicable for international and value added taxes. </value>
-        [DataMember(Name="noNexus", EmitDefaultValue=false)]
+        [JsonPropertyName("noNexus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> NoNexus { get; set; }
 
         /// <summary>
         /// Whether or not to display tax amounts for each line item. This field can contain one of the following values: - &#x60;Yes&#x60; - Display tax amounts for each line item - &#x60;No&#x60; (default) - Do not display tax amounts for each line item  Optional for U.S., Canadian, international tax, and value added taxes. 
         /// </summary>
         /// <value>Whether or not to display tax amounts for each line item. This field can contain one of the following values: - &#x60;Yes&#x60; - Display tax amounts for each line item - &#x60;No&#x60; (default) - Do not display tax amounts for each line item  Optional for U.S., Canadian, international tax, and value added taxes. </value>
-        [DataMember(Name="showTaxPerLineItem", EmitDefaultValue=false)]
+        [JsonPropertyName("showTaxPerLineItem")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShowTaxPerLineItem { get; set; }
 
         /// <summary>
         /// Indicates whether this is a committed tax transaction. For a committed tax transaction, the status in the Tax Detail Report is \&quot;Committed.\&quot; For an uncommitted tax transaction, the status in the Tax Detail Report is \&quot;Uncommitted.\&quot; Possible values: - &#x60;true&#x60;: This is a committed tax transaction. - &#x60;false&#x60; (default): This is not a committed tax transaction.  A committed tax request is a tax service request that sets the status field in the Tax Detail Report to committed. The committed status indicates that the amount calculated by the tax service is included in the amount of a capture or credit.  Use a void service request to cancel a committed tax request or a committed refund tax request. The void transaction is included as a separate entry in the Tax Detail Report. The value of the status field is cancelled. The value of the link ID is the request ID of the committed tax request or refund tax request that was voided. You can use the value of the link ID to reconcile your orders.  Optional for U.S., Canadian, international tax, and value added taxes. For more information on Tax Detail Report features refer the [Tax Service Guide](https://developer.cybersource.com/docs/cybs/en-us/tax-calculation/developer/all/rest/tax-calculation/tax-overview.html). 
         /// </summary>
         /// <value>Indicates whether this is a committed tax transaction. For a committed tax transaction, the status in the Tax Detail Report is \&quot;Committed.\&quot; For an uncommitted tax transaction, the status in the Tax Detail Report is \&quot;Uncommitted.\&quot; Possible values: - &#x60;true&#x60;: This is a committed tax transaction. - &#x60;false&#x60; (default): This is not a committed tax transaction.  A committed tax request is a tax service request that sets the status field in the Tax Detail Report to committed. The committed status indicates that the amount calculated by the tax service is included in the amount of a capture or credit.  Use a void service request to cancel a committed tax request or a committed refund tax request. The void transaction is included as a separate entry in the Tax Detail Report. The value of the status field is cancelled. The value of the link ID is the request ID of the committed tax request or refund tax request that was voided. You can use the value of the link ID to reconcile your orders.  Optional for U.S., Canadian, international tax, and value added taxes. For more information on Tax Detail Report features refer the [Tax Service Guide](https://developer.cybersource.com/docs/cybs/en-us/tax-calculation/developer/all/rest/tax-calculation/tax-overview.html). </value>
-        [DataMember(Name="commitIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("commitIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CommitIndicator { get; set; }
 
         /// <summary>
         /// Indicates whether this is a refund tax transaction. For a refund tax transaction, amounts in the Tax Detail Report will be negative. Possible values: - &#x60;true&#x60;: This is a refund tax transaction. - &#x60;false&#x60; (default): This is not a refund tax transaction.  A refund tax request is a tax service request that sets the transaction type field in the Tax Detail Report to refunded and makes the reported amount negative. Tax amounts are returned as positive amounts in reply messages, but they are saved in reports as negative amounts which enables the reporting software to accurately calculate the aggregate amounts.  Optional for U.S., Canadian, international tax, and value added taxes. For more information on Tax Detail Report features refer the [Tax Service Guide](https://developer.cybersource.com/docs/cybs/en-us/tax-calculation/developer/all/rest/tax-calculation/tax-overview.html). 
         /// </summary>
         /// <value>Indicates whether this is a refund tax transaction. For a refund tax transaction, amounts in the Tax Detail Report will be negative. Possible values: - &#x60;true&#x60;: This is a refund tax transaction. - &#x60;false&#x60; (default): This is not a refund tax transaction.  A refund tax request is a tax service request that sets the transaction type field in the Tax Detail Report to refunded and makes the reported amount negative. Tax amounts are returned as positive amounts in reply messages, but they are saved in reports as negative amounts which enables the reporting software to accurately calculate the aggregate amounts.  Optional for U.S., Canadian, international tax, and value added taxes. For more information on Tax Detail Report features refer the [Tax Service Guide](https://developer.cybersource.com/docs/cybs/en-us/tax-calculation/developer/all/rest/tax-calculation/tax-overview.html). </value>
-        [DataMember(Name="refundIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("refundIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? RefundIndicator { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Vasv2taxTaxInformation {\n");
-            if (ReportingDate != null) sb.Append("  ReportingDate: ").Append(ReportingDate).Append("\n");
-            if (DateOverrideReason != null) sb.Append("  DateOverrideReason: ").Append(DateOverrideReason).Append("\n");
-            if (Nexus != null) sb.Append("  Nexus: ").Append(Nexus).Append("\n");
-            if (NoNexus != null) sb.Append("  NoNexus: ").Append(NoNexus).Append("\n");
-            if (ShowTaxPerLineItem != null) sb.Append("  ShowTaxPerLineItem: ").Append(ShowTaxPerLineItem).Append("\n");
-            if (CommitIndicator != null) sb.Append("  CommitIndicator: ").Append(CommitIndicator).Append("\n");
-            if (RefundIndicator != null) sb.Append("  RefundIndicator: ").Append(RefundIndicator).Append("\n");
+            if (ReportingDate != null) sb.Append("  ReportingDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxTaxInformation", "reportingDate", ReportingDate.ToString())).Append("\n");
+            if (DateOverrideReason != null) sb.Append("  DateOverrideReason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxTaxInformation", "dateOverrideReason", DateOverrideReason.ToString())).Append("\n");
+            if (Nexus != null) sb.Append("  Nexus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxTaxInformation", "nexus", Nexus.ToString())).Append("\n");
+            if (NoNexus != null) sb.Append("  NoNexus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxTaxInformation", "noNexus", NoNexus.ToString())).Append("\n");
+            if (ShowTaxPerLineItem != null) sb.Append("  ShowTaxPerLineItem: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxTaxInformation", "showTaxPerLineItem", ShowTaxPerLineItem.ToString())).Append("\n");
+            if (CommitIndicator != null) sb.Append("  CommitIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxTaxInformation", "commitIndicator", CommitIndicator.ToString())).Append("\n");
+            if (RefundIndicator != null) sb.Append("  RefundIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxTaxInformation", "refundIndicator", RefundIndicator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Vasv2taxTaxInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

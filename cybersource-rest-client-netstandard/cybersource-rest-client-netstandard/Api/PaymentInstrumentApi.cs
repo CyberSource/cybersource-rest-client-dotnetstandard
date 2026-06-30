@@ -320,7 +320,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("paymentInstrumentId", ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (profileId != null)
             {
@@ -445,7 +445,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("paymentInstrumentId", ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (profileId != null)
             {
@@ -572,13 +572,13 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("paymentInstrumentId", ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (retrieveBinDetails != null)
             {
                 localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (profileId != null)
             {
@@ -707,13 +707,13 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("paymentInstrumentId", ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (retrieveBinDetails != null)
             {
                 localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (profileId != null)
             {
@@ -849,13 +849,13 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("paymentInstrumentId", ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (retrieveBinDetails != null)
             {
                 localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (profileId != null)
             {
@@ -996,13 +996,13 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("paymentInstrumentId", ApiClient.ParameterToString(paymentInstrumentId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (retrieveBinDetails != null)
             {
                 localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (profileId != null)
             {
@@ -1131,7 +1131,7 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (profileId != null)
             {
@@ -1257,7 +1257,7 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("retrieveBinDetails", ApiClient.ParameterToString(retrieveBinDetails)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (profileId != null)
             {

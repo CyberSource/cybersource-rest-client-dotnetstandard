@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,19 +47,22 @@ namespace CyberSource.Model
         /// Specify the Vault ID to which transacting MID needs to be assigned.Provide Vault ID as seen on EBC Vault management page. If not provided , transacting MID will be assigned to the existing default Vault at merchant&#39;s level. If there are no Vaults at merchant level , a new Vault will be created and transacting MID will be assigned to it.
         /// </summary>
         /// <value>Specify the Vault ID to which transacting MID needs to be assigned.Provide Vault ID as seen on EBC Vault management page. If not provided , transacting MID will be assigned to the existing default Vault at merchant&#39;s level. If there are no Vaults at merchant level , a new Vault will be created and transacting MID will be assigned to it.</value>
-        [DataMember(Name="parentProfileId", EmitDefaultValue=false)]
+        [JsonPropertyName("parentProfileId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ParentProfileId { get; set; }
 
         /// <summary>
         /// Gets or Sets Vault
         /// </summary>
-        [DataMember(Name="vault", EmitDefaultValue=false)]
+        [JsonPropertyName("vault")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurationsVault Vault { get; set; }
 
         /// <summary>
         /// Gets or Sets NetworkTokenEnrollment
         /// </summary>
-        [DataMember(Name="networkTokenEnrollment", EmitDefaultValue=false)]
+        [JsonPropertyName("networkTokenEnrollment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public NetworkTokenEnrollment NetworkTokenEnrollment { get; set; }
 
         /// <summary>
@@ -70,9 +73,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurations {\n");
-            if (ParentProfileId != null) sb.Append("  ParentProfileId: ").Append(ParentProfileId).Append("\n");
-            if (Vault != null) sb.Append("  Vault: ").Append(Vault).Append("\n");
-            if (NetworkTokenEnrollment != null) sb.Append("  NetworkTokenEnrollment: ").Append(NetworkTokenEnrollment).Append("\n");
+            if (ParentProfileId != null) sb.Append("  ParentProfileId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurations", "parentProfileId", ParentProfileId.ToString())).Append("\n");
+            if (Vault != null) sb.Append("  Vault: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurations", "vault", Vault.ToString())).Append("\n");
+            if (NetworkTokenEnrollment != null) sb.Append("  NetworkTokenEnrollment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurations", "networkTokenEnrollment", NetworkTokenEnrollment.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,7 +86,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurations", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

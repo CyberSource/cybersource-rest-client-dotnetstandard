@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,56 +57,64 @@ namespace CyberSource.Model
         /// Grand total for the order. This value cannot be negative. You can include a decimal point (.), but you cannot include any other special characters. CyberSource truncates the amount to the correct number of decimal places 
         /// </summary>
         /// <value>Grand total for the order. This value cannot be negative. You can include a decimal point (.), but you cannot include any other special characters. CyberSource truncates the amount to the correct number of decimal places </value>
-        [DataMember(Name="totalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalAmount { get; set; }
 
         /// <summary>
         /// Currency used for the order 
         /// </summary>
         /// <value>Currency used for the order </value>
-        [DataMember(Name="currency", EmitDefaultValue=false)]
+        [JsonPropertyName("currency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Currency { get; set; }
 
         /// <summary>
         /// Discount amount for the transaction.  
         /// </summary>
         /// <value>Discount amount for the transaction.  </value>
-        [DataMember(Name="discountAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("discountAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscountAmount { get; set; }
 
         /// <summary>
         /// Aggregate shipping charges for the transactions. 
         /// </summary>
         /// <value>Aggregate shipping charges for the transactions. </value>
-        [DataMember(Name="shippingAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShippingAmount { get; set; }
 
         /// <summary>
         /// Shipping discount amount for the transaction.  
         /// </summary>
         /// <value>Shipping discount amount for the transaction.  </value>
-        [DataMember(Name="shippingDiscountAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingDiscountAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShippingDiscountAmount { get; set; }
 
         /// <summary>
         /// Total tax amount.  
         /// </summary>
         /// <value>Total tax amount.  </value>
-        [DataMember(Name="taxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAmount { get; set; }
 
         /// <summary>
         /// Amount being charged for the insurance fee.  
         /// </summary>
         /// <value>Amount being charged for the insurance fee.  </value>
-        [DataMember(Name="insuranceAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("insuranceAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InsuranceAmount { get; set; }
 
         /// <summary>
         /// Amount being charged as duty amount.             
         /// </summary>
         /// <value>Amount being charged as duty amount.             </value>
-        [DataMember(Name="dutyAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("dutyAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DutyAmount { get; set; }
 
         /// <summary>
@@ -117,14 +125,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2intentsOrderInformationAmountDetails {\n");
-            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(TotalAmount).Append("\n");
-            if (Currency != null) sb.Append("  Currency: ").Append(Currency).Append("\n");
-            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(DiscountAmount).Append("\n");
-            if (ShippingAmount != null) sb.Append("  ShippingAmount: ").Append(ShippingAmount).Append("\n");
-            if (ShippingDiscountAmount != null) sb.Append("  ShippingDiscountAmount: ").Append(ShippingDiscountAmount).Append("\n");
-            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
-            if (InsuranceAmount != null) sb.Append("  InsuranceAmount: ").Append(InsuranceAmount).Append("\n");
-            if (DutyAmount != null) sb.Append("  DutyAmount: ").Append(DutyAmount).Append("\n");
+            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsOrderInformationAmountDetails", "totalAmount", TotalAmount.ToString())).Append("\n");
+            if (Currency != null) sb.Append("  Currency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsOrderInformationAmountDetails", "currency", Currency.ToString())).Append("\n");
+            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsOrderInformationAmountDetails", "discountAmount", DiscountAmount.ToString())).Append("\n");
+            if (ShippingAmount != null) sb.Append("  ShippingAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsOrderInformationAmountDetails", "shippingAmount", ShippingAmount.ToString())).Append("\n");
+            if (ShippingDiscountAmount != null) sb.Append("  ShippingDiscountAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsOrderInformationAmountDetails", "shippingDiscountAmount", ShippingDiscountAmount.ToString())).Append("\n");
+            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsOrderInformationAmountDetails", "taxAmount", TaxAmount.ToString())).Append("\n");
+            if (InsuranceAmount != null) sb.Append("  InsuranceAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsOrderInformationAmountDetails", "insuranceAmount", InsuranceAmount.ToString())).Append("\n");
+            if (DutyAmount != null) sb.Append("  DutyAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsOrderInformationAmountDetails", "dutyAmount", DutyAmount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -135,7 +143,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2intentsOrderInformationAmountDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

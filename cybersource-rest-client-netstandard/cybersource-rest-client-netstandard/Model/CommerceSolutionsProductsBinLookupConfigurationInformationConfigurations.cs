@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// This flag indicates if the merchant is configured to make payout calls
         /// </summary>
         /// <value>This flag indicates if the merchant is configured to make payout calls</value>
-        [DataMember(Name="isPayoutOptionsEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("isPayoutOptionsEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IsPayoutOptionsEnabled { get; set; }
 
         /// <summary>
         /// This flag indicates if the merchant is configured to receive account prefix
         /// </summary>
         /// <value>This flag indicates if the merchant is configured to receive account prefix</value>
-        [DataMember(Name="isAccountPrefixEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("isAccountPrefixEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IsAccountPrefixEnabled { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CommerceSolutionsProductsBinLookupConfigurationInformationConfigurations {\n");
-            if (IsPayoutOptionsEnabled != null) sb.Append("  IsPayoutOptionsEnabled: ").Append(IsPayoutOptionsEnabled).Append("\n");
-            if (IsAccountPrefixEnabled != null) sb.Append("  IsAccountPrefixEnabled: ").Append(IsAccountPrefixEnabled).Append("\n");
+            if (IsPayoutOptionsEnabled != null) sb.Append("  IsPayoutOptionsEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsBinLookupConfigurationInformationConfigurations", "isPayoutOptionsEnabled", IsPayoutOptionsEnabled.ToString())).Append("\n");
+            if (IsAccountPrefixEnabled != null) sb.Append("  IsAccountPrefixEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsBinLookupConfigurationInformationConfigurations", "isAccountPrefixEnabled", IsAccountPrefixEnabled.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CommerceSolutionsProductsBinLookupConfigurationInformationConfigurations", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,13 +45,15 @@ namespace CyberSource.Model
         /// Configure Unified Checkout theme.  Possible values: - LIGHT&lt;br&gt;&lt;br&gt;  Optional field:&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center and must be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Configure Unified Checkout theme.  Possible values: - LIGHT&lt;br&gt;&lt;br&gt;  Optional field:&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center and must be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="theme", EmitDefaultValue=false)]
+        [JsonPropertyName("theme")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Theme { get; set; }
 
         /// <summary>
         /// Gets or Sets Variables
         /// </summary>
-        [DataMember(Name="variables", EmitDefaultValue=false)]
+        [JsonPropertyName("variables")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsAppearanceVariables Variables { get; set; }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsAppearance {\n");
-            if (Theme != null) sb.Append("  Theme: ").Append(Theme).Append("\n");
-            if (Variables != null) sb.Append("  Variables: ").Append(Variables).Append("\n");
+            if (Theme != null) sb.Append("  Theme: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearance", "theme", Theme.ToString())).Append("\n");
+            if (Variables != null) sb.Append("  Variables: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearance", "variables", Variables.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,7 +76,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsAppearance", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

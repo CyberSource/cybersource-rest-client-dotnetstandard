@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -65,54 +65,62 @@ namespace CyberSource.Model
         /// Client friendly webhook name.
         /// </summary>
         /// <value>Client friendly webhook name.</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Organization Id.
         /// </summary>
         /// <value>Organization Id.</value>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// Client friendly webhook description.
         /// </summary>
         /// <value>Client friendly webhook description.</value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Products
         /// </summary>
-        [DataMember(Name="products", EmitDefaultValue=false)]
+        [JsonPropertyName("products")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Notificationsubscriptionsv2webhooksProducts> Products { get; set; }
 
         /// <summary>
         /// The client&#39;s endpoint (URL) to receive webhooks.
         /// </summary>
         /// <value>The client&#39;s endpoint (URL) to receive webhooks.</value>
-        [DataMember(Name="webhookUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("webhookUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WebhookUrl { get; set; }
 
         /// <summary>
         /// The webhook scope. 1. SELF The Webhook is used to deliver webhooks for only this Organization (or Merchant). 2. DESCENDANTS The Webhook is used to deliver webhooks for this Organization and its children. This field is optional.    Possible values: - SELF - DESCENDANTS
         /// </summary>
         /// <value>The webhook scope. 1. SELF The Webhook is used to deliver webhooks for only this Organization (or Merchant). 2. DESCENDANTS The Webhook is used to deliver webhooks for this Organization and its children. This field is optional.    Possible values: - SELF - DESCENDANTS</value>
-        [DataMember(Name="notificationScope", EmitDefaultValue=false)]
+        [JsonPropertyName("notificationScope")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NotificationScope { get; set; }
 
         /// <summary>
         /// The client&#39;s health check endpoint (URL).
         /// </summary>
         /// <value>The client&#39;s health check endpoint (URL).</value>
-        [DataMember(Name="healthCheckUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("healthCheckUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HealthCheckUrl { get; set; }
 
         /// <summary>
         /// Gets or Sets SecurityPolicy
         /// </summary>
-        [DataMember(Name="securityPolicy", EmitDefaultValue=false)]
+        [JsonPropertyName("securityPolicy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Notificationsubscriptionsv2webhooksSecurityPolicy SecurityPolicy { get; set; }
 
         /// <summary>
@@ -123,14 +131,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UpdateWebhook {\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (Description != null) sb.Append("  Description: ").Append(Description).Append("\n");
-            if (Products != null) sb.Append("  Products: ").Append(Products).Append("\n");
-            if (WebhookUrl != null) sb.Append("  WebhookUrl: ").Append(WebhookUrl).Append("\n");
-            if (NotificationScope != null) sb.Append("  NotificationScope: ").Append(NotificationScope).Append("\n");
-            if (HealthCheckUrl != null) sb.Append("  HealthCheckUrl: ").Append(HealthCheckUrl).Append("\n");
-            if (SecurityPolicy != null) sb.Append("  SecurityPolicy: ").Append(SecurityPolicy).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UpdateWebhook", "name", Name.ToString())).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UpdateWebhook", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (Description != null) sb.Append("  Description: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UpdateWebhook", "description", Description.ToString())).Append("\n");
+            if (Products != null) sb.Append("  Products: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UpdateWebhook", "products", Products.ToString())).Append("\n");
+            if (WebhookUrl != null) sb.Append("  WebhookUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UpdateWebhook", "webhookUrl", WebhookUrl.ToString())).Append("\n");
+            if (NotificationScope != null) sb.Append("  NotificationScope: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UpdateWebhook", "notificationScope", NotificationScope.ToString())).Append("\n");
+            if (HealthCheckUrl != null) sb.Append("  HealthCheckUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UpdateWebhook", "healthCheckUrl", HealthCheckUrl.ToString())).Append("\n");
+            if (SecurityPolicy != null) sb.Append("  SecurityPolicy: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UpdateWebhook", "securityPolicy", SecurityPolicy.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -141,7 +149,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UpdateWebhook", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

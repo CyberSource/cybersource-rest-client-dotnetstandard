@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Riskv1authenticationsetupsPaymentInformationCustomer" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Riskv1authenticationsetupsPaymentInformationCustomer() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Riskv1authenticationsetupsPaymentInformationCustomer" /> class.
@@ -48,7 +48,8 @@ namespace CyberSource.Model
         /// Unique identifier for the legacy Secure Storage token used in the transaction. When you include this value in your request, many of the fields that are normally required for an authorization or credit become optional. 
         /// </summary>
         /// <value>Unique identifier for the legacy Secure Storage token used in the transaction. When you include this value in your request, many of the fields that are normally required for an authorization or credit become optional. </value>
-        [DataMember(Name="customerId", EmitDefaultValue=false)]
+        [JsonPropertyName("customerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerId { get; set; }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1authenticationsetupsPaymentInformationCustomer {\n");
-            if (CustomerId != null) sb.Append("  CustomerId: ").Append(CustomerId).Append("\n");
+            if (CustomerId != null) sb.Append("  CustomerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsetupsPaymentInformationCustomer", "customerId", CustomerId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -70,7 +71,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1authenticationsetupsPaymentInformationCustomer", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

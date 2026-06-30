@@ -131,7 +131,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'mppCredentialsRequest' when calling CredentialsApi->ProvisionMppCredentials");
             }
 
-            var localVarPath = $"/acp/v1/mpp/credentials";
+            var localVarPath = $"/icc/v1/mpp/credentials";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);
@@ -242,7 +242,7 @@ namespace CyberSource.Api
                 throw new ApiException(400, "Missing required parameter 'mppCredentialsRequest' when calling CredentialsApi->ProvisionMppCredentials");
             }
 
-            var localVarPath = $"/acp/v1/mpp/credentials";
+            var localVarPath = $"/icc/v1/mpp/credentials";
             var localVarPathParams = new Dictionary<string, string>();
             var localVarQueryParams = new Dictionary<string, string>();
             var localVarHeaderParams = new Dictionary<string, string>(Configuration.MerchantLegacySettings.DefaultHeader);

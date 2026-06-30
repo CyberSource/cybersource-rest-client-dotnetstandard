@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,20 +46,23 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Oauth2
         /// </summary>
-        [DataMember(Name="oauth2", EmitDefaultValue=false)]
+        [JsonPropertyName("oauth2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Boardingv1registrationsIntegrationInformationOauth2> Oauth2 { get; set; }
 
         /// <summary>
         /// tenantConfigurations is an array of objects that includes the tenant information this merchant is associated with.
         /// </summary>
         /// <value>tenantConfigurations is an array of objects that includes the tenant information this merchant is associated with.</value>
-        [DataMember(Name="tenantConfigurations", EmitDefaultValue=false)]
+        [JsonPropertyName("tenantConfigurations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Boardingv1registrationsIntegrationInformationTenantConfigurations> TenantConfigurations { get; set; }
 
         /// <summary>
         /// Gets or Sets Msd
         /// </summary>
-        [DataMember(Name="msd", EmitDefaultValue=false)]
+        [JsonPropertyName("msd")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Boardingv1registrationsIntegrationInformationMsd Msd { get; set; }
 
         /// <summary>
@@ -70,9 +73,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Boardingv1registrationsIntegrationInformation {\n");
-            if (Oauth2 != null) sb.Append("  Oauth2: ").Append(Oauth2).Append("\n");
-            if (TenantConfigurations != null) sb.Append("  TenantConfigurations: ").Append(TenantConfigurations).Append("\n");
-            if (Msd != null) sb.Append("  Msd: ").Append(Msd).Append("\n");
+            if (Oauth2 != null) sb.Append("  Oauth2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsIntegrationInformation", "oauth2", Oauth2.ToString())).Append("\n");
+            if (TenantConfigurations != null) sb.Append("  TenantConfigurations: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsIntegrationInformation", "tenantConfigurations", TenantConfigurations.ToString())).Append("\n");
+            if (Msd != null) sb.Append("  Msd: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsIntegrationInformation", "msd", Msd.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,7 +86,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Boardingv1registrationsIntegrationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

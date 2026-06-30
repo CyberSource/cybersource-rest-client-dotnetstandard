@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -56,49 +56,57 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Token
         /// </summary>
-        [DataMember(Name="token", EmitDefaultValue=false)]
+        [JsonPropertyName("token")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Token { get; set; }
 
         /// <summary>
         /// Gets or Sets CustomerId
         /// </summary>
-        [DataMember(Name="customerId", EmitDefaultValue=false)]
+        [JsonPropertyName("customerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerId { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInstrumentId
         /// </summary>
-        [DataMember(Name="paymentInstrumentId", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInstrumentId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentInstrumentId { get; set; }
 
         /// <summary>
         /// Gets or Sets InstrumentIdentifierId
         /// </summary>
-        [DataMember(Name="instrumentIdentifierId", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentIdentifierId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InstrumentIdentifierId { get; set; }
 
         /// <summary>
         /// Gets or Sets CardNumber
         /// </summary>
-        [DataMember(Name="cardNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("cardNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets CardExpiryMonth
         /// </summary>
-        [DataMember(Name="cardExpiryMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("cardExpiryMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardExpiryMonth { get; set; }
 
         /// <summary>
         /// Gets or Sets CardExpiryYear
         /// </summary>
-        [DataMember(Name="cardExpiryYear", EmitDefaultValue=false)]
+        [JsonPropertyName("cardExpiryYear")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardExpiryYear { get; set; }
 
         /// <summary>
         /// Gets or Sets CardType
         /// </summary>
-        [DataMember(Name="cardType", EmitDefaultValue=false)]
+        [JsonPropertyName("cardType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardType { get; set; }
 
         /// <summary>
@@ -109,14 +117,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse20014SourceRecord {\n");
-            if (Token != null) sb.Append("  Token: ").Append(Token).Append("\n");
-            if (CustomerId != null) sb.Append("  CustomerId: ").Append(CustomerId).Append("\n");
-            if (PaymentInstrumentId != null) sb.Append("  PaymentInstrumentId: ").Append(PaymentInstrumentId).Append("\n");
-            if (InstrumentIdentifierId != null) sb.Append("  InstrumentIdentifierId: ").Append(InstrumentIdentifierId).Append("\n");
-            if (CardNumber != null) sb.Append("  CardNumber: ").Append(CardNumber).Append("\n");
-            if (CardExpiryMonth != null) sb.Append("  CardExpiryMonth: ").Append(CardExpiryMonth).Append("\n");
-            if (CardExpiryYear != null) sb.Append("  CardExpiryYear: ").Append(CardExpiryYear).Append("\n");
-            if (CardType != null) sb.Append("  CardType: ").Append(CardType).Append("\n");
+            if (Token != null) sb.Append("  Token: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014SourceRecord", "token", Token.ToString())).Append("\n");
+            if (CustomerId != null) sb.Append("  CustomerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014SourceRecord", "customerId", CustomerId.ToString())).Append("\n");
+            if (PaymentInstrumentId != null) sb.Append("  PaymentInstrumentId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014SourceRecord", "paymentInstrumentId", PaymentInstrumentId.ToString())).Append("\n");
+            if (InstrumentIdentifierId != null) sb.Append("  InstrumentIdentifierId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014SourceRecord", "instrumentIdentifierId", InstrumentIdentifierId.ToString())).Append("\n");
+            if (CardNumber != null) sb.Append("  CardNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014SourceRecord", "cardNumber", CardNumber.ToString())).Append("\n");
+            if (CardExpiryMonth != null) sb.Append("  CardExpiryMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014SourceRecord", "cardExpiryMonth", CardExpiryMonth.ToString())).Append("\n");
+            if (CardExpiryYear != null) sb.Append("  CardExpiryYear: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014SourceRecord", "cardExpiryYear", CardExpiryYear.ToString())).Append("\n");
+            if (CardType != null) sb.Append("  CardType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014SourceRecord", "cardType", CardType.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -127,7 +135,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse20014SourceRecord", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

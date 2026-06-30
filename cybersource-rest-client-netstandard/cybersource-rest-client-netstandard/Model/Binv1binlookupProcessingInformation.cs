@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,13 +45,15 @@ namespace CyberSource.Model
         /// Bin Source File Identifier.  Possible values: - itmx - rupay 
         /// </summary>
         /// <value>Bin Source File Identifier.  Possible values: - itmx - rupay </value>
-        [DataMember(Name="binSource", EmitDefaultValue=false)]
+        [JsonPropertyName("binSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BinSource { get; set; }
 
         /// <summary>
         /// Gets or Sets PayoutOptions
         /// </summary>
-        [DataMember(Name="payoutOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("payoutOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Binv1binlookupProcessingInformationPayoutOptions PayoutOptions { get; set; }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Binv1binlookupProcessingInformation {\n");
-            if (BinSource != null) sb.Append("  BinSource: ").Append(BinSource).Append("\n");
-            if (PayoutOptions != null) sb.Append("  PayoutOptions: ").Append(PayoutOptions).Append("\n");
+            if (BinSource != null) sb.Append("  BinSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Binv1binlookupProcessingInformation", "binSource", BinSource.ToString())).Append("\n");
+            if (PayoutOptions != null) sb.Append("  PayoutOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Binv1binlookupProcessingInformation", "payoutOptions", PayoutOptions.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,7 +76,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Binv1binlookupProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Shipping method for the product. Possible values:   - &#x60;lowcost&#x60;: Lowest-cost service  - &#x60;sameday&#x60;: Courier or same-day service  - &#x60;oneday&#x60;: Next-day or overnight service  - &#x60;twoday&#x60;: Two-day service  - &#x60;threeday&#x60;: Three-day service  - &#x60;pickup&#x60;: Store pick-up  - &#x60;other&#x60;: Other shipping method  - &#x60;none&#x60;: No shipping method because product is a service or subscription  Klarna Advantage Plus additional values:  - &#x60;TO_DOOR&#x60;: Delivery to door  - &#x60;TO_CURB&#x60;: Delivery to curb  - &#x60;TO_MAILBOX&#x60;: Delivery to mailbox  - &#x60;PICKUP_BOX&#x60;: Pickup from box  - &#x60;PICKUP_POINT&#x60;: Pickup from point  - &#x60;PICKUP_STORE&#x60;: Pickup from store  - &#x60;PICKUP_WAREHOUSE&#x60;: Pickup from warehouse  - &#x60;DIGITAL_EMAIL&#x60;: Digital delivery via email  - &#x60;DIGITAL_DOWNLOAD&#x60;: Digital download  - &#x60;DIGITAL_OTHER&#x60;: Other digital delivery  - &#x60;PHYSICAL_OTHER&#x60;: Other physical delivery 
         /// </summary>
         /// <value>Shipping method for the product. Possible values:   - &#x60;lowcost&#x60;: Lowest-cost service  - &#x60;sameday&#x60;: Courier or same-day service  - &#x60;oneday&#x60;: Next-day or overnight service  - &#x60;twoday&#x60;: Two-day service  - &#x60;threeday&#x60;: Three-day service  - &#x60;pickup&#x60;: Store pick-up  - &#x60;other&#x60;: Other shipping method  - &#x60;none&#x60;: No shipping method because product is a service or subscription  Klarna Advantage Plus additional values:  - &#x60;TO_DOOR&#x60;: Delivery to door  - &#x60;TO_CURB&#x60;: Delivery to curb  - &#x60;TO_MAILBOX&#x60;: Delivery to mailbox  - &#x60;PICKUP_BOX&#x60;: Pickup from box  - &#x60;PICKUP_POINT&#x60;: Pickup from point  - &#x60;PICKUP_STORE&#x60;: Pickup from store  - &#x60;PICKUP_WAREHOUSE&#x60;: Pickup from warehouse  - &#x60;DIGITAL_EMAIL&#x60;: Digital delivery via email  - &#x60;DIGITAL_DOWNLOAD&#x60;: Digital download  - &#x60;DIGITAL_OTHER&#x60;: Other digital delivery  - &#x60;PHYSICAL_OTHER&#x60;: Other physical delivery </value>
-        [DataMember(Name="shippingMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShippingMethod { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsOrderPost201ResponseOrderInformationShippingDetails {\n");
-            if (ShippingMethod != null) sb.Append("  ShippingMethod: ").Append(ShippingMethod).Append("\n");
+            if (ShippingMethod != null) sb.Append("  ShippingMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationShippingDetails", "shippingMethod", ShippingMethod.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsOrderPost201ResponseOrderInformationShippingDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

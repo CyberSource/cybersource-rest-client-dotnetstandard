@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,20 +47,23 @@ namespace CyberSource.Model
         /// Border Radius, Allowed Values - Number, Chars, SPACE, Percentage(%), DOT(.), Example &#39;25px 10px 25px 10px&#39;; &#39;2em 1em 0.5em 3em&#39; 
         /// </summary>
         /// <value>Border Radius, Allowed Values - Number, Chars, SPACE, Percentage(%), DOT(.), Example &#39;25px 10px 25px 10px&#39;; &#39;2em 1em 0.5em 3em&#39; </value>
-        [DataMember(Name="borderRadius", EmitDefaultValue=false)]
+        [JsonPropertyName("borderRadius")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BorderRadius { get; set; }
 
         /// <summary>
         /// UI Theme Name/Design Name - Allowed Chars: Alpha Numeric, Dot (.), Hyphen (-), Underscore (_) 
         /// </summary>
         /// <value>UI Theme Name/Design Name - Allowed Chars: Alpha Numeric, Dot (.), Hyphen (-), Underscore (_) </value>
-        [DataMember(Name="theme", EmitDefaultValue=false)]
+        [JsonPropertyName("theme")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Theme { get; set; }
 
         /// <summary>
         /// Gets or Sets Color
         /// </summary>
-        [DataMember(Name="color", EmitDefaultValue=false)]
+        [JsonPropertyName("color")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentreferencesUserInterfaceColor Color { get; set; }
 
         /// <summary>
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentreferencesUserInterface {\n");
-            if (BorderRadius != null) sb.Append("  BorderRadius: ").Append(BorderRadius).Append("\n");
-            if (Theme != null) sb.Append("  Theme: ").Append(Theme).Append("\n");
-            if (Color != null) sb.Append("  Color: ").Append(Color).Append("\n");
+            if (BorderRadius != null) sb.Append("  BorderRadius: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterface", "borderRadius", BorderRadius.ToString())).Append("\n");
+            if (Theme != null) sb.Append("  Theme: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterface", "theme", Theme.ToString())).Append("\n");
+            if (Color != null) sb.Append("  Color: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterface", "color", Color.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentreferencesUserInterface", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

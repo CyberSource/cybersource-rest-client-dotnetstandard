@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -50,35 +50,40 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets PersonalIdentification
         /// </summary>
-        [DataMember(Name="personalIdentification", EmitDefaultValue=false)]
+        [JsonPropertyName("personalIdentification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataBuyerInformationPersonalIdentification PersonalIdentification { get; set; }
 
         /// <summary>
         /// The Merchant Customer ID 
         /// </summary>
         /// <value>The Merchant Customer ID </value>
-        [DataMember(Name="merchantCustomerId", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantCustomerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantCustomerId { get; set; }
 
         /// <summary>
         /// The Company Tax ID 
         /// </summary>
         /// <value>The Company Tax ID </value>
-        [DataMember(Name="companyTaxId", EmitDefaultValue=false)]
+        [JsonPropertyName("companyTaxId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CompanyTaxId { get; set; }
 
         /// <summary>
         /// The date of birth 
         /// </summary>
         /// <value>The date of birth </value>
-        [DataMember(Name="dateOfBirth", EmitDefaultValue=false)]
+        [JsonPropertyName("dateOfBirth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DateOfBirth { get; set; }
 
         /// <summary>
         /// The preferred language 
         /// </summary>
         /// <value>The preferred language </value>
-        [DataMember(Name="language", EmitDefaultValue=false)]
+        [JsonPropertyName("language")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Language { get; set; }
 
         /// <summary>
@@ -89,11 +94,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Upv1capturecontextsDataBuyerInformation {\n");
-            if (PersonalIdentification != null) sb.Append("  PersonalIdentification: ").Append(PersonalIdentification).Append("\n");
-            if (MerchantCustomerId != null) sb.Append("  MerchantCustomerId: ").Append(MerchantCustomerId).Append("\n");
-            if (CompanyTaxId != null) sb.Append("  CompanyTaxId: ").Append(CompanyTaxId).Append("\n");
-            if (DateOfBirth != null) sb.Append("  DateOfBirth: ").Append(DateOfBirth).Append("\n");
-            if (Language != null) sb.Append("  Language: ").Append(Language).Append("\n");
+            if (PersonalIdentification != null) sb.Append("  PersonalIdentification: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataBuyerInformation", "personalIdentification", PersonalIdentification.ToString())).Append("\n");
+            if (MerchantCustomerId != null) sb.Append("  MerchantCustomerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataBuyerInformation", "merchantCustomerId", MerchantCustomerId.ToString())).Append("\n");
+            if (CompanyTaxId != null) sb.Append("  CompanyTaxId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataBuyerInformation", "companyTaxId", CompanyTaxId.ToString())).Append("\n");
+            if (DateOfBirth != null) sb.Append("  DateOfBirth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataBuyerInformation", "dateOfBirth", DateOfBirth.ToString())).Append("\n");
+            if (Language != null) sb.Append("  Language: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataBuyerInformation", "language", Language.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,7 +109,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Upv1capturecontextsDataBuyerInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

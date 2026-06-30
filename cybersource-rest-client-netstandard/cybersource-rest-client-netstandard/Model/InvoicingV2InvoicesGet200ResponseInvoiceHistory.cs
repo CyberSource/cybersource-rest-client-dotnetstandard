@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,20 +47,23 @@ namespace CyberSource.Model
         /// The event triggered for the invoice.  Possible values:  - &#x60;UNKNOWN&#x60;  - &#x60;DRAFT&#x60;  - &#x60;CREATE&#x60;  - &#x60;UPDATE&#x60;  - &#x60;SEND&#x60;  - &#x60;RESEND&#x60;  - &#x60;REMINDER&#x60;  - &#x60;PAYMENT&#x60;  - &#x60;CANCEL&#x60;  - &#x60;PENDING&#x60;  - &#x60;REJECTED&#x60; 
         /// </summary>
         /// <value>The event triggered for the invoice.  Possible values:  - &#x60;UNKNOWN&#x60;  - &#x60;DRAFT&#x60;  - &#x60;CREATE&#x60;  - &#x60;UPDATE&#x60;  - &#x60;SEND&#x60;  - &#x60;RESEND&#x60;  - &#x60;REMINDER&#x60;  - &#x60;PAYMENT&#x60;  - &#x60;CANCEL&#x60;  - &#x60;PENDING&#x60;  - &#x60;REJECTED&#x60; </value>
-        [DataMember(Name="event", EmitDefaultValue=false)]
+        [JsonPropertyName("event")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Event { get; set; }
 
         /// <summary>
         /// The date and time when the invoice event was triggered in ISO 8601 format. Format: YYYY-MM-DDThh:mm:ssZ 
         /// </summary>
         /// <value>The date and time when the invoice event was triggered in ISO 8601 format. Format: YYYY-MM-DDThh:mm:ssZ </value>
-        [DataMember(Name="date", EmitDefaultValue=false)]
+        [JsonPropertyName("date")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? Date { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionDetails
         /// </summary>
-        [DataMember(Name="transactionDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InvoicingV2InvoicesGet200ResponseTransactionDetails TransactionDetails { get; set; }
 
         /// <summary>
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InvoicingV2InvoicesGet200ResponseInvoiceHistory {\n");
-            if (Event != null) sb.Append("  Event: ").Append(Event).Append("\n");
-            if (Date != null) sb.Append("  Date: ").Append(Date).Append("\n");
-            if (TransactionDetails != null) sb.Append("  TransactionDetails: ").Append(TransactionDetails).Append("\n");
+            if (Event != null) sb.Append("  Event: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesGet200ResponseInvoiceHistory", "event", Event.ToString())).Append("\n");
+            if (Date != null) sb.Append("  Date: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesGet200ResponseInvoiceHistory", "date", Date.ToString())).Append("\n");
+            if (TransactionDetails != null) sb.Append("  TransactionDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesGet200ResponseInvoiceHistory", "transactionDetails", TransactionDetails.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InvoicingV2InvoicesGet200ResponseInvoiceHistory", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

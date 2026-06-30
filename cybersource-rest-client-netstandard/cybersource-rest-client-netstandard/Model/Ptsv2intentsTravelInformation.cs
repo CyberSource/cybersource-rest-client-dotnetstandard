@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,21 +46,24 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Agency
         /// </summary>
-        [DataMember(Name="agency", EmitDefaultValue=false)]
+        [JsonPropertyName("agency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2intentsTravelInformationAgency Agency { get; set; }
 
         /// <summary>
         /// The type of journey. 
         /// </summary>
         /// <value>The type of journey. </value>
-        [DataMember(Name="journeyType", EmitDefaultValue=false)]
+        [JsonPropertyName("journeyType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string JourneyType { get; set; }
 
         /// <summary>
         /// The actual final destination of the travel. 
         /// </summary>
         /// <value>The actual final destination of the travel. </value>
-        [DataMember(Name="actualFinalDestination", EmitDefaultValue=false)]
+        [JsonPropertyName("actualFinalDestination")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ActualFinalDestination { get; set; }
 
         /// <summary>
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2intentsTravelInformation {\n");
-            if (Agency != null) sb.Append("  Agency: ").Append(Agency).Append("\n");
-            if (JourneyType != null) sb.Append("  JourneyType: ").Append(JourneyType).Append("\n");
-            if (ActualFinalDestination != null) sb.Append("  ActualFinalDestination: ").Append(ActualFinalDestination).Append("\n");
+            if (Agency != null) sb.Append("  Agency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsTravelInformation", "agency", Agency.ToString())).Append("\n");
+            if (JourneyType != null) sb.Append("  JourneyType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsTravelInformation", "journeyType", JourneyType.ToString())).Append("\n");
+            if (ActualFinalDestination != null) sb.Append("  ActualFinalDestination: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsTravelInformation", "actualFinalDestination", ActualFinalDestination.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2intentsTravelInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

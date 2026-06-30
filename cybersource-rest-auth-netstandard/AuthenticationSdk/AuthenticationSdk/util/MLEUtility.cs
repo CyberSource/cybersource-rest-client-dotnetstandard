@@ -1,5 +1,4 @@
 ﻿using AuthenticationSdk.core;
-using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -7,12 +6,13 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography;
 using System.Text;
-using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Crypto.Encodings;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace AuthenticationSdk.util
 {
@@ -91,8 +91,8 @@ namespace AuthenticationSdk.util
             var rsa = mleCertificate.GetRSAPublicKey();
             var jweToken = JWEUtilty.EncryptJweCompact(payloadBytes, rsa, serialNumber);
 
-            object mleRequest = CreateJsonObject(jweToken);
-            logUtility.LogDebugMessage(logger, Constants.LOG_REQUEST_AFTER_MLE + mleRequest.ToString());
+            string mleRequest = CreateJsonString(jweToken);
+            logUtility.LogDebugMessage(logger, Constants.LOG_REQUEST_AFTER_MLE + mleRequest);
 
             return mleRequest;
         }
@@ -108,11 +108,12 @@ namespace AuthenticationSdk.util
             return CertificateUtility.ExtractSerialNumber(certificate);
         }
 
-        private static object CreateJsonObject(string jweToken)
+        private static string CreateJsonString(string jweToken)
         {
             var jsonObject = new { encryptedRequest = jweToken };
-            return JsonConvert.SerializeObject(jsonObject);
+            return JsonSerializer.Serialize(jsonObject);
         }
+
         public static bool CheckIsResponseMLEForAPI(MerchantConfig merchantConfig, string operationIds)
         {
             // isMLE for response for an api is false by default
@@ -154,7 +155,7 @@ namespace AuthenticationSdk.util
             }
             try
             {
-                var jsonObject = JsonConvert.DeserializeObject<JObject>(responseBody);
+                var jsonObject = JsonSerializer.Deserialize<JsonObject>(responseBody);
                 if (jsonObject == null || jsonObject.Count != 1)
                 {
                     return false;
@@ -162,7 +163,7 @@ namespace AuthenticationSdk.util
                 if (jsonObject.ContainsKey("encryptedResponse"))
                 {
                     var value = jsonObject["encryptedResponse"];
-                    return value != null && value.Type == JTokenType.String;
+                    return value != null && value.GetValueKind() == JsonValueKind.String;
                 }
                 return false;
             }
@@ -176,7 +177,7 @@ namespace AuthenticationSdk.util
         {
             try
             {
-                var jsonObject = JsonConvert.DeserializeObject<JObject>(mleResponseBody);
+                var jsonObject = JsonSerializer.Deserialize<JsonObject>(mleResponseBody);
                 return jsonObject?["encryptedResponse"]?.ToString();
             }
             catch (Exception e)
@@ -380,7 +381,41 @@ namespace AuthenticationSdk.util
                 {
                     throw new Exception("MLE Response private key is not an RSA key. Only RSA keys are supported for MLE decryption.");
                 }
-                string decryptedResponse = JWEUtilty.DecryptUsingRSAParameters(rsaKey.ExportParameters(true), jweResponseToken);
+                // Generate a fresh, single-use transient password for the in-memory key round-trip.
+                // This password is only used to export and immediately re-import the private key
+                // within this method; it is never persisted, transmitted, or reused. Two concatenated
+                // GUIDs (~244 bits) provide ample, unguessable entropy for a value that never leaves
+                // this process.
+                char[] tempPassword = (Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N")).ToCharArray();
+                byte[] encryptedPkcs8 = null;
+                string decryptedResponse;
+                try
+                {
+                    encryptedPkcs8 = rsaKey.ExportEncryptedPkcs8PrivateKey(tempPassword, new PbeParameters(PbeEncryptionAlgorithm.Aes256Cbc, HashAlgorithmName.SHA256, 1));
+                    using (var fullyUnlockedRSA = RSA.Create())
+                    {
+                        fullyUnlockedRSA.ImportEncryptedPkcs8PrivateKey(tempPassword, encryptedPkcs8, out _);
+                        RSAParameters rsaParameters = fullyUnlockedRSA.ExportParameters(true);
+                        try
+                        {
+                            decryptedResponse = JWEUtilty.DecryptUsingRSAParameters(rsaParameters, jweResponseToken);
+                        }
+                        finally
+                        {
+                            // Clear sensitive private key material from memory
+                            ClearRSAParameters(ref rsaParameters);
+                        }
+                    }
+                }
+                finally
+                {
+                    // Clear sensitive data from memory
+                    Array.Clear(tempPassword, 0, tempPassword.Length);
+                    if (encryptedPkcs8 != null)
+                    {
+                        Array.Clear(encryptedPkcs8, 0, encryptedPkcs8.Length);
+                    }
+                }
                 logUtility.LogDebugMessage(logger, Constants.LOG_NETWORK_RESPONSE_AFTER_MLE_DECRYPTION + decryptedResponse);
                 return decryptedResponse;
             }
@@ -619,8 +654,8 @@ namespace AuthenticationSdk.util
             var jweToken = JWEUtilty.EncryptJweCompact(payloadBytes, rsa, serialNumber);
 
 
-            object mleRequest = CreateJsonObject(jweToken);
-            logUtility.LogDebugMessage(logger, Constants.LOG_REQUEST_AFTER_MLE + mleRequest.ToString());
+            string mleRequest = CreateJsonString(jweToken);
+            logUtility.LogDebugMessage(logger, Constants.LOG_REQUEST_AFTER_MLE + mleRequest);
 
             return mleRequest;
         }
@@ -659,9 +694,21 @@ namespace AuthenticationSdk.util
         }
 
         /// <summary>
-        /// Checks whether MLE response decryption should be enabled for a specific API based on merchant configuration.
-        /// Evaluates global MLE response settings and API-specific control mappings.
+        /// Clears sensitive private key material from the given RSAParameters to avoid leaving
+        /// secrets lingering in memory after decryption.
         /// </summary>
+        /// <param name="parameters">The RSAParameters whose private components should be zeroed out.</param>
+        private static void ClearRSAParameters(ref RSAParameters parameters)
+        {
+            if (parameters.D != null) Array.Clear(parameters.D, 0, parameters.D.Length);
+            if (parameters.P != null) Array.Clear(parameters.P, 0, parameters.P.Length);
+            if (parameters.Q != null) Array.Clear(parameters.Q, 0, parameters.Q.Length);
+            if (parameters.DP != null) Array.Clear(parameters.DP, 0, parameters.DP.Length);
+            if (parameters.DQ != null) Array.Clear(parameters.DQ, 0, parameters.DQ.Length);
+            if (parameters.InverseQ != null) Array.Clear(parameters.InverseQ, 0, parameters.InverseQ.Length);
+        }
+
+
         /// <param name="merchantMLESettings">Object of IMerchantMLESettings containing MLE global settings and API-level response control mappings.</param>
         /// <param name="operationIds">Comma-separated list of operation IDs (API function names) to check for response MLE configuration.</param>
         /// <returns>True if response MLE should be enabled for the specified API operation; otherwise, false.</returns>

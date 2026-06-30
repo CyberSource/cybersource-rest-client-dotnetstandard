@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,19 +46,22 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets StartTime
         /// </summary>
-        [DataMember(Name="startTime", EmitDefaultValue=false)]
+        [JsonPropertyName("startTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? StartTime { get; set; }
 
         /// <summary>
         /// Gets or Sets EndTime
         /// </summary>
-        [DataMember(Name="endTime", EmitDefaultValue=false)]
+        [JsonPropertyName("endTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? EndTime { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentBatchSummaries
         /// </summary>
-        [DataMember(Name="paymentBatchSummaries", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentBatchSummaries")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries> PaymentBatchSummaries { get; set; }
 
         /// <summary>
@@ -69,9 +72,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3PaymentBatchSummariesGet200Response {\n");
-            if (StartTime != null) sb.Append("  StartTime: ").Append(StartTime).Append("\n");
-            if (EndTime != null) sb.Append("  EndTime: ").Append(EndTime).Append("\n");
-            if (PaymentBatchSummaries != null) sb.Append("  PaymentBatchSummaries: ").Append(PaymentBatchSummaries).Append("\n");
+            if (StartTime != null) sb.Append("  StartTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200Response", "startTime", StartTime.ToString())).Append("\n");
+            if (EndTime != null) sb.Append("  EndTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200Response", "endTime", EndTime.ToString())).Append("\n");
+            if (PaymentBatchSummaries != null) sb.Append("  PaymentBatchSummaries: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200Response", "paymentBatchSummaries", PaymentBatchSummaries.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +85,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3PaymentBatchSummariesGet200Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

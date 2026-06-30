@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Chargeback summary list count
         /// </summary>
         /// <value>Chargeback summary list count</value>
-        [DataMember(Name="count", EmitDefaultValue=false)]
+        [JsonPropertyName("count")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? Count { get; set; }
 
         /// <summary>
         /// Summary Date
         /// </summary>
         /// <value>Summary Date</value>
-        [DataMember(Name="time", EmitDefaultValue=false)]
+        [JsonPropertyName("time")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? Time { get; set; }
 
         /// <summary>
         /// Account Id
         /// </summary>
         /// <value>Account Id</value>
-        [DataMember(Name="accountId", EmitDefaultValue=false)]
+        [JsonPropertyName("accountId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountId { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3ChargebackSummariesGet200ResponseChargebackSummaries {\n");
-            if (Count != null) sb.Append("  Count: ").Append(Count).Append("\n");
-            if (Time != null) sb.Append("  Time: ").Append(Time).Append("\n");
-            if (AccountId != null) sb.Append("  AccountId: ").Append(AccountId).Append("\n");
+            if (Count != null) sb.Append("  Count: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackSummariesGet200ResponseChargebackSummaries", "count", Count.ToString())).Append("\n");
+            if (Time != null) sb.Append("  Time: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackSummariesGet200ResponseChargebackSummaries", "time", Time.ToString())).Append("\n");
+            if (AccountId != null) sb.Append("  AccountId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackSummariesGet200ResponseChargebackSummaries", "accountId", AccountId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3ChargebackSummariesGet200ResponseChargebackSummaries", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

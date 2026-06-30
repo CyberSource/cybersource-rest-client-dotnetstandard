@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// The purchase number
         /// </summary>
         /// <value>The purchase number</value>
-        [DataMember(Name="purchaseNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurchaseNumber { get; set; }
 
         /// <summary>
         /// Returns the link to a purchase or donation link when the status is &#x60;ACTIVE&#x60;.
         /// </summary>
         /// <value>Returns the link to a purchase or donation link when the status is &#x60;ACTIVE&#x60;.</value>
-        [DataMember(Name="paymentLink", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentLink")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentLink { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PblPaymentLinksAllGet200ResponsePurchaseInformation {\n");
-            if (PurchaseNumber != null) sb.Append("  PurchaseNumber: ").Append(PurchaseNumber).Append("\n");
-            if (PaymentLink != null) sb.Append("  PaymentLink: ").Append(PaymentLink).Append("\n");
+            if (PurchaseNumber != null) sb.Append("  PurchaseNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PblPaymentLinksAllGet200ResponsePurchaseInformation", "purchaseNumber", PurchaseNumber.ToString())).Append("\n");
+            if (PaymentLink != null) sb.Append("  PaymentLink: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PblPaymentLinksAllGet200ResponsePurchaseInformation", "paymentLink", PaymentLink.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PblPaymentLinksAllGet200ResponsePurchaseInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

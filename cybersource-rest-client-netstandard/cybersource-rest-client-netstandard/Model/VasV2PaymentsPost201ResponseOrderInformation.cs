@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,39 +53,45 @@ namespace CyberSource.Model
         /// Total amount of tax exempt amounts. This value is the sum of the values for all the &#x60;orderInformation.lineItems[].exemptAmount&#x60; fields in the tax calculation request. 
         /// </summary>
         /// <value>Total amount of tax exempt amounts. This value is the sum of the values for all the &#x60;orderInformation.lineItems[].exemptAmount&#x60; fields in the tax calculation request. </value>
-        [DataMember(Name="exemptAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("exemptAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExemptAmount { get; set; }
 
         /// <summary>
         /// Total amount of all taxable amounts. This value is the sum of the values for all the &#x60;orderInformation.lineItems[].taxAmount&#x60; fields in the tax calculation request. 
         /// </summary>
         /// <value>Total amount of all taxable amounts. This value is the sum of the values for all the &#x60;orderInformation.lineItems[].taxAmount&#x60; fields in the tax calculation request. </value>
-        [DataMember(Name="taxableAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxableAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxableAmount { get; set; }
 
         /// <summary>
         /// Total amount of tax for all lineItems in the tax calculation request. 
         /// </summary>
         /// <value>Total amount of tax for all lineItems in the tax calculation request. </value>
-        [DataMember(Name="taxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets LineItems
         /// </summary>
-        [DataMember(Name="lineItems", EmitDefaultValue=false)]
+        [JsonPropertyName("lineItems")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<VasV2PaymentsPost201ResponseOrderInformationLineItems> LineItems { get; set; }
 
         /// <summary>
         /// Gets or Sets TaxDetails
         /// </summary>
-        [DataMember(Name="taxDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("taxDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<VasV2PaymentsPost201ResponseOrderInformationTaxDetails> TaxDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets AmountDetails
         /// </summary>
-        [DataMember(Name="amountDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("amountDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidreversalsReversalInformationAmountDetails AmountDetails { get; set; }
 
         /// <summary>
@@ -96,12 +102,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class VasV2PaymentsPost201ResponseOrderInformation {\n");
-            if (ExemptAmount != null) sb.Append("  ExemptAmount: ").Append(ExemptAmount).Append("\n");
-            if (TaxableAmount != null) sb.Append("  TaxableAmount: ").Append(TaxableAmount).Append("\n");
-            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
-            if (LineItems != null) sb.Append("  LineItems: ").Append(LineItems).Append("\n");
-            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(TaxDetails).Append("\n");
-            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(AmountDetails).Append("\n");
+            if (ExemptAmount != null) sb.Append("  ExemptAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseOrderInformation", "exemptAmount", ExemptAmount.ToString())).Append("\n");
+            if (TaxableAmount != null) sb.Append("  TaxableAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseOrderInformation", "taxableAmount", TaxableAmount.ToString())).Append("\n");
+            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseOrderInformation", "taxAmount", TaxAmount.ToString())).Append("\n");
+            if (LineItems != null) sb.Append("  LineItems: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseOrderInformation", "lineItems", LineItems.ToString())).Append("\n");
+            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseOrderInformation", "taxDetails", TaxDetails.ToString())).Append("\n");
+            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseOrderInformation", "amountDetails", AmountDetails.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -112,7 +118,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("VasV2PaymentsPost201ResponseOrderInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

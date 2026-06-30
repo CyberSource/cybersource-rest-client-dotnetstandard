@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -50,34 +50,39 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets TaxDetails
         /// </summary>
-        [DataMember(Name="taxDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("taxDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<VasV2PaymentsPost201ResponseOrderInformationTaxDetails> TaxDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets Jurisdiction
         /// </summary>
-        [DataMember(Name="jurisdiction", EmitDefaultValue=false)]
+        [JsonPropertyName("jurisdiction")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<VasV2PaymentsPost201ResponseOrderInformationJurisdiction> Jurisdiction { get; set; }
 
         /// <summary>
         /// Exempt amount for the lineItem. Returned only if the &#x60;taxInformation.showTaxPerLineItem&#x60; field is set to &#x60;Yes&#x60;. 
         /// </summary>
         /// <value>Exempt amount for the lineItem. Returned only if the &#x60;taxInformation.showTaxPerLineItem&#x60; field is set to &#x60;Yes&#x60;. </value>
-        [DataMember(Name="exemptAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("exemptAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExemptAmount { get; set; }
 
         /// <summary>
         /// Portion of the item amount that is taxable. 
         /// </summary>
         /// <value>Portion of the item amount that is taxable. </value>
-        [DataMember(Name="taxableAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxableAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxableAmount { get; set; }
 
         /// <summary>
         /// Total tax for the item. This value is the sum of all taxes applied to the item. 
         /// </summary>
         /// <value>Total tax for the item. This value is the sum of all taxes applied to the item. </value>
-        [DataMember(Name="taxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAmount { get; set; }
 
         /// <summary>
@@ -88,11 +93,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class VasV2PaymentsPost201ResponseOrderInformationLineItems {\n");
-            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(TaxDetails).Append("\n");
-            if (Jurisdiction != null) sb.Append("  Jurisdiction: ").Append(Jurisdiction).Append("\n");
-            if (ExemptAmount != null) sb.Append("  ExemptAmount: ").Append(ExemptAmount).Append("\n");
-            if (TaxableAmount != null) sb.Append("  TaxableAmount: ").Append(TaxableAmount).Append("\n");
-            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
+            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseOrderInformationLineItems", "taxDetails", TaxDetails.ToString())).Append("\n");
+            if (Jurisdiction != null) sb.Append("  Jurisdiction: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseOrderInformationLineItems", "jurisdiction", Jurisdiction.ToString())).Append("\n");
+            if (ExemptAmount != null) sb.Append("  ExemptAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseOrderInformationLineItems", "exemptAmount", ExemptAmount.ToString())).Append("\n");
+            if (TaxableAmount != null) sb.Append("  TaxableAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseOrderInformationLineItems", "taxableAmount", TaxableAmount.ToString())).Append("\n");
+            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseOrderInformationLineItems", "taxAmount", TaxAmount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -103,7 +108,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("VasV2PaymentsPost201ResponseOrderInformationLineItems", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// JSON Web Token (JWT) used to authenticate the consumer with the authentication provider, such as, CardinalCommerce or Rupay. Note - Max Length of this field is 2048 characters. 
         /// </summary>
         /// <value>JSON Web Token (JWT) used to authenticate the consumer with the authentication provider, such as, CardinalCommerce or Rupay. Note - Max Length of this field is 2048 characters. </value>
-        [DataMember(Name="accessToken", EmitDefaultValue=false)]
+        [JsonPropertyName("accessToken")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccessToken { get; set; }
 
         /// <summary>
         /// This identifier represents cardinal has started device data collection session and this must be passed in Authentication JWT to Cardinal when invoking the deviceDataCollectionUrl. 
         /// </summary>
         /// <value>This identifier represents cardinal has started device data collection session and this must be passed in Authentication JWT to Cardinal when invoking the deviceDataCollectionUrl. </value>
-        [DataMember(Name="referenceId", EmitDefaultValue=false)]
+        [JsonPropertyName("referenceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReferenceId { get; set; }
 
         /// <summary>
         /// The deviceDataCollectionUrl is the location to send the Authentication JWT when invoking the Device Data collection process. 
         /// </summary>
         /// <value>The deviceDataCollectionUrl is the location to send the Authentication JWT when invoking the Device Data collection process. </value>
-        [DataMember(Name="deviceDataCollectionUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceDataCollectionUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeviceDataCollectionUrl { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class RiskV1AuthenticationSetupsPost201ResponseConsumerAuthenticationInformation {\n");
-            if (AccessToken != null) sb.Append("  AccessToken: ").Append(AccessToken).Append("\n");
-            if (ReferenceId != null) sb.Append("  ReferenceId: ").Append(ReferenceId).Append("\n");
-            if (DeviceDataCollectionUrl != null) sb.Append("  DeviceDataCollectionUrl: ").Append(DeviceDataCollectionUrl).Append("\n");
+            if (AccessToken != null) sb.Append("  AccessToken: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1AuthenticationSetupsPost201ResponseConsumerAuthenticationInformation", "accessToken", AccessToken.ToString())).Append("\n");
+            if (ReferenceId != null) sb.Append("  ReferenceId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1AuthenticationSetupsPost201ResponseConsumerAuthenticationInformation", "referenceId", ReferenceId.ToString())).Append("\n");
+            if (DeviceDataCollectionUrl != null) sb.Append("  DeviceDataCollectionUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1AuthenticationSetupsPost201ResponseConsumerAuthenticationInformation", "deviceDataCollectionUrl", DeviceDataCollectionUrl.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("RiskV1AuthenticationSetupsPost201ResponseConsumerAuthenticationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

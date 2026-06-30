@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// The ID of the customer, passed in the return_url field by PayPal after customer approval.
         /// </summary>
         /// <value>The ID of the customer, passed in the return_url field by PayPal after customer approval.</value>
-        [DataMember(Name="accountId", EmitDefaultValue=false)]
+        [JsonPropertyName("accountId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountId { get; set; }
 
         /// <summary>
         /// Payment mode for the authorization or order transaction.  INSTANT_TRANSFER  MANUAL_BANK_TRANSFER  DELAYED_TRANSFER  ECHECK  UNRESTRICTED (default)—this value is available only when configured by PayPal for the merchant. INSTANT
         /// </summary>
         /// <value>Payment mode for the authorization or order transaction.  INSTANT_TRANSFER  MANUAL_BANK_TRANSFER  DELAYED_TRANSFER  ECHECK  UNRESTRICTED (default)—this value is available only when configured by PayPal for the merchant. INSTANT</value>
-        [DataMember(Name="fundingSource", EmitDefaultValue=false)]
+        [JsonPropertyName("fundingSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FundingSource { get; set; }
 
         /// <summary>
         /// Payment method for the unit purchase. Possible values: - &#x60;UNRESTRICTED (default)—this value is only available if configured by PayPal for the merchant.&#x60; - &#x60;INSTANT&#x60; 
         /// </summary>
         /// <value>Payment method for the unit purchase. Possible values: - &#x60;UNRESTRICTED (default)—this value is only available if configured by PayPal for the merchant.&#x60; - &#x60;INSTANT&#x60; </value>
-        [DataMember(Name="fundingSourceSale", EmitDefaultValue=false)]
+        [JsonPropertyName("fundingSourceSale")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FundingSourceSale { get; set; }
 
         /// <summary>
         /// The Venmo user name chosen by the user, also known as a Venmo handle. 
         /// </summary>
         /// <value>The Venmo user name chosen by the user, also known as a Venmo handle. </value>
-        [DataMember(Name="userName", EmitDefaultValue=false)]
+        [JsonPropertyName("userName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UserName { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsOrderPost201ResponsePaymentInformationEWallet {\n");
-            if (AccountId != null) sb.Append("  AccountId: ").Append(AccountId).Append("\n");
-            if (FundingSource != null) sb.Append("  FundingSource: ").Append(FundingSource).Append("\n");
-            if (FundingSourceSale != null) sb.Append("  FundingSourceSale: ").Append(FundingSourceSale).Append("\n");
-            if (UserName != null) sb.Append("  UserName: ").Append(UserName).Append("\n");
+            if (AccountId != null) sb.Append("  AccountId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponsePaymentInformationEWallet", "accountId", AccountId.ToString())).Append("\n");
+            if (FundingSource != null) sb.Append("  FundingSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponsePaymentInformationEWallet", "fundingSource", FundingSource.ToString())).Append("\n");
+            if (FundingSourceSale != null) sb.Append("  FundingSourceSale: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponsePaymentInformationEWallet", "fundingSourceSale", FundingSourceSale.ToString())).Append("\n");
+            if (UserName != null) sb.Append("  UserName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponsePaymentInformationEWallet", "userName", UserName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsOrderPost201ResponsePaymentInformationEWallet", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

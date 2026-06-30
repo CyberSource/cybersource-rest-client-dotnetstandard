@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -95,49 +95,56 @@ namespace CyberSource.Model
         /// *NEW* Flag to indicate whether the processor is migrated to the Common Connectivity Services Platform. Applicable for VPC and amexdirect processors. 
         /// </summary>
         /// <value>*NEW* Flag to indicate whether the processor is migrated to the Common Connectivity Services Platform. Applicable for VPC and amexdirect processors. </value>
-        [DataMember(Name="enableCCS", EmitDefaultValue=false)]
+        [JsonPropertyName("enableCCS")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableCCS { get; set; }
 
         /// <summary>
         /// *NEW* The &#39;Terminal Id&#39; aka TID, is an identifier used for with your payments processor. Depending on the processor and payment acceptance type this may also be the default Terminal ID used for Card Present and Virtual Terminal transactions. Applicable for VPC processors. 
         /// </summary>
         /// <value>*NEW* The &#39;Terminal Id&#39; aka TID, is an identifier used for with your payments processor. Depending on the processor and payment acceptance type this may also be the default Terminal ID used for Card Present and Virtual Terminal transactions. Applicable for VPC processors. </value>
-        [DataMember(Name="terminalId", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalId { get; set; }
 
         /// <summary>
         /// *NEW* This ensures the transaction reference # contains an identifier that can be viewed in CYBS
         /// </summary>
         /// <value>*NEW* This ensures the transaction reference # contains an identifier that can be viewed in CYBS</value>
-        [DataMember(Name="enable15anTransactionReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("enable15anTransactionReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Enable15anTransactionReferenceNumber { get; set; }
 
         /// <summary>
         /// *NEW* This is used by the EBC2 application
         /// </summary>
         /// <value>*NEW* This is used by the EBC2 application</value>
-        [DataMember(Name="portalSupportedPaytypes", EmitDefaultValue=false)]
+        [JsonPropertyName("portalSupportedPaytypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PortalSupportedPaytypes { get; set; }
 
         /// <summary>
         /// *NEW*  Possible values: - BEST_GUESS
         /// </summary>
         /// <value>*NEW*  Possible values: - BEST_GUESS</value>
-        [DataMember(Name="settlementMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementMethod { get; set; }
 
         /// <summary>
         /// *NEW*  Possible values: - VALIDATION
         /// </summary>
         /// <value>*NEW*  Possible values: - VALIDATION</value>
-        [DataMember(Name="verificationLevel", EmitDefaultValue=false)]
+        [JsonPropertyName("verificationLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VerificationLevel { get; set; }
 
         /// <summary>
         /// *Moved* When set to Yes we will automatically update transactions to a completed status X-number of days after the transaction comes through; if no failure notification is received. When set to No means we will not update transaction status in this manner. For BAMS/Bank of America merchants, they should be set to No unless we are explicitly asked to set a merchant to YES.
         /// </summary>
         /// <value>*Moved* When set to Yes we will automatically update transactions to a completed status X-number of days after the transaction comes through; if no failure notification is received. When set to No means we will not update transaction status in this manner. For BAMS/Bank of America merchants, they should be set to No unless we are explicitly asked to set a merchant to YES.</value>
-        [DataMember(Name="setCompletedState", EmitDefaultValue=false)]
+        [JsonPropertyName("setCompletedState")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? SetCompletedState { get; set; }
 
         /// <summary>
@@ -148,13 +155,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ECheckConfigCommonInternalOnlyProcessors {\n");
-            if (EnableCCS != null) sb.Append("  EnableCCS: ").Append(EnableCCS).Append("\n");
-            if (TerminalId != null) sb.Append("  TerminalId: ").Append(TerminalId).Append("\n");
-            if (Enable15anTransactionReferenceNumber != null) sb.Append("  Enable15anTransactionReferenceNumber: ").Append(Enable15anTransactionReferenceNumber).Append("\n");
-            if (PortalSupportedPaytypes != null) sb.Append("  PortalSupportedPaytypes: ").Append(PortalSupportedPaytypes).Append("\n");
-            if (SettlementMethod != null) sb.Append("  SettlementMethod: ").Append(SettlementMethod).Append("\n");
-            if (VerificationLevel != null) sb.Append("  VerificationLevel: ").Append(VerificationLevel).Append("\n");
-            if (SetCompletedState != null) sb.Append("  SetCompletedState: ").Append(SetCompletedState).Append("\n");
+            if (EnableCCS != null) sb.Append("  EnableCCS: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonInternalOnlyProcessors", "enableCCS", EnableCCS.ToString())).Append("\n");
+            if (TerminalId != null) sb.Append("  TerminalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonInternalOnlyProcessors", "terminalId", TerminalId.ToString())).Append("\n");
+            if (Enable15anTransactionReferenceNumber != null) sb.Append("  Enable15anTransactionReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonInternalOnlyProcessors", "enable15anTransactionReferenceNumber", Enable15anTransactionReferenceNumber.ToString())).Append("\n");
+            if (PortalSupportedPaytypes != null) sb.Append("  PortalSupportedPaytypes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonInternalOnlyProcessors", "portalSupportedPaytypes", PortalSupportedPaytypes.ToString())).Append("\n");
+            if (SettlementMethod != null) sb.Append("  SettlementMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonInternalOnlyProcessors", "settlementMethod", SettlementMethod.ToString())).Append("\n");
+            if (VerificationLevel != null) sb.Append("  VerificationLevel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonInternalOnlyProcessors", "verificationLevel", VerificationLevel.ToString())).Append("\n");
+            if (SetCompletedState != null) sb.Append("  SetCompletedState: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonInternalOnlyProcessors", "setCompletedState", SetCompletedState.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -165,7 +172,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ECheckConfigCommonInternalOnlyProcessors", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

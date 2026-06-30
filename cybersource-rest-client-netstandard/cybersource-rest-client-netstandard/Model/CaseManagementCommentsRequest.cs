@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CaseManagementCommentsRequest" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected CaseManagementCommentsRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CaseManagementCommentsRequest" /> class.
@@ -48,7 +48,8 @@ namespace CyberSource.Model
         /// Comments to be added to case.
         /// </summary>
         /// <value>Comments to be added to case.</value>
-        [DataMember(Name="comments", EmitDefaultValue=false)]
+        [JsonPropertyName("comments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Comments { get; set; }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CaseManagementCommentsRequest {\n");
-            if (Comments != null) sb.Append("  Comments: ").Append(Comments).Append("\n");
+            if (Comments != null) sb.Append("  Comments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CaseManagementCommentsRequest", "comments", Comments.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -70,7 +71,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CaseManagementCommentsRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

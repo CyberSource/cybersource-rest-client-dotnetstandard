@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,19 +46,22 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Header
         /// </summary>
-        [DataMember(Name="header", EmitDefaultValue=false)]
+        [JsonPropertyName("header")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public VTConfigCardNotPresentReceiptInformationHeader Header { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public VTConfigCardNotPresentReceiptInformationOrderInformation OrderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets EmailReceipt
         /// </summary>
-        [DataMember(Name="emailReceipt", EmitDefaultValue=false)]
+        [JsonPropertyName("emailReceipt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public VTConfigCardNotPresentReceiptInformationEmailReceipt EmailReceipt { get; set; }
 
         /// <summary>
@@ -69,9 +72,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class VTConfigCardNotPresentReceiptInformation {\n");
-            if (Header != null) sb.Append("  Header: ").Append(Header).Append("\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
-            if (EmailReceipt != null) sb.Append("  EmailReceipt: ").Append(EmailReceipt).Append("\n");
+            if (Header != null) sb.Append("  Header: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VTConfigCardNotPresentReceiptInformation", "header", Header.ToString())).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VTConfigCardNotPresentReceiptInformation", "orderInformation", OrderInformation.ToString())).Append("\n");
+            if (EmailReceipt != null) sb.Append("  EmailReceipt: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VTConfigCardNotPresentReceiptInformation", "emailReceipt", EmailReceipt.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +85,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("VTConfigCardNotPresentReceiptInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,41 +53,47 @@ namespace CyberSource.Model
         /// Enables you to submit the payment transaction without one or more of the fields for the billTo or card_expiration. Applicable for Elavon Americas (elavonamericas), CB2A, Six (six), CMCIC (cmcic), GPX (gpx), GPN (gpn), VPC, Vero (vero), Fiserv (fiserv), American Express Direct (amexdirect), Chase Paymentech Salem (chasepaymentechsalem), RUPAY, FDI Global (fdiglobal) and Barclays HISO (barclayshiso) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Enables you to submit the payment transaction without one or more of the fields for the billTo or card_expiration. Applicable for Elavon Americas (elavonamericas), CB2A, Six (six), CMCIC (cmcic), GPX (gpx), GPN (gpn), VPC, Vero (vero), Fiserv (fiserv), American Express Direct (amexdirect), Chase Paymentech Salem (chasepaymentechsalem), RUPAY, FDI Global (fdiglobal) and Barclays HISO (barclayshiso) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="relaxAddressVerificationSystem", EmitDefaultValue=false)]
+        [JsonPropertyName("relaxAddressVerificationSystem")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? RelaxAddressVerificationSystem { get; set; }
 
         /// <summary>
         /// Allows Zip code without country. Applicable for American Express Direct (amexdirect), GPX (gpx), VPC, FDI Global (fdiglobal), Elavon Americas (elavonamericas), Chase Paymentech Salem (chasepaymentechsalem), RUPAY, GPN (gpn) and Barclays HISO (barclayshiso) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cp, cnp, both&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Allows Zip code without country. Applicable for American Express Direct (amexdirect), GPX (gpx), VPC, FDI Global (fdiglobal), Elavon Americas (elavonamericas), Chase Paymentech Salem (chasepaymentechsalem), RUPAY, GPN (gpn) and Barclays HISO (barclayshiso) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cp, cnp, both&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="relaxAddressVerificationSystemAllowZipWithoutCountry", EmitDefaultValue=false)]
+        [JsonPropertyName("relaxAddressVerificationSystemAllowZipWithoutCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? RelaxAddressVerificationSystemAllowZipWithoutCountry { get; set; }
 
         /// <summary>
         /// Allows transactions that use an expired card. Applicable for American Express Direct (amexdirect), GPN (gpn), Barclays HISO (barclayshiso), Elavon Americas (elavonamericas), VPC, FDI Global (fdiglobal), GPX (gpx), RUPAY, Six (six), Chase Paymentech Salem (chasepaymentechsalem) and CB2A processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Allows transactions that use an expired card. Applicable for American Express Direct (amexdirect), GPN (gpn), Barclays HISO (barclayshiso), Elavon Americas (elavonamericas), VPC, FDI Global (fdiglobal), GPX (gpx), RUPAY, Six (six), Chase Paymentech Salem (chasepaymentechsalem) and CB2A processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="relaxAddressVerificationSystemAllowExpiredCard", EmitDefaultValue=false)]
+        [JsonPropertyName("relaxAddressVerificationSystemAllowExpiredCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? RelaxAddressVerificationSystemAllowExpiredCard { get; set; }
 
         /// <summary>
         /// MasterCard Expert Monitoring Solutions (EMS) provides a predictive, behavior-based fraud score in real time during authorizations for card-not-present (CNP) transactions on cards issued in the U.S. Applicable for GPX (gpx) and VPC processors.
         /// </summary>
         /// <value>MasterCard Expert Monitoring Solutions (EMS) provides a predictive, behavior-based fraud score in real time during authorizations for card-not-present (CNP) transactions on cards issued in the U.S. Applicable for GPX (gpx) and VPC processors.</value>
-        [DataMember(Name="enableEmsTransactionRiskScore", EmitDefaultValue=false)]
+        [JsonPropertyName("enableEmsTransactionRiskScore")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableEmsTransactionRiskScore { get; set; }
 
         /// <summary>
         /// Applicable for VPC processors.
         /// </summary>
         /// <value>Applicable for VPC processors.</value>
-        [DataMember(Name="prestigiousPropertyIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("prestigiousPropertyIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PrestigiousPropertyIndicator { get; set; }
 
         /// <summary>
         /// Gets or Sets Payouts
         /// </summary>
-        [DataMember(Name="payouts", EmitDefaultValue=false)]
+        [JsonPropertyName("payouts")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public CardProcessingConfigFeaturesCardNotPresentPayouts Payouts { get; set; }
 
         /// <summary>
@@ -98,12 +104,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CardProcessingConfigFeaturesCardNotPresentProcessors {\n");
-            if (RelaxAddressVerificationSystem != null) sb.Append("  RelaxAddressVerificationSystem: ").Append(RelaxAddressVerificationSystem).Append("\n");
-            if (RelaxAddressVerificationSystemAllowZipWithoutCountry != null) sb.Append("  RelaxAddressVerificationSystemAllowZipWithoutCountry: ").Append(RelaxAddressVerificationSystemAllowZipWithoutCountry).Append("\n");
-            if (RelaxAddressVerificationSystemAllowExpiredCard != null) sb.Append("  RelaxAddressVerificationSystemAllowExpiredCard: ").Append(RelaxAddressVerificationSystemAllowExpiredCard).Append("\n");
-            if (EnableEmsTransactionRiskScore != null) sb.Append("  EnableEmsTransactionRiskScore: ").Append(EnableEmsTransactionRiskScore).Append("\n");
-            if (PrestigiousPropertyIndicator != null) sb.Append("  PrestigiousPropertyIndicator: ").Append(PrestigiousPropertyIndicator).Append("\n");
-            if (Payouts != null) sb.Append("  Payouts: ").Append(Payouts).Append("\n");
+            if (RelaxAddressVerificationSystem != null) sb.Append("  RelaxAddressVerificationSystem: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentProcessors", "relaxAddressVerificationSystem", RelaxAddressVerificationSystem.ToString())).Append("\n");
+            if (RelaxAddressVerificationSystemAllowZipWithoutCountry != null) sb.Append("  RelaxAddressVerificationSystemAllowZipWithoutCountry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentProcessors", "relaxAddressVerificationSystemAllowZipWithoutCountry", RelaxAddressVerificationSystemAllowZipWithoutCountry.ToString())).Append("\n");
+            if (RelaxAddressVerificationSystemAllowExpiredCard != null) sb.Append("  RelaxAddressVerificationSystemAllowExpiredCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentProcessors", "relaxAddressVerificationSystemAllowExpiredCard", RelaxAddressVerificationSystemAllowExpiredCard.ToString())).Append("\n");
+            if (EnableEmsTransactionRiskScore != null) sb.Append("  EnableEmsTransactionRiskScore: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentProcessors", "enableEmsTransactionRiskScore", EnableEmsTransactionRiskScore.ToString())).Append("\n");
+            if (PrestigiousPropertyIndicator != null) sb.Append("  PrestigiousPropertyIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentProcessors", "prestigiousPropertyIndicator", PrestigiousPropertyIndicator.ToString())).Append("\n");
+            if (Payouts != null) sb.Append("  Payouts: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentProcessors", "payouts", Payouts.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -114,7 +120,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CardProcessingConfigFeaturesCardNotPresentProcessors", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

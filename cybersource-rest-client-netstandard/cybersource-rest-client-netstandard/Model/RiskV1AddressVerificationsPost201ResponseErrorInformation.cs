@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,20 +47,23 @@ namespace CyberSource.Model
         /// The reason of the status. Value can be   - &#x60;APARTMENT_NUMBER_NOT_FOUND&#x60;   - &#x60;INSUFFICIENT_ADDRESS_INFORMATION&#x60;   - &#x60;HOUSE_OR_BOX_NUMBER_NOT_FOUND&#x60;   - &#x60;MULTIPLE_ADDRESS_MATCHES&#x60;   - &#x60;BOX_NUMBER_NOT_FOUND&#x60;   - &#x60;ROUTE_SERVICE_NOT_FOUND&#x60;   - &#x60;STREET_NAME_NOT_FOUND&#x60;   - &#x60;POSTAL_CODE_NOT_FOUND&#x60;   - &#x60;UNVERIFIABLE_ADDRESS&#x60;   - &#x60;MULTIPLE_ADDRESS_MATCHES_INTERNATIONAL&#x60;   - &#x60;ADDRESS_MATCH_NOT_FOUND&#x60;   - &#x60;UNSUPPORTED_CHARACTER_SET&#x60;   - &#x60;INVALID_MERCHANT_CONFIGURATION&#x60; 
         /// </summary>
         /// <value>The reason of the status. Value can be   - &#x60;APARTMENT_NUMBER_NOT_FOUND&#x60;   - &#x60;INSUFFICIENT_ADDRESS_INFORMATION&#x60;   - &#x60;HOUSE_OR_BOX_NUMBER_NOT_FOUND&#x60;   - &#x60;MULTIPLE_ADDRESS_MATCHES&#x60;   - &#x60;BOX_NUMBER_NOT_FOUND&#x60;   - &#x60;ROUTE_SERVICE_NOT_FOUND&#x60;   - &#x60;STREET_NAME_NOT_FOUND&#x60;   - &#x60;POSTAL_CODE_NOT_FOUND&#x60;   - &#x60;UNVERIFIABLE_ADDRESS&#x60;   - &#x60;MULTIPLE_ADDRESS_MATCHES_INTERNATIONAL&#x60;   - &#x60;ADDRESS_MATCH_NOT_FOUND&#x60;   - &#x60;UNSUPPORTED_CHARACTER_SET&#x60;   - &#x60;INVALID_MERCHANT_CONFIGURATION&#x60; </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
         /// The detail message related to the status and reason listed above.
         /// </summary>
         /// <value>The detail message related to the status and reason listed above.</value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
         /// Gets or Sets Details
         /// </summary>
-        [DataMember(Name="details", EmitDefaultValue=false)]
+        [JsonPropertyName("details")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<PtsV2PaymentsPost201ResponseErrorInformationDetails> Details { get; set; }
 
         /// <summary>
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class RiskV1AddressVerificationsPost201ResponseErrorInformation {\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
-            if (Details != null) sb.Append("  Details: ").Append(Details).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1AddressVerificationsPost201ResponseErrorInformation", "reason", Reason.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1AddressVerificationsPost201ResponseErrorInformation", "message", Message.ToString())).Append("\n");
+            if (Details != null) sb.Append("  Details: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1AddressVerificationsPost201ResponseErrorInformation", "details", Details.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("RiskV1AddressVerificationsPost201ResponseErrorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

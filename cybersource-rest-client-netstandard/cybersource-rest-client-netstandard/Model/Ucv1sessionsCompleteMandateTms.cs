@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Use this when you want to create a token from the card/bank data in your payment request.   Possible values:   - True   - False&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Use this when you want to create a token from the card/bank data in your payment request.   Possible values:   - True   - False&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="tokenCreate", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenCreate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? TokenCreate { get; set; }
 
         /// <summary>
         /// Cybersource tokens types you are performing a create on. If not supplied the default token type for the merchants token vault will be used.  Possible values: - Customer - paymentInstrument - instrumentIdentifier - shippingAddress&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Cybersource tokens types you are performing a create on. If not supplied the default token type for the merchants token vault will be used.  Possible values: - Customer - paymentInstrument - instrumentIdentifier - shippingAddress&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="tokenTypes", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenTypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> TokenTypes { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsCompleteMandateTms {\n");
-            if (TokenCreate != null) sb.Append("  TokenCreate: ").Append(TokenCreate).Append("\n");
-            if (TokenTypes != null) sb.Append("  TokenTypes: ").Append(TokenTypes).Append("\n");
+            if (TokenCreate != null) sb.Append("  TokenCreate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsCompleteMandateTms", "tokenCreate", TokenCreate.ToString())).Append("\n");
+            if (TokenTypes != null) sb.Append("  TokenTypes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsCompleteMandateTms", "tokenTypes", TokenTypes.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsCompleteMandateTms", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

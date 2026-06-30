@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Ptsv1pullfundstransferidrefundOrderInformationAmountDetails" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Ptsv1pullfundstransferidrefundOrderInformationAmountDetails() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Ptsv1pullfundstransferidrefundOrderInformationAmountDetails" /> class.
@@ -48,7 +48,8 @@ namespace CyberSource.Model
         /// Length: &lt;&#x3D;12. Up to 3 decimal places.   Type: String, with a non-negative double format.  The total amount of the AFT refund including all fees.   a. an amount that is &lt;&#x3D; the totalAmount of the original AFT   b. The amount of the transaction, inclusive of all fees assessed for the transaction, including currency conversion fees.       Minimum Value: Field must be greater than zero: minimum value is the smallest amount in any given currency.   c. Multiple successful reversals &amp; refunds of the original AFT transaction are allowed but the sum of the transaction amounts must not total more than the original AFT totalAmount. 
         /// </summary>
         /// <value>Length: &lt;&#x3D;12. Up to 3 decimal places.   Type: String, with a non-negative double format.  The total amount of the AFT refund including all fees.   a. an amount that is &lt;&#x3D; the totalAmount of the original AFT   b. The amount of the transaction, inclusive of all fees assessed for the transaction, including currency conversion fees.       Minimum Value: Field must be greater than zero: minimum value is the smallest amount in any given currency.   c. Multiple successful reversals &amp; refunds of the original AFT transaction are allowed but the sum of the transaction amounts must not total more than the original AFT totalAmount. </value>
-        [DataMember(Name="totalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalAmount { get; set; }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferidrefundOrderInformationAmountDetails {\n");
-            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(TotalAmount).Append("\n");
+            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferidrefundOrderInformationAmountDetails", "totalAmount", TotalAmount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -70,7 +71,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferidrefundOrderInformationAmountDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

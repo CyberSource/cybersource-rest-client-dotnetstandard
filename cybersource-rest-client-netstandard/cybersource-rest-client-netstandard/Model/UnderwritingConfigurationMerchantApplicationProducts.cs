@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderwritingConfigurationMerchantApplicationProducts" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected UnderwritingConfigurationMerchantApplicationProducts() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderwritingConfigurationMerchantApplicationProducts" /> class.
@@ -50,21 +50,24 @@ namespace CyberSource.Model
         /// Product Name [PRODUCT1, PRODUCT2, PRODUCT3] 
         /// </summary>
         /// <value>Product Name [PRODUCT1, PRODUCT2, PRODUCT3] </value>
-        [DataMember(Name="productShortName", EmitDefaultValue=false)]
+        [JsonPropertyName("productShortName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductShortName { get; set; }
 
         /// <summary>
         /// Override Acquirer Value
         /// </summary>
         /// <value>Override Acquirer Value</value>
-        [DataMember(Name="preferredAcquirer", EmitDefaultValue=false)]
+        [JsonPropertyName("preferredAcquirer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PreferredAcquirer { get; set; }
 
         /// <summary>
         /// Product status [] 
         /// </summary>
         /// <value>Product status [] </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; private set; }
 
         /// <summary>
@@ -75,9 +78,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UnderwritingConfigurationMerchantApplicationProducts {\n");
-            if (ProductShortName != null) sb.Append("  ProductShortName: ").Append(ProductShortName).Append("\n");
-            if (PreferredAcquirer != null) sb.Append("  PreferredAcquirer: ").Append(PreferredAcquirer).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
+            if (ProductShortName != null) sb.Append("  ProductShortName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationMerchantApplicationProducts", "productShortName", ProductShortName.ToString())).Append("\n");
+            if (PreferredAcquirer != null) sb.Append("  PreferredAcquirer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationMerchantApplicationProducts", "preferredAcquirer", PreferredAcquirer.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationMerchantApplicationProducts", "status", Status.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -88,7 +91,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UnderwritingConfigurationMerchantApplicationProducts", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

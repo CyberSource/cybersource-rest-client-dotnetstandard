@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Card type category. Type of card used in the transaction. Possible values: - &#x60;B&#x60;: Business card. - &#x60;O&#x60;: Noncommercial card. - &#x60;R&#x60;: Corporate card. - &#x60;S&#x60;: Purchase card. - &#x60;X&#x60;: Visa B2B Virtual Payments - &#x60;X1&#x60;: Flexible Rate B2B Virtual Program - &#x60;Blank&#x60;: Purchase card not supported. 
         /// </summary>
         /// <value>Card type category. Type of card used in the transaction. Possible values: - &#x60;B&#x60;: Business card. - &#x60;O&#x60;: Noncommercial card. - &#x60;R&#x60;: Corporate card. - &#x60;S&#x60;: Purchase card. - &#x60;X&#x60;: Visa B2B Virtual Payments - &#x60;X1&#x60;: Flexible Rate B2B Virtual Program - &#x60;Blank&#x60;: Purchase card not supported. </value>
-        [DataMember(Name="category", EmitDefaultValue=false)]
+        [JsonPropertyName("category")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Category { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2CreditsPost201ResponsePaymentInformationAccountFeatures {\n");
-            if (Category != null) sb.Append("  Category: ").Append(Category).Append("\n");
+            if (Category != null) sb.Append("  Category: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2CreditsPost201ResponsePaymentInformationAccountFeatures", "category", Category.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2CreditsPost201ResponsePaymentInformationAccountFeatures", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

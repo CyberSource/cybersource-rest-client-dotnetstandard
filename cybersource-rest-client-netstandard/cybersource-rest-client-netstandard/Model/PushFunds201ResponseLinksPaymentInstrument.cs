@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// This is the endpoint of the resource that was created by the successful request.
         /// </summary>
         /// <value>This is the endpoint of the resource that was created by the successful request.</value>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        [JsonPropertyName("href")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Href { get; set; }
 
         /// <summary>
         /// &#x60;method&#x60; refers to the HTTP method that you can send to the &#x60;self&#x60; endpoint to retrieve details of the resource.
         /// </summary>
         /// <value>&#x60;method&#x60; refers to the HTTP method that you can send to the &#x60;self&#x60; endpoint to retrieve details of the resource.</value>
-        [DataMember(Name="method", EmitDefaultValue=false)]
+        [JsonPropertyName("method")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Method { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PushFunds201ResponseLinksPaymentInstrument {\n");
-            if (Href != null) sb.Append("  Href: ").Append(Href).Append("\n");
-            if (Method != null) sb.Append("  Method: ").Append(Method).Append("\n");
+            if (Href != null) sb.Append("  Href: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponseLinksPaymentInstrument", "href", Href.ToString())).Append("\n");
+            if (Method != null) sb.Append("  Method: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponseLinksPaymentInstrument", "method", Method.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PushFunds201ResponseLinksPaymentInstrument", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

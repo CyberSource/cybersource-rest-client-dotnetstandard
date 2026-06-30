@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Hexadecimal code of tag. 
         /// </summary>
         /// <value>Hexadecimal code of tag. </value>
-        [DataMember(Name="tag", EmitDefaultValue=false)]
+        [JsonPropertyName("tag")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Tag { get; set; }
 
         /// <summary>
         /// Name of tag. 
         /// </summary>
         /// <value>Name of tag. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Tag length in bytes. 
         /// </summary>
         /// <value>Tag length in bytes. </value>
-        [DataMember(Name="length", EmitDefaultValue=false)]
+        [JsonPropertyName("length")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Length { get; set; }
 
         /// <summary>
         /// Hexadecimal value contained in the tag, masked data is represented by an &#39;X&#39;. 
         /// </summary>
         /// <value>Hexadecimal value contained in the tag, masked data is represented by an &#39;X&#39;. </value>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        [JsonPropertyName("value")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Value { get; set; }
 
         /// <summary>
         /// Description of tag. 
         /// </summary>
         /// <value>Description of tag. </value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Description { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2PostEmvTags200ResponseEmvTagBreakdownList {\n");
-            if (Tag != null) sb.Append("  Tag: ").Append(Tag).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Length != null) sb.Append("  Length: ").Append(Length).Append("\n");
-            if (Value != null) sb.Append("  Value: ").Append(Value).Append("\n");
-            if (Description != null) sb.Append("  Description: ").Append(Description).Append("\n");
+            if (Tag != null) sb.Append("  Tag: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2PostEmvTags200ResponseEmvTagBreakdownList", "tag", Tag.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2PostEmvTags200ResponseEmvTagBreakdownList", "name", Name.ToString())).Append("\n");
+            if (Length != null) sb.Append("  Length: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2PostEmvTags200ResponseEmvTagBreakdownList", "length", Length.ToString())).Append("\n");
+            if (Value != null) sb.Append("  Value: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2PostEmvTags200ResponseEmvTagBreakdownList", "value", Value.ToString())).Append("\n");
+            if (Description != null) sb.Append("  Description: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2PostEmvTags200ResponseEmvTagBreakdownList", "description", Description.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2PostEmvTags200ResponseEmvTagBreakdownList", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

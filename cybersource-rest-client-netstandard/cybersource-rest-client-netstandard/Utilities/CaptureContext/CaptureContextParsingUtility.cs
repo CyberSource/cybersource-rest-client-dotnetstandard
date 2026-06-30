@@ -1,5 +1,6 @@
 ﻿using System;
-using Newtonsoft.Json.Linq;
+using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 using CyberSource.Client;
 using CyberSource.Utilities.CaptureContext;
 using System.Threading.Tasks;
@@ -10,6 +11,9 @@ namespace CyberSource.Utilities.CaptureContext
 {
     public static class CaptureContextParsingUtility
     {
+        // Only allow alphanumeric characters, hyphens, underscores, and periods in kid values
+        private static readonly Regex SafeKidPattern = new Regex(@"^[a-zA-Z0-9._\-]+$", RegexOptions.Compiled);
+
         private static async Task<string> FetchPublicKeyFromApi(string kid, string runEnvironment)
         {
             string publicKey = null;
@@ -28,13 +32,13 @@ namespace CyberSource.Utilities.CaptureContext
         }
 
         #region NEW METHODS
-        public static JObject parseCaptureContextResponse(string jwtToken, IConfiguration config)
+        public static JsonObject parseCaptureContextResponse(string jwtToken, IConfiguration config)
         {
             bool verifyJWT = true;
             // Parse JWT Token for any malformations
 
             string payLoad = JWTUtility.Parse(jwtToken);
-            var jsonPayLoad = JObject.Parse(payLoad);
+            var jsonPayLoad = JsonNode.Parse(payLoad).AsObject();
             if (!verifyJWT)
             {
                 return jsonPayLoad;
@@ -46,6 +50,11 @@ namespace CyberSource.Utilities.CaptureContext
             if (string.IsNullOrEmpty(kid))
             {
                 throw new Exception("JWT token does not contain 'kid' in header");
+            }
+
+            if (!SafeKidPattern.IsMatch(kid))
+            {
+                throw new ArgumentException("Key ID (kid) contains invalid characters. Only alphanumeric characters, hyphens, underscores, and periods are allowed.", "kid");
             }
 
             var runEnvironment = config.MerchantCredentialSettings.RunEnvironment;

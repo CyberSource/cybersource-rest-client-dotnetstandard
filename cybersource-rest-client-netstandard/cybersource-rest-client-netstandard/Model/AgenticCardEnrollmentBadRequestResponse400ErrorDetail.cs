@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// Detailed reason for the error.
         /// </summary>
         /// <value>Detailed reason for the error.</value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
         /// Source for the error
         /// </summary>
         /// <value>Source for the error</value>
-        [DataMember(Name="source", EmitDefaultValue=false)]
+        [JsonPropertyName("source")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Source { get; set; }
 
         /// <summary>
         /// Detail about source for the error
         /// </summary>
         /// <value>Detail about source for the error</value>
-        [DataMember(Name="sourceType", EmitDefaultValue=false)]
+        [JsonPropertyName("sourceType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SourceType { get; set; }
 
         /// <summary>
         /// Detailed message for the error
         /// </summary>
         /// <value>Detailed message for the error</value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class AgenticCardEnrollmentBadRequestResponse400ErrorDetail {\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Source != null) sb.Append("  Source: ").Append(Source).Append("\n");
-            if (SourceType != null) sb.Append("  SourceType: ").Append(SourceType).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentBadRequestResponse400ErrorDetail", "reason", Reason.ToString())).Append("\n");
+            if (Source != null) sb.Append("  Source: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentBadRequestResponse400ErrorDetail", "source", Source.ToString())).Append("\n");
+            if (SourceType != null) sb.Append("  SourceType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentBadRequestResponse400ErrorDetail", "sourceType", SourceType.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentBadRequestResponse400ErrorDetail", "message", Message.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("AgenticCardEnrollmentBadRequestResponse400ErrorDetail", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

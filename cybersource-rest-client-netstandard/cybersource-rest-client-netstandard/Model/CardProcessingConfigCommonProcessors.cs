@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CardProcessingConfigCommonProcessors" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected CardProcessingConfigCommonProcessors() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CardProcessingConfigCommonProcessors" /> class.
@@ -150,363 +150,415 @@ namespace CyberSource.Model
         /// Determines the batching group that separates merchants for special batching times. Batching groups can separate merchant batches by the following criteria:  * Timezone * Merchant deadlines * Large merchants (top 10) * Merchants with Service-Level Agreements  Applicable for Chase Paymentech Salem (chasepaymentechsalem), Streamline (streamline2), Six (six), Barclays (barclays2), Paymentech Tampa (paymentechtampa), CMCIC (cmcic), FDC Nashville (smartfdc), RUPAY, American Express Direct (amexdirect), GPN (gpn), VPC, GPX (gpx), CB2A, Barclays HISO (barclayshiso), TSYS (tsys) and FDI Global (fdiglobal) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Determines the batching group that separates merchants for special batching times. Batching groups can separate merchant batches by the following criteria:  * Timezone * Merchant deadlines * Large merchants (top 10) * Merchants with Service-Level Agreements  Applicable for Chase Paymentech Salem (chasepaymentechsalem), Streamline (streamline2), Six (six), Barclays (barclays2), Paymentech Tampa (paymentechtampa), CMCIC (cmcic), FDC Nashville (smartfdc), RUPAY, American Express Direct (amexdirect), GPN (gpn), VPC, GPX (gpx), CB2A, Barclays HISO (barclayshiso), TSYS (tsys) and FDI Global (fdiglobal) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="batchGroup", EmitDefaultValue=false)]
+        [JsonPropertyName("batchGroup")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BatchGroup { get; set; }
 
         /// <summary>
         /// Indicates the type of money transfer used in the transaction. Applicable for VPC and GPX (gpx) processors.
         /// </summary>
         /// <value>Indicates the type of money transfer used in the transaction. Applicable for VPC and GPX (gpx) processors.</value>
-        [DataMember(Name="businessApplicationId", EmitDefaultValue=false)]
+        [JsonPropertyName("businessApplicationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessApplicationId { get; set; }
 
         /// <summary>
         /// Identify merchants that participate in Select Merchant Fee (SMF) programs. Unique to the merchant. Applicable for GPX (gpx) and VPC processors.
         /// </summary>
         /// <value>Identify merchants that participate in Select Merchant Fee (SMF) programs. Unique to the merchant. Applicable for GPX (gpx) and VPC processors.</value>
-        [DataMember(Name="merchantVerificationValue", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantVerificationValue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantVerificationValue { get; set; }
 
         /// <summary>
         /// Routing Number to identify banks within the United States. Applicable for GPX (gpx) processors.
         /// </summary>
         /// <value>Routing Number to identify banks within the United States. Applicable for GPX (gpx) processors.</value>
-        [DataMember(Name="abaNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("abaNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AbaNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets Acquirer
         /// </summary>
-        [DataMember(Name="acquirer", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public CardProcessingConfigCommonAcquirer Acquirer { get; set; }
 
         /// <summary>
         /// Identifies the financial institution acting as the acquirer of this customer transaction. The acquirer is the member or system user that signed the merchant.
         /// </summary>
         /// <value>Identifies the financial institution acting as the acquirer of this customer transaction. The acquirer is the member or system user that signed the merchant.</value>
-        [DataMember(Name="acquirers", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirers")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, CardProcessingConfigCommonAcquirers> Acquirers { get; set; }
 
         /// <summary>
         /// Merchant ID assigned by an acquirer or a processor. Should not be overriden by any other party.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z]+$&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Merchant ID assigned by an acquirer or a processor. Should not be overriden by any other party.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z]+$&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="merchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantId { get; set; }
 
         /// <summary>
         /// The &#39;Terminal Id&#39; aka TID, is an identifier used for with your payments processor. Depending on the processor and payment acceptance type this may also be the default Terminal ID used for Card Present and Virtual Terminal transactions.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cnp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z]+$&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>The &#39;Terminal Id&#39; aka TID, is an identifier used for with your payments processor. Depending on the processor and payment acceptance type this may also be the default Terminal ID used for Card Present and Virtual Terminal transactions.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cnp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z]+$&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="terminalId", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalId { get; set; }
 
         /// <summary>
         /// Valid values are: * VISA * MASTERCARD * AMERICAN_EXPRESS * CUP * EFTPOS * DINERS_CLUB * DISCOVER * JCB 
         /// </summary>
         /// <value>Valid values are: * VISA * MASTERCARD * AMERICAN_EXPRESS * CUP * EFTPOS * DINERS_CLUB * DISCOVER * JCB </value>
-        [DataMember(Name="paymentTypes", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentTypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, CardProcessingConfigCommonPaymentTypes> PaymentTypes { get; set; }
 
         /// <summary>
         /// Three-character [ISO 4217 ALPHA-3 Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)
         /// </summary>
         /// <value>Three-character [ISO 4217 ALPHA-3 Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)</value>
-        [DataMember(Name="currencies", EmitDefaultValue=false)]
+        [JsonPropertyName("currencies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, CardProcessingConfigCommonCurrencies1> Currencies { get; set; }
 
         /// <summary>
         /// This field is used as aggregator Id when Visa payment type is selected
         /// </summary>
         /// <value>This field is used as aggregator Id when Visa payment type is selected</value>
-        [DataMember(Name="visaAggregatorId", EmitDefaultValue=false)]
+        [JsonPropertyName("visaAggregatorId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VisaAggregatorId { get; set; }
 
         /// <summary>
         /// This field is used as aggregator Id when Amex payment type is selected
         /// </summary>
         /// <value>This field is used as aggregator Id when Amex payment type is selected</value>
-        [DataMember(Name="amexAggregatorId", EmitDefaultValue=false)]
+        [JsonPropertyName("amexAggregatorId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AmexAggregatorId { get; set; }
 
         /// <summary>
         /// This field is used as aggregator Id when Master Card payment type is selected
         /// </summary>
         /// <value>This field is used as aggregator Id when Master Card payment type is selected</value>
-        [DataMember(Name="masterCardAggregatorId", EmitDefaultValue=false)]
+        [JsonPropertyName("masterCardAggregatorId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MasterCardAggregatorId { get; set; }
 
         /// <summary>
         /// The Standard Industrial Classification (SIC) are four-digit codes that categorize the industries that companies belong to based on their business activities. Standard Industrial Classification codes were mostly replaced by the six-digit North American Industry Classification System (NAICS). Applicable for VPC and GPX (gpx) processors.
         /// </summary>
         /// <value>The Standard Industrial Classification (SIC) are four-digit codes that categorize the industries that companies belong to based on their business activities. Standard Industrial Classification codes were mostly replaced by the six-digit North American Industry Classification System (NAICS). Applicable for VPC and GPX (gpx) processors.</value>
-        [DataMember(Name="sicCode", EmitDefaultValue=false)]
+        [JsonPropertyName("sicCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SicCode { get; set; }
 
         /// <summary>
         /// Allows multiple captures for a single authorization transaction. Applicable for Paymentech Tampa (paymentechtampa), VPC, American Express Direct (amexdirect) and GPX (gpx) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Allows multiple captures for a single authorization transaction. Applicable for Paymentech Tampa (paymentechtampa), VPC, American Express Direct (amexdirect) and GPX (gpx) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="allowMultipleBills", EmitDefaultValue=false)]
+        [JsonPropertyName("allowMultipleBills")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AllowMultipleBills { get; set; }
 
         /// <summary>
         /// Enables partner to enable/disable merchant descriptors values. Applicable for VPC, EFTPOS and CUP processors.
         /// </summary>
         /// <value>Enables partner to enable/disable merchant descriptors values. Applicable for VPC, EFTPOS and CUP processors.</value>
-        [DataMember(Name="allowMerchantDescriptorOverride", EmitDefaultValue=false)]
+        [JsonPropertyName("allowMerchantDescriptorOverride")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AllowMerchantDescriptorOverride { get; set; }
 
         /// <summary>
         /// To enable airline transactions. Applicable for TSYS (tsys), VPC, Elavon Americas (elavonamericas), FDI Global (fdiglobal), GPX (gpx), Barclays (barclays2) and American Express Direct (amexdirect) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>To enable airline transactions. Applicable for TSYS (tsys), VPC, Elavon Americas (elavonamericas), FDI Global (fdiglobal), GPX (gpx), Barclays (barclays2) and American Express Direct (amexdirect) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="enhancedData", EmitDefaultValue=false)]
+        [JsonPropertyName("enhancedData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EnhancedData { get; set; }
 
         /// <summary>
         /// Indicates whether the merchant is compliant with Hotel and Motel Fire Safety Act of 1990. Applicable for GPX (gpx) and VPC processors.
         /// </summary>
         /// <value>Indicates whether the merchant is compliant with Hotel and Motel Fire Safety Act of 1990. Applicable for GPX (gpx) and VPC processors.</value>
-        [DataMember(Name="fireSafetyIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("fireSafetyIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? FireSafetyIndicator { get; set; }
 
         /// <summary>
         /// To enable quasi-cash transactions. A quasi-cash transaction is a cash-like transaction for the sale of items that are directly convertible to cash, such as:- Casino gaming chips, Money orders, Wire transfers.  Applicable for GPX (gpx), TSYS (tsys), Barclays (barclays2) and VPC processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>To enable quasi-cash transactions. A quasi-cash transaction is a cash-like transaction for the sale of items that are directly convertible to cash, such as:- Casino gaming chips, Money orders, Wire transfers.  Applicable for GPX (gpx), TSYS (tsys), Barclays (barclays2) and VPC processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="quasiCash", EmitDefaultValue=false)]
+        [JsonPropertyName("quasiCash")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? QuasiCash { get; set; }
 
         /// <summary>
         /// Identifier assigned by the acquirer. Applicable for RUPAY, VPC and Six (six) processors.
         /// </summary>
         /// <value>Identifier assigned by the acquirer. Applicable for RUPAY, VPC and Six (six) processors.</value>
-        [DataMember(Name="acquirerMerchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirerMerchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcquirerMerchantId { get; set; }
 
         /// <summary>
         /// Enables Enhanced AVS/Automated Address Verification Plus (AAV+).  Valid values: \&quot;basic\&quot; - Standard address verification system.   When a processor supports AVS for a transaction&#39;s card type, the issuing bank uses AVS to confirm that the customer has provided the correct billing address.   When a customer provides incorrect information, the transaction might be fraudulent. \&quot;basic + name\&quot; - Enhanced address verification system.   Consists of the standard AVS functionality plus verification of some additional fields.   The additional fields that are verified for Enhanced AVS are:   - customer_firstname   - customer_lastname \&quot;basic + name + shipto\&quot; - Automated address verification plus.   Consists of the Enhanced AVS functionality plus verification of some additional fields.   AAV+ intended for merchants who deliver physical goods to a different address than the billing address.   AAV+ verifies the additional fields only when the standard and Enhanced AVS tests pass first.   For information about Enhanced AVS - The additional fields that are verified for AAV+ are:   - ship_to_firstname   - ship_to_lastname   - ship_to_address1   - ship_to_country   - ship_to_zip   - ship_to_phone   - customer_phone(American Express Direct only)  Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;basic&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Enables Enhanced AVS/Automated Address Verification Plus (AAV+).  Valid values: \&quot;basic\&quot; - Standard address verification system.   When a processor supports AVS for a transaction&#39;s card type, the issuing bank uses AVS to confirm that the customer has provided the correct billing address.   When a customer provides incorrect information, the transaction might be fraudulent. \&quot;basic + name\&quot; - Enhanced address verification system.   Consists of the standard AVS functionality plus verification of some additional fields.   The additional fields that are verified for Enhanced AVS are:   - customer_firstname   - customer_lastname \&quot;basic + name + shipto\&quot; - Automated address verification plus.   Consists of the Enhanced AVS functionality plus verification of some additional fields.   AAV+ intended for merchants who deliver physical goods to a different address than the billing address.   AAV+ verifies the additional fields only when the standard and Enhanced AVS tests pass first.   For information about Enhanced AVS - The additional fields that are verified for AAV+ are:   - ship_to_firstname   - ship_to_lastname   - ship_to_address1   - ship_to_country   - ship_to_zip   - ship_to_phone   - customer_phone(American Express Direct only)  Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;basic&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="avsFormat", EmitDefaultValue=false)]
+        [JsonPropertyName("avsFormat")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AvsFormat { get; set; }
 
         /// <summary>
         /// Amex Direct specific merchant config value which determines what length (either 9 or Unique 12-char reference number) of reference number will be CYBS generated if the merchant does not pass in a trans_ref_no. Can be any combination of alpha, numeric and special characters, and/or binary data in hexadecimal.  Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Amex Direct specific merchant config value which determines what length (either 9 or Unique 12-char reference number) of reference number will be CYBS generated if the merchant does not pass in a trans_ref_no. Can be any combination of alpha, numeric and special characters, and/or binary data in hexadecimal.  Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="enableLongTransRefNo", EmitDefaultValue=false)]
+        [JsonPropertyName("enableLongTransRefNo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableLongTransRefNo { get; set; }
 
         /// <summary>
         /// Field that indicates whether merchant will send level 2 data for Amex cards. Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Field that indicates whether merchant will send level 2 data for Amex cards. Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="enableLevel2", EmitDefaultValue=false)]
+        [JsonPropertyName("enableLevel2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableLevel2 { get; set; }
 
         /// <summary>
         /// This flag related to multiple transaction advice addendum field. It is used to display descriptive information about a transaction on customer&#39;s American Express card statement. Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>This flag related to multiple transaction advice addendum field. It is used to display descriptive information about a transaction on customer&#39;s American Express card statement. Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="enableMultipleTransactionAdviceAddendum", EmitDefaultValue=false)]
+        [JsonPropertyName("enableMultipleTransactionAdviceAddendum")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableMultipleTransactionAdviceAddendum { get; set; }
 
         /// <summary>
         /// Advice addendum field. It is used to display descriptive information about a transaction on customer&#39;s American Express card statement. Applicable for TSYS (tsys), FDI Global (fdiglobal) and American Express Direct (amexdirect) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;40&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z&amp;#92;-\\s.]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Advice addendum field. It is used to display descriptive information about a transaction on customer&#39;s American Express card statement. Applicable for TSYS (tsys), FDI Global (fdiglobal) and American Express Direct (amexdirect) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;40&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z&amp;#92;-\\s.]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="amexTransactionAdviceAddendum1", EmitDefaultValue=false)]
+        [JsonPropertyName("amexTransactionAdviceAddendum1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AmexTransactionAdviceAddendum1 { get; set; }
 
         /// <summary>
         /// This flag is related to offer/line item details to be included instead of sending one line item, and a grand total. Example, offer0, offer 1...offer n. Applicable for American Express Direct (amexdirect) and Elavon Americas (elavonamericas) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>This flag is related to offer/line item details to be included instead of sending one line item, and a grand total. Example, offer0, offer 1...offer n. Applicable for American Express Direct (amexdirect) and Elavon Americas (elavonamericas) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="enableMultiLineItems", EmitDefaultValue=false)]
+        [JsonPropertyName("enableMultiLineItems")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableMultiLineItems { get; set; }
 
         /// <summary>
         /// To enable merchant to send in transaction reference number (unique reconciliation ID). Applicable for VPC, Vero (vero), FDI Global (fdiglobal), Six (six), CB2A, CUP, VPC, Chase Paymentech Salem (chasepaymentechsalem), Fiserv (fiserv), Elavon Americas (elavonamericas) and EFTPOS processors.
         /// </summary>
         /// <value>To enable merchant to send in transaction reference number (unique reconciliation ID). Applicable for VPC, Vero (vero), FDI Global (fdiglobal), Six (six), CB2A, CUP, VPC, Chase Paymentech Salem (chasepaymentechsalem), Fiserv (fiserv), Elavon Americas (elavonamericas) and EFTPOS processors.</value>
-        [DataMember(Name="enableTransactionReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("enableTransactionReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableTransactionReferenceNumber { get; set; }
 
         /// <summary>
         /// Enables to meet the Visa mandate requirements to reverse unused authorizations, benefitting the customer by releasing the hold on unused credit card funds. Applicable for CB2A, Elavon Americas (elavonamericas), Six (six), VPC and American Express Direct (amexdirect) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Enables to meet the Visa mandate requirements to reverse unused authorizations, benefitting the customer by releasing the hold on unused credit card funds. Applicable for CB2A, Elavon Americas (elavonamericas), Six (six), VPC and American Express Direct (amexdirect) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp, cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="enableAutoAuthReversalAfterVoid", EmitDefaultValue=false)]
+        [JsonPropertyName("enableAutoAuthReversalAfterVoid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableAutoAuthReversalAfterVoid { get; set; }
 
         /// <summary>
         /// When this is enabled, authorization responses from American Express expresspay transactions include the Primary Account Number (PAN) and expiration date of the card. Applicable for American Express Direct (amexdirect) processor.
         /// </summary>
         /// <value>When this is enabled, authorization responses from American Express expresspay transactions include the Primary Account Number (PAN) and expiration date of the card. Applicable for American Express Direct (amexdirect) processor.</value>
-        [DataMember(Name="enableExpresspayPanTranslation", EmitDefaultValue=false)]
+        [JsonPropertyName("enableExpresspayPanTranslation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableExpresspayPanTranslation { get; set; }
 
         /// <summary>
         /// Authorizes a credit. Reduces refund chargebacks and prevents customers from seeing the online update for credits which are otherwise offline settlements.
         /// </summary>
         /// <value>Authorizes a credit. Reduces refund chargebacks and prevents customers from seeing the online update for credits which are otherwise offline settlements.</value>
-        [DataMember(Name="enableCreditAuth", EmitDefaultValue=false)]
+        [JsonPropertyName("enableCreditAuth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableCreditAuth { get; set; }
 
         /// <summary>
         /// Field used to identify the industry type of the merchant submitting the authorization request.  Valid values: &#x60;0&#x60; – unknown or unsure &#x60;A&#x60; – auto rental (EMV supported) &#x60;B&#x60; – bank/financial institution (EMV supported) &#x60;D&#x60; – direct marketing &#x60;F&#x60; – food/restaurant (EMV supported) &#x60;G&#x60; – grocery store/super market (EMV supported) &#x60;H&#x60; – hotel (EMV supported) &#x60;L&#x60; – limited amount terminal (EMV supported) &#x60;O&#x60; – oil company/automated fueling system (EMV supported) &#x60;P&#x60; – passenger transport (EMV supported) &#x60;R&#x60; – retail (EMV supported) Applicable for TSYS (tsys), RUPAY and Elavon Americas (elavonamericas) processors.   Possible values: - 0 - A - B - D - F - G - H - L - O - P - R
         /// </summary>
         /// <value>Field used to identify the industry type of the merchant submitting the authorization request.  Valid values: &#x60;0&#x60; – unknown or unsure &#x60;A&#x60; – auto rental (EMV supported) &#x60;B&#x60; – bank/financial institution (EMV supported) &#x60;D&#x60; – direct marketing &#x60;F&#x60; – food/restaurant (EMV supported) &#x60;G&#x60; – grocery store/super market (EMV supported) &#x60;H&#x60; – hotel (EMV supported) &#x60;L&#x60; – limited amount terminal (EMV supported) &#x60;O&#x60; – oil company/automated fueling system (EMV supported) &#x60;P&#x60; – passenger transport (EMV supported) &#x60;R&#x60; – retail (EMV supported) Applicable for TSYS (tsys), RUPAY and Elavon Americas (elavonamericas) processors.   Possible values: - 0 - A - B - D - F - G - H - L - O - P - R</value>
-        [DataMember(Name="industryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("industryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IndustryCode { get; set; }
 
         /// <summary>
         /// Field that indicates whether merchant will send level 2 data for Amex cards. Applicable for TSYS (tsys) processor.
         /// </summary>
         /// <value>Field that indicates whether merchant will send level 2 data for Amex cards. Applicable for TSYS (tsys) processor.</value>
-        [DataMember(Name="sendAmexLevel2Data", EmitDefaultValue=false)]
+        [JsonPropertyName("sendAmexLevel2Data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? SendAmexLevel2Data { get; set; }
 
         /// <summary>
         /// A soft descriptor is a text, rendered on a cardholder&#39;s statement, describing a particular product or service, purchased by the cardholder. Descriptors are intended to help the cardholder identify the products or services purchased. Valid values: &#x60;1&#x60; - trans_ref_no &#x60;2&#x60; - merchant_descriptor &#x60;3&#x60; - trans_ref_no and merchant_descriptor Applicable for TSYS (tsys) processor. 
         /// </summary>
         /// <value>A soft descriptor is a text, rendered on a cardholder&#39;s statement, describing a particular product or service, purchased by the cardholder. Descriptors are intended to help the cardholder identify the products or services purchased. Valid values: &#x60;1&#x60; - trans_ref_no &#x60;2&#x60; - merchant_descriptor &#x60;3&#x60; - trans_ref_no and merchant_descriptor Applicable for TSYS (tsys) processor. </value>
-        [DataMember(Name="softDescriptorType", EmitDefaultValue=false)]
+        [JsonPropertyName("softDescriptorType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SoftDescriptorType { get; set; }
 
         /// <summary>
         /// V-number provided by TSYS info. The leading &#x60;V&#x60; must be replaced by a &#x60;7&#x60;. For example, replace &#x60;V1234567&#x60; with &#x60;71234567&#x60;. Applicable for TSYS (tsys) processor.
         /// </summary>
         /// <value>V-number provided by TSYS info. The leading &#x60;V&#x60; must be replaced by a &#x60;7&#x60;. For example, replace &#x60;V1234567&#x60; with &#x60;71234567&#x60;. Applicable for TSYS (tsys) processor.</value>
-        [DataMember(Name="vitalNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("vitalNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VitalNumber { get; set; }
 
         /// <summary>
         /// 6 digit agent bank number provided by acquirer. Applicable for TSYS (tsys) processor.
         /// </summary>
         /// <value>6 digit agent bank number provided by acquirer. Applicable for TSYS (tsys) processor.</value>
-        [DataMember(Name="bankNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("bankNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BankNumber { get; set; }
 
         /// <summary>
         /// 6 digit chain number provided by acquirer. Applicable for TSYS (tsys) processor.
         /// </summary>
         /// <value>6 digit chain number provided by acquirer. Applicable for TSYS (tsys) processor.</value>
-        [DataMember(Name="chainNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("chainNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ChainNumber { get; set; }
 
         /// <summary>
         /// 6 digits acquirer bank identification number. Applicable for TSYS (tsys) processor.
         /// </summary>
         /// <value>6 digits acquirer bank identification number. Applicable for TSYS (tsys) processor.</value>
-        [DataMember(Name="merchantBinNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantBinNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantBinNumber { get; set; }
 
         /// <summary>
         /// 5 digit merchant location number. Unless otherwise specified by merchant&#39;s bank or processor, this field should default to 00001. Applicable for TSYS (tsys) processor.
         /// </summary>
         /// <value>5 digit merchant location number. Unless otherwise specified by merchant&#39;s bank or processor, this field should default to 00001. Applicable for TSYS (tsys) processor.</value>
-        [DataMember(Name="merchantLocationNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantLocationNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantLocationNumber { get; set; }
 
         /// <summary>
         /// 4 digits number used to identify a specific merchant store location within the member systems. Applicable for TSYS (tsys) processor.
         /// </summary>
         /// <value>4 digits number used to identify a specific merchant store location within the member systems. Applicable for TSYS (tsys) processor.</value>
-        [DataMember(Name="storeID", EmitDefaultValue=false)]
+        [JsonPropertyName("storeID")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StoreID { get; set; }
 
         /// <summary>
         /// Contains travel agency code if airline ticket was issued by a travel agency. Applicable for TSYS (tsys) processor.
         /// </summary>
         /// <value>Contains travel agency code if airline ticket was issued by a travel agency. Applicable for TSYS (tsys) processor.</value>
-        [DataMember(Name="travelAgencyCode", EmitDefaultValue=false)]
+        [JsonPropertyName("travelAgencyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TravelAgencyCode { get; set; }
 
         /// <summary>
         /// Contains travel agency name if airline ticket was issued by travel agency. Applicable for TSYS (tsys) processor.
         /// </summary>
         /// <value>Contains travel agency name if airline ticket was issued by travel agency. Applicable for TSYS (tsys) processor.</value>
-        [DataMember(Name="travelAgencyName", EmitDefaultValue=false)]
+        [JsonPropertyName("travelAgencyName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TravelAgencyName { get; set; }
 
         /// <summary>
         /// This field is used to indicate Merchant&#39;s settlement currency. [ISO 4217 ALPHA-3 Standard Currency Codes] Applicable for TSYS (tsys) and Streamline (streamline2) processors.
         /// </summary>
         /// <value>This field is used to indicate Merchant&#39;s settlement currency. [ISO 4217 ALPHA-3 Standard Currency Codes] Applicable for TSYS (tsys) and Streamline (streamline2) processors.</value>
-        [DataMember(Name="settlementCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementCurrency { get; set; }
 
         /// <summary>
         /// Indicates whether Least Cost Routing is enabled. Applicable for EFTPOS and CUP processors.
         /// </summary>
         /// <value>Indicates whether Least Cost Routing is enabled. Applicable for EFTPOS and CUP processors.</value>
-        [DataMember(Name="enableLeastCostRouting", EmitDefaultValue=false)]
+        [JsonPropertyName("enableLeastCostRouting")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableLeastCostRouting { get; set; }
 
         /// <summary>
         /// This field denotes EFTPOS Merchant&#39;s choice of receiving CVV Processing Response in return. Applicable for EFTPOS processors.
         /// </summary>
         /// <value>This field denotes EFTPOS Merchant&#39;s choice of receiving CVV Processing Response in return. Applicable for EFTPOS processors.</value>
-        [DataMember(Name="enableCVVResponseIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("enableCVVResponseIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableCVVResponseIndicator { get; set; }
 
         /// <summary>
         /// Applicable for Barclays (barclays2) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Applicable for Barclays (barclays2) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="enableMultiCurrencyProcessing", EmitDefaultValue=false)]
+        [JsonPropertyName("enableMultiCurrencyProcessing")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EnableMultiCurrencyProcessing { get; set; }
 
         /// <summary>
         /// Transaction Type Identifier (TTI) field for Mastercard AFT transactions. Maps to ISO field F104.65.32. Used to ensure compliance with Mastercard&#39;s requirements for money send transactions when wallet classifications differ between Visa and Mastercard schemes. Takes priority over BAI values for Mastercard AFT transactions when present.
         /// </summary>
         /// <value>Transaction Type Identifier (TTI) field for Mastercard AFT transactions. Maps to ISO field F104.65.32. Used to ensure compliance with Mastercard&#39;s requirements for money send transactions when wallet classifications differ between Visa and Mastercard schemes. Takes priority over BAI values for Mastercard AFT transactions when present.</value>
-        [DataMember(Name="transactionTypeIdentifier", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionTypeIdentifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionTypeIdentifier { get; set; }
 
         /// <summary>
         /// The Sub merchant ID, sometimes referred to as the &#39;Seller ID&#39; is generally used and *required for Aggregators and OptBlue participants. The &#39;Sub Merchant&#39; is the Merchant whose transactions are submitted by a payment aggregator.
         /// </summary>
         /// <value>The Sub merchant ID, sometimes referred to as the &#39;Seller ID&#39; is generally used and *required for Aggregators and OptBlue participants. The &#39;Sub Merchant&#39; is the Merchant whose transactions are submitted by a payment aggregator.</value>
-        [DataMember(Name="subMerchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("subMerchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubMerchantId { get; set; }
 
         /// <summary>
         /// Sub Merchant Email of the Payment Facilitator&#39;s, OptBlue Participant
         /// </summary>
         /// <value>Sub Merchant Email of the Payment Facilitator&#39;s, OptBlue Participant</value>
-        [DataMember(Name="subMerchantEmail", EmitDefaultValue=false)]
+        [JsonPropertyName("subMerchantEmail")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubMerchantEmail { get; set; }
 
         /// <summary>
         /// Sub Merchant Phone Number of the Payment Facilitator&#39;s, OptBlue Participant&#39;s
         /// </summary>
         /// <value>Sub Merchant Phone Number of the Payment Facilitator&#39;s, OptBlue Participant&#39;s</value>
-        [DataMember(Name="subMerchantPhoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("subMerchantPhoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubMerchantPhoneNumber { get; set; }
 
         /// <summary>
         /// &#39;POS Network Switching&#39; or &#39;Alternate Routing&#39; means merchant can process PIN Debit transactions without a PIN. Set the value to &#39;Yes&#39; if it is supported. Applicable for FDI Global (fdiglobal) processor.
         /// </summary>
         /// <value>&#39;POS Network Switching&#39; or &#39;Alternate Routing&#39; means merchant can process PIN Debit transactions without a PIN. Set the value to &#39;Yes&#39; if it is supported. Applicable for FDI Global (fdiglobal) processor.</value>
-        [DataMember(Name="enablePosNetworkSwitching", EmitDefaultValue=false)]
+        [JsonPropertyName("enablePosNetworkSwitching")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnablePosNetworkSwitching { get; set; }
 
         /// <summary>
         /// Enable dynamic currency conversion for a merchant.
         /// </summary>
         /// <value>Enable dynamic currency conversion for a merchant.</value>
-        [DataMember(Name="enableDynamicCurrencyConversion", EmitDefaultValue=false)]
+        [JsonPropertyName("enableDynamicCurrencyConversion")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableDynamicCurrencyConversion { get; set; }
 
         /// <summary>
         /// Merchant Tier defines the type of merchant, the numeric Merchant Tier value is allocated by EFTPOS. Applicable for EFTPOS processors.
         /// </summary>
         /// <value>Merchant Tier defines the type of merchant, the numeric Merchant Tier value is allocated by EFTPOS. Applicable for EFTPOS processors.</value>
-        [DataMember(Name="merchantTier", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantTier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantTier { get; set; }
 
         /// <summary>
@@ -517,58 +569,58 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CardProcessingConfigCommonProcessors {\n");
-            if (BatchGroup != null) sb.Append("  BatchGroup: ").Append(BatchGroup).Append("\n");
-            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(BusinessApplicationId).Append("\n");
-            if (MerchantVerificationValue != null) sb.Append("  MerchantVerificationValue: ").Append(MerchantVerificationValue).Append("\n");
-            if (AbaNumber != null) sb.Append("  AbaNumber: ").Append(AbaNumber).Append("\n");
-            if (Acquirer != null) sb.Append("  Acquirer: ").Append(Acquirer).Append("\n");
-            if (Acquirers != null) sb.Append("  Acquirers: ").Append(Acquirers).Append("\n");
-            if (MerchantId != null) sb.Append("  MerchantId: ").Append(MerchantId).Append("\n");
-            if (TerminalId != null) sb.Append("  TerminalId: ").Append(TerminalId).Append("\n");
-            if (PaymentTypes != null) sb.Append("  PaymentTypes: ").Append(PaymentTypes).Append("\n");
-            if (Currencies != null) sb.Append("  Currencies: ").Append(Currencies).Append("\n");
-            if (VisaAggregatorId != null) sb.Append("  VisaAggregatorId: ").Append(VisaAggregatorId).Append("\n");
-            if (AmexAggregatorId != null) sb.Append("  AmexAggregatorId: ").Append(AmexAggregatorId).Append("\n");
-            if (MasterCardAggregatorId != null) sb.Append("  MasterCardAggregatorId: ").Append(MasterCardAggregatorId).Append("\n");
-            if (SicCode != null) sb.Append("  SicCode: ").Append(SicCode).Append("\n");
-            if (AllowMultipleBills != null) sb.Append("  AllowMultipleBills: ").Append(AllowMultipleBills).Append("\n");
-            if (AllowMerchantDescriptorOverride != null) sb.Append("  AllowMerchantDescriptorOverride: ").Append(AllowMerchantDescriptorOverride).Append("\n");
-            if (EnhancedData != null) sb.Append("  EnhancedData: ").Append(EnhancedData).Append("\n");
-            if (FireSafetyIndicator != null) sb.Append("  FireSafetyIndicator: ").Append(FireSafetyIndicator).Append("\n");
-            if (QuasiCash != null) sb.Append("  QuasiCash: ").Append(QuasiCash).Append("\n");
-            if (AcquirerMerchantId != null) sb.Append("  AcquirerMerchantId: ").Append(AcquirerMerchantId).Append("\n");
-            if (AvsFormat != null) sb.Append("  AvsFormat: ").Append(AvsFormat).Append("\n");
-            if (EnableLongTransRefNo != null) sb.Append("  EnableLongTransRefNo: ").Append(EnableLongTransRefNo).Append("\n");
-            if (EnableLevel2 != null) sb.Append("  EnableLevel2: ").Append(EnableLevel2).Append("\n");
-            if (EnableMultipleTransactionAdviceAddendum != null) sb.Append("  EnableMultipleTransactionAdviceAddendum: ").Append(EnableMultipleTransactionAdviceAddendum).Append("\n");
-            if (AmexTransactionAdviceAddendum1 != null) sb.Append("  AmexTransactionAdviceAddendum1: ").Append(AmexTransactionAdviceAddendum1).Append("\n");
-            if (EnableMultiLineItems != null) sb.Append("  EnableMultiLineItems: ").Append(EnableMultiLineItems).Append("\n");
-            if (EnableTransactionReferenceNumber != null) sb.Append("  EnableTransactionReferenceNumber: ").Append(EnableTransactionReferenceNumber).Append("\n");
-            if (EnableAutoAuthReversalAfterVoid != null) sb.Append("  EnableAutoAuthReversalAfterVoid: ").Append(EnableAutoAuthReversalAfterVoid).Append("\n");
-            if (EnableExpresspayPanTranslation != null) sb.Append("  EnableExpresspayPanTranslation: ").Append(EnableExpresspayPanTranslation).Append("\n");
-            if (EnableCreditAuth != null) sb.Append("  EnableCreditAuth: ").Append(EnableCreditAuth).Append("\n");
-            if (IndustryCode != null) sb.Append("  IndustryCode: ").Append(IndustryCode).Append("\n");
-            if (SendAmexLevel2Data != null) sb.Append("  SendAmexLevel2Data: ").Append(SendAmexLevel2Data).Append("\n");
-            if (SoftDescriptorType != null) sb.Append("  SoftDescriptorType: ").Append(SoftDescriptorType).Append("\n");
-            if (VitalNumber != null) sb.Append("  VitalNumber: ").Append(VitalNumber).Append("\n");
-            if (BankNumber != null) sb.Append("  BankNumber: ").Append(BankNumber).Append("\n");
-            if (ChainNumber != null) sb.Append("  ChainNumber: ").Append(ChainNumber).Append("\n");
-            if (MerchantBinNumber != null) sb.Append("  MerchantBinNumber: ").Append(MerchantBinNumber).Append("\n");
-            if (MerchantLocationNumber != null) sb.Append("  MerchantLocationNumber: ").Append(MerchantLocationNumber).Append("\n");
-            if (StoreID != null) sb.Append("  StoreID: ").Append(StoreID).Append("\n");
-            if (TravelAgencyCode != null) sb.Append("  TravelAgencyCode: ").Append(TravelAgencyCode).Append("\n");
-            if (TravelAgencyName != null) sb.Append("  TravelAgencyName: ").Append(TravelAgencyName).Append("\n");
-            if (SettlementCurrency != null) sb.Append("  SettlementCurrency: ").Append(SettlementCurrency).Append("\n");
-            if (EnableLeastCostRouting != null) sb.Append("  EnableLeastCostRouting: ").Append(EnableLeastCostRouting).Append("\n");
-            if (EnableCVVResponseIndicator != null) sb.Append("  EnableCVVResponseIndicator: ").Append(EnableCVVResponseIndicator).Append("\n");
-            if (EnableMultiCurrencyProcessing != null) sb.Append("  EnableMultiCurrencyProcessing: ").Append(EnableMultiCurrencyProcessing).Append("\n");
-            if (TransactionTypeIdentifier != null) sb.Append("  TransactionTypeIdentifier: ").Append(TransactionTypeIdentifier).Append("\n");
-            if (SubMerchantId != null) sb.Append("  SubMerchantId: ").Append(SubMerchantId).Append("\n");
-            if (SubMerchantEmail != null) sb.Append("  SubMerchantEmail: ").Append(SubMerchantEmail).Append("\n");
-            if (SubMerchantPhoneNumber != null) sb.Append("  SubMerchantPhoneNumber: ").Append(SubMerchantPhoneNumber).Append("\n");
-            if (EnablePosNetworkSwitching != null) sb.Append("  EnablePosNetworkSwitching: ").Append(EnablePosNetworkSwitching).Append("\n");
-            if (EnableDynamicCurrencyConversion != null) sb.Append("  EnableDynamicCurrencyConversion: ").Append(EnableDynamicCurrencyConversion).Append("\n");
-            if (MerchantTier != null) sb.Append("  MerchantTier: ").Append(MerchantTier).Append("\n");
+            if (BatchGroup != null) sb.Append("  BatchGroup: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "batchGroup", BatchGroup.ToString())).Append("\n");
+            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "businessApplicationId", BusinessApplicationId.ToString())).Append("\n");
+            if (MerchantVerificationValue != null) sb.Append("  MerchantVerificationValue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "merchantVerificationValue", MerchantVerificationValue.ToString())).Append("\n");
+            if (AbaNumber != null) sb.Append("  AbaNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "abaNumber", AbaNumber.ToString())).Append("\n");
+            if (Acquirer != null) sb.Append("  Acquirer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "acquirer", Acquirer.ToString())).Append("\n");
+            if (Acquirers != null) sb.Append("  Acquirers: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "acquirers", Acquirers.ToString())).Append("\n");
+            if (MerchantId != null) sb.Append("  MerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "merchantId", MerchantId.ToString())).Append("\n");
+            if (TerminalId != null) sb.Append("  TerminalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "terminalId", TerminalId.ToString())).Append("\n");
+            if (PaymentTypes != null) sb.Append("  PaymentTypes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "paymentTypes", PaymentTypes.ToString())).Append("\n");
+            if (Currencies != null) sb.Append("  Currencies: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "currencies", Currencies.ToString())).Append("\n");
+            if (VisaAggregatorId != null) sb.Append("  VisaAggregatorId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "visaAggregatorId", VisaAggregatorId.ToString())).Append("\n");
+            if (AmexAggregatorId != null) sb.Append("  AmexAggregatorId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "amexAggregatorId", AmexAggregatorId.ToString())).Append("\n");
+            if (MasterCardAggregatorId != null) sb.Append("  MasterCardAggregatorId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "masterCardAggregatorId", MasterCardAggregatorId.ToString())).Append("\n");
+            if (SicCode != null) sb.Append("  SicCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "sicCode", SicCode.ToString())).Append("\n");
+            if (AllowMultipleBills != null) sb.Append("  AllowMultipleBills: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "allowMultipleBills", AllowMultipleBills.ToString())).Append("\n");
+            if (AllowMerchantDescriptorOverride != null) sb.Append("  AllowMerchantDescriptorOverride: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "allowMerchantDescriptorOverride", AllowMerchantDescriptorOverride.ToString())).Append("\n");
+            if (EnhancedData != null) sb.Append("  EnhancedData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enhancedData", EnhancedData.ToString())).Append("\n");
+            if (FireSafetyIndicator != null) sb.Append("  FireSafetyIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "fireSafetyIndicator", FireSafetyIndicator.ToString())).Append("\n");
+            if (QuasiCash != null) sb.Append("  QuasiCash: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "quasiCash", QuasiCash.ToString())).Append("\n");
+            if (AcquirerMerchantId != null) sb.Append("  AcquirerMerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "acquirerMerchantId", AcquirerMerchantId.ToString())).Append("\n");
+            if (AvsFormat != null) sb.Append("  AvsFormat: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "avsFormat", AvsFormat.ToString())).Append("\n");
+            if (EnableLongTransRefNo != null) sb.Append("  EnableLongTransRefNo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableLongTransRefNo", EnableLongTransRefNo.ToString())).Append("\n");
+            if (EnableLevel2 != null) sb.Append("  EnableLevel2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableLevel2", EnableLevel2.ToString())).Append("\n");
+            if (EnableMultipleTransactionAdviceAddendum != null) sb.Append("  EnableMultipleTransactionAdviceAddendum: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableMultipleTransactionAdviceAddendum", EnableMultipleTransactionAdviceAddendum.ToString())).Append("\n");
+            if (AmexTransactionAdviceAddendum1 != null) sb.Append("  AmexTransactionAdviceAddendum1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "amexTransactionAdviceAddendum1", AmexTransactionAdviceAddendum1.ToString())).Append("\n");
+            if (EnableMultiLineItems != null) sb.Append("  EnableMultiLineItems: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableMultiLineItems", EnableMultiLineItems.ToString())).Append("\n");
+            if (EnableTransactionReferenceNumber != null) sb.Append("  EnableTransactionReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableTransactionReferenceNumber", EnableTransactionReferenceNumber.ToString())).Append("\n");
+            if (EnableAutoAuthReversalAfterVoid != null) sb.Append("  EnableAutoAuthReversalAfterVoid: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableAutoAuthReversalAfterVoid", EnableAutoAuthReversalAfterVoid.ToString())).Append("\n");
+            if (EnableExpresspayPanTranslation != null) sb.Append("  EnableExpresspayPanTranslation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableExpresspayPanTranslation", EnableExpresspayPanTranslation.ToString())).Append("\n");
+            if (EnableCreditAuth != null) sb.Append("  EnableCreditAuth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableCreditAuth", EnableCreditAuth.ToString())).Append("\n");
+            if (IndustryCode != null) sb.Append("  IndustryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "industryCode", IndustryCode.ToString())).Append("\n");
+            if (SendAmexLevel2Data != null) sb.Append("  SendAmexLevel2Data: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "sendAmexLevel2Data", SendAmexLevel2Data.ToString())).Append("\n");
+            if (SoftDescriptorType != null) sb.Append("  SoftDescriptorType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "softDescriptorType", SoftDescriptorType.ToString())).Append("\n");
+            if (VitalNumber != null) sb.Append("  VitalNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "vitalNumber", VitalNumber.ToString())).Append("\n");
+            if (BankNumber != null) sb.Append("  BankNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "bankNumber", BankNumber.ToString())).Append("\n");
+            if (ChainNumber != null) sb.Append("  ChainNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "chainNumber", ChainNumber.ToString())).Append("\n");
+            if (MerchantBinNumber != null) sb.Append("  MerchantBinNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "merchantBinNumber", MerchantBinNumber.ToString())).Append("\n");
+            if (MerchantLocationNumber != null) sb.Append("  MerchantLocationNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "merchantLocationNumber", MerchantLocationNumber.ToString())).Append("\n");
+            if (StoreID != null) sb.Append("  StoreID: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "storeID", StoreID.ToString())).Append("\n");
+            if (TravelAgencyCode != null) sb.Append("  TravelAgencyCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "travelAgencyCode", TravelAgencyCode.ToString())).Append("\n");
+            if (TravelAgencyName != null) sb.Append("  TravelAgencyName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "travelAgencyName", TravelAgencyName.ToString())).Append("\n");
+            if (SettlementCurrency != null) sb.Append("  SettlementCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "settlementCurrency", SettlementCurrency.ToString())).Append("\n");
+            if (EnableLeastCostRouting != null) sb.Append("  EnableLeastCostRouting: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableLeastCostRouting", EnableLeastCostRouting.ToString())).Append("\n");
+            if (EnableCVVResponseIndicator != null) sb.Append("  EnableCVVResponseIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableCVVResponseIndicator", EnableCVVResponseIndicator.ToString())).Append("\n");
+            if (EnableMultiCurrencyProcessing != null) sb.Append("  EnableMultiCurrencyProcessing: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableMultiCurrencyProcessing", EnableMultiCurrencyProcessing.ToString())).Append("\n");
+            if (TransactionTypeIdentifier != null) sb.Append("  TransactionTypeIdentifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "transactionTypeIdentifier", TransactionTypeIdentifier.ToString())).Append("\n");
+            if (SubMerchantId != null) sb.Append("  SubMerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "subMerchantId", SubMerchantId.ToString())).Append("\n");
+            if (SubMerchantEmail != null) sb.Append("  SubMerchantEmail: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "subMerchantEmail", SubMerchantEmail.ToString())).Append("\n");
+            if (SubMerchantPhoneNumber != null) sb.Append("  SubMerchantPhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "subMerchantPhoneNumber", SubMerchantPhoneNumber.ToString())).Append("\n");
+            if (EnablePosNetworkSwitching != null) sb.Append("  EnablePosNetworkSwitching: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enablePosNetworkSwitching", EnablePosNetworkSwitching.ToString())).Append("\n");
+            if (EnableDynamicCurrencyConversion != null) sb.Append("  EnableDynamicCurrencyConversion: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "enableDynamicCurrencyConversion", EnableDynamicCurrencyConversion.ToString())).Append("\n");
+            if (MerchantTier != null) sb.Append("  MerchantTier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonProcessors", "merchantTier", MerchantTier.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -579,7 +631,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CardProcessingConfigCommonProcessors", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,55 +57,63 @@ namespace CyberSource.Model
         /// Visa Direct(11 characters)   Value that identifies you as a payment aggregator. Get this value from the processor. 
         /// </summary>
         /// <value>Visa Direct(11 characters)   Value that identifies you as a payment aggregator. Get this value from the processor. </value>
-        [DataMember(Name="aggregatorId", EmitDefaultValue=false)]
+        [JsonPropertyName("aggregatorId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AggregatorId { get; set; }
 
         /// <summary>
         /// Visa Direct(25 characters)   Your payment aggregator business name. This field is conditionally required when aggregator id is present. 
         /// </summary>
         /// <value>Visa Direct(25 characters)   Your payment aggregator business name. This field is conditionally required when aggregator id is present. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets SubMerchant
         /// </summary>
-        [DataMember(Name="subMerchant", EmitDefaultValue=false)]
+        [JsonPropertyName("subMerchant")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv1pullfundstransferAggregatorInformationSubMerchant SubMerchant { get; set; }
 
         /// <summary>
         /// Aggregator city. 
         /// </summary>
         /// <value>Aggregator city. </value>
-        [DataMember(Name="city", EmitDefaultValue=false)]
+        [JsonPropertyName("city")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string City { get; set; }
 
         /// <summary>
         /// Aggregator country. 
         /// </summary>
         /// <value>Aggregator country. </value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// Aggregator postal code. 
         /// </summary>
         /// <value>Aggregator postal code. </value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// Aggregator state. 
         /// </summary>
         /// <value>Aggregator state. </value>
-        [DataMember(Name="state", EmitDefaultValue=false)]
+        [JsonPropertyName("state")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string State { get; set; }
 
         /// <summary>
         /// Aggregator street name.  
         /// </summary>
         /// <value>Aggregator street name.  </value>
-        [DataMember(Name="streetAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("streetAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StreetAddress { get; set; }
 
         /// <summary>
@@ -116,14 +124,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferAggregatorInformation {\n");
-            if (AggregatorId != null) sb.Append("  AggregatorId: ").Append(AggregatorId).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (SubMerchant != null) sb.Append("  SubMerchant: ").Append(SubMerchant).Append("\n");
-            if (City != null) sb.Append("  City: ").Append(City).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
-            if (State != null) sb.Append("  State: ").Append(State).Append("\n");
-            if (StreetAddress != null) sb.Append("  StreetAddress: ").Append(StreetAddress).Append("\n");
+            if (AggregatorId != null) sb.Append("  AggregatorId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferAggregatorInformation", "aggregatorId", AggregatorId.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferAggregatorInformation", "name", Name.ToString())).Append("\n");
+            if (SubMerchant != null) sb.Append("  SubMerchant: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferAggregatorInformation", "subMerchant", SubMerchant.ToString())).Append("\n");
+            if (City != null) sb.Append("  City: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferAggregatorInformation", "city", City.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferAggregatorInformation", "country", Country.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferAggregatorInformation", "postalCode", PostalCode.ToString())).Append("\n");
+            if (State != null) sb.Append("  State: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferAggregatorInformation", "state", State.ToString())).Append("\n");
+            if (StreetAddress != null) sb.Append("  StreetAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferAggregatorInformation", "streetAddress", StreetAddress.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -134,7 +142,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferAggregatorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

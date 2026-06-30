@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,27 +49,31 @@ namespace CyberSource.Model
         /// TMS Transient Token, 64 hexadecimal id value representing captured payment credentials (including Sensitive Authentication Data, e.g. CVV). 
         /// </summary>
         /// <value>TMS Transient Token, 64 hexadecimal id value representing captured payment credentials (including Sensitive Authentication Data, e.g. CVV). </value>
-        [DataMember(Name="jti", EmitDefaultValue=false)]
+        [JsonPropertyName("jti")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Jti { get; set; }
 
         /// <summary>
         /// Flex API Transient Token encoded as JWT (JSON Web Token), e.g. Flex microform or Unified Payment checkout result. 
         /// </summary>
         /// <value>Flex API Transient Token encoded as JWT (JSON Web Token), e.g. Flex microform or Unified Payment checkout result. </value>
-        [DataMember(Name="transientTokenJwt", EmitDefaultValue=false)]
+        [JsonPropertyName("transientTokenJwt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransientTokenJwt { get; set; }
 
         /// <summary>
         /// Indicates whether a payment network token associated with a TMS token should be used for authorization. This field can contain one of following values:  - &#x60;ignore&#x60;: Use a tokenized card number for an authorization, even if the TMS token has an associated payment network token. - &#x60;prefer&#x60;: (Default) Use an associated payment network token for an authorization if the TMS token has one; otherwise, use the tokenized card number. 
         /// </summary>
         /// <value>Indicates whether a payment network token associated with a TMS token should be used for authorization. This field can contain one of following values:  - &#x60;ignore&#x60;: Use a tokenized card number for an authorization, even if the TMS token has an associated payment network token. - &#x60;prefer&#x60;: (Default) Use an associated payment network token for an authorization if the TMS token has one; otherwise, use the tokenized card number. </value>
-        [DataMember(Name="networkTokenOption", EmitDefaultValue=false)]
+        [JsonPropertyName("networkTokenOption")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NetworkTokenOption { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenProvisioningInformation
         /// </summary>
-        [DataMember(Name="tokenProvisioningInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenProvisioningInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTokenInformationTokenProvisioningInformation TokenProvisioningInformation { get; set; }
 
         /// <summary>
@@ -80,10 +84,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2creditsTokenInformation {\n");
-            if (Jti != null) sb.Append("  Jti: ").Append(Jti).Append("\n");
-            if (TransientTokenJwt != null) sb.Append("  TransientTokenJwt: ").Append(TransientTokenJwt).Append("\n");
-            if (NetworkTokenOption != null) sb.Append("  NetworkTokenOption: ").Append(NetworkTokenOption).Append("\n");
-            if (TokenProvisioningInformation != null) sb.Append("  TokenProvisioningInformation: ").Append(TokenProvisioningInformation).Append("\n");
+            if (Jti != null) sb.Append("  Jti: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsTokenInformation", "jti", Jti.ToString())).Append("\n");
+            if (TransientTokenJwt != null) sb.Append("  TransientTokenJwt: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsTokenInformation", "transientTokenJwt", TransientTokenJwt.ToString())).Append("\n");
+            if (NetworkTokenOption != null) sb.Append("  NetworkTokenOption: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsTokenInformation", "networkTokenOption", NetworkTokenOption.ToString())).Append("\n");
+            if (TokenProvisioningInformation != null) sb.Append("  TokenProvisioningInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsTokenInformation", "tokenProvisioningInformation", TokenProvisioningInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -94,7 +98,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2creditsTokenInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

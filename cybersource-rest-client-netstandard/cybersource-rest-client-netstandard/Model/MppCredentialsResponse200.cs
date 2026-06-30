@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="MppCredentialsResponse200" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected MppCredentialsResponse200() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="MppCredentialsResponse200" /> class.
@@ -62,56 +62,64 @@ namespace CyberSource.Model
         /// Base64-encoded RSA-OAEP encrypted token ciphertext. Must not be parsed by client/server — forwarded opaquely to the Server Enabler.
         /// </summary>
         /// <value>Base64-encoded RSA-OAEP encrypted token ciphertext. Must not be parsed by client/server — forwarded opaquely to the Server Enabler.</value>
-        [DataMember(Name="token", EmitDefaultValue=false)]
+        [JsonPropertyName("token")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Token { get; set; }
 
         /// <summary>
         /// Card network. Possible values:   - &#x60;visa&#x60;   - &#x60;mastercard&#x60;   - &#x60;amex&#x60;   - &#x60;discover&#x60; 
         /// </summary>
         /// <value>Card network. Possible values:   - &#x60;visa&#x60;   - &#x60;mastercard&#x60;   - &#x60;amex&#x60;   - &#x60;discover&#x60; </value>
-        [DataMember(Name="network", EmitDefaultValue=false)]
+        [JsonPropertyName("network")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Network { get; set; }
 
         /// <summary>
         /// Last four digits of the card number as displayed to cardholder.
         /// </summary>
         /// <value>Last four digits of the card number as displayed to cardholder.</value>
-        [DataMember(Name="lastFour", EmitDefaultValue=false)]
+        [JsonPropertyName("lastFour")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastFour { get; set; }
 
         /// <summary>
         /// Token expiration month (e.g., &#39;06&#39;). Display only.
         /// </summary>
         /// <value>Token expiration month (e.g., &#39;06&#39;). Display only.</value>
-        [DataMember(Name="expirationMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationMonth { get; set; }
 
         /// <summary>
         /// Token expiration year, four digits (e.g., &#39;2028&#39;). Display only.
         /// </summary>
         /// <value>Token expiration year, four digits (e.g., &#39;2028&#39;). Display only.</value>
-        [DataMember(Name="expirationYear", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationYear")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationYear { get; set; }
 
         /// <summary>
         /// Base64-encoded cryptogram from TSP. Present only for network_token type. Display only.
         /// </summary>
         /// <value>Base64-encoded cryptogram from TSP. Present only for network_token type. Display only.</value>
-        [DataMember(Name="dynamicData", EmitDefaultValue=false)]
+        [JsonPropertyName("dynamicData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DynamicData { get; set; }
 
         /// <summary>
         /// Electronic Commerce Indicator (e.g., &#39;05&#39;, &#39;07&#39;). Present only for network_token type. Display only.
         /// </summary>
         /// <value>Electronic Commerce Indicator (e.g., &#39;05&#39;, &#39;07&#39;). Present only for network_token type. Display only.</value>
-        [DataMember(Name="eci", EmitDefaultValue=false)]
+        [JsonPropertyName("eci")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Eci { get; set; }
 
         /// <summary>
         /// Payment Account Reference — a stable reference to the underlying funding account.
         /// </summary>
         /// <value>Payment Account Reference — a stable reference to the underlying funding account.</value>
-        [DataMember(Name="paymentAccountReference", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentAccountReference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentAccountReference { get; set; }
 
         /// <summary>
@@ -122,14 +130,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class MppCredentialsResponse200 {\n");
-            if (Token != null) sb.Append("  Token: ").Append(Token).Append("\n");
-            if (Network != null) sb.Append("  Network: ").Append(Network).Append("\n");
-            if (LastFour != null) sb.Append("  LastFour: ").Append(LastFour).Append("\n");
-            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(ExpirationMonth).Append("\n");
-            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(ExpirationYear).Append("\n");
-            if (DynamicData != null) sb.Append("  DynamicData: ").Append(DynamicData).Append("\n");
-            if (Eci != null) sb.Append("  Eci: ").Append(Eci).Append("\n");
-            if (PaymentAccountReference != null) sb.Append("  PaymentAccountReference: ").Append(PaymentAccountReference).Append("\n");
+            if (Token != null) sb.Append("  Token: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MppCredentialsResponse200", "token", Token.ToString())).Append("\n");
+            if (Network != null) sb.Append("  Network: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MppCredentialsResponse200", "network", Network.ToString())).Append("\n");
+            if (LastFour != null) sb.Append("  LastFour: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MppCredentialsResponse200", "lastFour", LastFour.ToString())).Append("\n");
+            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MppCredentialsResponse200", "expirationMonth", ExpirationMonth.ToString())).Append("\n");
+            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MppCredentialsResponse200", "expirationYear", ExpirationYear.ToString())).Append("\n");
+            if (DynamicData != null) sb.Append("  DynamicData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MppCredentialsResponse200", "dynamicData", DynamicData.ToString())).Append("\n");
+            if (Eci != null) sb.Append("  Eci: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MppCredentialsResponse200", "eci", Eci.ToString())).Append("\n");
+            if (PaymentAccountReference != null) sb.Append("  PaymentAccountReference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MppCredentialsResponse200", "paymentAccountReference", PaymentAccountReference.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -140,7 +148,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("MppCredentialsResponse200", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

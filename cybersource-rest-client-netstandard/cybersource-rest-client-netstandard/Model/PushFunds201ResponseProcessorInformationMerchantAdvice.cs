@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Reason why transaction was declined.   #### Possible values: | Card Type   | Advice Code   |  Description                                | | - -- -- -- -- -- | - -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | VISA        | 1             | Issuer never approves                       | | VISA        | 2             | Issuer cannot approve at this time          | | VISA        | 3             | Data quality/revalidate payment information | | MasterCard  | 01            | New account information available           | | MasterCard  | 02            | Try Again Later                             | | MasterCard  | 03            | Do Not Try Again                            | | MasterCard  | 04            | Token not supported                         | | MasterCard  | 21            | Do not honor                                | | MasterCard  | 22            | Merchant does not qualify for product code  | | MasterCard  | 24            | Retry after 1 hour                          | | MasterCard  | 25            | Retry after 24 hours                        | | MasterCard  | 26            | Retry after 2 days                          | | MasterCard  | 27            | Retry after 4 days                          | | MasterCard  | 28            | Retry after 6 days                          | | MasterCard  | 29            | Retry after 8 days                          | | MasterCard  | 30            | Retry after 10 days                         | | MasterCard  | 40            | Consumer non-reloadable prepaid card        | | MasterCard  | 41            | Consumer single-use virtual card number     | | MasterCard  | 42            | Sanctions score exceeds threshold value     | | MasterCard  | 99            | Do Not Try Again                            | 
         /// </summary>
         /// <value>Reason why transaction was declined.   #### Possible values: | Card Type   | Advice Code   |  Description                                | | - -- -- -- -- -- | - -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- | | VISA        | 1             | Issuer never approves                       | | VISA        | 2             | Issuer cannot approve at this time          | | VISA        | 3             | Data quality/revalidate payment information | | MasterCard  | 01            | New account information available           | | MasterCard  | 02            | Try Again Later                             | | MasterCard  | 03            | Do Not Try Again                            | | MasterCard  | 04            | Token not supported                         | | MasterCard  | 21            | Do not honor                                | | MasterCard  | 22            | Merchant does not qualify for product code  | | MasterCard  | 24            | Retry after 1 hour                          | | MasterCard  | 25            | Retry after 24 hours                        | | MasterCard  | 26            | Retry after 2 days                          | | MasterCard  | 27            | Retry after 4 days                          | | MasterCard  | 28            | Retry after 6 days                          | | MasterCard  | 29            | Retry after 8 days                          | | MasterCard  | 30            | Retry after 10 days                         | | MasterCard  | 40            | Consumer non-reloadable prepaid card        | | MasterCard  | 41            | Consumer single-use virtual card number     | | MasterCard  | 42            | Sanctions score exceeds threshold value     | | MasterCard  | 99            | Do Not Try Again                            | </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Raw merchant advice code from processor.
         /// </summary>
         /// <value>Raw merchant advice code from processor.</value>
-        [DataMember(Name="codeRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("codeRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CodeRaw { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PushFunds201ResponseProcessorInformationMerchantAdvice {\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (CodeRaw != null) sb.Append("  CodeRaw: ").Append(CodeRaw).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponseProcessorInformationMerchantAdvice", "code", Code.ToString())).Append("\n");
+            if (CodeRaw != null) sb.Append("  CodeRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponseProcessorInformationMerchantAdvice", "codeRaw", CodeRaw.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PushFunds201ResponseProcessorInformationMerchantAdvice", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

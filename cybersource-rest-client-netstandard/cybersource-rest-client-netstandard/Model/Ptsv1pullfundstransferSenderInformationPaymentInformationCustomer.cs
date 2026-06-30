@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Unique identifier for the Customer token used in the transaction. When you include this value in your request, many of the fields that are normally required become optional.  If you intend on using more than one token, please take note of the following conditions:  - In case a Customer token is accompanied by an Instrument Identifier token, the card number from the Instrument Identifier token will take precedence over the Customer token. - The Customer token and the Payment Instrument token are mutually exclusive. If both are present, you will receive an error.   For more information on TMS, please see our originator-facing documentation.  Conditional: If the card and paymentInstrument object information is incomplete, this field becomes mandatory to retrieve missing information. 
         /// </summary>
         /// <value>Unique identifier for the Customer token used in the transaction. When you include this value in your request, many of the fields that are normally required become optional.  If you intend on using more than one token, please take note of the following conditions:  - In case a Customer token is accompanied by an Instrument Identifier token, the card number from the Instrument Identifier token will take precedence over the Customer token. - The Customer token and the Payment Instrument token are mutually exclusive. If both are present, you will receive an error.   For more information on TMS, please see our originator-facing documentation.  Conditional: If the card and paymentInstrument object information is incomplete, this field becomes mandatory to retrieve missing information. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferSenderInformationPaymentInformationCustomer {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationPaymentInformationCustomer", "id", Id.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferSenderInformationPaymentInformationCustomer", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

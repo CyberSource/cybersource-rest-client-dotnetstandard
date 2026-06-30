@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,41 +44,47 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentInstrumentListLinks Links { get; set; }
 
         /// <summary>
         /// The offset parameter supplied in the request.
         /// </summary>
         /// <value>The offset parameter supplied in the request.</value>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        [JsonPropertyName("offset")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Offset { get; private set; }
 
         /// <summary>
         /// The limit parameter supplied in the request.
         /// </summary>
         /// <value>The limit parameter supplied in the request.</value>
-        [DataMember(Name="limit", EmitDefaultValue=false)]
+        [JsonPropertyName("limit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Limit { get; private set; }
 
         /// <summary>
         /// The number of Payment Instruments returned in the array.
         /// </summary>
         /// <value>The number of Payment Instruments returned in the array.</value>
-        [DataMember(Name="count", EmitDefaultValue=false)]
+        [JsonPropertyName("count")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Count { get; private set; }
 
         /// <summary>
         /// The total number of Payment Instruments associated with the Customer or Instrument Identifier.
         /// </summary>
         /// <value>The total number of Payment Instruments associated with the Customer or Instrument Identifier.</value>
-        [DataMember(Name="total", EmitDefaultValue=false)]
+        [JsonPropertyName("total")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Total { get; private set; }
 
         /// <summary>
         /// Gets or Sets Embedded
         /// </summary>
-        [DataMember(Name="_embedded", EmitDefaultValue=false)]
+        [JsonPropertyName("_embedded")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentInstrumentList1Embedded Embedded { get; set; }
 
         /// <summary>
@@ -89,12 +95,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PaymentInstrumentList1 {\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
-            if (Offset != null) sb.Append("  Offset: ").Append(Offset).Append("\n");
-            if (Limit != null) sb.Append("  Limit: ").Append(Limit).Append("\n");
-            if (Count != null) sb.Append("  Count: ").Append(Count).Append("\n");
-            if (Total != null) sb.Append("  Total: ").Append(Total).Append("\n");
-            if (Embedded != null) sb.Append("  Embedded: ").Append(Embedded).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentInstrumentList1", "_links", Links.ToString())).Append("\n");
+            if (Offset != null) sb.Append("  Offset: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentInstrumentList1", "offset", Offset.ToString())).Append("\n");
+            if (Limit != null) sb.Append("  Limit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentInstrumentList1", "limit", Limit.ToString())).Append("\n");
+            if (Count != null) sb.Append("  Count: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentInstrumentList1", "count", Count.ToString())).Append("\n");
+            if (Total != null) sb.Append("  Total: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentInstrumentList1", "total", Total.ToString())).Append("\n");
+            if (Embedded != null) sb.Append("  Embedded: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentInstrumentList1", "_embedded", Embedded.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +111,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PaymentInstrumentList1", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

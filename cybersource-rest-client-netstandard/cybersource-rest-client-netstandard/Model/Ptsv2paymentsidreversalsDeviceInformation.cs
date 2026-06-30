@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Account Entry Device Type for Tap to More transactions. This field flows in ISO Field 34 DSID 02 Tag 89.  Valid Values: - &#x60;1&#x60;: Off-the-shelf mobile consumer  Mastercard is introducing changes to support commercialization of Tap to More transactions.  Acquirers globally must be prepared to send a value of 1 (Off-the-shelf mobile-consumer)  in Field 34—Acceptance Environment Data (TLV Format), Dataset ID 02—Acceptance Environment  Additional Data, Tag 89—Account Entry Device Type for Tap to More transactions. Visa will  map this value to a value of 8 (Remote terminal) in Mastercard Data Element 61.10.  #### Mapping - SCMP API Field: customer_device_type - Simple Order API Field: billTo_deviceType - CCS: device.type - NRTF Key: customer_device_type  Optional field. 
         /// </summary>
         /// <value>Account Entry Device Type for Tap to More transactions. This field flows in ISO Field 34 DSID 02 Tag 89.  Valid Values: - &#x60;1&#x60;: Off-the-shelf mobile consumer  Mastercard is introducing changes to support commercialization of Tap to More transactions.  Acquirers globally must be prepared to send a value of 1 (Off-the-shelf mobile-consumer)  in Field 34—Acceptance Environment Data (TLV Format), Dataset ID 02—Acceptance Environment  Additional Data, Tag 89—Account Entry Device Type for Tap to More transactions. Visa will  map this value to a value of 8 (Remote terminal) in Mastercard Data Element 61.10.  #### Mapping - SCMP API Field: customer_device_type - Simple Order API Field: billTo_deviceType - CCS: device.type - NRTF Key: customer_device_type  Optional field. </value>
-        [DataMember(Name="deviceType", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeviceType { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidreversalsDeviceInformation {\n");
-            if (DeviceType != null) sb.Append("  DeviceType: ").Append(DeviceType).Append("\n");
+            if (DeviceType != null) sb.Append("  DeviceType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidreversalsDeviceInformation", "deviceType", DeviceType.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidreversalsDeviceInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// If &#x60;true&#x60; then provide attributes related to fund transfer/payouts. If payout information not found then response will have standard account lookup.  Possible values: - true - false 
         /// </summary>
         /// <value>If &#x60;true&#x60; then provide attributes related to fund transfer/payouts. If payout information not found then response will have standard account lookup.  Possible values: - true - false </value>
-        [DataMember(Name="payoutInquiry", EmitDefaultValue=false)]
+        [JsonPropertyName("payoutInquiry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PayoutInquiry { get; set; }
 
         /// <summary>
         /// The networks specified in this field must be a subset of the information provided during program enrollment    Possible values: - 0020 : Accel/Exchange - 0024 : CU24 - 0003 : Interlink - 0016 : Maestro - 0018 : NYCE - 0027 : NYCE - 0009 : Pulse - 0017 : Pulse - 0019 : Pulse - 0008 : Star - 0010 : Star - 0011 : Star - 0012 : Star - 0015 : Star - 0002 : Visa/PLUS 
         /// </summary>
         /// <value>The networks specified in this field must be a subset of the information provided during program enrollment    Possible values: - 0020 : Accel/Exchange - 0024 : CU24 - 0003 : Interlink - 0016 : Maestro - 0018 : NYCE - 0027 : NYCE - 0009 : Pulse - 0017 : Pulse - 0019 : Pulse - 0008 : Star - 0010 : Star - 0011 : Star - 0012 : Star - 0015 : Star - 0002 : Visa/PLUS </value>
-        [DataMember(Name="networkId", EmitDefaultValue=false)]
+        [JsonPropertyName("networkId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NetworkId { get; set; }
 
         /// <summary>
         /// BIN under which the Funds Transfer application is registered. This must match the information provided during enrollment. 
         /// </summary>
         /// <value>BIN under which the Funds Transfer application is registered. This must match the information provided during enrollment. </value>
-        [DataMember(Name="acquirerBin", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirerBin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcquirerBin { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Binv1binlookupProcessingInformationPayoutOptions {\n");
-            if (PayoutInquiry != null) sb.Append("  PayoutInquiry: ").Append(PayoutInquiry).Append("\n");
-            if (NetworkId != null) sb.Append("  NetworkId: ").Append(NetworkId).Append("\n");
-            if (AcquirerBin != null) sb.Append("  AcquirerBin: ").Append(AcquirerBin).Append("\n");
+            if (PayoutInquiry != null) sb.Append("  PayoutInquiry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Binv1binlookupProcessingInformationPayoutOptions", "payoutInquiry", PayoutInquiry.ToString())).Append("\n");
+            if (NetworkId != null) sb.Append("  NetworkId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Binv1binlookupProcessingInformationPayoutOptions", "networkId", NetworkId.ToString())).Append("\n");
+            if (AcquirerBin != null) sb.Append("  AcquirerBin: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Binv1binlookupProcessingInformationPayoutOptions", "acquirerBin", AcquirerBin.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Binv1binlookupProcessingInformationPayoutOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

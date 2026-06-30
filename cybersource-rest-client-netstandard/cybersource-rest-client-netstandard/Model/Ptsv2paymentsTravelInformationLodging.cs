@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -133,322 +133,368 @@ namespace CyberSource.Model
         /// Date on which the guest checked in. In the case of a no-show or a reservation, the scheduled arrival date. Format: &#x60;MMDDYY&#x60;. For best interchange rates, make sure it is a valid date. 
         /// </summary>
         /// <value>Date on which the guest checked in. In the case of a no-show or a reservation, the scheduled arrival date. Format: &#x60;MMDDYY&#x60;. For best interchange rates, make sure it is a valid date. </value>
-        [DataMember(Name="checkInDate", EmitDefaultValue=false)]
+        [JsonPropertyName("checkInDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CheckInDate { get; set; }
 
         /// <summary>
         /// Date on which the guest checked out. Format: &#x60;MMDDYY&#x60;. For best interchange rates, make sure it is a valid date. 
         /// </summary>
         /// <value>Date on which the guest checked out. Format: &#x60;MMDDYY&#x60;. For best interchange rates, make sure it is a valid date. </value>
-        [DataMember(Name="checkOutDate", EmitDefaultValue=false)]
+        [JsonPropertyName("checkOutDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CheckOutDate { get; set; }
 
         /// <summary>
         /// The object containing the number of nights and the daily rate that applies for that no of nights. 
         /// </summary>
         /// <value>The object containing the number of nights and the daily rate that applies for that no of nights. </value>
-        [DataMember(Name="room", EmitDefaultValue=false)]
+        [JsonPropertyName("room")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsTravelInformationLodgingRoom> Room { get; set; }
 
         /// <summary>
         /// Smoking preference of the guest. Possible values: - &#x60;Y&#x60;: smoking room - &#x60;N&#x60;: non-smoking room 
         /// </summary>
         /// <value>Smoking preference of the guest. Possible values: - &#x60;Y&#x60;: smoking room - &#x60;N&#x60;: non-smoking room </value>
-        [DataMember(Name="smokingPreference", EmitDefaultValue=false)]
+        [JsonPropertyName("smokingPreference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SmokingPreference { get; set; }
 
         /// <summary>
         /// Number of rooms booked by the cardholder. 
         /// </summary>
         /// <value>Number of rooms booked by the cardholder. </value>
-        [DataMember(Name="numberOfRooms", EmitDefaultValue=false)]
+        [JsonPropertyName("numberOfRooms")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? NumberOfRooms { get; set; }
 
         /// <summary>
         /// Number of guests staying in the room. 
         /// </summary>
         /// <value>Number of guests staying in the room. </value>
-        [DataMember(Name="numberOfGuests", EmitDefaultValue=false)]
+        [JsonPropertyName("numberOfGuests")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? NumberOfGuests { get; set; }
 
         /// <summary>
         /// Type of room, such as queen, king, or two doubles. 
         /// </summary>
         /// <value>Type of room, such as queen, king, or two doubles. </value>
-        [DataMember(Name="roomBedType", EmitDefaultValue=false)]
+        [JsonPropertyName("roomBedType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoomBedType { get; set; }
 
         /// <summary>
         /// Type of tax, such as tourist or hotel. 
         /// </summary>
         /// <value>Type of tax, such as tourist or hotel. </value>
-        [DataMember(Name="roomTaxType", EmitDefaultValue=false)]
+        [JsonPropertyName("roomTaxType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoomTaxType { get; set; }
 
         /// <summary>
         /// Type of rate, such as corporate or senior citizen. 
         /// </summary>
         /// <value>Type of rate, such as corporate or senior citizen. </value>
-        [DataMember(Name="roomRateType", EmitDefaultValue=false)]
+        [JsonPropertyName("roomRateType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoomRateType { get; set; }
 
         /// <summary>
         /// Name of the guest under which the room is reserved. 
         /// </summary>
         /// <value>Name of the guest under which the room is reserved. </value>
-        [DataMember(Name="guestName", EmitDefaultValue=false)]
+        [JsonPropertyName("guestName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string GuestName { get; set; }
 
         /// <summary>
         /// Your toll-free customer service phone number. 
         /// </summary>
         /// <value>Your toll-free customer service phone number. </value>
-        [DataMember(Name="customerServicePhoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("customerServicePhoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerServicePhoneNumber { get; set; }
 
         /// <summary>
         /// Code assigned to a business. You can use this code to identify corporate rates and discounts for guests. 
         /// </summary>
         /// <value>Code assigned to a business. You can use this code to identify corporate rates and discounts for guests. </value>
-        [DataMember(Name="corporateClientCode", EmitDefaultValue=false)]
+        [JsonPropertyName("corporateClientCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CorporateClientCode { get; set; }
 
         /// <summary>
         /// Amount of an additional coupon or discount. 
         /// </summary>
         /// <value>Amount of an additional coupon or discount. </value>
-        [DataMember(Name="additionalDiscountAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("additionalDiscountAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdditionalDiscountAmount { get; set; }
 
         /// <summary>
         /// Location of room, such as lake view or ocean view. 
         /// </summary>
         /// <value>Location of room, such as lake view or ocean view. </value>
-        [DataMember(Name="roomLocation", EmitDefaultValue=false)]
+        [JsonPropertyName("roomLocation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoomLocation { get; set; }
 
         /// <summary>
         /// Code that identifies special circumstances. Possible values: - &#x60;1&#x60;: lodging (default) - &#x60;2&#x60;: no show reservation - &#x60;3&#x60;: advanced deposit 
         /// </summary>
         /// <value>Code that identifies special circumstances. Possible values: - &#x60;1&#x60;: lodging (default) - &#x60;2&#x60;: no show reservation - &#x60;3&#x60;: advanced deposit </value>
-        [DataMember(Name="specialProgramCode", EmitDefaultValue=false)]
+        [JsonPropertyName("specialProgramCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SpecialProgramCode { get; set; }
 
         /// <summary>
         /// Total tax amount. 
         /// </summary>
         /// <value>Total tax amount. </value>
-        [DataMember(Name="totalTaxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalTaxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalTaxAmount { get; set; }
 
         /// <summary>
         /// Prepaid amount, such as a deposit. 
         /// </summary>
         /// <value>Prepaid amount, such as a deposit. </value>
-        [DataMember(Name="prepaidCost", EmitDefaultValue=false)]
+        [JsonPropertyName("prepaidCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PrepaidCost { get; set; }
 
         /// <summary>
         /// Cost for all food and beverages. 
         /// </summary>
         /// <value>Cost for all food and beverages. </value>
-        [DataMember(Name="foodAndBeverageCost", EmitDefaultValue=false)]
+        [JsonPropertyName("foodAndBeverageCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FoodAndBeverageCost { get; set; }
 
         /// <summary>
         /// Total tax for the room. 
         /// </summary>
         /// <value>Total tax for the room. </value>
-        [DataMember(Name="roomTaxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("roomTaxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoomTaxAmount { get; set; }
 
         /// <summary>
         /// Adjusted amount charged in addition to the reservation amount after the stay is complete. 
         /// </summary>
         /// <value>Adjusted amount charged in addition to the reservation amount after the stay is complete. </value>
-        [DataMember(Name="adjustmentAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("adjustmentAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdjustmentAmount { get; set; }
 
         /// <summary>
         /// Cost of telephone services. 
         /// </summary>
         /// <value>Cost of telephone services. </value>
-        [DataMember(Name="phoneCost", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneCost { get; set; }
 
         /// <summary>
         /// Cost of restaurant purchases 
         /// </summary>
         /// <value>Cost of restaurant purchases </value>
-        [DataMember(Name="restaurantCost", EmitDefaultValue=false)]
+        [JsonPropertyName("restaurantCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RestaurantCost { get; set; }
 
         /// <summary>
         /// Cost of room service. 
         /// </summary>
         /// <value>Cost of room service. </value>
-        [DataMember(Name="roomServiceCost", EmitDefaultValue=false)]
+        [JsonPropertyName("roomServiceCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoomServiceCost { get; set; }
 
         /// <summary>
         /// Cost of mini-bar purchases. 
         /// </summary>
         /// <value>Cost of mini-bar purchases. </value>
-        [DataMember(Name="miniBarCost", EmitDefaultValue=false)]
+        [JsonPropertyName("miniBarCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MiniBarCost { get; set; }
 
         /// <summary>
         /// Cost of laundry services. 
         /// </summary>
         /// <value>Cost of laundry services. </value>
-        [DataMember(Name="laundryCost", EmitDefaultValue=false)]
+        [JsonPropertyName("laundryCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LaundryCost { get; set; }
 
         /// <summary>
         /// Miscellaneous costs. 
         /// </summary>
         /// <value>Miscellaneous costs. </value>
-        [DataMember(Name="miscellaneousCost", EmitDefaultValue=false)]
+        [JsonPropertyName("miscellaneousCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MiscellaneousCost { get; set; }
 
         /// <summary>
         /// Cost of gift shop purchases. 
         /// </summary>
         /// <value>Cost of gift shop purchases. </value>
-        [DataMember(Name="giftShopCost", EmitDefaultValue=false)]
+        [JsonPropertyName("giftShopCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string GiftShopCost { get; set; }
 
         /// <summary>
         /// Cost of movies. 
         /// </summary>
         /// <value>Cost of movies. </value>
-        [DataMember(Name="movieCost", EmitDefaultValue=false)]
+        [JsonPropertyName("movieCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MovieCost { get; set; }
 
         /// <summary>
         /// Cost of health club services. 
         /// </summary>
         /// <value>Cost of health club services. </value>
-        [DataMember(Name="healthClubCost", EmitDefaultValue=false)]
+        [JsonPropertyName("healthClubCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HealthClubCost { get; set; }
 
         /// <summary>
         /// Cost of valet parking services. 
         /// </summary>
         /// <value>Cost of valet parking services. </value>
-        [DataMember(Name="valetParkingCost", EmitDefaultValue=false)]
+        [JsonPropertyName("valetParkingCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ValetParkingCost { get; set; }
 
         /// <summary>
         /// Cost of the cash that was disbursed plus any associated service fees 
         /// </summary>
         /// <value>Cost of the cash that was disbursed plus any associated service fees </value>
-        [DataMember(Name="cashDisbursementCost", EmitDefaultValue=false)]
+        [JsonPropertyName("cashDisbursementCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CashDisbursementCost { get; set; }
 
         /// <summary>
         /// Cost of non-room purchases, such as meals and gifts. 
         /// </summary>
         /// <value>Cost of non-room purchases, such as meals and gifts. </value>
-        [DataMember(Name="nonRoomCost", EmitDefaultValue=false)]
+        [JsonPropertyName("nonRoomCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NonRoomCost { get; set; }
 
         /// <summary>
         /// Cost of business center services. 
         /// </summary>
         /// <value>Cost of business center services. </value>
-        [DataMember(Name="businessCenterCost", EmitDefaultValue=false)]
+        [JsonPropertyName("businessCenterCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessCenterCost { get; set; }
 
         /// <summary>
         /// Cost of lounge and bar purchases. 
         /// </summary>
         /// <value>Cost of lounge and bar purchases. </value>
-        [DataMember(Name="loungeBarCost", EmitDefaultValue=false)]
+        [JsonPropertyName("loungeBarCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LoungeBarCost { get; set; }
 
         /// <summary>
         /// Cost of transportation services. 
         /// </summary>
         /// <value>Cost of transportation services. </value>
-        [DataMember(Name="transportationCost", EmitDefaultValue=false)]
+        [JsonPropertyName("transportationCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransportationCost { get; set; }
 
         /// <summary>
         /// Gratuity. 
         /// </summary>
         /// <value>Gratuity. </value>
-        [DataMember(Name="gratuityAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("gratuityAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string GratuityAmount { get; set; }
 
         /// <summary>
         /// Cost of conference room services. 
         /// </summary>
         /// <value>Cost of conference room services. </value>
-        [DataMember(Name="conferenceRoomCost", EmitDefaultValue=false)]
+        [JsonPropertyName("conferenceRoomCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ConferenceRoomCost { get; set; }
 
         /// <summary>
         /// Cost of audio visual services. 
         /// </summary>
         /// <value>Cost of audio visual services. </value>
-        [DataMember(Name="audioVisualCost", EmitDefaultValue=false)]
+        [JsonPropertyName("audioVisualCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AudioVisualCost { get; set; }
 
         /// <summary>
         /// Cost of banquet services. 
         /// </summary>
         /// <value>Cost of banquet services. </value>
-        [DataMember(Name="banquestCost", EmitDefaultValue=false)]
+        [JsonPropertyName("banquestCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BanquestCost { get; set; }
 
         /// <summary>
         /// Tax on non-room purchases. 
         /// </summary>
         /// <value>Tax on non-room purchases. </value>
-        [DataMember(Name="nonRoomTaxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("nonRoomTaxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NonRoomTaxAmount { get; set; }
 
         /// <summary>
         /// Service fee for early departure. 
         /// </summary>
         /// <value>Service fee for early departure. </value>
-        [DataMember(Name="earlyCheckOutCost", EmitDefaultValue=false)]
+        [JsonPropertyName("earlyCheckOutCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EarlyCheckOutCost { get; set; }
 
         /// <summary>
         /// Cost of Internet access. 
         /// </summary>
         /// <value>Cost of Internet access. </value>
-        [DataMember(Name="internetAccessCost", EmitDefaultValue=false)]
+        [JsonPropertyName("internetAccessCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InternetAccessCost { get; set; }
 
         /// <summary>
         /// Name of the hotel for which the reservation is for. Mandatory in case the merchant&#39;s business type is Hotel. 
         /// </summary>
         /// <value>Name of the hotel for which the reservation is for. Mandatory in case the merchant&#39;s business type is Hotel. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// The name of the hotel for which the reservation was made. 
         /// </summary>
         /// <value>The name of the hotel for which the reservation was made. </value>
-        [DataMember(Name="hotelName", EmitDefaultValue=false)]
+        [JsonPropertyName("hotelName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HotelName { get; set; }
 
         /// <summary>
         /// The date of the check-in in GMT+8 offset. 
         /// </summary>
         /// <value>The date of the check-in in GMT+8 offset. </value>
-        [DataMember(Name="checkInDateTime", EmitDefaultValue=false)]
+        [JsonPropertyName("checkInDateTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CheckInDateTime { get; set; }
 
         /// <summary>
         /// The date of the check-out in GMT+8 offset. 
         /// </summary>
         /// <value>The date of the check-out in GMT+8 offset. </value>
-        [DataMember(Name="checkOutDateTime", EmitDefaultValue=false)]
+        [JsonPropertyName("checkOutDateTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CheckOutDateTime { get; set; }
 
         /// <summary>
@@ -459,52 +505,52 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsTravelInformationLodging {\n");
-            if (CheckInDate != null) sb.Append("  CheckInDate: ").Append(CheckInDate).Append("\n");
-            if (CheckOutDate != null) sb.Append("  CheckOutDate: ").Append(CheckOutDate).Append("\n");
-            if (Room != null) sb.Append("  Room: ").Append(Room).Append("\n");
-            if (SmokingPreference != null) sb.Append("  SmokingPreference: ").Append(SmokingPreference).Append("\n");
-            if (NumberOfRooms != null) sb.Append("  NumberOfRooms: ").Append(NumberOfRooms).Append("\n");
-            if (NumberOfGuests != null) sb.Append("  NumberOfGuests: ").Append(NumberOfGuests).Append("\n");
-            if (RoomBedType != null) sb.Append("  RoomBedType: ").Append(RoomBedType).Append("\n");
-            if (RoomTaxType != null) sb.Append("  RoomTaxType: ").Append(RoomTaxType).Append("\n");
-            if (RoomRateType != null) sb.Append("  RoomRateType: ").Append(RoomRateType).Append("\n");
-            if (GuestName != null) sb.Append("  GuestName: ").Append(GuestName).Append("\n");
-            if (CustomerServicePhoneNumber != null) sb.Append("  CustomerServicePhoneNumber: ").Append(CustomerServicePhoneNumber).Append("\n");
-            if (CorporateClientCode != null) sb.Append("  CorporateClientCode: ").Append(CorporateClientCode).Append("\n");
-            if (AdditionalDiscountAmount != null) sb.Append("  AdditionalDiscountAmount: ").Append(AdditionalDiscountAmount).Append("\n");
-            if (RoomLocation != null) sb.Append("  RoomLocation: ").Append(RoomLocation).Append("\n");
-            if (SpecialProgramCode != null) sb.Append("  SpecialProgramCode: ").Append(SpecialProgramCode).Append("\n");
-            if (TotalTaxAmount != null) sb.Append("  TotalTaxAmount: ").Append(TotalTaxAmount).Append("\n");
-            if (PrepaidCost != null) sb.Append("  PrepaidCost: ").Append(PrepaidCost).Append("\n");
-            if (FoodAndBeverageCost != null) sb.Append("  FoodAndBeverageCost: ").Append(FoodAndBeverageCost).Append("\n");
-            if (RoomTaxAmount != null) sb.Append("  RoomTaxAmount: ").Append(RoomTaxAmount).Append("\n");
-            if (AdjustmentAmount != null) sb.Append("  AdjustmentAmount: ").Append(AdjustmentAmount).Append("\n");
-            if (PhoneCost != null) sb.Append("  PhoneCost: ").Append(PhoneCost).Append("\n");
-            if (RestaurantCost != null) sb.Append("  RestaurantCost: ").Append(RestaurantCost).Append("\n");
-            if (RoomServiceCost != null) sb.Append("  RoomServiceCost: ").Append(RoomServiceCost).Append("\n");
-            if (MiniBarCost != null) sb.Append("  MiniBarCost: ").Append(MiniBarCost).Append("\n");
-            if (LaundryCost != null) sb.Append("  LaundryCost: ").Append(LaundryCost).Append("\n");
-            if (MiscellaneousCost != null) sb.Append("  MiscellaneousCost: ").Append(MiscellaneousCost).Append("\n");
-            if (GiftShopCost != null) sb.Append("  GiftShopCost: ").Append(GiftShopCost).Append("\n");
-            if (MovieCost != null) sb.Append("  MovieCost: ").Append(MovieCost).Append("\n");
-            if (HealthClubCost != null) sb.Append("  HealthClubCost: ").Append(HealthClubCost).Append("\n");
-            if (ValetParkingCost != null) sb.Append("  ValetParkingCost: ").Append(ValetParkingCost).Append("\n");
-            if (CashDisbursementCost != null) sb.Append("  CashDisbursementCost: ").Append(CashDisbursementCost).Append("\n");
-            if (NonRoomCost != null) sb.Append("  NonRoomCost: ").Append(NonRoomCost).Append("\n");
-            if (BusinessCenterCost != null) sb.Append("  BusinessCenterCost: ").Append(BusinessCenterCost).Append("\n");
-            if (LoungeBarCost != null) sb.Append("  LoungeBarCost: ").Append(LoungeBarCost).Append("\n");
-            if (TransportationCost != null) sb.Append("  TransportationCost: ").Append(TransportationCost).Append("\n");
-            if (GratuityAmount != null) sb.Append("  GratuityAmount: ").Append(GratuityAmount).Append("\n");
-            if (ConferenceRoomCost != null) sb.Append("  ConferenceRoomCost: ").Append(ConferenceRoomCost).Append("\n");
-            if (AudioVisualCost != null) sb.Append("  AudioVisualCost: ").Append(AudioVisualCost).Append("\n");
-            if (BanquestCost != null) sb.Append("  BanquestCost: ").Append(BanquestCost).Append("\n");
-            if (NonRoomTaxAmount != null) sb.Append("  NonRoomTaxAmount: ").Append(NonRoomTaxAmount).Append("\n");
-            if (EarlyCheckOutCost != null) sb.Append("  EarlyCheckOutCost: ").Append(EarlyCheckOutCost).Append("\n");
-            if (InternetAccessCost != null) sb.Append("  InternetAccessCost: ").Append(InternetAccessCost).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (HotelName != null) sb.Append("  HotelName: ").Append(HotelName).Append("\n");
-            if (CheckInDateTime != null) sb.Append("  CheckInDateTime: ").Append(CheckInDateTime).Append("\n");
-            if (CheckOutDateTime != null) sb.Append("  CheckOutDateTime: ").Append(CheckOutDateTime).Append("\n");
+            if (CheckInDate != null) sb.Append("  CheckInDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "checkInDate", CheckInDate.ToString())).Append("\n");
+            if (CheckOutDate != null) sb.Append("  CheckOutDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "checkOutDate", CheckOutDate.ToString())).Append("\n");
+            if (Room != null) sb.Append("  Room: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "room", Room.ToString())).Append("\n");
+            if (SmokingPreference != null) sb.Append("  SmokingPreference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "smokingPreference", SmokingPreference.ToString())).Append("\n");
+            if (NumberOfRooms != null) sb.Append("  NumberOfRooms: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "numberOfRooms", NumberOfRooms.ToString())).Append("\n");
+            if (NumberOfGuests != null) sb.Append("  NumberOfGuests: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "numberOfGuests", NumberOfGuests.ToString())).Append("\n");
+            if (RoomBedType != null) sb.Append("  RoomBedType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "roomBedType", RoomBedType.ToString())).Append("\n");
+            if (RoomTaxType != null) sb.Append("  RoomTaxType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "roomTaxType", RoomTaxType.ToString())).Append("\n");
+            if (RoomRateType != null) sb.Append("  RoomRateType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "roomRateType", RoomRateType.ToString())).Append("\n");
+            if (GuestName != null) sb.Append("  GuestName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "guestName", GuestName.ToString())).Append("\n");
+            if (CustomerServicePhoneNumber != null) sb.Append("  CustomerServicePhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "customerServicePhoneNumber", CustomerServicePhoneNumber.ToString())).Append("\n");
+            if (CorporateClientCode != null) sb.Append("  CorporateClientCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "corporateClientCode", CorporateClientCode.ToString())).Append("\n");
+            if (AdditionalDiscountAmount != null) sb.Append("  AdditionalDiscountAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "additionalDiscountAmount", AdditionalDiscountAmount.ToString())).Append("\n");
+            if (RoomLocation != null) sb.Append("  RoomLocation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "roomLocation", RoomLocation.ToString())).Append("\n");
+            if (SpecialProgramCode != null) sb.Append("  SpecialProgramCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "specialProgramCode", SpecialProgramCode.ToString())).Append("\n");
+            if (TotalTaxAmount != null) sb.Append("  TotalTaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "totalTaxAmount", TotalTaxAmount.ToString())).Append("\n");
+            if (PrepaidCost != null) sb.Append("  PrepaidCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "prepaidCost", PrepaidCost.ToString())).Append("\n");
+            if (FoodAndBeverageCost != null) sb.Append("  FoodAndBeverageCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "foodAndBeverageCost", FoodAndBeverageCost.ToString())).Append("\n");
+            if (RoomTaxAmount != null) sb.Append("  RoomTaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "roomTaxAmount", RoomTaxAmount.ToString())).Append("\n");
+            if (AdjustmentAmount != null) sb.Append("  AdjustmentAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "adjustmentAmount", AdjustmentAmount.ToString())).Append("\n");
+            if (PhoneCost != null) sb.Append("  PhoneCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "phoneCost", PhoneCost.ToString())).Append("\n");
+            if (RestaurantCost != null) sb.Append("  RestaurantCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "restaurantCost", RestaurantCost.ToString())).Append("\n");
+            if (RoomServiceCost != null) sb.Append("  RoomServiceCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "roomServiceCost", RoomServiceCost.ToString())).Append("\n");
+            if (MiniBarCost != null) sb.Append("  MiniBarCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "miniBarCost", MiniBarCost.ToString())).Append("\n");
+            if (LaundryCost != null) sb.Append("  LaundryCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "laundryCost", LaundryCost.ToString())).Append("\n");
+            if (MiscellaneousCost != null) sb.Append("  MiscellaneousCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "miscellaneousCost", MiscellaneousCost.ToString())).Append("\n");
+            if (GiftShopCost != null) sb.Append("  GiftShopCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "giftShopCost", GiftShopCost.ToString())).Append("\n");
+            if (MovieCost != null) sb.Append("  MovieCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "movieCost", MovieCost.ToString())).Append("\n");
+            if (HealthClubCost != null) sb.Append("  HealthClubCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "healthClubCost", HealthClubCost.ToString())).Append("\n");
+            if (ValetParkingCost != null) sb.Append("  ValetParkingCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "valetParkingCost", ValetParkingCost.ToString())).Append("\n");
+            if (CashDisbursementCost != null) sb.Append("  CashDisbursementCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "cashDisbursementCost", CashDisbursementCost.ToString())).Append("\n");
+            if (NonRoomCost != null) sb.Append("  NonRoomCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "nonRoomCost", NonRoomCost.ToString())).Append("\n");
+            if (BusinessCenterCost != null) sb.Append("  BusinessCenterCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "businessCenterCost", BusinessCenterCost.ToString())).Append("\n");
+            if (LoungeBarCost != null) sb.Append("  LoungeBarCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "loungeBarCost", LoungeBarCost.ToString())).Append("\n");
+            if (TransportationCost != null) sb.Append("  TransportationCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "transportationCost", TransportationCost.ToString())).Append("\n");
+            if (GratuityAmount != null) sb.Append("  GratuityAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "gratuityAmount", GratuityAmount.ToString())).Append("\n");
+            if (ConferenceRoomCost != null) sb.Append("  ConferenceRoomCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "conferenceRoomCost", ConferenceRoomCost.ToString())).Append("\n");
+            if (AudioVisualCost != null) sb.Append("  AudioVisualCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "audioVisualCost", AudioVisualCost.ToString())).Append("\n");
+            if (BanquestCost != null) sb.Append("  BanquestCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "banquestCost", BanquestCost.ToString())).Append("\n");
+            if (NonRoomTaxAmount != null) sb.Append("  NonRoomTaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "nonRoomTaxAmount", NonRoomTaxAmount.ToString())).Append("\n");
+            if (EarlyCheckOutCost != null) sb.Append("  EarlyCheckOutCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "earlyCheckOutCost", EarlyCheckOutCost.ToString())).Append("\n");
+            if (InternetAccessCost != null) sb.Append("  InternetAccessCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "internetAccessCost", InternetAccessCost.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "name", Name.ToString())).Append("\n");
+            if (HotelName != null) sb.Append("  HotelName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "hotelName", HotelName.ToString())).Append("\n");
+            if (CheckInDateTime != null) sb.Append("  CheckInDateTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "checkInDateTime", CheckInDateTime.ToString())).Append("\n");
+            if (CheckOutDateTime != null) sb.Append("  CheckOutDateTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodging", "checkOutDateTime", CheckOutDateTime.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -515,7 +561,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsTravelInformationLodging", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

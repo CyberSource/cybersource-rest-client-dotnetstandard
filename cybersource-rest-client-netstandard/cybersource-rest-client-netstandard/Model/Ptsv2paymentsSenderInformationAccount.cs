@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// The account number of the entity funding the transaction. The value for this field can be a payment card account number or bank account number. 
         /// </summary>
         /// <value>The account number of the entity funding the transaction. The value for this field can be a payment card account number or bank account number. </value>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Number { get; set; }
 
         /// <summary>
         /// Identifies the sender&#39;s account type. This field is applicable for AFT transactions.  Valid values are:   - &#x60;00&#x60; for Other   - &#x60;01&#x60; for Routing Transit Number (RTN) + Bank Account Number (BAN)   - &#x60;02&#x60; for International Bank Account Number (IBAN)   - &#x60;03&#x60; for Card Account   - &#x60;04&#x60; for Email   - &#x60;05&#x60; for Phone Number   - &#x60;06&#x60; for Bank Account Number (BAN) + Bank Identification Code (BIC), also known as a SWIFT code   - &#x60;07&#x60; for Wallet ID   - &#x60;08&#x60; for Social Network ID 
         /// </summary>
         /// <value>Identifies the sender&#39;s account type. This field is applicable for AFT transactions.  Valid values are:   - &#x60;00&#x60; for Other   - &#x60;01&#x60; for Routing Transit Number (RTN) + Bank Account Number (BAN)   - &#x60;02&#x60; for International Bank Account Number (IBAN)   - &#x60;03&#x60; for Card Account   - &#x60;04&#x60; for Email   - &#x60;05&#x60; for Phone Number   - &#x60;06&#x60; for Bank Account Number (BAN) + Bank Identification Code (BIC), also known as a SWIFT code   - &#x60;07&#x60; for Wallet ID   - &#x60;08&#x60; for Social Network ID </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Source of funds. Possible Values:  - &#x60;01&#x60;: Credit.  - &#x60;02&#x60;: Debit.  - &#x60;03&#x60;: Prepaid.  - &#x60;04&#x60;: Deposit Account.  - &#x60;05&#x60;: Mobile Money Account.  - &#x60;06&#x60;: Cash.  - &#x60;07&#x60;: Other.  - &#x60;V5&#x60;: Debits / deposit access other than those linked to the cardholders&#39; scheme.  - &#x60;V6&#x60;: Credit accounts other than those linked to the cardholder&#39;s scheme. 
         /// </summary>
         /// <value>Source of funds. Possible Values:  - &#x60;01&#x60;: Credit.  - &#x60;02&#x60;: Debit.  - &#x60;03&#x60;: Prepaid.  - &#x60;04&#x60;: Deposit Account.  - &#x60;05&#x60;: Mobile Money Account.  - &#x60;06&#x60;: Cash.  - &#x60;07&#x60;: Other.  - &#x60;V5&#x60;: Debits / deposit access other than those linked to the cardholders&#39; scheme.  - &#x60;V6&#x60;: Credit accounts other than those linked to the cardholder&#39;s scheme. </value>
-        [DataMember(Name="fundsSource", EmitDefaultValue=false)]
+        [JsonPropertyName("fundsSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FundsSource { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsSenderInformationAccount {\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (FundsSource != null) sb.Append("  FundsSource: ").Append(FundsSource).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsSenderInformationAccount", "number", Number.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsSenderInformationAccount", "type", Type.ToString())).Append("\n");
+            if (FundsSource != null) sb.Append("  FundsSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsSenderInformationAccount", "fundsSource", FundsSource.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsSenderInformationAccount", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

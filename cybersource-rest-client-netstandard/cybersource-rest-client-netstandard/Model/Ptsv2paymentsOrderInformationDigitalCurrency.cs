@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Currently, Visa uses a broad \&quot;cryptocurrency\&quot; indicator. The enhancement will introduce specific values to identify the type of digital currency or coin involved, such as Central Bank Digital Currency (CBDC), stable coins, blockchain-native tokens, and Non-Fungible Tokens (NFTs). Values: - 1: CBDC_TOKENDEPOSIT - 2: STABLE_COIN - 3: BLOCKCHAIN_NATIVE_TOKEN - 4: NFT
         /// </summary>
         /// <value>Currently, Visa uses a broad \&quot;cryptocurrency\&quot; indicator. The enhancement will introduce specific values to identify the type of digital currency or coin involved, such as Central Bank Digital Currency (CBDC), stable coins, blockchain-native tokens, and Non-Fungible Tokens (NFTs). Values: - 1: CBDC_TOKENDEPOSIT - 2: STABLE_COIN - 3: BLOCKCHAIN_NATIVE_TOKEN - 4: NFT</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Ramp is a platform where we can buy Digital currency, for example Coinbase. This value identifies the country where the Ramp provider is registered.
         /// </summary>
         /// <value>Ramp is a platform where we can buy Digital currency, for example Coinbase. This value identifies the country where the Ramp provider is registered.</value>
-        [DataMember(Name="rampProviderCountry", EmitDefaultValue=false)]
+        [JsonPropertyName("rampProviderCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RampProviderCountry { get; set; }
 
         /// <summary>
         /// Affiliate is the platform for the digital currency transactions. The merchant provides the Affiliate country for transaction processing. The combination of affiliate country and ramp country helps to derive the foreign retail indicator.
         /// </summary>
         /// <value>Affiliate is the platform for the digital currency transactions. The merchant provides the Affiliate country for transaction processing. The combination of affiliate country and ramp country helps to derive the foreign retail indicator.</value>
-        [DataMember(Name="conversionAffiliate", EmitDefaultValue=false)]
+        [JsonPropertyName("conversionAffiliate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ConversionAffiliate { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsOrderInformationDigitalCurrency {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (RampProviderCountry != null) sb.Append("  RampProviderCountry: ").Append(RampProviderCountry).Append("\n");
-            if (ConversionAffiliate != null) sb.Append("  ConversionAffiliate: ").Append(ConversionAffiliate).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationDigitalCurrency", "type", Type.ToString())).Append("\n");
+            if (RampProviderCountry != null) sb.Append("  RampProviderCountry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationDigitalCurrency", "rampProviderCountry", RampProviderCountry.ToString())).Append("\n");
+            if (ConversionAffiliate != null) sb.Append("  ConversionAffiliate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationDigitalCurrency", "conversionAffiliate", ConversionAffiliate.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsOrderInformationDigitalCurrency", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

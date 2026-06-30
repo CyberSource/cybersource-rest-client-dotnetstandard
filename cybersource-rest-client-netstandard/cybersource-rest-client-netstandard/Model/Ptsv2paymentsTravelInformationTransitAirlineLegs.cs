@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -81,140 +81,160 @@ namespace CyberSource.Model
         /// IATA code for the carrier for this leg of the trip. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. 
         /// </summary>
         /// <value>IATA code for the carrier for this leg of the trip. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. </value>
-        [DataMember(Name="carrierCode", EmitDefaultValue=false)]
+        [JsonPropertyName("carrierCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CarrierCode { get; set; }
 
         /// <summary>
         /// Flight number for this leg of the trip. Restrictions are limitations for the ticket based on the type of fare, such as a nonrefundable ticket or a 3-day minimum stay. Format: English characters only. Optional request field for travel legs. 
         /// </summary>
         /// <value>Flight number for this leg of the trip. Restrictions are limitations for the ticket based on the type of fare, such as a nonrefundable ticket or a 3-day minimum stay. Format: English characters only. Optional request field for travel legs. </value>
-        [DataMember(Name="flightNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("flightNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FlightNumber { get; set; }
 
         /// <summary>
         /// IATA code for the originating airport for this leg of the trip. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. 
         /// </summary>
         /// <value>IATA code for the originating airport for this leg of the trip. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. </value>
-        [DataMember(Name="originatingAirportCode", EmitDefaultValue=false)]
+        [JsonPropertyName("originatingAirportCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginatingAirportCode { get; set; }
 
         /// <summary>
         /// IATA code for the class of service for this leg of the trip. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. 
         /// </summary>
         /// <value>IATA code for the class of service for this leg of the trip. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. </value>
-        [DataMember(Name="class", EmitDefaultValue=false)]
+        [JsonPropertyName("class")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Class { get; set; }
 
         /// <summary>
         /// Code that indicates whether a stopover is allowed on this leg of the trip. Possible values: - &#x60;O&#x60; (capital letter \&quot;O\&quot;) (default): Stopover allowed - &#x60;X&#x60; (capital letter \&quot;X\&quot;): Stopover not allowed Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. 
         /// </summary>
         /// <value>Code that indicates whether a stopover is allowed on this leg of the trip. Possible values: - &#x60;O&#x60; (capital letter \&quot;O\&quot;) (default): Stopover allowed - &#x60;X&#x60; (capital letter \&quot;X\&quot;): Stopover not allowed Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. </value>
-        [DataMember(Name="stopoverIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("stopoverIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? StopoverIndicator { get; set; }
 
         /// <summary>
         /// Departure date for the first leg of the trip. Format: &#x60;YYYYMMDD&#x60;. Format: English characters only. Optional request field for travel legs. 
         /// </summary>
         /// <value>Departure date for the first leg of the trip. Format: &#x60;YYYYMMDD&#x60;. Format: English characters only. Optional request field for travel legs. </value>
-        [DataMember(Name="departureDate", EmitDefaultValue=false)]
+        [JsonPropertyName("departureDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? DepartureDate { get; set; }
 
         /// <summary>
         /// IATA code for the destination airport for this leg of the trip. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. 
         /// </summary>
         /// <value>IATA code for the destination airport for this leg of the trip. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. </value>
-        [DataMember(Name="destinationAirportCode", EmitDefaultValue=false)]
+        [JsonPropertyName("destinationAirportCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DestinationAirportCode { get; set; }
 
         /// <summary>
         /// Code for the fare basis for this leg of the trip. The fare basis is assigned by the carriers and indicates a particular ticket type, such as business class or discounted/nonrefundable. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Format: English characters only. Optional request field for travel legs.auto_rental_regular_mileage_cost 
         /// </summary>
         /// <value>Code for the fare basis for this leg of the trip. The fare basis is assigned by the carriers and indicates a particular ticket type, such as business class or discounted/nonrefundable. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Format: English characters only. Optional request field for travel legs.auto_rental_regular_mileage_cost </value>
-        [DataMember(Name="fareBasis", EmitDefaultValue=false)]
+        [JsonPropertyName("fareBasis")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FareBasis { get; set; }
 
         /// <summary>
         /// Amount of departure tax for this leg of the trip. 
         /// </summary>
         /// <value>Amount of departure tax for this leg of the trip. </value>
-        [DataMember(Name="departTaxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("departTaxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DepartTaxAmount { get; set; }
 
         /// <summary>
         /// Ticket that contains additional coupons for this leg of the trip on an itinerary that has more than four segments. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. 
         /// </summary>
         /// <value>Ticket that contains additional coupons for this leg of the trip on an itinerary that has more than four segments. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. </value>
-        [DataMember(Name="conjunctionTicket", EmitDefaultValue=false)]
+        [JsonPropertyName("conjunctionTicket")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ConjunctionTicket { get; set; }
 
         /// <summary>
         /// New ticket number that is issued when the ticket is exchanged for this leg of the trip. Restrictions are limitations for the ticket based on the type of fare, such as a nonrefundable ticket or a 3-day minimum stay. Format: English characters only. Optional request field for travel legs. 
         /// </summary>
         /// <value>New ticket number that is issued when the ticket is exchanged for this leg of the trip. Restrictions are limitations for the ticket based on the type of fare, such as a nonrefundable ticket or a 3-day minimum stay. Format: English characters only. Optional request field for travel legs. </value>
-        [DataMember(Name="exchangeTicketNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("exchangeTicketNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExchangeTicketNumber { get; set; }
 
         /// <summary>
         /// Coupon number. Each leg on the ticket requires a separate coupon, and each coupon is identified by the coupon number. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. 
         /// </summary>
         /// <value>Coupon number. Each leg on the ticket requires a separate coupon, and each coupon is identified by the coupon number. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. </value>
-        [DataMember(Name="couponNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("couponNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CouponNumber { get; set; }
 
         /// <summary>
         /// Time of departure for this leg of the trip. The format is military time and HHMM: If not all zeros, then the hours must be &#x60;00-23&#x60; and the minutes must be &#x60;00-59&#x60;. Format: English characters only. Optional request field for travel legs. 
         /// </summary>
         /// <value>Time of departure for this leg of the trip. The format is military time and HHMM: If not all zeros, then the hours must be &#x60;00-23&#x60; and the minutes must be &#x60;00-59&#x60;. Format: English characters only. Optional request field for travel legs. </value>
-        [DataMember(Name="departureTime", EmitDefaultValue=false)]
+        [JsonPropertyName("departureTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? DepartureTime { get; set; }
 
         /// <summary>
         /// AM or PM for the departure time. Possible values: - A: 12:00 midnight to 11:59 a.m. - P: 12:00 noon to 11:59 p.m Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. 
         /// </summary>
         /// <value>AM or PM for the departure time. Possible values: - A: 12:00 midnight to 11:59 a.m. - P: 12:00 noon to 11:59 p.m Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. </value>
-        [DataMember(Name="departureTimeMeridian", EmitDefaultValue=false)]
+        [JsonPropertyName("departureTimeMeridian")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DepartureTimeMeridian { get; set; }
 
         /// <summary>
         /// Time of arrival for this leg of the trip. The format is military time and HHMM: If not all zeros, then the hours must be &#x60;00-23&#x60; and the minutes must be &#x60;00-59&#x60; Format: English characters only. Optional request field for travel legs. 
         /// </summary>
         /// <value>Time of arrival for this leg of the trip. The format is military time and HHMM: If not all zeros, then the hours must be &#x60;00-23&#x60; and the minutes must be &#x60;00-59&#x60; Format: English characters only. Optional request field for travel legs. </value>
-        [DataMember(Name="arrivalTime", EmitDefaultValue=false)]
+        [JsonPropertyName("arrivalTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? ArrivalTime { get; set; }
 
         /// <summary>
         /// AM or PM for the arrival time for this leg of the trip. Possible values: - &#x60;A&#x60;: 12:00 midnight to 11:59 a.m. - &#x60;P&#x60;: 12:00 noon to 11:59 p.m. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. 
         /// </summary>
         /// <value>AM or PM for the arrival time for this leg of the trip. Possible values: - &#x60;A&#x60;: 12:00 midnight to 11:59 a.m. - &#x60;P&#x60;: 12:00 noon to 11:59 p.m. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field for travel legs. </value>
-        [DataMember(Name="arrivalTimeMeridian", EmitDefaultValue=false)]
+        [JsonPropertyName("arrivalTimeMeridian")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ArrivalTimeMeridian { get; set; }
 
         /// <summary>
         /// Notes or notations about endorsements and restrictions for this leg of the trip. Endorsements can be notations added by the travel agency, including mandatory government-required notations such as value added tax. Restrictions are limitations for the ticket based on the type of fare, such as a nonrefundable ticket or a 3-day minimum stay. Format: English characters only. Optional request field for travel legs. 
         /// </summary>
         /// <value>Notes or notations about endorsements and restrictions for this leg of the trip. Endorsements can be notations added by the travel agency, including mandatory government-required notations such as value added tax. Restrictions are limitations for the ticket based on the type of fare, such as a nonrefundable ticket or a 3-day minimum stay. Format: English characters only. Optional request field for travel legs. </value>
-        [DataMember(Name="endorsementsRestrictions", EmitDefaultValue=false)]
+        [JsonPropertyName("endorsementsRestrictions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EndorsementsRestrictions { get; set; }
 
         /// <summary>
         /// Total fare for this leg of the trip. Format: English characters only. Optional request field for travel legs. 
         /// </summary>
         /// <value>Total fare for this leg of the trip. Format: English characters only. Optional request field for travel legs. </value>
-        [DataMember(Name="totalFareAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalFareAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalFareAmount { get; set; }
 
         /// <summary>
         /// Fee for this leg of the trip, such as an airport fee or country fee. Format: English characters only. Optional request field for travel legs. 
         /// </summary>
         /// <value>Fee for this leg of the trip, such as an airport fee or country fee. Format: English characters only. Optional request field for travel legs. </value>
-        [DataMember(Name="feeAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("feeAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FeeAmount { get; set; }
 
         /// <summary>
         /// Tax for this leg of the trip. Format: English characters only. Optional request field for travel legs. 
         /// </summary>
         /// <value>Tax for this leg of the trip. Format: English characters only. Optional request field for travel legs. </value>
-        [DataMember(Name="taxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAmount { get; set; }
 
         /// <summary>
@@ -225,26 +245,26 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsTravelInformationTransitAirlineLegs {\n");
-            if (CarrierCode != null) sb.Append("  CarrierCode: ").Append(CarrierCode).Append("\n");
-            if (FlightNumber != null) sb.Append("  FlightNumber: ").Append(FlightNumber).Append("\n");
-            if (OriginatingAirportCode != null) sb.Append("  OriginatingAirportCode: ").Append(OriginatingAirportCode).Append("\n");
-            if (Class != null) sb.Append("  Class: ").Append(Class).Append("\n");
-            if (StopoverIndicator != null) sb.Append("  StopoverIndicator: ").Append(StopoverIndicator).Append("\n");
-            if (DepartureDate != null) sb.Append("  DepartureDate: ").Append(DepartureDate).Append("\n");
-            if (DestinationAirportCode != null) sb.Append("  DestinationAirportCode: ").Append(DestinationAirportCode).Append("\n");
-            if (FareBasis != null) sb.Append("  FareBasis: ").Append(FareBasis).Append("\n");
-            if (DepartTaxAmount != null) sb.Append("  DepartTaxAmount: ").Append(DepartTaxAmount).Append("\n");
-            if (ConjunctionTicket != null) sb.Append("  ConjunctionTicket: ").Append(ConjunctionTicket).Append("\n");
-            if (ExchangeTicketNumber != null) sb.Append("  ExchangeTicketNumber: ").Append(ExchangeTicketNumber).Append("\n");
-            if (CouponNumber != null) sb.Append("  CouponNumber: ").Append(CouponNumber).Append("\n");
-            if (DepartureTime != null) sb.Append("  DepartureTime: ").Append(DepartureTime).Append("\n");
-            if (DepartureTimeMeridian != null) sb.Append("  DepartureTimeMeridian: ").Append(DepartureTimeMeridian).Append("\n");
-            if (ArrivalTime != null) sb.Append("  ArrivalTime: ").Append(ArrivalTime).Append("\n");
-            if (ArrivalTimeMeridian != null) sb.Append("  ArrivalTimeMeridian: ").Append(ArrivalTimeMeridian).Append("\n");
-            if (EndorsementsRestrictions != null) sb.Append("  EndorsementsRestrictions: ").Append(EndorsementsRestrictions).Append("\n");
-            if (TotalFareAmount != null) sb.Append("  TotalFareAmount: ").Append(TotalFareAmount).Append("\n");
-            if (FeeAmount != null) sb.Append("  FeeAmount: ").Append(FeeAmount).Append("\n");
-            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
+            if (CarrierCode != null) sb.Append("  CarrierCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "carrierCode", CarrierCode.ToString())).Append("\n");
+            if (FlightNumber != null) sb.Append("  FlightNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "flightNumber", FlightNumber.ToString())).Append("\n");
+            if (OriginatingAirportCode != null) sb.Append("  OriginatingAirportCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "originatingAirportCode", OriginatingAirportCode.ToString())).Append("\n");
+            if (Class != null) sb.Append("  Class: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "class", Class.ToString())).Append("\n");
+            if (StopoverIndicator != null) sb.Append("  StopoverIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "stopoverIndicator", StopoverIndicator.ToString())).Append("\n");
+            if (DepartureDate != null) sb.Append("  DepartureDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "departureDate", DepartureDate.ToString())).Append("\n");
+            if (DestinationAirportCode != null) sb.Append("  DestinationAirportCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "destinationAirportCode", DestinationAirportCode.ToString())).Append("\n");
+            if (FareBasis != null) sb.Append("  FareBasis: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "fareBasis", FareBasis.ToString())).Append("\n");
+            if (DepartTaxAmount != null) sb.Append("  DepartTaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "departTaxAmount", DepartTaxAmount.ToString())).Append("\n");
+            if (ConjunctionTicket != null) sb.Append("  ConjunctionTicket: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "conjunctionTicket", ConjunctionTicket.ToString())).Append("\n");
+            if (ExchangeTicketNumber != null) sb.Append("  ExchangeTicketNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "exchangeTicketNumber", ExchangeTicketNumber.ToString())).Append("\n");
+            if (CouponNumber != null) sb.Append("  CouponNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "couponNumber", CouponNumber.ToString())).Append("\n");
+            if (DepartureTime != null) sb.Append("  DepartureTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "departureTime", DepartureTime.ToString())).Append("\n");
+            if (DepartureTimeMeridian != null) sb.Append("  DepartureTimeMeridian: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "departureTimeMeridian", DepartureTimeMeridian.ToString())).Append("\n");
+            if (ArrivalTime != null) sb.Append("  ArrivalTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "arrivalTime", ArrivalTime.ToString())).Append("\n");
+            if (ArrivalTimeMeridian != null) sb.Append("  ArrivalTimeMeridian: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "arrivalTimeMeridian", ArrivalTimeMeridian.ToString())).Append("\n");
+            if (EndorsementsRestrictions != null) sb.Append("  EndorsementsRestrictions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "endorsementsRestrictions", EndorsementsRestrictions.ToString())).Append("\n");
+            if (TotalFareAmount != null) sb.Append("  TotalFareAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "totalFareAmount", TotalFareAmount.ToString())).Append("\n");
+            if (FeeAmount != null) sb.Append("  FeeAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "feeAmount", FeeAmount.ToString())).Append("\n");
+            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineLegs", "taxAmount", TaxAmount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -255,7 +275,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsTravelInformationTransitAirlineLegs", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

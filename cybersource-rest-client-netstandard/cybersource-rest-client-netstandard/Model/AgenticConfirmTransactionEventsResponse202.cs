@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticConfirmTransactionEventsResponse202" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected AgenticConfirmTransactionEventsResponse202() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticConfirmTransactionEventsResponse202" /> class.
@@ -48,7 +48,8 @@ namespace CyberSource.Model
         /// Client Correlation Id provided by the Agent.
         /// </summary>
         /// <value>Client Correlation Id provided by the Agent.</value>
-        [DataMember(Name="clientCorrelationId", EmitDefaultValue=false)]
+        [JsonPropertyName("clientCorrelationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientCorrelationId { get; set; }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class AgenticConfirmTransactionEventsResponse202 {\n");
-            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(ClientCorrelationId).Append("\n");
+            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticConfirmTransactionEventsResponse202", "clientCorrelationId", ClientCorrelationId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -70,7 +71,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("AgenticConfirmTransactionEventsResponse202", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

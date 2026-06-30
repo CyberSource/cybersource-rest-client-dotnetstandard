@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Bavsv1accountvalidationsProcessingInformation" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Bavsv1accountvalidationsProcessingInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Bavsv1accountvalidationsProcessingInformation" /> class.
@@ -48,7 +48,8 @@ namespace CyberSource.Model
         /// Enter 1 for routing and account number validation. 
         /// </summary>
         /// <value>Enter 1 for routing and account number validation. </value>
-        [DataMember(Name="validationLevel", EmitDefaultValue=false)]
+        [JsonPropertyName("validationLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? ValidationLevel { get; set; }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Bavsv1accountvalidationsProcessingInformation {\n");
-            if (ValidationLevel != null) sb.Append("  ValidationLevel: ").Append(ValidationLevel).Append("\n");
+            if (ValidationLevel != null) sb.Append("  ValidationLevel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Bavsv1accountvalidationsProcessingInformation", "validationLevel", ValidationLevel.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -70,7 +71,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Bavsv1accountvalidationsProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

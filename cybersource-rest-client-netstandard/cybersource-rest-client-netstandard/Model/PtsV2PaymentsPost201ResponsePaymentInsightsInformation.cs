@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ResponseInsights
         /// </summary>
-        [DataMember(Name="responseInsights", EmitDefaultValue=false)]
+        [JsonPropertyName("responseInsights")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponsePaymentInsightsInformationResponseInsights ResponseInsights { get; set; }
 
         /// <summary>
         /// Gets or Sets Orchestration
         /// </summary>
-        [DataMember(Name="orchestration", EmitDefaultValue=false)]
+        [JsonPropertyName("orchestration")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponsePaymentInsightsInformationOrchestration Orchestration { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponsePaymentInsightsInformation {\n");
-            if (ResponseInsights != null) sb.Append("  ResponseInsights: ").Append(ResponseInsights).Append("\n");
-            if (Orchestration != null) sb.Append("  Orchestration: ").Append(Orchestration).Append("\n");
+            if (ResponseInsights != null) sb.Append("  ResponseInsights: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponsePaymentInsightsInformation", "responseInsights", ResponseInsights.ToString())).Append("\n");
+            if (Orchestration != null) sb.Append("  Orchestration: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponsePaymentInsightsInformation", "orchestration", Orchestration.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponsePaymentInsightsInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

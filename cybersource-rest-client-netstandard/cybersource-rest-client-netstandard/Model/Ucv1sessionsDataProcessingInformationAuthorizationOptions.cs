@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,34 +51,39 @@ namespace CyberSource.Model
         /// The AFT indicator&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>The AFT indicator&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="aftIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("aftIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AftIndicator { get; set; }
 
         /// <summary>
         /// The authorization indicator&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>The authorization indicator&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="authIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("authIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthIndicator { get; set; }
 
         /// <summary>
         /// Ignore the CV result&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Ignore the CV result&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="ignoreCvResult", EmitDefaultValue=false)]
+        [JsonPropertyName("ignoreCvResult")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IgnoreCvResult { get; set; }
 
         /// <summary>
         /// Ignore the AVS result&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Ignore the AVS result&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="ignoreAvsResult", EmitDefaultValue=false)]
+        [JsonPropertyName("ignoreAvsResult")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IgnoreAvsResult { get; set; }
 
         /// <summary>
         /// Gets or Sets Initiator
         /// </summary>
-        [DataMember(Name="initiator", EmitDefaultValue=false)]
+        [JsonPropertyName("initiator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataProcessingInformationAuthorizationOptionsInitiator Initiator { get; set; }
 
         /// <summary>
@@ -89,11 +94,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataProcessingInformationAuthorizationOptions {\n");
-            if (AftIndicator != null) sb.Append("  AftIndicator: ").Append(AftIndicator).Append("\n");
-            if (AuthIndicator != null) sb.Append("  AuthIndicator: ").Append(AuthIndicator).Append("\n");
-            if (IgnoreCvResult != null) sb.Append("  IgnoreCvResult: ").Append(IgnoreCvResult).Append("\n");
-            if (IgnoreAvsResult != null) sb.Append("  IgnoreAvsResult: ").Append(IgnoreAvsResult).Append("\n");
-            if (Initiator != null) sb.Append("  Initiator: ").Append(Initiator).Append("\n");
+            if (AftIndicator != null) sb.Append("  AftIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformationAuthorizationOptions", "aftIndicator", AftIndicator.ToString())).Append("\n");
+            if (AuthIndicator != null) sb.Append("  AuthIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformationAuthorizationOptions", "authIndicator", AuthIndicator.ToString())).Append("\n");
+            if (IgnoreCvResult != null) sb.Append("  IgnoreCvResult: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformationAuthorizationOptions", "ignoreCvResult", IgnoreCvResult.ToString())).Append("\n");
+            if (IgnoreAvsResult != null) sb.Append("  IgnoreAvsResult: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformationAuthorizationOptions", "ignoreAvsResult", IgnoreAvsResult.ToString())).Append("\n");
+            if (Initiator != null) sb.Append("  Initiator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformationAuthorizationOptions", "initiator", Initiator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,7 +109,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataProcessingInformationAuthorizationOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

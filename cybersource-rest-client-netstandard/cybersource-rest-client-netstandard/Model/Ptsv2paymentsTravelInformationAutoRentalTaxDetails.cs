@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,42 +53,48 @@ namespace CyberSource.Model
         /// Indicates the amount of tax based on the &#x60;type&#x60; field as described in the table below: 
         /// </summary>
         /// <value>Indicates the amount of tax based on the &#x60;type&#x60; field as described in the table below: </value>
-        [DataMember(Name="amount", EmitDefaultValue=false)]
+        [JsonPropertyName("amount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Amount { get; set; }
 
         /// <summary>
         /// Rate of VAT or other tax for the order.  Example 0.040 (&#x3D;4%)  Valid range: 0.01 to 0.99 (1% to 99%, with only whole percentage values accepted; values with additional decimal places will be truncated) 
         /// </summary>
         /// <value>Rate of VAT or other tax for the order.  Example 0.040 (&#x3D;4%)  Valid range: 0.01 to 0.99 (1% to 99%, with only whole percentage values accepted; values with additional decimal places will be truncated) </value>
-        [DataMember(Name="rate", EmitDefaultValue=false)]
+        [JsonPropertyName("rate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Rate { get; set; }
 
         /// <summary>
         /// Flag that indicates whether the tax amount (&#x60;travelInformation.autoRental.taxDetails.amount&#x60;) is included in the request.  Possible values: - &#x60;false&#x60;: tax amount is not included in the request. - &#x60;true&#x60;:  tax amount is included in the request. 
         /// </summary>
         /// <value>Flag that indicates whether the tax amount (&#x60;travelInformation.autoRental.taxDetails.amount&#x60;) is included in the request.  Possible values: - &#x60;false&#x60;: tax amount is not included in the request. - &#x60;true&#x60;:  tax amount is included in the request. </value>
-        [DataMember(Name="applied", EmitDefaultValue=false)]
+        [JsonPropertyName("applied")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Applied { get; set; }
 
         /// <summary>
         /// Status code for exemption from sales and use tax. This field is a pass-through, which means that CyberSource does not verify the value or modify it in any way before sending it to the processor. 
         /// </summary>
         /// <value>Status code for exemption from sales and use tax. This field is a pass-through, which means that CyberSource does not verify the value or modify it in any way before sending it to the processor. </value>
-        [DataMember(Name="exemptionCode", EmitDefaultValue=false)]
+        [JsonPropertyName("exemptionCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExemptionCode { get; set; }
 
         /// <summary>
         /// Different taxes the rental agency applies to the rental agreement such as tourist tax, airport tax, or rental tax. 
         /// </summary>
         /// <value>Different taxes the rental agency applies to the rental agreement such as tourist tax, airport tax, or rental tax. </value>
-        [DataMember(Name="taxType", EmitDefaultValue=false)]
+        [JsonPropertyName("taxType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxType { get; set; }
 
         /// <summary>
         /// Summary of all tax types 
         /// </summary>
         /// <value>Summary of all tax types </value>
-        [DataMember(Name="taxSummary", EmitDefaultValue=false)]
+        [JsonPropertyName("taxSummary")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxSummary { get; set; }
 
         /// <summary>
@@ -99,12 +105,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsTravelInformationAutoRentalTaxDetails {\n");
-            if (Amount != null) sb.Append("  Amount: ").Append(Amount).Append("\n");
-            if (Rate != null) sb.Append("  Rate: ").Append(Rate).Append("\n");
-            if (Applied != null) sb.Append("  Applied: ").Append(Applied).Append("\n");
-            if (ExemptionCode != null) sb.Append("  ExemptionCode: ").Append(ExemptionCode).Append("\n");
-            if (TaxType != null) sb.Append("  TaxType: ").Append(TaxType).Append("\n");
-            if (TaxSummary != null) sb.Append("  TaxSummary: ").Append(TaxSummary).Append("\n");
+            if (Amount != null) sb.Append("  Amount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalTaxDetails", "amount", Amount.ToString())).Append("\n");
+            if (Rate != null) sb.Append("  Rate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalTaxDetails", "rate", Rate.ToString())).Append("\n");
+            if (Applied != null) sb.Append("  Applied: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalTaxDetails", "applied", Applied.ToString())).Append("\n");
+            if (ExemptionCode != null) sb.Append("  ExemptionCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalTaxDetails", "exemptionCode", ExemptionCode.ToString())).Append("\n");
+            if (TaxType != null) sb.Append("  TaxType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalTaxDetails", "taxType", TaxType.ToString())).Append("\n");
+            if (TaxSummary != null) sb.Append("  TaxSummary: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalTaxDetails", "taxSummary", TaxSummary.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,7 +121,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsTravelInformationAutoRentalTaxDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

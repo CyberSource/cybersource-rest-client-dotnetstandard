@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Valid report Start Date in **ISO 8601 format**. Please refer the following link to know more about ISO 8601 format. - https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14  **Example:** - yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ 
         /// </summary>
         /// <value>Valid report Start Date in **ISO 8601 format**. Please refer the following link to know more about ISO 8601 format. - https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14  **Example:** - yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ </value>
-        [DataMember(Name="startDate", EmitDefaultValue=false)]
+        [JsonPropertyName("startDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? StartDate { get; set; }
 
         /// <summary>
         /// Valid report Start Date in **ISO 8601 format**. 
         /// </summary>
         /// <value>Valid report Start Date in **ISO 8601 format**. </value>
-        [DataMember(Name="endDate", EmitDefaultValue=false)]
+        [JsonPropertyName("endDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? EndDate { get; set; }
 
         /// <summary>
         /// List of InterchangeClearingLevelDetail
         /// </summary>
         /// <value>List of InterchangeClearingLevelDetail</value>
-        [DataMember(Name="interchangeClearingLevelDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("interchangeClearingLevelDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails> InterchangeClearingLevelDetails { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3InterchangeClearingLevelDetailsGet200Response {\n");
-            if (StartDate != null) sb.Append("  StartDate: ").Append(StartDate).Append("\n");
-            if (EndDate != null) sb.Append("  EndDate: ").Append(EndDate).Append("\n");
-            if (InterchangeClearingLevelDetails != null) sb.Append("  InterchangeClearingLevelDetails: ").Append(InterchangeClearingLevelDetails).Append("\n");
+            if (StartDate != null) sb.Append("  StartDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200Response", "startDate", StartDate.ToString())).Append("\n");
+            if (EndDate != null) sb.Append("  EndDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200Response", "endDate", EndDate.ToString())).Append("\n");
+            if (InterchangeClearingLevelDetails != null) sb.Append("  InterchangeClearingLevelDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200Response", "interchangeClearingLevelDetails", InterchangeClearingLevelDetails.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3InterchangeClearingLevelDetailsGet200Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

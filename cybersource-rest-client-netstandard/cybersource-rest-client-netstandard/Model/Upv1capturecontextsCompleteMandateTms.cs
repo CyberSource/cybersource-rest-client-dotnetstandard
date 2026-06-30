@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Use this when you want to create a token from the card/bank data in your payment request.   Possible values:   - True   - False&lt;br&gt;&lt;br&gt; 
         /// </summary>
         /// <value>Use this when you want to create a token from the card/bank data in your payment request.   Possible values:   - True   - False&lt;br&gt;&lt;br&gt; </value>
-        [DataMember(Name="tokenCreate", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenCreate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? TokenCreate { get; set; }
 
         /// <summary>
         /// Cybersource tokens types you are performing a create on. If not supplied the default token type for the merchants token vault will be used.  Possible values: - Customer - paymentInstrument - instrumentIdentifier - shippingAddress 
         /// </summary>
         /// <value>Cybersource tokens types you are performing a create on. If not supplied the default token type for the merchants token vault will be used.  Possible values: - Customer - paymentInstrument - instrumentIdentifier - shippingAddress </value>
-        [DataMember(Name="tokenTypes", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenTypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> TokenTypes { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Upv1capturecontextsCompleteMandateTms {\n");
-            if (TokenCreate != null) sb.Append("  TokenCreate: ").Append(TokenCreate).Append("\n");
-            if (TokenTypes != null) sb.Append("  TokenTypes: ").Append(TokenTypes).Append("\n");
+            if (TokenCreate != null) sb.Append("  TokenCreate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCompleteMandateTms", "tokenCreate", TokenCreate.ToString())).Append("\n");
+            if (TokenTypes != null) sb.Append("  TokenTypes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCompleteMandateTms", "tokenTypes", TokenTypes.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Upv1capturecontextsCompleteMandateTms", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

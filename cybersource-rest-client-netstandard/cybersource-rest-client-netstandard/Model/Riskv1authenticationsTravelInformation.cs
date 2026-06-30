@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,20 +46,23 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Legs
         /// </summary>
-        [DataMember(Name="legs", EmitDefaultValue=false)]
+        [JsonPropertyName("legs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Riskv1decisionsTravelInformationLegs> Legs { get; set; }
 
         /// <summary>
         /// Number of passengers for whom the ticket was issued. If you do not include this field in your request, CyberSource uses a default value of 1. Required for American Express SafeKey (U.S.) for travel-related requests. 
         /// </summary>
         /// <value>Number of passengers for whom the ticket was issued. If you do not include this field in your request, CyberSource uses a default value of 1. Required for American Express SafeKey (U.S.) for travel-related requests. </value>
-        [DataMember(Name="numberOfPassengers", EmitDefaultValue=false)]
+        [JsonPropertyName("numberOfPassengers")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? NumberOfPassengers { get; set; }
 
         /// <summary>
         /// Gets or Sets Passengers
         /// </summary>
-        [DataMember(Name="passengers", EmitDefaultValue=false)]
+        [JsonPropertyName("passengers")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Riskv1decisionsTravelInformationPassengers> Passengers { get; set; }
 
         /// <summary>
@@ -70,9 +73,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1authenticationsTravelInformation {\n");
-            if (Legs != null) sb.Append("  Legs: ").Append(Legs).Append("\n");
-            if (NumberOfPassengers != null) sb.Append("  NumberOfPassengers: ").Append(NumberOfPassengers).Append("\n");
-            if (Passengers != null) sb.Append("  Passengers: ").Append(Passengers).Append("\n");
+            if (Legs != null) sb.Append("  Legs: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsTravelInformation", "legs", Legs.ToString())).Append("\n");
+            if (NumberOfPassengers != null) sb.Append("  NumberOfPassengers: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsTravelInformation", "numberOfPassengers", NumberOfPassengers.ToString())).Append("\n");
+            if (Passengers != null) sb.Append("  Passengers: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsTravelInformation", "passengers", Passengers.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,7 +86,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1authenticationsTravelInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

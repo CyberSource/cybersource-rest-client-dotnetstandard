@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,26 +48,30 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets PaymentType
         /// </summary>
-        [DataMember(Name="paymentType", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2intentsPaymentInformationPaymentType PaymentType { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenizedPaymentMethod
         /// </summary>
-        [DataMember(Name="tokenizedPaymentMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenizedPaymentMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2intentsPaymentInformationTokenizedPaymentMethod TokenizedPaymentMethod { get; set; }
 
         /// <summary>
         /// Indicates the industry type. Possible Values: - \&quot;Events\&quot; - \&quot;Ticketing\&quot; - \&quot;Fuel\&quot; - \&quot;GAMING\&quot; - \&quot;DIGITAL GOODS\&quot; - \&quot;TELCO\&quot; - \&quot;Token Service Providers\&quot; - \&quot;Gambling\&quot; - \&quot;CFDs\&quot; - \&quot;car rental\&quot; - \&quot;hotel\&quot; - \&quot;transportation\&quot; - \&quot;travel package\&quot; - \&quot;Cruise Line\&quot; - \&quot;P2P\&quot; - \&quot;Retail\&quot; - \&quot;Food\&quot; - \&quot;Groceries\&quot; - \&quot;Ride Sharing\&quot; - \&quot;Taxi\&quot; - \&quot;Remittance\&quot; - \&quot;Crypto\&quot; - \&quot;Marketplaces\&quot; 
         /// </summary>
         /// <value>Indicates the industry type. Possible Values: - \&quot;Events\&quot; - \&quot;Ticketing\&quot; - \&quot;Fuel\&quot; - \&quot;GAMING\&quot; - \&quot;DIGITAL GOODS\&quot; - \&quot;TELCO\&quot; - \&quot;Token Service Providers\&quot; - \&quot;Gambling\&quot; - \&quot;CFDs\&quot; - \&quot;car rental\&quot; - \&quot;hotel\&quot; - \&quot;transportation\&quot; - \&quot;travel package\&quot; - \&quot;Cruise Line\&quot; - \&quot;P2P\&quot; - \&quot;Retail\&quot; - \&quot;Food\&quot; - \&quot;Groceries\&quot; - \&quot;Ride Sharing\&quot; - \&quot;Taxi\&quot; - \&quot;Remittance\&quot; - \&quot;Crypto\&quot; - \&quot;Marketplaces\&quot; </value>
-        [DataMember(Name="industryType", EmitDefaultValue=false)]
+        [JsonPropertyName("industryType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IndustryType { get; set; }
 
         /// <summary>
         /// Gets or Sets EWallet
         /// </summary>
-        [DataMember(Name="eWallet", EmitDefaultValue=false)]
+        [JsonPropertyName("eWallet")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2intentsPaymentInformationEWallet EWallet { get; set; }
 
         /// <summary>
@@ -78,10 +82,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2intentsPaymentInformation {\n");
-            if (PaymentType != null) sb.Append("  PaymentType: ").Append(PaymentType).Append("\n");
-            if (TokenizedPaymentMethod != null) sb.Append("  TokenizedPaymentMethod: ").Append(TokenizedPaymentMethod).Append("\n");
-            if (IndustryType != null) sb.Append("  IndustryType: ").Append(IndustryType).Append("\n");
-            if (EWallet != null) sb.Append("  EWallet: ").Append(EWallet).Append("\n");
+            if (PaymentType != null) sb.Append("  PaymentType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsPaymentInformation", "paymentType", PaymentType.ToString())).Append("\n");
+            if (TokenizedPaymentMethod != null) sb.Append("  TokenizedPaymentMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsPaymentInformation", "tokenizedPaymentMethod", TokenizedPaymentMethod.ToString())).Append("\n");
+            if (IndustryType != null) sb.Append("  IndustryType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsPaymentInformation", "industryType", IndustryType.ToString())).Append("\n");
+            if (EWallet != null) sb.Append("  EWallet: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsPaymentInformation", "eWallet", EWallet.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -92,7 +96,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2intentsPaymentInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Your tax ID number to use for the alternate tax amount.   Required if you set alternate tax amount to any value (including zero).  You may send this field without sending alternate tax amount. 
         /// </summary>
         /// <value>Your tax ID number to use for the alternate tax amount.   Required if you set alternate tax amount to any value (including zero).  You may send this field without sending alternate tax amount. </value>
-        [DataMember(Name="taxId", EmitDefaultValue=false)]
+        [JsonPropertyName("taxId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxId { get; set; }
 
         /// <summary>
         /// Indicates the type of tax data for the taxDetails object.&lt;br&gt;&lt;br&gt;  Possible values: - alternate - local - national - vat - other - green 
         /// </summary>
         /// <value>Indicates the type of tax data for the taxDetails object.&lt;br&gt;&lt;br&gt;  Possible values: - alternate - local - national - vat - other - green </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataOrderInformationAmountDetailsTaxDetails {\n");
-            if (TaxId != null) sb.Append("  TaxId: ").Append(TaxId).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
+            if (TaxId != null) sb.Append("  TaxId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformationAmountDetailsTaxDetails", "taxId", TaxId.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformationAmountDetailsTaxDetails", "type", Type.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataOrderInformationAmountDetailsTaxDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

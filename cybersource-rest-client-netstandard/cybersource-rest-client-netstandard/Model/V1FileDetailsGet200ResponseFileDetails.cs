@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,35 +55,40 @@ namespace CyberSource.Model
         /// Unique identifier of a file
         /// </summary>
         /// <value>Unique identifier of a file</value>
-        [DataMember(Name="fileId", EmitDefaultValue=false)]
+        [JsonPropertyName("fileId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FileId { get; set; }
 
         /// <summary>
         /// Name of the file
         /// </summary>
         /// <value>Name of the file</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Date and time for the file in PST
         /// </summary>
         /// <value>Date and time for the file in PST</value>
-        [DataMember(Name="createdTime", EmitDefaultValue=false)]
+        [JsonPropertyName("createdTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? CreatedTime { get; set; }
 
         /// <summary>
         /// Date and time for the file in PST
         /// </summary>
         /// <value>Date and time for the file in PST</value>
-        [DataMember(Name="lastModifiedTime", EmitDefaultValue=false)]
+        [JsonPropertyName("lastModifiedTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? LastModifiedTime { get; set; }
 
         /// <summary>
         /// Date and time for the file in PST
         /// </summary>
         /// <value>Date and time for the file in PST</value>
-        [DataMember(Name="date", EmitDefaultValue=false)]
+        [JsonPropertyName("date")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [JsonConverter(typeof(SwaggerDateConverter))]
         public DateTime? Date { get; set; }
 
@@ -91,14 +96,16 @@ namespace CyberSource.Model
         /// &#39;File extension&#39;  Valid values: - &#39;application/xml&#39; - &#39;text/csv&#39; - &#39;application/pdf&#39; - &#39;application/octet-stream&#39; 
         /// </summary>
         /// <value>&#39;File extension&#39;  Valid values: - &#39;application/xml&#39; - &#39;text/csv&#39; - &#39;application/pdf&#39; - &#39;application/octet-stream&#39; </value>
-        [DataMember(Name="mimeType", EmitDefaultValue=false)]
+        [JsonPropertyName("mimeType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MimeType { get; set; }
 
         /// <summary>
         /// Size of the file in bytes
         /// </summary>
         /// <value>Size of the file in bytes</value>
-        [DataMember(Name="size", EmitDefaultValue=false)]
+        [JsonPropertyName("size")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? Size { get; set; }
 
         /// <summary>
@@ -109,13 +116,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class V1FileDetailsGet200ResponseFileDetails {\n");
-            if (FileId != null) sb.Append("  FileId: ").Append(FileId).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (CreatedTime != null) sb.Append("  CreatedTime: ").Append(CreatedTime).Append("\n");
-            if (LastModifiedTime != null) sb.Append("  LastModifiedTime: ").Append(LastModifiedTime).Append("\n");
-            if (Date != null) sb.Append("  Date: ").Append(Date).Append("\n");
-            if (MimeType != null) sb.Append("  MimeType: ").Append(MimeType).Append("\n");
-            if (Size != null) sb.Append("  Size: ").Append(Size).Append("\n");
+            if (FileId != null) sb.Append("  FileId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("V1FileDetailsGet200ResponseFileDetails", "fileId", FileId.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("V1FileDetailsGet200ResponseFileDetails", "name", Name.ToString())).Append("\n");
+            if (CreatedTime != null) sb.Append("  CreatedTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("V1FileDetailsGet200ResponseFileDetails", "createdTime", CreatedTime.ToString())).Append("\n");
+            if (LastModifiedTime != null) sb.Append("  LastModifiedTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("V1FileDetailsGet200ResponseFileDetails", "lastModifiedTime", LastModifiedTime.ToString())).Append("\n");
+            if (Date != null) sb.Append("  Date: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("V1FileDetailsGet200ResponseFileDetails", "date", Date.ToString())).Append("\n");
+            if (MimeType != null) sb.Append("  MimeType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("V1FileDetailsGet200ResponseFileDetails", "mimeType", MimeType.ToString())).Append("\n");
+            if (Size != null) sb.Append("  Size: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("V1FileDetailsGet200ResponseFileDetails", "size", Size.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -126,7 +133,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("V1FileDetailsGet200ResponseFileDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

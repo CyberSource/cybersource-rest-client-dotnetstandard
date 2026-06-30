@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticRetrievePaymentCredentialsRequest" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected AgenticRetrievePaymentCredentialsRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticRetrievePaymentCredentialsRequest" /> class.
@@ -41,7 +41,7 @@ namespace CyberSource.Model
         /// <param name="ClientCorrelationId">Client Correlation Id used during the tokenization or during FIDO assertion. (required).</param>
         /// <param name="PaymentInformation">PaymentInformation (required).</param>
         /// <param name="TransactionData">List of transaction data. (required).</param>
-        public AgenticRetrievePaymentCredentialsRequest(string ClientCorrelationId = default(string), Acpv1tokensPaymentInformation PaymentInformation = default(Acpv1tokensPaymentInformation), List<Acpv1instructionsinstructionIdcredentialsTransactionData> TransactionData = default(List<Acpv1instructionsinstructionIdcredentialsTransactionData>))
+        public AgenticRetrievePaymentCredentialsRequest(string ClientCorrelationId = default(string), Iccv1tokensPaymentInformation PaymentInformation = default(Iccv1tokensPaymentInformation), List<Iccv1instructionsinstructionIdcredentialsTransactionData> TransactionData = default(List<Iccv1instructionsinstructionIdcredentialsTransactionData>))
         {
             this.ClientCorrelationId = ClientCorrelationId;
             this.PaymentInformation = PaymentInformation;
@@ -52,21 +52,24 @@ namespace CyberSource.Model
         /// Client Correlation Id used during the tokenization or during FIDO assertion.
         /// </summary>
         /// <value>Client Correlation Id used during the tokenization or during FIDO assertion.</value>
-        [DataMember(Name="clientCorrelationId", EmitDefaultValue=false)]
+        [JsonPropertyName("clientCorrelationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientCorrelationId { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInformation
         /// </summary>
-        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
-        public Acpv1tokensPaymentInformation PaymentInformation { get; set; }
+        [JsonPropertyName("paymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
         /// List of transaction data.
         /// </summary>
         /// <value>List of transaction data.</value>
-        [DataMember(Name="transactionData", EmitDefaultValue=false)]
-        public List<Acpv1instructionsinstructionIdcredentialsTransactionData> TransactionData { get; set; }
+        [JsonPropertyName("transactionData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public List<Iccv1instructionsinstructionIdcredentialsTransactionData> TransactionData { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -76,9 +79,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class AgenticRetrievePaymentCredentialsRequest {\n");
-            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(ClientCorrelationId).Append("\n");
-            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
-            if (TransactionData != null) sb.Append("  TransactionData: ").Append(TransactionData).Append("\n");
+            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticRetrievePaymentCredentialsRequest", "clientCorrelationId", ClientCorrelationId.ToString())).Append("\n");
+            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticRetrievePaymentCredentialsRequest", "paymentInformation", PaymentInformation.ToString())).Append("\n");
+            if (TransactionData != null) sb.Append("  TransactionData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticRetrievePaymentCredentialsRequest", "transactionData", TransactionData.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -89,7 +92,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("AgenticRetrievePaymentCredentialsRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

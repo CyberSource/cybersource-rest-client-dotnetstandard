@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,55 +57,63 @@ namespace CyberSource.Model
         /// Unique identifier assigned to the batch file.
         /// </summary>
         /// <value>Unique identifier assigned to the batch file.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Date when the batch template was update.
         /// </summary>
         /// <value>Date when the batch template was update.</value>
-        [DataMember(Name="uploadDate", EmitDefaultValue=false)]
+        [JsonPropertyName("uploadDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UploadDate { get; set; }
 
         /// <summary>
         /// The date when the batch template processing completed.
         /// </summary>
         /// <value>The date when the batch template processing completed.</value>
-        [DataMember(Name="completionDate", EmitDefaultValue=false)]
+        [JsonPropertyName("completionDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CompletionDate { get; set; }
 
         /// <summary>
         /// Number of transactions in the transaction.
         /// </summary>
         /// <value>Number of transactions in the transaction.</value>
-        [DataMember(Name="transactionCount", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? TransactionCount { get; set; }
 
         /// <summary>
         /// Number of transactions accepted.
         /// </summary>
         /// <value>Number of transactions accepted.</value>
-        [DataMember(Name="acceptedTransactionCount", EmitDefaultValue=false)]
+        [JsonPropertyName("acceptedTransactionCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? AcceptedTransactionCount { get; set; }
 
         /// <summary>
         /// Number of transactions rejected.
         /// </summary>
         /// <value>Number of transactions rejected.</value>
-        [DataMember(Name="rejectedTransactionCount", EmitDefaultValue=false)]
+        [JsonPropertyName("rejectedTransactionCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RejectedTransactionCount { get; set; }
 
         /// <summary>
         /// The status of you batch template processing.
         /// </summary>
         /// <value>The status of you batch template processing.</value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV1TransactionBatchesIdGet200ResponseLinks Links { get; set; }
 
         /// <summary>
@@ -116,14 +124,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV1TransactionBatchesIdGet200Response {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (UploadDate != null) sb.Append("  UploadDate: ").Append(UploadDate).Append("\n");
-            if (CompletionDate != null) sb.Append("  CompletionDate: ").Append(CompletionDate).Append("\n");
-            if (TransactionCount != null) sb.Append("  TransactionCount: ").Append(TransactionCount).Append("\n");
-            if (AcceptedTransactionCount != null) sb.Append("  AcceptedTransactionCount: ").Append(AcceptedTransactionCount).Append("\n");
-            if (RejectedTransactionCount != null) sb.Append("  RejectedTransactionCount: ").Append(RejectedTransactionCount).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV1TransactionBatchesIdGet200Response", "id", Id.ToString())).Append("\n");
+            if (UploadDate != null) sb.Append("  UploadDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV1TransactionBatchesIdGet200Response", "uploadDate", UploadDate.ToString())).Append("\n");
+            if (CompletionDate != null) sb.Append("  CompletionDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV1TransactionBatchesIdGet200Response", "completionDate", CompletionDate.ToString())).Append("\n");
+            if (TransactionCount != null) sb.Append("  TransactionCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV1TransactionBatchesIdGet200Response", "transactionCount", TransactionCount.ToString())).Append("\n");
+            if (AcceptedTransactionCount != null) sb.Append("  AcceptedTransactionCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV1TransactionBatchesIdGet200Response", "acceptedTransactionCount", AcceptedTransactionCount.ToString())).Append("\n");
+            if (RejectedTransactionCount != null) sb.Append("  RejectedTransactionCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV1TransactionBatchesIdGet200Response", "rejectedTransactionCount", RejectedTransactionCount.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV1TransactionBatchesIdGet200Response", "status", Status.ToString())).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV1TransactionBatchesIdGet200Response", "_links", Links.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -134,7 +142,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV1TransactionBatchesIdGet200Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

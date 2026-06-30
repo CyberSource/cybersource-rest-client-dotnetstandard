@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,19 +46,22 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Next
         /// </summary>
-        [DataMember(Name="next", EmitDefaultValue=false)]
+        [JsonPropertyName("next")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<InlineResponseDefaultLinksNext> Next { get; set; }
 
         /// <summary>
         /// Gets or Sets Documentation
         /// </summary>
-        [DataMember(Name="documentation", EmitDefaultValue=false)]
+        [JsonPropertyName("documentation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<InlineResponseDefaultLinksNext> Documentation { get; set; }
 
         /// <summary>
         /// Gets or Sets Self
         /// </summary>
-        [DataMember(Name="self", EmitDefaultValue=false)]
+        [JsonPropertyName("self")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponseDefaultLinksNext Self { get; set; }
 
         /// <summary>
@@ -69,9 +72,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponseDefaultLinks {\n");
-            if (Next != null) sb.Append("  Next: ").Append(Next).Append("\n");
-            if (Documentation != null) sb.Append("  Documentation: ").Append(Documentation).Append("\n");
-            if (Self != null) sb.Append("  Self: ").Append(Self).Append("\n");
+            if (Next != null) sb.Append("  Next: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponseDefaultLinks", "next", Next.ToString())).Append("\n");
+            if (Documentation != null) sb.Append("  Documentation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponseDefaultLinks", "documentation", Documentation.ToString())).Append("\n");
+            if (Self != null) sb.Append("  Self: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponseDefaultLinks", "self", Self.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +85,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponseDefaultLinks", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

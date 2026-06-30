@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -60,66 +60,76 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse20013Links Links { get; set; }
 
         /// <summary>
         /// Unique identification number assigned to the submitted request.
         /// </summary>
         /// <value>Unique identification number assigned to the submitted request.</value>
-        [DataMember(Name="batchId", EmitDefaultValue=false)]
+        [JsonPropertyName("batchId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BatchId { get; set; }
 
         /// <summary>
         /// ISO-8601 format: yyyy-MM-ddTHH:mm:ssZ
         /// </summary>
         /// <value>ISO-8601 format: yyyy-MM-ddTHH:mm:ssZ</value>
-        [DataMember(Name="batchCreatedDate", EmitDefaultValue=false)]
+        [JsonPropertyName("batchCreatedDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BatchCreatedDate { get; set; }
 
         /// <summary>
         /// Valid Values:   * SCHEDULER   * TOKEN_API   * CREDIT_CARD_FILE_UPLOAD   * AMEX_REGSITRY   * AMEX_REGISTRY_API   * AMEX_MAINTENANCE 
         /// </summary>
         /// <value>Valid Values:   * SCHEDULER   * TOKEN_API   * CREDIT_CARD_FILE_UPLOAD   * AMEX_REGSITRY   * AMEX_REGISTRY_API   * AMEX_MAINTENANCE </value>
-        [DataMember(Name="batchSource", EmitDefaultValue=false)]
+        [JsonPropertyName("batchSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BatchSource { get; set; }
 
         /// <summary>
         /// Reference used by merchant to identify batch.
         /// </summary>
         /// <value>Reference used by merchant to identify batch.</value>
-        [DataMember(Name="merchantReference", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantReference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantReference { get; set; }
 
         /// <summary>
         /// Gets or Sets BatchCaEndpoints
         /// </summary>
-        [DataMember(Name="batchCaEndpoints", EmitDefaultValue=false)]
+        [JsonPropertyName("batchCaEndpoints")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BatchCaEndpoints { get; set; }
 
         /// <summary>
         /// Valid Values:   * REJECTED   * RECEIVED   * VALIDATED   * DECLINED   * PROCESSING   * COMPLETED 
         /// </summary>
         /// <value>Valid Values:   * REJECTED   * RECEIVED   * VALIDATED   * DECLINED   * PROCESSING   * COMPLETED </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets Totals
         /// </summary>
-        [DataMember(Name="totals", EmitDefaultValue=false)]
+        [JsonPropertyName("totals")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse20012EmbeddedTotals Totals { get; set; }
 
         /// <summary>
         /// Gets or Sets Billing
         /// </summary>
-        [DataMember(Name="billing", EmitDefaultValue=false)]
+        [JsonPropertyName("billing")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse20013Billing Billing { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Description { get; set; }
 
         /// <summary>
@@ -130,16 +140,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse20013 {\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
-            if (BatchId != null) sb.Append("  BatchId: ").Append(BatchId).Append("\n");
-            if (BatchCreatedDate != null) sb.Append("  BatchCreatedDate: ").Append(BatchCreatedDate).Append("\n");
-            if (BatchSource != null) sb.Append("  BatchSource: ").Append(BatchSource).Append("\n");
-            if (MerchantReference != null) sb.Append("  MerchantReference: ").Append(MerchantReference).Append("\n");
-            if (BatchCaEndpoints != null) sb.Append("  BatchCaEndpoints: ").Append(BatchCaEndpoints).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (Totals != null) sb.Append("  Totals: ").Append(Totals).Append("\n");
-            if (Billing != null) sb.Append("  Billing: ").Append(Billing).Append("\n");
-            if (Description != null) sb.Append("  Description: ").Append(Description).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013", "_links", Links.ToString())).Append("\n");
+            if (BatchId != null) sb.Append("  BatchId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013", "batchId", BatchId.ToString())).Append("\n");
+            if (BatchCreatedDate != null) sb.Append("  BatchCreatedDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013", "batchCreatedDate", BatchCreatedDate.ToString())).Append("\n");
+            if (BatchSource != null) sb.Append("  BatchSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013", "batchSource", BatchSource.ToString())).Append("\n");
+            if (MerchantReference != null) sb.Append("  MerchantReference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013", "merchantReference", MerchantReference.ToString())).Append("\n");
+            if (BatchCaEndpoints != null) sb.Append("  BatchCaEndpoints: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013", "batchCaEndpoints", BatchCaEndpoints.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013", "status", Status.ToString())).Append("\n");
+            if (Totals != null) sb.Append("  Totals: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013", "totals", Totals.ToString())).Append("\n");
+            if (Billing != null) sb.Append("  Billing: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013", "billing", Billing.ToString())).Append("\n");
+            if (Description != null) sb.Append("  Description: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013", "description", Description.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -150,7 +160,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse20013", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,14 +44,16 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Emv
         /// </summary>
-        [DataMember(Name="emv", EmitDefaultValue=false)]
+        [JsonPropertyName("emv")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesPointOfSaleInformationEmv Emv { get; set; }
 
         /// <summary>
         /// Indicates the type of terminal.   Possible values: - &#x60;AFD&#x60;: Automated Fuel Dispenser 
         /// </summary>
         /// <value>Indicates the type of terminal.   Possible values: - &#x60;AFD&#x60;: Automated Fuel Dispenser </value>
-        [DataMember(Name="terminalCategory", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalCategory")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalCategory { get; set; }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidrefundsPointOfSaleInformation {\n");
-            if (Emv != null) sb.Append("  Emv: ").Append(Emv).Append("\n");
-            if (TerminalCategory != null) sb.Append("  TerminalCategory: ").Append(TerminalCategory).Append("\n");
+            if (Emv != null) sb.Append("  Emv: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPointOfSaleInformation", "emv", Emv.ToString())).Append("\n");
+            if (TerminalCategory != null) sb.Append("  TerminalCategory: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPointOfSaleInformation", "terminalCategory", TerminalCategory.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,7 +76,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidrefundsPointOfSaleInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

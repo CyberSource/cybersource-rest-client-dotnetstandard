@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,14 +53,16 @@ namespace CyberSource.Model
         /// *NEW* Used by EBC UI always set to true
         /// </summary>
         /// <value>*NEW* Used by EBC UI always set to true</value>
-        [DataMember(Name="displayEcheckInfo", EmitDefaultValue=false)]
+        [JsonPropertyName("displayEcheckInfo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DisplayEcheckInfo { get; set; }
 
         /// <summary>
         /// *NEW* Payment Processing connection used to support eCheck, aka ACH, payment methods. Example * \&quot;bofaach\&quot; * \&quot;wellsfargoach\&quot; 
         /// </summary>
         /// <value>*NEW* Payment Processing connection used to support eCheck, aka ACH, payment methods. Example * \&quot;bofaach\&quot; * \&quot;wellsfargoach\&quot; </value>
-        [DataMember(Name="processors", EmitDefaultValue=false)]
+        [JsonPropertyName("processors")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, ECheckConfigCommonInternalOnlyProcessors> Processors { get; set; }
 
         /// <summary>
@@ -71,8 +73,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ECheckConfigCommonInternalOnly {\n");
-            if (DisplayEcheckInfo != null) sb.Append("  DisplayEcheckInfo: ").Append(DisplayEcheckInfo).Append("\n");
-            if (Processors != null) sb.Append("  Processors: ").Append(Processors).Append("\n");
+            if (DisplayEcheckInfo != null) sb.Append("  DisplayEcheckInfo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonInternalOnly", "displayEcheckInfo", DisplayEcheckInfo.ToString())).Append("\n");
+            if (Processors != null) sb.Append("  Processors: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonInternalOnly", "processors", Processors.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,7 +85,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ECheckConfigCommonInternalOnly", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

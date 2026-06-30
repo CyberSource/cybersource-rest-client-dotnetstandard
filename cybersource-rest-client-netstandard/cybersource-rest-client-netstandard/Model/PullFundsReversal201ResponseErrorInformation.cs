@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,20 +47,23 @@ namespace CyberSource.Model
         /// The reason of the status.  Possible values: - EXPIRED_CARD - PROCESSOR_DECLINED - STOLEN_LOST_CARD - UNAUTHORIZED_CARD - CVN_NOT_MATCH - INVALID_CVN - BLACKLISTED_CUSTOMER - INVALID_ACCOUNT - GENERAL_DECLINE - RISK_CONTROL_DECLINE - PROCESSOR_RISK_CONTROL_DECLINE - DEBIT_CARD_USAGE_EXCEEDED_LIMIT 
         /// </summary>
         /// <value>The reason of the status.  Possible values: - EXPIRED_CARD - PROCESSOR_DECLINED - STOLEN_LOST_CARD - UNAUTHORIZED_CARD - CVN_NOT_MATCH - INVALID_CVN - BLACKLISTED_CUSTOMER - INVALID_ACCOUNT - GENERAL_DECLINE - RISK_CONTROL_DECLINE - PROCESSOR_RISK_CONTROL_DECLINE - DEBIT_CARD_USAGE_EXCEEDED_LIMIT </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
         /// The detail message related to the status and reason listed above. 
         /// </summary>
         /// <value>The detail message related to the status and reason listed above. </value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
         /// Gets or Sets Details
         /// </summary>
-        [DataMember(Name="details", EmitDefaultValue=false)]
+        [JsonPropertyName("details")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<PullFundsReversal201ResponseErrorInformationDetails> Details { get; set; }
 
         /// <summary>
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PullFundsReversal201ResponseErrorInformation {\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
-            if (Details != null) sb.Append("  Details: ").Append(Details).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201ResponseErrorInformation", "reason", Reason.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201ResponseErrorInformation", "message", Message.ToString())).Append("\n");
+            if (Details != null) sb.Append("  Details: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201ResponseErrorInformation", "details", Details.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PullFundsReversal201ResponseErrorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

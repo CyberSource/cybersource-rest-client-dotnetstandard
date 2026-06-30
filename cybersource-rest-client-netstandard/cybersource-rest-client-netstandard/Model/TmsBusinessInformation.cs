@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,47 +55,54 @@ namespace CyberSource.Model
         /// Name of the network token merchant.
         /// </summary>
         /// <value>Name of the network token merchant.</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Name the network token merchant does business as
         /// </summary>
         /// <value>Name the network token merchant does business as</value>
-        [DataMember(Name="doingBusinessAs", EmitDefaultValue=false)]
+        [JsonPropertyName("doingBusinessAs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DoingBusinessAs { get; set; }
 
         /// <summary>
         /// Gets or Sets Address
         /// </summary>
-        [DataMember(Name="address", EmitDefaultValue=false)]
+        [JsonPropertyName("address")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsBusinessInformationAddress Address { get; set; }
 
         /// <summary>
         /// Website of network token merchant.
         /// </summary>
         /// <value>Website of network token merchant.</value>
-        [DataMember(Name="websiteUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("websiteUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WebsiteUrl { get; set; }
 
         /// <summary>
         /// The Identifier associated with the business type; required unless both acquirerId and acquirerMerchantId are provided. 
         /// </summary>
         /// <value>The Identifier associated with the business type; required unless both acquirerId and acquirerMerchantId are provided. </value>
-        [DataMember(Name="businessIdentificationType", EmitDefaultValue=false)]
+        [JsonPropertyName("businessIdentificationType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessIdentificationType { get; set; }
 
         /// <summary>
         /// The value associated with the business identifier type; required unless both acquirerId and acquirerMerchantId are provided. 
         /// </summary>
         /// <value>The value associated with the business identifier type; required unless both acquirerId and acquirerMerchantId are provided. </value>
-        [DataMember(Name="businessIdentificationValue", EmitDefaultValue=false)]
+        [JsonPropertyName("businessIdentificationValue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessIdentificationValue { get; set; }
 
         /// <summary>
         /// Gets or Sets Acquirer
         /// </summary>
-        [DataMember(Name="acquirer", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsBusinessInformationAcquirer Acquirer { get; set; }
 
         /// <summary>
@@ -106,13 +113,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsBusinessInformation {\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (DoingBusinessAs != null) sb.Append("  DoingBusinessAs: ").Append(DoingBusinessAs).Append("\n");
-            if (Address != null) sb.Append("  Address: ").Append(Address).Append("\n");
-            if (WebsiteUrl != null) sb.Append("  WebsiteUrl: ").Append(WebsiteUrl).Append("\n");
-            if (BusinessIdentificationType != null) sb.Append("  BusinessIdentificationType: ").Append(BusinessIdentificationType).Append("\n");
-            if (BusinessIdentificationValue != null) sb.Append("  BusinessIdentificationValue: ").Append(BusinessIdentificationValue).Append("\n");
-            if (Acquirer != null) sb.Append("  Acquirer: ").Append(Acquirer).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBusinessInformation", "name", Name.ToString())).Append("\n");
+            if (DoingBusinessAs != null) sb.Append("  DoingBusinessAs: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBusinessInformation", "doingBusinessAs", DoingBusinessAs.ToString())).Append("\n");
+            if (Address != null) sb.Append("  Address: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBusinessInformation", "address", Address.ToString())).Append("\n");
+            if (WebsiteUrl != null) sb.Append("  WebsiteUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBusinessInformation", "websiteUrl", WebsiteUrl.ToString())).Append("\n");
+            if (BusinessIdentificationType != null) sb.Append("  BusinessIdentificationType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBusinessInformation", "businessIdentificationType", BusinessIdentificationType.ToString())).Append("\n");
+            if (BusinessIdentificationValue != null) sb.Append("  BusinessIdentificationValue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBusinessInformation", "businessIdentificationValue", BusinessIdentificationValue.ToString())).Append("\n");
+            if (Acquirer != null) sb.Append("  Acquirer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBusinessInformation", "acquirer", Acquirer.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -123,7 +130,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsBusinessInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

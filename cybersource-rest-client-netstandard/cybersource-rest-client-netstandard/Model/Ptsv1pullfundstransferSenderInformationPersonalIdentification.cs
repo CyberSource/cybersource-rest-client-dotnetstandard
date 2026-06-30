@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// Issuing country of the identification.   The field format should be a 2 character ISO 3166-1 alpha-2 country code. 
         /// </summary>
         /// <value>Issuing country of the identification.   The field format should be a 2 character ISO 3166-1 alpha-2 country code. </value>
-        [DataMember(Name="issuingCountry", EmitDefaultValue=false)]
+        [JsonPropertyName("issuingCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IssuingCountry { get; set; }
 
         /// <summary>
         /// The ID number/value.  Visa Direct(35 characters)   This tag will contain an acquirer-populated id value associated with the API.   If &#x60;senderInformation.personalIdentification.type&#x60;&#x3D;&#x60;BTHD&#x60;, then the id format must be &#x60;YYYYMMDD&#x60;. 
         /// </summary>
         /// <value>The ID number/value.  Visa Direct(35 characters)   This tag will contain an acquirer-populated id value associated with the API.   If &#x60;senderInformation.personalIdentification.type&#x60;&#x3D;&#x60;BTHD&#x60;, then the id format must be &#x60;YYYYMMDD&#x60;. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Visa Direct   This tag will contain the type of sender identification.   The valid values are:   • &#x60;BTHD&#x60; (Date of birth)   • &#x60;CUID&#x60; (Customer identification (unspecified))   • &#x60;NTID&#x60; (National identification)   • &#x60;PASN&#x60; (Passport number)   • &#x60;DRLN&#x60; (Driver license)   • &#x60;TXIN&#x60; (Tax identification)   • &#x60;CPNY&#x60; (Company registration number)   • &#x60;PRXY&#x60; (Proxy identification)   • &#x60;SSNB&#x60; (Social security number)   • &#x60;ARNB&#x60; (Alien registration number)   • &#x60;LAWE&#x60; (Law enforcement identification)   • &#x60;MILI&#x60; (Military identification)   • &#x60;TRVL&#x60; (Travel identification (non-passport))   • &#x60;EMAL&#x60; (Email)   • &#x60;PHON&#x60; (Phone number) 
         /// </summary>
         /// <value>Visa Direct   This tag will contain the type of sender identification.   The valid values are:   • &#x60;BTHD&#x60; (Date of birth)   • &#x60;CUID&#x60; (Customer identification (unspecified))   • &#x60;NTID&#x60; (National identification)   • &#x60;PASN&#x60; (Passport number)   • &#x60;DRLN&#x60; (Driver license)   • &#x60;TXIN&#x60; (Tax identification)   • &#x60;CPNY&#x60; (Company registration number)   • &#x60;PRXY&#x60; (Proxy identification)   • &#x60;SSNB&#x60; (Social security number)   • &#x60;ARNB&#x60; (Alien registration number)   • &#x60;LAWE&#x60; (Law enforcement identification)   • &#x60;MILI&#x60; (Military identification)   • &#x60;TRVL&#x60; (Travel identification (non-passport))   • &#x60;EMAL&#x60; (Email)   • &#x60;PHON&#x60; (Phone number) </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// It denotes whether the tax ID is a business or individual tax ID.   The valid values are:   • &#x60;B&#x60; (Business)   • &#x60;I&#x60; (Individual)  Visa Direct   This field is required when &#x60;senderInformation.personalIdentification.type&#x60; has the value of &#x60;TXIN&#x60; (Tax identification).   A value for &#x60;senderInformation.personalInformation.id&#x60; is required when &#x60;senderInformation.personalIdentification.personalIdType&#x60; is present in a request. 
         /// </summary>
         /// <value>It denotes whether the tax ID is a business or individual tax ID.   The valid values are:   • &#x60;B&#x60; (Business)   • &#x60;I&#x60; (Individual)  Visa Direct   This field is required when &#x60;senderInformation.personalIdentification.type&#x60; has the value of &#x60;TXIN&#x60; (Tax identification).   A value for &#x60;senderInformation.personalInformation.id&#x60; is required when &#x60;senderInformation.personalIdentification.personalIdType&#x60; is present in a request. </value>
-        [DataMember(Name="personalIdType", EmitDefaultValue=false)]
+        [JsonPropertyName("personalIdType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PersonalIdType { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferSenderInformationPersonalIdentification {\n");
-            if (IssuingCountry != null) sb.Append("  IssuingCountry: ").Append(IssuingCountry).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (PersonalIdType != null) sb.Append("  PersonalIdType: ").Append(PersonalIdType).Append("\n");
+            if (IssuingCountry != null) sb.Append("  IssuingCountry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationPersonalIdentification", "issuingCountry", IssuingCountry.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationPersonalIdentification", "id", Id.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationPersonalIdentification", "type", Type.ToString())).Append("\n");
+            if (PersonalIdType != null) sb.Append("  PersonalIdType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationPersonalIdentification", "personalIdType", PersonalIdType.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferSenderInformationPersonalIdentification", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets EWallet
         /// </summary>
-        [DataMember(Name="eWallet", EmitDefaultValue=false)]
+        [JsonPropertyName("eWallet")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2ModifyBillingAgreementPost201ResponsePaymentInformationEWallet EWallet { get; set; }
 
         /// <summary>
         /// Gets or Sets Bank
         /// </summary>
-        [DataMember(Name="bank", EmitDefaultValue=false)]
+        [JsonPropertyName("bank")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2ModifyBillingAgreementPost201ResponsePaymentInformationBank Bank { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2ModifyBillingAgreementPost201ResponsePaymentInformation {\n");
-            if (EWallet != null) sb.Append("  EWallet: ").Append(EWallet).Append("\n");
-            if (Bank != null) sb.Append("  Bank: ").Append(Bank).Append("\n");
+            if (EWallet != null) sb.Append("  EWallet: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponsePaymentInformation", "eWallet", EWallet.ToString())).Append("\n");
+            if (Bank != null) sb.Append("  Bank: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponsePaymentInformation", "bank", Bank.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2ModifyBillingAgreementPost201ResponsePaymentInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

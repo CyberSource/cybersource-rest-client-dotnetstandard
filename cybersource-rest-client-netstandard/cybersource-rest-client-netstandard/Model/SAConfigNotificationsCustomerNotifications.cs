@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// Toggles the custom receipt page, where merchants can receive the results of the transaction and display appropriate messaging. Usually set by web developers integrating to Secure Acceptance.
         /// </summary>
         /// <value>Toggles the custom receipt page, where merchants can receive the results of the transaction and display appropriate messaging. Usually set by web developers integrating to Secure Acceptance.</value>
-        [DataMember(Name="customReceiptPageEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("customReceiptPageEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CustomReceiptPageEnabled { get; set; }
 
         /// <summary>
         /// Email address where a copy of the payer&#39;s receipt email is sent, when notificationReceiptEmailEnabled is true.
         /// </summary>
         /// <value>Email address where a copy of the payer&#39;s receipt email is sent, when notificationReceiptEmailEnabled is true.</value>
-        [DataMember(Name="receiptEmailAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("receiptEmailAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReceiptEmailAddress { get; set; }
 
         /// <summary>
         /// Toggles an email receipt sent to the payer&#39;s email address on payment success.
         /// </summary>
         /// <value>Toggles an email receipt sent to the payer&#39;s email address on payment success.</value>
-        [DataMember(Name="customerReceiptEmailEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("customerReceiptEmailEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CustomerReceiptEmailEnabled { get; set; }
 
         /// <summary>
         /// URL to which transaction results are POSTed when the payer clicks &#39;Cancel&#39; on the Hosted Checkout. Triggered when customCancelPageEnabled is true. Usually set by web developers integrating to Secure Acceptance.
         /// </summary>
         /// <value>URL to which transaction results are POSTed when the payer clicks &#39;Cancel&#39; on the Hosted Checkout. Triggered when customCancelPageEnabled is true. Usually set by web developers integrating to Secure Acceptance.</value>
-        [DataMember(Name="customCancelPage", EmitDefaultValue=false)]
+        [JsonPropertyName("customCancelPage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomCancelPage { get; set; }
 
         /// <summary>
         /// URL to which transaction results are POSTed when the payer requests a payment on the Hosted Checkout. Triggered when customCancelPageEnabled is true. Usually set by web developers integrating to Secure Acceptance.
         /// </summary>
         /// <value>URL to which transaction results are POSTed when the payer requests a payment on the Hosted Checkout. Triggered when customCancelPageEnabled is true. Usually set by web developers integrating to Secure Acceptance.</value>
-        [DataMember(Name="customReceiptPage", EmitDefaultValue=false)]
+        [JsonPropertyName("customReceiptPage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomReceiptPage { get; set; }
 
         /// <summary>
         /// Toggles the custom cancel page, where merchants can receive notice that the payer has canceled, and display appropriate messaging and direction. Usually set by web developers integrating to Secure Acceptance.
         /// </summary>
         /// <value>Toggles the custom cancel page, where merchants can receive notice that the payer has canceled, and display appropriate messaging and direction. Usually set by web developers integrating to Secure Acceptance.</value>
-        [DataMember(Name="customCancelPageEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("customCancelPageEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CustomCancelPageEnabled { get; set; }
 
         /// <summary>
         /// Toggles whether merchant receives a copy of the payer&#39;s receipt email.
         /// </summary>
         /// <value>Toggles whether merchant receives a copy of the payer&#39;s receipt email.</value>
-        [DataMember(Name="notificationReceiptEmailEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("notificationReceiptEmailEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? NotificationReceiptEmailEnabled { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class SAConfigNotificationsCustomerNotifications {\n");
-            if (CustomReceiptPageEnabled != null) sb.Append("  CustomReceiptPageEnabled: ").Append(CustomReceiptPageEnabled).Append("\n");
-            if (ReceiptEmailAddress != null) sb.Append("  ReceiptEmailAddress: ").Append(ReceiptEmailAddress).Append("\n");
-            if (CustomerReceiptEmailEnabled != null) sb.Append("  CustomerReceiptEmailEnabled: ").Append(CustomerReceiptEmailEnabled).Append("\n");
-            if (CustomCancelPage != null) sb.Append("  CustomCancelPage: ").Append(CustomCancelPage).Append("\n");
-            if (CustomReceiptPage != null) sb.Append("  CustomReceiptPage: ").Append(CustomReceiptPage).Append("\n");
-            if (CustomCancelPageEnabled != null) sb.Append("  CustomCancelPageEnabled: ").Append(CustomCancelPageEnabled).Append("\n");
-            if (NotificationReceiptEmailEnabled != null) sb.Append("  NotificationReceiptEmailEnabled: ").Append(NotificationReceiptEmailEnabled).Append("\n");
+            if (CustomReceiptPageEnabled != null) sb.Append("  CustomReceiptPageEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsCustomerNotifications", "customReceiptPageEnabled", CustomReceiptPageEnabled.ToString())).Append("\n");
+            if (ReceiptEmailAddress != null) sb.Append("  ReceiptEmailAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsCustomerNotifications", "receiptEmailAddress", ReceiptEmailAddress.ToString())).Append("\n");
+            if (CustomerReceiptEmailEnabled != null) sb.Append("  CustomerReceiptEmailEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsCustomerNotifications", "customerReceiptEmailEnabled", CustomerReceiptEmailEnabled.ToString())).Append("\n");
+            if (CustomCancelPage != null) sb.Append("  CustomCancelPage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsCustomerNotifications", "customCancelPage", CustomCancelPage.ToString())).Append("\n");
+            if (CustomReceiptPage != null) sb.Append("  CustomReceiptPage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsCustomerNotifications", "customReceiptPage", CustomReceiptPage.ToString())).Append("\n");
+            if (CustomCancelPageEnabled != null) sb.Append("  CustomCancelPageEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsCustomerNotifications", "customCancelPageEnabled", CustomCancelPageEnabled.ToString())).Append("\n");
+            if (NotificationReceiptEmailEnabled != null) sb.Append("  NotificationReceiptEmailEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsCustomerNotifications", "notificationReceiptEmailEnabled", NotificationReceiptEmailEnabled.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("SAConfigNotificationsCustomerNotifications", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,34 +51,39 @@ namespace CyberSource.Model
         /// Ticket number, which consists of the carrier code, form, and serial number, without the check digit. **Important** This field is required in the U.S. in order for you to qualify for either the custom payment service (CPS) or the electronic interchange reimbursement fee (EIRF) program. Format: English characters only. Optional field for ancillary services. 
         /// </summary>
         /// <value>Ticket number, which consists of the carrier code, form, and serial number, without the check digit. **Important** This field is required in the U.S. in order for you to qualify for either the custom payment service (CPS) or the electronic interchange reimbursement fee (EIRF) program. Format: English characters only. Optional field for ancillary services. </value>
-        [DataMember(Name="ticketNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("ticketNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TicketNumber { get; set; }
 
         /// <summary>
         /// Name of the passenger. If the passenger&#39;s name is not available, this value is the cardholder&#39;s name. If neither the passenger&#39;s name nor the cardholder&#39;s name is available, this value is a description of the ancillary purchase. **Important** This field is required in the U.S. in order for you to qualify for either the custom payment service (CPS) or the electronic interchange reimbursement fee (EIRF) program. Format: English characters only. Optional field for ancillary service. 
         /// </summary>
         /// <value>Name of the passenger. If the passenger&#39;s name is not available, this value is the cardholder&#39;s name. If neither the passenger&#39;s name nor the cardholder&#39;s name is available, this value is a description of the ancillary purchase. **Important** This field is required in the U.S. in order for you to qualify for either the custom payment service (CPS) or the electronic interchange reimbursement fee (EIRF) program. Format: English characters only. Optional field for ancillary service. </value>
-        [DataMember(Name="passengerName", EmitDefaultValue=false)]
+        [JsonPropertyName("passengerName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PassengerName { get; set; }
 
         /// <summary>
         /// Number for the airline ticket to which the ancillary purchase is connected.  If this purchase has a connection or relationship to another purchase such as a baggage fee for a passenger transport ticket, this field must contain the ticket number for the other purchase.  For a stand-alone purchase, the value for this field must be the same as the value for the &#x60;travelInformation.transit.airline.ancillaryInformation.ticketNumber&#x60; field. **Important** This field is required in the U.S. in order for you to qualify for either the custom payment service (CPS) or the electronic interchange reimbursement fee (EIRF) program. Format: English characters only. Optional request field for ancillary services. 
         /// </summary>
         /// <value>Number for the airline ticket to which the ancillary purchase is connected.  If this purchase has a connection or relationship to another purchase such as a baggage fee for a passenger transport ticket, this field must contain the ticket number for the other purchase.  For a stand-alone purchase, the value for this field must be the same as the value for the &#x60;travelInformation.transit.airline.ancillaryInformation.ticketNumber&#x60; field. **Important** This field is required in the U.S. in order for you to qualify for either the custom payment service (CPS) or the electronic interchange reimbursement fee (EIRF) program. Format: English characters only. Optional request field for ancillary services. </value>
-        [DataMember(Name="connectedTicketNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("connectedTicketNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ConnectedTicketNumber { get; set; }
 
         /// <summary>
         /// Reason for the credit. Possible values: - &#x60;A&#x60;: Cancellation of the ancillary passenger transport purchase. - &#x60;B&#x60;: Cancellation of the airline ticket and the passenger transport ancillary purchase. - &#x60;C&#x60;: Cancellation of the airline ticket. - &#x60;O&#x60;: Other. - &#x60;P&#x60;: Partial refund of the airline ticket. Format: English characters only. Optional field for ancillary services. 
         /// </summary>
         /// <value>Reason for the credit. Possible values: - &#x60;A&#x60;: Cancellation of the ancillary passenger transport purchase. - &#x60;B&#x60;: Cancellation of the airline ticket and the passenger transport ancillary purchase. - &#x60;C&#x60;: Cancellation of the airline ticket. - &#x60;O&#x60;: Other. - &#x60;P&#x60;: Partial refund of the airline ticket. Format: English characters only. Optional field for ancillary services. </value>
-        [DataMember(Name="creditReasonIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("creditReasonIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CreditReasonIndicator { get; set; }
 
         /// <summary>
         /// Gets or Sets Service
         /// </summary>
-        [DataMember(Name="service", EmitDefaultValue=false)]
+        [JsonPropertyName("service")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsidrefundsTravelInformationTransitAirlineAncillaryInformationService> Service { get; set; }
 
         /// <summary>
@@ -89,11 +94,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidrefundsTravelInformationTransitAirlineAncillaryInformation {\n");
-            if (TicketNumber != null) sb.Append("  TicketNumber: ").Append(TicketNumber).Append("\n");
-            if (PassengerName != null) sb.Append("  PassengerName: ").Append(PassengerName).Append("\n");
-            if (ConnectedTicketNumber != null) sb.Append("  ConnectedTicketNumber: ").Append(ConnectedTicketNumber).Append("\n");
-            if (CreditReasonIndicator != null) sb.Append("  CreditReasonIndicator: ").Append(CreditReasonIndicator).Append("\n");
-            if (Service != null) sb.Append("  Service: ").Append(Service).Append("\n");
+            if (TicketNumber != null) sb.Append("  TicketNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirlineAncillaryInformation", "ticketNumber", TicketNumber.ToString())).Append("\n");
+            if (PassengerName != null) sb.Append("  PassengerName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirlineAncillaryInformation", "passengerName", PassengerName.ToString())).Append("\n");
+            if (ConnectedTicketNumber != null) sb.Append("  ConnectedTicketNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirlineAncillaryInformation", "connectedTicketNumber", ConnectedTicketNumber.ToString())).Append("\n");
+            if (CreditReasonIndicator != null) sb.Append("  CreditReasonIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirlineAncillaryInformation", "creditReasonIndicator", CreditReasonIndicator.ToString())).Append("\n");
+            if (Service != null) sb.Append("  Service: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirlineAncillaryInformation", "service", Service.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,7 +109,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidrefundsTravelInformationTransitAirlineAncillaryInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Use the transientTokenResponseOptions.includeCardPrefix field to choose your preferred card number prefix length: 6-digit, 8-digit, or no card number prefix.  Possible values: - True - False&lt;br&gt;&lt;br&gt;  To select the type of card number prefix: - No field included: A 6-digit prefix is returned (default) - True: An 8-digit prefix is returned - False: No prefix is returned&lt;br&gt;&lt;br&gt;  The following conditions apply: - 8-digit card number prefixes only apply to Discover, JCB, Mastercard, UnionPay, and Visa brands with 16-digit card numbers or more. - Any card with less than 16-digit numbers will return a 6-digit prefix even when the transientTokenResponseOptions.includeCardPrefix field is set to true. - Any card brand other than Discover, JCB, Mastercard, UnionPay, or Visa will return a 6-digit prefix even when the transientTokenResponseOptions.includeCardPrefix field is set to true. - If any card brand is co-branded with Discover, JCB, Mastercard, UnionPay, or Visa, an 8-digit prefix will be returned if the transientTokenResponseOptions.includeCardPrefix field is set to true.&lt;br&gt;&lt;br&gt;  **Important:**  If your application does NOT require a card number prefix for routing or identification purposes, set the transientTokenResponseOptions.includeCardPrefix field to False.  This will minimize your personal data exposure.&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center and if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Use the transientTokenResponseOptions.includeCardPrefix field to choose your preferred card number prefix length: 6-digit, 8-digit, or no card number prefix.  Possible values: - True - False&lt;br&gt;&lt;br&gt;  To select the type of card number prefix: - No field included: A 6-digit prefix is returned (default) - True: An 8-digit prefix is returned - False: No prefix is returned&lt;br&gt;&lt;br&gt;  The following conditions apply: - 8-digit card number prefixes only apply to Discover, JCB, Mastercard, UnionPay, and Visa brands with 16-digit card numbers or more. - Any card with less than 16-digit numbers will return a 6-digit prefix even when the transientTokenResponseOptions.includeCardPrefix field is set to true. - Any card brand other than Discover, JCB, Mastercard, UnionPay, or Visa will return a 6-digit prefix even when the transientTokenResponseOptions.includeCardPrefix field is set to true. - If any card brand is co-branded with Discover, JCB, Mastercard, UnionPay, or Visa, an 8-digit prefix will be returned if the transientTokenResponseOptions.includeCardPrefix field is set to true.&lt;br&gt;&lt;br&gt;  **Important:**  If your application does NOT require a card number prefix for routing or identification purposes, set the transientTokenResponseOptions.includeCardPrefix field to False.  This will minimize your personal data exposure.&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center and if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="includeCardPrefix", EmitDefaultValue=false)]
+        [JsonPropertyName("includeCardPrefix")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IncludeCardPrefix { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsTransientTokenResponseOptions {\n");
-            if (IncludeCardPrefix != null) sb.Append("  IncludeCardPrefix: ").Append(IncludeCardPrefix).Append("\n");
+            if (IncludeCardPrefix != null) sb.Append("  IncludeCardPrefix: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsTransientTokenResponseOptions", "includeCardPrefix", IncludeCardPrefix.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsTransientTokenResponseOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

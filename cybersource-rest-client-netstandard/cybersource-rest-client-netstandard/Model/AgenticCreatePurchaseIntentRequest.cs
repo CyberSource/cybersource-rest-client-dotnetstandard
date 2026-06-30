@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticCreatePurchaseIntentRequest" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected AgenticCreatePurchaseIntentRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticCreatePurchaseIntentRequest" /> class.
@@ -46,7 +46,7 @@ namespace CyberSource.Model
         /// <param name="BuyerInformation">BuyerInformation.</param>
         /// <param name="IsRecurring">Indicates whether the transaction is recurring. Default value is false..</param>
         /// <param name="ConsumerPrompt">Recap - A summary or condensed version of user prompts that leads to the purchase..</param>
-        public AgenticCreatePurchaseIntentRequest(string ClientCorrelationId = default(string), Acpv1tokensPaymentInformation PaymentInformation = default(Acpv1tokensPaymentInformation), Acpv1tokensDeviceInformation DeviceInformation = default(Acpv1tokensDeviceInformation), List<Acpv1tokensAssuranceData> AssuranceData = default(List<Acpv1tokensAssuranceData>), List<Acpv1instructionsMandates> Mandates = default(List<Acpv1instructionsMandates>), Acpv1tokensBuyerInformation BuyerInformation = default(Acpv1tokensBuyerInformation), bool? IsRecurring = default(bool?), string ConsumerPrompt = default(string))
+        public AgenticCreatePurchaseIntentRequest(string ClientCorrelationId = default(string), Iccv1tokensPaymentInformation PaymentInformation = default(Iccv1tokensPaymentInformation), Iccv1tokensDeviceInformation DeviceInformation = default(Iccv1tokensDeviceInformation), List<Iccv1tokensAssuranceData> AssuranceData = default(List<Iccv1tokensAssuranceData>), List<Iccv1instructionsMandates> Mandates = default(List<Iccv1instructionsMandates>), Iccv1tokensBuyerInformation BuyerInformation = default(Iccv1tokensBuyerInformation), bool? IsRecurring = default(bool?), string ConsumerPrompt = default(string))
         {
             this.ClientCorrelationId = ClientCorrelationId;
             this.PaymentInformation = PaymentInformation;
@@ -62,53 +62,61 @@ namespace CyberSource.Model
         /// Client Correlation Id used during the tokenization or during FIDO assertion.
         /// </summary>
         /// <value>Client Correlation Id used during the tokenization or during FIDO assertion.</value>
-        [DataMember(Name="clientCorrelationId", EmitDefaultValue=false)]
+        [JsonPropertyName("clientCorrelationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientCorrelationId { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInformation
         /// </summary>
-        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
-        public Acpv1tokensPaymentInformation PaymentInformation { get; set; }
+        [JsonPropertyName("paymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DeviceInformation
         /// </summary>
-        [DataMember(Name="deviceInformation", EmitDefaultValue=false)]
-        public Acpv1tokensDeviceInformation DeviceInformation { get; set; }
+        [JsonPropertyName("deviceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensDeviceInformation DeviceInformation { get; set; }
 
         /// <summary>
         /// Assurance data.
         /// </summary>
         /// <value>Assurance data.</value>
-        [DataMember(Name="assuranceData", EmitDefaultValue=false)]
-        public List<Acpv1tokensAssuranceData> AssuranceData { get; set; }
+        [JsonPropertyName("assuranceData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public List<Iccv1tokensAssuranceData> AssuranceData { get; set; }
 
         /// <summary>
         /// Mandate data.
         /// </summary>
         /// <value>Mandate data.</value>
-        [DataMember(Name="mandates", EmitDefaultValue=false)]
-        public List<Acpv1instructionsMandates> Mandates { get; set; }
+        [JsonPropertyName("mandates")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public List<Iccv1instructionsMandates> Mandates { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerInformation
         /// </summary>
-        [DataMember(Name="buyerInformation", EmitDefaultValue=false)]
-        public Acpv1tokensBuyerInformation BuyerInformation { get; set; }
+        [JsonPropertyName("buyerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensBuyerInformation BuyerInformation { get; set; }
 
         /// <summary>
         /// Indicates whether the transaction is recurring. Default value is false.
         /// </summary>
         /// <value>Indicates whether the transaction is recurring. Default value is false.</value>
-        [DataMember(Name="isRecurring", EmitDefaultValue=false)]
+        [JsonPropertyName("isRecurring")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IsRecurring { get; set; }
 
         /// <summary>
         /// Recap - A summary or condensed version of user prompts that leads to the purchase.
         /// </summary>
         /// <value>Recap - A summary or condensed version of user prompts that leads to the purchase.</value>
-        [DataMember(Name="consumerPrompt", EmitDefaultValue=false)]
+        [JsonPropertyName("consumerPrompt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ConsumerPrompt { get; set; }
 
         /// <summary>
@@ -119,14 +127,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class AgenticCreatePurchaseIntentRequest {\n");
-            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(ClientCorrelationId).Append("\n");
-            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
-            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(DeviceInformation).Append("\n");
-            if (AssuranceData != null) sb.Append("  AssuranceData: ").Append(AssuranceData).Append("\n");
-            if (Mandates != null) sb.Append("  Mandates: ").Append(Mandates).Append("\n");
-            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(BuyerInformation).Append("\n");
-            if (IsRecurring != null) sb.Append("  IsRecurring: ").Append(IsRecurring).Append("\n");
-            if (ConsumerPrompt != null) sb.Append("  ConsumerPrompt: ").Append(ConsumerPrompt).Append("\n");
+            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCreatePurchaseIntentRequest", "clientCorrelationId", ClientCorrelationId.ToString())).Append("\n");
+            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCreatePurchaseIntentRequest", "paymentInformation", PaymentInformation.ToString())).Append("\n");
+            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCreatePurchaseIntentRequest", "deviceInformation", DeviceInformation.ToString())).Append("\n");
+            if (AssuranceData != null) sb.Append("  AssuranceData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCreatePurchaseIntentRequest", "assuranceData", AssuranceData.ToString())).Append("\n");
+            if (Mandates != null) sb.Append("  Mandates: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCreatePurchaseIntentRequest", "mandates", Mandates.ToString())).Append("\n");
+            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCreatePurchaseIntentRequest", "buyerInformation", BuyerInformation.ToString())).Append("\n");
+            if (IsRecurring != null) sb.Append("  IsRecurring: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCreatePurchaseIntentRequest", "isRecurring", IsRecurring.ToString())).Append("\n");
+            if (ConsumerPrompt != null) sb.Append("  ConsumerPrompt: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCreatePurchaseIntentRequest", "consumerPrompt", ConsumerPrompt.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -137,7 +145,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("AgenticCreatePurchaseIntentRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

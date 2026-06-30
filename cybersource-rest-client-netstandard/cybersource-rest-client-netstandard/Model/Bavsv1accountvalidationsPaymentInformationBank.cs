@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Bavsv1accountvalidationsPaymentInformationBank" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Bavsv1accountvalidationsPaymentInformationBank() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Bavsv1accountvalidationsPaymentInformationBank" /> class.
@@ -50,13 +50,15 @@ namespace CyberSource.Model
         /// Bank routing number. This is also called the transit number.  Non-Negative String, containing only digits. 
         /// </summary>
         /// <value>Bank routing number. This is also called the transit number.  Non-Negative String, containing only digits. </value>
-        [DataMember(Name="routingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("routingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoutingNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets Account
         /// </summary>
-        [DataMember(Name="account", EmitDefaultValue=false)]
+        [JsonPropertyName("account")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Bavsv1accountvalidationsPaymentInformationBankAccount Account { get; set; }
 
         /// <summary>
@@ -67,8 +69,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Bavsv1accountvalidationsPaymentInformationBank {\n");
-            if (RoutingNumber != null) sb.Append("  RoutingNumber: ").Append(RoutingNumber).Append("\n");
-            if (Account != null) sb.Append("  Account: ").Append(Account).Append("\n");
+            if (RoutingNumber != null) sb.Append("  RoutingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Bavsv1accountvalidationsPaymentInformationBank", "routingNumber", RoutingNumber.ToString())).Append("\n");
+            if (Account != null) sb.Append("  Account: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Bavsv1accountvalidationsPaymentInformationBank", "account", Account.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -79,7 +81,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Bavsv1accountvalidationsPaymentInformationBank", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// The PayPal-generated ID for the token. 
         /// </summary>
         /// <value>The PayPal-generated ID for the token. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Indicates the type of vaulting relationship. Valid values: - \&quot;MERCHANT\&quot;: Single merchant relationship. - \&quot;PLATFORM\&quot;: Platform hosting multiple merchants. 
         /// </summary>
         /// <value>Indicates the type of vaulting relationship. Valid values: - \&quot;MERCHANT\&quot;: Single merchant relationship. - \&quot;PLATFORM\&quot;: Platform hosting multiple merchants. </value>
-        [DataMember(Name="usageType", EmitDefaultValue=false)]
+        [JsonPropertyName("usageType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UsageType { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse201PaymentInformationTokenizedPaymentMethod {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (UsageType != null) sb.Append("  UsageType: ").Append(UsageType).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse201PaymentInformationTokenizedPaymentMethod", "id", Id.ToString())).Append("\n");
+            if (UsageType != null) sb.Append("  UsageType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse201PaymentInformationTokenizedPaymentMethod", "usageType", UsageType.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse201PaymentInformationTokenizedPaymentMethod", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

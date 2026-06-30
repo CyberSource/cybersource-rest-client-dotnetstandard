@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Aud
         /// </summary>
-        [DataMember(Name="aud", EmitDefaultValue=false)]
+        [JsonPropertyName("aud")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Aud { get; set; }
 
         /// <summary>
         /// Gets or Sets ClientId
         /// </summary>
-        [DataMember(Name="client_id", EmitDefaultValue=false)]
+        [JsonPropertyName("client_id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientId { get; set; }
 
         /// <summary>
         /// Gets or Sets KeyId
         /// </summary>
-        [DataMember(Name="keyId", EmitDefaultValue=false)]
+        [JsonPropertyName("keyId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string KeyId { get; set; }
 
         /// <summary>
         /// Gets or Sets Scope
         /// </summary>
-        [DataMember(Name="scope", EmitDefaultValue=false)]
+        [JsonPropertyName("scope")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Scope { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Notificationsubscriptionsv2webhooksSecurityPolicyConfigAdditionalConfig {\n");
-            if (Aud != null) sb.Append("  Aud: ").Append(Aud).Append("\n");
-            if (ClientId != null) sb.Append("  ClientId: ").Append(ClientId).Append("\n");
-            if (KeyId != null) sb.Append("  KeyId: ").Append(KeyId).Append("\n");
-            if (Scope != null) sb.Append("  Scope: ").Append(Scope).Append("\n");
+            if (Aud != null) sb.Append("  Aud: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksSecurityPolicyConfigAdditionalConfig", "aud", Aud.ToString())).Append("\n");
+            if (ClientId != null) sb.Append("  ClientId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksSecurityPolicyConfigAdditionalConfig", "client_id", ClientId.ToString())).Append("\n");
+            if (KeyId != null) sb.Append("  KeyId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksSecurityPolicyConfigAdditionalConfig", "keyId", KeyId.ToString())).Append("\n");
+            if (Scope != null) sb.Append("  Scope: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksSecurityPolicyConfigAdditionalConfig", "scope", Scope.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Notificationsubscriptionsv2webhooksSecurityPolicyConfigAdditionalConfig", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

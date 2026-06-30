@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,27 +49,31 @@ namespace CyberSource.Model
         /// This field indicates whether the transaction is a merchant-initiated transaction or customer-initiated transaction.  Valid values: - **customer** - **merchant** 
         /// </summary>
         /// <value>This field indicates whether the transaction is a merchant-initiated transaction or customer-initiated transaction.  Valid values: - **customer** - **merchant** </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Indicates to the issuing bank two things: - The merchant has received consent from the cardholder to store their card details on file - The merchant wants the issuing bank to check out the card details before the merchant initiates their first transaction for this cardholder. The purpose of the merchant-initiated transaction is to ensure that the cardholder&#39;s credentials are valid (that the card is not stolen or has restrictions) and that the card details are good to be stored on the merchant&#39;s file for future transactions.  Valid values: - &#x60;Y&#x60; means merchant will use this transaction to store payment credentials for follow-up merchant-initiated transactions. - &#x60;N&#x60; means merchant will not use this transaction to store payment credentials for follow-up merchant-initiated transactions.  **NOTE:** The value for this field does not correspond to any data in the TC 33 capture file5.  This field is supported only for Visa transactions on CyberSource through VisaNet. 
         /// </summary>
         /// <value>Indicates to the issuing bank two things: - The merchant has received consent from the cardholder to store their card details on file - The merchant wants the issuing bank to check out the card details before the merchant initiates their first transaction for this cardholder. The purpose of the merchant-initiated transaction is to ensure that the cardholder&#39;s credentials are valid (that the card is not stolen or has restrictions) and that the card details are good to be stored on the merchant&#39;s file for future transactions.  Valid values: - &#x60;Y&#x60; means merchant will use this transaction to store payment credentials for follow-up merchant-initiated transactions. - &#x60;N&#x60; means merchant will not use this transaction to store payment credentials for follow-up merchant-initiated transactions.  **NOTE:** The value for this field does not correspond to any data in the TC 33 capture file5.  This field is supported only for Visa transactions on CyberSource through VisaNet. </value>
-        [DataMember(Name="credentialStoredOnFile", EmitDefaultValue=false)]
+        [JsonPropertyName("credentialStoredOnFile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CredentialStoredOnFile { get; set; }
 
         /// <summary>
         /// Indicates to an issuing bank whether a merchant-initiated transaction came from a card that was already stored on file.  Possible values: - **Y** means the merchant-initiated transaction came from a card that was already stored on file. - **N**  means the merchant-initiated transaction came from a card that was not stored on file. 
         /// </summary>
         /// <value>Indicates to an issuing bank whether a merchant-initiated transaction came from a card that was already stored on file.  Possible values: - **Y** means the merchant-initiated transaction came from a card that was already stored on file. - **N**  means the merchant-initiated transaction came from a card that was not stored on file. </value>
-        [DataMember(Name="storedCredentialUsed", EmitDefaultValue=false)]
+        [JsonPropertyName("storedCredentialUsed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StoredCredentialUsed { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInitiatedTransaction
         /// </summary>
-        [DataMember(Name="merchantInitiatedTransaction", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantInitiatedTransaction")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public MerchantInitiatedTransactionObject MerchantInitiatedTransaction { get; set; }
 
         /// <summary>
@@ -80,10 +84,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptionsInitiator {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (CredentialStoredOnFile != null) sb.Append("  CredentialStoredOnFile: ").Append(CredentialStoredOnFile).Append("\n");
-            if (StoredCredentialUsed != null) sb.Append("  StoredCredentialUsed: ").Append(StoredCredentialUsed).Append("\n");
-            if (MerchantInitiatedTransaction != null) sb.Append("  MerchantInitiatedTransaction: ").Append(MerchantInitiatedTransaction).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptionsInitiator", "type", Type.ToString())).Append("\n");
+            if (CredentialStoredOnFile != null) sb.Append("  CredentialStoredOnFile: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptionsInitiator", "credentialStoredOnFile", CredentialStoredOnFile.ToString())).Append("\n");
+            if (StoredCredentialUsed != null) sb.Append("  StoredCredentialUsed: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptionsInitiator", "storedCredentialUsed", StoredCredentialUsed.ToString())).Append("\n");
+            if (MerchantInitiatedTransaction != null) sb.Append("  MerchantInitiatedTransaction: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptionsInitiator", "merchantInitiatedTransaction", MerchantInitiatedTransaction.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -94,7 +98,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptionsInitiator", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

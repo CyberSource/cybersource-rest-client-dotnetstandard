@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,47 +55,54 @@ namespace CyberSource.Model
         /// IATA Code for the actual final destination that the customer intends to travel to. It should be a destination on the completeRoute. 
         /// </summary>
         /// <value>IATA Code for the actual final destination that the customer intends to travel to. It should be a destination on the completeRoute. </value>
-        [DataMember(Name="actualFinalDestination", EmitDefaultValue=false)]
+        [JsonPropertyName("actualFinalDestination")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ActualFinalDestination { get; set; }
 
         /// <summary>
         /// Concatenation of individual travel legs in the format ORIG1-DEST1[:ORIG2-DEST2...:ORIGn-DESTn], for example, SFO-JFK:JFK-LHR:LHR-CDG. For airport codes, see the IATA Airline and Airport Code Search. Note In your request, send either the complete route or the individual legs (_leg#_orig and _leg#_dest). If you send all the fields, the value of _complete_route takes precedence over that of the _leg# fields. 
         /// </summary>
         /// <value>Concatenation of individual travel legs in the format ORIG1-DEST1[:ORIG2-DEST2...:ORIGn-DESTn], for example, SFO-JFK:JFK-LHR:LHR-CDG. For airport codes, see the IATA Airline and Airport Code Search. Note In your request, send either the complete route or the individual legs (_leg#_orig and _leg#_dest). If you send all the fields, the value of _complete_route takes precedence over that of the _leg# fields. </value>
-        [DataMember(Name="completeRoute", EmitDefaultValue=false)]
+        [JsonPropertyName("completeRoute")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CompleteRoute { get; set; }
 
         /// <summary>
         /// Departure date and time of the first leg of the trip. Use one of the following formats:   - yyyy-MM-dd HH:mm z   - yyyy-MM-dd hh:mm a z   - yyyy-MM-dd hh:mma z   HH &#x3D; hour in 24-hour format   hh &#x3D; hour in 12-hour format   a &#x3D; am or pm (case insensitive)   z &#x3D; time zone of the departing flight, for example: If the   airline is based in city A, but the flight departs from city   B, z is the time zone of city B at the time of departure. Important For travel information, use GMT instead of UTC, or use the local time zone. Examples 2011-03-20 11:30 PM PDT 2011-03-20 11:30pm GMT 2011-03-20 11:30pm GMT-05:00 Eastern Standard Time: GMT-05:00 or EST Note When specifying an offset from GMT, the format must be exactly as specified in the example. Insert no spaces between the time zone and the offset. 
         /// </summary>
         /// <value>Departure date and time of the first leg of the trip. Use one of the following formats:   - yyyy-MM-dd HH:mm z   - yyyy-MM-dd hh:mm a z   - yyyy-MM-dd hh:mma z   HH &#x3D; hour in 24-hour format   hh &#x3D; hour in 12-hour format   a &#x3D; am or pm (case insensitive)   z &#x3D; time zone of the departing flight, for example: If the   airline is based in city A, but the flight departs from city   B, z is the time zone of city B at the time of departure. Important For travel information, use GMT instead of UTC, or use the local time zone. Examples 2011-03-20 11:30 PM PDT 2011-03-20 11:30pm GMT 2011-03-20 11:30pm GMT-05:00 Eastern Standard Time: GMT-05:00 or EST Note When specifying an offset from GMT, the format must be exactly as specified in the example. Insert no spaces between the time zone and the offset. </value>
-        [DataMember(Name="departureTime", EmitDefaultValue=false)]
+        [JsonPropertyName("departureTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DepartureTime { get; set; }
 
         /// <summary>
         /// Type of travel, for example one way or round trip.
         /// </summary>
         /// <value>Type of travel, for example one way or round trip.</value>
-        [DataMember(Name="journeyType", EmitDefaultValue=false)]
+        [JsonPropertyName("journeyType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string JourneyType { get; set; }
 
         /// <summary>
         /// Gets or Sets Legs
         /// </summary>
-        [DataMember(Name="legs", EmitDefaultValue=false)]
+        [JsonPropertyName("legs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Riskv1decisionsTravelInformationLegs> Legs { get; set; }
 
         /// <summary>
         /// Number of passengers for whom the ticket was issued. If you do not include this field in your request, CyberSource uses a default value of 1. Required for American Express SafeKey (U.S.) for travel-related requests. 
         /// </summary>
         /// <value>Number of passengers for whom the ticket was issued. If you do not include this field in your request, CyberSource uses a default value of 1. Required for American Express SafeKey (U.S.) for travel-related requests. </value>
-        [DataMember(Name="numberOfPassengers", EmitDefaultValue=false)]
+        [JsonPropertyName("numberOfPassengers")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? NumberOfPassengers { get; set; }
 
         /// <summary>
         /// Gets or Sets Passengers
         /// </summary>
-        [DataMember(Name="passengers", EmitDefaultValue=false)]
+        [JsonPropertyName("passengers")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Riskv1decisionsTravelInformationPassengers> Passengers { get; set; }
 
         /// <summary>
@@ -106,13 +113,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1decisionsTravelInformation {\n");
-            if (ActualFinalDestination != null) sb.Append("  ActualFinalDestination: ").Append(ActualFinalDestination).Append("\n");
-            if (CompleteRoute != null) sb.Append("  CompleteRoute: ").Append(CompleteRoute).Append("\n");
-            if (DepartureTime != null) sb.Append("  DepartureTime: ").Append(DepartureTime).Append("\n");
-            if (JourneyType != null) sb.Append("  JourneyType: ").Append(JourneyType).Append("\n");
-            if (Legs != null) sb.Append("  Legs: ").Append(Legs).Append("\n");
-            if (NumberOfPassengers != null) sb.Append("  NumberOfPassengers: ").Append(NumberOfPassengers).Append("\n");
-            if (Passengers != null) sb.Append("  Passengers: ").Append(Passengers).Append("\n");
+            if (ActualFinalDestination != null) sb.Append("  ActualFinalDestination: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsTravelInformation", "actualFinalDestination", ActualFinalDestination.ToString())).Append("\n");
+            if (CompleteRoute != null) sb.Append("  CompleteRoute: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsTravelInformation", "completeRoute", CompleteRoute.ToString())).Append("\n");
+            if (DepartureTime != null) sb.Append("  DepartureTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsTravelInformation", "departureTime", DepartureTime.ToString())).Append("\n");
+            if (JourneyType != null) sb.Append("  JourneyType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsTravelInformation", "journeyType", JourneyType.ToString())).Append("\n");
+            if (Legs != null) sb.Append("  Legs: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsTravelInformation", "legs", Legs.ToString())).Append("\n");
+            if (NumberOfPassengers != null) sb.Append("  NumberOfPassengers: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsTravelInformation", "numberOfPassengers", NumberOfPassengers.ToString())).Append("\n");
+            if (Passengers != null) sb.Append("  Passengers: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsTravelInformation", "passengers", Passengers.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -123,7 +130,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1decisionsTravelInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

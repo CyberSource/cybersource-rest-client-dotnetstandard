@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Nan
         /// </summary>
-        [DataMember(Name="nan", EmitDefaultValue=false)]
+        [JsonPropertyName("nan")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Nan { get; set; }
 
         /// <summary>
         /// Gets or Sets Ned
         /// </summary>
-        [DataMember(Name="ned", EmitDefaultValue=false)]
+        [JsonPropertyName("ned")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Ned { get; set; }
 
         /// <summary>
         /// Gets or Sets Acl
         /// </summary>
-        [DataMember(Name="acl", EmitDefaultValue=false)]
+        [JsonPropertyName("acl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Acl { get; set; }
 
         /// <summary>
         /// Gets or Sets Cch
         /// </summary>
-        [DataMember(Name="cch", EmitDefaultValue=false)]
+        [JsonPropertyName("cch")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Cch { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse20013Billing {\n");
-            if (Nan != null) sb.Append("  Nan: ").Append(Nan).Append("\n");
-            if (Ned != null) sb.Append("  Ned: ").Append(Ned).Append("\n");
-            if (Acl != null) sb.Append("  Acl: ").Append(Acl).Append("\n");
-            if (Cch != null) sb.Append("  Cch: ").Append(Cch).Append("\n");
+            if (Nan != null) sb.Append("  Nan: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013Billing", "nan", Nan.ToString())).Append("\n");
+            if (Ned != null) sb.Append("  Ned: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013Billing", "ned", Ned.ToString())).Append("\n");
+            if (Acl != null) sb.Append("  Acl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013Billing", "acl", Acl.ToString())).Append("\n");
+            if (Cch != null) sb.Append("  Cch: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20013Billing", "cch", Cch.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse20013Billing", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

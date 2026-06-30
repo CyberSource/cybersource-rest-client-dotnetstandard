@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -59,63 +59,72 @@ namespace CyberSource.Model
         /// Border Color 
         /// </summary>
         /// <value>Border Color </value>
-        [DataMember(Name="border", EmitDefaultValue=false)]
+        [JsonPropertyName("border")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Border { get; set; }
 
         /// <summary>
         /// Selected Border Color 
         /// </summary>
         /// <value>Selected Border Color </value>
-        [DataMember(Name="borderSelected", EmitDefaultValue=false)]
+        [JsonPropertyName("borderSelected")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BorderSelected { get; set; }
 
         /// <summary>
         /// Button Color 
         /// </summary>
         /// <value>Button Color </value>
-        [DataMember(Name="button", EmitDefaultValue=false)]
+        [JsonPropertyName("button")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Button { get; set; }
 
         /// <summary>
         /// Button Text Color 
         /// </summary>
         /// <value>Button Text Color </value>
-        [DataMember(Name="buttonText", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonText")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonText { get; set; }
 
         /// <summary>
         /// Checkbox Color 
         /// </summary>
         /// <value>Checkbox Color </value>
-        [DataMember(Name="checkbox", EmitDefaultValue=false)]
+        [JsonPropertyName("checkbox")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Checkbox { get; set; }
 
         /// <summary>
         /// Checkbox Checkmark Color 
         /// </summary>
         /// <value>Checkbox Checkmark Color </value>
-        [DataMember(Name="checkboxCheckMark", EmitDefaultValue=false)]
+        [JsonPropertyName("checkboxCheckMark")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CheckboxCheckMark { get; set; }
 
         /// <summary>
         /// Header Color 
         /// </summary>
         /// <value>Header Color </value>
-        [DataMember(Name="header", EmitDefaultValue=false)]
+        [JsonPropertyName("header")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Header { get; set; }
 
         /// <summary>
         /// Link Color 
         /// </summary>
         /// <value>Link Color </value>
-        [DataMember(Name="link", EmitDefaultValue=false)]
+        [JsonPropertyName("link")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Link { get; set; }
 
         /// <summary>
         /// Text Color 
         /// </summary>
         /// <value>Text Color </value>
-        [DataMember(Name="text", EmitDefaultValue=false)]
+        [JsonPropertyName("text")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Text { get; set; }
 
         /// <summary>
@@ -126,15 +135,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentreferencesUserInterfaceColor {\n");
-            if (Border != null) sb.Append("  Border: ").Append(Border).Append("\n");
-            if (BorderSelected != null) sb.Append("  BorderSelected: ").Append(BorderSelected).Append("\n");
-            if (Button != null) sb.Append("  Button: ").Append(Button).Append("\n");
-            if (ButtonText != null) sb.Append("  ButtonText: ").Append(ButtonText).Append("\n");
-            if (Checkbox != null) sb.Append("  Checkbox: ").Append(Checkbox).Append("\n");
-            if (CheckboxCheckMark != null) sb.Append("  CheckboxCheckMark: ").Append(CheckboxCheckMark).Append("\n");
-            if (Header != null) sb.Append("  Header: ").Append(Header).Append("\n");
-            if (Link != null) sb.Append("  Link: ").Append(Link).Append("\n");
-            if (Text != null) sb.Append("  Text: ").Append(Text).Append("\n");
+            if (Border != null) sb.Append("  Border: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterfaceColor", "border", Border.ToString())).Append("\n");
+            if (BorderSelected != null) sb.Append("  BorderSelected: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterfaceColor", "borderSelected", BorderSelected.ToString())).Append("\n");
+            if (Button != null) sb.Append("  Button: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterfaceColor", "button", Button.ToString())).Append("\n");
+            if (ButtonText != null) sb.Append("  ButtonText: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterfaceColor", "buttonText", ButtonText.ToString())).Append("\n");
+            if (Checkbox != null) sb.Append("  Checkbox: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterfaceColor", "checkbox", Checkbox.ToString())).Append("\n");
+            if (CheckboxCheckMark != null) sb.Append("  CheckboxCheckMark: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterfaceColor", "checkboxCheckMark", CheckboxCheckMark.ToString())).Append("\n");
+            if (Header != null) sb.Append("  Header: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterfaceColor", "header", Header.ToString())).Append("\n");
+            if (Link != null) sb.Append("  Link: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterfaceColor", "link", Link.ToString())).Append("\n");
+            if (Text != null) sb.Append("  Text: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesUserInterfaceColor", "text", Text.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -145,7 +154,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentreferencesUserInterfaceColor", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

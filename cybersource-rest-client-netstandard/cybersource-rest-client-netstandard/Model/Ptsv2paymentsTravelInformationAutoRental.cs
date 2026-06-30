@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -129,305 +129,349 @@ namespace CyberSource.Model
         /// No Show Indicator provides an indicator noting that the individual did not show up after making a reservation for a vehicle. Possible values: - true - false 
         /// </summary>
         /// <value>No Show Indicator provides an indicator noting that the individual did not show up after making a reservation for a vehicle. Possible values: - true - false </value>
-        [DataMember(Name="noShowIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("noShowIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? NoShowIndicator { get; set; }
 
         /// <summary>
         /// Name of the individual making the rental agreement.  Valid data lengths by card:  |Card Specific Validation|VISA|MasterCard|Discover|AMEX| |- -- |- -- |- -- |- -- | | Filed Length| 40| 40| 29| 26| | Field Type| AN| ANS| AN| AN| | M/O/C| O| M| M| M| 
         /// </summary>
         /// <value>Name of the individual making the rental agreement.  Valid data lengths by card:  |Card Specific Validation|VISA|MasterCard|Discover|AMEX| |- -- |- -- |- -- |- -- | | Filed Length| 40| 40| 29| 26| | Field Type| AN| ANS| AN| AN| | M/O/C| O| M| M| M| </value>
-        [DataMember(Name="customerName", EmitDefaultValue=false)]
+        [JsonPropertyName("customerName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerName { get; set; }
 
         /// <summary>
         /// Classification of the rented auto.  **NOTE** For VISA, this is a 2-byte optional code.  Valid values for American Express &amp; MasterCard:  |American Express |MasterCard |Description| |- -- |- -- |- -- | | 0001| 0001| Mini| | 0002| 0002| Subcompact| | 0003| 0003| Economy| | 0004| 0004| Compact| | 0005| 0005| Midsize| | 0006| 0006| Intermediate| | 0007| 0007| Standard| | 0008| 0008| Fulll size| | 0009| 0009| Luxury| | 0010| 0010| Premium| | 0011| 0011| Minivan| | 0012| 0012| 12-passenger van| | 0013| 0013| Moving van| | 0014| 0014| 15-passenger van| | 0015| 0015| Cargo van| | 0016| 0016| 12-foot truck| | 0017| 0017| 20-foot truck| | 0018| 0018| 24-foot truck| | 0019| 0019| 26-foot truck| | 0020| 0020| Moped| | 0021| 0021| Stretch| | 0022| 0022| Regular| | 0023| 0023| Unique| | 0024| 0024| Exotic| | 0025| 0025| Small/medium truck| | 0026| 0026| Large truck| | 0027| 0027| Small SUV| | 0028| 0028| Medium SUV| | 0029| 0029| Large SUV| | 0030| 0030| Exotic SUV| | 9999| 9999| Miscellaneous|  Additional Values allowed **only** for &#x60;American Express&#x60;:  |American Express|MasterCard|Description| |- -- |- -- |- -- | | 0031| NA| Four Wheel Drive| | 0032| NA| Special| | 0099| NA| Taxi| 
         /// </summary>
         /// <value>Classification of the rented auto.  **NOTE** For VISA, this is a 2-byte optional code.  Valid values for American Express &amp; MasterCard:  |American Express |MasterCard |Description| |- -- |- -- |- -- | | 0001| 0001| Mini| | 0002| 0002| Subcompact| | 0003| 0003| Economy| | 0004| 0004| Compact| | 0005| 0005| Midsize| | 0006| 0006| Intermediate| | 0007| 0007| Standard| | 0008| 0008| Fulll size| | 0009| 0009| Luxury| | 0010| 0010| Premium| | 0011| 0011| Minivan| | 0012| 0012| 12-passenger van| | 0013| 0013| Moving van| | 0014| 0014| 15-passenger van| | 0015| 0015| Cargo van| | 0016| 0016| 12-foot truck| | 0017| 0017| 20-foot truck| | 0018| 0018| 24-foot truck| | 0019| 0019| 26-foot truck| | 0020| 0020| Moped| | 0021| 0021| Stretch| | 0022| 0022| Regular| | 0023| 0023| Unique| | 0024| 0024| Exotic| | 0025| 0025| Small/medium truck| | 0026| 0026| Large truck| | 0027| 0027| Small SUV| | 0028| 0028| Medium SUV| | 0029| 0029| Large SUV| | 0030| 0030| Exotic SUV| | 9999| 9999| Miscellaneous|  Additional Values allowed **only** for &#x60;American Express&#x60;:  |American Express|MasterCard|Description| |- -- |- -- |- -- | | 0031| NA| Four Wheel Drive| | 0032| NA| Special| | 0099| NA| Taxi| </value>
-        [DataMember(Name="vehicleClass", EmitDefaultValue=false)]
+        [JsonPropertyName("vehicleClass")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VehicleClass { get; set; }
 
         /// <summary>
         /// Total number of miles driven by the customer. This field is supported only for MasterCard and American Express. 
         /// </summary>
         /// <value>Total number of miles driven by the customer. This field is supported only for MasterCard and American Express. </value>
-        [DataMember(Name="distanceTravelled", EmitDefaultValue=false)]
+        [JsonPropertyName("distanceTravelled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DistanceTravelled { get; set; }
 
         /// <summary>
         /// Miles/Kilometers Indicator shows whether the \&quot;miles\&quot; fields are expressed in miles or kilometers.  Allowed values: - &#x60;K&#x60; - Kilometers - &#x60;M&#x60; - Miles 
         /// </summary>
         /// <value>Miles/Kilometers Indicator shows whether the \&quot;miles\&quot; fields are expressed in miles or kilometers.  Allowed values: - &#x60;K&#x60; - Kilometers - &#x60;M&#x60; - Miles </value>
-        [DataMember(Name="distanceUnit", EmitDefaultValue=false)]
+        [JsonPropertyName("distanceUnit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DistanceUnit { get; set; }
 
         /// <summary>
         /// Date/time the auto was returned to the rental agency. Format: &#x60;&#x60;yyyy-MM-dd HH-mm-ss z&#x60;&#x60; This field is supported for Visa, MasterCard, and American Express. 
         /// </summary>
         /// <value>Date/time the auto was returned to the rental agency. Format: &#x60;&#x60;yyyy-MM-dd HH-mm-ss z&#x60;&#x60; This field is supported for Visa, MasterCard, and American Express. </value>
-        [DataMember(Name="returnDateTime", EmitDefaultValue=false)]
+        [JsonPropertyName("returnDateTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReturnDateTime { get; set; }
 
         /// <summary>
         /// Date/time the auto was picked up from the rental agency. Format: &#x60;yyyy-MM-dd HH-mm-ss z&#x60; This field is supported for Visa, MasterCard, and American Express. 
         /// </summary>
         /// <value>Date/time the auto was picked up from the rental agency. Format: &#x60;yyyy-MM-dd HH-mm-ss z&#x60; This field is supported for Visa, MasterCard, and American Express. </value>
-        [DataMember(Name="rentalDateTime", EmitDefaultValue=false)]
+        [JsonPropertyName("rentalDateTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RentalDateTime { get; set; }
 
         /// <summary>
         /// Maximum number of free miles or kilometers allowed to a customer for the duration of the auto rental agreement. This field is supported only for MasterCard and American Express. 
         /// </summary>
         /// <value>Maximum number of free miles or kilometers allowed to a customer for the duration of the auto rental agreement. This field is supported only for MasterCard and American Express. </value>
-        [DataMember(Name="maxFreeDistance", EmitDefaultValue=false)]
+        [JsonPropertyName("maxFreeDistance")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MaxFreeDistance { get; set; }
 
         /// <summary>
         /// Used for MC and Discover  Valid values: - &#x60;true&#x60; - Yes (insurance was purchased) - &#x60;false&#x60; - No (insurance was not purchased) 
         /// </summary>
         /// <value>Used for MC and Discover  Valid values: - &#x60;true&#x60; - Yes (insurance was purchased) - &#x60;false&#x60; - No (insurance was not purchased) </value>
-        [DataMember(Name="insuranceIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("insuranceIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? InsuranceIndicator { get; set; }
 
         /// <summary>
         /// Used to identify special circumstances applicable to the Card Transaction or Cardholder, such as \&quot;renter\&quot; or \&quot;show\&quot;.  This code is &#x60;2 digit&#x60; value agreed by Merchant and processor. 
         /// </summary>
         /// <value>Used to identify special circumstances applicable to the Card Transaction or Cardholder, such as \&quot;renter\&quot; or \&quot;show\&quot;.  This code is &#x60;2 digit&#x60; value agreed by Merchant and processor. </value>
-        [DataMember(Name="programCode", EmitDefaultValue=false)]
+        [JsonPropertyName("programCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProgramCode { get; set; }
 
         /// <summary>
         /// Gets or Sets ReturnAddress
         /// </summary>
-        [DataMember(Name="returnAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("returnAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformationAutoRentalReturnAddress ReturnAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets RentalAddress
         /// </summary>
-        [DataMember(Name="rentalAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("rentalAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformationAutoRentalRentalAddress RentalAddress { get; set; }
 
         /// <summary>
         /// Auto rental agency&#39;s agreement (invoice) number provided to the customer. It is used to trace any inquiries about transactions. This field is supported for Visa, MasterCard, and American Express. This Merchant-defined value, which may be composed of any combination of characters and/or numerals, may become part of the descriptive bill on the Cardmember&#39;s statement. 
         /// </summary>
         /// <value>Auto rental agency&#39;s agreement (invoice) number provided to the customer. It is used to trace any inquiries about transactions. This field is supported for Visa, MasterCard, and American Express. This Merchant-defined value, which may be composed of any combination of characters and/or numerals, may become part of the descriptive bill on the Cardmember&#39;s statement. </value>
-        [DataMember(Name="agreementNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("agreementNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AgreementNumber { get; set; }
 
         /// <summary>
         /// Odometer reading at time of vehicle rental. 
         /// </summary>
         /// <value>Odometer reading at time of vehicle rental. </value>
-        [DataMember(Name="odometerReading", EmitDefaultValue=false)]
+        [JsonPropertyName("odometerReading")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OdometerReading { get; set; }
 
         /// <summary>
         /// This field contains a unique identifier assigned by the company to the vehicle. 
         /// </summary>
         /// <value>This field contains a unique identifier assigned by the company to the vehicle. </value>
-        [DataMember(Name="vehicleIdentificationNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("vehicleIdentificationNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VehicleIdentificationNumber { get; set; }
 
         /// <summary>
         /// Corporate Identifier provides the unique identifier of the corporation or entity renting the vehicle:  |Card Specific Validation|VISA|MasterCard|Discover|AMEX| |- -- |- -- |- -- |- -- | | Filed Length| NA| 12| NA| NA| | Field Type| NA| AN| NA| NA| | M/O/C| NA| O| NA| NA| 
         /// </summary>
         /// <value>Corporate Identifier provides the unique identifier of the corporation or entity renting the vehicle:  |Card Specific Validation|VISA|MasterCard|Discover|AMEX| |- -- |- -- |- -- |- -- | | Filed Length| NA| 12| NA| NA| | Field Type| NA| AN| NA| NA| | M/O/C| NA| O| NA| NA| </value>
-        [DataMember(Name="companyId", EmitDefaultValue=false)]
+        [JsonPropertyName("companyId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CompanyId { get; set; }
 
         /// <summary>
         /// The number of additional drivers included on the rental agreement not including the individual who signed the rental agreement. 
         /// </summary>
         /// <value>The number of additional drivers included on the rental agreement not including the individual who signed the rental agreement. </value>
-        [DataMember(Name="numberOfAdditionalDrivers", EmitDefaultValue=false)]
+        [JsonPropertyName("numberOfAdditionalDrivers")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NumberOfAdditionalDrivers { get; set; }
 
         /// <summary>
         /// Age of the driver renting the vehicle. 
         /// </summary>
         /// <value>Age of the driver renting the vehicle. </value>
-        [DataMember(Name="driverAge", EmitDefaultValue=false)]
+        [JsonPropertyName("driverAge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DriverAge { get; set; }
 
         /// <summary>
         /// Program code used to identify special circumstances, such as \&quot;frequent renter\&quot; or \&quot;no show\&quot; status for the renter. Possible values: - &#x60;0&#x60;: not applicable (default) - &#x60;1&#x60;: frequent renter - &#x60;2&#x60;: no show  For authorizations, this field is supported only for Visa.  For captures, this field is supported for Visa, MasterCard, and American Express.  Code for special programs applicable to the Card Transaction or the Cardholder. 
         /// </summary>
         /// <value>Program code used to identify special circumstances, such as \&quot;frequent renter\&quot; or \&quot;no show\&quot; status for the renter. Possible values: - &#x60;0&#x60;: not applicable (default) - &#x60;1&#x60;: frequent renter - &#x60;2&#x60;: no show  For authorizations, this field is supported only for Visa.  For captures, this field is supported for Visa, MasterCard, and American Express.  Code for special programs applicable to the Card Transaction or the Cardholder. </value>
-        [DataMember(Name="specialProgramCode", EmitDefaultValue=false)]
+        [JsonPropertyName("specialProgramCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SpecialProgramCode { get; set; }
 
         /// <summary>
         /// Make of the vehicle being rented (e.g., Chevrolet or Ford). 
         /// </summary>
         /// <value>Make of the vehicle being rented (e.g., Chevrolet or Ford). </value>
-        [DataMember(Name="vehicleMake", EmitDefaultValue=false)]
+        [JsonPropertyName("vehicleMake")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VehicleMake { get; set; }
 
         /// <summary>
         /// Model of the vehicle being rented (e.g., Cavalier or Focus). 
         /// </summary>
         /// <value>Model of the vehicle being rented (e.g., Cavalier or Focus). </value>
-        [DataMember(Name="vehicleModel", EmitDefaultValue=false)]
+        [JsonPropertyName("vehicleModel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VehicleModel { get; set; }
 
         /// <summary>
         /// Indicates the time period for which the vehicle rental rate applies (e.g., daily, weekly or monthly). Daily, Weekly and Monthly are valid values. 
         /// </summary>
         /// <value>Indicates the time period for which the vehicle rental rate applies (e.g., daily, weekly or monthly). Daily, Weekly and Monthly are valid values. </value>
-        [DataMember(Name="timePeriod", EmitDefaultValue=false)]
+        [JsonPropertyName("timePeriod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TimePeriod { get; set; }
 
         /// <summary>
         /// Commodity code or International description code used to classify the item. Contact your acquirer for a list of codes. 
         /// </summary>
         /// <value>Commodity code or International description code used to classify the item. Contact your acquirer for a list of codes. </value>
-        [DataMember(Name="commodityCode", EmitDefaultValue=false)]
+        [JsonPropertyName("commodityCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommodityCode { get; set; }
 
         /// <summary>
         /// Customer service telephone number that is used to resolve questions or disputes. Include the area code, exchange, and number. This field is supported only for MasterCard and American Express. 
         /// </summary>
         /// <value>Customer service telephone number that is used to resolve questions or disputes. Include the area code, exchange, and number. This field is supported only for MasterCard and American Express. </value>
-        [DataMember(Name="customerServicePhoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("customerServicePhoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerServicePhoneNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets TaxDetails
         /// </summary>
-        [DataMember(Name="taxDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("taxDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformationAutoRentalTaxDetails TaxDetails { get; set; }
 
         /// <summary>
         /// Insurance charges. Field is conditional and can include decimal point. 
         /// </summary>
         /// <value>Insurance charges. Field is conditional and can include decimal point. </value>
-        [DataMember(Name="insuranceAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("insuranceAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InsuranceAmount { get; set; }
 
         /// <summary>
         /// Extra charges incurred for a one-way rental agreement for the auto. This field is supported only for Visa. 
         /// </summary>
         /// <value>Extra charges incurred for a one-way rental agreement for the auto. This field is supported only for Visa. </value>
-        [DataMember(Name="oneWayDropOffAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("oneWayDropOffAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OneWayDropOffAmount { get; set; }
 
         /// <summary>
         /// For **MasterCard** and **Discover**: Adjusted amount indicator code that indicates any miscellaneous charges incurred after the auto was returned. Possible values: - &#x60;A&#x60; - Drop-off charges - &#x60;B&#x60; - Delivery charges - &#x60;C&#x60; - Parking expenses - &#x60;D&#x60; - Extra hours - &#x60;E&#x60; - Violations - &#x60;X&#x60; - More than one of the above charges  For **American Express**: Audit indicator code that indicates any adjustment for mileage, fuel, auto damage, etc. made to a rental agreement and whether the cardholder was notified.  Possible value for the authorization service: - &#x60;A&#x60; (default): adjustment amount greater than 0 (zero)  Possible values for the capture service: - &#x60;X&#x60; - Multiple adjustments - &#x60;Y&#x60; - One adjustment only; Cardmember notified - &#x60;Z&#x60; - One adjustment only; Cardmember not notified. This value is used as the default if the request does not include this field and includes an adjustment amount greater than 0 (zero). This is an optional field. 
         /// </summary>
         /// <value>For **MasterCard** and **Discover**: Adjusted amount indicator code that indicates any miscellaneous charges incurred after the auto was returned. Possible values: - &#x60;A&#x60; - Drop-off charges - &#x60;B&#x60; - Delivery charges - &#x60;C&#x60; - Parking expenses - &#x60;D&#x60; - Extra hours - &#x60;E&#x60; - Violations - &#x60;X&#x60; - More than one of the above charges  For **American Express**: Audit indicator code that indicates any adjustment for mileage, fuel, auto damage, etc. made to a rental agreement and whether the cardholder was notified.  Possible value for the authorization service: - &#x60;A&#x60; (default): adjustment amount greater than 0 (zero)  Possible values for the capture service: - &#x60;X&#x60; - Multiple adjustments - &#x60;Y&#x60; - One adjustment only; Cardmember notified - &#x60;Z&#x60; - One adjustment only; Cardmember not notified. This value is used as the default if the request does not include this field and includes an adjustment amount greater than 0 (zero). This is an optional field. </value>
-        [DataMember(Name="adjustedAmountIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("adjustedAmountIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdjustedAmountIndicator { get; set; }
 
         /// <summary>
         /// Adjusted Amount indicates whether any miscellaneous charges were incurred after the vehicle was returned.  For authorizations, this field is supported only for American Express.  For captures, this field is supported only for MasterCard and American Express. **NOTE** For American Express, this field is required if the &#x60;travelInformation.autoRental.adjustedAmountIndicator&#x60; field is included in the request and has a value; otherwise, this field is optional.  For all other card types, this field is ignored. 
         /// </summary>
         /// <value>Adjusted Amount indicates whether any miscellaneous charges were incurred after the vehicle was returned.  For authorizations, this field is supported only for American Express.  For captures, this field is supported only for MasterCard and American Express. **NOTE** For American Express, this field is required if the &#x60;travelInformation.autoRental.adjustedAmountIndicator&#x60; field is included in the request and has a value; otherwise, this field is optional.  For all other card types, this field is ignored. </value>
-        [DataMember(Name="adjustedAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("adjustedAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdjustedAmount { get; set; }
 
         /// <summary>
         /// Extra gasoline charges that extend beyond the basic rental agreement. This field is supported only for Visa. 
         /// </summary>
         /// <value>Extra gasoline charges that extend beyond the basic rental agreement. This field is supported only for Visa. </value>
-        [DataMember(Name="fuelCharges", EmitDefaultValue=false)]
+        [JsonPropertyName("fuelCharges")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FuelCharges { get; set; }
 
         /// <summary>
         /// Weekly Rental Amount provides the amount charged for a seven-day rental period. Field - Time Period needs to be populated with Weekly if this field is present 
         /// </summary>
         /// <value>Weekly Rental Amount provides the amount charged for a seven-day rental period. Field - Time Period needs to be populated with Weekly if this field is present </value>
-        [DataMember(Name="weeklyRentalRate", EmitDefaultValue=false)]
+        [JsonPropertyName("weeklyRentalRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WeeklyRentalRate { get; set; }
 
         /// <summary>
         /// Daily auto rental rate charged. This field is supported only for MasterCard and American Express.  Field - Time Period needs to be populated with Daily if this field is present 
         /// </summary>
         /// <value>Daily auto rental rate charged. This field is supported only for MasterCard and American Express.  Field - Time Period needs to be populated with Daily if this field is present </value>
-        [DataMember(Name="dailyRentalRate", EmitDefaultValue=false)]
+        [JsonPropertyName("dailyRentalRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DailyRentalRate { get; set; }
 
         /// <summary>
         /// Rate charged for each mile. This field is supported only for MasterCard and American Express. 
         /// </summary>
         /// <value>Rate charged for each mile. This field is supported only for MasterCard and American Express. </value>
-        [DataMember(Name="ratePerMile", EmitDefaultValue=false)]
+        [JsonPropertyName("ratePerMile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RatePerMile { get; set; }
 
         /// <summary>
         /// Regular Mileage Charge provides the amount charged for regular miles traveled during vehicle rental. Two decimal places 
         /// </summary>
         /// <value>Regular Mileage Charge provides the amount charged for regular miles traveled during vehicle rental. Two decimal places </value>
-        [DataMember(Name="mileageCharge", EmitDefaultValue=false)]
+        [JsonPropertyName("mileageCharge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MileageCharge { get; set; }
 
         /// <summary>
         /// Extra mileage charges that extend beyond the basic rental agreement. This field is supported only for Visa. 
         /// </summary>
         /// <value>Extra mileage charges that extend beyond the basic rental agreement. This field is supported only for Visa. </value>
-        [DataMember(Name="extraMileageCharge", EmitDefaultValue=false)]
+        [JsonPropertyName("extraMileageCharge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExtraMileageCharge { get; set; }
 
         /// <summary>
         /// Extra charges related to a late return of the rented auto. This field is supported only for Visa. 
         /// </summary>
         /// <value>Extra charges related to a late return of the rented auto. This field is supported only for Visa. </value>
-        [DataMember(Name="lateFeeAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("lateFeeAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LateFeeAmount { get; set; }
 
         /// <summary>
         /// (Towing Charges) provides the amount charged to tow the rental vehicle. 
         /// </summary>
         /// <value>(Towing Charges) provides the amount charged to tow the rental vehicle. </value>
-        [DataMember(Name="towingCharge", EmitDefaultValue=false)]
+        [JsonPropertyName("towingCharge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TowingCharge { get; set; }
 
         /// <summary>
         /// (Extra Charges) provides the extra charges associated with the vehicle rental. 
         /// </summary>
         /// <value>(Extra Charges) provides the extra charges associated with the vehicle rental. </value>
-        [DataMember(Name="extraCharge", EmitDefaultValue=false)]
+        [JsonPropertyName("extraCharge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExtraCharge { get; set; }
 
         /// <summary>
         /// Amount charged for renting a Global Positioning Service (GPS). 
         /// </summary>
         /// <value>Amount charged for renting a Global Positioning Service (GPS). </value>
-        [DataMember(Name="gpsCharge", EmitDefaultValue=false)]
+        [JsonPropertyName("gpsCharge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string GpsCharge { get; set; }
 
         /// <summary>
         /// Additional charges incurred for phone usage included on the total bill. 
         /// </summary>
         /// <value>Additional charges incurred for phone usage included on the total bill. </value>
-        [DataMember(Name="phoneCharge", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneCharge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneCharge { get; set; }
 
         /// <summary>
         /// Extra charges incurred due to a parking violation for the auto. This field is supported only for Visa. 
         /// </summary>
         /// <value>Extra charges incurred due to a parking violation for the auto. This field is supported only for Visa. </value>
-        [DataMember(Name="parkingViolationCharge", EmitDefaultValue=false)]
+        [JsonPropertyName("parkingViolationCharge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ParkingViolationCharge { get; set; }
 
         /// <summary>
         /// Total amount charged for all other miscellaneous charges not previously defined. 
         /// </summary>
         /// <value>Total amount charged for all other miscellaneous charges not previously defined. </value>
-        [DataMember(Name="otherCharges", EmitDefaultValue=false)]
+        [JsonPropertyName("otherCharges")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OtherCharges { get; set; }
 
         /// <summary>
         /// Merchant to send their auto rental company name 
         /// </summary>
         /// <value>Merchant to send their auto rental company name </value>
-        [DataMember(Name="companyName", EmitDefaultValue=false)]
+        [JsonPropertyName("companyName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CompanyName { get; set; }
 
         /// <summary>
         /// When merchant wants to send the affiliate name. 
         /// </summary>
         /// <value>When merchant wants to send the affiliate name. </value>
-        [DataMember(Name="affiliateName", EmitDefaultValue=false)]
+        [JsonPropertyName("affiliateName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AffiliateName { get; set; }
 
         /// <summary>
@@ -438,50 +482,50 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsTravelInformationAutoRental {\n");
-            if (NoShowIndicator != null) sb.Append("  NoShowIndicator: ").Append(NoShowIndicator).Append("\n");
-            if (CustomerName != null) sb.Append("  CustomerName: ").Append(CustomerName).Append("\n");
-            if (VehicleClass != null) sb.Append("  VehicleClass: ").Append(VehicleClass).Append("\n");
-            if (DistanceTravelled != null) sb.Append("  DistanceTravelled: ").Append(DistanceTravelled).Append("\n");
-            if (DistanceUnit != null) sb.Append("  DistanceUnit: ").Append(DistanceUnit).Append("\n");
-            if (ReturnDateTime != null) sb.Append("  ReturnDateTime: ").Append(ReturnDateTime).Append("\n");
-            if (RentalDateTime != null) sb.Append("  RentalDateTime: ").Append(RentalDateTime).Append("\n");
-            if (MaxFreeDistance != null) sb.Append("  MaxFreeDistance: ").Append(MaxFreeDistance).Append("\n");
-            if (InsuranceIndicator != null) sb.Append("  InsuranceIndicator: ").Append(InsuranceIndicator).Append("\n");
-            if (ProgramCode != null) sb.Append("  ProgramCode: ").Append(ProgramCode).Append("\n");
-            if (ReturnAddress != null) sb.Append("  ReturnAddress: ").Append(ReturnAddress).Append("\n");
-            if (RentalAddress != null) sb.Append("  RentalAddress: ").Append(RentalAddress).Append("\n");
-            if (AgreementNumber != null) sb.Append("  AgreementNumber: ").Append(AgreementNumber).Append("\n");
-            if (OdometerReading != null) sb.Append("  OdometerReading: ").Append(OdometerReading).Append("\n");
-            if (VehicleIdentificationNumber != null) sb.Append("  VehicleIdentificationNumber: ").Append(VehicleIdentificationNumber).Append("\n");
-            if (CompanyId != null) sb.Append("  CompanyId: ").Append(CompanyId).Append("\n");
-            if (NumberOfAdditionalDrivers != null) sb.Append("  NumberOfAdditionalDrivers: ").Append(NumberOfAdditionalDrivers).Append("\n");
-            if (DriverAge != null) sb.Append("  DriverAge: ").Append(DriverAge).Append("\n");
-            if (SpecialProgramCode != null) sb.Append("  SpecialProgramCode: ").Append(SpecialProgramCode).Append("\n");
-            if (VehicleMake != null) sb.Append("  VehicleMake: ").Append(VehicleMake).Append("\n");
-            if (VehicleModel != null) sb.Append("  VehicleModel: ").Append(VehicleModel).Append("\n");
-            if (TimePeriod != null) sb.Append("  TimePeriod: ").Append(TimePeriod).Append("\n");
-            if (CommodityCode != null) sb.Append("  CommodityCode: ").Append(CommodityCode).Append("\n");
-            if (CustomerServicePhoneNumber != null) sb.Append("  CustomerServicePhoneNumber: ").Append(CustomerServicePhoneNumber).Append("\n");
-            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(TaxDetails).Append("\n");
-            if (InsuranceAmount != null) sb.Append("  InsuranceAmount: ").Append(InsuranceAmount).Append("\n");
-            if (OneWayDropOffAmount != null) sb.Append("  OneWayDropOffAmount: ").Append(OneWayDropOffAmount).Append("\n");
-            if (AdjustedAmountIndicator != null) sb.Append("  AdjustedAmountIndicator: ").Append(AdjustedAmountIndicator).Append("\n");
-            if (AdjustedAmount != null) sb.Append("  AdjustedAmount: ").Append(AdjustedAmount).Append("\n");
-            if (FuelCharges != null) sb.Append("  FuelCharges: ").Append(FuelCharges).Append("\n");
-            if (WeeklyRentalRate != null) sb.Append("  WeeklyRentalRate: ").Append(WeeklyRentalRate).Append("\n");
-            if (DailyRentalRate != null) sb.Append("  DailyRentalRate: ").Append(DailyRentalRate).Append("\n");
-            if (RatePerMile != null) sb.Append("  RatePerMile: ").Append(RatePerMile).Append("\n");
-            if (MileageCharge != null) sb.Append("  MileageCharge: ").Append(MileageCharge).Append("\n");
-            if (ExtraMileageCharge != null) sb.Append("  ExtraMileageCharge: ").Append(ExtraMileageCharge).Append("\n");
-            if (LateFeeAmount != null) sb.Append("  LateFeeAmount: ").Append(LateFeeAmount).Append("\n");
-            if (TowingCharge != null) sb.Append("  TowingCharge: ").Append(TowingCharge).Append("\n");
-            if (ExtraCharge != null) sb.Append("  ExtraCharge: ").Append(ExtraCharge).Append("\n");
-            if (GpsCharge != null) sb.Append("  GpsCharge: ").Append(GpsCharge).Append("\n");
-            if (PhoneCharge != null) sb.Append("  PhoneCharge: ").Append(PhoneCharge).Append("\n");
-            if (ParkingViolationCharge != null) sb.Append("  ParkingViolationCharge: ").Append(ParkingViolationCharge).Append("\n");
-            if (OtherCharges != null) sb.Append("  OtherCharges: ").Append(OtherCharges).Append("\n");
-            if (CompanyName != null) sb.Append("  CompanyName: ").Append(CompanyName).Append("\n");
-            if (AffiliateName != null) sb.Append("  AffiliateName: ").Append(AffiliateName).Append("\n");
+            if (NoShowIndicator != null) sb.Append("  NoShowIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "noShowIndicator", NoShowIndicator.ToString())).Append("\n");
+            if (CustomerName != null) sb.Append("  CustomerName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "customerName", CustomerName.ToString())).Append("\n");
+            if (VehicleClass != null) sb.Append("  VehicleClass: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "vehicleClass", VehicleClass.ToString())).Append("\n");
+            if (DistanceTravelled != null) sb.Append("  DistanceTravelled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "distanceTravelled", DistanceTravelled.ToString())).Append("\n");
+            if (DistanceUnit != null) sb.Append("  DistanceUnit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "distanceUnit", DistanceUnit.ToString())).Append("\n");
+            if (ReturnDateTime != null) sb.Append("  ReturnDateTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "returnDateTime", ReturnDateTime.ToString())).Append("\n");
+            if (RentalDateTime != null) sb.Append("  RentalDateTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "rentalDateTime", RentalDateTime.ToString())).Append("\n");
+            if (MaxFreeDistance != null) sb.Append("  MaxFreeDistance: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "maxFreeDistance", MaxFreeDistance.ToString())).Append("\n");
+            if (InsuranceIndicator != null) sb.Append("  InsuranceIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "insuranceIndicator", InsuranceIndicator.ToString())).Append("\n");
+            if (ProgramCode != null) sb.Append("  ProgramCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "programCode", ProgramCode.ToString())).Append("\n");
+            if (ReturnAddress != null) sb.Append("  ReturnAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "returnAddress", ReturnAddress.ToString())).Append("\n");
+            if (RentalAddress != null) sb.Append("  RentalAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "rentalAddress", RentalAddress.ToString())).Append("\n");
+            if (AgreementNumber != null) sb.Append("  AgreementNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "agreementNumber", AgreementNumber.ToString())).Append("\n");
+            if (OdometerReading != null) sb.Append("  OdometerReading: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "odometerReading", OdometerReading.ToString())).Append("\n");
+            if (VehicleIdentificationNumber != null) sb.Append("  VehicleIdentificationNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "vehicleIdentificationNumber", VehicleIdentificationNumber.ToString())).Append("\n");
+            if (CompanyId != null) sb.Append("  CompanyId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "companyId", CompanyId.ToString())).Append("\n");
+            if (NumberOfAdditionalDrivers != null) sb.Append("  NumberOfAdditionalDrivers: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "numberOfAdditionalDrivers", NumberOfAdditionalDrivers.ToString())).Append("\n");
+            if (DriverAge != null) sb.Append("  DriverAge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "driverAge", DriverAge.ToString())).Append("\n");
+            if (SpecialProgramCode != null) sb.Append("  SpecialProgramCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "specialProgramCode", SpecialProgramCode.ToString())).Append("\n");
+            if (VehicleMake != null) sb.Append("  VehicleMake: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "vehicleMake", VehicleMake.ToString())).Append("\n");
+            if (VehicleModel != null) sb.Append("  VehicleModel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "vehicleModel", VehicleModel.ToString())).Append("\n");
+            if (TimePeriod != null) sb.Append("  TimePeriod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "timePeriod", TimePeriod.ToString())).Append("\n");
+            if (CommodityCode != null) sb.Append("  CommodityCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "commodityCode", CommodityCode.ToString())).Append("\n");
+            if (CustomerServicePhoneNumber != null) sb.Append("  CustomerServicePhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "customerServicePhoneNumber", CustomerServicePhoneNumber.ToString())).Append("\n");
+            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "taxDetails", TaxDetails.ToString())).Append("\n");
+            if (InsuranceAmount != null) sb.Append("  InsuranceAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "insuranceAmount", InsuranceAmount.ToString())).Append("\n");
+            if (OneWayDropOffAmount != null) sb.Append("  OneWayDropOffAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "oneWayDropOffAmount", OneWayDropOffAmount.ToString())).Append("\n");
+            if (AdjustedAmountIndicator != null) sb.Append("  AdjustedAmountIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "adjustedAmountIndicator", AdjustedAmountIndicator.ToString())).Append("\n");
+            if (AdjustedAmount != null) sb.Append("  AdjustedAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "adjustedAmount", AdjustedAmount.ToString())).Append("\n");
+            if (FuelCharges != null) sb.Append("  FuelCharges: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "fuelCharges", FuelCharges.ToString())).Append("\n");
+            if (WeeklyRentalRate != null) sb.Append("  WeeklyRentalRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "weeklyRentalRate", WeeklyRentalRate.ToString())).Append("\n");
+            if (DailyRentalRate != null) sb.Append("  DailyRentalRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "dailyRentalRate", DailyRentalRate.ToString())).Append("\n");
+            if (RatePerMile != null) sb.Append("  RatePerMile: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "ratePerMile", RatePerMile.ToString())).Append("\n");
+            if (MileageCharge != null) sb.Append("  MileageCharge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "mileageCharge", MileageCharge.ToString())).Append("\n");
+            if (ExtraMileageCharge != null) sb.Append("  ExtraMileageCharge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "extraMileageCharge", ExtraMileageCharge.ToString())).Append("\n");
+            if (LateFeeAmount != null) sb.Append("  LateFeeAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "lateFeeAmount", LateFeeAmount.ToString())).Append("\n");
+            if (TowingCharge != null) sb.Append("  TowingCharge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "towingCharge", TowingCharge.ToString())).Append("\n");
+            if (ExtraCharge != null) sb.Append("  ExtraCharge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "extraCharge", ExtraCharge.ToString())).Append("\n");
+            if (GpsCharge != null) sb.Append("  GpsCharge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "gpsCharge", GpsCharge.ToString())).Append("\n");
+            if (PhoneCharge != null) sb.Append("  PhoneCharge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "phoneCharge", PhoneCharge.ToString())).Append("\n");
+            if (ParkingViolationCharge != null) sb.Append("  ParkingViolationCharge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "parkingViolationCharge", ParkingViolationCharge.ToString())).Append("\n");
+            if (OtherCharges != null) sb.Append("  OtherCharges: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "otherCharges", OtherCharges.ToString())).Append("\n");
+            if (CompanyName != null) sb.Append("  CompanyName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "companyName", CompanyName.ToString())).Append("\n");
+            if (AffiliateName != null) sb.Append("  AffiliateName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRental", "affiliateName", AffiliateName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -492,7 +536,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsTravelInformationAutoRental", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

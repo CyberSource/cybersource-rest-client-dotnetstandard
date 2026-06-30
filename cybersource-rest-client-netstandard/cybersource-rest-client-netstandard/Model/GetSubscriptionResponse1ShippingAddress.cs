@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -35,7 +35,7 @@ namespace CyberSource.Model
         /// </summary>
         /// <param name="Id">The Id of the Shipping Address Token..</param>
         /// <param name="ShipTo">ShipTo.</param>
-        public GetSubscriptionResponse1ShippingAddress(string Id = default(string), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressShipTo ShipTo = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressShipTo))
+        public GetSubscriptionResponse1ShippingAddress(string Id = default(string), DefaultShippingAddressShipTo ShipTo = default(DefaultShippingAddressShipTo))
         {
             this.Id = Id;
             this.ShipTo = ShipTo;
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// The Id of the Shipping Address Token.
         /// </summary>
         /// <value>The Id of the Shipping Address Token.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets ShipTo
         /// </summary>
-        [DataMember(Name="shipTo", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressShipTo ShipTo { get; set; }
+        [JsonPropertyName("shipTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultShippingAddressShipTo ShipTo { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -62,8 +64,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class GetSubscriptionResponse1ShippingAddress {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (ShipTo != null) sb.Append("  ShipTo: ").Append(ShipTo).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionResponse1ShippingAddress", "id", Id.ToString())).Append("\n");
+            if (ShipTo != null) sb.Append("  ShipTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionResponse1ShippingAddress", "shipTo", ShipTo.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,7 +76,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("GetSubscriptionResponse1ShippingAddress", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

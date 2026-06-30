@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -34,44 +34,58 @@ namespace CyberSource.Model
         /// Initializes a new instance of the <see cref="Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities" /> class.
         /// </summary>
         /// <param name="Id">The id from the authenticated identity.  Base64URL encoded string (RFC4648).   The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. .</param>
-        /// <param name="Provider">The provider of the authenticated identity.  Possible Values:   - VISA_PAYMENT_PASSKEY .</param>
-        /// <param name="Data">The data from the authenticated identity, for FIDO this could be the Attestation. Base64URL encoded string (RFC4648).  The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. .</param>
-        /// <param name="RelyingPartyId">The id of the Relying Party.  Base64URL encoded string (RFC4648).   The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. .</param>
-        public Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities(string Id = default(string), string Provider = default(string), string Data = default(string), string RelyingPartyId = default(string))
+        /// <param name="Provider">The provider of the authenticated identity.  Possible Values:   - VISA_PAYMENT_PASSKEY   - CLIENT_DEVICE_CERT_JWS .</param>
+        /// <param name="Data">The data from the authenticated identity. For Passkey this could be the FIDO Attestation. For Classic Cloud Token Framework (CTF) this could be a JWS containing device authentication information signed by a devices private key. Base64URL encoded string (RFC4648). The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. .</param>
+        /// <param name="RelyingPartyId">The id of the Relying Party.  Base64URL encoded string (RFC4648).  The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. .</param>
+        /// <param name="UserAuthenticationMethod">The method used to authenticate the user.  Possible Values:   - USERNAME_PASSWORD   - PASSCODE_PASSWORD   - PASSCODE   - PASSWORD   - PATTERN   - BIOMETRIC_FINGERPRINT   - BIOMETRIC_FACIAL   - BIOMETRIC_IRIS   - BIOMETRIC_VOICE   - BIOMETRIC_BEHAVIORAL   - DEVICE_UNLOCKED_METHOD_UNKNOWN   - OTP_SMS   - OTP_EMAIL   - OTP_SMS_KNOWLEDGE   - KNOWLEDGE_BASED_AUTHENTICATION   - USER_UNVERIFIED   - BIOMETRIC .</param>
+        public Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities(string Id = default(string), string Provider = default(string), string Data = default(string), string RelyingPartyId = default(string), string UserAuthenticationMethod = default(string))
         {
             this.Id = Id;
             this.Provider = Provider;
             this.Data = Data;
             this.RelyingPartyId = RelyingPartyId;
+            this.UserAuthenticationMethod = UserAuthenticationMethod;
         }
         
         /// <summary>
         /// The id from the authenticated identity.  Base64URL encoded string (RFC4648).   The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. 
         /// </summary>
         /// <value>The id from the authenticated identity.  Base64URL encoded string (RFC4648).   The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
-        /// The provider of the authenticated identity.  Possible Values:   - VISA_PAYMENT_PASSKEY 
+        /// The provider of the authenticated identity.  Possible Values:   - VISA_PAYMENT_PASSKEY   - CLIENT_DEVICE_CERT_JWS 
         /// </summary>
-        /// <value>The provider of the authenticated identity.  Possible Values:   - VISA_PAYMENT_PASSKEY </value>
-        [DataMember(Name="provider", EmitDefaultValue=false)]
+        /// <value>The provider of the authenticated identity.  Possible Values:   - VISA_PAYMENT_PASSKEY   - CLIENT_DEVICE_CERT_JWS </value>
+        [JsonPropertyName("provider")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Provider { get; set; }
 
         /// <summary>
-        /// The data from the authenticated identity, for FIDO this could be the Attestation. Base64URL encoded string (RFC4648).  The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. 
+        /// The data from the authenticated identity. For Passkey this could be the FIDO Attestation. For Classic Cloud Token Framework (CTF) this could be a JWS containing device authentication information signed by a devices private key. Base64URL encoded string (RFC4648). The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. 
         /// </summary>
-        /// <value>The data from the authenticated identity, for FIDO this could be the Attestation. Base64URL encoded string (RFC4648).  The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. </value>
-        [DataMember(Name="data", EmitDefaultValue=false)]
+        /// <value>The data from the authenticated identity. For Passkey this could be the FIDO Attestation. For Classic Cloud Token Framework (CTF) this could be a JWS containing device authentication information signed by a devices private key. Base64URL encoded string (RFC4648). The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. </value>
+        [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Data { get; set; }
 
         /// <summary>
-        /// The id of the Relying Party.  Base64URL encoded string (RFC4648).   The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. 
+        /// The id of the Relying Party.  Base64URL encoded string (RFC4648).  The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. 
         /// </summary>
-        /// <value>The id of the Relying Party.  Base64URL encoded string (RFC4648).   The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. </value>
-        [DataMember(Name="relyingPartyId", EmitDefaultValue=false)]
+        /// <value>The id of the Relying Party.  Base64URL encoded string (RFC4648).  The encoding is the same as Base64, but uses &#39;-&#39; characters instead of &#39;+&#39; and &#39;_&#39; characters instead of &#39;/&#39;. </value>
+        [JsonPropertyName("relyingPartyId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RelyingPartyId { get; set; }
+
+        /// <summary>
+        /// The method used to authenticate the user.  Possible Values:   - USERNAME_PASSWORD   - PASSCODE_PASSWORD   - PASSCODE   - PASSWORD   - PATTERN   - BIOMETRIC_FINGERPRINT   - BIOMETRIC_FACIAL   - BIOMETRIC_IRIS   - BIOMETRIC_VOICE   - BIOMETRIC_BEHAVIORAL   - DEVICE_UNLOCKED_METHOD_UNKNOWN   - OTP_SMS   - OTP_EMAIL   - OTP_SMS_KNOWLEDGE   - KNOWLEDGE_BASED_AUTHENTICATION   - USER_UNVERIFIED   - BIOMETRIC 
+        /// </summary>
+        /// <value>The method used to authenticate the user.  Possible Values:   - USERNAME_PASSWORD   - PASSCODE_PASSWORD   - PASSCODE   - PASSWORD   - PATTERN   - BIOMETRIC_FINGERPRINT   - BIOMETRIC_FACIAL   - BIOMETRIC_IRIS   - BIOMETRIC_VOICE   - BIOMETRIC_BEHAVIORAL   - DEVICE_UNLOCKED_METHOD_UNKNOWN   - OTP_SMS   - OTP_EMAIL   - OTP_SMS_KNOWLEDGE   - KNOWLEDGE_BASED_AUTHENTICATION   - USER_UNVERIFIED   - BIOMETRIC </value>
+        [JsonPropertyName("userAuthenticationMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string UserAuthenticationMethod { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -81,10 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (Provider != null) sb.Append("  Provider: ").Append(Provider).Append("\n");
-            if (Data != null) sb.Append("  Data: ").Append(Data).Append("\n");
-            if (RelyingPartyId != null) sb.Append("  RelyingPartyId: ").Append(RelyingPartyId).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities", "id", Id.ToString())).Append("\n");
+            if (Provider != null) sb.Append("  Provider: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities", "provider", Provider.ToString())).Append("\n");
+            if (Data != null) sb.Append("  Data: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities", "data", Data.ToString())).Append("\n");
+            if (RelyingPartyId != null) sb.Append("  RelyingPartyId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities", "relyingPartyId", RelyingPartyId.ToString())).Append("\n");
+            if (UserAuthenticationMethod != null) sb.Append("  UserAuthenticationMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities", "userAuthenticationMethod", UserAuthenticationMethod.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>
@@ -140,6 +155,11 @@ namespace CyberSource.Model
                     this.RelyingPartyId == other.RelyingPartyId ||
                     this.RelyingPartyId != null &&
                     this.RelyingPartyId.Equals(other.RelyingPartyId)
+                ) && 
+                (
+                    this.UserAuthenticationMethod == other.UserAuthenticationMethod ||
+                    this.UserAuthenticationMethod != null &&
+                    this.UserAuthenticationMethod.Equals(other.UserAuthenticationMethod)
                 );
         }
 
@@ -162,6 +182,8 @@ namespace CyberSource.Model
                     hash = hash * 59 + this.Data.GetHashCode();
                 if (this.RelyingPartyId != null)
                     hash = hash * 59 + this.RelyingPartyId.GetHashCode();
+                if (this.UserAuthenticationMethod != null)
+                    hash = hash * 59 + this.UserAuthenticationMethod.GetHashCode();
                 return hash;
             }
         }

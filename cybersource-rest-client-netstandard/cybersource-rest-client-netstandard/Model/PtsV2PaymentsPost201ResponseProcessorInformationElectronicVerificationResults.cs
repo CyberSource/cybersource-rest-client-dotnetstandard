@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -77,126 +77,144 @@ namespace CyberSource.Model
         /// Mapped Electronic Verification response code for the customer&#39;s name. 
         /// </summary>
         /// <value>Mapped Electronic Verification response code for the customer&#39;s name. </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Raw Electronic Verification response code from the processor for the customer&#39;s last name
         /// </summary>
         /// <value>Raw Electronic Verification response code from the processor for the customer&#39;s last name</value>
-        [DataMember(Name="codeRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("codeRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CodeRaw { get; set; }
 
         /// <summary>
         /// Mapped Electronic Verification response code for the customer&#39;s email address. 
         /// </summary>
         /// <value>Mapped Electronic Verification response code for the customer&#39;s email address. </value>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Email { get; set; }
 
         /// <summary>
         /// Raw Electronic Verification response code from the processor for the customer&#39;s email address.
         /// </summary>
         /// <value>Raw Electronic Verification response code from the processor for the customer&#39;s email address.</value>
-        [DataMember(Name="emailRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("emailRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EmailRaw { get; set; }
 
         /// <summary>
         /// Mapped Electronic Verification response code for the customer&#39;s phone number. 
         /// </summary>
         /// <value>Mapped Electronic Verification response code for the customer&#39;s phone number. </value>
-        [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Raw Electronic Verification response code from the processor for the customer&#39;s phone number.
         /// </summary>
         /// <value>Raw Electronic Verification response code from the processor for the customer&#39;s phone number.</value>
-        [DataMember(Name="phoneNumberRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumberRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneNumberRaw { get; set; }
 
         /// <summary>
         /// Mapped Electronic Verification response code for the customer&#39;s postal code. 
         /// </summary>
         /// <value>Mapped Electronic Verification response code for the customer&#39;s postal code. </value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// Raw Electronic Verification response code from the processor for the customer&#39;s postal code.
         /// </summary>
         /// <value>Raw Electronic Verification response code from the processor for the customer&#39;s postal code.</value>
-        [DataMember(Name="postalCodeRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCodeRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCodeRaw { get; set; }
 
         /// <summary>
         /// Mapped Electronic Verification response code for the customer&#39;s street address. 
         /// </summary>
         /// <value>Mapped Electronic Verification response code for the customer&#39;s street address. </value>
-        [DataMember(Name="street", EmitDefaultValue=false)]
+        [JsonPropertyName("street")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Street { get; set; }
 
         /// <summary>
         /// Raw Electronic Verification response code from the processor for the customer&#39;s street address.
         /// </summary>
         /// <value>Raw Electronic Verification response code from the processor for the customer&#39;s street address.</value>
-        [DataMember(Name="streetRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("streetRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StreetRaw { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect Mapped Electronic Verification response code for the customer&#39;s name.  Valid values :  &#39;Y&#39;   Yes, the data Matches &#39;N&#39;   No Match &#39;O&#39;   Partial Match 
         /// </summary>
         /// <value>#### Visa Platform Connect Mapped Electronic Verification response code for the customer&#39;s name.  Valid values :  &#39;Y&#39;   Yes, the data Matches &#39;N&#39;   No Match &#39;O&#39;   Partial Match </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect Raw Electronic Verification response code from the processor for the customer&#39;s name.  Valid values :  &#39;01&#39;     Match &#39;50&#39;     Partial Match &#39;99&#39;     No Match 
         /// </summary>
         /// <value>#### Visa Platform Connect Raw Electronic Verification response code from the processor for the customer&#39;s name.  Valid values :  &#39;01&#39;     Match &#39;50&#39;     Partial Match &#39;99&#39;     No Match </value>
-        [DataMember(Name="nameRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("nameRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NameRaw { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect Raw electronic verification response code from the processor for the customer&#39;s first name.  Valid values :  &#39;01&#39;     Match &#39;50&#39;     Partial Match &#39;99&#39;     No Match 
         /// </summary>
         /// <value>#### Visa Platform Connect Raw electronic verification response code from the processor for the customer&#39;s first name.  Valid values :  &#39;01&#39;     Match &#39;50&#39;     Partial Match &#39;99&#39;     No Match </value>
-        [DataMember(Name="firstNameRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("firstNameRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstNameRaw { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect Mapped electronic verification response code from the processor for the customer&#39;s first name.  Valid values :  &#39;Y&#39;   Yes, the data Matches &#39;N&#39;   No Match &#39;O&#39;   Partial Match 
         /// </summary>
         /// <value>#### Visa Platform Connect Mapped electronic verification response code from the processor for the customer&#39;s first name.  Valid values :  &#39;Y&#39;   Yes, the data Matches &#39;N&#39;   No Match &#39;O&#39;   Partial Match </value>
-        [DataMember(Name="firstName", EmitDefaultValue=false)]
+        [JsonPropertyName("firstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect Raw electronic verification response code from the processor for the customer&#39;s middle name.  Valid values :  &#39;01&#39;     Match &#39;50&#39;     Partial Match &#39;99&#39;     No Match 
         /// </summary>
         /// <value>#### Visa Platform Connect Raw electronic verification response code from the processor for the customer&#39;s middle name.  Valid values :  &#39;01&#39;     Match &#39;50&#39;     Partial Match &#39;99&#39;     No Match </value>
-        [DataMember(Name="middleNameRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("middleNameRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MiddleNameRaw { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect Mapped electronic verification response code from the processor for the customer&#39;s middle name.  Valid values :  &#39;Y&#39;   Yes, the data Matches &#39;N&#39;   No Match &#39;O&#39;   Partial Match 
         /// </summary>
         /// <value>#### Visa Platform Connect Mapped electronic verification response code from the processor for the customer&#39;s middle name.  Valid values :  &#39;Y&#39;   Yes, the data Matches &#39;N&#39;   No Match &#39;O&#39;   Partial Match </value>
-        [DataMember(Name="middleName", EmitDefaultValue=false)]
+        [JsonPropertyName("middleName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MiddleName { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect Raw electronic verification response code from the processor for the customer&#39;s last name.  Valid values :  &#39;01&#39;     Match &#39;50&#39;     Partial Match &#39;99&#39;     No Match 
         /// </summary>
         /// <value>#### Visa Platform Connect Raw electronic verification response code from the processor for the customer&#39;s last name.  Valid values :  &#39;01&#39;     Match &#39;50&#39;     Partial Match &#39;99&#39;     No Match </value>
-        [DataMember(Name="lastNameRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("lastNameRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastNameRaw { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect Mapped electronic verification response code from the processor for the customer&#39;s last name.  Valid values :  &#39;Y&#39;   Yes, the data Matches &#39;N&#39;   No Match &#39;O&#39;   Partial Match 
         /// </summary>
         /// <value>#### Visa Platform Connect Mapped electronic verification response code from the processor for the customer&#39;s last name.  Valid values :  &#39;Y&#39;   Yes, the data Matches &#39;N&#39;   No Match &#39;O&#39;   Partial Match </value>
-        [DataMember(Name="lastName", EmitDefaultValue=false)]
+        [JsonPropertyName("lastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastName { get; set; }
 
         /// <summary>
@@ -207,24 +225,24 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults {\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (CodeRaw != null) sb.Append("  CodeRaw: ").Append(CodeRaw).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (EmailRaw != null) sb.Append("  EmailRaw: ").Append(EmailRaw).Append("\n");
-            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
-            if (PhoneNumberRaw != null) sb.Append("  PhoneNumberRaw: ").Append(PhoneNumberRaw).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
-            if (PostalCodeRaw != null) sb.Append("  PostalCodeRaw: ").Append(PostalCodeRaw).Append("\n");
-            if (Street != null) sb.Append("  Street: ").Append(Street).Append("\n");
-            if (StreetRaw != null) sb.Append("  StreetRaw: ").Append(StreetRaw).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (NameRaw != null) sb.Append("  NameRaw: ").Append(NameRaw).Append("\n");
-            if (FirstNameRaw != null) sb.Append("  FirstNameRaw: ").Append(FirstNameRaw).Append("\n");
-            if (FirstName != null) sb.Append("  FirstName: ").Append(FirstName).Append("\n");
-            if (MiddleNameRaw != null) sb.Append("  MiddleNameRaw: ").Append(MiddleNameRaw).Append("\n");
-            if (MiddleName != null) sb.Append("  MiddleName: ").Append(MiddleName).Append("\n");
-            if (LastNameRaw != null) sb.Append("  LastNameRaw: ").Append(LastNameRaw).Append("\n");
-            if (LastName != null) sb.Append("  LastName: ").Append(LastName).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "code", Code.ToString())).Append("\n");
+            if (CodeRaw != null) sb.Append("  CodeRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "codeRaw", CodeRaw.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "email", Email.ToString())).Append("\n");
+            if (EmailRaw != null) sb.Append("  EmailRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "emailRaw", EmailRaw.ToString())).Append("\n");
+            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "phoneNumber", PhoneNumber.ToString())).Append("\n");
+            if (PhoneNumberRaw != null) sb.Append("  PhoneNumberRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "phoneNumberRaw", PhoneNumberRaw.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "postalCode", PostalCode.ToString())).Append("\n");
+            if (PostalCodeRaw != null) sb.Append("  PostalCodeRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "postalCodeRaw", PostalCodeRaw.ToString())).Append("\n");
+            if (Street != null) sb.Append("  Street: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "street", Street.ToString())).Append("\n");
+            if (StreetRaw != null) sb.Append("  StreetRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "streetRaw", StreetRaw.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "name", Name.ToString())).Append("\n");
+            if (NameRaw != null) sb.Append("  NameRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "nameRaw", NameRaw.ToString())).Append("\n");
+            if (FirstNameRaw != null) sb.Append("  FirstNameRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "firstNameRaw", FirstNameRaw.ToString())).Append("\n");
+            if (FirstName != null) sb.Append("  FirstName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "firstName", FirstName.ToString())).Append("\n");
+            if (MiddleNameRaw != null) sb.Append("  MiddleNameRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "middleNameRaw", MiddleNameRaw.ToString())).Append("\n");
+            if (MiddleName != null) sb.Append("  MiddleName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "middleName", MiddleName.ToString())).Append("\n");
+            if (LastNameRaw != null) sb.Append("  LastNameRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "lastNameRaw", LastNameRaw.ToString())).Append("\n");
+            if (LastName != null) sb.Append("  LastName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", "lastName", LastName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -235,7 +253,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

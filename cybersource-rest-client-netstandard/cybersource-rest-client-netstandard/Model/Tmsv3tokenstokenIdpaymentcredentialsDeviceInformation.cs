@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -63,77 +63,88 @@ namespace CyberSource.Model
         /// Platform type.  Possible Values:   - iOS: iOS app   - ANDROID: Android app   - WINDOWS: Windows app   - WEB: Browser-based app 
         /// </summary>
         /// <value>Platform type.  Possible Values:   - iOS: iOS app   - ANDROID: Android app   - WINDOWS: Windows app   - WEB: Browser-based app </value>
-        [DataMember(Name="platformType", EmitDefaultValue=false)]
+        [JsonPropertyName("platformType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PlatformType { get; set; }
 
         /// <summary>
         /// IP address of the customer. 
         /// </summary>
         /// <value>IP address of the customer. </value>
-        [DataMember(Name="ipAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("ipAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IpAddress { get; set; }
 
         /// <summary>
         /// The exact content of the HTTP accept header. 
         /// </summary>
         /// <value>The exact content of the HTTP accept header. </value>
-        [DataMember(Name="httpAcceptContent", EmitDefaultValue=false)]
+        [JsonPropertyName("httpAcceptContent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpAcceptContent { get; set; }
 
         /// <summary>
         /// Value represents the browser language as defined in IETF BCP47. Example:en-US, refer  https://en.wikipedia.org/wiki/IETF_language_tag for more details. 
         /// </summary>
         /// <value>Value represents the browser language as defined in IETF BCP47. Example:en-US, refer  https://en.wikipedia.org/wiki/IETF_language_tag for more details. </value>
-        [DataMember(Name="httpBrowserLanguage", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserLanguage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpBrowserLanguage { get; set; }
 
         /// <summary>
         /// A Boolean value that represents the ability of the cardholder browser to execute Java. Value is returned from the navigator.javaEnabled property. Possible Values:True/False 
         /// </summary>
         /// <value>A Boolean value that represents the ability of the cardholder browser to execute Java. Value is returned from the navigator.javaEnabled property. Possible Values:True/False </value>
-        [DataMember(Name="httpBrowserJavaEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserJavaEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? HttpBrowserJavaEnabled { get; set; }
 
         /// <summary>
         /// A Boolean value that represents the ability of the cardholder browser to execute JavaScript. Possible Values:True/False. **Note**: Merchants should be able to know the values from fingerprint details of cardholder&#39;s browser. 
         /// </summary>
         /// <value>A Boolean value that represents the ability of the cardholder browser to execute JavaScript. Possible Values:True/False. **Note**: Merchants should be able to know the values from fingerprint details of cardholder&#39;s browser. </value>
-        [DataMember(Name="httpBrowserJavaScriptEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserJavaScriptEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? HttpBrowserJavaScriptEnabled { get; set; }
 
         /// <summary>
         /// Value represents the bit depth of the color palette for displaying images, in bits per pixel. Example : 24, refer https://en.wikipedia.org/wiki/Color_depth for more details 
         /// </summary>
         /// <value>Value represents the bit depth of the color palette for displaying images, in bits per pixel. Example : 24, refer https://en.wikipedia.org/wiki/Color_depth for more details </value>
-        [DataMember(Name="httpBrowserColorDepth", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserColorDepth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpBrowserColorDepth { get; set; }
 
         /// <summary>
         /// Total height of the Cardholder&#39;s screen in pixels. 
         /// </summary>
         /// <value>Total height of the Cardholder&#39;s screen in pixels. </value>
-        [DataMember(Name="httpBrowserScreenHeight", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserScreenHeight")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpBrowserScreenHeight { get; set; }
 
         /// <summary>
         /// Total width of the cardholder&#39;s screen in pixels. 
         /// </summary>
         /// <value>Total width of the cardholder&#39;s screen in pixels. </value>
-        [DataMember(Name="httpBrowserScreenWidth", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserScreenWidth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpBrowserScreenWidth { get; set; }
 
         /// <summary>
         /// Time difference between UTC time and the cardholder browser local time, in minutes. 
         /// </summary>
         /// <value>Time difference between UTC time and the cardholder browser local time, in minutes. </value>
-        [DataMember(Name="httpBrowserTimeDifference", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserTimeDifference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpBrowserTimeDifference { get; set; }
 
         /// <summary>
         /// Value of the User-Agent header sent by the customer&#39;s web browser. Note If the customer&#39;s browser provides a value, you must include it in your request. 
         /// </summary>
         /// <value>Value of the User-Agent header sent by the customer&#39;s web browser. Note If the customer&#39;s browser provides a value, you must include it in your request. </value>
-        [DataMember(Name="userAgentBrowserValue", EmitDefaultValue=false)]
+        [JsonPropertyName("userAgentBrowserValue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UserAgentBrowserValue { get; set; }
 
         /// <summary>
@@ -144,17 +155,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation {\n");
-            if (PlatformType != null) sb.Append("  PlatformType: ").Append(PlatformType).Append("\n");
-            if (IpAddress != null) sb.Append("  IpAddress: ").Append(IpAddress).Append("\n");
-            if (HttpAcceptContent != null) sb.Append("  HttpAcceptContent: ").Append(HttpAcceptContent).Append("\n");
-            if (HttpBrowserLanguage != null) sb.Append("  HttpBrowserLanguage: ").Append(HttpBrowserLanguage).Append("\n");
-            if (HttpBrowserJavaEnabled != null) sb.Append("  HttpBrowserJavaEnabled: ").Append(HttpBrowserJavaEnabled).Append("\n");
-            if (HttpBrowserJavaScriptEnabled != null) sb.Append("  HttpBrowserJavaScriptEnabled: ").Append(HttpBrowserJavaScriptEnabled).Append("\n");
-            if (HttpBrowserColorDepth != null) sb.Append("  HttpBrowserColorDepth: ").Append(HttpBrowserColorDepth).Append("\n");
-            if (HttpBrowserScreenHeight != null) sb.Append("  HttpBrowserScreenHeight: ").Append(HttpBrowserScreenHeight).Append("\n");
-            if (HttpBrowserScreenWidth != null) sb.Append("  HttpBrowserScreenWidth: ").Append(HttpBrowserScreenWidth).Append("\n");
-            if (HttpBrowserTimeDifference != null) sb.Append("  HttpBrowserTimeDifference: ").Append(HttpBrowserTimeDifference).Append("\n");
-            if (UserAgentBrowserValue != null) sb.Append("  UserAgentBrowserValue: ").Append(UserAgentBrowserValue).Append("\n");
+            if (PlatformType != null) sb.Append("  PlatformType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", "platformType", PlatformType.ToString())).Append("\n");
+            if (IpAddress != null) sb.Append("  IpAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", "ipAddress", IpAddress.ToString())).Append("\n");
+            if (HttpAcceptContent != null) sb.Append("  HttpAcceptContent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", "httpAcceptContent", HttpAcceptContent.ToString())).Append("\n");
+            if (HttpBrowserLanguage != null) sb.Append("  HttpBrowserLanguage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", "httpBrowserLanguage", HttpBrowserLanguage.ToString())).Append("\n");
+            if (HttpBrowserJavaEnabled != null) sb.Append("  HttpBrowserJavaEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", "httpBrowserJavaEnabled", HttpBrowserJavaEnabled.ToString())).Append("\n");
+            if (HttpBrowserJavaScriptEnabled != null) sb.Append("  HttpBrowserJavaScriptEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", "httpBrowserJavaScriptEnabled", HttpBrowserJavaScriptEnabled.ToString())).Append("\n");
+            if (HttpBrowserColorDepth != null) sb.Append("  HttpBrowserColorDepth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", "httpBrowserColorDepth", HttpBrowserColorDepth.ToString())).Append("\n");
+            if (HttpBrowserScreenHeight != null) sb.Append("  HttpBrowserScreenHeight: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", "httpBrowserScreenHeight", HttpBrowserScreenHeight.ToString())).Append("\n");
+            if (HttpBrowserScreenWidth != null) sb.Append("  HttpBrowserScreenWidth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", "httpBrowserScreenWidth", HttpBrowserScreenWidth.ToString())).Append("\n");
+            if (HttpBrowserTimeDifference != null) sb.Append("  HttpBrowserTimeDifference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", "httpBrowserTimeDifference", HttpBrowserTimeDifference.ToString())).Append("\n");
+            if (UserAgentBrowserValue != null) sb.Append("  UserAgentBrowserValue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", "userAgentBrowserValue", UserAgentBrowserValue.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -165,7 +176,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

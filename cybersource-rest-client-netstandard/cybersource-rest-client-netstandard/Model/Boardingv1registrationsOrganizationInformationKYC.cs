@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsOrganizationInformationKYC" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Boardingv1registrationsOrganizationInformationKYC() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsOrganizationInformationKYC" /> class.
@@ -70,74 +70,86 @@ namespace CyberSource.Model
         /// Possible values: - ONETIMEBEFORE - ONETIMEAFTER - OTHER
         /// </summary>
         /// <value>Possible values: - ONETIMEBEFORE - ONETIMEAFTER - OTHER</value>
-        [DataMember(Name="whenIsCustomerCharged", EmitDefaultValue=false)]
+        [JsonPropertyName("whenIsCustomerCharged")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WhenIsCustomerCharged { get; set; }
 
         /// <summary>
         /// Gets or Sets WhenIsCustomerChargedDescription
         /// </summary>
-        [DataMember(Name="whenIsCustomerChargedDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("whenIsCustomerChargedDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WhenIsCustomerChargedDescription { get; set; }
 
         /// <summary>
         /// Gets or Sets OfferSubscriptions
         /// </summary>
-        [DataMember(Name="offerSubscriptions", EmitDefaultValue=false)]
+        [JsonPropertyName("offerSubscriptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? OfferSubscriptions { get; set; }
 
         /// <summary>
         /// Gets or Sets MonthlySubscriptionPercent
         /// </summary>
-        [DataMember(Name="monthlySubscriptionPercent", EmitDefaultValue=false)]
+        [JsonPropertyName("monthlySubscriptionPercent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? MonthlySubscriptionPercent { get; set; }
 
         /// <summary>
         /// Gets or Sets QuarterlySubscriptionPercent
         /// </summary>
-        [DataMember(Name="quarterlySubscriptionPercent", EmitDefaultValue=false)]
+        [JsonPropertyName("quarterlySubscriptionPercent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? QuarterlySubscriptionPercent { get; set; }
 
         /// <summary>
         /// Gets or Sets SemiAnnualSubscriptionPercent
         /// </summary>
-        [DataMember(Name="semiAnnualSubscriptionPercent", EmitDefaultValue=false)]
+        [JsonPropertyName("semiAnnualSubscriptionPercent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? SemiAnnualSubscriptionPercent { get; set; }
 
         /// <summary>
         /// Gets or Sets AnnualSubscriptionPercent
         /// </summary>
-        [DataMember(Name="annualSubscriptionPercent", EmitDefaultValue=false)]
+        [JsonPropertyName("annualSubscriptionPercent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? AnnualSubscriptionPercent { get; set; }
 
         /// <summary>
         /// Possible values: - INSTANT - UPTO2 - UPTO5 - UPTO10 - GREATERTHAN10
         /// </summary>
         /// <value>Possible values: - INSTANT - UPTO2 - UPTO5 - UPTO10 - GREATERTHAN10</value>
-        [DataMember(Name="timeToProductDelivery", EmitDefaultValue=false)]
+        [JsonPropertyName("timeToProductDelivery")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TimeToProductDelivery { get; set; }
 
         /// <summary>
         /// Gets or Sets EstimatedMonthlySales
         /// </summary>
-        [DataMember(Name="estimatedMonthlySales", EmitDefaultValue=false)]
+        [JsonPropertyName("estimatedMonthlySales")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? EstimatedMonthlySales { get; set; }
 
         /// <summary>
         /// Gets or Sets AverageOrderAmount
         /// </summary>
-        [DataMember(Name="averageOrderAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("averageOrderAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? AverageOrderAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets LargestExpectedOrderAmount
         /// </summary>
-        [DataMember(Name="largestExpectedOrderAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("largestExpectedOrderAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? LargestExpectedOrderAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets DepositBankAccount
         /// </summary>
-        [DataMember(Name="depositBankAccount", EmitDefaultValue=false)]
+        [JsonPropertyName("depositBankAccount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Boardingv1registrationsOrganizationInformationKYCDepositBankAccount DepositBankAccount { get; set; }
 
         /// <summary>
@@ -148,18 +160,18 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Boardingv1registrationsOrganizationInformationKYC {\n");
-            if (WhenIsCustomerCharged != null) sb.Append("  WhenIsCustomerCharged: ").Append(WhenIsCustomerCharged).Append("\n");
-            if (WhenIsCustomerChargedDescription != null) sb.Append("  WhenIsCustomerChargedDescription: ").Append(WhenIsCustomerChargedDescription).Append("\n");
-            if (OfferSubscriptions != null) sb.Append("  OfferSubscriptions: ").Append(OfferSubscriptions).Append("\n");
-            if (MonthlySubscriptionPercent != null) sb.Append("  MonthlySubscriptionPercent: ").Append(MonthlySubscriptionPercent).Append("\n");
-            if (QuarterlySubscriptionPercent != null) sb.Append("  QuarterlySubscriptionPercent: ").Append(QuarterlySubscriptionPercent).Append("\n");
-            if (SemiAnnualSubscriptionPercent != null) sb.Append("  SemiAnnualSubscriptionPercent: ").Append(SemiAnnualSubscriptionPercent).Append("\n");
-            if (AnnualSubscriptionPercent != null) sb.Append("  AnnualSubscriptionPercent: ").Append(AnnualSubscriptionPercent).Append("\n");
-            if (TimeToProductDelivery != null) sb.Append("  TimeToProductDelivery: ").Append(TimeToProductDelivery).Append("\n");
-            if (EstimatedMonthlySales != null) sb.Append("  EstimatedMonthlySales: ").Append(EstimatedMonthlySales).Append("\n");
-            if (AverageOrderAmount != null) sb.Append("  AverageOrderAmount: ").Append(AverageOrderAmount).Append("\n");
-            if (LargestExpectedOrderAmount != null) sb.Append("  LargestExpectedOrderAmount: ").Append(LargestExpectedOrderAmount).Append("\n");
-            if (DepositBankAccount != null) sb.Append("  DepositBankAccount: ").Append(DepositBankAccount).Append("\n");
+            if (WhenIsCustomerCharged != null) sb.Append("  WhenIsCustomerCharged: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "whenIsCustomerCharged", WhenIsCustomerCharged.ToString())).Append("\n");
+            if (WhenIsCustomerChargedDescription != null) sb.Append("  WhenIsCustomerChargedDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "whenIsCustomerChargedDescription", WhenIsCustomerChargedDescription.ToString())).Append("\n");
+            if (OfferSubscriptions != null) sb.Append("  OfferSubscriptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "offerSubscriptions", OfferSubscriptions.ToString())).Append("\n");
+            if (MonthlySubscriptionPercent != null) sb.Append("  MonthlySubscriptionPercent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "monthlySubscriptionPercent", MonthlySubscriptionPercent.ToString())).Append("\n");
+            if (QuarterlySubscriptionPercent != null) sb.Append("  QuarterlySubscriptionPercent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "quarterlySubscriptionPercent", QuarterlySubscriptionPercent.ToString())).Append("\n");
+            if (SemiAnnualSubscriptionPercent != null) sb.Append("  SemiAnnualSubscriptionPercent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "semiAnnualSubscriptionPercent", SemiAnnualSubscriptionPercent.ToString())).Append("\n");
+            if (AnnualSubscriptionPercent != null) sb.Append("  AnnualSubscriptionPercent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "annualSubscriptionPercent", AnnualSubscriptionPercent.ToString())).Append("\n");
+            if (TimeToProductDelivery != null) sb.Append("  TimeToProductDelivery: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "timeToProductDelivery", TimeToProductDelivery.ToString())).Append("\n");
+            if (EstimatedMonthlySales != null) sb.Append("  EstimatedMonthlySales: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "estimatedMonthlySales", EstimatedMonthlySales.ToString())).Append("\n");
+            if (AverageOrderAmount != null) sb.Append("  AverageOrderAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "averageOrderAmount", AverageOrderAmount.ToString())).Append("\n");
+            if (LargestExpectedOrderAmount != null) sb.Append("  LargestExpectedOrderAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "largestExpectedOrderAmount", LargestExpectedOrderAmount.ToString())).Append("\n");
+            if (DepositBankAccount != null) sb.Append("  DepositBankAccount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYC", "depositBankAccount", DepositBankAccount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -170,7 +182,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Boardingv1registrationsOrganizationInformationKYC", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

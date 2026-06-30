@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,42 +53,48 @@ namespace CyberSource.Model
         /// Loyalty points total balance before redemption. For Example: Points, such as 100 
         /// </summary>
         /// <value>Loyalty points total balance before redemption. For Example: Points, such as 100 </value>
-        [DataMember(Name="pointsBeforeRedemption", EmitDefaultValue=false)]
+        [JsonPropertyName("pointsBeforeRedemption")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PointsBeforeRedemption { get; set; }
 
         /// <summary>
         /// The total value of loyalty points before redemption in the default currency. Max characters is 12 excluding the \&quot;.\&quot; symbol For Example: Points, such as 20.00 
         /// </summary>
         /// <value>The total value of loyalty points before redemption in the default currency. Max characters is 12 excluding the \&quot;.\&quot; symbol For Example: Points, such as 20.00 </value>
-        [DataMember(Name="pointsValueBeforeRedemption", EmitDefaultValue=false)]
+        [JsonPropertyName("pointsValueBeforeRedemption")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PointsValueBeforeRedemption { get; set; }
 
         /// <summary>
         /// Number of loyalty points that were redeemed. For Example: Points, such as 100 
         /// </summary>
         /// <value>Number of loyalty points that were redeemed. For Example: Points, such as 100 </value>
-        [DataMember(Name="pointsRedeemed", EmitDefaultValue=false)]
+        [JsonPropertyName("pointsRedeemed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PointsRedeemed { get; set; }
 
         /// <summary>
         /// The value of the loyalty points that were redeemed in the default currency. Max characters is 12 excluding the \&quot;.\&quot; symbol For Example: Points, such as 100.00 
         /// </summary>
         /// <value>The value of the loyalty points that were redeemed in the default currency. Max characters is 12 excluding the \&quot;.\&quot; symbol For Example: Points, such as 100.00 </value>
-        [DataMember(Name="pointsValueRedeemed", EmitDefaultValue=false)]
+        [JsonPropertyName("pointsValueRedeemed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PointsValueRedeemed { get; set; }
 
         /// <summary>
         /// Loyalty Points remaining total balance after redemption. For Example: Points, such as 20.00 
         /// </summary>
         /// <value>Loyalty Points remaining total balance after redemption. For Example: Points, such as 20.00 </value>
-        [DataMember(Name="pointsAfterRedemption", EmitDefaultValue=false)]
+        [JsonPropertyName("pointsAfterRedemption")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PointsAfterRedemption { get; set; }
 
         /// <summary>
         /// The value of the remaining loyalty points after redumption in the default currency. Max characters is 12 excluding the \&quot;.\&quot; symbol For Example: Points, such as 20.00 
         /// </summary>
         /// <value>The value of the remaining loyalty points after redumption in the default currency. Max characters is 12 excluding the \&quot;.\&quot; symbol For Example: Points, such as 20.00 </value>
-        [DataMember(Name="pointsValueAfterRedemption", EmitDefaultValue=false)]
+        [JsonPropertyName("pointsValueAfterRedemption")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PointsValueAfterRedemption { get; set; }
 
         /// <summary>
@@ -99,12 +105,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseOrderInformationRewardPointsDetails {\n");
-            if (PointsBeforeRedemption != null) sb.Append("  PointsBeforeRedemption: ").Append(PointsBeforeRedemption).Append("\n");
-            if (PointsValueBeforeRedemption != null) sb.Append("  PointsValueBeforeRedemption: ").Append(PointsValueBeforeRedemption).Append("\n");
-            if (PointsRedeemed != null) sb.Append("  PointsRedeemed: ").Append(PointsRedeemed).Append("\n");
-            if (PointsValueRedeemed != null) sb.Append("  PointsValueRedeemed: ").Append(PointsValueRedeemed).Append("\n");
-            if (PointsAfterRedemption != null) sb.Append("  PointsAfterRedemption: ").Append(PointsAfterRedemption).Append("\n");
-            if (PointsValueAfterRedemption != null) sb.Append("  PointsValueAfterRedemption: ").Append(PointsValueAfterRedemption).Append("\n");
+            if (PointsBeforeRedemption != null) sb.Append("  PointsBeforeRedemption: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseOrderInformationRewardPointsDetails", "pointsBeforeRedemption", PointsBeforeRedemption.ToString())).Append("\n");
+            if (PointsValueBeforeRedemption != null) sb.Append("  PointsValueBeforeRedemption: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseOrderInformationRewardPointsDetails", "pointsValueBeforeRedemption", PointsValueBeforeRedemption.ToString())).Append("\n");
+            if (PointsRedeemed != null) sb.Append("  PointsRedeemed: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseOrderInformationRewardPointsDetails", "pointsRedeemed", PointsRedeemed.ToString())).Append("\n");
+            if (PointsValueRedeemed != null) sb.Append("  PointsValueRedeemed: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseOrderInformationRewardPointsDetails", "pointsValueRedeemed", PointsValueRedeemed.ToString())).Append("\n");
+            if (PointsAfterRedemption != null) sb.Append("  PointsAfterRedemption: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseOrderInformationRewardPointsDetails", "pointsAfterRedemption", PointsAfterRedemption.ToString())).Append("\n");
+            if (PointsValueAfterRedemption != null) sb.Append("  PointsValueAfterRedemption: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseOrderInformationRewardPointsDetails", "pointsValueAfterRedemption", PointsValueAfterRedemption.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,7 +121,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseOrderInformationRewardPointsDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

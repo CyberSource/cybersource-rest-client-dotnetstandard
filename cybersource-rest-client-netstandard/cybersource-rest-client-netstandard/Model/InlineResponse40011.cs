@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,53 +33,60 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="InlineResponse40011" /> class.
         /// </summary>
-        /// <param name="SubmitTimeUtc">Time verification was requested  Format: &#x60;YYYY-MM-DDThhmmssZ&#x60;, where: - &#x60;T&#x60;:  Separates the date and the time - &#x60;Z&#x60;:  Indicates Coordinated Universal Time (UTC), also known as Greenwich Mean Time (GMT)  Example:  &#x60;2020-01-11T224757Z&#x60; equals January 11, 2020, at 22:47:57 (10:47:57 p.m.) .</param>
-        /// <param name="Status">Possible values:   - &#x60;INVALID_REQUEST&#x60; .</param>
-        /// <param name="Message">The detail message related to the status and reason.</param>
-        /// <param name="Reason">The reason of the status.  Possible values:   - &#x60;INVALID_REQUEST&#x60; .</param>
+        [JsonConstructor]
+        protected InlineResponse40011() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InlineResponse40011" /> class.
+        /// </summary>
+        /// <param name="CorrelationId">CorrelationId.</param>
         /// <param name="Details">Details.</param>
-        public InlineResponse40011(string SubmitTimeUtc = default(string), string Status = default(string), string Message = default(string), string Reason = default(string), List<InlineResponse40011Details> Details = default(List<InlineResponse40011Details>))
+        /// <param name="InformationLink">InformationLink.</param>
+        /// <param name="Message">Message (required).</param>
+        /// <param name="Reason">Possible values: - INVALID_APIKEY - INVALID_SHIPPING_INPUT_PARAMS - CAPTURE_CONTEXT_INVALID - CAPTURE_CONTEXT_EXPIRED - SDK_XHR_ERROR - UNIFIEDPAYMENTS_VALIDATION_PARAMS - UNIFIEDPAYMENTS_VALIDATION_FIELDS - UNIFIEDPAYMENT_PAYMENT_PARAMITERS - CREATE_TOKEN_TIMEOUT - CREATE_TOKEN_XHR_ERROR - SHOW_LOAD_CONTAINER_SELECTOR - SHOW_LOAD_INVALID_CONTAINER - SHOW_TOKEN_TIMEOUT - SHOW_TOKEN_XHR_ERROR - SHOW_PAYMENT_TIMEOUT (required).</param>
+        public InlineResponse40011(string CorrelationId = default(string), List<InlineResponse4001Details> Details = default(List<InlineResponse4001Details>), string InformationLink = default(string), string Message = default(string), string Reason = default(string))
         {
-            this.SubmitTimeUtc = SubmitTimeUtc;
-            this.Status = Status;
+            this.CorrelationId = CorrelationId;
+            this.Details = Details;
+            this.InformationLink = InformationLink;
             this.Message = Message;
             this.Reason = Reason;
-            this.Details = Details;
         }
         
         /// <summary>
-        /// Time verification was requested  Format: &#x60;YYYY-MM-DDThhmmssZ&#x60;, where: - &#x60;T&#x60;:  Separates the date and the time - &#x60;Z&#x60;:  Indicates Coordinated Universal Time (UTC), also known as Greenwich Mean Time (GMT)  Example:  &#x60;2020-01-11T224757Z&#x60; equals January 11, 2020, at 22:47:57 (10:47:57 p.m.) 
+        /// Gets or Sets CorrelationId
         /// </summary>
-        /// <value>Time verification was requested  Format: &#x60;YYYY-MM-DDThhmmssZ&#x60;, where: - &#x60;T&#x60;:  Separates the date and the time - &#x60;Z&#x60;:  Indicates Coordinated Universal Time (UTC), also known as Greenwich Mean Time (GMT)  Example:  &#x60;2020-01-11T224757Z&#x60; equals January 11, 2020, at 22:47:57 (10:47:57 p.m.) </value>
-        [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
-        public string SubmitTimeUtc { get; set; }
-
-        /// <summary>
-        /// Possible values:   - &#x60;INVALID_REQUEST&#x60; 
-        /// </summary>
-        /// <value>Possible values:   - &#x60;INVALID_REQUEST&#x60; </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
-
-        /// <summary>
-        /// The detail message related to the status and reason
-        /// </summary>
-        /// <value>The detail message related to the status and reason</value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
-        public string Message { get; set; }
-
-        /// <summary>
-        /// The reason of the status.  Possible values:   - &#x60;INVALID_REQUEST&#x60; 
-        /// </summary>
-        /// <value>The reason of the status.  Possible values:   - &#x60;INVALID_REQUEST&#x60; </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
-        public string Reason { get; set; }
+        [JsonPropertyName("correlationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string CorrelationId { get; set; }
 
         /// <summary>
         /// Gets or Sets Details
         /// </summary>
-        [DataMember(Name="details", EmitDefaultValue=false)]
-        public List<InlineResponse40011Details> Details { get; set; }
+        [JsonPropertyName("details")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public List<InlineResponse4001Details> Details { get; set; }
+
+        /// <summary>
+        /// Gets or Sets InformationLink
+        /// </summary>
+        [JsonPropertyName("informationLink")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string InformationLink { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Message
+        /// </summary>
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string Message { get; set; }
+
+        /// <summary>
+        /// Possible values: - INVALID_APIKEY - INVALID_SHIPPING_INPUT_PARAMS - CAPTURE_CONTEXT_INVALID - CAPTURE_CONTEXT_EXPIRED - SDK_XHR_ERROR - UNIFIEDPAYMENTS_VALIDATION_PARAMS - UNIFIEDPAYMENTS_VALIDATION_FIELDS - UNIFIEDPAYMENT_PAYMENT_PARAMITERS - CREATE_TOKEN_TIMEOUT - CREATE_TOKEN_XHR_ERROR - SHOW_LOAD_CONTAINER_SELECTOR - SHOW_LOAD_INVALID_CONTAINER - SHOW_TOKEN_TIMEOUT - SHOW_TOKEN_XHR_ERROR - SHOW_PAYMENT_TIMEOUT
+        /// </summary>
+        /// <value>Possible values: - INVALID_APIKEY - INVALID_SHIPPING_INPUT_PARAMS - CAPTURE_CONTEXT_INVALID - CAPTURE_CONTEXT_EXPIRED - SDK_XHR_ERROR - UNIFIEDPAYMENTS_VALIDATION_PARAMS - UNIFIEDPAYMENTS_VALIDATION_FIELDS - UNIFIEDPAYMENT_PAYMENT_PARAMITERS - CREATE_TOKEN_TIMEOUT - CREATE_TOKEN_XHR_ERROR - SHOW_LOAD_CONTAINER_SELECTOR - SHOW_LOAD_INVALID_CONTAINER - SHOW_TOKEN_TIMEOUT - SHOW_TOKEN_XHR_ERROR - SHOW_PAYMENT_TIMEOUT</value>
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string Reason { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -89,11 +96,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse40011 {\n");
-            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Details != null) sb.Append("  Details: ").Append(Details).Append("\n");
+            if (CorrelationId != null) sb.Append("  CorrelationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse40011", "correlationId", CorrelationId.ToString())).Append("\n");
+            if (Details != null) sb.Append("  Details: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse40011", "details", Details.ToString())).Append("\n");
+            if (InformationLink != null) sb.Append("  InformationLink: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse40011", "informationLink", InformationLink.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse40011", "message", Message.ToString())).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse40011", "reason", Reason.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,7 +111,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse40011", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>
@@ -131,14 +138,19 @@ namespace CyberSource.Model
 
             return 
                 (
-                    this.SubmitTimeUtc == other.SubmitTimeUtc ||
-                    this.SubmitTimeUtc != null &&
-                    this.SubmitTimeUtc.Equals(other.SubmitTimeUtc)
+                    this.CorrelationId == other.CorrelationId ||
+                    this.CorrelationId != null &&
+                    this.CorrelationId.Equals(other.CorrelationId)
                 ) && 
                 (
-                    this.Status == other.Status ||
-                    this.Status != null &&
-                    this.Status.Equals(other.Status)
+                    this.Details == other.Details ||
+                    this.Details != null &&
+                    this.Details.SequenceEqual(other.Details)
+                ) && 
+                (
+                    this.InformationLink == other.InformationLink ||
+                    this.InformationLink != null &&
+                    this.InformationLink.Equals(other.InformationLink)
                 ) && 
                 (
                     this.Message == other.Message ||
@@ -149,11 +161,6 @@ namespace CyberSource.Model
                     this.Reason == other.Reason ||
                     this.Reason != null &&
                     this.Reason.Equals(other.Reason)
-                ) && 
-                (
-                    this.Details == other.Details ||
-                    this.Details != null &&
-                    this.Details.SequenceEqual(other.Details)
                 );
         }
 
@@ -168,16 +175,16 @@ namespace CyberSource.Model
             {
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
-                if (this.SubmitTimeUtc != null)
-                    hash = hash * 59 + this.SubmitTimeUtc.GetHashCode();
-                if (this.Status != null)
-                    hash = hash * 59 + this.Status.GetHashCode();
+                if (this.CorrelationId != null)
+                    hash = hash * 59 + this.CorrelationId.GetHashCode();
+                if (this.Details != null)
+                    hash = hash * 59 + this.Details.GetHashCode();
+                if (this.InformationLink != null)
+                    hash = hash * 59 + this.InformationLink.GetHashCode();
                 if (this.Message != null)
                     hash = hash * 59 + this.Message.GetHashCode();
                 if (this.Reason != null)
                     hash = hash * 59 + this.Reason.GetHashCode();
-                if (this.Details != null)
-                    hash = hash * 59 + this.Details.GetHashCode();
                 return hash;
             }
         }

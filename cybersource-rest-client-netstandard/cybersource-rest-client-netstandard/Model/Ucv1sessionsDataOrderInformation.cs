@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -39,7 +39,7 @@ namespace CyberSource.Model
         /// <param name="LineItems">LineItems.</param>
         /// <param name="InvoiceDetails">InvoiceDetails.</param>
         /// <param name="ShippingDetails">ShippingDetails.</param>
-        public Ucv1sessionsDataOrderInformation(Ucv1sessionsDataOrderInformationAmountDetails AmountDetails = default(Ucv1sessionsDataOrderInformationAmountDetails), Ucv1sessionsDataOrderInformationBillTo BillTo = default(Ucv1sessionsDataOrderInformationBillTo), Upv1capturecontextsDataOrderInformationShipTo ShipTo = default(Upv1capturecontextsDataOrderInformationShipTo), List<Ucv1sessionsDataOrderInformationLineItems> LineItems = default(List<Ucv1sessionsDataOrderInformationLineItems>), Ucv1sessionsDataOrderInformationInvoiceDetails InvoiceDetails = default(Ucv1sessionsDataOrderInformationInvoiceDetails), Ucv1sessionsDataOrderInformationShippingDetails ShippingDetails = default(Ucv1sessionsDataOrderInformationShippingDetails))
+        public Ucv1sessionsDataOrderInformation(Ucv1sessionsDataOrderInformationAmountDetails AmountDetails = default(Ucv1sessionsDataOrderInformationAmountDetails), Ucv1sessionsDataOrderInformationBillTo BillTo = default(Ucv1sessionsDataOrderInformationBillTo), Ucv1sessionsDataOrderInformationShipTo ShipTo = default(Ucv1sessionsDataOrderInformationShipTo), List<Ucv1sessionsDataOrderInformationLineItems> LineItems = default(List<Ucv1sessionsDataOrderInformationLineItems>), Ucv1sessionsDataOrderInformationInvoiceDetails InvoiceDetails = default(Ucv1sessionsDataOrderInformationInvoiceDetails), Ucv1sessionsDataOrderInformationShippingDetails ShippingDetails = default(Ucv1sessionsDataOrderInformationShippingDetails))
         {
             this.AmountDetails = AmountDetails;
             this.BillTo = BillTo;
@@ -52,37 +52,43 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AmountDetails
         /// </summary>
-        [DataMember(Name="amountDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("amountDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataOrderInformationAmountDetails AmountDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets BillTo
         /// </summary>
-        [DataMember(Name="billTo", EmitDefaultValue=false)]
+        [JsonPropertyName("billTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataOrderInformationBillTo BillTo { get; set; }
 
         /// <summary>
         /// Gets or Sets ShipTo
         /// </summary>
-        [DataMember(Name="shipTo", EmitDefaultValue=false)]
-        public Upv1capturecontextsDataOrderInformationShipTo ShipTo { get; set; }
+        [JsonPropertyName("shipTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Ucv1sessionsDataOrderInformationShipTo ShipTo { get; set; }
 
         /// <summary>
         /// Gets or Sets LineItems
         /// </summary>
-        [DataMember(Name="lineItems", EmitDefaultValue=false)]
+        [JsonPropertyName("lineItems")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ucv1sessionsDataOrderInformationLineItems> LineItems { get; set; }
 
         /// <summary>
         /// Gets or Sets InvoiceDetails
         /// </summary>
-        [DataMember(Name="invoiceDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataOrderInformationInvoiceDetails InvoiceDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets ShippingDetails
         /// </summary>
-        [DataMember(Name="shippingDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataOrderInformationShippingDetails ShippingDetails { get; set; }
 
         /// <summary>
@@ -93,12 +99,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataOrderInformation {\n");
-            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(AmountDetails).Append("\n");
-            if (BillTo != null) sb.Append("  BillTo: ").Append(BillTo).Append("\n");
-            if (ShipTo != null) sb.Append("  ShipTo: ").Append(ShipTo).Append("\n");
-            if (LineItems != null) sb.Append("  LineItems: ").Append(LineItems).Append("\n");
-            if (InvoiceDetails != null) sb.Append("  InvoiceDetails: ").Append(InvoiceDetails).Append("\n");
-            if (ShippingDetails != null) sb.Append("  ShippingDetails: ").Append(ShippingDetails).Append("\n");
+            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformation", "amountDetails", AmountDetails.ToString())).Append("\n");
+            if (BillTo != null) sb.Append("  BillTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformation", "billTo", BillTo.ToString())).Append("\n");
+            if (ShipTo != null) sb.Append("  ShipTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformation", "shipTo", ShipTo.ToString())).Append("\n");
+            if (LineItems != null) sb.Append("  LineItems: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformation", "lineItems", LineItems.ToString())).Append("\n");
+            if (InvoiceDetails != null) sb.Append("  InvoiceDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformation", "invoiceDetails", InvoiceDetails.ToString())).Append("\n");
+            if (ShippingDetails != null) sb.Append("  ShippingDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformation", "shippingDetails", ShippingDetails.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -109,7 +115,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataOrderInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

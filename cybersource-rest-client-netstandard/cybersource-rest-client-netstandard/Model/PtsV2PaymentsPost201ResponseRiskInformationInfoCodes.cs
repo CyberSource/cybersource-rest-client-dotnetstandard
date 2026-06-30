@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -59,63 +59,72 @@ namespace CyberSource.Model
         /// List of information codes triggered by the order. These information codes were generated when you created the order and product velocity rules and are returned so that you can associate them with the rules. 
         /// </summary>
         /// <value>List of information codes triggered by the order. These information codes were generated when you created the order and product velocity rules and are returned so that you can associate them with the rules. </value>
-        [DataMember(Name="velocity", EmitDefaultValue=false)]
+        [JsonPropertyName("velocity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> Velocity { get; set; }
 
         /// <summary>
         /// Indicates a mismatch between the customer&#39;s billing and shipping addresses. 
         /// </summary>
         /// <value>Indicates a mismatch between the customer&#39;s billing and shipping addresses. </value>
-        [DataMember(Name="address", EmitDefaultValue=false)]
+        [JsonPropertyName("address")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> Address { get; set; }
 
         /// <summary>
         /// Indicates that customer information is associated with transactions that are either on the negative or the positive list. 
         /// </summary>
         /// <value>Indicates that customer information is associated with transactions that are either on the negative or the positive list. </value>
-        [DataMember(Name="customerList", EmitDefaultValue=false)]
+        [JsonPropertyName("customerList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> CustomerList { get; set; }
 
         /// <summary>
         /// Indicates the device behavior information code(s) returned from device fingerprinting. 
         /// </summary>
         /// <value>Indicates the device behavior information code(s) returned from device fingerprinting. </value>
-        [DataMember(Name="deviceBehavior", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceBehavior")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> DeviceBehavior { get; set; }
 
         /// <summary>
         /// Indicates excessive identity changes. The threshold is variable depending on the identity elements being compared. 
         /// </summary>
         /// <value>Indicates excessive identity changes. The threshold is variable depending on the identity elements being compared. </value>
-        [DataMember(Name="identityChange", EmitDefaultValue=false)]
+        [JsonPropertyName("identityChange")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> IdentityChange { get; set; }
 
         /// <summary>
         /// Indicates a problem with the customer&#39;s email address, IP address, or billing address. 
         /// </summary>
         /// <value>Indicates a problem with the customer&#39;s email address, IP address, or billing address. </value>
-        [DataMember(Name="internet", EmitDefaultValue=false)]
+        [JsonPropertyName("internet")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> Internet { get; set; }
 
         /// <summary>
         /// Indicates a problem with the customer&#39;s phone number. 
         /// </summary>
         /// <value>Indicates a problem with the customer&#39;s phone number. </value>
-        [DataMember(Name="phone", EmitDefaultValue=false)]
+        [JsonPropertyName("phone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> Phone { get; set; }
 
         /// <summary>
         /// Indicates that the customer provided potentially suspicious information. 
         /// </summary>
         /// <value>Indicates that the customer provided potentially suspicious information. </value>
-        [DataMember(Name="suspicious", EmitDefaultValue=false)]
+        [JsonPropertyName("suspicious")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> Suspicious { get; set; }
 
         /// <summary>
         /// Indicates that the customer has a high purchase frequency. 
         /// </summary>
         /// <value>Indicates that the customer has a high purchase frequency. </value>
-        [DataMember(Name="globalVelocity", EmitDefaultValue=false)]
+        [JsonPropertyName("globalVelocity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> GlobalVelocity { get; set; }
 
         /// <summary>
@@ -126,15 +135,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseRiskInformationInfoCodes {\n");
-            if (Velocity != null) sb.Append("  Velocity: ").Append(Velocity).Append("\n");
-            if (Address != null) sb.Append("  Address: ").Append(Address).Append("\n");
-            if (CustomerList != null) sb.Append("  CustomerList: ").Append(CustomerList).Append("\n");
-            if (DeviceBehavior != null) sb.Append("  DeviceBehavior: ").Append(DeviceBehavior).Append("\n");
-            if (IdentityChange != null) sb.Append("  IdentityChange: ").Append(IdentityChange).Append("\n");
-            if (Internet != null) sb.Append("  Internet: ").Append(Internet).Append("\n");
-            if (Phone != null) sb.Append("  Phone: ").Append(Phone).Append("\n");
-            if (Suspicious != null) sb.Append("  Suspicious: ").Append(Suspicious).Append("\n");
-            if (GlobalVelocity != null) sb.Append("  GlobalVelocity: ").Append(GlobalVelocity).Append("\n");
+            if (Velocity != null) sb.Append("  Velocity: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationInfoCodes", "velocity", Velocity.ToString())).Append("\n");
+            if (Address != null) sb.Append("  Address: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationInfoCodes", "address", Address.ToString())).Append("\n");
+            if (CustomerList != null) sb.Append("  CustomerList: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationInfoCodes", "customerList", CustomerList.ToString())).Append("\n");
+            if (DeviceBehavior != null) sb.Append("  DeviceBehavior: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationInfoCodes", "deviceBehavior", DeviceBehavior.ToString())).Append("\n");
+            if (IdentityChange != null) sb.Append("  IdentityChange: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationInfoCodes", "identityChange", IdentityChange.ToString())).Append("\n");
+            if (Internet != null) sb.Append("  Internet: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationInfoCodes", "internet", Internet.ToString())).Append("\n");
+            if (Phone != null) sb.Append("  Phone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationInfoCodes", "phone", Phone.ToString())).Append("\n");
+            if (Suspicious != null) sb.Append("  Suspicious: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationInfoCodes", "suspicious", Suspicious.ToString())).Append("\n");
+            if (GlobalVelocity != null) sb.Append("  GlobalVelocity: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationInfoCodes", "globalVelocity", GlobalVelocity.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -145,7 +154,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseRiskInformationInfoCodes", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

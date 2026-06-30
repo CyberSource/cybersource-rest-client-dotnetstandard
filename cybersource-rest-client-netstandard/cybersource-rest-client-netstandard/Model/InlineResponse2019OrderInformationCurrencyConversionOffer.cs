@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -63,77 +63,88 @@ namespace CyberSource.Model
         /// The amount of the sale in the merchant&#39;s currency.  For DCC this should be the same value as the request. For MCP will be 1 major unit of the merchant&#39;s base currency. 
         /// </summary>
         /// <value>The amount of the sale in the merchant&#39;s currency.  For DCC this should be the same value as the request. For MCP will be 1 major unit of the merchant&#39;s base currency. </value>
-        [DataMember(Name="originalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("originalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalAmount { get; set; }
 
         /// <summary>
         /// Currency of the transaction in the merchant&#39;s currency.  For DCC this should be the same value as the request.  For MCP will be the merchant&#39;s base currency as configured on the currency conversion provider&#39;s system. Use three-character alphabetic [ISO 4271 Currency Codes.](https://developer.cybersource.com/docs/cybs/en-us/currency-codes/reference/all/na/currency-codes/currency-codes.html) 
         /// </summary>
         /// <value>Currency of the transaction in the merchant&#39;s currency.  For DCC this should be the same value as the request.  For MCP will be the merchant&#39;s base currency as configured on the currency conversion provider&#39;s system. Use three-character alphabetic [ISO 4271 Currency Codes.](https://developer.cybersource.com/docs/cybs/en-us/currency-codes/reference/all/na/currency-codes/currency-codes.html) </value>
-        [DataMember(Name="originalCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("originalCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalCurrency { get; set; }
 
         /// <summary>
         /// The offer amount, calculated using the originalAmount and the exchangeRate. For DCC this is the amount in the card issuer&#39;s currency. 
         /// </summary>
         /// <value>The offer amount, calculated using the originalAmount and the exchangeRate. For DCC this is the amount in the card issuer&#39;s currency. </value>
-        [DataMember(Name="amount", EmitDefaultValue=false)]
+        [JsonPropertyName("amount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Amount { get; set; }
 
         /// <summary>
         /// Currency of the offer. For DCC this is the card&#39;s issuers currency. Use three-character alphabetic  [ISO 4271 Currency Codes.](https://developer.cybersource.com/docs/cybs/en-us/currency-codes/reference/all/na/currency-codes/currency-codes.html) 
         /// </summary>
         /// <value>Currency of the offer. For DCC this is the card&#39;s issuers currency. Use three-character alphabetic  [ISO 4271 Currency Codes.](https://developer.cybersource.com/docs/cybs/en-us/currency-codes/reference/all/na/currency-codes/currency-codes.html) </value>
-        [DataMember(Name="currency", EmitDefaultValue=false)]
+        [JsonPropertyName("currency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Currency { get; set; }
 
         /// <summary>
         /// The exchange rate of the offer from 1 major unit of the sale currency including margin. This will be printed on the receipt. For example, if a USD consumer is purchasing in EUR, this field should return the amount of 1 EUR in USD including mark-up. The receipt will contain the following: &#x60;EUR 1.00 &#x3D; USD 1.09998900010999&#x60; - where 1.09998900010999 is the value returned in this field. 
         /// </summary>
         /// <value>The exchange rate of the offer from 1 major unit of the sale currency including margin. This will be printed on the receipt. For example, if a USD consumer is purchasing in EUR, this field should return the amount of 1 EUR in USD including mark-up. The receipt will contain the following: &#x60;EUR 1.00 &#x3D; USD 1.09998900010999&#x60; - where 1.09998900010999 is the value returned in this field. </value>
-        [DataMember(Name="exchangeRate", EmitDefaultValue=false)]
+        [JsonPropertyName("exchangeRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExchangeRate { get; set; }
 
         /// <summary>
         /// An inverted exchange rate is the base currency amount divided by the converted currency amount. Ex. If a USD customer is purchasing in EUR, this field should return the value of USD divided by EUR. 
         /// </summary>
         /// <value>An inverted exchange rate is the base currency amount divided by the converted currency amount. Ex. If a USD customer is purchasing in EUR, this field should return the value of USD divided by EUR. </value>
-        [DataMember(Name="exchangeRateInverted", EmitDefaultValue=false)]
+        [JsonPropertyName("exchangeRateInverted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ExchangeRateInverted { get; set; }
 
         /// <summary>
         /// The margin between the offer exchange rate and wholesale rates, i.e. the mark up. Expressed as a percentage of 100, e.g. 3.75 
         /// </summary>
         /// <value>The margin between the offer exchange rate and wholesale rates, i.e. the mark up. Expressed as a percentage of 100, e.g. 3.75 </value>
-        [DataMember(Name="marginRate", EmitDefaultValue=false)]
+        [JsonPropertyName("marginRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MarginRate { get; set; }
 
         /// <summary>
         /// The source of the rate (excluding mark up). Optional field. 
         /// </summary>
         /// <value>The source of the rate (excluding mark up). Optional field. </value>
-        [DataMember(Name="rateSource", EmitDefaultValue=false)]
+        [JsonPropertyName("rateSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RateSource { get; set; }
 
         /// <summary>
         /// The date and time of exchange rate in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2023-05-17T23:47:57Z&#x60; equals May 17, 2023, at 23:47:57 (11:47:57 PM). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC. 
         /// </summary>
         /// <value>The date and time of exchange rate in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2023-05-17T23:47:57Z&#x60; equals May 17, 2023, at 23:47:57 (11:47:57 PM). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC. </value>
-        [DataMember(Name="exchangeRateTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("exchangeRateTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExchangeRateTimeUtc { get; set; }
 
         /// <summary>
         /// The expiration time of the exchange rate in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; 
         /// </summary>
         /// <value>The expiration time of the exchange rate in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; </value>
-        [DataMember(Name="exchangeRateExpirationTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("exchangeRateExpirationTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExchangeRateExpirationTimeUtc { get; set; }
 
         /// <summary>
         /// A unique MCP rate identifier. 
         /// </summary>
         /// <value>A unique MCP rate identifier. </value>
-        [DataMember(Name="rateId", EmitDefaultValue=false)]
+        [JsonPropertyName("rateId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RateId { get; set; }
 
         /// <summary>
@@ -144,17 +155,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2019OrderInformationCurrencyConversionOffer {\n");
-            if (OriginalAmount != null) sb.Append("  OriginalAmount: ").Append(OriginalAmount).Append("\n");
-            if (OriginalCurrency != null) sb.Append("  OriginalCurrency: ").Append(OriginalCurrency).Append("\n");
-            if (Amount != null) sb.Append("  Amount: ").Append(Amount).Append("\n");
-            if (Currency != null) sb.Append("  Currency: ").Append(Currency).Append("\n");
-            if (ExchangeRate != null) sb.Append("  ExchangeRate: ").Append(ExchangeRate).Append("\n");
-            if (ExchangeRateInverted != null) sb.Append("  ExchangeRateInverted: ").Append(ExchangeRateInverted).Append("\n");
-            if (MarginRate != null) sb.Append("  MarginRate: ").Append(MarginRate).Append("\n");
-            if (RateSource != null) sb.Append("  RateSource: ").Append(RateSource).Append("\n");
-            if (ExchangeRateTimeUtc != null) sb.Append("  ExchangeRateTimeUtc: ").Append(ExchangeRateTimeUtc).Append("\n");
-            if (ExchangeRateExpirationTimeUtc != null) sb.Append("  ExchangeRateExpirationTimeUtc: ").Append(ExchangeRateExpirationTimeUtc).Append("\n");
-            if (RateId != null) sb.Append("  RateId: ").Append(RateId).Append("\n");
+            if (OriginalAmount != null) sb.Append("  OriginalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019OrderInformationCurrencyConversionOffer", "originalAmount", OriginalAmount.ToString())).Append("\n");
+            if (OriginalCurrency != null) sb.Append("  OriginalCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019OrderInformationCurrencyConversionOffer", "originalCurrency", OriginalCurrency.ToString())).Append("\n");
+            if (Amount != null) sb.Append("  Amount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019OrderInformationCurrencyConversionOffer", "amount", Amount.ToString())).Append("\n");
+            if (Currency != null) sb.Append("  Currency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019OrderInformationCurrencyConversionOffer", "currency", Currency.ToString())).Append("\n");
+            if (ExchangeRate != null) sb.Append("  ExchangeRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019OrderInformationCurrencyConversionOffer", "exchangeRate", ExchangeRate.ToString())).Append("\n");
+            if (ExchangeRateInverted != null) sb.Append("  ExchangeRateInverted: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019OrderInformationCurrencyConversionOffer", "exchangeRateInverted", ExchangeRateInverted.ToString())).Append("\n");
+            if (MarginRate != null) sb.Append("  MarginRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019OrderInformationCurrencyConversionOffer", "marginRate", MarginRate.ToString())).Append("\n");
+            if (RateSource != null) sb.Append("  RateSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019OrderInformationCurrencyConversionOffer", "rateSource", RateSource.ToString())).Append("\n");
+            if (ExchangeRateTimeUtc != null) sb.Append("  ExchangeRateTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019OrderInformationCurrencyConversionOffer", "exchangeRateTimeUtc", ExchangeRateTimeUtc.ToString())).Append("\n");
+            if (ExchangeRateExpirationTimeUtc != null) sb.Append("  ExchangeRateExpirationTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019OrderInformationCurrencyConversionOffer", "exchangeRateExpirationTimeUtc", ExchangeRateExpirationTimeUtc.ToString())).Append("\n");
+            if (RateId != null) sb.Append("  RateId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019OrderInformationCurrencyConversionOffer", "rateId", RateId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -165,7 +176,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2019OrderInformationCurrencyConversionOffer", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

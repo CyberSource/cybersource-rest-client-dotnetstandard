@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="MerchantDefinedFieldDefinitionRequest" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected MerchantDefinedFieldDefinitionRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="MerchantDefinedFieldDefinitionRequest" /> class.
@@ -80,59 +80,68 @@ namespace CyberSource.Model
         /// Possible values: - text - select
         /// </summary>
         /// <value>Possible values: - text - select</value>
-        [DataMember(Name="fieldType", EmitDefaultValue=false)]
+        [JsonPropertyName("fieldType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FieldType { get; set; }
 
         /// <summary>
         /// Gets or Sets Label
         /// </summary>
-        [DataMember(Name="label", EmitDefaultValue=false)]
+        [JsonPropertyName("label")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Label { get; set; }
 
         /// <summary>
         /// Gets or Sets CustomerVisible
         /// </summary>
-        [DataMember(Name="customerVisible", EmitDefaultValue=false)]
+        [JsonPropertyName("customerVisible")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CustomerVisible { get; set; }
 
         /// <summary>
         /// Should be used only if fieldType &#x3D; \&quot;text\&quot;
         /// </summary>
         /// <value>Should be used only if fieldType &#x3D; \&quot;text\&quot;</value>
-        [DataMember(Name="textMinLength", EmitDefaultValue=false)]
+        [JsonPropertyName("textMinLength")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? TextMinLength { get; set; }
 
         /// <summary>
         /// Should be used only if fieldType &#x3D; \&quot;text\&quot;
         /// </summary>
         /// <value>Should be used only if fieldType &#x3D; \&quot;text\&quot;</value>
-        [DataMember(Name="textMaxLength", EmitDefaultValue=false)]
+        [JsonPropertyName("textMaxLength")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? TextMaxLength { get; set; }
 
         /// <summary>
         /// Should be used only if fieldType &#x3D; \&quot;text\&quot;
         /// </summary>
         /// <value>Should be used only if fieldType &#x3D; \&quot;text\&quot;</value>
-        [DataMember(Name="textDefaultValue", EmitDefaultValue=false)]
+        [JsonPropertyName("textDefaultValue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TextDefaultValue { get; set; }
 
         /// <summary>
         /// Should be mandatory and used only if fieldType &#x3D; \&quot;select\&quot;
         /// </summary>
         /// <value>Should be mandatory and used only if fieldType &#x3D; \&quot;select\&quot;</value>
-        [DataMember(Name="possibleValues", EmitDefaultValue=false)]
+        [JsonPropertyName("possibleValues")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PossibleValues { get; set; }
 
         /// <summary>
         /// Gets or Sets ReadOnly
         /// </summary>
-        [DataMember(Name="readOnly", EmitDefaultValue=false)]
+        [JsonPropertyName("readOnly")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ReadOnly { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantDefinedDataIndex
         /// </summary>
-        [DataMember(Name="merchantDefinedDataIndex", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDefinedDataIndex")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? MerchantDefinedDataIndex { get; set; }
 
         /// <summary>
@@ -143,15 +152,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class MerchantDefinedFieldDefinitionRequest {\n");
-            if (FieldType != null) sb.Append("  FieldType: ").Append(FieldType).Append("\n");
-            if (Label != null) sb.Append("  Label: ").Append(Label).Append("\n");
-            if (CustomerVisible != null) sb.Append("  CustomerVisible: ").Append(CustomerVisible).Append("\n");
-            if (TextMinLength != null) sb.Append("  TextMinLength: ").Append(TextMinLength).Append("\n");
-            if (TextMaxLength != null) sb.Append("  TextMaxLength: ").Append(TextMaxLength).Append("\n");
-            if (TextDefaultValue != null) sb.Append("  TextDefaultValue: ").Append(TextDefaultValue).Append("\n");
-            if (PossibleValues != null) sb.Append("  PossibleValues: ").Append(PossibleValues).Append("\n");
-            if (ReadOnly != null) sb.Append("  ReadOnly: ").Append(ReadOnly).Append("\n");
-            if (MerchantDefinedDataIndex != null) sb.Append("  MerchantDefinedDataIndex: ").Append(MerchantDefinedDataIndex).Append("\n");
+            if (FieldType != null) sb.Append("  FieldType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MerchantDefinedFieldDefinitionRequest", "fieldType", FieldType.ToString())).Append("\n");
+            if (Label != null) sb.Append("  Label: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MerchantDefinedFieldDefinitionRequest", "label", Label.ToString())).Append("\n");
+            if (CustomerVisible != null) sb.Append("  CustomerVisible: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MerchantDefinedFieldDefinitionRequest", "customerVisible", CustomerVisible.ToString())).Append("\n");
+            if (TextMinLength != null) sb.Append("  TextMinLength: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MerchantDefinedFieldDefinitionRequest", "textMinLength", TextMinLength.ToString())).Append("\n");
+            if (TextMaxLength != null) sb.Append("  TextMaxLength: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MerchantDefinedFieldDefinitionRequest", "textMaxLength", TextMaxLength.ToString())).Append("\n");
+            if (TextDefaultValue != null) sb.Append("  TextDefaultValue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MerchantDefinedFieldDefinitionRequest", "textDefaultValue", TextDefaultValue.ToString())).Append("\n");
+            if (PossibleValues != null) sb.Append("  PossibleValues: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MerchantDefinedFieldDefinitionRequest", "possibleValues", PossibleValues.ToString())).Append("\n");
+            if (ReadOnly != null) sb.Append("  ReadOnly: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MerchantDefinedFieldDefinitionRequest", "readOnly", ReadOnly.ToString())).Append("\n");
+            if (MerchantDefinedDataIndex != null) sb.Append("  MerchantDefinedDataIndex: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MerchantDefinedFieldDefinitionRequest", "merchantDefinedDataIndex", MerchantDefinedDataIndex.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -162,7 +171,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("MerchantDefinedFieldDefinitionRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

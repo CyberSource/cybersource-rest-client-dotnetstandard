@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets TemplateId
         /// </summary>
-        [DataMember(Name="templateId", EmitDefaultValue=false)]
+        [JsonPropertyName("templateId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TemplateId { get; set; }
 
         /// <summary>
         /// Gets or Sets Configurations
         /// </summary>
-        [DataMember(Name="configurations", EmitDefaultValue=false)]
+        [JsonPropertyName("configurations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsMicroformConfigurationInformationConfigurations Configurations { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PaymentsProductsMicroformConfigurationInformation {\n");
-            if (TemplateId != null) sb.Append("  TemplateId: ").Append(TemplateId).Append("\n");
-            if (Configurations != null) sb.Append("  Configurations: ").Append(Configurations).Append("\n");
+            if (TemplateId != null) sb.Append("  TemplateId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsMicroformConfigurationInformation", "templateId", TemplateId.ToString())).Append("\n");
+            if (Configurations != null) sb.Append("  Configurations: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsMicroformConfigurationInformation", "configurations", Configurations.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PaymentsProductsMicroformConfigurationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

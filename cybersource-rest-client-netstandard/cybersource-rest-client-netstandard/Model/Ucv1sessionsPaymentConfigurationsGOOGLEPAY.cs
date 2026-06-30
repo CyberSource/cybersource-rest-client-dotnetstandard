@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,17 +33,18 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Ucv1sessionsPaymentConfigurationsGOOGLEPAY" /> class.
         /// </summary>
-        /// <param name="AllowedAuthMethods">When you enable Google Pay on Unified Checkout you can specify optional parameters that define the types of card authentication you receive from Google Pay.&lt;br&gt;&lt;br&gt; By default, Google sends both authentication types.  When the complete mandate is used and Google Pay does not authenticate the transaction, then Unified Checkout completes the authentication request as part of the complete mandate.&lt;br&gt;&lt;br&gt; Possible values: - PAN_ONLY: Google returns primary account number (PAN) values - CRYPTOGRAM_3DS: Google returns fully authenticated network token values.&lt;br&gt;&lt;br&gt;  Optional field:   This field can be configured through the Merchant Experience Screens in the Business Center.  The configured value may be overridden on a per transaction basis in the uc/v1/sessions API request. .</param>
+        /// <param name="AllowedAuthMethods">When you enable Google Pay on Unified Checkout you can specify optional parameters that define the types of card authentication you receive from Google Pay.&lt;br&gt;&lt;br&gt; By default, Google sends both authentication types.  When the complete mandate is used and Google Pay does not authenticate the transaction, then Unified Checkout completes the authentication request as part of the complete mandate.&lt;br&gt;&lt;br&gt; Possible values: - PAN_ONLY: Google returns primary account number (PAN) values - CRYPTOGRAM_3DS: Google returns fully authenticated network token values.&lt;br&gt;&lt;br&gt;  The allowedPaymentTypes field must also include GOOGLEPAY as shown below for the Google Pay button to show in Unified Checkout:    \&quot;allowedPaymentTypes\&quot;: [\&quot;GOOGLEPAY\&quot;] &lt;br&gt;&lt;br&gt;  Optional field:   This field can be configured through the Merchant Experience Screens in the Business Center.  The configured value may be overridden on a per transaction basis in the uc/v1/sessions API request. .</param>
         public Ucv1sessionsPaymentConfigurationsGOOGLEPAY(List<string> AllowedAuthMethods = default(List<string>))
         {
             this.AllowedAuthMethods = AllowedAuthMethods;
         }
         
         /// <summary>
-        /// When you enable Google Pay on Unified Checkout you can specify optional parameters that define the types of card authentication you receive from Google Pay.&lt;br&gt;&lt;br&gt; By default, Google sends both authentication types.  When the complete mandate is used and Google Pay does not authenticate the transaction, then Unified Checkout completes the authentication request as part of the complete mandate.&lt;br&gt;&lt;br&gt; Possible values: - PAN_ONLY: Google returns primary account number (PAN) values - CRYPTOGRAM_3DS: Google returns fully authenticated network token values.&lt;br&gt;&lt;br&gt;  Optional field:   This field can be configured through the Merchant Experience Screens in the Business Center.  The configured value may be overridden on a per transaction basis in the uc/v1/sessions API request. 
+        /// When you enable Google Pay on Unified Checkout you can specify optional parameters that define the types of card authentication you receive from Google Pay.&lt;br&gt;&lt;br&gt; By default, Google sends both authentication types.  When the complete mandate is used and Google Pay does not authenticate the transaction, then Unified Checkout completes the authentication request as part of the complete mandate.&lt;br&gt;&lt;br&gt; Possible values: - PAN_ONLY: Google returns primary account number (PAN) values - CRYPTOGRAM_3DS: Google returns fully authenticated network token values.&lt;br&gt;&lt;br&gt;  The allowedPaymentTypes field must also include GOOGLEPAY as shown below for the Google Pay button to show in Unified Checkout:    \&quot;allowedPaymentTypes\&quot;: [\&quot;GOOGLEPAY\&quot;] &lt;br&gt;&lt;br&gt;  Optional field:   This field can be configured through the Merchant Experience Screens in the Business Center.  The configured value may be overridden on a per transaction basis in the uc/v1/sessions API request. 
         /// </summary>
-        /// <value>When you enable Google Pay on Unified Checkout you can specify optional parameters that define the types of card authentication you receive from Google Pay.&lt;br&gt;&lt;br&gt; By default, Google sends both authentication types.  When the complete mandate is used and Google Pay does not authenticate the transaction, then Unified Checkout completes the authentication request as part of the complete mandate.&lt;br&gt;&lt;br&gt; Possible values: - PAN_ONLY: Google returns primary account number (PAN) values - CRYPTOGRAM_3DS: Google returns fully authenticated network token values.&lt;br&gt;&lt;br&gt;  Optional field:   This field can be configured through the Merchant Experience Screens in the Business Center.  The configured value may be overridden on a per transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="allowedAuthMethods", EmitDefaultValue=false)]
+        /// <value>When you enable Google Pay on Unified Checkout you can specify optional parameters that define the types of card authentication you receive from Google Pay.&lt;br&gt;&lt;br&gt; By default, Google sends both authentication types.  When the complete mandate is used and Google Pay does not authenticate the transaction, then Unified Checkout completes the authentication request as part of the complete mandate.&lt;br&gt;&lt;br&gt; Possible values: - PAN_ONLY: Google returns primary account number (PAN) values - CRYPTOGRAM_3DS: Google returns fully authenticated network token values.&lt;br&gt;&lt;br&gt;  The allowedPaymentTypes field must also include GOOGLEPAY as shown below for the Google Pay button to show in Unified Checkout:    \&quot;allowedPaymentTypes\&quot;: [\&quot;GOOGLEPAY\&quot;] &lt;br&gt;&lt;br&gt;  Optional field:   This field can be configured through the Merchant Experience Screens in the Business Center.  The configured value may be overridden on a per transaction basis in the uc/v1/sessions API request. </value>
+        [JsonPropertyName("allowedAuthMethods")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> AllowedAuthMethods { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsPaymentConfigurationsGOOGLEPAY {\n");
-            if (AllowedAuthMethods != null) sb.Append("  AllowedAuthMethods: ").Append(AllowedAuthMethods).Append("\n");
+            if (AllowedAuthMethods != null) sb.Append("  AllowedAuthMethods: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsPaymentConfigurationsGOOGLEPAY", "allowedAuthMethods", AllowedAuthMethods.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsPaymentConfigurationsGOOGLEPAY", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Indicator to determine whether negative sign infront of amount for all refunded transaction
         /// </summary>
         /// <value>Indicator to determine whether negative sign infront of amount for all refunded transaction</value>
-        [DataMember(Name="signedAmounts", EmitDefaultValue=false)]
+        [JsonPropertyName("signedAmounts")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? SignedAmounts { get; set; }
 
         /// <summary>
         /// Specify the field naming convention to be followed in reports (applicable to only csv report formats)  Valid values: - SOAPI - SCMP 
         /// </summary>
         /// <value>Specify the field naming convention to be followed in reports (applicable to only csv report formats)  Valid values: - SOAPI - SCMP </value>
-        [DataMember(Name="fieldNameConvention", EmitDefaultValue=false)]
+        [JsonPropertyName("fieldNameConvention")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FieldNameConvention { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Reportingv3reportsReportPreferences {\n");
-            if (SignedAmounts != null) sb.Append("  SignedAmounts: ").Append(SignedAmounts).Append("\n");
-            if (FieldNameConvention != null) sb.Append("  FieldNameConvention: ").Append(FieldNameConvention).Append("\n");
+            if (SignedAmounts != null) sb.Append("  SignedAmounts: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Reportingv3reportsReportPreferences", "signedAmounts", SignedAmounts.ToString())).Append("\n");
+            if (FieldNameConvention != null) sb.Append("  FieldNameConvention: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Reportingv3reportsReportPreferences", "fieldNameConvention", FieldNameConvention.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Reportingv3reportsReportPreferences", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// This field indicates if domestic AFTs (pull funds) are allowed. Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if domestic AFTs (pull funds) are allowed. Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; </value>
-        [DataMember(Name="domesticParticipant", EmitDefaultValue=false)]
+        [JsonPropertyName("domesticParticipant")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DomesticParticipant { get; set; }
 
         /// <summary>
         /// This field indicates if cross-border AFTs (pull funds) are allowed. Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if cross-border AFTs (pull funds) are allowed. Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; </value>
-        [DataMember(Name="crossBorderParticipant", EmitDefaultValue=false)]
+        [JsonPropertyName("crossBorderParticipant")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CrossBorderParticipant { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2013PayoutInformationPullFunds {\n");
-            if (DomesticParticipant != null) sb.Append("  DomesticParticipant: ").Append(DomesticParticipant).Append("\n");
-            if (CrossBorderParticipant != null) sb.Append("  CrossBorderParticipant: ").Append(CrossBorderParticipant).Append("\n");
+            if (DomesticParticipant != null) sb.Append("  DomesticParticipant: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPullFunds", "domesticParticipant", DomesticParticipant.ToString())).Append("\n");
+            if (CrossBorderParticipant != null) sb.Append("  CrossBorderParticipant: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPullFunds", "crossBorderParticipant", CrossBorderParticipant.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2013PayoutInformationPullFunds", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

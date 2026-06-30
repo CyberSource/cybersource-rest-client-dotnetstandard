@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,56 +57,64 @@ namespace CyberSource.Model
         /// Passenger classification associated with the price of the ticket. You can use one of the following values: - &#x60;ADT&#x60;: Adult - &#x60;CNN&#x60;: Child - &#x60;INF&#x60;: Infant - &#x60;YTH&#x60;: Youth - &#x60;STU&#x60;: Student - &#x60;SCR&#x60;: Senior Citizen - &#x60;MIL&#x60;: Military 
         /// </summary>
         /// <value>Passenger classification associated with the price of the ticket. You can use one of the following values: - &#x60;ADT&#x60;: Adult - &#x60;CNN&#x60;: Child - &#x60;INF&#x60;: Infant - &#x60;YTH&#x60;: Youth - &#x60;STU&#x60;: Student - &#x60;SCR&#x60;: Senior Citizen - &#x60;MIL&#x60;: Military </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Your company&#39;s passenger classification, such as with a frequent flyer program. In this case, you might use values such as &#x60;standard&#x60;, &#x60;gold&#x60;, or &#x60;platinum&#x60;. 
         /// </summary>
         /// <value>Your company&#39;s passenger classification, such as with a frequent flyer program. In this case, you might use values such as &#x60;standard&#x60;, &#x60;gold&#x60;, or &#x60;platinum&#x60;. </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Passenger&#39;s phone number. If the order is from outside the U.S., CyberSource recommends that you include the [ISO Standard Country Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf). 
         /// </summary>
         /// <value>Passenger&#39;s phone number. If the order is from outside the U.S., CyberSource recommends that you include the [ISO Standard Country Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf). </value>
-        [DataMember(Name="phone", EmitDefaultValue=false)]
+        [JsonPropertyName("phone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Phone { get; set; }
 
         /// <summary>
         /// Passenger&#39;s first name.
         /// </summary>
         /// <value>Passenger&#39;s first name.</value>
-        [DataMember(Name="firstName", EmitDefaultValue=false)]
+        [JsonPropertyName("firstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Passenger&#39;s last name.
         /// </summary>
         /// <value>Passenger&#39;s last name.</value>
-        [DataMember(Name="lastName", EmitDefaultValue=false)]
+        [JsonPropertyName("lastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastName { get; set; }
 
         /// <summary>
         /// ID of the passenger to whom the ticket was issued. For example, you can use this field for the frequent flyer number. 
         /// </summary>
         /// <value>ID of the passenger to whom the ticket was issued. For example, you can use this field for the frequent flyer number. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Passenger&#39;s email address, including the full domain name, such as jdoe@example.com.
         /// </summary>
         /// <value>Passenger&#39;s email address, including the full domain name, such as jdoe@example.com.</value>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Email { get; set; }
 
         /// <summary>
         /// Passenger&#39;s nationality country. Use the two character [ISO Standard Country Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).
         /// </summary>
         /// <value>Passenger&#39;s nationality country. Use the two character [ISO Standard Country Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).</value>
-        [DataMember(Name="nationality", EmitDefaultValue=false)]
+        [JsonPropertyName("nationality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Nationality { get; set; }
 
         /// <summary>
@@ -117,14 +125,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsOrderInformationPassenger {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (Phone != null) sb.Append("  Phone: ").Append(Phone).Append("\n");
-            if (FirstName != null) sb.Append("  FirstName: ").Append(FirstName).Append("\n");
-            if (LastName != null) sb.Append("  LastName: ").Append(LastName).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (Nationality != null) sb.Append("  Nationality: ").Append(Nationality).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationPassenger", "type", Type.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationPassenger", "status", Status.ToString())).Append("\n");
+            if (Phone != null) sb.Append("  Phone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationPassenger", "phone", Phone.ToString())).Append("\n");
+            if (FirstName != null) sb.Append("  FirstName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationPassenger", "firstName", FirstName.ToString())).Append("\n");
+            if (LastName != null) sb.Append("  LastName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationPassenger", "lastName", LastName.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationPassenger", "id", Id.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationPassenger", "email", Email.ToString())).Append("\n");
+            if (Nationality != null) sb.Append("  Nationality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationPassenger", "nationality", Nationality.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -135,7 +143,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsOrderInformationPassenger", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

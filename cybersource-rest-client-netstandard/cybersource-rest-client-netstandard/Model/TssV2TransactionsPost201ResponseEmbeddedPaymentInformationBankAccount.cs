@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Last four digits of the customer&#39;s payment account number. 
         /// </summary>
         /// <value>Last four digits of the customer&#39;s payment account number. </value>
-        [DataMember(Name="suffix", EmitDefaultValue=false)]
+        [JsonPropertyName("suffix")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Suffix { get; set; }
 
         /// <summary>
         /// Bank Identification Number (BIN). This is the initial four to six numbers on a credit card account number. 
         /// </summary>
         /// <value>Bank Identification Number (BIN). This is the initial four to six numbers on a credit card account number. </value>
-        [DataMember(Name="prefix", EmitDefaultValue=false)]
+        [JsonPropertyName("prefix")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Prefix { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsPost201ResponseEmbeddedPaymentInformationBankAccount {\n");
-            if (Suffix != null) sb.Append("  Suffix: ").Append(Suffix).Append("\n");
-            if (Prefix != null) sb.Append("  Prefix: ").Append(Prefix).Append("\n");
+            if (Suffix != null) sb.Append("  Suffix: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedPaymentInformationBankAccount", "suffix", Suffix.ToString())).Append("\n");
+            if (Prefix != null) sb.Append("  Prefix: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedPaymentInformationBankAccount", "prefix", Prefix.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsPost201ResponseEmbeddedPaymentInformationBankAccount", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

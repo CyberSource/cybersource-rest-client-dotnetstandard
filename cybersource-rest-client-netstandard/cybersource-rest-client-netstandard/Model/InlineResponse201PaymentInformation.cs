@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets TokenizedPaymentMethod
         /// </summary>
-        [DataMember(Name="tokenizedPaymentMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenizedPaymentMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse201PaymentInformationTokenizedPaymentMethod TokenizedPaymentMethod { get; set; }
 
         /// <summary>
         /// Gets or Sets EWallet
         /// </summary>
-        [DataMember(Name="eWallet", EmitDefaultValue=false)]
+        [JsonPropertyName("eWallet")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse201PaymentInformationEWallet EWallet { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse201PaymentInformation {\n");
-            if (TokenizedPaymentMethod != null) sb.Append("  TokenizedPaymentMethod: ").Append(TokenizedPaymentMethod).Append("\n");
-            if (EWallet != null) sb.Append("  EWallet: ").Append(EWallet).Append("\n");
+            if (TokenizedPaymentMethod != null) sb.Append("  TokenizedPaymentMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse201PaymentInformation", "tokenizedPaymentMethod", TokenizedPaymentMethod.ToString())).Append("\n");
+            if (EWallet != null) sb.Append("  EWallet: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse201PaymentInformation", "eWallet", EWallet.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse201PaymentInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

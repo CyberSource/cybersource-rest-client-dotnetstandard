@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Supported currency codes are numeric ISO 4217 codes, such as 840 for US Dollar and 978 for Euro.  For backward compatibility, we also support the &#39;ALL&#39; code, which represents all currencies.  In the UI, &#39;ALL&#39; is displayed as &#39;Default&#39;. 
         /// </summary>
         /// <value>Supported currency codes are numeric ISO 4217 codes, such as 840 for US Dollar and 978 for Euro.  For backward compatibility, we also support the &#39;ALL&#39; code, which represents all currencies.  In the UI, &#39;ALL&#39; is displayed as &#39;Default&#39;. </value>
-        [DataMember(Name="currencyCodes", EmitDefaultValue=false)]
+        [JsonPropertyName("currencyCodes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> CurrencyCodes { get; set; }
 
         /// <summary>
         /// The Acquirer ID value, often referred to as the Acquirer BIN, is specific to an Acquirer. The value is created by Cardinal in their system and the Acquirer may not know that the Acquirer ID is different from their Acquiring BIN. It is most often the Acquiring BIN + \&quot;-1000\&quot; but the trailing character can be different. **Note** We will need to double check with Cardinal before setting up the Portfolio Template in production. 
         /// </summary>
         /// <value>The Acquirer ID value, often referred to as the Acquirer BIN, is specific to an Acquirer. The value is created by Cardinal in their system and the Acquirer may not know that the Acquirer ID is different from their Acquiring BIN. It is most often the Acquiring BIN + \&quot;-1000\&quot; but the trailing character can be different. **Note** We will need to double check with Cardinal before setting up the Portfolio Template in production. </value>
-        [DataMember(Name="acquirerId", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcquirerId { get; set; }
 
         /// <summary>
         /// Processor Merchant ID is the Merchant ID assigned by your acquiring bank. This Merchant ID should also be used by your bank to register your account to the card scheme Directory Server for processing Payer Authentication services. 
         /// </summary>
         /// <value>Processor Merchant ID is the Merchant ID assigned by your acquiring bank. This Merchant ID should also be used by your bank to register your account to the card scheme Directory Server for processing Payer Authentication services. </value>
-        [DataMember(Name="processorMerchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("processorMerchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessorMerchantId { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PayerAuthConfigCardTypesVerifiedByVisaCurrencies {\n");
-            if (CurrencyCodes != null) sb.Append("  CurrencyCodes: ").Append(CurrencyCodes).Append("\n");
-            if (AcquirerId != null) sb.Append("  AcquirerId: ").Append(AcquirerId).Append("\n");
-            if (ProcessorMerchantId != null) sb.Append("  ProcessorMerchantId: ").Append(ProcessorMerchantId).Append("\n");
+            if (CurrencyCodes != null) sb.Append("  CurrencyCodes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PayerAuthConfigCardTypesVerifiedByVisaCurrencies", "currencyCodes", CurrencyCodes.ToString())).Append("\n");
+            if (AcquirerId != null) sb.Append("  AcquirerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PayerAuthConfigCardTypesVerifiedByVisaCurrencies", "acquirerId", AcquirerId.ToString())).Append("\n");
+            if (ProcessorMerchantId != null) sb.Append("  ProcessorMerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PayerAuthConfigCardTypesVerifiedByVisaCurrencies", "processorMerchantId", ProcessorMerchantId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PayerAuthConfigCardTypesVerifiedByVisaCurrencies", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

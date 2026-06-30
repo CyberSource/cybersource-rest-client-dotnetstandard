@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -38,7 +38,7 @@ namespace CyberSource.Model
         /// <param name="ShipTo">ShipTo.</param>
         /// <param name="LineItems">LineItems.</param>
         /// <param name="InvoiceDetails">InvoiceDetails.</param>
-        public Upv1capturecontextsDataOrderInformation(Upv1capturecontextsDataOrderInformationAmountDetails AmountDetails = default(Upv1capturecontextsDataOrderInformationAmountDetails), Upv1capturecontextsDataOrderInformationBillTo BillTo = default(Upv1capturecontextsDataOrderInformationBillTo), Upv1capturecontextsDataOrderInformationShipTo ShipTo = default(Upv1capturecontextsDataOrderInformationShipTo), Upv1capturecontextsDataOrderInformationLineItems LineItems = default(Upv1capturecontextsDataOrderInformationLineItems), Upv1capturecontextsDataOrderInformationInvoiceDetails InvoiceDetails = default(Upv1capturecontextsDataOrderInformationInvoiceDetails))
+        public Upv1capturecontextsDataOrderInformation(Upv1capturecontextsDataOrderInformationAmountDetails AmountDetails = default(Upv1capturecontextsDataOrderInformationAmountDetails), Upv1capturecontextsDataOrderInformationBillTo BillTo = default(Upv1capturecontextsDataOrderInformationBillTo), Upv1capturecontextsDataOrderInformationShipTo ShipTo = default(Upv1capturecontextsDataOrderInformationShipTo), List<Upv1capturecontextsDataOrderInformationLineItems> LineItems = default(List<Upv1capturecontextsDataOrderInformationLineItems>), Upv1capturecontextsDataOrderInformationInvoiceDetails InvoiceDetails = default(Upv1capturecontextsDataOrderInformationInvoiceDetails))
         {
             this.AmountDetails = AmountDetails;
             this.BillTo = BillTo;
@@ -50,31 +50,36 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AmountDetails
         /// </summary>
-        [DataMember(Name="amountDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("amountDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataOrderInformationAmountDetails AmountDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets BillTo
         /// </summary>
-        [DataMember(Name="billTo", EmitDefaultValue=false)]
+        [JsonPropertyName("billTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataOrderInformationBillTo BillTo { get; set; }
 
         /// <summary>
         /// Gets or Sets ShipTo
         /// </summary>
-        [DataMember(Name="shipTo", EmitDefaultValue=false)]
+        [JsonPropertyName("shipTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataOrderInformationShipTo ShipTo { get; set; }
 
         /// <summary>
         /// Gets or Sets LineItems
         /// </summary>
-        [DataMember(Name="lineItems", EmitDefaultValue=false)]
-        public Upv1capturecontextsDataOrderInformationLineItems LineItems { get; set; }
+        [JsonPropertyName("lineItems")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public List<Upv1capturecontextsDataOrderInformationLineItems> LineItems { get; set; }
 
         /// <summary>
         /// Gets or Sets InvoiceDetails
         /// </summary>
-        [DataMember(Name="invoiceDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataOrderInformationInvoiceDetails InvoiceDetails { get; set; }
 
         /// <summary>
@@ -85,11 +90,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Upv1capturecontextsDataOrderInformation {\n");
-            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(AmountDetails).Append("\n");
-            if (BillTo != null) sb.Append("  BillTo: ").Append(BillTo).Append("\n");
-            if (ShipTo != null) sb.Append("  ShipTo: ").Append(ShipTo).Append("\n");
-            if (LineItems != null) sb.Append("  LineItems: ").Append(LineItems).Append("\n");
-            if (InvoiceDetails != null) sb.Append("  InvoiceDetails: ").Append(InvoiceDetails).Append("\n");
+            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformation", "amountDetails", AmountDetails.ToString())).Append("\n");
+            if (BillTo != null) sb.Append("  BillTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformation", "billTo", BillTo.ToString())).Append("\n");
+            if (ShipTo != null) sb.Append("  ShipTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformation", "shipTo", ShipTo.ToString())).Append("\n");
+            if (LineItems != null) sb.Append("  LineItems: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformation", "lineItems", LineItems.ToString())).Append("\n");
+            if (InvoiceDetails != null) sb.Append("  InvoiceDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformation", "invoiceDetails", InvoiceDetails.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -100,7 +105,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Upv1capturecontextsDataOrderInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>
@@ -144,7 +149,7 @@ namespace CyberSource.Model
                 (
                     this.LineItems == other.LineItems ||
                     this.LineItems != null &&
-                    this.LineItems.Equals(other.LineItems)
+                    this.LineItems.SequenceEqual(other.LineItems)
                 ) && 
                 (
                     this.InvoiceDetails == other.InvoiceDetails ||

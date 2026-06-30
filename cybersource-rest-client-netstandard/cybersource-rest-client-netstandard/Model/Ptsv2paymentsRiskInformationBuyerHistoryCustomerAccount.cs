@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,42 +53,48 @@ namespace CyberSource.Model
         /// Date the cardholder&#39;s account was last changed. This includes changes to the billing or shipping address, new payment accounts or new users added. Recommended for Discover ProtectBuy. 
         /// </summary>
         /// <value>Date the cardholder&#39;s account was last changed. This includes changes to the billing or shipping address, new payment accounts or new users added. Recommended for Discover ProtectBuy. </value>
-        [DataMember(Name="lastChangeDate", EmitDefaultValue=false)]
+        [JsonPropertyName("lastChangeDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastChangeDate { get; set; }
 
         /// <summary>
         /// The values from the enum can be: - GUEST - NEW_ACCOUNT - EXISTING_ACCOUNT 
         /// </summary>
         /// <value>The values from the enum can be: - GUEST - NEW_ACCOUNT - EXISTING_ACCOUNT </value>
-        [DataMember(Name="creationHistory", EmitDefaultValue=false)]
+        [JsonPropertyName("creationHistory")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CreationHistory { get; set; }
 
         /// <summary>
         /// This field is applicable only in case of EXISTING_ACCOUNT in creationHistory. Possible values: - ACCOUNT_UPDATED_NOW - ACCOUNT_UPDATED_PAST 
         /// </summary>
         /// <value>This field is applicable only in case of EXISTING_ACCOUNT in creationHistory. Possible values: - ACCOUNT_UPDATED_NOW - ACCOUNT_UPDATED_PAST </value>
-        [DataMember(Name="modificationHistory", EmitDefaultValue=false)]
+        [JsonPropertyName("modificationHistory")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ModificationHistory { get; set; }
 
         /// <summary>
         /// This only applies for EXISTING_ACCOUNT in creationHistory. The values from the enum can be: - PASSWORD_CHANGED_NOW - PASSWORD_CHANGED_PAST - PASSWORD_NEVER_CHANGED 
         /// </summary>
         /// <value>This only applies for EXISTING_ACCOUNT in creationHistory. The values from the enum can be: - PASSWORD_CHANGED_NOW - PASSWORD_CHANGED_PAST - PASSWORD_NEVER_CHANGED </value>
-        [DataMember(Name="passwordHistory", EmitDefaultValue=false)]
+        [JsonPropertyName("passwordHistory")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PasswordHistory { get; set; }
 
         /// <summary>
         /// Date the cardholder opened the account. Recommended for Discover ProtectBuy. This only applies for EXISTING_ACCOUNT in creationHistory. 
         /// </summary>
         /// <value>Date the cardholder opened the account. Recommended for Discover ProtectBuy. This only applies for EXISTING_ACCOUNT in creationHistory. </value>
-        [DataMember(Name="createDate", EmitDefaultValue=false)]
+        [JsonPropertyName("createDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CreateDate { get; set; }
 
         /// <summary>
         /// Date the cardholder last changed or reset password on account. Recommended for Discover ProtectBuy. This only applies for PASSWORD_CHANGED_PAST in passwordHistory. 
         /// </summary>
         /// <value>Date the cardholder last changed or reset password on account. Recommended for Discover ProtectBuy. This only applies for PASSWORD_CHANGED_PAST in passwordHistory. </value>
-        [DataMember(Name="passwordChangeDate", EmitDefaultValue=false)]
+        [JsonPropertyName("passwordChangeDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PasswordChangeDate { get; set; }
 
         /// <summary>
@@ -99,12 +105,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsRiskInformationBuyerHistoryCustomerAccount {\n");
-            if (LastChangeDate != null) sb.Append("  LastChangeDate: ").Append(LastChangeDate).Append("\n");
-            if (CreationHistory != null) sb.Append("  CreationHistory: ").Append(CreationHistory).Append("\n");
-            if (ModificationHistory != null) sb.Append("  ModificationHistory: ").Append(ModificationHistory).Append("\n");
-            if (PasswordHistory != null) sb.Append("  PasswordHistory: ").Append(PasswordHistory).Append("\n");
-            if (CreateDate != null) sb.Append("  CreateDate: ").Append(CreateDate).Append("\n");
-            if (PasswordChangeDate != null) sb.Append("  PasswordChangeDate: ").Append(PasswordChangeDate).Append("\n");
+            if (LastChangeDate != null) sb.Append("  LastChangeDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistoryCustomerAccount", "lastChangeDate", LastChangeDate.ToString())).Append("\n");
+            if (CreationHistory != null) sb.Append("  CreationHistory: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistoryCustomerAccount", "creationHistory", CreationHistory.ToString())).Append("\n");
+            if (ModificationHistory != null) sb.Append("  ModificationHistory: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistoryCustomerAccount", "modificationHistory", ModificationHistory.ToString())).Append("\n");
+            if (PasswordHistory != null) sb.Append("  PasswordHistory: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistoryCustomerAccount", "passwordHistory", PasswordHistory.ToString())).Append("\n");
+            if (CreateDate != null) sb.Append("  CreateDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistoryCustomerAccount", "createDate", CreateDate.ToString())).Append("\n");
+            if (PasswordChangeDate != null) sb.Append("  PasswordChangeDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistoryCustomerAccount", "passwordChangeDate", PasswordChangeDate.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,7 +121,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsRiskInformationBuyerHistoryCustomerAccount", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,8 +45,9 @@ namespace CyberSource.Model
         /// <param name="OrderInformation">OrderInformation.</param>
         /// <param name="PaymentInformation">PaymentInformation.</param>
         /// <param name="ProcessingInformation">ProcessingInformation.</param>
+        /// <param name="IssuerInformation">IssuerInformation.</param>
         /// <param name="Links">Links.</param>
-        public PushFunds201Response(string Id = default(string), string SubmitTimeUtc = default(string), string Status = default(string), string ReconciliationId = default(string), PushFunds201ResponseClientReferenceInformation ClientReferenceInformation = default(PushFunds201ResponseClientReferenceInformation), PushFunds201ResponseRecipientInformation RecipientInformation = default(PushFunds201ResponseRecipientInformation), PushFunds201ResponseMerchantInformation MerchantInformation = default(PushFunds201ResponseMerchantInformation), PushFunds201ResponseErrorInformation ErrorInformation = default(PushFunds201ResponseErrorInformation), PushFunds201ResponseProcessorInformation ProcessorInformation = default(PushFunds201ResponseProcessorInformation), PushFunds201ResponseOrderInformation OrderInformation = default(PushFunds201ResponseOrderInformation), PushFunds201ResponsePaymentInformation PaymentInformation = default(PushFunds201ResponsePaymentInformation), PushFunds201ResponseProcessingInformation ProcessingInformation = default(PushFunds201ResponseProcessingInformation), PushFunds201ResponseLinks Links = default(PushFunds201ResponseLinks))
+        public PushFunds201Response(string Id = default(string), string SubmitTimeUtc = default(string), string Status = default(string), string ReconciliationId = default(string), PushFunds201ResponseClientReferenceInformation ClientReferenceInformation = default(PushFunds201ResponseClientReferenceInformation), PushFunds201ResponseRecipientInformation RecipientInformation = default(PushFunds201ResponseRecipientInformation), PushFunds201ResponseMerchantInformation MerchantInformation = default(PushFunds201ResponseMerchantInformation), PushFunds201ResponseErrorInformation ErrorInformation = default(PushFunds201ResponseErrorInformation), PushFunds201ResponseProcessorInformation ProcessorInformation = default(PushFunds201ResponseProcessorInformation), PushFunds201ResponseOrderInformation OrderInformation = default(PushFunds201ResponseOrderInformation), PushFunds201ResponsePaymentInformation PaymentInformation = default(PushFunds201ResponsePaymentInformation), PushFunds201ResponseProcessingInformation ProcessingInformation = default(PushFunds201ResponseProcessingInformation), PushFunds201ResponseIssuerInformation IssuerInformation = default(PushFunds201ResponseIssuerInformation), PushFunds201ResponseLinks Links = default(PushFunds201ResponseLinks))
         {
             this.Id = Id;
             this.SubmitTimeUtc = SubmitTimeUtc;
@@ -60,6 +61,7 @@ namespace CyberSource.Model
             this.OrderInformation = OrderInformation;
             this.PaymentInformation = PaymentInformation;
             this.ProcessingInformation = ProcessingInformation;
+            this.IssuerInformation = IssuerInformation;
             this.Links = Links;
         }
         
@@ -67,82 +69,102 @@ namespace CyberSource.Model
         /// A unique identification number to identify the submitted request. It is also appended to the endpoint of the resource. 
         /// </summary>
         /// <value>A unique identification number to identify the submitted request. It is also appended to the endpoint of the resource. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60;  **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC. 
         /// </summary>
         /// <value>Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60;  **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC. </value>
-        [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("submitTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubmitTimeUtc { get; set; }
 
         /// <summary>
         /// The status of the submitted transaction.  Possible values: - AUTHORIZED - DECLINED - SERVER_ERROR - INVALID_REQUEST - PARTIAL_AUTHORIZED 
         /// </summary>
         /// <value>The status of the submitted transaction.  Possible values: - AUTHORIZED - DECLINED - SERVER_ERROR - INVALID_REQUEST - PARTIAL_AUTHORIZED </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Cybersource or merchant generated transaction reference number. This is sent to the processor and is echoed back in the response to the merchant. This is This value is used for reconciliation purposes. 
         /// </summary>
         /// <value>Cybersource or merchant generated transaction reference number. This is sent to the processor and is echoed back in the response to the merchant. This is This value is used for reconciliation purposes. </value>
-        [DataMember(Name="reconciliationId", EmitDefaultValue=false)]
+        [JsonPropertyName("reconciliationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReconciliationId { get; set; }
 
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PushFunds201ResponseClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets RecipientInformation
         /// </summary>
-        [DataMember(Name="recipientInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("recipientInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PushFunds201ResponseRecipientInformation RecipientInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInformation
         /// </summary>
-        [DataMember(Name="merchantInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PushFunds201ResponseMerchantInformation MerchantInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ErrorInformation
         /// </summary>
-        [DataMember(Name="errorInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("errorInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PushFunds201ResponseErrorInformation ErrorInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessorInformation
         /// </summary>
-        [DataMember(Name="processorInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processorInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PushFunds201ResponseProcessorInformation ProcessorInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PushFunds201ResponseOrderInformation OrderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInformation
         /// </summary>
-        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PushFunds201ResponsePaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessingInformation
         /// </summary>
-        [DataMember(Name="processingInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PushFunds201ResponseProcessingInformation ProcessingInformation { get; set; }
+
+        /// <summary>
+        /// Gets or Sets IssuerInformation
+        /// </summary>
+        [JsonPropertyName("issuerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public PushFunds201ResponseIssuerInformation IssuerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PushFunds201ResponseLinks Links { get; set; }
 
         /// <summary>
@@ -153,19 +175,20 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PushFunds201Response {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(ReconciliationId).Append("\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (RecipientInformation != null) sb.Append("  RecipientInformation: ").Append(RecipientInformation).Append("\n");
-            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(MerchantInformation).Append("\n");
-            if (ErrorInformation != null) sb.Append("  ErrorInformation: ").Append(ErrorInformation).Append("\n");
-            if (ProcessorInformation != null) sb.Append("  ProcessorInformation: ").Append(ProcessorInformation).Append("\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
-            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
-            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(ProcessingInformation).Append("\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "id", Id.ToString())).Append("\n");
+            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "submitTimeUtc", SubmitTimeUtc.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "status", Status.ToString())).Append("\n");
+            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "reconciliationId", ReconciliationId.ToString())).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (RecipientInformation != null) sb.Append("  RecipientInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "recipientInformation", RecipientInformation.ToString())).Append("\n");
+            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "merchantInformation", MerchantInformation.ToString())).Append("\n");
+            if (ErrorInformation != null) sb.Append("  ErrorInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "errorInformation", ErrorInformation.ToString())).Append("\n");
+            if (ProcessorInformation != null) sb.Append("  ProcessorInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "processorInformation", ProcessorInformation.ToString())).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "orderInformation", OrderInformation.ToString())).Append("\n");
+            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "paymentInformation", PaymentInformation.ToString())).Append("\n");
+            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "processingInformation", ProcessingInformation.ToString())).Append("\n");
+            if (IssuerInformation != null) sb.Append("  IssuerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "issuerInformation", IssuerInformation.ToString())).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201Response", "_links", Links.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -176,7 +199,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PushFunds201Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>
@@ -263,6 +286,11 @@ namespace CyberSource.Model
                     this.ProcessingInformation.Equals(other.ProcessingInformation)
                 ) && 
                 (
+                    this.IssuerInformation == other.IssuerInformation ||
+                    this.IssuerInformation != null &&
+                    this.IssuerInformation.Equals(other.IssuerInformation)
+                ) && 
+                (
                     this.Links == other.Links ||
                     this.Links != null &&
                     this.Links.Equals(other.Links)
@@ -304,6 +332,8 @@ namespace CyberSource.Model
                     hash = hash * 59 + this.PaymentInformation.GetHashCode();
                 if (this.ProcessingInformation != null)
                     hash = hash * 59 + this.ProcessingInformation.GetHashCode();
+                if (this.IssuerInformation != null)
+                    hash = hash * 59 + this.IssuerInformation.GetHashCode();
                 if (this.Links != null)
                     hash = hash * 59 + this.Links.GetHashCode();
                 return hash;

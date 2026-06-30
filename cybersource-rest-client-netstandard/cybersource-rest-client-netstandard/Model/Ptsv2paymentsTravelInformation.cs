@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,37 +53,43 @@ namespace CyberSource.Model
         /// Duration of the auto rental or lodging rental.  #### Auto rental This field is supported for Visa, MasterCard, and American Express. **Important** If this field is not included when the &#x60;processingInformation.industryDataType&#x60; is auto rental, the transaction is declined. 
         /// </summary>
         /// <value>Duration of the auto rental or lodging rental.  #### Auto rental This field is supported for Visa, MasterCard, and American Express. **Important** If this field is not included when the &#x60;processingInformation.industryDataType&#x60; is auto rental, the transaction is declined. </value>
-        [DataMember(Name="duration", EmitDefaultValue=false)]
+        [JsonPropertyName("duration")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Duration { get; set; }
 
         /// <summary>
         /// Gets or Sets Agency
         /// </summary>
-        [DataMember(Name="agency", EmitDefaultValue=false)]
+        [JsonPropertyName("agency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformationAgency Agency { get; set; }
 
         /// <summary>
         /// Gets or Sets AutoRental
         /// </summary>
-        [DataMember(Name="autoRental", EmitDefaultValue=false)]
+        [JsonPropertyName("autoRental")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformationAutoRental AutoRental { get; set; }
 
         /// <summary>
         /// Gets or Sets Lodging
         /// </summary>
-        [DataMember(Name="lodging", EmitDefaultValue=false)]
+        [JsonPropertyName("lodging")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformationLodging Lodging { get; set; }
 
         /// <summary>
         /// Gets or Sets Transit
         /// </summary>
-        [DataMember(Name="transit", EmitDefaultValue=false)]
+        [JsonPropertyName("transit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformationTransit Transit { get; set; }
 
         /// <summary>
         /// Gets or Sets VehicleData
         /// </summary>
-        [DataMember(Name="vehicleData", EmitDefaultValue=false)]
+        [JsonPropertyName("vehicleData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformationVehicleData VehicleData { get; set; }
 
         /// <summary>
@@ -94,12 +100,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsTravelInformation {\n");
-            if (Duration != null) sb.Append("  Duration: ").Append(Duration).Append("\n");
-            if (Agency != null) sb.Append("  Agency: ").Append(Agency).Append("\n");
-            if (AutoRental != null) sb.Append("  AutoRental: ").Append(AutoRental).Append("\n");
-            if (Lodging != null) sb.Append("  Lodging: ").Append(Lodging).Append("\n");
-            if (Transit != null) sb.Append("  Transit: ").Append(Transit).Append("\n");
-            if (VehicleData != null) sb.Append("  VehicleData: ").Append(VehicleData).Append("\n");
+            if (Duration != null) sb.Append("  Duration: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformation", "duration", Duration.ToString())).Append("\n");
+            if (Agency != null) sb.Append("  Agency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformation", "agency", Agency.ToString())).Append("\n");
+            if (AutoRental != null) sb.Append("  AutoRental: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformation", "autoRental", AutoRental.ToString())).Append("\n");
+            if (Lodging != null) sb.Append("  Lodging: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformation", "lodging", Lodging.ToString())).Append("\n");
+            if (Transit != null) sb.Append("  Transit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformation", "transit", Transit.ToString())).Append("\n");
+            if (VehicleData != null) sb.Append("  VehicleData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformation", "vehicleData", VehicleData.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -110,7 +116,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsTravelInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

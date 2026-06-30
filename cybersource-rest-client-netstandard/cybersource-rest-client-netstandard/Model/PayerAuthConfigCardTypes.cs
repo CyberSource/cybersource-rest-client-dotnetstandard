@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -56,49 +56,57 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets VerifiedByVisa
         /// </summary>
-        [DataMember(Name="verifiedByVisa", EmitDefaultValue=false)]
+        [JsonPropertyName("verifiedByVisa")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PayerAuthConfigCardTypesVerifiedByVisa VerifiedByVisa { get; set; }
 
         /// <summary>
         /// Gets or Sets MasterCardSecureCode
         /// </summary>
-        [DataMember(Name="masterCardSecureCode", EmitDefaultValue=false)]
+        [JsonPropertyName("masterCardSecureCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PayerAuthConfigCardTypesVerifiedByVisa MasterCardSecureCode { get; set; }
 
         /// <summary>
         /// Gets or Sets AmexSafeKey
         /// </summary>
-        [DataMember(Name="amexSafeKey", EmitDefaultValue=false)]
+        [JsonPropertyName("amexSafeKey")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PayerAuthConfigCardTypesVerifiedByVisa AmexSafeKey { get; set; }
 
         /// <summary>
         /// Gets or Sets JCBJSecure
         /// </summary>
-        [DataMember(Name="jCBJSecure", EmitDefaultValue=false)]
+        [JsonPropertyName("jCBJSecure")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PayerAuthConfigCardTypesJCBJSecure JCBJSecure { get; set; }
 
         /// <summary>
         /// Gets or Sets DinersClubInternationalProtectBuy
         /// </summary>
-        [DataMember(Name="dinersClubInternationalProtectBuy", EmitDefaultValue=false)]
+        [JsonPropertyName("dinersClubInternationalProtectBuy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PayerAuthConfigCardTypesVerifiedByVisa DinersClubInternationalProtectBuy { get; set; }
 
         /// <summary>
         /// Gets or Sets ELO
         /// </summary>
-        [DataMember(Name="ELO", EmitDefaultValue=false)]
+        [JsonPropertyName("ELO")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PayerAuthConfigCardTypesVerifiedByVisa ELO { get; set; }
 
         /// <summary>
         /// Gets or Sets UPI
         /// </summary>
-        [DataMember(Name="UPI", EmitDefaultValue=false)]
+        [JsonPropertyName("UPI")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PayerAuthConfigCardTypesVerifiedByVisa UPI { get; set; }
 
         /// <summary>
         /// Gets or Sets CB
         /// </summary>
-        [DataMember(Name="CB", EmitDefaultValue=false)]
+        [JsonPropertyName("CB")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PayerAuthConfigCardTypesCB CB { get; set; }
 
         /// <summary>
@@ -109,14 +117,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PayerAuthConfigCardTypes {\n");
-            if (VerifiedByVisa != null) sb.Append("  VerifiedByVisa: ").Append(VerifiedByVisa).Append("\n");
-            if (MasterCardSecureCode != null) sb.Append("  MasterCardSecureCode: ").Append(MasterCardSecureCode).Append("\n");
-            if (AmexSafeKey != null) sb.Append("  AmexSafeKey: ").Append(AmexSafeKey).Append("\n");
-            if (JCBJSecure != null) sb.Append("  JCBJSecure: ").Append(JCBJSecure).Append("\n");
-            if (DinersClubInternationalProtectBuy != null) sb.Append("  DinersClubInternationalProtectBuy: ").Append(DinersClubInternationalProtectBuy).Append("\n");
-            if (ELO != null) sb.Append("  ELO: ").Append(ELO).Append("\n");
-            if (UPI != null) sb.Append("  UPI: ").Append(UPI).Append("\n");
-            if (CB != null) sb.Append("  CB: ").Append(CB).Append("\n");
+            if (VerifiedByVisa != null) sb.Append("  VerifiedByVisa: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PayerAuthConfigCardTypes", "verifiedByVisa", VerifiedByVisa.ToString())).Append("\n");
+            if (MasterCardSecureCode != null) sb.Append("  MasterCardSecureCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PayerAuthConfigCardTypes", "masterCardSecureCode", MasterCardSecureCode.ToString())).Append("\n");
+            if (AmexSafeKey != null) sb.Append("  AmexSafeKey: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PayerAuthConfigCardTypes", "amexSafeKey", AmexSafeKey.ToString())).Append("\n");
+            if (JCBJSecure != null) sb.Append("  JCBJSecure: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PayerAuthConfigCardTypes", "jCBJSecure", JCBJSecure.ToString())).Append("\n");
+            if (DinersClubInternationalProtectBuy != null) sb.Append("  DinersClubInternationalProtectBuy: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PayerAuthConfigCardTypes", "dinersClubInternationalProtectBuy", DinersClubInternationalProtectBuy.ToString())).Append("\n");
+            if (ELO != null) sb.Append("  ELO: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PayerAuthConfigCardTypes", "ELO", ELO.ToString())).Append("\n");
+            if (UPI != null) sb.Append("  UPI: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PayerAuthConfigCardTypes", "UPI", UPI.ToString())).Append("\n");
+            if (CB != null) sb.Append("  CB: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PayerAuthConfigCardTypes", "CB", CB.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -127,7 +135,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PayerAuthConfigCardTypes", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

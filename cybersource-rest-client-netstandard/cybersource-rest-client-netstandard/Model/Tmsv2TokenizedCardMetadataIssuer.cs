@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,61 +43,70 @@ namespace CyberSource.Model
         /// Issuer name. 
         /// </summary>
         /// <value>Issuer name. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; private set; }
 
         /// <summary>
         /// Short description of the card. 
         /// </summary>
         /// <value>Short description of the card. </value>
-        [DataMember(Name="shortDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("shortDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShortDescription { get; private set; }
 
         /// <summary>
         /// Long description of the card. 
         /// </summary>
         /// <value>Long description of the card. </value>
-        [DataMember(Name="longDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("longDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LongDescription { get; private set; }
 
         /// <summary>
         /// Issuer customer service email address. 
         /// </summary>
         /// <value>Issuer customer service email address. </value>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Email { get; private set; }
 
         /// <summary>
         /// Issuer customer service phone number. 
         /// </summary>
         /// <value>Issuer customer service phone number. </value>
-        [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneNumber { get; private set; }
 
         /// <summary>
         /// Issuer customer service url. 
         /// </summary>
         /// <value>Issuer customer service url. </value>
-        [DataMember(Name="url", EmitDefaultValue=false)]
+        [JsonPropertyName("url")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Url { get; private set; }
 
         /// <summary>
         /// Issuer privacy policy url. 
         /// </summary>
         /// <value>Issuer privacy policy url. </value>
-        [DataMember(Name="privacyPolicyUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("privacyPolicyUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PrivacyPolicyUrl { get; private set; }
 
         /// <summary>
         /// Gets or Sets Capabilities
         /// </summary>
-        [DataMember(Name="capabilities", EmitDefaultValue=false)]
+        [JsonPropertyName("capabilities")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2TokenizedCardMetadataIssuerCapabilities Capabilities { get; set; }
 
         /// <summary>
         /// Gets or Sets BankApplications
         /// </summary>
-        [DataMember(Name="bankApplications", EmitDefaultValue=false)]
+        [JsonPropertyName("bankApplications")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Tmsv2TokenizedCardMetadataIssuerBankApplications> BankApplications { get; private set; }
 
         /// <summary>
@@ -108,15 +117,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2TokenizedCardMetadataIssuer {\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (ShortDescription != null) sb.Append("  ShortDescription: ").Append(ShortDescription).Append("\n");
-            if (LongDescription != null) sb.Append("  LongDescription: ").Append(LongDescription).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
-            if (Url != null) sb.Append("  Url: ").Append(Url).Append("\n");
-            if (PrivacyPolicyUrl != null) sb.Append("  PrivacyPolicyUrl: ").Append(PrivacyPolicyUrl).Append("\n");
-            if (Capabilities != null) sb.Append("  Capabilities: ").Append(Capabilities).Append("\n");
-            if (BankApplications != null) sb.Append("  BankApplications: ").Append(BankApplications).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuer", "name", Name.ToString())).Append("\n");
+            if (ShortDescription != null) sb.Append("  ShortDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuer", "shortDescription", ShortDescription.ToString())).Append("\n");
+            if (LongDescription != null) sb.Append("  LongDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuer", "longDescription", LongDescription.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuer", "email", Email.ToString())).Append("\n");
+            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuer", "phoneNumber", PhoneNumber.ToString())).Append("\n");
+            if (Url != null) sb.Append("  Url: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuer", "url", Url.ToString())).Append("\n");
+            if (PrivacyPolicyUrl != null) sb.Append("  PrivacyPolicyUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuer", "privacyPolicyUrl", PrivacyPolicyUrl.ToString())).Append("\n");
+            if (Capabilities != null) sb.Append("  Capabilities: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuer", "capabilities", Capabilities.ToString())).Append("\n");
+            if (BankApplications != null) sb.Append("  BankApplications: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuer", "bankApplications", BankApplications.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -127,7 +136,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2TokenizedCardMetadataIssuer", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

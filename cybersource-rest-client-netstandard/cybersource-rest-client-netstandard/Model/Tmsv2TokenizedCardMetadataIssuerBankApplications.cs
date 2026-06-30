@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Tmsv2TokenizedCardMetadataIssuerBankApplications" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         public Tmsv2TokenizedCardMetadataIssuerBankApplications()
         {
         }
@@ -42,14 +42,16 @@ namespace CyberSource.Model
         /// Bank application name. 
         /// </summary>
         /// <value>Bank application name. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; private set; }
 
         /// <summary>
         /// Bank application address. (e.g. com.mybank.app) 
         /// </summary>
         /// <value>Bank application address. (e.g. com.mybank.app) </value>
-        [DataMember(Name="address", EmitDefaultValue=false)]
+        [JsonPropertyName("address")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address { get; private set; }
 
         /// <summary>
@@ -60,8 +62,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2TokenizedCardMetadataIssuerBankApplications {\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Address != null) sb.Append("  Address: ").Append(Address).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuerBankApplications", "name", Name.ToString())).Append("\n");
+            if (Address != null) sb.Append("  Address: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuerBankApplications", "address", Address.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -72,7 +74,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2TokenizedCardMetadataIssuerBankApplications", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

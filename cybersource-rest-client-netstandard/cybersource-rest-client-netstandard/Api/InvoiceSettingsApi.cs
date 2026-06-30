@@ -202,7 +202,7 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("productType", ApiClient.ParameterToString(productType)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -221,7 +221,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetInvoiceSettings,GetInvoiceSettingsAsync,GetInvoiceSettingsWithHttpInfo,GetInvoiceSettingsAsyncWithHttpInfo"))
             {
                 try
@@ -319,7 +319,7 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("productType", ApiClient.ParameterToString(productType)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -337,7 +337,7 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetInvoiceSettings,GetInvoiceSettingsAsync,GetInvoiceSettingsWithHttpInfo,GetInvoiceSettingsAsyncWithHttpInfo"))
             {
                 try
@@ -441,7 +441,7 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("productType", ApiClient.ParameterToString(productType)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (invoiceSettingsRequest != null && invoiceSettingsRequest.GetType() != typeof(byte[]))
             {
@@ -455,7 +455,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateInvoiceSettings,UpdateInvoiceSettingsAsync,UpdateInvoiceSettingsWithHttpInfo,UpdateInvoiceSettingsAsyncWithHttpInfo"))
             {
                 try
@@ -563,7 +563,7 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("productType", ApiClient.ParameterToString(productType)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (invoiceSettingsRequest != null && invoiceSettingsRequest.GetType() != typeof(byte[]))
             {
@@ -577,7 +577,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateInvoiceSettings,UpdateInvoiceSettingsAsync,UpdateInvoiceSettingsWithHttpInfo,UpdateInvoiceSettingsAsyncWithHttpInfo"))
             {
                 try

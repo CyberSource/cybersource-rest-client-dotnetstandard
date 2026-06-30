@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderwritingConfigurationOrganizationInformationBusinessInformation" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected UnderwritingConfigurationOrganizationInformationBusinessInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderwritingConfigurationOrganizationInformationBusinessInformation" /> class.
@@ -62,7 +62,7 @@ namespace CyberSource.Model
         /// <param name="BusinessDetails">BusinessDetails.</param>
         /// <param name="OwnerInformation">OwnerInformation.</param>
         /// <param name="DirectorInformation">DirectorInformation.</param>
-        public UnderwritingConfigurationOrganizationInformationBusinessInformation(string BusinessIdentifier = default(string), string CountryRegistration = default(string), string LegalName = default(string), string DoingBusinessAs = default(string), string BusinessDescription = default(string), string RegistrationNumber = default(string), string StockExchange = default(string), string TickerSymbol = default(string), DateTime? StartDate = default(DateTime?), string MerchantCategoryCode = default(string), string MccDescription = default(string), string WebsiteURL = default(string), string BusinessType = default(string), List<string> LocalMCC = default(List<string>), string CountryPhoneNumber = default(string), string PhoneNumber = default(string), string Email = default(string), string WhatYourCompanyDoes = default(string), UnderwritingConfigurationOrganizationInformationBusinessInformationAddress Address = default(UnderwritingConfigurationOrganizationInformationBusinessInformationAddress), UnderwritingConfigurationOrganizationInformationBusinessInformationTradingAddress TradingAddress = default(UnderwritingConfigurationOrganizationInformationBusinessInformationTradingAddress), UnderwritingConfigurationOrganizationInformationBusinessInformationBusinessContact BusinessContact = default(UnderwritingConfigurationOrganizationInformationBusinessInformationBusinessContact), UnderwritingConfigurationOrganizationInformationBusinessInformationBusinessDetails BusinessDetails = default(UnderwritingConfigurationOrganizationInformationBusinessInformationBusinessDetails), List<UnderwritingConfigurationOrganizationInformationBusinessInformationOwnerInformation> OwnerInformation = default(List<UnderwritingConfigurationOrganizationInformationBusinessInformationOwnerInformation>), List<UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation> DirectorInformation = default(List<UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation>))
+        public UnderwritingConfigurationOrganizationInformationBusinessInformation(string BusinessIdentifier = default(string), string CountryRegistration = default(string), string LegalName = default(string), string DoingBusinessAs = default(string), string BusinessDescription = default(string), string RegistrationNumber = default(string), string StockExchange = default(string), string TickerSymbol = default(string), DateTime? StartDate = default(DateTime?), string MerchantCategoryCode = default(string), string MccDescription = default(string), string WebsiteURL = default(string), string BusinessType = default(string), List<string> LocalMCC = default(List<string>), string CountryPhoneNumber = default(string), string PhoneNumber = default(string), string Email = default(string), string WhatYourCompanyDoes = default(string), UnderwritingConfigurationOrganizationInformationBusinessInformationAddress Address = default(UnderwritingConfigurationOrganizationInformationBusinessInformationAddress), UnderwritingConfigurationOrganizationInformationBusinessInformationTradingAddress TradingAddress = default(UnderwritingConfigurationOrganizationInformationBusinessInformationTradingAddress), UnderwritingConfigurationOrganizationInformationBusinessInformationBusinessContact BusinessContact = default(UnderwritingConfigurationOrganizationInformationBusinessInformationBusinessContact), UnderwritingConfigurationBusinessDetails BusinessDetails = default(UnderwritingConfigurationBusinessDetails), List<UnderwritingConfigurationOrganizationInformationBusinessInformationOwnerInformation> OwnerInformation = default(List<UnderwritingConfigurationOrganizationInformationBusinessInformationOwnerInformation>), List<UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation> DirectorInformation = default(List<UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation>))
         {
             this.BusinessIdentifier = BusinessIdentifier;
             this.CountryRegistration = CountryRegistration;
@@ -94,63 +94,72 @@ namespace CyberSource.Model
         /// Tax ID for the business
         /// </summary>
         /// <value>Tax ID for the business</value>
-        [DataMember(Name="businessIdentifier", EmitDefaultValue=false)]
+        [JsonPropertyName("businessIdentifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessIdentifier { get; set; }
 
         /// <summary>
         /// Country where the business is registered. Two character country code, ISO 3166-1 alpha-2.
         /// </summary>
         /// <value>Country where the business is registered. Two character country code, ISO 3166-1 alpha-2.</value>
-        [DataMember(Name="countryRegistration", EmitDefaultValue=false)]
+        [JsonPropertyName("countryRegistration")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CountryRegistration { get; set; }
 
         /// <summary>
         /// The legally registered name of the business
         /// </summary>
         /// <value>The legally registered name of the business</value>
-        [DataMember(Name="legalName", EmitDefaultValue=false)]
+        [JsonPropertyName("legalName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LegalName { get; set; }
 
         /// <summary>
         /// The DBA of the business.
         /// </summary>
         /// <value>The DBA of the business.</value>
-        [DataMember(Name="doingBusinessAs", EmitDefaultValue=false)]
+        [JsonPropertyName("doingBusinessAs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DoingBusinessAs { get; set; }
 
         /// <summary>
         /// Short description of the Business
         /// </summary>
         /// <value>Short description of the Business</value>
-        [DataMember(Name="businessDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("businessDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessDescription { get; set; }
 
         /// <summary>
         /// Registration ID for Enterprise Merchant
         /// </summary>
         /// <value>Registration ID for Enterprise Merchant</value>
-        [DataMember(Name="registrationNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("registrationNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RegistrationNumber { get; set; }
 
         /// <summary>
         /// Which stock exchange is the company trading in?
         /// </summary>
         /// <value>Which stock exchange is the company trading in?</value>
-        [DataMember(Name="stockExchange", EmitDefaultValue=false)]
+        [JsonPropertyName("stockExchange")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StockExchange { get; set; }
 
         /// <summary>
         /// Stock Symbol on the exchange
         /// </summary>
         /// <value>Stock Symbol on the exchange</value>
-        [DataMember(Name="tickerSymbol", EmitDefaultValue=false)]
+        [JsonPropertyName("tickerSymbol")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TickerSymbol { get; set; }
 
         /// <summary>
         /// When did Business start. Format: YYYY-MM-DD Example 2016-08-11 equals August 11, 2016
         /// </summary>
         /// <value>When did Business start. Format: YYYY-MM-DD Example 2016-08-11 equals August 11, 2016</value>
-        [DataMember(Name="startDate", EmitDefaultValue=false)]
+        [JsonPropertyName("startDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [JsonConverter(typeof(SwaggerDateConverter))]
         public DateTime? StartDate { get; set; }
 
@@ -158,98 +167,113 @@ namespace CyberSource.Model
         /// Industry standard Merchant Category Code (MCC)
         /// </summary>
         /// <value>Industry standard Merchant Category Code (MCC)</value>
-        [DataMember(Name="merchantCategoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantCategoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantCategoryCode { get; set; }
 
         /// <summary>
         /// MCC Description
         /// </summary>
         /// <value>MCC Description</value>
-        [DataMember(Name="mccDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("mccDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MccDescription { get; set; }
 
         /// <summary>
         /// Website for the Business
         /// </summary>
         /// <value>Website for the Business</value>
-        [DataMember(Name="websiteURL", EmitDefaultValue=false)]
+        [JsonPropertyName("websiteURL")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WebsiteURL { get; set; }
 
         /// <summary>
         /// Business type  Possible values: - PARTNERSHIP - SOLE_PROPRIETORSHIP - CORPORATION - LLC - NON_PROFIT - TRUST
         /// </summary>
         /// <value>Business type  Possible values: - PARTNERSHIP - SOLE_PROPRIETORSHIP - CORPORATION - LLC - NON_PROFIT - TRUST</value>
-        [DataMember(Name="businessType", EmitDefaultValue=false)]
+        [JsonPropertyName("businessType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessType { get; set; }
 
         /// <summary>
         /// Gets or Sets LocalMCC
         /// </summary>
-        [DataMember(Name="localMCC", EmitDefaultValue=false)]
+        [JsonPropertyName("localMCC")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> LocalMCC { get; set; }
 
         /// <summary>
         /// Country of the Business phone number. Two character country code, ISO 3166-1 alpha-2.
         /// </summary>
         /// <value>Country of the Business phone number. Two character country code, ISO 3166-1 alpha-2.</value>
-        [DataMember(Name="countryPhoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("countryPhoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CountryPhoneNumber { get; set; }
 
         /// <summary>
         /// Business Phone Number
         /// </summary>
         /// <value>Business Phone Number</value>
-        [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Business Email Address
         /// </summary>
         /// <value>Business Email Address</value>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Email { get; set; }
 
         /// <summary>
         /// What your company does and how you market your service
         /// </summary>
         /// <value>What your company does and how you market your service</value>
-        [DataMember(Name="whatYourCompanyDoes", EmitDefaultValue=false)]
+        [JsonPropertyName("whatYourCompanyDoes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WhatYourCompanyDoes { get; set; }
 
         /// <summary>
         /// Gets or Sets Address
         /// </summary>
-        [DataMember(Name="address", EmitDefaultValue=false)]
+        [JsonPropertyName("address")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationOrganizationInformationBusinessInformationAddress Address { get; set; }
 
         /// <summary>
         /// Gets or Sets TradingAddress
         /// </summary>
-        [DataMember(Name="tradingAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("tradingAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationOrganizationInformationBusinessInformationTradingAddress TradingAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets BusinessContact
         /// </summary>
-        [DataMember(Name="businessContact", EmitDefaultValue=false)]
+        [JsonPropertyName("businessContact")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationOrganizationInformationBusinessInformationBusinessContact BusinessContact { get; set; }
 
         /// <summary>
         /// Gets or Sets BusinessDetails
         /// </summary>
-        [DataMember(Name="businessDetails", EmitDefaultValue=false)]
-        public UnderwritingConfigurationOrganizationInformationBusinessInformationBusinessDetails BusinessDetails { get; set; }
+        [JsonPropertyName("businessDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public UnderwritingConfigurationBusinessDetails BusinessDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets OwnerInformation
         /// </summary>
-        [DataMember(Name="ownerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("ownerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<UnderwritingConfigurationOrganizationInformationBusinessInformationOwnerInformation> OwnerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DirectorInformation
         /// </summary>
-        [DataMember(Name="directorInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("directorInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation> DirectorInformation { get; set; }
 
         /// <summary>
@@ -260,30 +284,30 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UnderwritingConfigurationOrganizationInformationBusinessInformation {\n");
-            if (BusinessIdentifier != null) sb.Append("  BusinessIdentifier: ").Append(BusinessIdentifier).Append("\n");
-            if (CountryRegistration != null) sb.Append("  CountryRegistration: ").Append(CountryRegistration).Append("\n");
-            if (LegalName != null) sb.Append("  LegalName: ").Append(LegalName).Append("\n");
-            if (DoingBusinessAs != null) sb.Append("  DoingBusinessAs: ").Append(DoingBusinessAs).Append("\n");
-            if (BusinessDescription != null) sb.Append("  BusinessDescription: ").Append(BusinessDescription).Append("\n");
-            if (RegistrationNumber != null) sb.Append("  RegistrationNumber: ").Append(RegistrationNumber).Append("\n");
-            if (StockExchange != null) sb.Append("  StockExchange: ").Append(StockExchange).Append("\n");
-            if (TickerSymbol != null) sb.Append("  TickerSymbol: ").Append(TickerSymbol).Append("\n");
-            if (StartDate != null) sb.Append("  StartDate: ").Append(StartDate).Append("\n");
-            if (MerchantCategoryCode != null) sb.Append("  MerchantCategoryCode: ").Append(MerchantCategoryCode).Append("\n");
-            if (MccDescription != null) sb.Append("  MccDescription: ").Append(MccDescription).Append("\n");
-            if (WebsiteURL != null) sb.Append("  WebsiteURL: ").Append(WebsiteURL).Append("\n");
-            if (BusinessType != null) sb.Append("  BusinessType: ").Append(BusinessType).Append("\n");
-            if (LocalMCC != null) sb.Append("  LocalMCC: ").Append(LocalMCC).Append("\n");
-            if (CountryPhoneNumber != null) sb.Append("  CountryPhoneNumber: ").Append(CountryPhoneNumber).Append("\n");
-            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (WhatYourCompanyDoes != null) sb.Append("  WhatYourCompanyDoes: ").Append(WhatYourCompanyDoes).Append("\n");
-            if (Address != null) sb.Append("  Address: ").Append(Address).Append("\n");
-            if (TradingAddress != null) sb.Append("  TradingAddress: ").Append(TradingAddress).Append("\n");
-            if (BusinessContact != null) sb.Append("  BusinessContact: ").Append(BusinessContact).Append("\n");
-            if (BusinessDetails != null) sb.Append("  BusinessDetails: ").Append(BusinessDetails).Append("\n");
-            if (OwnerInformation != null) sb.Append("  OwnerInformation: ").Append(OwnerInformation).Append("\n");
-            if (DirectorInformation != null) sb.Append("  DirectorInformation: ").Append(DirectorInformation).Append("\n");
+            if (BusinessIdentifier != null) sb.Append("  BusinessIdentifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "businessIdentifier", BusinessIdentifier.ToString())).Append("\n");
+            if (CountryRegistration != null) sb.Append("  CountryRegistration: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "countryRegistration", CountryRegistration.ToString())).Append("\n");
+            if (LegalName != null) sb.Append("  LegalName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "legalName", LegalName.ToString())).Append("\n");
+            if (DoingBusinessAs != null) sb.Append("  DoingBusinessAs: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "doingBusinessAs", DoingBusinessAs.ToString())).Append("\n");
+            if (BusinessDescription != null) sb.Append("  BusinessDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "businessDescription", BusinessDescription.ToString())).Append("\n");
+            if (RegistrationNumber != null) sb.Append("  RegistrationNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "registrationNumber", RegistrationNumber.ToString())).Append("\n");
+            if (StockExchange != null) sb.Append("  StockExchange: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "stockExchange", StockExchange.ToString())).Append("\n");
+            if (TickerSymbol != null) sb.Append("  TickerSymbol: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "tickerSymbol", TickerSymbol.ToString())).Append("\n");
+            if (StartDate != null) sb.Append("  StartDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "startDate", StartDate.ToString())).Append("\n");
+            if (MerchantCategoryCode != null) sb.Append("  MerchantCategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "merchantCategoryCode", MerchantCategoryCode.ToString())).Append("\n");
+            if (MccDescription != null) sb.Append("  MccDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "mccDescription", MccDescription.ToString())).Append("\n");
+            if (WebsiteURL != null) sb.Append("  WebsiteURL: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "websiteURL", WebsiteURL.ToString())).Append("\n");
+            if (BusinessType != null) sb.Append("  BusinessType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "businessType", BusinessType.ToString())).Append("\n");
+            if (LocalMCC != null) sb.Append("  LocalMCC: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "localMCC", LocalMCC.ToString())).Append("\n");
+            if (CountryPhoneNumber != null) sb.Append("  CountryPhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "countryPhoneNumber", CountryPhoneNumber.ToString())).Append("\n");
+            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "phoneNumber", PhoneNumber.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "email", Email.ToString())).Append("\n");
+            if (WhatYourCompanyDoes != null) sb.Append("  WhatYourCompanyDoes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "whatYourCompanyDoes", WhatYourCompanyDoes.ToString())).Append("\n");
+            if (Address != null) sb.Append("  Address: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "address", Address.ToString())).Append("\n");
+            if (TradingAddress != null) sb.Append("  TradingAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "tradingAddress", TradingAddress.ToString())).Append("\n");
+            if (BusinessContact != null) sb.Append("  BusinessContact: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "businessContact", BusinessContact.ToString())).Append("\n");
+            if (BusinessDetails != null) sb.Append("  BusinessDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "businessDetails", BusinessDetails.ToString())).Append("\n");
+            if (OwnerInformation != null) sb.Append("  OwnerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "ownerInformation", OwnerInformation.ToString())).Append("\n");
+            if (DirectorInformation != null) sb.Append("  DirectorInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformation", "directorInformation", DirectorInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -294,7 +318,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UnderwritingConfigurationOrganizationInformationBusinessInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

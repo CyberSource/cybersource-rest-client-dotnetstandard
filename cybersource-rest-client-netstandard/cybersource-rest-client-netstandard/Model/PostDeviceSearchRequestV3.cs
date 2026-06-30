@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// The Search Query to retrieve the Terminals.(Example :- serialNumber:456345234 AND readerId:509353f0-86ca-4af4-a1c9-c2702bfd7431  AND terminalId:7854922 AND status:Inactive AND statusChangeReason:Other AND organizationId:London Store)
         /// </summary>
         /// <value>The Search Query to retrieve the Terminals.(Example :- serialNumber:456345234 AND readerId:509353f0-86ca-4af4-a1c9-c2702bfd7431  AND terminalId:7854922 AND status:Inactive AND statusChangeReason:Other AND organizationId:London Store)</value>
-        [DataMember(Name="query", EmitDefaultValue=false)]
+        [JsonPropertyName("query")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Query { get; set; }
 
         /// <summary>
         /// terminalCreationDate:desc (default) or serialNumber or terminalUpdationDate
         /// </summary>
         /// <value>terminalCreationDate:desc (default) or serialNumber or terminalUpdationDate</value>
-        [DataMember(Name="sort", EmitDefaultValue=false)]
+        [JsonPropertyName("sort")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Sort { get; set; }
 
         /// <summary>
         /// The offset or page number.
         /// </summary>
         /// <value>The offset or page number.</value>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        [JsonPropertyName("offset")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public long? Offset { get; set; }
 
         /// <summary>
         /// Number of devices to retrieve in one request.
         /// </summary>
         /// <value>Number of devices to retrieve in one request.</value>
-        [DataMember(Name="limit", EmitDefaultValue=false)]
+        [JsonPropertyName("limit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public long? Limit { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PostDeviceSearchRequestV3 {\n");
-            if (Query != null) sb.Append("  Query: ").Append(Query).Append("\n");
-            if (Sort != null) sb.Append("  Sort: ").Append(Sort).Append("\n");
-            if (Offset != null) sb.Append("  Offset: ").Append(Offset).Append("\n");
-            if (Limit != null) sb.Append("  Limit: ").Append(Limit).Append("\n");
+            if (Query != null) sb.Append("  Query: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostDeviceSearchRequestV3", "query", Query.ToString())).Append("\n");
+            if (Sort != null) sb.Append("  Sort: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostDeviceSearchRequestV3", "sort", Sort.ToString())).Append("\n");
+            if (Offset != null) sb.Append("  Offset: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostDeviceSearchRequestV3", "offset", Offset.ToString())).Append("\n");
+            if (Limit != null) sb.Append("  Limit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostDeviceSearchRequestV3", "limit", Limit.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PostDeviceSearchRequestV3", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

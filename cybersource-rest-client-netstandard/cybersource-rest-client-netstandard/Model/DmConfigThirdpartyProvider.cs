@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -54,43 +54,50 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Accurint
         /// </summary>
-        [DataMember(Name="accurint", EmitDefaultValue=false)]
+        [JsonPropertyName("accurint")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigThirdpartyProviderAccurint Accurint { get; set; }
 
         /// <summary>
         /// Gets or Sets Credilink
         /// </summary>
-        [DataMember(Name="credilink", EmitDefaultValue=false)]
+        [JsonPropertyName("credilink")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigThirdpartyProviderCredilink Credilink { get; set; }
 
         /// <summary>
         /// Gets or Sets Ekata
         /// </summary>
-        [DataMember(Name="ekata", EmitDefaultValue=false)]
+        [JsonPropertyName("ekata")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigThirdpartyProviderEkata Ekata { get; set; }
 
         /// <summary>
         /// Gets or Sets Emailage
         /// </summary>
-        [DataMember(Name="emailage", EmitDefaultValue=false)]
+        [JsonPropertyName("emailage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigThirdpartyProviderEmailage Emailage { get; set; }
 
         /// <summary>
         /// Gets or Sets Perseuss
         /// </summary>
-        [DataMember(Name="perseuss", EmitDefaultValue=false)]
+        [JsonPropertyName("perseuss")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigThirdpartyProviderPerseuss Perseuss { get; set; }
 
         /// <summary>
         /// Gets or Sets Signifyd
         /// </summary>
-        [DataMember(Name="signifyd", EmitDefaultValue=false)]
+        [JsonPropertyName("signifyd")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigThirdpartyProviderSignifyd Signifyd { get; set; }
 
         /// <summary>
         /// Gets or Sets Targus
         /// </summary>
-        [DataMember(Name="targus", EmitDefaultValue=false)]
+        [JsonPropertyName("targus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigThirdpartyProviderTargus Targus { get; set; }
 
         /// <summary>
@@ -101,13 +108,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class DmConfigThirdpartyProvider {\n");
-            if (Accurint != null) sb.Append("  Accurint: ").Append(Accurint).Append("\n");
-            if (Credilink != null) sb.Append("  Credilink: ").Append(Credilink).Append("\n");
-            if (Ekata != null) sb.Append("  Ekata: ").Append(Ekata).Append("\n");
-            if (Emailage != null) sb.Append("  Emailage: ").Append(Emailage).Append("\n");
-            if (Perseuss != null) sb.Append("  Perseuss: ").Append(Perseuss).Append("\n");
-            if (Signifyd != null) sb.Append("  Signifyd: ").Append(Signifyd).Append("\n");
-            if (Targus != null) sb.Append("  Targus: ").Append(Targus).Append("\n");
+            if (Accurint != null) sb.Append("  Accurint: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProvider", "accurint", Accurint.ToString())).Append("\n");
+            if (Credilink != null) sb.Append("  Credilink: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProvider", "credilink", Credilink.ToString())).Append("\n");
+            if (Ekata != null) sb.Append("  Ekata: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProvider", "ekata", Ekata.ToString())).Append("\n");
+            if (Emailage != null) sb.Append("  Emailage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProvider", "emailage", Emailage.ToString())).Append("\n");
+            if (Perseuss != null) sb.Append("  Perseuss: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProvider", "perseuss", Perseuss.ToString())).Append("\n");
+            if (Signifyd != null) sb.Append("  Signifyd: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProvider", "signifyd", Signifyd.ToString())).Append("\n");
+            if (Targus != null) sb.Append("  Targus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProvider", "targus", Targus.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -118,7 +125,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("DmConfigThirdpartyProvider", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

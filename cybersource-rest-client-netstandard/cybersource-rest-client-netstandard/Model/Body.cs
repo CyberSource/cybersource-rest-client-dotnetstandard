@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Body" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Body() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Body" /> class.
@@ -62,27 +62,31 @@ namespace CyberSource.Model
         /// Valid Values:   * oneOff   * amexRegistration 
         /// </summary>
         /// <value>Valid Values:   * oneOff   * amexRegistration </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Included
         /// </summary>
-        [DataMember(Name="included", EmitDefaultValue=false)]
+        [JsonPropertyName("included")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Accountupdaterv1batchesIncluded Included { get; set; }
 
         /// <summary>
         /// Reference used by merchant to identify batch.
         /// </summary>
         /// <value>Reference used by merchant to identify batch.</value>
-        [DataMember(Name="merchantReference", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantReference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantReference { get; set; }
 
         /// <summary>
         /// Email used to notify the batch status.
         /// </summary>
         /// <value>Email used to notify the batch status.</value>
-        [DataMember(Name="notificationEmail", EmitDefaultValue=false)]
+        [JsonPropertyName("notificationEmail")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NotificationEmail { get; set; }
 
         /// <summary>
@@ -93,10 +97,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Body {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Included != null) sb.Append("  Included: ").Append(Included).Append("\n");
-            if (MerchantReference != null) sb.Append("  MerchantReference: ").Append(MerchantReference).Append("\n");
-            if (NotificationEmail != null) sb.Append("  NotificationEmail: ").Append(NotificationEmail).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Body", "type", Type.ToString())).Append("\n");
+            if (Included != null) sb.Append("  Included: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Body", "included", Included.ToString())).Append("\n");
+            if (MerchantReference != null) sb.Append("  MerchantReference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Body", "merchantReference", MerchantReference.ToString())).Append("\n");
+            if (NotificationEmail != null) sb.Append("  NotificationEmail: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Body", "notificationEmail", NotificationEmail.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -107,7 +111,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Body", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

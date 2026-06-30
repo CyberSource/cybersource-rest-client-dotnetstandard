@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using AuthenticationSdk.core;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Encodings;
@@ -70,31 +71,14 @@ namespace AuthenticationSdk.util
             string enc = null;
             byte[] headerBytes = Base64UrlEncoder.DecodeBytes(protectedHeader);
             string headerJson  = Encoding.UTF8.GetString(headerBytes);
-            Dictionary<string, object> headers;
-            try
-            {
-                headers = JsonConvert.DeserializeObject<Dictionary<string, object>>(headerJson);
-            }
-            catch (Newtonsoft.Json.JsonException ex)
-            {
-                throw new FormatException("JWE protected header is not a valid JSON object.", ex);
-            }
-            if (headers != null)
-            {
-                if (headers.TryGetValue("alg", out object algObj))
-                {
-                    alg = algObj as string;
-                }
-                if (headers.TryGetValue("enc", out object encObj))
-                {
-                    enc = encObj as string;
-                }
-            }
 
-            // Validate header algorithms when in strict mode
+            var headerNode = JsonNode.Parse(headerJson).AsObject();
+            alg = headerNode["alg"]?.GetValue<string>();
+            enc = headerNode["enc"]?.GetValue<string>();
+
             if (!lenient)
             {
-                ValidateJweHeader(headers, alg, enc);
+                ValidateJweHeader(headerNode, alg, enc);
             }
 
             // Select the OAEP hash digest based on the JWE "alg" header:
@@ -144,7 +128,7 @@ namespace AuthenticationSdk.util
         /// Supported alg: RSA-OAEP, RSA-OAEP-256. Supported enc: A256GCM.
         /// Throws FormatException if the values are missing or unsupported.
         /// </summary>
-        private static void ValidateJweHeader(Dictionary<string, object> headers, string alg, string enc)
+        private static void ValidateJweHeader(JsonNode headers, string alg, string enc)
         {
             if (headers == null)
             {
@@ -182,14 +166,14 @@ namespace AuthenticationSdk.util
         {
             // Build the protected header
             long iat = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-            var headerObj = new JObject
+            var headerObj = new JsonObject
             {
                 ["alg"] = "RSA-OAEP-256",
                 ["enc"] = "A256GCM",
                 ["kid"] = kid,
                 ["iat"] = iat
             };
-            string headerJson    = headerObj.ToString(Newtonsoft.Json.Formatting.None);
+            string headerJson = headerObj.ToJsonString(new JsonSerializerOptions{ WriteIndented = false });
             string headerEncoded = Base64UrlEncoder.Encode(Encoding.UTF8.GetBytes(headerJson));
 
             // Step 1: Generate a random 256-bit CEK and 96-bit IV

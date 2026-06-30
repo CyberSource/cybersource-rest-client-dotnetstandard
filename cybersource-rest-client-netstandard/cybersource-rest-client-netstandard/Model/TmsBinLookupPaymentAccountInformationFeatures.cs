@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -97,196 +97,224 @@ namespace CyberSource.Model
         /// This field contains the account funding source. Possible values:   - &#x60;CREDIT&#x60;   - &#x60;DEBIT&#x60;   - &#x60;PREPAID&#x60;   - &#x60;DEFERRED DEBIT&#x60;   - &#x60;CHARGE&#x60; 
         /// </summary>
         /// <value>This field contains the account funding source. Possible values:   - &#x60;CREDIT&#x60;   - &#x60;DEBIT&#x60;   - &#x60;PREPAID&#x60;   - &#x60;DEFERRED DEBIT&#x60;   - &#x60;CHARGE&#x60; </value>
-        [DataMember(Name="accountFundingSource", EmitDefaultValue=false)]
+        [JsonPropertyName("accountFundingSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountFundingSource { get; set; }
 
         /// <summary>
         /// This field contains the type of prepaid card. Possible values:   - &#x60;Reloadable&#x60;   - &#x60;Non-reloadable&#x60; 
         /// </summary>
         /// <value>This field contains the type of prepaid card. Possible values:   - &#x60;Reloadable&#x60;   - &#x60;Non-reloadable&#x60; </value>
-        [DataMember(Name="accountFundingSourceSubType", EmitDefaultValue=false)]
+        [JsonPropertyName("accountFundingSourceSubType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountFundingSourceSubType { get; set; }
 
         /// <summary>
         /// This field contains the type of issuer product. Example values:   - Visa Classic   - Visa Signature   - Visa Infinite 
         /// </summary>
         /// <value>This field contains the type of issuer product. Example values:   - Visa Classic   - Visa Signature   - Visa Infinite </value>
-        [DataMember(Name="cardProduct", EmitDefaultValue=false)]
+        [JsonPropertyName("cardProduct")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardProduct { get; set; }
 
         /// <summary>
         /// This field contains the type of BIN based authentication. Possible values:   - &#x60;S&#x60;: Single Message   - &#x60;D&#x60;: Dual Message 
         /// </summary>
         /// <value>This field contains the type of BIN based authentication. Possible values:   - &#x60;S&#x60;: Single Message   - &#x60;D&#x60;: Dual Message </value>
-        [DataMember(Name="messageType", EmitDefaultValue=false)]
+        [JsonPropertyName("messageType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MessageType { get; set; }
 
         /// <summary>
         /// This field contains the acceptance level of the PAN. Possible values:   - &#x60;0&#x60; : Normal   - &#x60;1&#x60; : Monitor   - &#x60;2&#x60; : Refuse   - &#x60;3&#x60; : Not Allowed   - &#x60;4&#x60; : Private   - &#x60;5&#x60; : Test 
         /// </summary>
         /// <value>This field contains the acceptance level of the PAN. Possible values:   - &#x60;0&#x60; : Normal   - &#x60;1&#x60; : Monitor   - &#x60;2&#x60; : Refuse   - &#x60;3&#x60; : Not Allowed   - &#x60;4&#x60; : Private   - &#x60;5&#x60; : Test </value>
-        [DataMember(Name="acceptanceLevel", EmitDefaultValue=false)]
+        [JsonPropertyName("acceptanceLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcceptanceLevel { get; set; }
 
         /// <summary>
         /// This field contains the type of card platform. Possible values:   - &#x60;BUSINESS&#x60;   - &#x60;CONSUMER&#x60;   - &#x60;CORPORATE&#x60;   - &#x60;COMMERCIAL&#x60;   - &#x60;GOVERNMENT&#x60; 
         /// </summary>
         /// <value>This field contains the type of card platform. Possible values:   - &#x60;BUSINESS&#x60;   - &#x60;CONSUMER&#x60;   - &#x60;CORPORATE&#x60;   - &#x60;COMMERCIAL&#x60;   - &#x60;GOVERNMENT&#x60; </value>
-        [DataMember(Name="cardPlatform", EmitDefaultValue=false)]
+        [JsonPropertyName("cardPlatform")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardPlatform { get; set; }
 
         /// <summary>
         /// This field indicates the type of combo card. Possible values:   - 0 (Not a combo card)   - 1 (Credit and Prepaid Combo card)   - 2 (Credit and Debit Combo card)   - 3 (Prepaid Credit and Prepaid Debit combo card) 
         /// </summary>
         /// <value>This field indicates the type of combo card. Possible values:   - 0 (Not a combo card)   - 1 (Credit and Prepaid Combo card)   - 2 (Credit and Debit Combo card)   - 3 (Prepaid Credit and Prepaid Debit combo card) </value>
-        [DataMember(Name="comboCard", EmitDefaultValue=false)]
+        [JsonPropertyName("comboCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ComboCard { get; set; }
 
         /// <summary>
         /// This field indicates if the instrument can be used for corporate purchasing. This field is only applicable for American Express cards. Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the instrument can be used for corporate purchasing. This field is only applicable for American Express cards. Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; </value>
-        [DataMember(Name="corporatePurchase", EmitDefaultValue=false)]
+        [JsonPropertyName("corporatePurchase")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CorporatePurchase { get; set; }
 
         /// <summary>
         /// This field indicates if the BIN is for healthcare (HSA/FSA). Currently, this field is only supported for Visa BINs. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the BIN is for healthcare (HSA/FSA). Currently, this field is only supported for Visa BINs. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="healthCard", EmitDefaultValue=false)]
+        [JsonPropertyName("healthCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? HealthCard { get; set; }
 
         /// <summary>
         /// This field indicates if the BIN is shared by multiple issuers Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the BIN is shared by multiple issuers Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="sharedBIN", EmitDefaultValue=false)]
+        [JsonPropertyName("sharedBIN")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? SharedBIN { get; set; }
 
         /// <summary>
         /// This field indicates if the BIN is valid only for POS domestic usage. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the BIN is valid only for POS domestic usage. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="posDomesticOnly", EmitDefaultValue=false)]
+        [JsonPropertyName("posDomesticOnly")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PosDomesticOnly { get; set; }
 
         /// <summary>
         /// This field indicates if gambling transactions are allowed on the BIN. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if gambling transactions are allowed on the BIN. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="gamblingAllowed", EmitDefaultValue=false)]
+        [JsonPropertyName("gamblingAllowed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? GamblingAllowed { get; set; }
 
         /// <summary>
         /// This field indicates if a transaction on the instrument qualifies for level 2 interchange rates. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if a transaction on the instrument qualifies for level 2 interchange rates. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="commercialCardLevel2", EmitDefaultValue=false)]
+        [JsonPropertyName("commercialCardLevel2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CommercialCardLevel2 { get; set; }
 
         /// <summary>
         /// This field indicates if a transaction on the instrument qualifies for level 3 interchange rates. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if a transaction on the instrument qualifies for level 3 interchange rates. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="commercialCardLevel3", EmitDefaultValue=false)]
+        [JsonPropertyName("commercialCardLevel3")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CommercialCardLevel3 { get; set; }
 
         /// <summary>
         /// This field indicates if a transaction on the instrument qualifies for government exempt interchange fee. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if a transaction on the instrument qualifies for government exempt interchange fee. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="exemptBIN", EmitDefaultValue=false)]
+        [JsonPropertyName("exemptBIN")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ExemptBIN { get; set; }
 
         /// <summary>
         /// This field indicates if the BIN participates in Account Level Management (ALM). Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the BIN participates in Account Level Management (ALM). Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="accountLevelManagement", EmitDefaultValue=false)]
+        [JsonPropertyName("accountLevelManagement")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AccountLevelManagement { get; set; }
 
         /// <summary>
         /// This field indicates if online gambling is blocked on the BIN. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if online gambling is blocked on the BIN. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="onlineGamblingBlock", EmitDefaultValue=false)]
+        [JsonPropertyName("onlineGamblingBlock")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? OnlineGamblingBlock { get; set; }
 
         /// <summary>
         /// This field indicates if auto-substantiation is enabled on the BIN. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if auto-substantiation is enabled on the BIN. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="autoSubstantiation", EmitDefaultValue=false)]
+        [JsonPropertyName("autoSubstantiation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AutoSubstantiation { get; set; }
 
         /// <summary>
         /// This field indicates if the instrument is a flex credential. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the instrument is a flex credential. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="flexCredential", EmitDefaultValue=false)]
+        [JsonPropertyName("flexCredential")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? FlexCredential { get; set; }
 
         /// <summary>
         /// This field contains the Visa-assigned product identifier associated with the BIN. This field is only supported for Visa BINs. Example values:   - Q4   - P   - AX 
         /// </summary>
         /// <value>This field contains the Visa-assigned product identifier associated with the BIN. This field is only supported for Visa BINs. Example values:   - Q4   - P   - AX </value>
-        [DataMember(Name="productId", EmitDefaultValue=false)]
+        [JsonPropertyName("productId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductId { get; set; }
 
         /// <summary>
         /// This field contains the Visa-assigned product subtype identifier associated with the BIN. This field is only supported for Visa BINs. Example values:   - BB   - EX   - L2   - C2 
         /// </summary>
         /// <value>This field contains the Visa-assigned product subtype identifier associated with the BIN. This field is only supported for Visa BINs. Example values:   - BB   - EX   - L2   - C2 </value>
-        [DataMember(Name="productIdSubtype", EmitDefaultValue=false)]
+        [JsonPropertyName("productIdSubtype")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductIdSubtype { get; set; }
 
         /// <summary>
         /// This field indicates if the payment instrument supports 3D Secure authentication. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the payment instrument supports 3D Secure authentication. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="threeDSSupport", EmitDefaultValue=false)]
+        [JsonPropertyName("threeDSSupport")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ThreeDSSupport { get; set; }
 
         /// <summary>
         /// This field indicates if the payment instrument is eligible for Standing Instructions (recurring payments). Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the payment instrument is eligible for Standing Instructions (recurring payments). Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="siEligible", EmitDefaultValue=false)]
+        [JsonPropertyName("siEligible")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? SiEligible { get; set; }
 
         /// <summary>
         /// This field indicates if the payment instrument is eligible for Equated Monthly Installments (EMI). Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the payment instrument is eligible for Equated Monthly Installments (EMI). Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="emiEligible", EmitDefaultValue=false)]
+        [JsonPropertyName("emiEligible")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EmiEligible { get; set; }
 
         /// <summary>
         /// This field indicates if the BIN is designated for fuel/fleet usage. These specialized BINs support additional Level2/Level 3 transaction data. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the BIN is designated for fuel/fleet usage. These specialized BINs support additional Level2/Level 3 transaction data. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="fleetCard", EmitDefaultValue=false)]
+        [JsonPropertyName("fleetCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? FleetCard { get; set; }
 
         /// <summary>
         /// This field indicates if the payment instrument is enabled for ATM usage. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the payment instrument is enabled for ATM usage. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="atmEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("atmEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AtmEnabled { get; set; }
 
         /// <summary>
         /// This field indicates if the payment instrument is enabled for POS usage. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the payment instrument is enabled for POS usage. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="posEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("posEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PosEnabled { get; set; }
 
         /// <summary>
         /// This field indicates if the payment instrument is enabled for ECOM usage. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if the payment instrument is enabled for ECOM usage. Possible values:     - &#x60;true&#x60;     - &#x60;false&#x60; </value>
-        [DataMember(Name="ecomEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("ecomEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EcomEnabled { get; set; }
 
         /// <summary>
@@ -297,34 +325,34 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsBinLookupPaymentAccountInformationFeatures {\n");
-            if (AccountFundingSource != null) sb.Append("  AccountFundingSource: ").Append(AccountFundingSource).Append("\n");
-            if (AccountFundingSourceSubType != null) sb.Append("  AccountFundingSourceSubType: ").Append(AccountFundingSourceSubType).Append("\n");
-            if (CardProduct != null) sb.Append("  CardProduct: ").Append(CardProduct).Append("\n");
-            if (MessageType != null) sb.Append("  MessageType: ").Append(MessageType).Append("\n");
-            if (AcceptanceLevel != null) sb.Append("  AcceptanceLevel: ").Append(AcceptanceLevel).Append("\n");
-            if (CardPlatform != null) sb.Append("  CardPlatform: ").Append(CardPlatform).Append("\n");
-            if (ComboCard != null) sb.Append("  ComboCard: ").Append(ComboCard).Append("\n");
-            if (CorporatePurchase != null) sb.Append("  CorporatePurchase: ").Append(CorporatePurchase).Append("\n");
-            if (HealthCard != null) sb.Append("  HealthCard: ").Append(HealthCard).Append("\n");
-            if (SharedBIN != null) sb.Append("  SharedBIN: ").Append(SharedBIN).Append("\n");
-            if (PosDomesticOnly != null) sb.Append("  PosDomesticOnly: ").Append(PosDomesticOnly).Append("\n");
-            if (GamblingAllowed != null) sb.Append("  GamblingAllowed: ").Append(GamblingAllowed).Append("\n");
-            if (CommercialCardLevel2 != null) sb.Append("  CommercialCardLevel2: ").Append(CommercialCardLevel2).Append("\n");
-            if (CommercialCardLevel3 != null) sb.Append("  CommercialCardLevel3: ").Append(CommercialCardLevel3).Append("\n");
-            if (ExemptBIN != null) sb.Append("  ExemptBIN: ").Append(ExemptBIN).Append("\n");
-            if (AccountLevelManagement != null) sb.Append("  AccountLevelManagement: ").Append(AccountLevelManagement).Append("\n");
-            if (OnlineGamblingBlock != null) sb.Append("  OnlineGamblingBlock: ").Append(OnlineGamblingBlock).Append("\n");
-            if (AutoSubstantiation != null) sb.Append("  AutoSubstantiation: ").Append(AutoSubstantiation).Append("\n");
-            if (FlexCredential != null) sb.Append("  FlexCredential: ").Append(FlexCredential).Append("\n");
-            if (ProductId != null) sb.Append("  ProductId: ").Append(ProductId).Append("\n");
-            if (ProductIdSubtype != null) sb.Append("  ProductIdSubtype: ").Append(ProductIdSubtype).Append("\n");
-            if (ThreeDSSupport != null) sb.Append("  ThreeDSSupport: ").Append(ThreeDSSupport).Append("\n");
-            if (SiEligible != null) sb.Append("  SiEligible: ").Append(SiEligible).Append("\n");
-            if (EmiEligible != null) sb.Append("  EmiEligible: ").Append(EmiEligible).Append("\n");
-            if (FleetCard != null) sb.Append("  FleetCard: ").Append(FleetCard).Append("\n");
-            if (AtmEnabled != null) sb.Append("  AtmEnabled: ").Append(AtmEnabled).Append("\n");
-            if (PosEnabled != null) sb.Append("  PosEnabled: ").Append(PosEnabled).Append("\n");
-            if (EcomEnabled != null) sb.Append("  EcomEnabled: ").Append(EcomEnabled).Append("\n");
+            if (AccountFundingSource != null) sb.Append("  AccountFundingSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "accountFundingSource", AccountFundingSource.ToString())).Append("\n");
+            if (AccountFundingSourceSubType != null) sb.Append("  AccountFundingSourceSubType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "accountFundingSourceSubType", AccountFundingSourceSubType.ToString())).Append("\n");
+            if (CardProduct != null) sb.Append("  CardProduct: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "cardProduct", CardProduct.ToString())).Append("\n");
+            if (MessageType != null) sb.Append("  MessageType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "messageType", MessageType.ToString())).Append("\n");
+            if (AcceptanceLevel != null) sb.Append("  AcceptanceLevel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "acceptanceLevel", AcceptanceLevel.ToString())).Append("\n");
+            if (CardPlatform != null) sb.Append("  CardPlatform: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "cardPlatform", CardPlatform.ToString())).Append("\n");
+            if (ComboCard != null) sb.Append("  ComboCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "comboCard", ComboCard.ToString())).Append("\n");
+            if (CorporatePurchase != null) sb.Append("  CorporatePurchase: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "corporatePurchase", CorporatePurchase.ToString())).Append("\n");
+            if (HealthCard != null) sb.Append("  HealthCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "healthCard", HealthCard.ToString())).Append("\n");
+            if (SharedBIN != null) sb.Append("  SharedBIN: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "sharedBIN", SharedBIN.ToString())).Append("\n");
+            if (PosDomesticOnly != null) sb.Append("  PosDomesticOnly: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "posDomesticOnly", PosDomesticOnly.ToString())).Append("\n");
+            if (GamblingAllowed != null) sb.Append("  GamblingAllowed: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "gamblingAllowed", GamblingAllowed.ToString())).Append("\n");
+            if (CommercialCardLevel2 != null) sb.Append("  CommercialCardLevel2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "commercialCardLevel2", CommercialCardLevel2.ToString())).Append("\n");
+            if (CommercialCardLevel3 != null) sb.Append("  CommercialCardLevel3: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "commercialCardLevel3", CommercialCardLevel3.ToString())).Append("\n");
+            if (ExemptBIN != null) sb.Append("  ExemptBIN: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "exemptBIN", ExemptBIN.ToString())).Append("\n");
+            if (AccountLevelManagement != null) sb.Append("  AccountLevelManagement: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "accountLevelManagement", AccountLevelManagement.ToString())).Append("\n");
+            if (OnlineGamblingBlock != null) sb.Append("  OnlineGamblingBlock: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "onlineGamblingBlock", OnlineGamblingBlock.ToString())).Append("\n");
+            if (AutoSubstantiation != null) sb.Append("  AutoSubstantiation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "autoSubstantiation", AutoSubstantiation.ToString())).Append("\n");
+            if (FlexCredential != null) sb.Append("  FlexCredential: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "flexCredential", FlexCredential.ToString())).Append("\n");
+            if (ProductId != null) sb.Append("  ProductId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "productId", ProductId.ToString())).Append("\n");
+            if (ProductIdSubtype != null) sb.Append("  ProductIdSubtype: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "productIdSubtype", ProductIdSubtype.ToString())).Append("\n");
+            if (ThreeDSSupport != null) sb.Append("  ThreeDSSupport: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "threeDSSupport", ThreeDSSupport.ToString())).Append("\n");
+            if (SiEligible != null) sb.Append("  SiEligible: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "siEligible", SiEligible.ToString())).Append("\n");
+            if (EmiEligible != null) sb.Append("  EmiEligible: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "emiEligible", EmiEligible.ToString())).Append("\n");
+            if (FleetCard != null) sb.Append("  FleetCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "fleetCard", FleetCard.ToString())).Append("\n");
+            if (AtmEnabled != null) sb.Append("  AtmEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "atmEnabled", AtmEnabled.ToString())).Append("\n");
+            if (PosEnabled != null) sb.Append("  PosEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "posEnabled", PosEnabled.ToString())).Append("\n");
+            if (EcomEnabled != null) sb.Append("  EcomEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformationFeatures", "ecomEnabled", EcomEnabled.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -335,7 +363,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsBinLookupPaymentAccountInformationFeatures", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

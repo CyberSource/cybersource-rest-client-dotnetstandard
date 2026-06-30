@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// The amount of the sale in the merchant&#39;s currency. Mandatory when type&#x3D;DCC, optional otherwise. This value cannot be negative. You can include a decimal point (.), but no other special characters.
         /// </summary>
         /// <value>The amount of the sale in the merchant&#39;s currency. Mandatory when type&#x3D;DCC, optional otherwise. This value cannot be negative. You can include a decimal point (.), but no other special characters.</value>
-        [DataMember(Name="originalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("originalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalAmount { get; set; }
 
         /// <summary>
         /// Original currency of the transaction in the merchant&#39;s currency. Mandatory when type&#x3D;DCC, optional otherwise. Use three-character alphabetic [ISO 4271 Currency Codes.](https://developer.cybersource.com/docs/cybs/en-us/currency-codes/reference/all/na/currency-codes/currency-codes.html) 
         /// </summary>
         /// <value>Original currency of the transaction in the merchant&#39;s currency. Mandatory when type&#x3D;DCC, optional otherwise. Use three-character alphabetic [ISO 4271 Currency Codes.](https://developer.cybersource.com/docs/cybs/en-us/currency-codes/reference/all/na/currency-codes/currency-codes.html) </value>
-        [DataMember(Name="originalCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("originalCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalCurrency { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Vasv1currencyconversionOrderInformationAmountDetails {\n");
-            if (OriginalAmount != null) sb.Append("  OriginalAmount: ").Append(OriginalAmount).Append("\n");
-            if (OriginalCurrency != null) sb.Append("  OriginalCurrency: ").Append(OriginalCurrency).Append("\n");
+            if (OriginalAmount != null) sb.Append("  OriginalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv1currencyconversionOrderInformationAmountDetails", "originalAmount", OriginalAmount.ToString())).Append("\n");
+            if (OriginalCurrency != null) sb.Append("  OriginalCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv1currencyconversionOrderInformationAmountDetails", "originalCurrency", OriginalCurrency.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Vasv1currencyconversionOrderInformationAmountDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

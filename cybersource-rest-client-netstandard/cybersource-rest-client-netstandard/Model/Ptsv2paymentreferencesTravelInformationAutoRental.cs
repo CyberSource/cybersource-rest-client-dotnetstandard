@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,47 +55,54 @@ namespace CyberSource.Model
         /// Merchant to send their auto rental company name 
         /// </summary>
         /// <value>Merchant to send their auto rental company name </value>
-        [DataMember(Name="companyName", EmitDefaultValue=false)]
+        [JsonPropertyName("companyName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CompanyName { get; set; }
 
         /// <summary>
         /// When merchant wants to send the affiliate name. 
         /// </summary>
         /// <value>When merchant wants to send the affiliate name. </value>
-        [DataMember(Name="affiliateName", EmitDefaultValue=false)]
+        [JsonPropertyName("affiliateName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AffiliateName { get; set; }
 
         /// <summary>
         /// Gets or Sets RentalAddress
         /// </summary>
-        [DataMember(Name="rentalAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("rentalAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformationAutoRentalRentalAddress RentalAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets ReturnAddress
         /// </summary>
-        [DataMember(Name="returnAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("returnAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformationAutoRentalReturnAddress ReturnAddress { get; set; }
 
         /// <summary>
         /// Date/time the auto was returned to the rental agency. Format: &#x60;&#x60;yyyy-MM-dd HH-mm-ss z&#x60;&#x60; This field is supported for Visa, MasterCard, and American Express. 
         /// </summary>
         /// <value>Date/time the auto was returned to the rental agency. Format: &#x60;&#x60;yyyy-MM-dd HH-mm-ss z&#x60;&#x60; This field is supported for Visa, MasterCard, and American Express. </value>
-        [DataMember(Name="returnDateTime", EmitDefaultValue=false)]
+        [JsonPropertyName("returnDateTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReturnDateTime { get; set; }
 
         /// <summary>
         /// Date/time the auto was picked up from the rental agency. Format: &#x60;yyyy-MM-dd HH-mm-ss z&#x60; This field is supported for Visa, MasterCard, and American Express. 
         /// </summary>
         /// <value>Date/time the auto was picked up from the rental agency. Format: &#x60;yyyy-MM-dd HH-mm-ss z&#x60; This field is supported for Visa, MasterCard, and American Express. </value>
-        [DataMember(Name="rentalDateTime", EmitDefaultValue=false)]
+        [JsonPropertyName("rentalDateTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RentalDateTime { get; set; }
 
         /// <summary>
         /// Name of the individual making the rental agreement.  Valid data lengths by card:  |Card Specific Validation|VISA|MasterCard|Discover|AMEX| |- -- |- -- |- -- |- -- | | Filed Length| 40| 40| 29| 26| | Field Type| AN| ANS| AN| AN| | M/O/C| O| M| M| M| 
         /// </summary>
         /// <value>Name of the individual making the rental agreement.  Valid data lengths by card:  |Card Specific Validation|VISA|MasterCard|Discover|AMEX| |- -- |- -- |- -- |- -- | | Filed Length| 40| 40| 29| 26| | Field Type| AN| ANS| AN| AN| | M/O/C| O| M| M| M| </value>
-        [DataMember(Name="customerName", EmitDefaultValue=false)]
+        [JsonPropertyName("customerName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerName { get; set; }
 
         /// <summary>
@@ -106,13 +113,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentreferencesTravelInformationAutoRental {\n");
-            if (CompanyName != null) sb.Append("  CompanyName: ").Append(CompanyName).Append("\n");
-            if (AffiliateName != null) sb.Append("  AffiliateName: ").Append(AffiliateName).Append("\n");
-            if (RentalAddress != null) sb.Append("  RentalAddress: ").Append(RentalAddress).Append("\n");
-            if (ReturnAddress != null) sb.Append("  ReturnAddress: ").Append(ReturnAddress).Append("\n");
-            if (ReturnDateTime != null) sb.Append("  ReturnDateTime: ").Append(ReturnDateTime).Append("\n");
-            if (RentalDateTime != null) sb.Append("  RentalDateTime: ").Append(RentalDateTime).Append("\n");
-            if (CustomerName != null) sb.Append("  CustomerName: ").Append(CustomerName).Append("\n");
+            if (CompanyName != null) sb.Append("  CompanyName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesTravelInformationAutoRental", "companyName", CompanyName.ToString())).Append("\n");
+            if (AffiliateName != null) sb.Append("  AffiliateName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesTravelInformationAutoRental", "affiliateName", AffiliateName.ToString())).Append("\n");
+            if (RentalAddress != null) sb.Append("  RentalAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesTravelInformationAutoRental", "rentalAddress", RentalAddress.ToString())).Append("\n");
+            if (ReturnAddress != null) sb.Append("  ReturnAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesTravelInformationAutoRental", "returnAddress", ReturnAddress.ToString())).Append("\n");
+            if (ReturnDateTime != null) sb.Append("  ReturnDateTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesTravelInformationAutoRental", "returnDateTime", ReturnDateTime.ToString())).Append("\n");
+            if (RentalDateTime != null) sb.Append("  RentalDateTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesTravelInformationAutoRental", "rentalDateTime", RentalDateTime.ToString())).Append("\n");
+            if (CustomerName != null) sb.Append("  CustomerName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesTravelInformationAutoRental", "customerName", CustomerName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -123,7 +130,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentreferencesTravelInformationAutoRental", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

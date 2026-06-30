@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Number of Installments.
         /// </summary>
         /// <value>Number of Installments.</value>
-        [DataMember(Name="numberOfInstallments", EmitDefaultValue=false)]
+        [JsonPropertyName("numberOfInstallments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NumberOfInstallments { get; set; }
 
         /// <summary>
         /// Standing Instruction/Installment identifier. 
         /// </summary>
         /// <value>Standing Instruction/Installment identifier. </value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
+        [JsonPropertyName("identifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Identifier { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseInstallmentInformation {\n");
-            if (NumberOfInstallments != null) sb.Append("  NumberOfInstallments: ").Append(NumberOfInstallments).Append("\n");
-            if (Identifier != null) sb.Append("  Identifier: ").Append(Identifier).Append("\n");
+            if (NumberOfInstallments != null) sb.Append("  NumberOfInstallments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseInstallmentInformation", "numberOfInstallments", NumberOfInstallments.ToString())).Append("\n");
+            if (Identifier != null) sb.Append("  Identifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseInstallmentInformation", "identifier", Identifier.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseInstallmentInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

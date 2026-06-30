@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// #### Visa Platform Connect  Merchant&#39;s service location city name. When merchant provides services from a location other than the location identified as merchant location. 
         /// </summary>
         /// <value>#### Visa Platform Connect  Merchant&#39;s service location city name. When merchant provides services from a location other than the location identified as merchant location. </value>
-        [DataMember(Name="locality", EmitDefaultValue=false)]
+        [JsonPropertyName("locality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Locality { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect  Merchant&#39;s service location country subdivision code. When merchant provides services from a location other than the location identified as merchant location. 
         /// </summary>
         /// <value>#### Visa Platform Connect  Merchant&#39;s service location country subdivision code. When merchant provides services from a location other than the location identified as merchant location. </value>
-        [DataMember(Name="countrySubdivisionCode", EmitDefaultValue=false)]
+        [JsonPropertyName("countrySubdivisionCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CountrySubdivisionCode { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect  Merchant&#39;s service location country code. When merchant provides services from a location other than the location identified as merchant location. 
         /// </summary>
         /// <value>#### Visa Platform Connect  Merchant&#39;s service location country code. When merchant provides services from a location other than the location identified as merchant location. </value>
-        [DataMember(Name="countryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("countryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CountryCode { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect  Merchant&#39;s service location postal code. When merchant provides services from a location other than the location identified as merchant location. 
         /// </summary>
         /// <value>#### Visa Platform Connect  Merchant&#39;s service location postal code. When merchant provides services from a location other than the location identified as merchant location. </value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsMerchantInformationServiceLocation {\n");
-            if (Locality != null) sb.Append("  Locality: ").Append(Locality).Append("\n");
-            if (CountrySubdivisionCode != null) sb.Append("  CountrySubdivisionCode: ").Append(CountrySubdivisionCode).Append("\n");
-            if (CountryCode != null) sb.Append("  CountryCode: ").Append(CountryCode).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
+            if (Locality != null) sb.Append("  Locality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformationServiceLocation", "locality", Locality.ToString())).Append("\n");
+            if (CountrySubdivisionCode != null) sb.Append("  CountrySubdivisionCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformationServiceLocation", "countrySubdivisionCode", CountrySubdivisionCode.ToString())).Append("\n");
+            if (CountryCode != null) sb.Append("  CountryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformationServiceLocation", "countryCode", CountryCode.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformationServiceLocation", "postalCode", PostalCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsMerchantInformationServiceLocation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

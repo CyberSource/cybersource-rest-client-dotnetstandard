@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// The invoice font color. The format is a valid hexadecimal code prefixed with &#x60;#&#x60;, such as &#x60;#000000&#x60; for black.
         /// </summary>
         /// <value>The invoice font color. The format is a valid hexadecimal code prefixed with &#x60;#&#x60;, such as &#x60;#000000&#x60; for black.</value>
-        [DataMember(Name="fontColor", EmitDefaultValue=false)]
+        [JsonPropertyName("fontColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FontColor { get; set; }
 
         /// <summary>
         /// The invoice background color. The format is a valid hexadecimal code prefixed with &#x60;#&#x60;, such as &#x60;#ffffff&#x60; for white.
         /// </summary>
         /// <value>The invoice background color. The format is a valid hexadecimal code prefixed with &#x60;#&#x60;, such as &#x60;#ffffff&#x60; for white.</value>
-        [DataMember(Name="backgroundColor", EmitDefaultValue=false)]
+        [JsonPropertyName("backgroundColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BackgroundColor { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformationHeaderStyle {\n");
-            if (FontColor != null) sb.Append("  FontColor: ").Append(FontColor).Append("\n");
-            if (BackgroundColor != null) sb.Append("  BackgroundColor: ").Append(BackgroundColor).Append("\n");
+            if (FontColor != null) sb.Append("  FontColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformationHeaderStyle", "fontColor", FontColor.ToString())).Append("\n");
+            if (BackgroundColor != null) sb.Append("  BackgroundColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformationHeaderStyle", "backgroundColor", BackgroundColor.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformationHeaderStyle", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

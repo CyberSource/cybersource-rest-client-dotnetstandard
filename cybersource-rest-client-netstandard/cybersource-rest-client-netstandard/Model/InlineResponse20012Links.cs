@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,13 +45,15 @@ namespace CyberSource.Model
         /// Valid Values:   * self   * first   * last   * prev   * next 
         /// </summary>
         /// <value>Valid Values:   * self   * first   * last   * prev   * next </value>
-        [DataMember(Name="rel", EmitDefaultValue=false)]
+        [JsonPropertyName("rel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Rel { get; set; }
 
         /// <summary>
         /// Gets or Sets Href
         /// </summary>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        [JsonPropertyName("href")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Href { get; set; }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse20012Links {\n");
-            if (Rel != null) sb.Append("  Rel: ").Append(Rel).Append("\n");
-            if (Href != null) sb.Append("  Href: ").Append(Href).Append("\n");
+            if (Rel != null) sb.Append("  Rel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012Links", "rel", Rel.ToString())).Append("\n");
+            if (Href != null) sb.Append("  Href: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012Links", "href", Href.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,7 +76,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse20012Links", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

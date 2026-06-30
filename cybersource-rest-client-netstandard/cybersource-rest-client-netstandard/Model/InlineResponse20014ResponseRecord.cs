@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -61,62 +61,72 @@ namespace CyberSource.Model
         /// Valid Values:   * NAN   * NED   * ACL   * CCH   * CUR   * NUP   * UNA   * ERR   * DEC 
         /// </summary>
         /// <value>Valid Values:   * NAN   * NED   * ACL   * CCH   * CUR   * NUP   * UNA   * ERR   * DEC </value>
-        [DataMember(Name="response", EmitDefaultValue=false)]
+        [JsonPropertyName("response")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Response { get; set; }
 
         /// <summary>
         /// Gets or Sets Reason
         /// </summary>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
         /// Gets or Sets Token
         /// </summary>
-        [DataMember(Name="token", EmitDefaultValue=false)]
+        [JsonPropertyName("token")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Token { get; set; }
 
         /// <summary>
         /// Gets or Sets InstrumentIdentifierId
         /// </summary>
-        [DataMember(Name="instrumentIdentifierId", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentIdentifierId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InstrumentIdentifierId { get; set; }
 
         /// <summary>
         /// Valid Values:   * true   * false 
         /// </summary>
         /// <value>Valid Values:   * true   * false </value>
-        [DataMember(Name="instrumentIdentifierCreated", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentIdentifierCreated")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InstrumentIdentifierCreated { get; set; }
 
         /// <summary>
         /// Gets or Sets CardNumber
         /// </summary>
-        [DataMember(Name="cardNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("cardNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets CardExpiryMonth
         /// </summary>
-        [DataMember(Name="cardExpiryMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("cardExpiryMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardExpiryMonth { get; set; }
 
         /// <summary>
         /// Gets or Sets CardExpiryYear
         /// </summary>
-        [DataMember(Name="cardExpiryYear", EmitDefaultValue=false)]
+        [JsonPropertyName("cardExpiryYear")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardExpiryYear { get; set; }
 
         /// <summary>
         /// Gets or Sets CardType
         /// </summary>
-        [DataMember(Name="cardType", EmitDefaultValue=false)]
+        [JsonPropertyName("cardType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardType { get; set; }
 
         /// <summary>
         /// Gets or Sets AdditionalUpdates
         /// </summary>
-        [DataMember(Name="additionalUpdates", EmitDefaultValue=false)]
+        [JsonPropertyName("additionalUpdates")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<InlineResponse20014ResponseRecordAdditionalUpdates> AdditionalUpdates { get; set; }
 
         /// <summary>
@@ -127,16 +137,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse20014ResponseRecord {\n");
-            if (Response != null) sb.Append("  Response: ").Append(Response).Append("\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Token != null) sb.Append("  Token: ").Append(Token).Append("\n");
-            if (InstrumentIdentifierId != null) sb.Append("  InstrumentIdentifierId: ").Append(InstrumentIdentifierId).Append("\n");
-            if (InstrumentIdentifierCreated != null) sb.Append("  InstrumentIdentifierCreated: ").Append(InstrumentIdentifierCreated).Append("\n");
-            if (CardNumber != null) sb.Append("  CardNumber: ").Append(CardNumber).Append("\n");
-            if (CardExpiryMonth != null) sb.Append("  CardExpiryMonth: ").Append(CardExpiryMonth).Append("\n");
-            if (CardExpiryYear != null) sb.Append("  CardExpiryYear: ").Append(CardExpiryYear).Append("\n");
-            if (CardType != null) sb.Append("  CardType: ").Append(CardType).Append("\n");
-            if (AdditionalUpdates != null) sb.Append("  AdditionalUpdates: ").Append(AdditionalUpdates).Append("\n");
+            if (Response != null) sb.Append("  Response: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecord", "response", Response.ToString())).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecord", "reason", Reason.ToString())).Append("\n");
+            if (Token != null) sb.Append("  Token: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecord", "token", Token.ToString())).Append("\n");
+            if (InstrumentIdentifierId != null) sb.Append("  InstrumentIdentifierId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecord", "instrumentIdentifierId", InstrumentIdentifierId.ToString())).Append("\n");
+            if (InstrumentIdentifierCreated != null) sb.Append("  InstrumentIdentifierCreated: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecord", "instrumentIdentifierCreated", InstrumentIdentifierCreated.ToString())).Append("\n");
+            if (CardNumber != null) sb.Append("  CardNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecord", "cardNumber", CardNumber.ToString())).Append("\n");
+            if (CardExpiryMonth != null) sb.Append("  CardExpiryMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecord", "cardExpiryMonth", CardExpiryMonth.ToString())).Append("\n");
+            if (CardExpiryYear != null) sb.Append("  CardExpiryYear: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecord", "cardExpiryYear", CardExpiryYear.ToString())).Append("\n");
+            if (CardType != null) sb.Append("  CardType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecord", "cardType", CardType.ToString())).Append("\n");
+            if (AdditionalUpdates != null) sb.Append("  AdditionalUpdates: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecord", "additionalUpdates", AdditionalUpdates.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -147,7 +157,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse20014ResponseRecord", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

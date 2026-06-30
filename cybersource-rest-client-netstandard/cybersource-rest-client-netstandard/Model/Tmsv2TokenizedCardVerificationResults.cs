@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Tmsv2TokenizedCardVerificationResults" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         public Tmsv2TokenizedCardVerificationResults()
         {
         }
@@ -42,14 +42,16 @@ namespace CyberSource.Model
         /// Indicates whether the security code (CVV/CVC) was verified by the issuer during the provisioning request. Supported only for VTS tokens.  Possible Values: - MATCH: Verified, CVV2 data matched. - NO_MATCH: Verified, CVV2 data did not match. - NOT_SUPPORTED: Verification not supported by card issuer. - SKIPPED: Verification was not performed. 
         /// </summary>
         /// <value>Indicates whether the security code (CVV/CVC) was verified by the issuer during the provisioning request. Supported only for VTS tokens.  Possible Values: - MATCH: Verified, CVV2 data matched. - NO_MATCH: Verified, CVV2 data did not match. - NOT_SUPPORTED: Verification not supported by card issuer. - SKIPPED: Verification was not performed. </value>
-        [DataMember(Name="securityCode", EmitDefaultValue=false)]
+        [JsonPropertyName("securityCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecurityCode { get; private set; }
 
         /// <summary>
         /// Indicates whether the billing address was verified by the issuer during the provisioning request. Supported only for VTS tokens.  Possible Values: - MATCH: Verified, address and postal code data matched. - PARTIAL_MATCH: Verified, either address data matched or postal code data matched. - PARTIAL_MATCH_FORMAT_UNSUPPORTED: Verified, either address data matched or postal code data matched, but the other could not be verified due to format issues. - NO_MATCH: Verified, address and postal code data did not match. - NOT_SUPPORTED: Verification not supported by card issuer. - SKIPPED: Verification was not performed. 
         /// </summary>
         /// <value>Indicates whether the billing address was verified by the issuer during the provisioning request. Supported only for VTS tokens.  Possible Values: - MATCH: Verified, address and postal code data matched. - PARTIAL_MATCH: Verified, either address data matched or postal code data matched. - PARTIAL_MATCH_FORMAT_UNSUPPORTED: Verified, either address data matched or postal code data matched, but the other could not be verified due to format issues. - NO_MATCH: Verified, address and postal code data did not match. - NOT_SUPPORTED: Verification not supported by card issuer. - SKIPPED: Verification was not performed. </value>
-        [DataMember(Name="address", EmitDefaultValue=false)]
+        [JsonPropertyName("address")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address { get; private set; }
 
         /// <summary>
@@ -60,8 +62,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2TokenizedCardVerificationResults {\n");
-            if (SecurityCode != null) sb.Append("  SecurityCode: ").Append(SecurityCode).Append("\n");
-            if (Address != null) sb.Append("  Address: ").Append(Address).Append("\n");
+            if (SecurityCode != null) sb.Append("  SecurityCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardVerificationResults", "securityCode", SecurityCode.ToString())).Append("\n");
+            if (Address != null) sb.Append("  Address: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardVerificationResults", "address", Address.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -72,7 +74,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2TokenizedCardVerificationResults", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

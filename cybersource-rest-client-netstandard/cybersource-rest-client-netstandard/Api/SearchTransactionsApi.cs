@@ -421,7 +421,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("searchId", ApiClient.ParameterToString(searchId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -541,7 +541,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("searchId", ApiClient.ParameterToString(searchId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Get == Method.Post)
             {

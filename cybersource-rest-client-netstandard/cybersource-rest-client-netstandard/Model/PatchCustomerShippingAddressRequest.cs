@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -38,7 +38,7 @@ namespace CyberSource.Model
         /// <param name="Default">Flag that indicates whether customer shipping address is the dafault. Possible Values:  - &#x60;true&#x60;: Shipping Address is customer&#39;s default.  - &#x60;false&#x60;: Shipping Address is not customer&#39;s default. .</param>
         /// <param name="ShipTo">ShipTo.</param>
         /// <param name="Metadata">Metadata.</param>
-        public PatchCustomerShippingAddressRequest(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressLinks Links = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressLinks), string Id = default(string), bool? Default = default(bool?), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressShipTo ShipTo = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressShipTo), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressMetadata Metadata = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressMetadata))
+        public PatchCustomerShippingAddressRequest(DefaultShippingAddressLinks Links = default(DefaultShippingAddressLinks), string Id = default(string), bool? Default = default(bool?), DefaultShippingAddressShipTo ShipTo = default(DefaultShippingAddressShipTo), DefaultShippingAddressMetadata Metadata = default(DefaultShippingAddressMetadata))
         {
             this.Links = Links;
             this.Id = Id;
@@ -50,34 +50,39 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressLinks Links { get; set; }
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultShippingAddressLinks Links { get; set; }
 
         /// <summary>
         /// The Id of the Shipping Address Token.
         /// </summary>
         /// <value>The Id of the Shipping Address Token.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Flag that indicates whether customer shipping address is the dafault. Possible Values:  - &#x60;true&#x60;: Shipping Address is customer&#39;s default.  - &#x60;false&#x60;: Shipping Address is not customer&#39;s default. 
         /// </summary>
         /// <value>Flag that indicates whether customer shipping address is the dafault. Possible Values:  - &#x60;true&#x60;: Shipping Address is customer&#39;s default.  - &#x60;false&#x60;: Shipping Address is not customer&#39;s default. </value>
-        [DataMember(Name="default", EmitDefaultValue=false)]
+        [JsonPropertyName("default")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Default { get; set; }
 
         /// <summary>
         /// Gets or Sets ShipTo
         /// </summary>
-        [DataMember(Name="shipTo", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressShipTo ShipTo { get; set; }
+        [JsonPropertyName("shipTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultShippingAddressShipTo ShipTo { get; set; }
 
         /// <summary>
         /// Gets or Sets Metadata
         /// </summary>
-        [DataMember(Name="metadata", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddressMetadata Metadata { get; set; }
+        [JsonPropertyName("metadata")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultShippingAddressMetadata Metadata { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -87,11 +92,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PatchCustomerShippingAddressRequest {\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (Default != null) sb.Append("  Default: ").Append(Default).Append("\n");
-            if (ShipTo != null) sb.Append("  ShipTo: ").Append(ShipTo).Append("\n");
-            if (Metadata != null) sb.Append("  Metadata: ").Append(Metadata).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerShippingAddressRequest", "_links", Links.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerShippingAddressRequest", "id", Id.ToString())).Append("\n");
+            if (Default != null) sb.Append("  Default: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerShippingAddressRequest", "default", Default.ToString())).Append("\n");
+            if (ShipTo != null) sb.Append("  ShipTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerShippingAddressRequest", "shipTo", ShipTo.ToString())).Append("\n");
+            if (Metadata != null) sb.Append("  Metadata: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerShippingAddressRequest", "metadata", Metadata.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -102,7 +107,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PatchCustomerShippingAddressRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -36,7 +36,7 @@ namespace CyberSource.Model
         /// <param name="Type">This field is used to indicate how a payment should be processed.  Possible values: - AUTH: Use this value when you want to authorize a payment within Unified Checkout without capturing it immediately.  Payment types that initiate an immediate transfer of funds are NOT allowed.  If a capture context request includes a payment type incompatible with this mode, a 400 error will be returned.  A merchant would need to perform their own capture via API where applicable.&lt;br&gt;&lt;br&gt;   - CAPTURE: Use this value when you want to perform a sale within Unified Checkout and capture the payment immediately during the transaction.  Note: Some payment types may return a PENDING status, requiring an additional status check call to determine the final outcome of the payment.&lt;br&gt;&lt;br&gt; - PREFER_AUTH: Use this value to offer multiple alternative payment options during the Unified Checkout experience. This option authorizes the payment without immediate capture, where available.  It will perform a \&quot;CAPTURE\&quot; where an \&quot;AUTH\&quot; is not allowed by the payment type.  Transactions can be AUTHORIZED, CAPTURED, or PENDING.  If an \&quot;AUTH\&quot; is performed, a merchant would need to perform their own capture via API where applicable.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. .</param>
         /// <param name="Tms">Tms.</param>
         /// <param name="DecisionManager">Configure Unified Checkout to determine whether Decision Manager is invoked during service orchestration.  Possible values:  - True  - False&lt;br&gt;&lt;br&gt;  Setting this value to True indicates that device fingerprinting will be executed to add additional information for risk service Setting this value to False (or not provided) indicates that you do not wish to run device fingerprinting and skip decision manager services.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. .</param>
-        /// <param name="ConsumerAuthentication">Configure Unified Checkout to determine whether Consumer Authentication is invoked during service orchestration.  Possible values:  - NONE  - 3DS&lt;br&gt;&lt;br&gt;  Setting this value to 3DS will attempt to perform authentication using the Payer Authentication Service. Setting this value to NONE indicates that you do not wish to perform authentication using the Payer Authentication Service.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. .</param>
+        /// <param name="ConsumerAuthentication">Configure Unified Checkout to determine whether Consumer Authentication is invoked during service orchestration.  Possible values:   - PASSKEY  - 3DS  - NONE&lt;br&gt;&lt;br&gt;  Setting this value to PASSKEY performs Payer Authentication with an existing Visa Payment Passkey or create a new Passkey (Post a traditional 3DS Authentication) attempt to perform authentication using the Payer Authentication Service.&lt;br&gt; Setting this value to 3DS will attempt to perform authentication using the Payer Authentication Service.&lt;br&gt; Setting this value to NONE indicates that you do not wish to perform authentication using the Payer Authentication Service.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. .</param>
         public Ucv1sessionsCompleteMandate(string Type = default(string), Ucv1sessionsCompleteMandateTms Tms = default(Ucv1sessionsCompleteMandateTms), bool? DecisionManager = default(bool?), string ConsumerAuthentication = default(string))
         {
             this.Type = Type;
@@ -49,27 +49,31 @@ namespace CyberSource.Model
         /// This field is used to indicate how a payment should be processed.  Possible values: - AUTH: Use this value when you want to authorize a payment within Unified Checkout without capturing it immediately.  Payment types that initiate an immediate transfer of funds are NOT allowed.  If a capture context request includes a payment type incompatible with this mode, a 400 error will be returned.  A merchant would need to perform their own capture via API where applicable.&lt;br&gt;&lt;br&gt;   - CAPTURE: Use this value when you want to perform a sale within Unified Checkout and capture the payment immediately during the transaction.  Note: Some payment types may return a PENDING status, requiring an additional status check call to determine the final outcome of the payment.&lt;br&gt;&lt;br&gt; - PREFER_AUTH: Use this value to offer multiple alternative payment options during the Unified Checkout experience. This option authorizes the payment without immediate capture, where available.  It will perform a \&quot;CAPTURE\&quot; where an \&quot;AUTH\&quot; is not allowed by the payment type.  Transactions can be AUTHORIZED, CAPTURED, or PENDING.  If an \&quot;AUTH\&quot; is performed, a merchant would need to perform their own capture via API where applicable.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>This field is used to indicate how a payment should be processed.  Possible values: - AUTH: Use this value when you want to authorize a payment within Unified Checkout without capturing it immediately.  Payment types that initiate an immediate transfer of funds are NOT allowed.  If a capture context request includes a payment type incompatible with this mode, a 400 error will be returned.  A merchant would need to perform their own capture via API where applicable.&lt;br&gt;&lt;br&gt;   - CAPTURE: Use this value when you want to perform a sale within Unified Checkout and capture the payment immediately during the transaction.  Note: Some payment types may return a PENDING status, requiring an additional status check call to determine the final outcome of the payment.&lt;br&gt;&lt;br&gt; - PREFER_AUTH: Use this value to offer multiple alternative payment options during the Unified Checkout experience. This option authorizes the payment without immediate capture, where available.  It will perform a \&quot;CAPTURE\&quot; where an \&quot;AUTH\&quot; is not allowed by the payment type.  Transactions can be AUTHORIZED, CAPTURED, or PENDING.  If an \&quot;AUTH\&quot; is performed, a merchant would need to perform their own capture via API where applicable.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets Tms
         /// </summary>
-        [DataMember(Name="tms", EmitDefaultValue=false)]
+        [JsonPropertyName("tms")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsCompleteMandateTms Tms { get; set; }
 
         /// <summary>
         /// Configure Unified Checkout to determine whether Decision Manager is invoked during service orchestration.  Possible values:  - True  - False&lt;br&gt;&lt;br&gt;  Setting this value to True indicates that device fingerprinting will be executed to add additional information for risk service Setting this value to False (or not provided) indicates that you do not wish to run device fingerprinting and skip decision manager services.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Configure Unified Checkout to determine whether Decision Manager is invoked during service orchestration.  Possible values:  - True  - False&lt;br&gt;&lt;br&gt;  Setting this value to True indicates that device fingerprinting will be executed to add additional information for risk service Setting this value to False (or not provided) indicates that you do not wish to run device fingerprinting and skip decision manager services.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="decisionManager", EmitDefaultValue=false)]
+        [JsonPropertyName("decisionManager")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DecisionManager { get; set; }
 
         /// <summary>
-        /// Configure Unified Checkout to determine whether Consumer Authentication is invoked during service orchestration.  Possible values:  - NONE  - 3DS&lt;br&gt;&lt;br&gt;  Setting this value to 3DS will attempt to perform authentication using the Payer Authentication Service. Setting this value to NONE indicates that you do not wish to perform authentication using the Payer Authentication Service.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. 
+        /// Configure Unified Checkout to determine whether Consumer Authentication is invoked during service orchestration.  Possible values:   - PASSKEY  - 3DS  - NONE&lt;br&gt;&lt;br&gt;  Setting this value to PASSKEY performs Payer Authentication with an existing Visa Payment Passkey or create a new Passkey (Post a traditional 3DS Authentication) attempt to perform authentication using the Payer Authentication Service.&lt;br&gt; Setting this value to 3DS will attempt to perform authentication using the Payer Authentication Service.&lt;br&gt; Setting this value to NONE indicates that you do not wish to perform authentication using the Payer Authentication Service.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
-        /// <value>Configure Unified Checkout to determine whether Consumer Authentication is invoked during service orchestration.  Possible values:  - NONE  - 3DS&lt;br&gt;&lt;br&gt;  Setting this value to 3DS will attempt to perform authentication using the Payer Authentication Service. Setting this value to NONE indicates that you do not wish to perform authentication using the Payer Authentication Service.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="consumerAuthentication", EmitDefaultValue=false)]
+        /// <value>Configure Unified Checkout to determine whether Consumer Authentication is invoked during service orchestration.  Possible values:   - PASSKEY  - 3DS  - NONE&lt;br&gt;&lt;br&gt;  Setting this value to PASSKEY performs Payer Authentication with an existing Visa Payment Passkey or create a new Passkey (Post a traditional 3DS Authentication) attempt to perform authentication using the Payer Authentication Service.&lt;br&gt; Setting this value to 3DS will attempt to perform authentication using the Payer Authentication Service.&lt;br&gt; Setting this value to NONE indicates that you do not wish to perform authentication using the Payer Authentication Service.&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request. </value>
+        [JsonPropertyName("consumerAuthentication")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ConsumerAuthentication { get; set; }
 
         /// <summary>
@@ -80,10 +84,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsCompleteMandate {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Tms != null) sb.Append("  Tms: ").Append(Tms).Append("\n");
-            if (DecisionManager != null) sb.Append("  DecisionManager: ").Append(DecisionManager).Append("\n");
-            if (ConsumerAuthentication != null) sb.Append("  ConsumerAuthentication: ").Append(ConsumerAuthentication).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsCompleteMandate", "type", Type.ToString())).Append("\n");
+            if (Tms != null) sb.Append("  Tms: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsCompleteMandate", "tms", Tms.ToString())).Append("\n");
+            if (DecisionManager != null) sb.Append("  DecisionManager: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsCompleteMandate", "decisionManager", DecisionManager.ToString())).Append("\n");
+            if (ConsumerAuthentication != null) sb.Append("  ConsumerAuthentication: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsCompleteMandate", "consumerAuthentication", ConsumerAuthentication.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -94,7 +98,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsCompleteMandate", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

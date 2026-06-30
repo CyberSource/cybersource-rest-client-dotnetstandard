@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// TMS Transient Token for BAVS detokenization. A 64 hexadecimal character identifier representing captured payment credentials.
         /// </summary>
         /// <value>TMS Transient Token for BAVS detokenization. A 64 hexadecimal character identifier representing captured payment credentials.</value>
-        [DataMember(Name="jti", EmitDefaultValue=false)]
+        [JsonPropertyName("jti")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Jti { get; set; }
 
         /// <summary>
         /// Flex API Transient Token encoded as JWT for BAVS detokenization. Contains encrypted bank account information from Flex microform or Unified Payment checkout.
         /// </summary>
         /// <value>Flex API Transient Token encoded as JWT for BAVS detokenization. Contains encrypted bank account information from Flex microform or Unified Payment checkout.</value>
-        [DataMember(Name="transientTokenJwt", EmitDefaultValue=false)]
+        [JsonPropertyName("transientTokenJwt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransientTokenJwt { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Bavsv1accountvalidationsTokenInformation {\n");
-            if (Jti != null) sb.Append("  Jti: ").Append(Jti).Append("\n");
-            if (TransientTokenJwt != null) sb.Append("  TransientTokenJwt: ").Append(TransientTokenJwt).Append("\n");
+            if (Jti != null) sb.Append("  Jti: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Bavsv1accountvalidationsTokenInformation", "jti", Jti.ToString())).Append("\n");
+            if (TransientTokenJwt != null) sb.Append("  TransientTokenJwt: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Bavsv1accountvalidationsTokenInformation", "transientTokenJwt", TransientTokenJwt.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Bavsv1accountvalidationsTokenInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

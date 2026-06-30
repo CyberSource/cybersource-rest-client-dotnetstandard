@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// Country of actual final destination on the route.
         /// </summary>
         /// <value>Country of actual final destination on the route.</value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// City of actual final destination on the route.
         /// </summary>
         /// <value>City of actual final destination on the route.</value>
-        [DataMember(Name="locality", EmitDefaultValue=false)]
+        [JsonPropertyName("locality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Locality { get; set; }
 
         /// <summary>
         /// Latitude of actual final destination on the route.
         /// </summary>
         /// <value>Latitude of actual final destination on the route.</value>
-        [DataMember(Name="latitude", EmitDefaultValue=false)]
+        [JsonPropertyName("latitude")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Latitude { get; set; }
 
         /// <summary>
         /// Longitude of actual final destination on the route.
         /// </summary>
         /// <value>Longitude of actual final destination on the route.</value>
-        [DataMember(Name="longitude", EmitDefaultValue=false)]
+        [JsonPropertyName("longitude")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Longitude { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseRiskInformationTravelActualFinalDestination {\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (Locality != null) sb.Append("  Locality: ").Append(Locality).Append("\n");
-            if (Latitude != null) sb.Append("  Latitude: ").Append(Latitude).Append("\n");
-            if (Longitude != null) sb.Append("  Longitude: ").Append(Longitude).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationTravelActualFinalDestination", "country", Country.ToString())).Append("\n");
+            if (Locality != null) sb.Append("  Locality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationTravelActualFinalDestination", "locality", Locality.ToString())).Append("\n");
+            if (Latitude != null) sb.Append("  Latitude: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationTravelActualFinalDestination", "latitude", Latitude.ToString())).Append("\n");
+            if (Longitude != null) sb.Append("  Longitude: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationTravelActualFinalDestination", "longitude", Longitude.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseRiskInformationTravelActualFinalDestination", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

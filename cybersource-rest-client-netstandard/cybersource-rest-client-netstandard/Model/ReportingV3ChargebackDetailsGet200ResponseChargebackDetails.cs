@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -87,161 +87,184 @@ namespace CyberSource.Model
         /// Processor Merchant Id
         /// </summary>
         /// <value>Processor Merchant Id</value>
-        [DataMember(Name="processorMerchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("processorMerchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessorMerchantId { get; set; }
 
         /// <summary>
         /// Merchant Name
         /// </summary>
         /// <value>Merchant Name</value>
-        [DataMember(Name="merchantName", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantName { get; set; }
 
         /// <summary>
         /// Transaction Reference Number
         /// </summary>
         /// <value>Transaction Reference Number</value>
-        [DataMember(Name="transactionReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionReferenceNumber { get; set; }
 
         /// <summary>
         /// Merchant Reference Number
         /// </summary>
         /// <value>Merchant Reference Number</value>
-        [DataMember(Name="merchantReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantReferenceNumber { get; set; }
 
         /// <summary>
         /// Nature of Dispute
         /// </summary>
         /// <value>Nature of Dispute</value>
-        [DataMember(Name="natureOfDispute", EmitDefaultValue=false)]
+        [JsonPropertyName("natureOfDispute")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NatureOfDispute { get; set; }
 
         /// <summary>
         /// Chargeback Alert Type
         /// </summary>
         /// <value>Chargeback Alert Type</value>
-        [DataMember(Name="alertType", EmitDefaultValue=false)]
+        [JsonPropertyName("alertType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AlertType { get; set; }
 
         /// <summary>
         /// Chargeback Amount
         /// </summary>
         /// <value>Chargeback Amount</value>
-        [DataMember(Name="amount", EmitDefaultValue=false)]
+        [JsonPropertyName("amount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Amount { get; set; }
 
         /// <summary>
         /// Chargeback Sign
         /// </summary>
         /// <value>Chargeback Sign</value>
-        [DataMember(Name="sign", EmitDefaultValue=false)]
+        [JsonPropertyName("sign")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Sign { get; set; }
 
         /// <summary>
         /// Chargeback Action
         /// </summary>
         /// <value>Chargeback Action</value>
-        [DataMember(Name="action", EmitDefaultValue=false)]
+        [JsonPropertyName("action")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Action { get; set; }
 
         /// <summary>
         /// Card Type
         /// </summary>
         /// <value>Card Type</value>
-        [DataMember(Name="cardType", EmitDefaultValue=false)]
+        [JsonPropertyName("cardType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardType { get; set; }
 
         /// <summary>
         /// Original Settlement Date
         /// </summary>
         /// <value>Original Settlement Date</value>
-        [DataMember(Name="originalSettlementTime", EmitDefaultValue=false)]
+        [JsonPropertyName("originalSettlementTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? OriginalSettlementTime { get; set; }
 
         /// <summary>
         /// Tracking Number
         /// </summary>
         /// <value>Tracking Number</value>
-        [DataMember(Name="trackingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("trackingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TrackingNumber { get; set; }
 
         /// <summary>
         /// Valid ISO 4217 ALPHA-3 currency code
         /// </summary>
         /// <value>Valid ISO 4217 ALPHA-3 currency code</value>
-        [DataMember(Name="currencyCode", EmitDefaultValue=false)]
+        [JsonPropertyName("currencyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CurrencyCode { get; set; }
 
         /// <summary>
         /// Request Id
         /// </summary>
         /// <value>Request Id</value>
-        [DataMember(Name="requestId", EmitDefaultValue=false)]
+        [JsonPropertyName("requestId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestId { get; set; }
 
         /// <summary>
         /// Response Due Date
         /// </summary>
         /// <value>Response Due Date</value>
-        [DataMember(Name="responseDueTime", EmitDefaultValue=false)]
+        [JsonPropertyName("responseDueTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? ResponseDueTime { get; set; }
 
         /// <summary>
         /// Chargeback Date
         /// </summary>
         /// <value>Chargeback Date</value>
-        [DataMember(Name="time", EmitDefaultValue=false)]
+        [JsonPropertyName("time")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? Time { get; set; }
 
         /// <summary>
         /// Chargeback Action Description
         /// </summary>
         /// <value>Chargeback Action Description</value>
-        [DataMember(Name="actionDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("actionDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ActionDescription { get; set; }
 
         /// <summary>
         /// Customer Id
         /// </summary>
         /// <value>Customer Id</value>
-        [DataMember(Name="customerId", EmitDefaultValue=false)]
+        [JsonPropertyName("customerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerId { get; set; }
 
         /// <summary>
         /// Chargeback Reason Code
         /// </summary>
         /// <value>Chargeback Reason Code</value>
-        [DataMember(Name="reasonCode", EmitDefaultValue=false)]
+        [JsonPropertyName("reasonCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReasonCode { get; set; }
 
         /// <summary>
         /// Representment CP Date
         /// </summary>
         /// <value>Representment CP Date</value>
-        [DataMember(Name="representmentCPTime", EmitDefaultValue=false)]
+        [JsonPropertyName("representmentCPTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? RepresentmentCPTime { get; set; }
 
         /// <summary>
         /// ICS Request Applications
         /// </summary>
         /// <value>ICS Request Applications</value>
-        [DataMember(Name="applications", EmitDefaultValue=false)]
+        [JsonPropertyName("applications")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Applications { get; set; }
 
         /// <summary>
         /// Event Request Date
         /// </summary>
         /// <value>Event Request Date</value>
-        [DataMember(Name="eventRequestedTime", EmitDefaultValue=false)]
+        [JsonPropertyName("eventRequestedTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? EventRequestedTime { get; set; }
 
         /// <summary>
         /// Pre Dispute Flag
         /// </summary>
         /// <value>Pre Dispute Flag</value>
-        [DataMember(Name="preDisputeFlag", EmitDefaultValue=false)]
+        [JsonPropertyName("preDisputeFlag")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PreDisputeFlag { get; set; }
 
         /// <summary>
@@ -252,29 +275,29 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3ChargebackDetailsGet200ResponseChargebackDetails {\n");
-            if (ProcessorMerchantId != null) sb.Append("  ProcessorMerchantId: ").Append(ProcessorMerchantId).Append("\n");
-            if (MerchantName != null) sb.Append("  MerchantName: ").Append(MerchantName).Append("\n");
-            if (TransactionReferenceNumber != null) sb.Append("  TransactionReferenceNumber: ").Append(TransactionReferenceNumber).Append("\n");
-            if (MerchantReferenceNumber != null) sb.Append("  MerchantReferenceNumber: ").Append(MerchantReferenceNumber).Append("\n");
-            if (NatureOfDispute != null) sb.Append("  NatureOfDispute: ").Append(NatureOfDispute).Append("\n");
-            if (AlertType != null) sb.Append("  AlertType: ").Append(AlertType).Append("\n");
-            if (Amount != null) sb.Append("  Amount: ").Append(Amount).Append("\n");
-            if (Sign != null) sb.Append("  Sign: ").Append(Sign).Append("\n");
-            if (Action != null) sb.Append("  Action: ").Append(Action).Append("\n");
-            if (CardType != null) sb.Append("  CardType: ").Append(CardType).Append("\n");
-            if (OriginalSettlementTime != null) sb.Append("  OriginalSettlementTime: ").Append(OriginalSettlementTime).Append("\n");
-            if (TrackingNumber != null) sb.Append("  TrackingNumber: ").Append(TrackingNumber).Append("\n");
-            if (CurrencyCode != null) sb.Append("  CurrencyCode: ").Append(CurrencyCode).Append("\n");
-            if (RequestId != null) sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            if (ResponseDueTime != null) sb.Append("  ResponseDueTime: ").Append(ResponseDueTime).Append("\n");
-            if (Time != null) sb.Append("  Time: ").Append(Time).Append("\n");
-            if (ActionDescription != null) sb.Append("  ActionDescription: ").Append(ActionDescription).Append("\n");
-            if (CustomerId != null) sb.Append("  CustomerId: ").Append(CustomerId).Append("\n");
-            if (ReasonCode != null) sb.Append("  ReasonCode: ").Append(ReasonCode).Append("\n");
-            if (RepresentmentCPTime != null) sb.Append("  RepresentmentCPTime: ").Append(RepresentmentCPTime).Append("\n");
-            if (Applications != null) sb.Append("  Applications: ").Append(Applications).Append("\n");
-            if (EventRequestedTime != null) sb.Append("  EventRequestedTime: ").Append(EventRequestedTime).Append("\n");
-            if (PreDisputeFlag != null) sb.Append("  PreDisputeFlag: ").Append(PreDisputeFlag).Append("\n");
+            if (ProcessorMerchantId != null) sb.Append("  ProcessorMerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "processorMerchantId", ProcessorMerchantId.ToString())).Append("\n");
+            if (MerchantName != null) sb.Append("  MerchantName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "merchantName", MerchantName.ToString())).Append("\n");
+            if (TransactionReferenceNumber != null) sb.Append("  TransactionReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "transactionReferenceNumber", TransactionReferenceNumber.ToString())).Append("\n");
+            if (MerchantReferenceNumber != null) sb.Append("  MerchantReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "merchantReferenceNumber", MerchantReferenceNumber.ToString())).Append("\n");
+            if (NatureOfDispute != null) sb.Append("  NatureOfDispute: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "natureOfDispute", NatureOfDispute.ToString())).Append("\n");
+            if (AlertType != null) sb.Append("  AlertType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "alertType", AlertType.ToString())).Append("\n");
+            if (Amount != null) sb.Append("  Amount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "amount", Amount.ToString())).Append("\n");
+            if (Sign != null) sb.Append("  Sign: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "sign", Sign.ToString())).Append("\n");
+            if (Action != null) sb.Append("  Action: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "action", Action.ToString())).Append("\n");
+            if (CardType != null) sb.Append("  CardType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "cardType", CardType.ToString())).Append("\n");
+            if (OriginalSettlementTime != null) sb.Append("  OriginalSettlementTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "originalSettlementTime", OriginalSettlementTime.ToString())).Append("\n");
+            if (TrackingNumber != null) sb.Append("  TrackingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "trackingNumber", TrackingNumber.ToString())).Append("\n");
+            if (CurrencyCode != null) sb.Append("  CurrencyCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "currencyCode", CurrencyCode.ToString())).Append("\n");
+            if (RequestId != null) sb.Append("  RequestId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "requestId", RequestId.ToString())).Append("\n");
+            if (ResponseDueTime != null) sb.Append("  ResponseDueTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "responseDueTime", ResponseDueTime.ToString())).Append("\n");
+            if (Time != null) sb.Append("  Time: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "time", Time.ToString())).Append("\n");
+            if (ActionDescription != null) sb.Append("  ActionDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "actionDescription", ActionDescription.ToString())).Append("\n");
+            if (CustomerId != null) sb.Append("  CustomerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "customerId", CustomerId.ToString())).Append("\n");
+            if (ReasonCode != null) sb.Append("  ReasonCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "reasonCode", ReasonCode.ToString())).Append("\n");
+            if (RepresentmentCPTime != null) sb.Append("  RepresentmentCPTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "representmentCPTime", RepresentmentCPTime.ToString())).Append("\n");
+            if (Applications != null) sb.Append("  Applications: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "applications", Applications.ToString())).Append("\n");
+            if (EventRequestedTime != null) sb.Append("  EventRequestedTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "eventRequestedTime", EventRequestedTime.ToString())).Append("\n");
+            if (PreDisputeFlag != null) sb.Append("  PreDisputeFlag: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", "preDisputeFlag", PreDisputeFlag.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -285,7 +308,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3ChargebackDetailsGet200ResponseChargebackDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

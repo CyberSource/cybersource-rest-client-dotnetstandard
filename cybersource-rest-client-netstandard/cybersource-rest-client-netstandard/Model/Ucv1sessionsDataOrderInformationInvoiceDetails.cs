@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,27 +49,31 @@ namespace CyberSource.Model
         /// VAT invoice number associated with the transaction. 
         /// </summary>
         /// <value>VAT invoice number associated with the transaction. </value>
-        [DataMember(Name="vatInvoiceReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("vatInvoiceReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VatInvoiceReferenceNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionAdviceAddendum
         /// </summary>
-        [DataMember(Name="transactionAdviceAddendum", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionAdviceAddendum")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ucv1sessionsDataOrderInformationInvoiceDetailsTransactionAdviceAddendum> TransactionAdviceAddendum { get; set; }
 
         /// <summary>
         /// Invoice number
         /// </summary>
         /// <value>Invoice number</value>
-        [DataMember(Name="invoiceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InvoiceNumber { get; set; }
 
         /// <summary>
         /// Product description
         /// </summary>
         /// <value>Product description</value>
-        [DataMember(Name="productDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("productDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductDescription { get; set; }
 
         /// <summary>
@@ -80,10 +84,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataOrderInformationInvoiceDetails {\n");
-            if (VatInvoiceReferenceNumber != null) sb.Append("  VatInvoiceReferenceNumber: ").Append(VatInvoiceReferenceNumber).Append("\n");
-            if (TransactionAdviceAddendum != null) sb.Append("  TransactionAdviceAddendum: ").Append(TransactionAdviceAddendum).Append("\n");
-            if (InvoiceNumber != null) sb.Append("  InvoiceNumber: ").Append(InvoiceNumber).Append("\n");
-            if (ProductDescription != null) sb.Append("  ProductDescription: ").Append(ProductDescription).Append("\n");
+            if (VatInvoiceReferenceNumber != null) sb.Append("  VatInvoiceReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformationInvoiceDetails", "vatInvoiceReferenceNumber", VatInvoiceReferenceNumber.ToString())).Append("\n");
+            if (TransactionAdviceAddendum != null) sb.Append("  TransactionAdviceAddendum: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformationInvoiceDetails", "transactionAdviceAddendum", TransactionAdviceAddendum.ToString())).Append("\n");
+            if (InvoiceNumber != null) sb.Append("  InvoiceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformationInvoiceDetails", "invoiceNumber", InvoiceNumber.ToString())).Append("\n");
+            if (ProductDescription != null) sb.Append("  ProductDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformationInvoiceDetails", "productDescription", ProductDescription.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -94,7 +98,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataOrderInformationInvoiceDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

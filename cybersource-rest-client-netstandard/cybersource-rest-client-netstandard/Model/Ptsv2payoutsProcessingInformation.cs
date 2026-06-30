@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -63,74 +63,85 @@ namespace CyberSource.Model
         /// Payouts transaction type.  Applicable Processors: FDC Compass, Paymentech, CtV  Possible values:  **Credit Card Bill Payment**   - **CP**: credit card bill payment  **Funds Disbursement**   - **FD**: funds disbursement  - **GD**: government disbursement  - **MD**: merchant disbursement  **Money Transfer**   - **AA**: account to account. Sender and receiver are same person.  - **PP**: person to person. Sender and receiver are different.  **Prepaid Load**   - **TU**: top up 
         /// </summary>
         /// <value>Payouts transaction type.  Applicable Processors: FDC Compass, Paymentech, CtV  Possible values:  **Credit Card Bill Payment**   - **CP**: credit card bill payment  **Funds Disbursement**   - **FD**: funds disbursement  - **GD**: government disbursement  - **MD**: merchant disbursement  **Money Transfer**   - **AA**: account to account. Sender and receiver are same person.  - **PP**: person to person. Sender and receiver are different.  **Prepaid Load**   - **TU**: top up </value>
-        [DataMember(Name="businessApplicationId", EmitDefaultValue=false)]
+        [JsonPropertyName("businessApplicationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessApplicationId { get; set; }
 
         /// <summary>
         /// This field is optionally used by Push Payments Gateway participants (merchants and acquirers) to get the attributes for specified networks only. The networks specified in this field must be a subset of the information provided during program enrollment. Refer to Sharing Group Code/Network Routing Order. Note: Supported only in US for domestic transactions involving Push Payments Gateway Service.  VisaNet checks to determine if there are issuer routing preferences for any of the networks specified by the network routing order. If an issuer preference exists for one of the specified debit networks, VisaNet makes a routing selection based on the issuer&#39;s preference.  If an issuer preference exists for more than one of the specified debit networks, or if no issuer preference exists, VisaNet makes a selection based on the acquirer&#39;s routing priorities.  
         /// </summary>
         /// <value>This field is optionally used by Push Payments Gateway participants (merchants and acquirers) to get the attributes for specified networks only. The networks specified in this field must be a subset of the information provided during program enrollment. Refer to Sharing Group Code/Network Routing Order. Note: Supported only in US for domestic transactions involving Push Payments Gateway Service.  VisaNet checks to determine if there are issuer routing preferences for any of the networks specified by the network routing order. If an issuer preference exists for one of the specified debit networks, VisaNet makes a routing selection based on the issuer&#39;s preference.  If an issuer preference exists for more than one of the specified debit networks, or if no issuer preference exists, VisaNet makes a selection based on the acquirer&#39;s routing priorities.  </value>
-        [DataMember(Name="networkRoutingOrder", EmitDefaultValue=false)]
+        [JsonPropertyName("networkRoutingOrder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NetworkRoutingOrder { get; set; }
 
         /// <summary>
         /// Type of transaction.  Value for an OCT transaction: - &#x60;internet&#x60; 
         /// </summary>
         /// <value>Type of transaction.  Value for an OCT transaction: - &#x60;internet&#x60; </value>
-        [DataMember(Name="commerceIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("commerceIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommerceIndicator { get; set; }
 
         /// <summary>
         /// Please check with Cybersource customer support to see if your merchant account is configured correctly so you can include this field in your request. * For Payouts: max length for FDCCompass is String (22). 
         /// </summary>
         /// <value>Please check with Cybersource customer support to see if your merchant account is configured correctly so you can include this field in your request. * For Payouts: max length for FDCCompass is String (22). </value>
-        [DataMember(Name="reconciliationId", EmitDefaultValue=false)]
+        [JsonPropertyName("reconciliationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReconciliationId { get; set; }
 
         /// <summary>
         /// Gets or Sets PayoutsOptions
         /// </summary>
-        [DataMember(Name="payoutsOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("payoutsOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2payoutsProcessingInformationPayoutsOptions PayoutsOptions { get; set; }
 
         /// <summary>
         /// Transaction reason code. 
         /// </summary>
         /// <value>Transaction reason code. </value>
-        [DataMember(Name="transactionReason", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionReason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionReason { get; set; }
 
         /// <summary>
         /// This field is applicable for AFT and OCT transactions. For list of supported values, please refer to Developer Guide. 
         /// </summary>
         /// <value>This field is applicable for AFT and OCT transactions. For list of supported values, please refer to Developer Guide. </value>
-        [DataMember(Name="purposeOfPayment", EmitDefaultValue=false)]
+        [JsonPropertyName("purposeOfPayment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurposeOfPayment { get; set; }
 
         /// <summary>
         /// Gets or Sets FundingOptions
         /// </summary>
-        [DataMember(Name="fundingOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("fundingOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2payoutsProcessingInformationFundingOptions FundingOptions { get; set; }
 
         /// <summary>
         /// Contains the ISO 639-2 defined language Code 
         /// </summary>
         /// <value>Contains the ISO 639-2 defined language Code </value>
-        [DataMember(Name="languageCode", EmitDefaultValue=false)]
+        [JsonPropertyName("languageCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LanguageCode { get; set; }
 
         /// <summary>
         /// Gets or Sets PurchaseOptions
         /// </summary>
-        [DataMember(Name="purchaseOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2payoutsProcessingInformationPurchaseOptions PurchaseOptions { get; set; }
 
         /// <summary>
         /// Account verification code will inform what Payment Account Verification should be performed. With this array of codes, a merchant can choose à la carte what verifications to run. This field is optional, and the default is 1 if it is not passed in. This means that a full validation of the fields will be performed. Valid verification codes: - &#x60;1&#x60; &#x3D; Full Account Verification (Card Account, CVN, CAVV, TAVV, Address, Name, eMail, Phone, Identity) - &#x60;2&#x60; &#x3D; Card Account Verification - &#x60;3&#x60; &#x3D; Address Verification - &#x60;4&#x60; &#x3D; Card Authentication Method (CAM) (Cryptogram) - &#x60;5&#x60; &#x3D; Cardholder Authentication Verification (CAVV) - &#x60;6&#x60; &#x3D; Cardholder Identity Verification - &#x60;7&#x60; &#x3D; CVV2 Verification - &#x60;8&#x60; &#x3D; eMail Verification - &#x60;9&#x60; &#x3D; Name Verification - &#x60;10&#x60; &#x3D; Phone Verification 
         /// </summary>
         /// <value>Account verification code will inform what Payment Account Verification should be performed. With this array of codes, a merchant can choose à la carte what verifications to run. This field is optional, and the default is 1 if it is not passed in. This means that a full validation of the fields will be performed. Valid verification codes: - &#x60;1&#x60; &#x3D; Full Account Verification (Card Account, CVN, CAVV, TAVV, Address, Name, eMail, Phone, Identity) - &#x60;2&#x60; &#x3D; Card Account Verification - &#x60;3&#x60; &#x3D; Address Verification - &#x60;4&#x60; &#x3D; Card Authentication Method (CAM) (Cryptogram) - &#x60;5&#x60; &#x3D; Cardholder Authentication Verification (CAVV) - &#x60;6&#x60; &#x3D; Cardholder Identity Verification - &#x60;7&#x60; &#x3D; CVV2 Verification - &#x60;8&#x60; &#x3D; eMail Verification - &#x60;9&#x60; &#x3D; Name Verification - &#x60;10&#x60; &#x3D; Phone Verification </value>
-        [DataMember(Name="accountVerificationCode", EmitDefaultValue=false)]
+        [JsonPropertyName("accountVerificationCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> AccountVerificationCode { get; set; }
 
         /// <summary>
@@ -141,17 +152,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2payoutsProcessingInformation {\n");
-            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(BusinessApplicationId).Append("\n");
-            if (NetworkRoutingOrder != null) sb.Append("  NetworkRoutingOrder: ").Append(NetworkRoutingOrder).Append("\n");
-            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CommerceIndicator).Append("\n");
-            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(ReconciliationId).Append("\n");
-            if (PayoutsOptions != null) sb.Append("  PayoutsOptions: ").Append(PayoutsOptions).Append("\n");
-            if (TransactionReason != null) sb.Append("  TransactionReason: ").Append(TransactionReason).Append("\n");
-            if (PurposeOfPayment != null) sb.Append("  PurposeOfPayment: ").Append(PurposeOfPayment).Append("\n");
-            if (FundingOptions != null) sb.Append("  FundingOptions: ").Append(FundingOptions).Append("\n");
-            if (LanguageCode != null) sb.Append("  LanguageCode: ").Append(LanguageCode).Append("\n");
-            if (PurchaseOptions != null) sb.Append("  PurchaseOptions: ").Append(PurchaseOptions).Append("\n");
-            if (AccountVerificationCode != null) sb.Append("  AccountVerificationCode: ").Append(AccountVerificationCode).Append("\n");
+            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2payoutsProcessingInformation", "businessApplicationId", BusinessApplicationId.ToString())).Append("\n");
+            if (NetworkRoutingOrder != null) sb.Append("  NetworkRoutingOrder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2payoutsProcessingInformation", "networkRoutingOrder", NetworkRoutingOrder.ToString())).Append("\n");
+            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2payoutsProcessingInformation", "commerceIndicator", CommerceIndicator.ToString())).Append("\n");
+            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2payoutsProcessingInformation", "reconciliationId", ReconciliationId.ToString())).Append("\n");
+            if (PayoutsOptions != null) sb.Append("  PayoutsOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2payoutsProcessingInformation", "payoutsOptions", PayoutsOptions.ToString())).Append("\n");
+            if (TransactionReason != null) sb.Append("  TransactionReason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2payoutsProcessingInformation", "transactionReason", TransactionReason.ToString())).Append("\n");
+            if (PurposeOfPayment != null) sb.Append("  PurposeOfPayment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2payoutsProcessingInformation", "purposeOfPayment", PurposeOfPayment.ToString())).Append("\n");
+            if (FundingOptions != null) sb.Append("  FundingOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2payoutsProcessingInformation", "fundingOptions", FundingOptions.ToString())).Append("\n");
+            if (LanguageCode != null) sb.Append("  LanguageCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2payoutsProcessingInformation", "languageCode", LanguageCode.ToString())).Append("\n");
+            if (PurchaseOptions != null) sb.Append("  PurchaseOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2payoutsProcessingInformation", "purchaseOptions", PurchaseOptions.ToString())).Append("\n");
+            if (AccountVerificationCode != null) sb.Append("  AccountVerificationCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2payoutsProcessingInformation", "accountVerificationCode", AccountVerificationCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -162,7 +173,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2payoutsProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

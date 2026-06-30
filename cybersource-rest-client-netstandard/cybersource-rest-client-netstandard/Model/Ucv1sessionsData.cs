@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,7 +46,7 @@ namespace CyberSource.Model
         /// <param name="PaymentInformation">PaymentInformation.</param>
         /// <param name="InstallmentInformation">InstallmentInformation.</param>
         /// <param name="MerchantDefinedInformation">MerchantDefinedInformation.</param>
-        public Ucv1sessionsData(Ucv1sessionsDataAggregatorInformation AggregatorInformation = default(Ucv1sessionsDataAggregatorInformation), Ucv1sessionsDataOrderInformation OrderInformation = default(Ucv1sessionsDataOrderInformation), Ucv1sessionsDataBuyerInformation BuyerInformation = default(Ucv1sessionsDataBuyerInformation), Upv1capturecontextsDataClientReferenceInformation ClientReferenceInformation = default(Upv1capturecontextsDataClientReferenceInformation), Ucv1sessionsDataConsumerAuthenticationInformation ConsumerAuthenticationInformation = default(Ucv1sessionsDataConsumerAuthenticationInformation), Ucv1sessionsDataMerchantInformation MerchantInformation = default(Ucv1sessionsDataMerchantInformation), Ucv1sessionsDataProcessingInformation ProcessingInformation = default(Ucv1sessionsDataProcessingInformation), Ucv1sessionsDataRecipientInformation RecipientInformation = default(Ucv1sessionsDataRecipientInformation), Ucv1sessionsDataSenderInformation SenderInformation = default(Ucv1sessionsDataSenderInformation), Ucv1sessionsDataDeviceInformation DeviceInformation = default(Ucv1sessionsDataDeviceInformation), Ucv1sessionsDataPaymentInformation PaymentInformation = default(Ucv1sessionsDataPaymentInformation), Ucv1sessionsDataInstallmentInformation InstallmentInformation = default(Ucv1sessionsDataInstallmentInformation), List<Ucv1sessionsDataMerchantDefinedInformation> MerchantDefinedInformation = default(List<Ucv1sessionsDataMerchantDefinedInformation>))
+        public Ucv1sessionsData(Ucv1sessionsDataAggregatorInformation AggregatorInformation = default(Ucv1sessionsDataAggregatorInformation), Ucv1sessionsDataOrderInformation OrderInformation = default(Ucv1sessionsDataOrderInformation), Ucv1sessionsDataBuyerInformation BuyerInformation = default(Ucv1sessionsDataBuyerInformation), Ucv1sessionsDataClientReferenceInformation ClientReferenceInformation = default(Ucv1sessionsDataClientReferenceInformation), Ucv1sessionsDataConsumerAuthenticationInformation ConsumerAuthenticationInformation = default(Ucv1sessionsDataConsumerAuthenticationInformation), Ucv1sessionsDataMerchantInformation MerchantInformation = default(Ucv1sessionsDataMerchantInformation), Ucv1sessionsDataProcessingInformation ProcessingInformation = default(Ucv1sessionsDataProcessingInformation), Ucv1sessionsDataRecipientInformation RecipientInformation = default(Ucv1sessionsDataRecipientInformation), Ucv1sessionsDataSenderInformation SenderInformation = default(Ucv1sessionsDataSenderInformation), Ucv1sessionsDataDeviceInformation DeviceInformation = default(Ucv1sessionsDataDeviceInformation), Ucv1sessionsDataPaymentInformation PaymentInformation = default(Ucv1sessionsDataPaymentInformation), Ucv1sessionsDataInstallmentInformation InstallmentInformation = default(Ucv1sessionsDataInstallmentInformation), List<Ucv1sessionsDataMerchantDefinedInformation> MerchantDefinedInformation = default(List<Ucv1sessionsDataMerchantDefinedInformation>))
         {
             this.AggregatorInformation = AggregatorInformation;
             this.OrderInformation = OrderInformation;
@@ -66,79 +66,92 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AggregatorInformation
         /// </summary>
-        [DataMember(Name="aggregatorInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("aggregatorInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataAggregatorInformation AggregatorInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataOrderInformation OrderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerInformation
         /// </summary>
-        [DataMember(Name="buyerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("buyerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataBuyerInformation BuyerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
-        public Upv1capturecontextsDataClientReferenceInformation ClientReferenceInformation { get; set; }
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Ucv1sessionsDataClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ConsumerAuthenticationInformation
         /// </summary>
-        [DataMember(Name="consumerAuthenticationInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("consumerAuthenticationInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataConsumerAuthenticationInformation ConsumerAuthenticationInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInformation
         /// </summary>
-        [DataMember(Name="merchantInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataMerchantInformation MerchantInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessingInformation
         /// </summary>
-        [DataMember(Name="processingInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataProcessingInformation ProcessingInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets RecipientInformation
         /// </summary>
-        [DataMember(Name="recipientInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("recipientInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataRecipientInformation RecipientInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets SenderInformation
         /// </summary>
-        [DataMember(Name="senderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("senderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataSenderInformation SenderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DeviceInformation
         /// </summary>
-        [DataMember(Name="deviceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataDeviceInformation DeviceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInformation
         /// </summary>
-        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets InstallmentInformation
         /// </summary>
-        [DataMember(Name="installmentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("installmentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataInstallmentInformation InstallmentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantDefinedInformation
         /// </summary>
-        [DataMember(Name="merchantDefinedInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDefinedInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ucv1sessionsDataMerchantDefinedInformation> MerchantDefinedInformation { get; set; }
 
         /// <summary>
@@ -149,19 +162,19 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsData {\n");
-            if (AggregatorInformation != null) sb.Append("  AggregatorInformation: ").Append(AggregatorInformation).Append("\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
-            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(BuyerInformation).Append("\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (ConsumerAuthenticationInformation != null) sb.Append("  ConsumerAuthenticationInformation: ").Append(ConsumerAuthenticationInformation).Append("\n");
-            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(MerchantInformation).Append("\n");
-            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(ProcessingInformation).Append("\n");
-            if (RecipientInformation != null) sb.Append("  RecipientInformation: ").Append(RecipientInformation).Append("\n");
-            if (SenderInformation != null) sb.Append("  SenderInformation: ").Append(SenderInformation).Append("\n");
-            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(DeviceInformation).Append("\n");
-            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
-            if (InstallmentInformation != null) sb.Append("  InstallmentInformation: ").Append(InstallmentInformation).Append("\n");
-            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(MerchantDefinedInformation).Append("\n");
+            if (AggregatorInformation != null) sb.Append("  AggregatorInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "aggregatorInformation", AggregatorInformation.ToString())).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "orderInformation", OrderInformation.ToString())).Append("\n");
+            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "buyerInformation", BuyerInformation.ToString())).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (ConsumerAuthenticationInformation != null) sb.Append("  ConsumerAuthenticationInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "consumerAuthenticationInformation", ConsumerAuthenticationInformation.ToString())).Append("\n");
+            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "merchantInformation", MerchantInformation.ToString())).Append("\n");
+            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "processingInformation", ProcessingInformation.ToString())).Append("\n");
+            if (RecipientInformation != null) sb.Append("  RecipientInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "recipientInformation", RecipientInformation.ToString())).Append("\n");
+            if (SenderInformation != null) sb.Append("  SenderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "senderInformation", SenderInformation.ToString())).Append("\n");
+            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "deviceInformation", DeviceInformation.ToString())).Append("\n");
+            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "paymentInformation", PaymentInformation.ToString())).Append("\n");
+            if (InstallmentInformation != null) sb.Append("  InstallmentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "installmentInformation", InstallmentInformation.ToString())).Append("\n");
+            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsData", "merchantDefinedInformation", MerchantDefinedInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -172,7 +185,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsData", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

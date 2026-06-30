@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// National Net Interchange Reimbursement Fee (IRF) calculation base amount. This must be less than the transaction amount.  Format:  Minimum Value: 0  Maximum value: 999999999.99  Allowed fractional digits: 3.  Note: If a currency has three decimal places, the last digit of this field must be zero.  Required for Columbia National Net Settlement Service (NNSS) transactions. 
         /// </summary>
         /// <value>National Net Interchange Reimbursement Fee (IRF) calculation base amount. This must be less than the transaction amount.  Format:  Minimum Value: 0  Maximum value: 999999999.99  Allowed fractional digits: 3.  Note: If a currency has three decimal places, the last digit of this field must be zero.  Required for Columbia National Net Settlement Service (NNSS) transactions. </value>
-        [DataMember(Name="reimbursementFeeBaseAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("reimbursementFeeBaseAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReimbursementFeeBaseAmount { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PushFunds201ResponseProcessingInformationDomesticNationalNet {\n");
-            if (ReimbursementFeeBaseAmount != null) sb.Append("  ReimbursementFeeBaseAmount: ").Append(ReimbursementFeeBaseAmount).Append("\n");
+            if (ReimbursementFeeBaseAmount != null) sb.Append("  ReimbursementFeeBaseAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponseProcessingInformationDomesticNationalNet", "reimbursementFeeBaseAmount", ReimbursementFeeBaseAmount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PushFunds201ResponseProcessingInformationDomesticNationalNet", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

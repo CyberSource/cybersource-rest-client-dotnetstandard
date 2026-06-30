@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,56 +57,64 @@ namespace CyberSource.Model
         /// Merchant Reference Number
         /// </summary>
         /// <value>Merchant Reference Number</value>
-        [DataMember(Name="merchantReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantReferenceNumber { get; set; }
 
         /// <summary>
         /// Transaction Reference Number
         /// </summary>
         /// <value>Transaction Reference Number</value>
-        [DataMember(Name="transactionReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionReferenceNumber { get; set; }
 
         /// <summary>
         /// Notification Of Change Date(ISO 8601 Extended)
         /// </summary>
         /// <value>Notification Of Change Date(ISO 8601 Extended)</value>
-        [DataMember(Name="time", EmitDefaultValue=false)]
+        [JsonPropertyName("time")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? Time { get; set; }
 
         /// <summary>
         /// Merchant Reference Number
         /// </summary>
         /// <value>Merchant Reference Number</value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Account Type
         /// </summary>
         /// <value>Account Type</value>
-        [DataMember(Name="accountType", EmitDefaultValue=false)]
+        [JsonPropertyName("accountType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountType { get; set; }
 
         /// <summary>
         /// Routing Number
         /// </summary>
         /// <value>Routing Number</value>
-        [DataMember(Name="routingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("routingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoutingNumber { get; set; }
 
         /// <summary>
         /// Account Number
         /// </summary>
         /// <value>Account Number</value>
-        [DataMember(Name="accountNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("accountNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountNumber { get; set; }
 
         /// <summary>
         /// Consumer Name
         /// </summary>
         /// <value>Consumer Name</value>
-        [DataMember(Name="consumerName", EmitDefaultValue=false)]
+        [JsonPropertyName("consumerName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ConsumerName { get; set; }
 
         /// <summary>
@@ -117,14 +125,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges {\n");
-            if (MerchantReferenceNumber != null) sb.Append("  MerchantReferenceNumber: ").Append(MerchantReferenceNumber).Append("\n");
-            if (TransactionReferenceNumber != null) sb.Append("  TransactionReferenceNumber: ").Append(TransactionReferenceNumber).Append("\n");
-            if (Time != null) sb.Append("  Time: ").Append(Time).Append("\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (AccountType != null) sb.Append("  AccountType: ").Append(AccountType).Append("\n");
-            if (RoutingNumber != null) sb.Append("  RoutingNumber: ").Append(RoutingNumber).Append("\n");
-            if (AccountNumber != null) sb.Append("  AccountNumber: ").Append(AccountNumber).Append("\n");
-            if (ConsumerName != null) sb.Append("  ConsumerName: ").Append(ConsumerName).Append("\n");
+            if (MerchantReferenceNumber != null) sb.Append("  MerchantReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges", "merchantReferenceNumber", MerchantReferenceNumber.ToString())).Append("\n");
+            if (TransactionReferenceNumber != null) sb.Append("  TransactionReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges", "transactionReferenceNumber", TransactionReferenceNumber.ToString())).Append("\n");
+            if (Time != null) sb.Append("  Time: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges", "time", Time.ToString())).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges", "code", Code.ToString())).Append("\n");
+            if (AccountType != null) sb.Append("  AccountType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges", "accountType", AccountType.ToString())).Append("\n");
+            if (RoutingNumber != null) sb.Append("  RoutingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges", "routingNumber", RoutingNumber.ToString())).Append("\n");
+            if (AccountNumber != null) sb.Append("  AccountNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges", "accountNumber", AccountNumber.ToString())).Append("\n");
+            if (ConsumerName != null) sb.Append("  ConsumerName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges", "consumerName", ConsumerName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -135,7 +143,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

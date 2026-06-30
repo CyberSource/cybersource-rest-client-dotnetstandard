@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Reason code for deleting the network token.  Possible Values:   - FRAUD: Network token is being deleted due to fraud concerns.   - PAYMENT_METHOD_REMOVED: Network Token is being deleted because the payment method was removed.  Default: PAYMENT_METHOD_REMOVED 
         /// </summary>
         /// <value>Reason code for deleting the network token.  Possible Values:   - FRAUD: Network token is being deleted due to fraud concerns.   - PAYMENT_METHOD_REMOVED: Network Token is being deleted because the payment method was removed.  Default: PAYMENT_METHOD_REMOVED </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Additional description providing context for the deletion reason. 
         /// </summary>
         /// <value>Additional description providing context for the deletion reason. </value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Description { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2tokenizedcardstokenizedCardIddeleteReason {\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (Description != null) sb.Append("  Description: ").Append(Description).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizedcardstokenizedCardIddeleteReason", "code", Code.ToString())).Append("\n");
+            if (Description != null) sb.Append("  Description: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizedcardstokenizedCardIddeleteReason", "description", Description.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2tokenizedcardstokenizedCardIddeleteReason", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

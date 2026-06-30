@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// Notes or details that explain the reasons for marking the transaction as suspect or otherwise.
         /// </summary>
         /// <value>Notes or details that explain the reasons for marking the transaction as suspect or otherwise.</value>
-        [DataMember(Name="notes", EmitDefaultValue=false)]
+        [JsonPropertyName("notes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Notes { get; set; }
 
         /// <summary>
         /// Reason for marking the transaction as suspect or otherwise. This field can contain one of the following values: - &#x60;fraud_chargeback:&#x60; You have received a fraud-related chargeback for the transaction. - &#x60;non_fraud_chargeback:&#x60; You have received a non-fraudulent chargeback for the transaction. - &#x60;suspected:&#x60; You believe that you will probably receive a chargeback for the transaction. - &#x60;creditback:&#x60; You issued a refund to the customer to avoid a chargeback for the transaction. 
         /// </summary>
         /// <value>Reason for marking the transaction as suspect or otherwise. This field can contain one of the following values: - &#x60;fraud_chargeback:&#x60; You have received a fraud-related chargeback for the transaction. - &#x60;non_fraud_chargeback:&#x60; You have received a non-fraudulent chargeback for the transaction. - &#x60;suspected:&#x60; You believe that you will probably receive a chargeback for the transaction. - &#x60;creditback:&#x60; You issued a refund to the customer to avoid a chargeback for the transaction. </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
         /// This field can contain one or more of the following values. When you specify more than one value, separate them with commas (,). - &#x60;account_key_hash&#x60; - &#x60;customer_account_id&#x60; - &#x60;customer_email&#x60; - &#x60;customer_ipaddress&#x60; - &#x60;customer_phone&#x60; - &#x60;device_fingerprint&#x60; - &#x60;ship_address&#x60; If no value is specified, &#x60;account_key_hash&#x60;, &#x60;customer_email&#x60;, and &#x60;ship_address&#x60; are used by default. Note &#x60;account_key_hash&#x60; adds the field that contains the card number (&#x60;customer_cc_number&#x60;). 
         /// </summary>
         /// <value>This field can contain one or more of the following values. When you specify more than one value, separate them with commas (,). - &#x60;account_key_hash&#x60; - &#x60;customer_account_id&#x60; - &#x60;customer_email&#x60; - &#x60;customer_ipaddress&#x60; - &#x60;customer_phone&#x60; - &#x60;device_fingerprint&#x60; - &#x60;ship_address&#x60; If no value is specified, &#x60;account_key_hash&#x60;, &#x60;customer_email&#x60;, and &#x60;ship_address&#x60; are used by default. Note &#x60;account_key_hash&#x60; adds the field that contains the card number (&#x60;customer_cc_number&#x60;). </value>
-        [DataMember(Name="fieldsIncluded", EmitDefaultValue=false)]
+        [JsonPropertyName("fieldsIncluded")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> FieldsIncluded { get; set; }
 
         /// <summary>
         /// This field can contain one of the following values: - add: Mark as Suspect. - clear: Clear Mark as Suspect. - hide: Remove from history. 
         /// </summary>
         /// <value>This field can contain one of the following values: - add: Mark as Suspect. - clear: Clear Mark as Suspect. - hide: Remove from history. </value>
-        [DataMember(Name="action", EmitDefaultValue=false)]
+        [JsonPropertyName("action")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Action { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1decisionsidmarkingRiskInformationMarkingDetails {\n");
-            if (Notes != null) sb.Append("  Notes: ").Append(Notes).Append("\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (FieldsIncluded != null) sb.Append("  FieldsIncluded: ").Append(FieldsIncluded).Append("\n");
-            if (Action != null) sb.Append("  Action: ").Append(Action).Append("\n");
+            if (Notes != null) sb.Append("  Notes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsidmarkingRiskInformationMarkingDetails", "notes", Notes.ToString())).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsidmarkingRiskInformationMarkingDetails", "reason", Reason.ToString())).Append("\n");
+            if (FieldsIncluded != null) sb.Append("  FieldsIncluded: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsidmarkingRiskInformationMarkingDetails", "fieldsIncluded", FieldsIncluded.ToString())).Append("\n");
+            if (Action != null) sb.Append("  Action: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsidmarkingRiskInformationMarkingDetails", "action", Action.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1decisionsidmarkingRiskInformationMarkingDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

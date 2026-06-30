@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -71,98 +71,113 @@ namespace CyberSource.Model
         /// Request field for merchant to increase the AUTH expiry days for Klarna Advantage Plus. Applicable for Re-Authorization (AP_REAUTH) service. 
         /// </summary>
         /// <value>Request field for merchant to increase the AUTH expiry days for Klarna Advantage Plus. Applicable for Re-Authorization (AP_REAUTH) service. </value>
-        [DataMember(Name="extensionDays", EmitDefaultValue=false)]
+        [JsonPropertyName("extensionDays")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExtensionDays { get; set; }
 
         /// <summary>
         /// Gets or Sets AmountDetails
         /// </summary>
-        [DataMember(Name="amountDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("amountDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsOrderInformationAmountDetails AmountDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets BillTo
         /// </summary>
-        [DataMember(Name="billTo", EmitDefaultValue=false)]
+        [JsonPropertyName("billTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsOrderInformationBillTo BillTo { get; set; }
 
         /// <summary>
         /// Gets or Sets ShipTo
         /// </summary>
-        [DataMember(Name="shipTo", EmitDefaultValue=false)]
+        [JsonPropertyName("shipTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsOrderInformationShipTo ShipTo { get; set; }
 
         /// <summary>
         /// Gets or Sets LineItems
         /// </summary>
-        [DataMember(Name="lineItems", EmitDefaultValue=false)]
+        [JsonPropertyName("lineItems")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsOrderInformationLineItems> LineItems { get; set; }
 
         /// <summary>
         /// Gets or Sets InvoiceDetails
         /// </summary>
-        [DataMember(Name="invoiceDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsOrderInformationInvoiceDetails InvoiceDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets ShippingDetails
         /// </summary>
-        [DataMember(Name="shippingDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsOrderInformationShippingDetails ShippingDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets DigitalCurrency
         /// </summary>
-        [DataMember(Name="digitalCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("digitalCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsOrderInformationDigitalCurrency DigitalCurrency { get; set; }
 
         /// <summary>
         /// This is only needed when you are requesting both payment and DM service at same time.  Boolean that indicates whether returns are accepted for this order. This field can contain one of the following values: - true: Returns are accepted for this order. - false: Returns are not accepted for this order. 
         /// </summary>
         /// <value>This is only needed when you are requesting both payment and DM service at same time.  Boolean that indicates whether returns are accepted for this order. This field can contain one of the following values: - true: Returns are accepted for this order. - false: Returns are not accepted for this order. </value>
-        [DataMember(Name="returnsAccepted", EmitDefaultValue=false)]
+        [JsonPropertyName("returnsAccepted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ReturnsAccepted { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect : This API will contain the Flag that specifies whether the payment is for the purchase of cryptocurrency. Additional values to add : This API will contain the Flag that specifies whether the payment is for the purchase of cryptocurrency. valid values are - Y/y, true - N/n, false 
         /// </summary>
         /// <value>#### Visa Platform Connect : This API will contain the Flag that specifies whether the payment is for the purchase of cryptocurrency. Additional values to add : This API will contain the Flag that specifies whether the payment is for the purchase of cryptocurrency. valid values are - Y/y, true - N/n, false </value>
-        [DataMember(Name="isCryptocurrencyPurchase", EmitDefaultValue=false)]
+        [JsonPropertyName("isCryptocurrencyPurchase")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IsCryptocurrencyPurchase { get; set; }
 
         /// <summary>
         /// Starting date and time for an event or a journey that is independent of which transportation mechanism, in UTC. The cutoffDateTime will supersede travelInformation.transit.airline.legs[].departureDate and travelInformation.transit.airline.legs[].departureTime if these fields are supplied in the request. Format: YYYY-MM-DDThh:mm:ssZ. Example 2016-08-11T22:47:57Z equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The T separates the date and the time. The Z indicates UTC. 
         /// </summary>
         /// <value>Starting date and time for an event or a journey that is independent of which transportation mechanism, in UTC. The cutoffDateTime will supersede travelInformation.transit.airline.legs[].departureDate and travelInformation.transit.airline.legs[].departureTime if these fields are supplied in the request. Format: YYYY-MM-DDThh:mm:ssZ. Example 2016-08-11T22:47:57Z equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The T separates the date and the time. The Z indicates UTC. </value>
-        [DataMember(Name="cutoffDateTime", EmitDefaultValue=false)]
+        [JsonPropertyName("cutoffDateTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CutoffDateTime { get; set; }
 
         /// <summary>
         /// Indicates whether cardholder is placing an order with a future availability or release date. This field can contain one of these values: - MERCHANDISE_AVAILABLE: Merchandise available - FUTURE_AVAILABILITY: Future availability 
         /// </summary>
         /// <value>Indicates whether cardholder is placing an order with a future availability or release date. This field can contain one of these values: - MERCHANDISE_AVAILABLE: Merchandise available - FUTURE_AVAILABILITY: Future availability </value>
-        [DataMember(Name="preOrder", EmitDefaultValue=false)]
+        [JsonPropertyName("preOrder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PreOrder { get; set; }
 
         /// <summary>
         /// Expected date that a pre-ordered purchase will be available. Format: YYYYMMDD 
         /// </summary>
         /// <value>Expected date that a pre-ordered purchase will be available. Format: YYYYMMDD </value>
-        [DataMember(Name="preOrderDate", EmitDefaultValue=false)]
+        [JsonPropertyName("preOrderDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PreOrderDate { get; set; }
 
         /// <summary>
         /// Indicates whether the cardholder is reordering previously purchased merchandise. This field can contain one of these values: - false: First time ordered - true: Reordered 
         /// </summary>
         /// <value>Indicates whether the cardholder is reordering previously purchased merchandise. This field can contain one of these values: - false: First time ordered - true: Reordered </value>
-        [DataMember(Name="reordered", EmitDefaultValue=false)]
+        [JsonPropertyName("reordered")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Reordered { get; set; }
 
         /// <summary>
         /// Total number of articles/items in the order as a numeric decimal count. Possible values: 00 - 99 
         /// </summary>
         /// <value>Total number of articles/items in the order as a numeric decimal count. Possible values: 00 - 99 </value>
-        [DataMember(Name="totalOffersCount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalOffersCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalOffersCount { get; set; }
 
         /// <summary>
@@ -173,21 +188,21 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsOrderInformation {\n");
-            if (ExtensionDays != null) sb.Append("  ExtensionDays: ").Append(ExtensionDays).Append("\n");
-            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(AmountDetails).Append("\n");
-            if (BillTo != null) sb.Append("  BillTo: ").Append(BillTo).Append("\n");
-            if (ShipTo != null) sb.Append("  ShipTo: ").Append(ShipTo).Append("\n");
-            if (LineItems != null) sb.Append("  LineItems: ").Append(LineItems).Append("\n");
-            if (InvoiceDetails != null) sb.Append("  InvoiceDetails: ").Append(InvoiceDetails).Append("\n");
-            if (ShippingDetails != null) sb.Append("  ShippingDetails: ").Append(ShippingDetails).Append("\n");
-            if (DigitalCurrency != null) sb.Append("  DigitalCurrency: ").Append(DigitalCurrency).Append("\n");
-            if (ReturnsAccepted != null) sb.Append("  ReturnsAccepted: ").Append(ReturnsAccepted).Append("\n");
-            if (IsCryptocurrencyPurchase != null) sb.Append("  IsCryptocurrencyPurchase: ").Append(IsCryptocurrencyPurchase).Append("\n");
-            if (CutoffDateTime != null) sb.Append("  CutoffDateTime: ").Append(CutoffDateTime).Append("\n");
-            if (PreOrder != null) sb.Append("  PreOrder: ").Append(PreOrder).Append("\n");
-            if (PreOrderDate != null) sb.Append("  PreOrderDate: ").Append(PreOrderDate).Append("\n");
-            if (Reordered != null) sb.Append("  Reordered: ").Append(Reordered).Append("\n");
-            if (TotalOffersCount != null) sb.Append("  TotalOffersCount: ").Append(TotalOffersCount).Append("\n");
+            if (ExtensionDays != null) sb.Append("  ExtensionDays: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "extensionDays", ExtensionDays.ToString())).Append("\n");
+            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "amountDetails", AmountDetails.ToString())).Append("\n");
+            if (BillTo != null) sb.Append("  BillTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "billTo", BillTo.ToString())).Append("\n");
+            if (ShipTo != null) sb.Append("  ShipTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "shipTo", ShipTo.ToString())).Append("\n");
+            if (LineItems != null) sb.Append("  LineItems: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "lineItems", LineItems.ToString())).Append("\n");
+            if (InvoiceDetails != null) sb.Append("  InvoiceDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "invoiceDetails", InvoiceDetails.ToString())).Append("\n");
+            if (ShippingDetails != null) sb.Append("  ShippingDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "shippingDetails", ShippingDetails.ToString())).Append("\n");
+            if (DigitalCurrency != null) sb.Append("  DigitalCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "digitalCurrency", DigitalCurrency.ToString())).Append("\n");
+            if (ReturnsAccepted != null) sb.Append("  ReturnsAccepted: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "returnsAccepted", ReturnsAccepted.ToString())).Append("\n");
+            if (IsCryptocurrencyPurchase != null) sb.Append("  IsCryptocurrencyPurchase: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "isCryptocurrencyPurchase", IsCryptocurrencyPurchase.ToString())).Append("\n");
+            if (CutoffDateTime != null) sb.Append("  CutoffDateTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "cutoffDateTime", CutoffDateTime.ToString())).Append("\n");
+            if (PreOrder != null) sb.Append("  PreOrder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "preOrder", PreOrder.ToString())).Append("\n");
+            if (PreOrderDate != null) sb.Append("  PreOrderDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "preOrderDate", PreOrderDate.ToString())).Append("\n");
+            if (Reordered != null) sb.Append("  Reordered: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "reordered", Reordered.ToString())).Append("\n");
+            if (TotalOffersCount != null) sb.Append("  TotalOffersCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformation", "totalOffersCount", TotalOffersCount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -198,7 +213,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsOrderInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

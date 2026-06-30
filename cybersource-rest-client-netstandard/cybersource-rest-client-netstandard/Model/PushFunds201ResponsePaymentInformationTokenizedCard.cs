@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Confidence level of the tokenization. This value is assigned by the token service provider.  Valid Values:  Spaces (No value set)  00 &#x3D; No issuer ID&amp;V  10 &#x3D; Card issuer account verification  11 &#x3D; Card issuer interactive cardholder authentication - 1 factor  12 &#x3D; Card issuer interactive cardholder authentication - 2 factor  13 &#x3D; Card issuer risk oriented non-interactive cardholder authentication  14 &#x3D; Card issuer asserted authentication 
         /// </summary>
         /// <value>Confidence level of the tokenization. This value is assigned by the token service provider.  Valid Values:  Spaces (No value set)  00 &#x3D; No issuer ID&amp;V  10 &#x3D; Card issuer account verification  11 &#x3D; Card issuer interactive cardholder authentication - 1 factor  12 &#x3D; Card issuer interactive cardholder authentication - 2 factor  13 &#x3D; Card issuer risk oriented non-interactive cardholder authentication  14 &#x3D; Card issuer asserted authentication </value>
-        [DataMember(Name="assuranceMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("assuranceMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AssuranceMethod { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PushFunds201ResponsePaymentInformationTokenizedCard {\n");
-            if (AssuranceMethod != null) sb.Append("  AssuranceMethod: ").Append(AssuranceMethod).Append("\n");
+            if (AssuranceMethod != null) sb.Append("  AssuranceMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponsePaymentInformationTokenizedCard", "assuranceMethod", AssuranceMethod.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PushFunds201ResponsePaymentInformationTokenizedCard", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

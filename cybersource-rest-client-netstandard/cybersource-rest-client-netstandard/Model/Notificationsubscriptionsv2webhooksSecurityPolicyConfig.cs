@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,20 +47,23 @@ namespace CyberSource.Model
         /// Client direct endpoint to the oAuth server.
         /// </summary>
         /// <value>Client direct endpoint to the oAuth server.</value>
-        [DataMember(Name="oAuthURL", EmitDefaultValue=false)]
+        [JsonPropertyName("oAuthURL")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OAuthURL { get; set; }
 
         /// <summary>
         /// Token type for the oAuth config.  Possible values: - Bearer
         /// </summary>
         /// <value>Token type for the oAuth config.  Possible values: - Bearer</value>
-        [DataMember(Name="oAuthTokenType", EmitDefaultValue=false)]
+        [JsonPropertyName("oAuthTokenType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OAuthTokenType { get; set; }
 
         /// <summary>
         /// Gets or Sets AdditionalConfig
         /// </summary>
-        [DataMember(Name="additionalConfig", EmitDefaultValue=false)]
+        [JsonPropertyName("additionalConfig")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Notificationsubscriptionsv2webhooksSecurityPolicyConfigAdditionalConfig AdditionalConfig { get; set; }
 
         /// <summary>
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Notificationsubscriptionsv2webhooksSecurityPolicyConfig {\n");
-            if (OAuthURL != null) sb.Append("  OAuthURL: ").Append(OAuthURL).Append("\n");
-            if (OAuthTokenType != null) sb.Append("  OAuthTokenType: ").Append(OAuthTokenType).Append("\n");
-            if (AdditionalConfig != null) sb.Append("  AdditionalConfig: ").Append(AdditionalConfig).Append("\n");
+            if (OAuthURL != null) sb.Append("  OAuthURL: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksSecurityPolicyConfig", "oAuthURL", OAuthURL.ToString())).Append("\n");
+            if (OAuthTokenType != null) sb.Append("  OAuthTokenType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksSecurityPolicyConfig", "oAuthTokenType", OAuthTokenType.ToString())).Append("\n");
+            if (AdditionalConfig != null) sb.Append("  AdditionalConfig: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksSecurityPolicyConfig", "additionalConfig", AdditionalConfig.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Notificationsubscriptionsv2webhooksSecurityPolicyConfig", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

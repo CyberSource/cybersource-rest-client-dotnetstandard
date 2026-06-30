@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 
 namespace AuthenticationSdk.util
 {
@@ -39,7 +39,7 @@ namespace AuthenticationSdk.util
         /// Decodes and returns the headers from the first part of a JWT compact serialization
         /// as a dictionary, without verifying the signature.
         /// </summary>
-        public static IDictionary<string, object> DecodeHeaders(string compactToken)
+        public static IDictionary<string, JsonElement> DecodeHeaders(string compactToken)
         {
             if (string.IsNullOrWhiteSpace(compactToken))
             {
@@ -55,7 +55,7 @@ namespace AuthenticationSdk.util
             byte[] headerBytes = Base64UrlEncoder.DecodeBytes(parts[0]);
             string headerJson  = Encoding.UTF8.GetString(headerBytes);
 
-            var result = JsonConvert.DeserializeObject<Dictionary<string, object>>(headerJson);
+            var result = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(headerJson);
             if (result == null)
             {
                 throw new FormatException("Invalid JWT: header could not be deserialized.");

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// The new last 4 digits of the card number associated to the Tokenized Card. 
         /// </summary>
         /// <value>The new last 4 digits of the card number associated to the Tokenized Card. </value>
-        [DataMember(Name="last4", EmitDefaultValue=false)]
+        [JsonPropertyName("last4")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Last4 { get; set; }
 
         /// <summary>
         /// The new two-digit month of the card associated to the Tokenized Card. Format: &#x60;MM&#x60;. Possible Values: &#x60;01&#x60; through &#x60;12&#x60;. 
         /// </summary>
         /// <value>The new two-digit month of the card associated to the Tokenized Card. Format: &#x60;MM&#x60;. Possible Values: &#x60;01&#x60; through &#x60;12&#x60;. </value>
-        [DataMember(Name="expirationMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationMonth { get; set; }
 
         /// <summary>
         /// The new four-digit year of the card associated to the Tokenized Card. Format: &#x60;YYYY&#x60;. 
         /// </summary>
         /// <value>The new four-digit year of the card associated to the Tokenized Card. Format: &#x60;YYYY&#x60;. </value>
-        [DataMember(Name="expirationYear", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationYear")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationYear { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard {\n");
-            if (Last4 != null) sb.Append("  Last4: ").Append(Last4).Append("\n");
-            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(ExpirationMonth).Append("\n");
-            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(ExpirationYear).Append("\n");
+            if (Last4 != null) sb.Append("  Last4: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard", "last4", Last4.ToString())).Append("\n");
+            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard", "expirationMonth", ExpirationMonth.ToString())).Append("\n");
+            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard", "expirationYear", ExpirationYear.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

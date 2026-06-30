@@ -205,7 +205,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("registrationId", ApiClient.ParameterToString(registrationId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -224,7 +224,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "mandatory";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetRegistration,GetRegistrationAsync,GetRegistrationWithHttpInfo,GetRegistrationAsyncWithHttpInfo"))
             {
                 try
@@ -325,7 +325,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("registrationId", ApiClient.ParameterToString(registrationId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -343,7 +343,7 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "mandatory";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetRegistration,GetRegistrationAsync,GetRegistrationWithHttpInfo,GetRegistrationAsyncWithHttpInfo"))
             {
                 try
@@ -457,7 +457,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "mandatory";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PostRegistration,PostRegistrationAsync,PostRegistrationWithHttpInfo,PostRegistrationAsyncWithHttpInfo"))
             {
                 try
@@ -575,7 +575,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "mandatory";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "PostRegistration,PostRegistrationAsync,PostRegistrationWithHttpInfo,PostRegistrationAsyncWithHttpInfo"))
             {
                 try

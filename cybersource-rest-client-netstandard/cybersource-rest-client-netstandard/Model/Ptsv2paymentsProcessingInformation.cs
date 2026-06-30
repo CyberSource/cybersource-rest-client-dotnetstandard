@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,7 +44,7 @@ namespace CyberSource.Model
         /// <param name="CommerceIndicatorLabel">Type of transaction. Some payment card companies use this information when determining discount rates.  #### Used by **Authorization** Required payer authentication transactions; otherwise, optional. **Credit** Required for standalone credits on Chase Paymentech solutions; otherwise, optional.  The list of valid values in this field depends on your processor.  #### Ingenico ePayments When you omit this field for Ingenico ePayments, the processor uses the default transaction type they have on file for you instead of the default value   #### Card Present You must set this field to &#x60;retail&#x60;. This field is required for a card-present transaction. Note that this should ONLY be used when the cardholder and card are present at the time of the transaction. For all keyed transactions originated from a POS terminal where the cardholder and card are not present, commerceIndicator should be submitted as &#x60;moto&#x60; .</param>
         /// <param name="PaymentSolution">Type of digital payment solution for the transaction. Possible Values:   - &#x60;visacheckout&#x60;: Visa Checkout. This value is required for Visa Checkout transactions. For details, see &#x60;payment_solution&#x60; field description in [Visa Checkout Using the REST API.](https://developer.cybersource.com/content/dam/docs/cybs/en-us/apifields/reference/all/rest/api-fields.pdf)  - &#x60;001&#x60;: Apple Pay.  - &#x60;004&#x60;: Cybersource In-App Solution.  - &#x60;005&#x60;: Masterpass. This value is required for Masterpass transactions on OmniPay Direct.   - &#x60;006&#x60;: Android Pay.  - &#x60;007&#x60;: Chase Pay.  - &#x60;008&#x60;: Samsung Pay.  - &#x60;012&#x60;: Google Pay.  - &#x60;013&#x60;: Cybersource P2PE Decryption  - &#x60;014&#x60;: Mastercard credential on file (COF) payment network token. Returned in authorizations that use a payment network token associated with a TMS token.  - &#x60;015&#x60;: Visa credential on file (COF) payment network token. Returned in authorizations that use a payment network token associated with a TMS token.  - &#x60;027&#x60;: Click to Pay. .</param>
         /// <param name="ReconciliationId">Please check with Cybersource customer support to see if your merchant account is configured correctly so you can include this field in your request. * For Payouts: max length for FDCCompass is String (22). .</param>
-        /// <param name="LinkId">Value that links the current authorization request to the original authorization request. Set this value to the ID that was returned in the reply message from the original authorization request.  This value is used for:  - Partial authorizations - Split shipments .</param>
+        /// <param name="LinkId">Value that links the current authorization request to the original authorization request or previous declined Merchant Initiated Debt Recovery Transactions . Set this value to the ID that was returned in the reply message from the original authorization request or previous declined Merchant Initiated Debt Recovery Transactions.  This value is used for:  - Partial authorizations - Split shipments - Merchant Initiated Debt Recovery Transactions for Visa Platform Connect and China Union Pay merchants .</param>
         /// <param name="PurchaseLevel">Set this field to 3 to indicate that the request includes Level III data..</param>
         /// <param name="TransactionTimeout">The time-out limit in seconds for the transaction. The time-out limit starts when the customer is directed to the merchant URL that is included in the sale service response. The maximum value is 99999 (about 27 hours). When the transaction times out, the payment system changes the status to abandoned..</param>
         /// <param name="IntentsId">Set to the value of the requestID field returned in the order service response..</param>
@@ -81,7 +81,7 @@ namespace CyberSource.Model
         /// <param name="DestinationType">Identifies the destination/purpose of the cash-in:  • 04: M2M (Same ownership, same portfolio/arrangement) • 05: P2P (For another holder, same wallet/arrangement) • 06: Transfer to another arrangement (same ownership) • 07: Transfer to another arrangement (other ownership) • 08: Transfer to stored value digital wallet. .</param>
         /// <param name="ProgramIndicators">ProgramIndicators.</param>
         /// <param name="InquiryType">Type of inquiry for Zero dollar transactions. Mastercard is introducing Mastercard One Credential, a single, digitally connected credential that offers cardholders the ability to access multiple payment methods.   This field is used for Product Status Inquiry (PSI), Account Status Inquiry with Product Status Inquiry (ASI with PSI), and Account Status Inquiry with Product Status Inquiry and Probability Indicator.  This field is supported for Zero dollar transactions only.  Possible values: - &#x60;01&#x60;: Product status inquiry - &#x60;02&#x60;: Account status inquiry with product status inquiry - &#x60;03&#x60;: Account status Inquiry with Product Status Inquiry and Probability Indicator  #### Used by **Authorization (Zero dollar transactions)** Optional field. .</param>
-        public Ptsv2paymentsProcessingInformation(List<string> ActionList = default(List<string>), bool? EnableEscrowOption = default(bool?), List<string> ActionTokenTypes = default(List<string>), string BinSource = default(string), bool? Capture = false, string ProcessorId = default(string), string BusinessApplicationId = default(string), string CommerceIndicator = default(string), string CommerceIndicatorLabel = default(string), string PaymentSolution = default(string), string ReconciliationId = default(string), string LinkId = default(string), string PurchaseLevel = default(string), int? TransactionTimeout = default(int?), string IntentsId = default(string), string ReportGroup = default(string), string VisaCheckoutId = default(string), string IndustryDataType = default(string), Ptsv2paymentsProcessingInformationAuthorizationOptions AuthorizationOptions = default(Ptsv2paymentsProcessingInformationAuthorizationOptions), Ptsv2paymentsProcessingInformationCaptureOptions CaptureOptions = default(Ptsv2paymentsProcessingInformationCaptureOptions), Ptsv2paymentsProcessingInformationRecurringOptions RecurringOptions = default(Ptsv2paymentsProcessingInformationRecurringOptions), Ptsv2paymentsProcessingInformationBankTransferOptions BankTransferOptions = default(Ptsv2paymentsProcessingInformationBankTransferOptions), Ptsv2paymentsProcessingInformationPurchaseOptions PurchaseOptions = default(Ptsv2paymentsProcessingInformationPurchaseOptions), Ptsv2paymentsProcessingInformationElectronicBenefitsTransfer ElectronicBenefitsTransfer = default(Ptsv2paymentsProcessingInformationElectronicBenefitsTransfer), Ptsv2paymentsProcessingInformationLoanOptions LoanOptions = default(Ptsv2paymentsProcessingInformationLoanOptions), string WalletType = default(string), string NationalNetDomesticData = default(string), string MerchantVerificationValue = default(string), Ptsv2paymentsProcessingInformationJapanPaymentOptions JapanPaymentOptions = default(Ptsv2paymentsProcessingInformationJapanPaymentOptions), string MobileRemotePaymentType = default(string), string ExtendedCreditTotalCount = default(string), string NetworkRoutingOrder = default(string), bool? PayByPointsIndicator = default(bool?), int? Timeout = default(int?), bool? IsReturnAuthRecordEnabled = default(bool?), string NetworkPartnerId = default(string), string PaymentType = default(string), string EnablerId = default(string), string ProcessingInstruction = default(string), string TransactionTypeIndicator = default(string), string PurposeOfPayment = default(string), string LanguageCode = default(string), string OriginalPaymentId = default(string), string AmexIndirectModelType = default(string), decimal? WalletTransactionIntent = default(decimal?), decimal? DestinationType = default(decimal?), Ptsv2paymentsProcessingInformationProgramIndicators ProgramIndicators = default(Ptsv2paymentsProcessingInformationProgramIndicators), string InquiryType = default(string))
+        public Ptsv2paymentsProcessingInformation(List<string> ActionList = default(List<string>), bool? EnableEscrowOption = default(bool?), List<string> ActionTokenTypes = default(List<string>), string BinSource = default(string), bool? Capture = false, string ProcessorId = default(string), string BusinessApplicationId = default(string), string CommerceIndicator = default(string), string CommerceIndicatorLabel = default(string), string PaymentSolution = default(string), string ReconciliationId = default(string), string LinkId = default(string), string PurchaseLevel = default(string), int? TransactionTimeout = default(int?), string IntentsId = default(string), string ReportGroup = default(string), string VisaCheckoutId = default(string), string IndustryDataType = default(string), ProcessingInfoAuthorizationOptions AuthorizationOptions = default(ProcessingInfoAuthorizationOptions), Ptsv2paymentsProcessingInformationCaptureOptions CaptureOptions = default(Ptsv2paymentsProcessingInformationCaptureOptions), Ptsv2paymentsProcessingInformationRecurringOptions RecurringOptions = default(Ptsv2paymentsProcessingInformationRecurringOptions), Ptsv2paymentsProcessingInformationBankTransferOptions BankTransferOptions = default(Ptsv2paymentsProcessingInformationBankTransferOptions), Ptsv2paymentsProcessingInformationPurchaseOptions PurchaseOptions = default(Ptsv2paymentsProcessingInformationPurchaseOptions), Ptsv2paymentsProcessingInformationElectronicBenefitsTransfer ElectronicBenefitsTransfer = default(Ptsv2paymentsProcessingInformationElectronicBenefitsTransfer), Ptsv2paymentsProcessingInformationLoanOptions LoanOptions = default(Ptsv2paymentsProcessingInformationLoanOptions), string WalletType = default(string), string NationalNetDomesticData = default(string), string MerchantVerificationValue = default(string), Ptsv2paymentsProcessingInformationJapanPaymentOptions JapanPaymentOptions = default(Ptsv2paymentsProcessingInformationJapanPaymentOptions), string MobileRemotePaymentType = default(string), string ExtendedCreditTotalCount = default(string), string NetworkRoutingOrder = default(string), bool? PayByPointsIndicator = default(bool?), int? Timeout = default(int?), bool? IsReturnAuthRecordEnabled = default(bool?), string NetworkPartnerId = default(string), string PaymentType = default(string), string EnablerId = default(string), string ProcessingInstruction = default(string), string TransactionTypeIndicator = default(string), string PurposeOfPayment = default(string), string LanguageCode = default(string), string OriginalPaymentId = default(string), string AmexIndirectModelType = default(string), decimal? WalletTransactionIntent = default(decimal?), decimal? DestinationType = default(decimal?), Ptsv2paymentsProcessingInformationProgramIndicators ProgramIndicators = default(Ptsv2paymentsProcessingInformationProgramIndicators), string InquiryType = default(string))
         {
             this.ActionList = ActionList;
             this.EnableEscrowOption = EnableEscrowOption;
@@ -145,327 +145,375 @@ namespace CyberSource.Model
         /// Array of actions (one or more) to be included in the payment to invoke bundled services along with payment.  Possible values are one or more of follows:   - &#x60;DECISION_SKIP&#x60;: Use this when you want to skip Decision Manager service(s).   - &#x60;TOKEN_CREATE&#x60;: Use this when you want to create a token from the card/bank data in your payment request.   - &#x60;CONSUMER_AUTHENTICATION&#x60;: Use this when you want to check if a card is enrolled in Payer Authentication along with your payment request.   - &#x60;VALIDATE_CONSUMER_AUTHENTICATION&#x60;: Use this after you acquire a Payer Authentication result that needs to be included for your payment request.    - &#x60;AP_INITIATE&#x60;: Use this when Alternative Payment Initiate service is requested.   - &#x60;WATCHLIST_SCREENING&#x60; : Use this when you want to call Watchlist Screening service.   - &#x60;AP_SALE&#x60; : Use this when Alternative Payment Sale service is requested.    - &#x60;AP_AUTH&#x60; : Use this when Alternative Payment Authorize service is requested.   - &#x60;AP_REAUTH&#x60; : Use this when Alternative Payment Reauthorize service is requested. 
         /// </summary>
         /// <value>Array of actions (one or more) to be included in the payment to invoke bundled services along with payment.  Possible values are one or more of follows:   - &#x60;DECISION_SKIP&#x60;: Use this when you want to skip Decision Manager service(s).   - &#x60;TOKEN_CREATE&#x60;: Use this when you want to create a token from the card/bank data in your payment request.   - &#x60;CONSUMER_AUTHENTICATION&#x60;: Use this when you want to check if a card is enrolled in Payer Authentication along with your payment request.   - &#x60;VALIDATE_CONSUMER_AUTHENTICATION&#x60;: Use this after you acquire a Payer Authentication result that needs to be included for your payment request.    - &#x60;AP_INITIATE&#x60;: Use this when Alternative Payment Initiate service is requested.   - &#x60;WATCHLIST_SCREENING&#x60; : Use this when you want to call Watchlist Screening service.   - &#x60;AP_SALE&#x60; : Use this when Alternative Payment Sale service is requested.    - &#x60;AP_AUTH&#x60; : Use this when Alternative Payment Authorize service is requested.   - &#x60;AP_REAUTH&#x60; : Use this when Alternative Payment Reauthorize service is requested. </value>
-        [DataMember(Name="actionList", EmitDefaultValue=false)]
+        [JsonPropertyName("actionList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ActionList { get; set; }
 
         /// <summary>
         /// Indicates whether to use the customer&#39;s escrow agreement. Possible values: - &#x60;true&#x60;: yes, use the customer&#39;s escrow agreement. - &#x60;false&#x60;: no, do not use the customer&#39;s escrow agreement.  
         /// </summary>
         /// <value>Indicates whether to use the customer&#39;s escrow agreement. Possible values: - &#x60;true&#x60;: yes, use the customer&#39;s escrow agreement. - &#x60;false&#x60;: no, do not use the customer&#39;s escrow agreement.  </value>
-        [DataMember(Name="enableEscrowOption", EmitDefaultValue=false)]
+        [JsonPropertyName("enableEscrowOption")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableEscrowOption { get; set; }
 
         /// <summary>
         /// CyberSource tokens types you are performing a create on. If not supplied the default token type for the merchants token vault will be used.  Valid values: - customer - paymentInstrument - instrumentIdentifier - shippingAddress 
         /// </summary>
         /// <value>CyberSource tokens types you are performing a create on. If not supplied the default token type for the merchants token vault will be used.  Valid values: - customer - paymentInstrument - instrumentIdentifier - shippingAddress </value>
-        [DataMember(Name="actionTokenTypes", EmitDefaultValue=false)]
+        [JsonPropertyName("actionTokenTypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ActionTokenTypes { get; set; }
 
         /// <summary>
         /// Bin Source File Identifier. Possible values: - itmx - rupay 
         /// </summary>
         /// <value>Bin Source File Identifier. Possible values: - itmx - rupay </value>
-        [DataMember(Name="binSource", EmitDefaultValue=false)]
+        [JsonPropertyName("binSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BinSource { get; set; }
 
         /// <summary>
         /// Indicates whether to also include a capture  in the submitted authorization request or not.  Possible values: - &#x60;true&#x60;: Include a capture with an authorization request. - &#x60;false&#x60;: (default) Do not include a capture with an authorization request.  #### Used by **Authorization and Capture** Optional field. 
         /// </summary>
         /// <value>Indicates whether to also include a capture  in the submitted authorization request or not.  Possible values: - &#x60;true&#x60;: Include a capture with an authorization request. - &#x60;false&#x60;: (default) Do not include a capture with an authorization request.  #### Used by **Authorization and Capture** Optional field. </value>
-        [DataMember(Name="capture", EmitDefaultValue=false)]
+        [JsonPropertyName("capture")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Capture { get; set; }
 
         /// <summary>
         /// Value that identifies the processor/acquirer to use for the transaction. This value is supported only for **CyberSource through VisaNet**.  Contact CyberSource Customer Support to get the value for this field. 
         /// </summary>
         /// <value>Value that identifies the processor/acquirer to use for the transaction. This value is supported only for **CyberSource through VisaNet**.  Contact CyberSource Customer Support to get the value for this field. </value>
-        [DataMember(Name="processorId", EmitDefaultValue=false)]
+        [JsonPropertyName("processorId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessorId { get; set; }
 
         /// <summary>
         /// Required for AFT and OCT transactions.  Given below is a list of all the BAI values available. However, the processors may support only few specific BAI values.  - AA : Account-to-account  - BB : Supplier Payments - BI : Bank-Initiated P2P Money Transfer - BP : Non-Card Bill Pay/Bill Pay - CD : Cash Deposit - CP : Credit card Bill Payment - FD : Funds disbursement  - FT : Funds transfer - GD : Government Disbursement - GP : Gambling payout (non-online gambling) - LO : Loyalty credits and rebates - MD : Merchant Settlement - OG : Online Gambling Payout - PD : Payroll and pension disbursement - PP : Person-to-Person or Peer-to-Peer - TU : Top up, prepaid load - WT : Digital wallet  
         /// </summary>
         /// <value>Required for AFT and OCT transactions.  Given below is a list of all the BAI values available. However, the processors may support only few specific BAI values.  - AA : Account-to-account  - BB : Supplier Payments - BI : Bank-Initiated P2P Money Transfer - BP : Non-Card Bill Pay/Bill Pay - CD : Cash Deposit - CP : Credit card Bill Payment - FD : Funds disbursement  - FT : Funds transfer - GD : Government Disbursement - GP : Gambling payout (non-online gambling) - LO : Loyalty credits and rebates - MD : Merchant Settlement - OG : Online Gambling Payout - PD : Payroll and pension disbursement - PP : Person-to-Person or Peer-to-Peer - TU : Top up, prepaid load - WT : Digital wallet  </value>
-        [DataMember(Name="businessApplicationId", EmitDefaultValue=false)]
+        [JsonPropertyName("businessApplicationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessApplicationId { get; set; }
 
         /// <summary>
         /// Type of transaction. Some payment card companies use this information when determining discount rates.  #### Used by **Authorization** Required payer authentication transactions; otherwise, optional. **Credit** Required for standalone credits on Chase Paymentech solutions; otherwise, optional.  The list of valid values in this field depends on your processor.  #### Ingenico ePayments When you omit this field for Ingenico ePayments, the processor uses the default transaction type they have on file for you instead of the default value   #### Card Present You must set this field to &#x60;retail&#x60;. This field is required for a card-present transaction. Note that this should ONLY be used when the cardholder and card are present at the time of the transaction. For all keyed transactions originated from a POS terminal where the cardholder and card are not present, commerceIndicator should be submitted as \&quot;moto\&quot; 
         /// </summary>
         /// <value>Type of transaction. Some payment card companies use this information when determining discount rates.  #### Used by **Authorization** Required payer authentication transactions; otherwise, optional. **Credit** Required for standalone credits on Chase Paymentech solutions; otherwise, optional.  The list of valid values in this field depends on your processor.  #### Ingenico ePayments When you omit this field for Ingenico ePayments, the processor uses the default transaction type they have on file for you instead of the default value   #### Card Present You must set this field to &#x60;retail&#x60;. This field is required for a card-present transaction. Note that this should ONLY be used when the cardholder and card are present at the time of the transaction. For all keyed transactions originated from a POS terminal where the cardholder and card are not present, commerceIndicator should be submitted as \&quot;moto\&quot; </value>
-        [DataMember(Name="commerceIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("commerceIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommerceIndicator { get; set; }
 
         /// <summary>
         /// Type of transaction. Some payment card companies use this information when determining discount rates.  #### Used by **Authorization** Required payer authentication transactions; otherwise, optional. **Credit** Required for standalone credits on Chase Paymentech solutions; otherwise, optional.  The list of valid values in this field depends on your processor.  #### Ingenico ePayments When you omit this field for Ingenico ePayments, the processor uses the default transaction type they have on file for you instead of the default value   #### Card Present You must set this field to &#x60;retail&#x60;. This field is required for a card-present transaction. Note that this should ONLY be used when the cardholder and card are present at the time of the transaction. For all keyed transactions originated from a POS terminal where the cardholder and card are not present, commerceIndicator should be submitted as &#x60;moto&#x60; 
         /// </summary>
         /// <value>Type of transaction. Some payment card companies use this information when determining discount rates.  #### Used by **Authorization** Required payer authentication transactions; otherwise, optional. **Credit** Required for standalone credits on Chase Paymentech solutions; otherwise, optional.  The list of valid values in this field depends on your processor.  #### Ingenico ePayments When you omit this field for Ingenico ePayments, the processor uses the default transaction type they have on file for you instead of the default value   #### Card Present You must set this field to &#x60;retail&#x60;. This field is required for a card-present transaction. Note that this should ONLY be used when the cardholder and card are present at the time of the transaction. For all keyed transactions originated from a POS terminal where the cardholder and card are not present, commerceIndicator should be submitted as &#x60;moto&#x60; </value>
-        [DataMember(Name="commerceIndicatorLabel", EmitDefaultValue=false)]
+        [JsonPropertyName("commerceIndicatorLabel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommerceIndicatorLabel { get; set; }
 
         /// <summary>
         /// Type of digital payment solution for the transaction. Possible Values:   - &#x60;visacheckout&#x60;: Visa Checkout. This value is required for Visa Checkout transactions. For details, see &#x60;payment_solution&#x60; field description in [Visa Checkout Using the REST API.](https://developer.cybersource.com/content/dam/docs/cybs/en-us/apifields/reference/all/rest/api-fields.pdf)  - &#x60;001&#x60;: Apple Pay.  - &#x60;004&#x60;: Cybersource In-App Solution.  - &#x60;005&#x60;: Masterpass. This value is required for Masterpass transactions on OmniPay Direct.   - &#x60;006&#x60;: Android Pay.  - &#x60;007&#x60;: Chase Pay.  - &#x60;008&#x60;: Samsung Pay.  - &#x60;012&#x60;: Google Pay.  - &#x60;013&#x60;: Cybersource P2PE Decryption  - &#x60;014&#x60;: Mastercard credential on file (COF) payment network token. Returned in authorizations that use a payment network token associated with a TMS token.  - &#x60;015&#x60;: Visa credential on file (COF) payment network token. Returned in authorizations that use a payment network token associated with a TMS token.  - &#x60;027&#x60;: Click to Pay. 
         /// </summary>
         /// <value>Type of digital payment solution for the transaction. Possible Values:   - &#x60;visacheckout&#x60;: Visa Checkout. This value is required for Visa Checkout transactions. For details, see &#x60;payment_solution&#x60; field description in [Visa Checkout Using the REST API.](https://developer.cybersource.com/content/dam/docs/cybs/en-us/apifields/reference/all/rest/api-fields.pdf)  - &#x60;001&#x60;: Apple Pay.  - &#x60;004&#x60;: Cybersource In-App Solution.  - &#x60;005&#x60;: Masterpass. This value is required for Masterpass transactions on OmniPay Direct.   - &#x60;006&#x60;: Android Pay.  - &#x60;007&#x60;: Chase Pay.  - &#x60;008&#x60;: Samsung Pay.  - &#x60;012&#x60;: Google Pay.  - &#x60;013&#x60;: Cybersource P2PE Decryption  - &#x60;014&#x60;: Mastercard credential on file (COF) payment network token. Returned in authorizations that use a payment network token associated with a TMS token.  - &#x60;015&#x60;: Visa credential on file (COF) payment network token. Returned in authorizations that use a payment network token associated with a TMS token.  - &#x60;027&#x60;: Click to Pay. </value>
-        [DataMember(Name="paymentSolution", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentSolution")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentSolution { get; set; }
 
         /// <summary>
         /// Please check with Cybersource customer support to see if your merchant account is configured correctly so you can include this field in your request. * For Payouts: max length for FDCCompass is String (22). 
         /// </summary>
         /// <value>Please check with Cybersource customer support to see if your merchant account is configured correctly so you can include this field in your request. * For Payouts: max length for FDCCompass is String (22). </value>
-        [DataMember(Name="reconciliationId", EmitDefaultValue=false)]
+        [JsonPropertyName("reconciliationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReconciliationId { get; set; }
 
         /// <summary>
-        /// Value that links the current authorization request to the original authorization request. Set this value to the ID that was returned in the reply message from the original authorization request.  This value is used for:  - Partial authorizations - Split shipments 
+        /// Value that links the current authorization request to the original authorization request or previous declined Merchant Initiated Debt Recovery Transactions . Set this value to the ID that was returned in the reply message from the original authorization request or previous declined Merchant Initiated Debt Recovery Transactions.  This value is used for:  - Partial authorizations - Split shipments - Merchant Initiated Debt Recovery Transactions for Visa Platform Connect and China Union Pay merchants 
         /// </summary>
-        /// <value>Value that links the current authorization request to the original authorization request. Set this value to the ID that was returned in the reply message from the original authorization request.  This value is used for:  - Partial authorizations - Split shipments </value>
-        [DataMember(Name="linkId", EmitDefaultValue=false)]
+        /// <value>Value that links the current authorization request to the original authorization request or previous declined Merchant Initiated Debt Recovery Transactions . Set this value to the ID that was returned in the reply message from the original authorization request or previous declined Merchant Initiated Debt Recovery Transactions.  This value is used for:  - Partial authorizations - Split shipments - Merchant Initiated Debt Recovery Transactions for Visa Platform Connect and China Union Pay merchants </value>
+        [JsonPropertyName("linkId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LinkId { get; set; }
 
         /// <summary>
         /// Set this field to 3 to indicate that the request includes Level III data.
         /// </summary>
         /// <value>Set this field to 3 to indicate that the request includes Level III data.</value>
-        [DataMember(Name="purchaseLevel", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurchaseLevel { get; set; }
 
         /// <summary>
         /// The time-out limit in seconds for the transaction. The time-out limit starts when the customer is directed to the merchant URL that is included in the sale service response. The maximum value is 99999 (about 27 hours). When the transaction times out, the payment system changes the status to abandoned.
         /// </summary>
         /// <value>The time-out limit in seconds for the transaction. The time-out limit starts when the customer is directed to the merchant URL that is included in the sale service response. The maximum value is 99999 (about 27 hours). When the transaction times out, the payment system changes the status to abandoned.</value>
-        [DataMember(Name="transactionTimeout", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionTimeout")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? TransactionTimeout { get; set; }
 
         /// <summary>
         /// Set to the value of the requestID field returned in the order service response.
         /// </summary>
         /// <value>Set to the value of the requestID field returned in the order service response.</value>
-        [DataMember(Name="intentsId", EmitDefaultValue=false)]
+        [JsonPropertyName("intentsId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IntentsId { get; set; }
 
         /// <summary>
         /// Attribute that lets you define custom grouping for your processor reports. This field is supported only for **Worldpay VAP**. 
         /// </summary>
         /// <value>Attribute that lets you define custom grouping for your processor reports. This field is supported only for **Worldpay VAP**. </value>
-        [DataMember(Name="reportGroup", EmitDefaultValue=false)]
+        [JsonPropertyName("reportGroup")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportGroup { get; set; }
 
         /// <summary>
         /// Identifier for the **Visa Checkout** order. Visa Checkout provides a unique order ID for every transaction in the Visa Checkout **callID** field. 
         /// </summary>
         /// <value>Identifier for the **Visa Checkout** order. Visa Checkout provides a unique order ID for every transaction in the Visa Checkout **callID** field. </value>
-        [DataMember(Name="visaCheckoutId", EmitDefaultValue=false)]
+        [JsonPropertyName("visaCheckoutId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VisaCheckoutId { get; set; }
 
         /// <summary>
         /// Indicates that the transaction includes industry-specific data.  Possible Values: - &#x60;airline&#x60; - &#x60;restaurant&#x60; - &#x60;lodging&#x60; - &#x60;auto_rental&#x60; - &#x60;transit&#x60; - &#x60;healthcare_medical&#x60; - &#x60;healthcare_transit&#x60; - &#x60;transit&#x60;  #### Card Present, Airlines and Auto Rental You must set this field to &#x60;airline&#x60; in order for airline data to be sent to the processor. For example, if this field is not set to &#x60;airline&#x60; or is not included in the request, no airline data is sent to the processor.  You must set this field to &#x60;restaurant&#x60; in order for restaurant data to be sent to the processor. When this field is not set to &#x60;restaurant&#x60; or is not included in the request, no restaurant data is sent to the processor.  You must set this field to &#x60;auto_rental&#x60; in order for auto rental data to be sent to the processor. For example, if this field is not set to &#x60;auto_rental&#x60; or is not included in the request, no auto rental data is sent to the processor.  Restaurant data is supported only on CyberSource through VisaNet. 
         /// </summary>
         /// <value>Indicates that the transaction includes industry-specific data.  Possible Values: - &#x60;airline&#x60; - &#x60;restaurant&#x60; - &#x60;lodging&#x60; - &#x60;auto_rental&#x60; - &#x60;transit&#x60; - &#x60;healthcare_medical&#x60; - &#x60;healthcare_transit&#x60; - &#x60;transit&#x60;  #### Card Present, Airlines and Auto Rental You must set this field to &#x60;airline&#x60; in order for airline data to be sent to the processor. For example, if this field is not set to &#x60;airline&#x60; or is not included in the request, no airline data is sent to the processor.  You must set this field to &#x60;restaurant&#x60; in order for restaurant data to be sent to the processor. When this field is not set to &#x60;restaurant&#x60; or is not included in the request, no restaurant data is sent to the processor.  You must set this field to &#x60;auto_rental&#x60; in order for auto rental data to be sent to the processor. For example, if this field is not set to &#x60;auto_rental&#x60; or is not included in the request, no auto rental data is sent to the processor.  Restaurant data is supported only on CyberSource through VisaNet. </value>
-        [DataMember(Name="industryDataType", EmitDefaultValue=false)]
+        [JsonPropertyName("industryDataType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IndustryDataType { get; set; }
 
         /// <summary>
         /// Gets or Sets AuthorizationOptions
         /// </summary>
-        [DataMember(Name="authorizationOptions", EmitDefaultValue=false)]
-        public Ptsv2paymentsProcessingInformationAuthorizationOptions AuthorizationOptions { get; set; }
+        [JsonPropertyName("authorizationOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public ProcessingInfoAuthorizationOptions AuthorizationOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets CaptureOptions
         /// </summary>
-        [DataMember(Name="captureOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("captureOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessingInformationCaptureOptions CaptureOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets RecurringOptions
         /// </summary>
-        [DataMember(Name="recurringOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("recurringOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessingInformationRecurringOptions RecurringOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets BankTransferOptions
         /// </summary>
-        [DataMember(Name="bankTransferOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("bankTransferOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessingInformationBankTransferOptions BankTransferOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets PurchaseOptions
         /// </summary>
-        [DataMember(Name="purchaseOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessingInformationPurchaseOptions PurchaseOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets ElectronicBenefitsTransfer
         /// </summary>
-        [DataMember(Name="electronicBenefitsTransfer", EmitDefaultValue=false)]
+        [JsonPropertyName("electronicBenefitsTransfer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessingInformationElectronicBenefitsTransfer ElectronicBenefitsTransfer { get; set; }
 
         /// <summary>
         /// Gets or Sets LoanOptions
         /// </summary>
-        [DataMember(Name="loanOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("loanOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessingInformationLoanOptions LoanOptions { get; set; }
 
         /// <summary>
         /// This field carries the wallet type in authorization requests and credit requests. Possible value are: - &#x60;101&#x60;: Masterpass remote payment. The customer created the wallet by manually interacting with a customer-controlled device such as a computer, tablet, or phone. This value is supported only for Masterpass transactions on Chase Paymentech Solutions and CyberSource through VisaNet. - &#x60;102&#x60;: Masterpass remote near field communication (NFC) payment. The customer created the wallet by tapping a PayPass card or customer-controlled device at a contactless card reader. This value is supported only for card-present Masterpass transactions on CyberSource through VisaNet. - &#x60;103&#x60;: Masterpass Apple Pay payment. The payment was made with a combination of Masterpass and Apple Pay. This value is supported only for Masterpass Apple Pay transactions on CyberSource through VisaNet. - &#x60;216&#x60;: Masterpass Google Pay payment. The payment was made with a combination of Masterpass and Google Pay. This value is supported only for Masterpass Google Pay transactions on CyberSource through VisaNet. - &#x60;217&#x60;: Masterpass Samsung Pay payment. The payment was made with a combination of Masterpass and Samsung Pay. This value is supported only for Masterpass Samsung Pay transactions on CyberSource through VisaNet. - &#x60;SDW&#x60;: Staged digital wallet. An issuer or operator created the wallet. This value is supported only for Masterpass transactions on Chase Paymentech Solutions. - &#x60;VCIND&#x60;: Visa Checkout payment. This value is supported only on CyberSource through VisaNet, FDC Compass, FDC Nashville Global, FDI Australia, and TSYS Acquiring Solutions. See Getting Started with Visa Checkout. For Visa Checkout transactions, the way CyberSource processes the value for this field depends on the processor. See the Visa Checkout section below. For all other values, this field is a passthrough; therefore, CyberSource does not verify the value or modify it in any way before sending it to the processor. Masterpass (101, 102, 103, 216, and 217): The Masterpass platform generates the wallet type value and passes it to you along with the customer&#39;s checkout information.  Visa Checkout: This field is optional for Visa Checkout authorizations on FDI Australia. For all other processors, this field is required for Visa Checkout authorizations. For Visa Checkout transactions on the following processors, CyberSource sends the value that the processor expects for this field:FDC Compass,FDC Nashville Global,FDI Australia,TSYS Acquiring Solutions For all other processors, this field is a passthrough; therefore, CyberSource does not verify the value or modify it in any way before sending it to the processor. For incremental authorizations, this field is supported only for Mastercard and the supported values are 101 and 102. Payment card companies can introduce new values without notice. Your order management system should be able to process new values without problems.  CyberSource through VisaNet When the value for this field is 101, 102, 103, 216, or 217, it corresponds to the following data in the TC 33 capture file5: Record: CP01 TCR6, Position: 88-90,  Field: Mastercard Wallet Identifier. When the value for this field is VCIND, it corresponds to the following data in the TC 33 capture file5: Record: CP01 TCR8, Position: 72-76, Field: Agent Unique ID. 
         /// </summary>
         /// <value>This field carries the wallet type in authorization requests and credit requests. Possible value are: - &#x60;101&#x60;: Masterpass remote payment. The customer created the wallet by manually interacting with a customer-controlled device such as a computer, tablet, or phone. This value is supported only for Masterpass transactions on Chase Paymentech Solutions and CyberSource through VisaNet. - &#x60;102&#x60;: Masterpass remote near field communication (NFC) payment. The customer created the wallet by tapping a PayPass card or customer-controlled device at a contactless card reader. This value is supported only for card-present Masterpass transactions on CyberSource through VisaNet. - &#x60;103&#x60;: Masterpass Apple Pay payment. The payment was made with a combination of Masterpass and Apple Pay. This value is supported only for Masterpass Apple Pay transactions on CyberSource through VisaNet. - &#x60;216&#x60;: Masterpass Google Pay payment. The payment was made with a combination of Masterpass and Google Pay. This value is supported only for Masterpass Google Pay transactions on CyberSource through VisaNet. - &#x60;217&#x60;: Masterpass Samsung Pay payment. The payment was made with a combination of Masterpass and Samsung Pay. This value is supported only for Masterpass Samsung Pay transactions on CyberSource through VisaNet. - &#x60;SDW&#x60;: Staged digital wallet. An issuer or operator created the wallet. This value is supported only for Masterpass transactions on Chase Paymentech Solutions. - &#x60;VCIND&#x60;: Visa Checkout payment. This value is supported only on CyberSource through VisaNet, FDC Compass, FDC Nashville Global, FDI Australia, and TSYS Acquiring Solutions. See Getting Started with Visa Checkout. For Visa Checkout transactions, the way CyberSource processes the value for this field depends on the processor. See the Visa Checkout section below. For all other values, this field is a passthrough; therefore, CyberSource does not verify the value or modify it in any way before sending it to the processor. Masterpass (101, 102, 103, 216, and 217): The Masterpass platform generates the wallet type value and passes it to you along with the customer&#39;s checkout information.  Visa Checkout: This field is optional for Visa Checkout authorizations on FDI Australia. For all other processors, this field is required for Visa Checkout authorizations. For Visa Checkout transactions on the following processors, CyberSource sends the value that the processor expects for this field:FDC Compass,FDC Nashville Global,FDI Australia,TSYS Acquiring Solutions For all other processors, this field is a passthrough; therefore, CyberSource does not verify the value or modify it in any way before sending it to the processor. For incremental authorizations, this field is supported only for Mastercard and the supported values are 101 and 102. Payment card companies can introduce new values without notice. Your order management system should be able to process new values without problems.  CyberSource through VisaNet When the value for this field is 101, 102, 103, 216, or 217, it corresponds to the following data in the TC 33 capture file5: Record: CP01 TCR6, Position: 88-90,  Field: Mastercard Wallet Identifier. When the value for this field is VCIND, it corresponds to the following data in the TC 33 capture file5: Record: CP01 TCR8, Position: 72-76, Field: Agent Unique ID. </value>
-        [DataMember(Name="walletType", EmitDefaultValue=false)]
+        [JsonPropertyName("walletType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WalletType { get; set; }
 
         /// <summary>
         /// Supplementary domestic transaction information provided by the acquirer for National Net Settlement Service (NNSS) transactions. NNSS is a settlement service that Visa provides. For transactions on CyberSource through VisaNet in countries that subscribe to NNSS: VisaNet clears transactions; VisaNet transfers funds to the acquirer after deducting processing fees and interchange fees. VisaNet settles transactions in the local pricing currency through a local financial institution. This field is supported only on CyberSource through VisaNet for domestic data in Colombia 
         /// </summary>
         /// <value>Supplementary domestic transaction information provided by the acquirer for National Net Settlement Service (NNSS) transactions. NNSS is a settlement service that Visa provides. For transactions on CyberSource through VisaNet in countries that subscribe to NNSS: VisaNet clears transactions; VisaNet transfers funds to the acquirer after deducting processing fees and interchange fees. VisaNet settles transactions in the local pricing currency through a local financial institution. This field is supported only on CyberSource through VisaNet for domestic data in Colombia </value>
-        [DataMember(Name="nationalNetDomesticData", EmitDefaultValue=false)]
+        [JsonPropertyName("nationalNetDomesticData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NationalNetDomesticData { get; set; }
 
         /// <summary>
         /// The override value of the Merchant Verification Value (MVV) received by various card brands. MVV refers to the value assigned by the card brand/network to identify participation in select merchant programs.  Sample value for Visa: &#x60;101010&#x60; 
         /// </summary>
         /// <value>The override value of the Merchant Verification Value (MVV) received by various card brands. MVV refers to the value assigned by the card brand/network to identify participation in select merchant programs.  Sample value for Visa: &#x60;101010&#x60; </value>
-        [DataMember(Name="merchantVerificationValue", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantVerificationValue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantVerificationValue { get; set; }
 
         /// <summary>
         /// Gets or Sets JapanPaymentOptions
         /// </summary>
-        [DataMember(Name="japanPaymentOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("japanPaymentOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessingInformationJapanPaymentOptions JapanPaymentOptions { get; set; }
 
         /// <summary>
         /// Type of payment initiated from a cardholder&#39;s mobile device. Possible values: - &#x60;1&#x60; :  Consumer-initiated remote purchase, face-to-face - &#x60;2&#x60; :  Consumer-initiated remote purchase, e-commerce - &#x60;3&#x60; :  Consumer-initiated remote purchase, mail order / telephone order - &#x60;4&#x60; :  Consumer-initiated bill pay - &#x60;5&#x60; :  Consumer-initiated top up - &#x60;6&#x60; :  Consumer-initiated cash out - &#x60;7&#x60; :  ATM triggered or agent-initiated cash out - &#x60;8&#x60; :  Merchant-initiated remote purchase, face-to-face - &#x60;9&#x60; :  Merchant-initiated remote purchase, e-commerce  This field is supported only for Mastercard transactions on CyberSource through VisaNet.  Optional field.  **Note** On CyberSource through VisaNet, the value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 94 - Field: Mastercard Mobile Remote Payment Program Indicator  The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment networks. 
         /// </summary>
         /// <value>Type of payment initiated from a cardholder&#39;s mobile device. Possible values: - &#x60;1&#x60; :  Consumer-initiated remote purchase, face-to-face - &#x60;2&#x60; :  Consumer-initiated remote purchase, e-commerce - &#x60;3&#x60; :  Consumer-initiated remote purchase, mail order / telephone order - &#x60;4&#x60; :  Consumer-initiated bill pay - &#x60;5&#x60; :  Consumer-initiated top up - &#x60;6&#x60; :  Consumer-initiated cash out - &#x60;7&#x60; :  ATM triggered or agent-initiated cash out - &#x60;8&#x60; :  Merchant-initiated remote purchase, face-to-face - &#x60;9&#x60; :  Merchant-initiated remote purchase, e-commerce  This field is supported only for Mastercard transactions on CyberSource through VisaNet.  Optional field.  **Note** On CyberSource through VisaNet, the value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 94 - Field: Mastercard Mobile Remote Payment Program Indicator  The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment networks. </value>
-        [DataMember(Name="mobileRemotePaymentType", EmitDefaultValue=false)]
+        [JsonPropertyName("mobileRemotePaymentType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MobileRemotePaymentType { get; set; }
 
         /// <summary>
         /// A private national-use field submitted by acquirers and issuers in South Africa for South Africa-domestic (intra-country) authorizations and financial requests. Values for this field are 00 through 99. 
         /// </summary>
         /// <value>A private national-use field submitted by acquirers and issuers in South Africa for South Africa-domestic (intra-country) authorizations and financial requests. Values for this field are 00 through 99. </value>
-        [DataMember(Name="extendedCreditTotalCount", EmitDefaultValue=false)]
+        [JsonPropertyName("extendedCreditTotalCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExtendedCreditTotalCount { get; set; }
 
         /// <summary>
         /// On PIN Debit Gateways: This U.S.-only field is optionally used by  participants (merchants and acquirers) to specify the network access priority. VisaNet checks to determine if there are issuer routing preferences for any of the networks specified by the sharing group code. If an issuer preference exists for one of the specified debit networks, VisaNet makes a routing selection based on the issuer&#39;s preference. If an issuer preference exists for more than one of the specified debit networks, or if no issuer preference exists, VisaNet makes a selection based on the acquirer&#39;s routing priorities.  #### PIN debit Priority order of the networks through which he transaction will be routed. Set this value to a series of one-character network codes in your preferred order. This is a list of the network codes:  | Network | Code | | - -- | - -- | | Accel | E | | AFFN | U | | Alaska Option | 3 | | CU24 | C | | Interlink | G | | Maestro | 8 | | NETS | P | | NYCE | F | | Pulse | H | | Shazam | 7 | | Star | M | | Visa | V |  For example, if the Star network is your first preference and Pulse is your second preference, set this field to a value of &#x60;MH&#x60;.  When you do not include this value in your PIN debit request, the list of network codes from your account is used. **Note** This field is supported only for businesses located in the U.S.  Optional field for PIN debit credit or PIN debit purchase. 
         /// </summary>
         /// <value>On PIN Debit Gateways: This U.S.-only field is optionally used by  participants (merchants and acquirers) to specify the network access priority. VisaNet checks to determine if there are issuer routing preferences for any of the networks specified by the sharing group code. If an issuer preference exists for one of the specified debit networks, VisaNet makes a routing selection based on the issuer&#39;s preference. If an issuer preference exists for more than one of the specified debit networks, or if no issuer preference exists, VisaNet makes a selection based on the acquirer&#39;s routing priorities.  #### PIN debit Priority order of the networks through which he transaction will be routed. Set this value to a series of one-character network codes in your preferred order. This is a list of the network codes:  | Network | Code | | - -- | - -- | | Accel | E | | AFFN | U | | Alaska Option | 3 | | CU24 | C | | Interlink | G | | Maestro | 8 | | NETS | P | | NYCE | F | | Pulse | H | | Shazam | 7 | | Star | M | | Visa | V |  For example, if the Star network is your first preference and Pulse is your second preference, set this field to a value of &#x60;MH&#x60;.  When you do not include this value in your PIN debit request, the list of network codes from your account is used. **Note** This field is supported only for businesses located in the U.S.  Optional field for PIN debit credit or PIN debit purchase. </value>
-        [DataMember(Name="networkRoutingOrder", EmitDefaultValue=false)]
+        [JsonPropertyName("networkRoutingOrder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NetworkRoutingOrder { get; set; }
 
         /// <summary>
         /// Flag that indicates if the transaction is pay by points transaction true: Transaction uses loyalty points false: Transaction does not use loyalty points Default: false 
         /// </summary>
         /// <value>Flag that indicates if the transaction is pay by points transaction true: Transaction uses loyalty points false: Transaction does not use loyalty points Default: false </value>
-        [DataMember(Name="payByPointsIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("payByPointsIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PayByPointsIndicator { get; set; }
 
         /// <summary>
         /// Minutes until a pending MyBank transaction will be timed out. Value must be between 5 and 30. Default is 5. 
         /// </summary>
         /// <value>Minutes until a pending MyBank transaction will be timed out. Value must be between 5 and 30. Default is 5. </value>
-        [DataMember(Name="timeout", EmitDefaultValue=false)]
+        [JsonPropertyName("timeout")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Timeout { get; set; }
 
         /// <summary>
         /// Flag that indicates the functionality we are having for merchants for which auth is done through Cybersource but settlement is done by themselves. true: functionality is supported. Processor should send raw processor auth response to Merchant. false: functionality is not supported. Default: false 
         /// </summary>
         /// <value>Flag that indicates the functionality we are having for merchants for which auth is done through Cybersource but settlement is done by themselves. true: functionality is supported. Processor should send raw processor auth response to Merchant. false: functionality is not supported. Default: false </value>
-        [DataMember(Name="isReturnAuthRecordEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("isReturnAuthRecordEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IsReturnAuthRecordEnabled { get; set; }
 
         /// <summary>
         /// Merchant payment gateway ID that is assigned by Mastercard and is provided by the acquirer when a registered merchant payment gateway service provider is involved in the transaction. This field is supported for Visa Platform Connect, Chase Paymentech Salem. 
         /// </summary>
         /// <value>Merchant payment gateway ID that is assigned by Mastercard and is provided by the acquirer when a registered merchant payment gateway service provider is involved in the transaction. This field is supported for Visa Platform Connect, Chase Paymentech Salem. </value>
-        [DataMember(Name="networkPartnerId", EmitDefaultValue=false)]
+        [JsonPropertyName("networkPartnerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NetworkPartnerId { get; set; }
 
         /// <summary>
         /// Identifier for the payment type. 
         /// </summary>
         /// <value>Identifier for the payment type. </value>
-        [DataMember(Name="paymentType", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentType { get; set; }
 
         /// <summary>
         /// Enablers are payment processing entities that are not acquiring members and are often the primary relationship owner with merchants and originators. Enablers own technical solutions through which the merchant or originator will access acceptance. The Enabler ID is a five-character hexadecimal identifier that will be used by Visa to identify enablers. Enabler ID assignment will be determined by Visa. Visa will communicate Enablers assignments to enablers. 
         /// </summary>
         /// <value>Enablers are payment processing entities that are not acquiring members and are often the primary relationship owner with merchants and originators. Enablers own technical solutions through which the merchant or originator will access acceptance. The Enabler ID is a five-character hexadecimal identifier that will be used by Visa to identify enablers. Enabler ID assignment will be determined by Visa. Visa will communicate Enablers assignments to enablers. </value>
-        [DataMember(Name="enablerId", EmitDefaultValue=false)]
+        [JsonPropertyName("enablerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EnablerId { get; set; }
 
         /// <summary>
         /// The instruction to process an order. - default value: &#39;NO_INSTRUCTION&#39; - &#39;ORDER_SAVED_EXPLICITLY&#39; 
         /// </summary>
         /// <value>The instruction to process an order. - default value: &#39;NO_INSTRUCTION&#39; - &#39;ORDER_SAVED_EXPLICITLY&#39; </value>
-        [DataMember(Name="processingInstruction", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInstruction")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessingInstruction { get; set; }
 
         /// <summary>
         /// This field is used identify the type of payment transaction taking place. This field is applicable for MasterCard transactions only. Possible values: - 201- Mastercard Rebate - 202- rePower Load Value - 203- Gaming Re-pay - 204- General Person-to-Person - 205- General Transfer to Own Account - 206- Agent Cash Out - 207- Payment of Own Credit Card Bill - 208- Business Disbursement - 209- Government/Non-Profit Disbursement - 210- Rapid Merchant Settlement - 211- Cash in at ATM (Usage limited to specific countries) - 212- Cash in at Point of Sale (Usage limited to specific countries) - 213- General Business to Business Transfer - 214- Mastercard Merchant Presented QR - 215- Mastercard Merchant Presented QR Refund Payment - 216- Utility Payments (for Brazil domestic use only) - 217- Government Services (for Brazil domestic use only) - 218- Mobile phone top-ups (for Brazil domestic use only) - 219- Coupon booklet payments (for Brazil domestic use only) - 220- General Person-to-Person Transfer - 221- Person-to-Person Transfer to Card Account - 222- General Transfer to Own Account - 223- Agent Cash Out - 224- Payment of Own Credit Card Bill - 225- Business Disbursement - 226- Transfer to Own Staged Digital Wallet Account - 227- Transfer to Own Debit or Prepaid Account - 228- General Business-to-Business Transfer - 229- Installment-based repayment - 230- Mastercard ATM Cash Pick-Up Transaction - 231- Cryptocurrency - 232- High-risk Securities 
         /// </summary>
         /// <value>This field is used identify the type of payment transaction taking place. This field is applicable for MasterCard transactions only. Possible values: - 201- Mastercard Rebate - 202- rePower Load Value - 203- Gaming Re-pay - 204- General Person-to-Person - 205- General Transfer to Own Account - 206- Agent Cash Out - 207- Payment of Own Credit Card Bill - 208- Business Disbursement - 209- Government/Non-Profit Disbursement - 210- Rapid Merchant Settlement - 211- Cash in at ATM (Usage limited to specific countries) - 212- Cash in at Point of Sale (Usage limited to specific countries) - 213- General Business to Business Transfer - 214- Mastercard Merchant Presented QR - 215- Mastercard Merchant Presented QR Refund Payment - 216- Utility Payments (for Brazil domestic use only) - 217- Government Services (for Brazil domestic use only) - 218- Mobile phone top-ups (for Brazil domestic use only) - 219- Coupon booklet payments (for Brazil domestic use only) - 220- General Person-to-Person Transfer - 221- Person-to-Person Transfer to Card Account - 222- General Transfer to Own Account - 223- Agent Cash Out - 224- Payment of Own Credit Card Bill - 225- Business Disbursement - 226- Transfer to Own Staged Digital Wallet Account - 227- Transfer to Own Debit or Prepaid Account - 228- General Business-to-Business Transfer - 229- Installment-based repayment - 230- Mastercard ATM Cash Pick-Up Transaction - 231- Cryptocurrency - 232- High-risk Securities </value>
-        [DataMember(Name="transactionTypeIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionTypeIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionTypeIndicator { get; set; }
 
         /// <summary>
         /// This field is applicable for AFT and OCT transactions. For list of supported values, please refer to Developer Guide. 
         /// </summary>
         /// <value>This field is applicable for AFT and OCT transactions. For list of supported values, please refer to Developer Guide. </value>
-        [DataMember(Name="purposeOfPayment", EmitDefaultValue=false)]
+        [JsonPropertyName("purposeOfPayment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurposeOfPayment { get; set; }
 
         /// <summary>
         /// Contains the ISO 639-2 defined language Code 
         /// </summary>
         /// <value>Contains the ISO 639-2 defined language Code </value>
-        [DataMember(Name="languageCode", EmitDefaultValue=false)]
+        [JsonPropertyName("languageCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LanguageCode { get; set; }
 
         /// <summary>
         /// This value is used for linking Authorization extension transaction to the original Authorization transaction  and for linking MIT (Merchant initiated transaction) with the respective CIT (Customer initiated transaction). 
         /// </summary>
         /// <value>This value is used for linking Authorization extension transaction to the original Authorization transaction  and for linking MIT (Merchant initiated transaction) with the respective CIT (Customer initiated transaction). </value>
-        [DataMember(Name="originalPaymentId", EmitDefaultValue=false)]
+        [JsonPropertyName("originalPaymentId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalPaymentId { get; set; }
 
         /// <summary>
         /// Effective with the April 2025 release, American Express is introducing the following new Indirect Acceptor models : - Digital Wallet Operator   - Staged back to back transaction   - Peer to peer (P2P) transaction   - Stored value transaction - Marketplace  Each model must have a separate American Express Merchant Account number and will be assigned a unique Indirect Model Type value.  Valid/Sample Values : - &#x60;1&#x60;: Bill payment provider - &#x60;2&#x60;: Installment payment transaction - &#x60;3&#x60;: Marketplace - &#x60;4&#x60;: Peer to peer transaction - &#x60;5&#x60;: Staged back to back transaction - &#x60;6&#x60;: Stored value transaction 
         /// </summary>
         /// <value>Effective with the April 2025 release, American Express is introducing the following new Indirect Acceptor models : - Digital Wallet Operator   - Staged back to back transaction   - Peer to peer (P2P) transaction   - Stored value transaction - Marketplace  Each model must have a separate American Express Merchant Account number and will be assigned a unique Indirect Model Type value.  Valid/Sample Values : - &#x60;1&#x60;: Bill payment provider - &#x60;2&#x60;: Installment payment transaction - &#x60;3&#x60;: Marketplace - &#x60;4&#x60;: Peer to peer transaction - &#x60;5&#x60;: Staged back to back transaction - &#x60;6&#x60;: Stored value transaction </value>
-        [DataMember(Name="amexIndirectModelType", EmitDefaultValue=false)]
+        [JsonPropertyName("amexIndirectModelType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AmexIndirectModelType { get; set; }
 
         /// <summary>
         /// Identifies the type of operation being performed by the staged digital wallet operator. The value distinguishes between a Cash-in transaction (coded as \&quot;02\&quot;), where funds are loaded into the digital wallet from a registered payment card, and a Purchase transaction (coded as \&quot;01\&quot;), where the wallet is used to make a payment to a merchant or transfer funds between wallets. This distinction is essential for transaction processing, reporting, and ensuring compliance with the specific rules and requirements associated with each card brand and transaction type. 
         /// </summary>
         /// <value>Identifies the type of operation being performed by the staged digital wallet operator. The value distinguishes between a Cash-in transaction (coded as \&quot;02\&quot;), where funds are loaded into the digital wallet from a registered payment card, and a Purchase transaction (coded as \&quot;01\&quot;), where the wallet is used to make a payment to a merchant or transfer funds between wallets. This distinction is essential for transaction processing, reporting, and ensuring compliance with the specific rules and requirements associated with each card brand and transaction type. </value>
-        [DataMember(Name="walletTransactionIntent", EmitDefaultValue=false)]
+        [JsonPropertyName("walletTransactionIntent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? WalletTransactionIntent { get; set; }
 
         /// <summary>
         /// Identifies the destination/purpose of the cash-in:  • 04: M2M (Same ownership, same portfolio/arrangement) • 05: P2P (For another holder, same wallet/arrangement) • 06: Transfer to another arrangement (same ownership) • 07: Transfer to another arrangement (other ownership) • 08: Transfer to stored value digital wallet. 
         /// </summary>
         /// <value>Identifies the destination/purpose of the cash-in:  • 04: M2M (Same ownership, same portfolio/arrangement) • 05: P2P (For another holder, same wallet/arrangement) • 06: Transfer to another arrangement (same ownership) • 07: Transfer to another arrangement (other ownership) • 08: Transfer to stored value digital wallet. </value>
-        [DataMember(Name="destinationType", EmitDefaultValue=false)]
+        [JsonPropertyName("destinationType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? DestinationType { get; set; }
 
         /// <summary>
         /// Gets or Sets ProgramIndicators
         /// </summary>
-        [DataMember(Name="programIndicators", EmitDefaultValue=false)]
+        [JsonPropertyName("programIndicators")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessingInformationProgramIndicators ProgramIndicators { get; set; }
 
         /// <summary>
         /// Type of inquiry for Zero dollar transactions. Mastercard is introducing Mastercard One Credential, a single, digitally connected credential that offers cardholders the ability to access multiple payment methods.   This field is used for Product Status Inquiry (PSI), Account Status Inquiry with Product Status Inquiry (ASI with PSI), and Account Status Inquiry with Product Status Inquiry and Probability Indicator.  This field is supported for Zero dollar transactions only.  Possible values: - &#x60;01&#x60;: Product status inquiry - &#x60;02&#x60;: Account status inquiry with product status inquiry - &#x60;03&#x60;: Account status Inquiry with Product Status Inquiry and Probability Indicator  #### Used by **Authorization (Zero dollar transactions)** Optional field. 
         /// </summary>
         /// <value>Type of inquiry for Zero dollar transactions. Mastercard is introducing Mastercard One Credential, a single, digitally connected credential that offers cardholders the ability to access multiple payment methods.   This field is used for Product Status Inquiry (PSI), Account Status Inquiry with Product Status Inquiry (ASI with PSI), and Account Status Inquiry with Product Status Inquiry and Probability Indicator.  This field is supported for Zero dollar transactions only.  Possible values: - &#x60;01&#x60;: Product status inquiry - &#x60;02&#x60;: Account status inquiry with product status inquiry - &#x60;03&#x60;: Account status Inquiry with Product Status Inquiry and Probability Indicator  #### Used by **Authorization (Zero dollar transactions)** Optional field. </value>
-        [DataMember(Name="inquiryType", EmitDefaultValue=false)]
+        [JsonPropertyName("inquiryType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InquiryType { get; set; }
 
         /// <summary>
@@ -476,54 +524,54 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsProcessingInformation {\n");
-            if (ActionList != null) sb.Append("  ActionList: ").Append(ActionList).Append("\n");
-            if (EnableEscrowOption != null) sb.Append("  EnableEscrowOption: ").Append(EnableEscrowOption).Append("\n");
-            if (ActionTokenTypes != null) sb.Append("  ActionTokenTypes: ").Append(ActionTokenTypes).Append("\n");
-            if (BinSource != null) sb.Append("  BinSource: ").Append(BinSource).Append("\n");
-            if (Capture != null) sb.Append("  Capture: ").Append(Capture).Append("\n");
-            if (ProcessorId != null) sb.Append("  ProcessorId: ").Append(ProcessorId).Append("\n");
-            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(BusinessApplicationId).Append("\n");
-            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CommerceIndicator).Append("\n");
-            if (CommerceIndicatorLabel != null) sb.Append("  CommerceIndicatorLabel: ").Append(CommerceIndicatorLabel).Append("\n");
-            if (PaymentSolution != null) sb.Append("  PaymentSolution: ").Append(PaymentSolution).Append("\n");
-            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(ReconciliationId).Append("\n");
-            if (LinkId != null) sb.Append("  LinkId: ").Append(LinkId).Append("\n");
-            if (PurchaseLevel != null) sb.Append("  PurchaseLevel: ").Append(PurchaseLevel).Append("\n");
-            if (TransactionTimeout != null) sb.Append("  TransactionTimeout: ").Append(TransactionTimeout).Append("\n");
-            if (IntentsId != null) sb.Append("  IntentsId: ").Append(IntentsId).Append("\n");
-            if (ReportGroup != null) sb.Append("  ReportGroup: ").Append(ReportGroup).Append("\n");
-            if (VisaCheckoutId != null) sb.Append("  VisaCheckoutId: ").Append(VisaCheckoutId).Append("\n");
-            if (IndustryDataType != null) sb.Append("  IndustryDataType: ").Append(IndustryDataType).Append("\n");
-            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(AuthorizationOptions).Append("\n");
-            if (CaptureOptions != null) sb.Append("  CaptureOptions: ").Append(CaptureOptions).Append("\n");
-            if (RecurringOptions != null) sb.Append("  RecurringOptions: ").Append(RecurringOptions).Append("\n");
-            if (BankTransferOptions != null) sb.Append("  BankTransferOptions: ").Append(BankTransferOptions).Append("\n");
-            if (PurchaseOptions != null) sb.Append("  PurchaseOptions: ").Append(PurchaseOptions).Append("\n");
-            if (ElectronicBenefitsTransfer != null) sb.Append("  ElectronicBenefitsTransfer: ").Append(ElectronicBenefitsTransfer).Append("\n");
-            if (LoanOptions != null) sb.Append("  LoanOptions: ").Append(LoanOptions).Append("\n");
-            if (WalletType != null) sb.Append("  WalletType: ").Append(WalletType).Append("\n");
-            if (NationalNetDomesticData != null) sb.Append("  NationalNetDomesticData: ").Append(NationalNetDomesticData).Append("\n");
-            if (MerchantVerificationValue != null) sb.Append("  MerchantVerificationValue: ").Append(MerchantVerificationValue).Append("\n");
-            if (JapanPaymentOptions != null) sb.Append("  JapanPaymentOptions: ").Append(JapanPaymentOptions).Append("\n");
-            if (MobileRemotePaymentType != null) sb.Append("  MobileRemotePaymentType: ").Append(MobileRemotePaymentType).Append("\n");
-            if (ExtendedCreditTotalCount != null) sb.Append("  ExtendedCreditTotalCount: ").Append(ExtendedCreditTotalCount).Append("\n");
-            if (NetworkRoutingOrder != null) sb.Append("  NetworkRoutingOrder: ").Append(NetworkRoutingOrder).Append("\n");
-            if (PayByPointsIndicator != null) sb.Append("  PayByPointsIndicator: ").Append(PayByPointsIndicator).Append("\n");
-            if (Timeout != null) sb.Append("  Timeout: ").Append(Timeout).Append("\n");
-            if (IsReturnAuthRecordEnabled != null) sb.Append("  IsReturnAuthRecordEnabled: ").Append(IsReturnAuthRecordEnabled).Append("\n");
-            if (NetworkPartnerId != null) sb.Append("  NetworkPartnerId: ").Append(NetworkPartnerId).Append("\n");
-            if (PaymentType != null) sb.Append("  PaymentType: ").Append(PaymentType).Append("\n");
-            if (EnablerId != null) sb.Append("  EnablerId: ").Append(EnablerId).Append("\n");
-            if (ProcessingInstruction != null) sb.Append("  ProcessingInstruction: ").Append(ProcessingInstruction).Append("\n");
-            if (TransactionTypeIndicator != null) sb.Append("  TransactionTypeIndicator: ").Append(TransactionTypeIndicator).Append("\n");
-            if (PurposeOfPayment != null) sb.Append("  PurposeOfPayment: ").Append(PurposeOfPayment).Append("\n");
-            if (LanguageCode != null) sb.Append("  LanguageCode: ").Append(LanguageCode).Append("\n");
-            if (OriginalPaymentId != null) sb.Append("  OriginalPaymentId: ").Append(OriginalPaymentId).Append("\n");
-            if (AmexIndirectModelType != null) sb.Append("  AmexIndirectModelType: ").Append(AmexIndirectModelType).Append("\n");
-            if (WalletTransactionIntent != null) sb.Append("  WalletTransactionIntent: ").Append(WalletTransactionIntent).Append("\n");
-            if (DestinationType != null) sb.Append("  DestinationType: ").Append(DestinationType).Append("\n");
-            if (ProgramIndicators != null) sb.Append("  ProgramIndicators: ").Append(ProgramIndicators).Append("\n");
-            if (InquiryType != null) sb.Append("  InquiryType: ").Append(InquiryType).Append("\n");
+            if (ActionList != null) sb.Append("  ActionList: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "actionList", ActionList.ToString())).Append("\n");
+            if (EnableEscrowOption != null) sb.Append("  EnableEscrowOption: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "enableEscrowOption", EnableEscrowOption.ToString())).Append("\n");
+            if (ActionTokenTypes != null) sb.Append("  ActionTokenTypes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "actionTokenTypes", ActionTokenTypes.ToString())).Append("\n");
+            if (BinSource != null) sb.Append("  BinSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "binSource", BinSource.ToString())).Append("\n");
+            if (Capture != null) sb.Append("  Capture: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "capture", Capture.ToString())).Append("\n");
+            if (ProcessorId != null) sb.Append("  ProcessorId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "processorId", ProcessorId.ToString())).Append("\n");
+            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "businessApplicationId", BusinessApplicationId.ToString())).Append("\n");
+            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "commerceIndicator", CommerceIndicator.ToString())).Append("\n");
+            if (CommerceIndicatorLabel != null) sb.Append("  CommerceIndicatorLabel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "commerceIndicatorLabel", CommerceIndicatorLabel.ToString())).Append("\n");
+            if (PaymentSolution != null) sb.Append("  PaymentSolution: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "paymentSolution", PaymentSolution.ToString())).Append("\n");
+            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "reconciliationId", ReconciliationId.ToString())).Append("\n");
+            if (LinkId != null) sb.Append("  LinkId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "linkId", LinkId.ToString())).Append("\n");
+            if (PurchaseLevel != null) sb.Append("  PurchaseLevel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "purchaseLevel", PurchaseLevel.ToString())).Append("\n");
+            if (TransactionTimeout != null) sb.Append("  TransactionTimeout: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "transactionTimeout", TransactionTimeout.ToString())).Append("\n");
+            if (IntentsId != null) sb.Append("  IntentsId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "intentsId", IntentsId.ToString())).Append("\n");
+            if (ReportGroup != null) sb.Append("  ReportGroup: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "reportGroup", ReportGroup.ToString())).Append("\n");
+            if (VisaCheckoutId != null) sb.Append("  VisaCheckoutId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "visaCheckoutId", VisaCheckoutId.ToString())).Append("\n");
+            if (IndustryDataType != null) sb.Append("  IndustryDataType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "industryDataType", IndustryDataType.ToString())).Append("\n");
+            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "authorizationOptions", AuthorizationOptions.ToString())).Append("\n");
+            if (CaptureOptions != null) sb.Append("  CaptureOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "captureOptions", CaptureOptions.ToString())).Append("\n");
+            if (RecurringOptions != null) sb.Append("  RecurringOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "recurringOptions", RecurringOptions.ToString())).Append("\n");
+            if (BankTransferOptions != null) sb.Append("  BankTransferOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "bankTransferOptions", BankTransferOptions.ToString())).Append("\n");
+            if (PurchaseOptions != null) sb.Append("  PurchaseOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "purchaseOptions", PurchaseOptions.ToString())).Append("\n");
+            if (ElectronicBenefitsTransfer != null) sb.Append("  ElectronicBenefitsTransfer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "electronicBenefitsTransfer", ElectronicBenefitsTransfer.ToString())).Append("\n");
+            if (LoanOptions != null) sb.Append("  LoanOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "loanOptions", LoanOptions.ToString())).Append("\n");
+            if (WalletType != null) sb.Append("  WalletType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "walletType", WalletType.ToString())).Append("\n");
+            if (NationalNetDomesticData != null) sb.Append("  NationalNetDomesticData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "nationalNetDomesticData", NationalNetDomesticData.ToString())).Append("\n");
+            if (MerchantVerificationValue != null) sb.Append("  MerchantVerificationValue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "merchantVerificationValue", MerchantVerificationValue.ToString())).Append("\n");
+            if (JapanPaymentOptions != null) sb.Append("  JapanPaymentOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "japanPaymentOptions", JapanPaymentOptions.ToString())).Append("\n");
+            if (MobileRemotePaymentType != null) sb.Append("  MobileRemotePaymentType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "mobileRemotePaymentType", MobileRemotePaymentType.ToString())).Append("\n");
+            if (ExtendedCreditTotalCount != null) sb.Append("  ExtendedCreditTotalCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "extendedCreditTotalCount", ExtendedCreditTotalCount.ToString())).Append("\n");
+            if (NetworkRoutingOrder != null) sb.Append("  NetworkRoutingOrder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "networkRoutingOrder", NetworkRoutingOrder.ToString())).Append("\n");
+            if (PayByPointsIndicator != null) sb.Append("  PayByPointsIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "payByPointsIndicator", PayByPointsIndicator.ToString())).Append("\n");
+            if (Timeout != null) sb.Append("  Timeout: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "timeout", Timeout.ToString())).Append("\n");
+            if (IsReturnAuthRecordEnabled != null) sb.Append("  IsReturnAuthRecordEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "isReturnAuthRecordEnabled", IsReturnAuthRecordEnabled.ToString())).Append("\n");
+            if (NetworkPartnerId != null) sb.Append("  NetworkPartnerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "networkPartnerId", NetworkPartnerId.ToString())).Append("\n");
+            if (PaymentType != null) sb.Append("  PaymentType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "paymentType", PaymentType.ToString())).Append("\n");
+            if (EnablerId != null) sb.Append("  EnablerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "enablerId", EnablerId.ToString())).Append("\n");
+            if (ProcessingInstruction != null) sb.Append("  ProcessingInstruction: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "processingInstruction", ProcessingInstruction.ToString())).Append("\n");
+            if (TransactionTypeIndicator != null) sb.Append("  TransactionTypeIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "transactionTypeIndicator", TransactionTypeIndicator.ToString())).Append("\n");
+            if (PurposeOfPayment != null) sb.Append("  PurposeOfPayment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "purposeOfPayment", PurposeOfPayment.ToString())).Append("\n");
+            if (LanguageCode != null) sb.Append("  LanguageCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "languageCode", LanguageCode.ToString())).Append("\n");
+            if (OriginalPaymentId != null) sb.Append("  OriginalPaymentId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "originalPaymentId", OriginalPaymentId.ToString())).Append("\n");
+            if (AmexIndirectModelType != null) sb.Append("  AmexIndirectModelType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "amexIndirectModelType", AmexIndirectModelType.ToString())).Append("\n");
+            if (WalletTransactionIntent != null) sb.Append("  WalletTransactionIntent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "walletTransactionIntent", WalletTransactionIntent.ToString())).Append("\n");
+            if (DestinationType != null) sb.Append("  DestinationType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "destinationType", DestinationType.ToString())).Append("\n");
+            if (ProgramIndicators != null) sb.Append("  ProgramIndicators: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "programIndicators", ProgramIndicators.ToString())).Append("\n");
+            if (InquiryType != null) sb.Append("  InquiryType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformation", "inquiryType", InquiryType.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -534,7 +582,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

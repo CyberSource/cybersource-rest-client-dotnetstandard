@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -69,97 +69,111 @@ namespace CyberSource.Model
         /// Selected Organization Id
         /// </summary>
         /// <value>Selected Organization Id</value>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// Report Definition Id
         /// </summary>
         /// <value>Report Definition Id</value>
-        [DataMember(Name="reportDefinitionId", EmitDefaultValue=false)]
+        [JsonPropertyName("reportDefinitionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportDefinitionId { get; set; }
 
         /// <summary>
         /// Report Definition Class
         /// </summary>
         /// <value>Report Definition Class</value>
-        [DataMember(Name="reportDefinitionName", EmitDefaultValue=false)]
+        [JsonPropertyName("reportDefinitionName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportDefinitionName { get; set; }
 
         /// <summary>
         /// Report Format                          Valid values: - application/xml - text/csv 
         /// </summary>
         /// <value>Report Format                          Valid values: - application/xml - text/csv </value>
-        [DataMember(Name="reportMimeType", EmitDefaultValue=false)]
+        [JsonPropertyName("reportMimeType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportMimeType { get; set; }
 
         /// <summary>
         /// &#39;Report Frequency&#39; **NOTE: Do not document USER_DEFINED Frequency field in developer center**  Valid values: - DAILY - WEEKLY - MONTHLY - USER_DEFINED 
         /// </summary>
         /// <value>&#39;Report Frequency&#39; **NOTE: Do not document USER_DEFINED Frequency field in developer center**  Valid values: - DAILY - WEEKLY - MONTHLY - USER_DEFINED </value>
-        [DataMember(Name="reportFrequency", EmitDefaultValue=false)]
+        [JsonPropertyName("reportFrequency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportFrequency { get; set; }
 
         /// <summary>
         /// If the reportFrequency is User-defined, reportInterval should be in **ISO 8601 time format** Please refer the following link to know more about ISO 8601 format.[Rfc Time Format](https://en.wikipedia.org/wiki/ISO_8601#Durations)  **Example time format for 2 hours and 30 Mins:**   - PT2H30M **NOTE: Do not document reportInterval field in developer center** 
         /// </summary>
         /// <value>If the reportFrequency is User-defined, reportInterval should be in **ISO 8601 time format** Please refer the following link to know more about ISO 8601 format.[Rfc Time Format](https://en.wikipedia.org/wiki/ISO_8601#Durations)  **Example time format for 2 hours and 30 Mins:**   - PT2H30M **NOTE: Do not document reportInterval field in developer center** </value>
-        [DataMember(Name="reportInterval", EmitDefaultValue=false)]
+        [JsonPropertyName("reportInterval")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportInterval { get; set; }
 
         /// <summary>
         /// Report Name
         /// </summary>
         /// <value>Report Name</value>
-        [DataMember(Name="reportName", EmitDefaultValue=false)]
+        [JsonPropertyName("reportName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportName { get; set; }
 
         /// <summary>
         /// Time Zone
         /// </summary>
         /// <value>Time Zone</value>
-        [DataMember(Name="timezone", EmitDefaultValue=false)]
+        [JsonPropertyName("timezone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Timezone { get; set; }
 
         /// <summary>
         /// Start Time
         /// </summary>
         /// <value>Start Time</value>
-        [DataMember(Name="startTime", EmitDefaultValue=false)]
+        [JsonPropertyName("startTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? StartTime { get; set; }
 
         /// <summary>
         /// Start Day
         /// </summary>
         /// <value>Start Day</value>
-        [DataMember(Name="startDay", EmitDefaultValue=false)]
+        [JsonPropertyName("startDay")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? StartDay { get; set; }
 
         /// <summary>
         /// List of all fields String values
         /// </summary>
         /// <value>List of all fields String values</value>
-        [DataMember(Name="reportFields", EmitDefaultValue=false)]
+        [JsonPropertyName("reportFields")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ReportFields { get; set; }
 
         /// <summary>
         /// List of filters to apply
         /// </summary>
         /// <value>List of filters to apply</value>
-        [DataMember(Name="reportFilters", EmitDefaultValue=false)]
+        [JsonPropertyName("reportFilters")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, List<string>> ReportFilters { get; set; }
 
         /// <summary>
         /// Gets or Sets ReportPreferences
         /// </summary>
-        [DataMember(Name="reportPreferences", EmitDefaultValue=false)]
+        [JsonPropertyName("reportPreferences")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Reportingv3reportsReportPreferences ReportPreferences { get; set; }
 
         /// <summary>
         /// Id for the selected group.
         /// </summary>
         /// <value>Id for the selected group.</value>
-        [DataMember(Name="groupId", EmitDefaultValue=false)]
+        [JsonPropertyName("groupId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string GroupId { get; set; }
 
         /// <summary>
@@ -170,20 +184,20 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3ReportSubscriptionsGet200ResponseSubscriptions {\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (ReportDefinitionId != null) sb.Append("  ReportDefinitionId: ").Append(ReportDefinitionId).Append("\n");
-            if (ReportDefinitionName != null) sb.Append("  ReportDefinitionName: ").Append(ReportDefinitionName).Append("\n");
-            if (ReportMimeType != null) sb.Append("  ReportMimeType: ").Append(ReportMimeType).Append("\n");
-            if (ReportFrequency != null) sb.Append("  ReportFrequency: ").Append(ReportFrequency).Append("\n");
-            if (ReportInterval != null) sb.Append("  ReportInterval: ").Append(ReportInterval).Append("\n");
-            if (ReportName != null) sb.Append("  ReportName: ").Append(ReportName).Append("\n");
-            if (Timezone != null) sb.Append("  Timezone: ").Append(Timezone).Append("\n");
-            if (StartTime != null) sb.Append("  StartTime: ").Append(StartTime).Append("\n");
-            if (StartDay != null) sb.Append("  StartDay: ").Append(StartDay).Append("\n");
-            if (ReportFields != null) sb.Append("  ReportFields: ").Append(ReportFields).Append("\n");
-            if (ReportFilters != null) sb.Append("  ReportFilters: ").Append(ReportFilters).Append("\n");
-            if (ReportPreferences != null) sb.Append("  ReportPreferences: ").Append(ReportPreferences).Append("\n");
-            if (GroupId != null) sb.Append("  GroupId: ").Append(GroupId).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (ReportDefinitionId != null) sb.Append("  ReportDefinitionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "reportDefinitionId", ReportDefinitionId.ToString())).Append("\n");
+            if (ReportDefinitionName != null) sb.Append("  ReportDefinitionName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "reportDefinitionName", ReportDefinitionName.ToString())).Append("\n");
+            if (ReportMimeType != null) sb.Append("  ReportMimeType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "reportMimeType", ReportMimeType.ToString())).Append("\n");
+            if (ReportFrequency != null) sb.Append("  ReportFrequency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "reportFrequency", ReportFrequency.ToString())).Append("\n");
+            if (ReportInterval != null) sb.Append("  ReportInterval: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "reportInterval", ReportInterval.ToString())).Append("\n");
+            if (ReportName != null) sb.Append("  ReportName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "reportName", ReportName.ToString())).Append("\n");
+            if (Timezone != null) sb.Append("  Timezone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "timezone", Timezone.ToString())).Append("\n");
+            if (StartTime != null) sb.Append("  StartTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "startTime", StartTime.ToString())).Append("\n");
+            if (StartDay != null) sb.Append("  StartDay: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "startDay", StartDay.ToString())).Append("\n");
+            if (ReportFields != null) sb.Append("  ReportFields: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "reportFields", ReportFields.ToString())).Append("\n");
+            if (ReportFilters != null) sb.Append("  ReportFilters: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "reportFilters", ReportFilters.ToString())).Append("\n");
+            if (ReportPreferences != null) sb.Append("  ReportPreferences: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "reportPreferences", ReportPreferences.ToString())).Append("\n");
+            if (GroupId != null) sb.Append("  GroupId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", "groupId", GroupId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -194,7 +208,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3ReportSubscriptionsGet200ResponseSubscriptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

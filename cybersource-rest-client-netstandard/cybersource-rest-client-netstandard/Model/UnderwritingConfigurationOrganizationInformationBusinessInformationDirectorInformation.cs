@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -63,28 +63,32 @@ namespace CyberSource.Model
         /// Director&#39;s first name
         /// </summary>
         /// <value>Director&#39;s first name</value>
-        [DataMember(Name="firstName", EmitDefaultValue=false)]
+        [JsonPropertyName("firstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Director&#39;s middle name
         /// </summary>
         /// <value>Director&#39;s middle name</value>
-        [DataMember(Name="middleName", EmitDefaultValue=false)]
+        [JsonPropertyName("middleName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MiddleName { get; set; }
 
         /// <summary>
         /// Director&#39;s last name
         /// </summary>
         /// <value>Director&#39;s last name</value>
-        [DataMember(Name="lastName", EmitDefaultValue=false)]
+        [JsonPropertyName("lastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastName { get; set; }
 
         /// <summary>
         /// Director&#39;s date of birth. Format: YYYY-MM-DD Example 2016-08-11 equals August 11, 2016
         /// </summary>
         /// <value>Director&#39;s date of birth. Format: YYYY-MM-DD Example 2016-08-11 equals August 11, 2016</value>
-        [DataMember(Name="birthDate", EmitDefaultValue=false)]
+        [JsonPropertyName("birthDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [JsonConverter(typeof(SwaggerDateConverter))]
         public DateTime? BirthDate { get; set; }
 
@@ -92,48 +96,55 @@ namespace CyberSource.Model
         /// Email address for Director
         /// </summary>
         /// <value>Email address for Director</value>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Email { get; set; }
 
         /// <summary>
         /// Owner&#39;s phone number
         /// </summary>
         /// <value>Owner&#39;s phone number</value>
-        [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Country of origin for the owner. Two character country code, ISO 3166-1 alpha-2.
         /// </summary>
         /// <value>Country of origin for the owner. Two character country code, ISO 3166-1 alpha-2.</value>
-        [DataMember(Name="nationality", EmitDefaultValue=false)]
+        [JsonPropertyName("nationality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Nationality { get; set; }
 
         /// <summary>
         /// Identification value from ID document
         /// </summary>
         /// <value>Identification value from ID document</value>
-        [DataMember(Name="nationalId", EmitDefaultValue=false)]
+        [JsonPropertyName("nationalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NationalId { get; set; }
 
         /// <summary>
         /// Country of the ID document. Two character country code, ISO 3166-1 alpha-2.
         /// </summary>
         /// <value>Country of the ID document. Two character country code, ISO 3166-1 alpha-2.</value>
-        [DataMember(Name="idCountry", EmitDefaultValue=false)]
+        [JsonPropertyName("idCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IdCountry { get; set; }
 
         /// <summary>
         /// Passport Number
         /// </summary>
         /// <value>Passport Number</value>
-        [DataMember(Name="passportNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("passportNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PassportNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets Address
         /// </summary>
-        [DataMember(Name="address", EmitDefaultValue=false)]
+        [JsonPropertyName("address")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationOrganizationInformationBusinessInformationAddress2 Address { get; set; }
 
         /// <summary>
@@ -144,17 +155,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation {\n");
-            if (FirstName != null) sb.Append("  FirstName: ").Append(FirstName).Append("\n");
-            if (MiddleName != null) sb.Append("  MiddleName: ").Append(MiddleName).Append("\n");
-            if (LastName != null) sb.Append("  LastName: ").Append(LastName).Append("\n");
-            if (BirthDate != null) sb.Append("  BirthDate: ").Append(BirthDate).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
-            if (Nationality != null) sb.Append("  Nationality: ").Append(Nationality).Append("\n");
-            if (NationalId != null) sb.Append("  NationalId: ").Append(NationalId).Append("\n");
-            if (IdCountry != null) sb.Append("  IdCountry: ").Append(IdCountry).Append("\n");
-            if (PassportNumber != null) sb.Append("  PassportNumber: ").Append(PassportNumber).Append("\n");
-            if (Address != null) sb.Append("  Address: ").Append(Address).Append("\n");
+            if (FirstName != null) sb.Append("  FirstName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", "firstName", FirstName.ToString())).Append("\n");
+            if (MiddleName != null) sb.Append("  MiddleName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", "middleName", MiddleName.ToString())).Append("\n");
+            if (LastName != null) sb.Append("  LastName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", "lastName", LastName.ToString())).Append("\n");
+            if (BirthDate != null) sb.Append("  BirthDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", "birthDate", BirthDate.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", "email", Email.ToString())).Append("\n");
+            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", "phoneNumber", PhoneNumber.ToString())).Append("\n");
+            if (Nationality != null) sb.Append("  Nationality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", "nationality", Nationality.ToString())).Append("\n");
+            if (NationalId != null) sb.Append("  NationalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", "nationalId", NationalId.ToString())).Append("\n");
+            if (IdCountry != null) sb.Append("  IdCountry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", "idCountry", IdCountry.ToString())).Append("\n");
+            if (PassportNumber != null) sb.Append("  PassportNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", "passportNumber", PassportNumber.ToString())).Append("\n");
+            if (Address != null) sb.Append("  Address: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", "address", Address.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -165,7 +176,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UnderwritingConfigurationOrganizationInformationBusinessInformationDirectorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

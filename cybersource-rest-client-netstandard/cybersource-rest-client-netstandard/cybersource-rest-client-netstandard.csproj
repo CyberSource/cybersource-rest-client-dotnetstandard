@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>CyberSource</RootNamespace>
-    <Version>0.0.1.55</Version>
+    <Version>0.0.1.56</Version>
     <Authors>CyberSource</Authors>
     <Company>CyberSource</Company>
     <Description>A library generated from a Swagger doc</Description>
@@ -25,13 +25,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CyberSource.Authentication.NetStandard" Version="[0.0.1.23]" />
+    <PackageReference Include="CyberSource.Authentication.NetStandard" Version="[0.0.1.24]" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="10.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.8" />
     <PackageReference Include="NLog" Version="5.0.0" />
     <PackageReference Include="RestSharp" Version="[112.1.0]" />
     <PackageReference Include="StandardSocketsHttpHandler" Version="2.2.0.8" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

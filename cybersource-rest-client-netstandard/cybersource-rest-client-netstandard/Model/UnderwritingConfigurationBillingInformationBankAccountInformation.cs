@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Country of the Bank Account. Two character country code, ISO 3166-1 alpha-2.
         /// </summary>
         /// <value>Country of the Bank Account. Two character country code, ISO 3166-1 alpha-2.</value>
-        [DataMember(Name="bankAccountCountry", EmitDefaultValue=false)]
+        [JsonPropertyName("bankAccountCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BankAccountCountry { get; set; }
 
         /// <summary>
         /// Name on the checking account
         /// </summary>
         /// <value>Name on the checking account</value>
-        [DataMember(Name="accountHolderName", EmitDefaultValue=false)]
+        [JsonPropertyName("accountHolderName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountHolderName { get; set; }
 
         /// <summary>
         /// Type of Account  Possible Values: - CHECKING - SAVINGS - CORPORATECHECKING - CORPORATESAVINGS 
         /// </summary>
         /// <value>Type of Account  Possible Values: - CHECKING - SAVINGS - CORPORATECHECKING - CORPORATESAVINGS </value>
-        [DataMember(Name="accountType", EmitDefaultValue=false)]
+        [JsonPropertyName("accountType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountType { get; set; }
 
         /// <summary>
         /// Routing Number, IBAN, Swift/BIC, etc
         /// </summary>
         /// <value>Routing Number, IBAN, Swift/BIC, etc</value>
-        [DataMember(Name="accountRoutingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("accountRoutingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountRoutingNumber { get; set; }
 
         /// <summary>
         /// Account Number
         /// </summary>
         /// <value>Account Number</value>
-        [DataMember(Name="accountNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("accountNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountNumber { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UnderwritingConfigurationBillingInformationBankAccountInformation {\n");
-            if (BankAccountCountry != null) sb.Append("  BankAccountCountry: ").Append(BankAccountCountry).Append("\n");
-            if (AccountHolderName != null) sb.Append("  AccountHolderName: ").Append(AccountHolderName).Append("\n");
-            if (AccountType != null) sb.Append("  AccountType: ").Append(AccountType).Append("\n");
-            if (AccountRoutingNumber != null) sb.Append("  AccountRoutingNumber: ").Append(AccountRoutingNumber).Append("\n");
-            if (AccountNumber != null) sb.Append("  AccountNumber: ").Append(AccountNumber).Append("\n");
+            if (BankAccountCountry != null) sb.Append("  BankAccountCountry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationBillingInformationBankAccountInformation", "bankAccountCountry", BankAccountCountry.ToString())).Append("\n");
+            if (AccountHolderName != null) sb.Append("  AccountHolderName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationBillingInformationBankAccountInformation", "accountHolderName", AccountHolderName.ToString())).Append("\n");
+            if (AccountType != null) sb.Append("  AccountType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationBillingInformationBankAccountInformation", "accountType", AccountType.ToString())).Append("\n");
+            if (AccountRoutingNumber != null) sb.Append("  AccountRoutingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationBillingInformationBankAccountInformation", "accountRoutingNumber", AccountRoutingNumber.ToString())).Append("\n");
+            if (AccountNumber != null) sb.Append("  AccountNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationBillingInformationBankAccountInformation", "accountNumber", AccountNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UnderwritingConfigurationBillingInformationBankAccountInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

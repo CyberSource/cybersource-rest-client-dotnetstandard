@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -59,63 +59,72 @@ namespace CyberSource.Model
         /// Applicable for VPC processors.
         /// </summary>
         /// <value>Applicable for VPC processors.</value>
-        [DataMember(Name="reimbursementCode", EmitDefaultValue=false)]
+        [JsonPropertyName("reimbursementCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReimbursementCode { get; set; }
 
         /// <summary>
         /// This code identifies the financial institution acting as the acquirer of this customer transaction. The acquirer is the member or system user that signed the merchant. This number is usually a Visa-assigned. Applicable for VPC processors.
         /// </summary>
         /// <value>This code identifies the financial institution acting as the acquirer of this customer transaction. The acquirer is the member or system user that signed the merchant. This number is usually a Visa-assigned. Applicable for VPC processors.</value>
-        [DataMember(Name="acquiringInstitutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("acquiringInstitutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcquiringInstitutionId { get; set; }
 
         /// <summary>
         /// Transaction type. List of supported identifiers documented in the Developer Guide. Applicable for GPX (gpx) and VPC processors.
         /// </summary>
         /// <value>Transaction type. List of supported identifiers documented in the Developer Guide. Applicable for GPX (gpx) and VPC processors.</value>
-        [DataMember(Name="businessApplicationId", EmitDefaultValue=false)]
+        [JsonPropertyName("businessApplicationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessApplicationId { get; set; }
 
         /// <summary>
         /// Applicable for GPX (gpx) and VPC processors.
         /// </summary>
         /// <value>Applicable for GPX (gpx) and VPC processors.</value>
-        [DataMember(Name="financialInstitutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("financialInstitutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FinancialInstitutionId { get; set; }
 
         /// <summary>
         /// Routing Number to identify banks within the United States. Applicable for VPC processors.
         /// </summary>
         /// <value>Routing Number to identify banks within the United States. Applicable for VPC processors.</value>
-        [DataMember(Name="merchantAbaNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantAbaNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantAbaNumber { get; set; }
 
         /// <summary>
         /// Order of the networks in which Visa should make routing decisions. Applicable for VPC processors.
         /// </summary>
         /// <value>Order of the networks in which Visa should make routing decisions. Applicable for VPC processors.</value>
-        [DataMember(Name="networkOrder", EmitDefaultValue=false)]
+        [JsonPropertyName("networkOrder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NetworkOrder { get; set; }
 
         /// <summary>
         /// Three-character [ISO 4217 ALPHA-3 Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)
         /// </summary>
         /// <value>Three-character [ISO 4217 ALPHA-3 Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)</value>
-        [DataMember(Name="currencies", EmitDefaultValue=false)]
+        [JsonPropertyName("currencies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, CardProcessingConfigFeaturesCardNotPresentPayoutsCurrencies> Currencies { get; set; }
 
         /// <summary>
         /// Merchant ID assigned by an acquirer or a processor. Should not be overridden by any other party.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;^[0-9]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Merchant ID assigned by an acquirer or a processor. Should not be overridden by any other party.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;^[0-9]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="merchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantId { get; set; }
 
         /// <summary>
         /// The &#39;Terminal Id&#39; aka TID, is an identifier used for with your payments processor. Depending on the processor and payment acceptance type this may also be the default Terminal ID used for Card Present and Virtual Terminal transactions.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;255&lt;/td&gt;&lt;td&gt;^[0-9:&amp;#92;-]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>The &#39;Terminal Id&#39; aka TID, is an identifier used for with your payments processor. Depending on the processor and payment acceptance type this may also be the default Terminal ID used for Card Present and Virtual Terminal transactions.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;255&lt;/td&gt;&lt;td&gt;^[0-9:&amp;#92;-]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="terminalId", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalId { get; set; }
 
         /// <summary>
@@ -126,15 +135,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CardProcessingConfigFeaturesCardNotPresentPayouts {\n");
-            if (ReimbursementCode != null) sb.Append("  ReimbursementCode: ").Append(ReimbursementCode).Append("\n");
-            if (AcquiringInstitutionId != null) sb.Append("  AcquiringInstitutionId: ").Append(AcquiringInstitutionId).Append("\n");
-            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(BusinessApplicationId).Append("\n");
-            if (FinancialInstitutionId != null) sb.Append("  FinancialInstitutionId: ").Append(FinancialInstitutionId).Append("\n");
-            if (MerchantAbaNumber != null) sb.Append("  MerchantAbaNumber: ").Append(MerchantAbaNumber).Append("\n");
-            if (NetworkOrder != null) sb.Append("  NetworkOrder: ").Append(NetworkOrder).Append("\n");
-            if (Currencies != null) sb.Append("  Currencies: ").Append(Currencies).Append("\n");
-            if (MerchantId != null) sb.Append("  MerchantId: ").Append(MerchantId).Append("\n");
-            if (TerminalId != null) sb.Append("  TerminalId: ").Append(TerminalId).Append("\n");
+            if (ReimbursementCode != null) sb.Append("  ReimbursementCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayouts", "reimbursementCode", ReimbursementCode.ToString())).Append("\n");
+            if (AcquiringInstitutionId != null) sb.Append("  AcquiringInstitutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayouts", "acquiringInstitutionId", AcquiringInstitutionId.ToString())).Append("\n");
+            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayouts", "businessApplicationId", BusinessApplicationId.ToString())).Append("\n");
+            if (FinancialInstitutionId != null) sb.Append("  FinancialInstitutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayouts", "financialInstitutionId", FinancialInstitutionId.ToString())).Append("\n");
+            if (MerchantAbaNumber != null) sb.Append("  MerchantAbaNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayouts", "merchantAbaNumber", MerchantAbaNumber.ToString())).Append("\n");
+            if (NetworkOrder != null) sb.Append("  NetworkOrder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayouts", "networkOrder", NetworkOrder.ToString())).Append("\n");
+            if (Currencies != null) sb.Append("  Currencies: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayouts", "currencies", Currencies.ToString())).Append("\n");
+            if (MerchantId != null) sb.Append("  MerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayouts", "merchantId", MerchantId.ToString())).Append("\n");
+            if (TerminalId != null) sb.Append("  TerminalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresentPayouts", "terminalId", TerminalId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -145,7 +154,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CardProcessingConfigFeaturesCardNotPresentPayouts", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

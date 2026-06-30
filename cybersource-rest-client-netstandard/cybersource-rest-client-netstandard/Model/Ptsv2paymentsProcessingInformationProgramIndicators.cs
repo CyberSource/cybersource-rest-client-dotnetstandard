@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Indicator for when a Quick Payment transaction. A Quick Payment Service (QPS) Transaction is a magnetic stripe-based or contact chip-based face-to-face Mastercard POS transaction that occurs at a Peruvian merchant in an eligible merchant category and for an amount equal or less to the CVM limit.  This field is supported for Mastercard transactions in Peru.  Possible values: - &#x60;true&#x60;: This is a Quick Payment Service transaction - &#x60;false&#x60;: This is not a Quick Payment Service transaction  Default: null 
         /// </summary>
         /// <value>Indicator for when a Quick Payment transaction. A Quick Payment Service (QPS) Transaction is a magnetic stripe-based or contact chip-based face-to-face Mastercard POS transaction that occurs at a Peruvian merchant in an eligible merchant category and for an amount equal or less to the CVM limit.  This field is supported for Mastercard transactions in Peru.  Possible values: - &#x60;true&#x60;: This is a Quick Payment Service transaction - &#x60;false&#x60;: This is not a Quick Payment Service transaction  Default: null </value>
-        [DataMember(Name="quickPayment", EmitDefaultValue=false)]
+        [JsonPropertyName("quickPayment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? QuickPayment { get; set; }
 
         /// <summary>
         /// Indicator that the transaction was made via QR Payment.  This field is supported for Mastercard QR e-commerce payment programs in Peru.  Possible values: - &#x60;true&#x60;: Transaction was initiated via QR code - &#x60;false&#x60;: Transaction was not initiated via QR code  Default: null 
         /// </summary>
         /// <value>Indicator that the transaction was made via QR Payment.  This field is supported for Mastercard QR e-commerce payment programs in Peru.  Possible values: - &#x60;true&#x60;: Transaction was initiated via QR code - &#x60;false&#x60;: Transaction was not initiated via QR code  Default: null </value>
-        [DataMember(Name="qrInitiated", EmitDefaultValue=false)]
+        [JsonPropertyName("qrInitiated")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? QrInitiated { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsProcessingInformationProgramIndicators {\n");
-            if (QuickPayment != null) sb.Append("  QuickPayment: ").Append(QuickPayment).Append("\n");
-            if (QrInitiated != null) sb.Append("  QrInitiated: ").Append(QrInitiated).Append("\n");
+            if (QuickPayment != null) sb.Append("  QuickPayment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationProgramIndicators", "quickPayment", QuickPayment.ToString())).Append("\n");
+            if (QrInitiated != null) sb.Append("  QrInitiated: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationProgramIndicators", "qrInitiated", QrInitiated.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsProcessingInformationProgramIndicators", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

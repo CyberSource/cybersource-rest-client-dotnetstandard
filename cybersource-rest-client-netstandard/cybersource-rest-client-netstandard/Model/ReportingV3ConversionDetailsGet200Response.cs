@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,25 +49,29 @@ namespace CyberSource.Model
         /// Merchant Id
         /// </summary>
         /// <value>Merchant Id</value>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// Gets or Sets StartTime
         /// </summary>
-        [DataMember(Name="startTime", EmitDefaultValue=false)]
+        [JsonPropertyName("startTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? StartTime { get; set; }
 
         /// <summary>
         /// Gets or Sets EndTime
         /// </summary>
-        [DataMember(Name="endTime", EmitDefaultValue=false)]
+        [JsonPropertyName("endTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? EndTime { get; set; }
 
         /// <summary>
         /// Gets or Sets ConversionDetails
         /// </summary>
-        [DataMember(Name="conversionDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("conversionDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3ConversionDetailsGet200ResponseConversionDetails> ConversionDetails { get; set; }
 
         /// <summary>
@@ -78,10 +82,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3ConversionDetailsGet200Response {\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (StartTime != null) sb.Append("  StartTime: ").Append(StartTime).Append("\n");
-            if (EndTime != null) sb.Append("  EndTime: ").Append(EndTime).Append("\n");
-            if (ConversionDetails != null) sb.Append("  ConversionDetails: ").Append(ConversionDetails).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200Response", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (StartTime != null) sb.Append("  StartTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200Response", "startTime", StartTime.ToString())).Append("\n");
+            if (EndTime != null) sb.Append("  EndTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200Response", "endTime", EndTime.ToString())).Append("\n");
+            if (ConversionDetails != null) sb.Append("  ConversionDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200Response", "conversionDetails", ConversionDetails.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -92,7 +96,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3ConversionDetailsGet200Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

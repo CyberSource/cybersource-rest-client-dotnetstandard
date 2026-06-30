@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,13 +45,15 @@ namespace CyberSource.Model
         /// Cardholder authentication verification value (CAVV).   Conditional: this field is mandatory if the transaction is using either a Visa or Visa Electron card, and if the commerce indicator is &#x3D; &#x60;VBV&#x60;.  If in hexabinary format, length of field value must be &#x3D;40.   If in base64 format, length of field must be &#x3D;28. 
         /// </summary>
         /// <value>Cardholder authentication verification value (CAVV).   Conditional: this field is mandatory if the transaction is using either a Visa or Visa Electron card, and if the commerce indicator is &#x3D; &#x60;VBV&#x60;.  If in hexabinary format, length of field value must be &#x3D;40.   If in base64 format, length of field must be &#x3D;28. </value>
-        [DataMember(Name="cavv", EmitDefaultValue=false)]
+        [JsonPropertyName("cavv")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Cavv { get; set; }
 
         /// <summary>
         /// Gets or Sets StrongAuthentication
         /// </summary>
-        [DataMember(Name="strongAuthentication", EmitDefaultValue=false)]
+        [JsonPropertyName("strongAuthentication")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv1pullfundstransferSenderInformationConsumerAuthenticationStrongAuthentication StrongAuthentication { get; set; }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferSenderInformationConsumerAuthentication {\n");
-            if (Cavv != null) sb.Append("  Cavv: ").Append(Cavv).Append("\n");
-            if (StrongAuthentication != null) sb.Append("  StrongAuthentication: ").Append(StrongAuthentication).Append("\n");
+            if (Cavv != null) sb.Append("  Cavv: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationConsumerAuthentication", "cavv", Cavv.ToString())).Append("\n");
+            if (StrongAuthentication != null) sb.Append("  StrongAuthentication: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationConsumerAuthentication", "strongAuthentication", StrongAuthentication.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,7 +76,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferSenderInformationConsumerAuthentication", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

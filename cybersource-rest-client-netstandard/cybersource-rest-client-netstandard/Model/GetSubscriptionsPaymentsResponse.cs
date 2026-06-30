@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -52,41 +52,47 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public GetSubscriptionsPaymentsResponseLinks Links { get; set; }
 
         /// <summary>
         /// Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC.  Returned by Cybersource for all services. 
         /// </summary>
         /// <value>Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC.  Returned by Cybersource for all services. </value>
-        [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("submitTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubmitTimeUtc { get; set; }
 
         /// <summary>
         /// Total number of payments returned for the subscription, including both past payments and those specified in scheduledPaymentsCount.
         /// </summary>
         /// <value>Total number of payments returned for the subscription, including both past payments and those specified in scheduledPaymentsCount.</value>
-        [DataMember(Name="totalCount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? TotalCount { get; set; }
 
         /// <summary>
         /// Gets or Sets CyclesCompletedCount
         /// </summary>
-        [DataMember(Name="cyclesCompletedCount", EmitDefaultValue=false)]
+        [JsonPropertyName("cyclesCompletedCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public GetSubscriptionsPaymentsResponseCyclesCompletedCount CyclesCompletedCount { get; set; }
 
         /// <summary>
         /// A list of billing cycles that are marked to be skipped.
         /// </summary>
         /// <value>A list of billing cycles that are marked to be skipped.</value>
-        [DataMember(Name="billingCyclesToSkip", EmitDefaultValue=false)]
+        [JsonPropertyName("billingCyclesToSkip")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<int?> BillingCyclesToSkip { get; set; }
 
         /// <summary>
         /// The list of subscription payment details.
         /// </summary>
         /// <value>The list of subscription payment details.</value>
-        [DataMember(Name="subscriptionPayment", EmitDefaultValue=false)]
+        [JsonPropertyName("subscriptionPayment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<GetSubscriptionsPaymentsResponseSubscriptionPayment> SubscriptionPayment { get; set; }
 
         /// <summary>
@@ -97,12 +103,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class GetSubscriptionsPaymentsResponse {\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
-            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
-            if (TotalCount != null) sb.Append("  TotalCount: ").Append(TotalCount).Append("\n");
-            if (CyclesCompletedCount != null) sb.Append("  CyclesCompletedCount: ").Append(CyclesCompletedCount).Append("\n");
-            if (BillingCyclesToSkip != null) sb.Append("  BillingCyclesToSkip: ").Append(BillingCyclesToSkip).Append("\n");
-            if (SubscriptionPayment != null) sb.Append("  SubscriptionPayment: ").Append(SubscriptionPayment).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionsPaymentsResponse", "_links", Links.ToString())).Append("\n");
+            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionsPaymentsResponse", "submitTimeUtc", SubmitTimeUtc.ToString())).Append("\n");
+            if (TotalCount != null) sb.Append("  TotalCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionsPaymentsResponse", "totalCount", TotalCount.ToString())).Append("\n");
+            if (CyclesCompletedCount != null) sb.Append("  CyclesCompletedCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionsPaymentsResponse", "cyclesCompletedCount", CyclesCompletedCount.ToString())).Append("\n");
+            if (BillingCyclesToSkip != null) sb.Append("  BillingCyclesToSkip: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionsPaymentsResponse", "billingCyclesToSkip", BillingCyclesToSkip.ToString())).Append("\n");
+            if (SubscriptionPayment != null) sb.Append("  SubscriptionPayment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionsPaymentsResponse", "subscriptionPayment", SubscriptionPayment.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -113,7 +119,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("GetSubscriptionsPaymentsResponse", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Source of funds. Possible values: - &#x60;01&#x60;: Credit card, - &#x60;02&#x60;: Debit card, - &#x60;03&#x60;: Prepaid card, - &#x60;04&#x60;: Cash, - &#x60;05&#x60;: Debit or deposit account that is not linked to a Visa card. Includes checking accounts, savings, - &#x60;06&#x60;: Credit account that is not linked to a Visa card. Includes credit cards and proprietary lines, - &#x60;07&#x60;: Mobile wallet account, - &#x60;08&#x60;: Other source of funds. 
         /// </summary>
         /// <value>Source of funds. Possible values: - &#x60;01&#x60;: Credit card, - &#x60;02&#x60;: Debit card, - &#x60;03&#x60;: Prepaid card, - &#x60;04&#x60;: Cash, - &#x60;05&#x60;: Debit or deposit account that is not linked to a Visa card. Includes checking accounts, savings, - &#x60;06&#x60;: Credit account that is not linked to a Visa card. Includes credit cards and proprietary lines, - &#x60;07&#x60;: Mobile wallet account, - &#x60;08&#x60;: Other source of funds. </value>
-        [DataMember(Name="fundsSource", EmitDefaultValue=false)]
+        [JsonPropertyName("fundsSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FundsSource { get; set; }
 
         /// <summary>
         /// - Cross-border: Account number of the recipient account being funded by the AFT, is mandatory in cross-border Money Transfer AFTs. - Domestic: Optional in domestic AFTs. - Europe Domestic and intra-EEA cross-border: Account number of the recipient account being funded is mandatory in domestic and intra-EEA Money Transfer AFTs. In an AFT, this field contains the account number of the Recipient Account being funded by the AFT. Note: Inclusion of this tag is conditional; Sender Information reference number or Sender account number are required. If this tag is not included, Sender Reference number must be present and contain a reference number for the recipient account. 
         /// </summary>
         /// <value>- Cross-border: Account number of the recipient account being funded by the AFT, is mandatory in cross-border Money Transfer AFTs. - Domestic: Optional in domestic AFTs. - Europe Domestic and intra-EEA cross-border: Account number of the recipient account being funded is mandatory in domestic and intra-EEA Money Transfer AFTs. In an AFT, this field contains the account number of the Recipient Account being funded by the AFT. Note: Inclusion of this tag is conditional; Sender Information reference number or Sender account number are required. If this tag is not included, Sender Reference number must be present and contain a reference number for the recipient account. </value>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Number { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferSenderInformationAccount {\n");
-            if (FundsSource != null) sb.Append("  FundsSource: ").Append(FundsSource).Append("\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
+            if (FundsSource != null) sb.Append("  FundsSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationAccount", "fundsSource", FundsSource.ToString())).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationAccount", "number", Number.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferSenderInformationAccount", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

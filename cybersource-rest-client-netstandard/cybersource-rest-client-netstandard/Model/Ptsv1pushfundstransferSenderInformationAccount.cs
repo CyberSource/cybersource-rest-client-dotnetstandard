@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Source of funds. Possible values:  - &#x60;01&#x60;: Credit card - &#x60;02&#x60;: Debit card - &#x60;03&#x60;: Prepaid card - &#x60;04&#x60;: Cash/Deposit Account - &#x60;05&#x60;: Debit or deposit account that is not linked to a Visa card. Includes checking accounts, savings accounts, and proprietary debit or ATM cards. - &#x60;06&#x60;: Credit account that is not linked to a Visa card. Includes credit cards and proprietary lines of credit.  Funds Disbursement This value is most likely 05 to identify that the originator used a deposit account to fund the disbursement.  Credit Card Bill Payment This value must be 02, 03, 04, or 05. 
         /// </summary>
         /// <value>Source of funds. Possible values:  - &#x60;01&#x60;: Credit card - &#x60;02&#x60;: Debit card - &#x60;03&#x60;: Prepaid card - &#x60;04&#x60;: Cash/Deposit Account - &#x60;05&#x60;: Debit or deposit account that is not linked to a Visa card. Includes checking accounts, savings accounts, and proprietary debit or ATM cards. - &#x60;06&#x60;: Credit account that is not linked to a Visa card. Includes credit cards and proprietary lines of credit.  Funds Disbursement This value is most likely 05 to identify that the originator used a deposit account to fund the disbursement.  Credit Card Bill Payment This value must be 02, 03, 04, or 05. </value>
-        [DataMember(Name="fundsSource", EmitDefaultValue=false)]
+        [JsonPropertyName("fundsSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FundsSource { get; set; }
 
         /// <summary>
         /// The account number of the entity funding the transaction. It is the sender&#39;s account number. It can be a debit/credit card account number or bank account number.  Funds disbursements  This field is optional.  All other transactions  This field is required when the sender funds the transaction with a financial instrument, for example debit card. Length: 
         /// </summary>
         /// <value>The account number of the entity funding the transaction. It is the sender&#39;s account number. It can be a debit/credit card account number or bank account number.  Funds disbursements  This field is optional.  All other transactions  This field is required when the sender funds the transaction with a financial instrument, for example debit card. Length: </value>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Number { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pushfundstransferSenderInformationAccount {\n");
-            if (FundsSource != null) sb.Append("  FundsSource: ").Append(FundsSource).Append("\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
+            if (FundsSource != null) sb.Append("  FundsSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pushfundstransferSenderInformationAccount", "fundsSource", FundsSource.ToString())).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pushfundstransferSenderInformationAccount", "number", Number.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pushfundstransferSenderInformationAccount", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

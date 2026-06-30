@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Indicates if the card number should be nullified (i.e. not stored)
         /// </summary>
         /// <value>Indicates if the card number should be nullified (i.e. not stored)</value>
-        [DataMember(Name="instrumentIdentifierCardNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentIdentifierCardNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? InstrumentIdentifierCardNumber { get; set; }
 
         /// <summary>
         /// Indicates if the expiration date associated to the instrument identifier should be nullified (i.e. not stored)
         /// </summary>
         /// <value>Indicates if the expiration date associated to the instrument identifier should be nullified (i.e. not stored)</value>
-        [DataMember(Name="instrumentIdentifierCardExpiration", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentIdentifierCardExpiration")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? InstrumentIdentifierCardExpiration { get; set; }
 
         /// <summary>
         /// Indicates if the card details should be nullified (i.e. not stored)
         /// </summary>
         /// <value>Indicates if the card details should be nullified (i.e. not stored)</value>
-        [DataMember(Name="paymentInstrumentCardDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInstrumentCardDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PaymentInstrumentCardDetails { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsNullify {\n");
-            if (InstrumentIdentifierCardNumber != null) sb.Append("  InstrumentIdentifierCardNumber: ").Append(InstrumentIdentifierCardNumber).Append("\n");
-            if (InstrumentIdentifierCardExpiration != null) sb.Append("  InstrumentIdentifierCardExpiration: ").Append(InstrumentIdentifierCardExpiration).Append("\n");
-            if (PaymentInstrumentCardDetails != null) sb.Append("  PaymentInstrumentCardDetails: ").Append(PaymentInstrumentCardDetails).Append("\n");
+            if (InstrumentIdentifierCardNumber != null) sb.Append("  InstrumentIdentifierCardNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNullify", "instrumentIdentifierCardNumber", InstrumentIdentifierCardNumber.ToString())).Append("\n");
+            if (InstrumentIdentifierCardExpiration != null) sb.Append("  InstrumentIdentifierCardExpiration: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNullify", "instrumentIdentifierCardExpiration", InstrumentIdentifierCardExpiration.ToString())).Append("\n");
+            if (PaymentInstrumentCardDetails != null) sb.Append("  PaymentInstrumentCardDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNullify", "paymentInstrumentCardDetails", PaymentInstrumentCardDetails.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsNullify", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

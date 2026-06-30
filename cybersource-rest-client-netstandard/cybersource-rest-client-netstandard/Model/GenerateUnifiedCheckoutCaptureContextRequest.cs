@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -65,79 +65,91 @@ namespace CyberSource.Model
         /// Specify the version of Unified Checkout that you want to use.
         /// </summary>
         /// <value>Specify the version of Unified Checkout that you want to use.</value>
-        [DataMember(Name="clientVersion", EmitDefaultValue=false)]
+        [JsonPropertyName("clientVersion")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientVersion { get; set; }
 
         /// <summary>
         /// The [target origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin) of the website on which you will be launching Unified Checkout is defined by the scheme (protocol), hostname (domain) and port number (if used).    You must use https://hostname (unless you use http://localhost) Wildcards are NOT supported.  Ensure that subdomains are included. Any valid top-level domain is supported (e.g. .com, .co.uk, .gov.br etc)  Examples:   - https://example.com   - https://subdomain.example.com   - https://example.com:8080&lt;br&gt;&lt;br&gt;  If you are embedding within multiple nested iframes you need to specify the origins of all the browser contexts used, for example:    targetOrigins: [     \&quot;https://example.com\&quot;,     \&quot;https://basket.example.com\&quot;,     \&quot;https://ecom.example.com\&quot;   ] 
         /// </summary>
         /// <value>The [target origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin) of the website on which you will be launching Unified Checkout is defined by the scheme (protocol), hostname (domain) and port number (if used).    You must use https://hostname (unless you use http://localhost) Wildcards are NOT supported.  Ensure that subdomains are included. Any valid top-level domain is supported (e.g. .com, .co.uk, .gov.br etc)  Examples:   - https://example.com   - https://subdomain.example.com   - https://example.com:8080&lt;br&gt;&lt;br&gt;  If you are embedding within multiple nested iframes you need to specify the origins of all the browser contexts used, for example:    targetOrigins: [     \&quot;https://example.com\&quot;,     \&quot;https://basket.example.com\&quot;,     \&quot;https://ecom.example.com\&quot;   ] </value>
-        [DataMember(Name="targetOrigins", EmitDefaultValue=false)]
+        [JsonPropertyName("targetOrigins")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> TargetOrigins { get; set; }
 
         /// <summary>
         /// The list of card networks you want to use for this Unified Checkout transaction.  Unified Checkout currently supports the following card networks:     - VISA     - MASTERCARD     - AMEX     - CARNET     - CARTESBANCAIRES     - CUP     - DINERSCLUB     - DISCOVER     - EFTPOS     - ELO     - JAYWAN     - JCB     - JCREW     - KCP     - MADA     - MAESTRO     - MEEZA     - PAYPAK     - UATP 
         /// </summary>
         /// <value>The list of card networks you want to use for this Unified Checkout transaction.  Unified Checkout currently supports the following card networks:     - VISA     - MASTERCARD     - AMEX     - CARNET     - CARTESBANCAIRES     - CUP     - DINERSCLUB     - DISCOVER     - EFTPOS     - ELO     - JAYWAN     - JCB     - JCREW     - KCP     - MADA     - MAESTRO     - MEEZA     - PAYPAK     - UATP </value>
-        [DataMember(Name="allowedCardNetworks", EmitDefaultValue=false)]
+        [JsonPropertyName("allowedCardNetworks")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> AllowedCardNetworks { get; set; }
 
         /// <summary>
         /// The payment types that are allowed for the merchant.    Possible values when launching Unified Checkout:   - APPLEPAY   - CHECK   - CLICKTOPAY   - GOOGLEPAY   - PANENTRY                 - PAZE &lt;br&gt;&lt;br&gt;  Unified Checkout supports the following Buy Now, Pay Later (BNPL) payment methods:   - AFTERPAY&lt;br&gt;&lt;br&gt;  Unified Checkout supports the following Online Bank Transfer payment methods:   - Bancontact (BE)   - DragonPay (PH)   - iDEAL (NL)   - Multibanco (PT)   - MyBank (IT, BE, PT, ES)   - Przelewy24|P24 (PL)   - Tink Pay By Bank (GB)&lt;br&gt;&lt;br&gt;    Unified Checkout supports the following Post-Pay Reference payment methods:   - Konbini (JP)&lt;br&gt;&lt;br&gt;  Possible values when launching Click To Pay Drop-In UI: - CLICKTOPAY &lt;br&gt;&lt;br&gt;  **Important:**    - CLICKTOPAY only available for Visa, Mastercard and AMEX for saved cards.   - Visa and Mastercard will look to tokenize using network tokenization for all Click to Pay requests.  Click to Pay uses Click to Pay token requester IDs and not the merchant&#39;s existing token requester.   - Apple Pay, Google Pay, Check, and Paze can be used independently without requiring PAN entry in the allowedPaymentTypes field.&lt;br&gt;&lt;br&gt;  **Managing Google Pay Authentication Types** When you enable Google Pay on Unified Checkout you can specify optional parameters that define the types of card authentication you receive from Google Pay.&lt;br&gt;&lt;br&gt;  **Managing Google Pay Authentication Types** Where Click to Pay is the payment type selected by the customer and the customer manually enters their card, the option to enroll their card in Click to Pay will be auto-checked if this field is set to \&quot;true\&quot;.   This is only available where the merchant and cardholder are based in the following countries and the billing type is set to \&quot;FULL\&quot; or \&quot;PARTIAL\&quot;.   - UAE   - Argentina   - Brazil   - Chile   - Colombia   - Kuwait   - Mexico   - Peru   - Qatar   - Saudi Arabia   - Ukraine   - South Africa&lt;br&gt;&lt;br&gt;  If false, this is not present or not supported in the market.  Enrollment in Click to Pay is not checked for the customer when completing manual card entry. 
         /// </summary>
         /// <value>The payment types that are allowed for the merchant.    Possible values when launching Unified Checkout:   - APPLEPAY   - CHECK   - CLICKTOPAY   - GOOGLEPAY   - PANENTRY                 - PAZE &lt;br&gt;&lt;br&gt;  Unified Checkout supports the following Buy Now, Pay Later (BNPL) payment methods:   - AFTERPAY&lt;br&gt;&lt;br&gt;  Unified Checkout supports the following Online Bank Transfer payment methods:   - Bancontact (BE)   - DragonPay (PH)   - iDEAL (NL)   - Multibanco (PT)   - MyBank (IT, BE, PT, ES)   - Przelewy24|P24 (PL)   - Tink Pay By Bank (GB)&lt;br&gt;&lt;br&gt;    Unified Checkout supports the following Post-Pay Reference payment methods:   - Konbini (JP)&lt;br&gt;&lt;br&gt;  Possible values when launching Click To Pay Drop-In UI: - CLICKTOPAY &lt;br&gt;&lt;br&gt;  **Important:**    - CLICKTOPAY only available for Visa, Mastercard and AMEX for saved cards.   - Visa and Mastercard will look to tokenize using network tokenization for all Click to Pay requests.  Click to Pay uses Click to Pay token requester IDs and not the merchant&#39;s existing token requester.   - Apple Pay, Google Pay, Check, and Paze can be used independently without requiring PAN entry in the allowedPaymentTypes field.&lt;br&gt;&lt;br&gt;  **Managing Google Pay Authentication Types** When you enable Google Pay on Unified Checkout you can specify optional parameters that define the types of card authentication you receive from Google Pay.&lt;br&gt;&lt;br&gt;  **Managing Google Pay Authentication Types** Where Click to Pay is the payment type selected by the customer and the customer manually enters their card, the option to enroll their card in Click to Pay will be auto-checked if this field is set to \&quot;true\&quot;.   This is only available where the merchant and cardholder are based in the following countries and the billing type is set to \&quot;FULL\&quot; or \&quot;PARTIAL\&quot;.   - UAE   - Argentina   - Brazil   - Chile   - Colombia   - Kuwait   - Mexico   - Peru   - Qatar   - Saudi Arabia   - Ukraine   - South Africa&lt;br&gt;&lt;br&gt;  If false, this is not present or not supported in the market.  Enrollment in Click to Pay is not checked for the customer when completing manual card entry. </value>
-        [DataMember(Name="allowedPaymentTypes", EmitDefaultValue=false)]
+        [JsonPropertyName("allowedPaymentTypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> AllowedPaymentTypes { get; set; }
 
         /// <summary>
         /// Country the purchase is originating from (e.g. country of the merchant).  Use the two-character ISO Standard 
         /// </summary>
         /// <value>Country the purchase is originating from (e.g. country of the merchant).  Use the two-character ISO Standard </value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// Localization of the User experience conforming to the ISO 639-1 language standards and two-character ISO Standard Country Code.  Please refer to list of [supported locales through Unified Checkout](https://developer.cybersource.com/docs/cybs/en-us/unified-checkout/developer/all/rest/unified-checkout/uc-appendix-languages.html) 
         /// </summary>
         /// <value>Localization of the User experience conforming to the ISO 639-1 language standards and two-character ISO Standard Country Code.  Please refer to list of [supported locales through Unified Checkout](https://developer.cybersource.com/docs/cybs/en-us/unified-checkout/developer/all/rest/unified-checkout/uc-appendix-languages.html) </value>
-        [DataMember(Name="locale", EmitDefaultValue=false)]
+        [JsonPropertyName("locale")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Locale { get; set; }
 
         /// <summary>
         /// Changes the label on the payment button within Unified Checkout .&lt;br&gt;&lt;br&gt;  Possible values: - ADD_CARD - CARD_PAYMENT - CHECKOUT - CHECKOUT_AND_CONTINUE - DEBIT_CREDIT - DONATE - PAY - PAY_WITH_CARD - SAVE_CARD - SUBSCRIBE_WITH_CARD&lt;br&gt;&lt;br&gt;  This is an optional field, 
         /// </summary>
         /// <value>Changes the label on the payment button within Unified Checkout .&lt;br&gt;&lt;br&gt;  Possible values: - ADD_CARD - CARD_PAYMENT - CHECKOUT - CHECKOUT_AND_CONTINUE - DEBIT_CREDIT - DONATE - PAY - PAY_WITH_CARD - SAVE_CARD - SUBSCRIBE_WITH_CARD&lt;br&gt;&lt;br&gt;  This is an optional field, </value>
-        [DataMember(Name="buttonType", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonType { get; set; }
 
         /// <summary>
         /// Gets or Sets CaptureMandate
         /// </summary>
-        [DataMember(Name="captureMandate", EmitDefaultValue=false)]
+        [JsonPropertyName("captureMandate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsCaptureMandate CaptureMandate { get; set; }
 
         /// <summary>
         /// Gets or Sets CompleteMandate
         /// </summary>
-        [DataMember(Name="completeMandate", EmitDefaultValue=false)]
+        [JsonPropertyName("completeMandate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsCompleteMandate CompleteMandate { get; set; }
 
         /// <summary>
         /// Gets or Sets TransientTokenResponseOptions
         /// </summary>
-        [DataMember(Name="transientTokenResponseOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("transientTokenResponseOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Microformv2sessionsTransientTokenResponseOptions TransientTokenResponseOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets Data
         /// </summary>
-        [DataMember(Name="data", EmitDefaultValue=false)]
+        [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsData Data { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsOrderInformation OrderInformation { get; set; }
 
         /// <summary>
@@ -148,18 +160,18 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class GenerateUnifiedCheckoutCaptureContextRequest {\n");
-            if (ClientVersion != null) sb.Append("  ClientVersion: ").Append(ClientVersion).Append("\n");
-            if (TargetOrigins != null) sb.Append("  TargetOrigins: ").Append(TargetOrigins).Append("\n");
-            if (AllowedCardNetworks != null) sb.Append("  AllowedCardNetworks: ").Append(AllowedCardNetworks).Append("\n");
-            if (AllowedPaymentTypes != null) sb.Append("  AllowedPaymentTypes: ").Append(AllowedPaymentTypes).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (Locale != null) sb.Append("  Locale: ").Append(Locale).Append("\n");
-            if (ButtonType != null) sb.Append("  ButtonType: ").Append(ButtonType).Append("\n");
-            if (CaptureMandate != null) sb.Append("  CaptureMandate: ").Append(CaptureMandate).Append("\n");
-            if (CompleteMandate != null) sb.Append("  CompleteMandate: ").Append(CompleteMandate).Append("\n");
-            if (TransientTokenResponseOptions != null) sb.Append("  TransientTokenResponseOptions: ").Append(TransientTokenResponseOptions).Append("\n");
-            if (Data != null) sb.Append("  Data: ").Append(Data).Append("\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
+            if (ClientVersion != null) sb.Append("  ClientVersion: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "clientVersion", ClientVersion.ToString())).Append("\n");
+            if (TargetOrigins != null) sb.Append("  TargetOrigins: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "targetOrigins", TargetOrigins.ToString())).Append("\n");
+            if (AllowedCardNetworks != null) sb.Append("  AllowedCardNetworks: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "allowedCardNetworks", AllowedCardNetworks.ToString())).Append("\n");
+            if (AllowedPaymentTypes != null) sb.Append("  AllowedPaymentTypes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "allowedPaymentTypes", AllowedPaymentTypes.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "country", Country.ToString())).Append("\n");
+            if (Locale != null) sb.Append("  Locale: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "locale", Locale.ToString())).Append("\n");
+            if (ButtonType != null) sb.Append("  ButtonType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "buttonType", ButtonType.ToString())).Append("\n");
+            if (CaptureMandate != null) sb.Append("  CaptureMandate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "captureMandate", CaptureMandate.ToString())).Append("\n");
+            if (CompleteMandate != null) sb.Append("  CompleteMandate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "completeMandate", CompleteMandate.ToString())).Append("\n");
+            if (TransientTokenResponseOptions != null) sb.Append("  TransientTokenResponseOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "transientTokenResponseOptions", TransientTokenResponseOptions.ToString())).Append("\n");
+            if (Data != null) sb.Append("  Data: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "data", Data.ToString())).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GenerateUnifiedCheckoutCaptureContextRequest", "orderInformation", OrderInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -170,7 +182,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("GenerateUnifiedCheckoutCaptureContextRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

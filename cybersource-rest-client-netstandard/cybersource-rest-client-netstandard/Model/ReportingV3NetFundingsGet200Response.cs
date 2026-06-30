@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,56 +57,64 @@ namespace CyberSource.Model
         /// Valid report Start Date in **ISO 8601 format**. Please refer the following link to know more about ISO 8601 format.[Rfc Date Format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)  **Example:** - yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ 
         /// </summary>
         /// <value>Valid report Start Date in **ISO 8601 format**. Please refer the following link to know more about ISO 8601 format.[Rfc Date Format](https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14)  **Example:** - yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ </value>
-        [DataMember(Name="startTime", EmitDefaultValue=false)]
+        [JsonPropertyName("startTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? StartTime { get; set; }
 
         /// <summary>
         /// Valid report End Date in **ISO 8601 format** **Example date format:** - yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ 
         /// </summary>
         /// <value>Valid report End Date in **ISO 8601 format** **Example date format:** - yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSZZ </value>
-        [DataMember(Name="endTime", EmitDefaultValue=false)]
+        [JsonPropertyName("endTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? EndTime { get; set; }
 
         /// <summary>
         /// List of Netfunding summary objects
         /// </summary>
         /// <value>List of Netfunding summary objects</value>
-        [DataMember(Name="netFundingSummaries", EmitDefaultValue=false)]
+        [JsonPropertyName("netFundingSummaries")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3NetFundingsGet200ResponseNetFundingSummaries> NetFundingSummaries { get; set; }
 
         /// <summary>
         /// List of total purchases currency wise
         /// </summary>
         /// <value>List of total purchases currency wise</value>
-        [DataMember(Name="totalPurchases", EmitDefaultValue=false)]
+        [JsonPropertyName("totalPurchases")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3NetFundingsGet200ResponseTotalPurchases> TotalPurchases { get; set; }
 
         /// <summary>
         /// List of total refunds currency wise
         /// </summary>
         /// <value>List of total refunds currency wise</value>
-        [DataMember(Name="totalRefunds", EmitDefaultValue=false)]
+        [JsonPropertyName("totalRefunds")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3NetFundingsGet200ResponseTotalPurchases> TotalRefunds { get; set; }
 
         /// <summary>
         /// List of total fees currency wise
         /// </summary>
         /// <value>List of total fees currency wise</value>
-        [DataMember(Name="totalFees", EmitDefaultValue=false)]
+        [JsonPropertyName("totalFees")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3NetFundingsGet200ResponseTotalPurchases> TotalFees { get; set; }
 
         /// <summary>
         /// List of total chargebacks currency wise
         /// </summary>
         /// <value>List of total chargebacks currency wise</value>
-        [DataMember(Name="totalChargebacks", EmitDefaultValue=false)]
+        [JsonPropertyName("totalChargebacks")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3NetFundingsGet200ResponseTotalPurchases> TotalChargebacks { get; set; }
 
         /// <summary>
         /// List of new total currency wise
         /// </summary>
         /// <value>List of new total currency wise</value>
-        [DataMember(Name="netTotal", EmitDefaultValue=false)]
+        [JsonPropertyName("netTotal")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3NetFundingsGet200ResponseTotalPurchases> NetTotal { get; set; }
 
         /// <summary>
@@ -117,14 +125,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3NetFundingsGet200Response {\n");
-            if (StartTime != null) sb.Append("  StartTime: ").Append(StartTime).Append("\n");
-            if (EndTime != null) sb.Append("  EndTime: ").Append(EndTime).Append("\n");
-            if (NetFundingSummaries != null) sb.Append("  NetFundingSummaries: ").Append(NetFundingSummaries).Append("\n");
-            if (TotalPurchases != null) sb.Append("  TotalPurchases: ").Append(TotalPurchases).Append("\n");
-            if (TotalRefunds != null) sb.Append("  TotalRefunds: ").Append(TotalRefunds).Append("\n");
-            if (TotalFees != null) sb.Append("  TotalFees: ").Append(TotalFees).Append("\n");
-            if (TotalChargebacks != null) sb.Append("  TotalChargebacks: ").Append(TotalChargebacks).Append("\n");
-            if (NetTotal != null) sb.Append("  NetTotal: ").Append(NetTotal).Append("\n");
+            if (StartTime != null) sb.Append("  StartTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200Response", "startTime", StartTime.ToString())).Append("\n");
+            if (EndTime != null) sb.Append("  EndTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200Response", "endTime", EndTime.ToString())).Append("\n");
+            if (NetFundingSummaries != null) sb.Append("  NetFundingSummaries: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200Response", "netFundingSummaries", NetFundingSummaries.ToString())).Append("\n");
+            if (TotalPurchases != null) sb.Append("  TotalPurchases: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200Response", "totalPurchases", TotalPurchases.ToString())).Append("\n");
+            if (TotalRefunds != null) sb.Append("  TotalRefunds: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200Response", "totalRefunds", TotalRefunds.ToString())).Append("\n");
+            if (TotalFees != null) sb.Append("  TotalFees: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200Response", "totalFees", TotalFees.ToString())).Append("\n");
+            if (TotalChargebacks != null) sb.Append("  TotalChargebacks: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200Response", "totalChargebacks", TotalChargebacks.ToString())).Append("\n");
+            if (NetTotal != null) sb.Append("  NetTotal: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200Response", "netTotal", NetTotal.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -135,7 +143,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3NetFundingsGet200Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

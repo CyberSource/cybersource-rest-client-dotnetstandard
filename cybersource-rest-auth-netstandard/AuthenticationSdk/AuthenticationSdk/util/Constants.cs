@@ -14,7 +14,7 @@ namespace AuthenticationSdk.util
 
         public static readonly string HostName = "apitest.cybersource.com";
 
-        public static readonly string HideMerchantConfigProps = "MerchantSecretKey, MerchantKeyId, KeyAlias, KeyPassword, KeyPass, RequestJsonData, ClientCertPassword ";
+        public static readonly string HideMerchantConfigProps = "MerchantSecretKey, MerchantKeyId, KeyAlias, KeyPassword, KeyPass, RequestJsonData, ClientCertPassword, ClientSecret, ClientId, AccessToken, RefreshToken, ProxyPassword, ProxyUsername, ResponseMlePrivateKeyFilePassword, ResponseMleKID ";
 
         public static readonly List<string> OldRunEnvironmentConstants = new List<string> { "CYBERSOURCE.ENVIRONMENT.SANDBOX", "CYBERSOURCE.ENVIRONMENT.PRODUCTION", "CYBERSOURCE.ENVIRONMENT.MUTUALAUTH.SANDBOX", "CYBERSOURCE.ENVIRONMENT.MUTUALAUTH.PRODUCTION", "BANKOFAMERICA.ENVIRONMENT.SANDBOX", "BANKOFAMERICA.ENVIRONMENT.PRODUCTION", "CYBERSOURCE.IN.ENVIRONMENT.SANDBOX", "CYBESOURCE.IN.ENVIRONMENT.PRODUCTION", "CYBESOURCE.ENVIRONMENT.MUTUALAUTH.SIT" };
 
@@ -50,7 +50,7 @@ namespace AuthenticationSdk.util
 
         public static readonly string DEFAULT_TIME_OUT = "100000"; // Time in milliseconds
 
-        public static readonly string DefaultMaxConnectionPoolSize = $"{int.MaxValue}";
+        public static readonly string DefaultMaxConnectionPoolSize = "100";
 
         // https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient.timeout?view=net-9.0
         public static readonly string DefaultKeepAliveTime = "300000"; // Time in milliseconds

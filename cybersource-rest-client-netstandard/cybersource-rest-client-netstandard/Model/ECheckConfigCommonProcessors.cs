@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ECheckConfigCommonProcessors" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected ECheckConfigCommonProcessors() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ECheckConfigCommonProcessors" /> class.
@@ -82,42 +82,48 @@ namespace CyberSource.Model
         /// *EXISTING* Company (merchant) defined description of entry to receive.  For e.g. PAYROLL, GAS BILL, INS PREM. This field is alphanumeric
         /// </summary>
         /// <value>*EXISTING* Company (merchant) defined description of entry to receive.  For e.g. PAYROLL, GAS BILL, INS PREM. This field is alphanumeric</value>
-        [DataMember(Name="companyEntryDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("companyEntryDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CompanyEntryDescription { get; set; }
 
         /// <summary>
         /// *EXISTING* company ID assigned to merchant by Acquiring bank. This field is alphanumeric
         /// </summary>
         /// <value>*EXISTING* company ID assigned to merchant by Acquiring bank. This field is alphanumeric</value>
-        [DataMember(Name="companyId", EmitDefaultValue=false)]
+        [JsonPropertyName("companyId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CompanyId { get; set; }
 
         /// <summary>
         /// *EXISTING* Capture requests are grouped into a batch bound for your payment processor. The batch time can be identified by reading the last 2-digits as military time. E.g., &lt;processor&gt;_16 &#x3D; your processing cutoff is 4PM PST. Please note if you are in a different location you may then need to convert time zone as well.
         /// </summary>
         /// <value>*EXISTING* Capture requests are grouped into a batch bound for your payment processor. The batch time can be identified by reading the last 2-digits as military time. E.g., &lt;processor&gt;_16 &#x3D; your processing cutoff is 4PM PST. Please note if you are in a different location you may then need to convert time zone as well.</value>
-        [DataMember(Name="batchGroup", EmitDefaultValue=false)]
+        [JsonPropertyName("batchGroup")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BatchGroup { get; set; }
 
         /// <summary>
         /// *NEW* Accuity is the original validation service that checks the account/routing number for formatting issues. Used by WF and set to \&quot;Yes\&quot; unless told otherwise
         /// </summary>
         /// <value>*NEW* Accuity is the original validation service that checks the account/routing number for formatting issues. Used by WF and set to \&quot;Yes\&quot; unless told otherwise</value>
-        [DataMember(Name="enableAccuityForAvs", EmitDefaultValue=false)]
+        [JsonPropertyName("enableAccuityForAvs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableAccuityForAvs { get; set; }
 
         /// <summary>
         /// *NEW*  Possible values: - ALWAYS
         /// </summary>
         /// <value>*NEW*  Possible values: - ALWAYS</value>
-        [DataMember(Name="accuityCheckType", EmitDefaultValue=false)]
+        [JsonPropertyName("accuityCheckType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccuityCheckType { get; set; }
 
         /// <summary>
         /// *Moved* When set to Yes we will automatically update transactions to a completed status X-number of days after the transaction comes through; if no failure notification is received. When set to No means we will not update transaction status in this manner. For BAMS/Bank of America merchants, they should be set to No unless we are explicitly asked to set a merchant to YES.
         /// </summary>
         /// <value>*Moved* When set to Yes we will automatically update transactions to a completed status X-number of days after the transaction comes through; if no failure notification is received. When set to No means we will not update transaction status in this manner. For BAMS/Bank of America merchants, they should be set to No unless we are explicitly asked to set a merchant to YES.</value>
-        [DataMember(Name="setCompletedState", EmitDefaultValue=false)]
+        [JsonPropertyName("setCompletedState")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? SetCompletedState { get; set; }
 
         /// <summary>
@@ -128,12 +134,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ECheckConfigCommonProcessors {\n");
-            if (CompanyEntryDescription != null) sb.Append("  CompanyEntryDescription: ").Append(CompanyEntryDescription).Append("\n");
-            if (CompanyId != null) sb.Append("  CompanyId: ").Append(CompanyId).Append("\n");
-            if (BatchGroup != null) sb.Append("  BatchGroup: ").Append(BatchGroup).Append("\n");
-            if (EnableAccuityForAvs != null) sb.Append("  EnableAccuityForAvs: ").Append(EnableAccuityForAvs).Append("\n");
-            if (AccuityCheckType != null) sb.Append("  AccuityCheckType: ").Append(AccuityCheckType).Append("\n");
-            if (SetCompletedState != null) sb.Append("  SetCompletedState: ").Append(SetCompletedState).Append("\n");
+            if (CompanyEntryDescription != null) sb.Append("  CompanyEntryDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonProcessors", "companyEntryDescription", CompanyEntryDescription.ToString())).Append("\n");
+            if (CompanyId != null) sb.Append("  CompanyId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonProcessors", "companyId", CompanyId.ToString())).Append("\n");
+            if (BatchGroup != null) sb.Append("  BatchGroup: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonProcessors", "batchGroup", BatchGroup.ToString())).Append("\n");
+            if (EnableAccuityForAvs != null) sb.Append("  EnableAccuityForAvs: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonProcessors", "enableAccuityForAvs", EnableAccuityForAvs.ToString())).Append("\n");
+            if (AccuityCheckType != null) sb.Append("  AccuityCheckType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonProcessors", "accuityCheckType", AccuityCheckType.ToString())).Append("\n");
+            if (SetCompletedState != null) sb.Append("  SetCompletedState: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommonProcessors", "setCompletedState", SetCompletedState.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -144,7 +150,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ECheckConfigCommonProcessors", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

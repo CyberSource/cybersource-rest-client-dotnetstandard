@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,20 +47,23 @@ namespace CyberSource.Model
         /// The reason of the status.  Possible values: - CONTACT_PROCESSOR - INVALID_MERCHANT_CONFIGURATION - STOLEN_LOST_CARD - PROCESSOR_DECLINED - PARTIAL_APPROVAL - PAYMENT_REFUSED - INVALID_ACCOUNT - ISSUER_UNAVAILABLE - INSUFFICIENT_FUND - EXPIRED_CARD - INVALID_PIN - UNAUTHORIZED_CARD - EXCEEDS_CREDIT_LIMIT - DEBIT_CARD_USAGE_LIMIT_EXCEEDED - CVN_NOT_MATCH - DUPLICATE_REQUEST - GENERAL_DECLINE - BLACKLISTED_CUSTOMER - GATEWAY_TIMEOUT - INVALID_DATA - SYSTEM_ERROR - SERVICE_UNAVAILABLE - PROCESSOR_TIMEOUT - PAYMENT_REJECTED - PULL_PAYMENT_REFUSED 
         /// </summary>
         /// <value>The reason of the status.  Possible values: - CONTACT_PROCESSOR - INVALID_MERCHANT_CONFIGURATION - STOLEN_LOST_CARD - PROCESSOR_DECLINED - PARTIAL_APPROVAL - PAYMENT_REFUSED - INVALID_ACCOUNT - ISSUER_UNAVAILABLE - INSUFFICIENT_FUND - EXPIRED_CARD - INVALID_PIN - UNAUTHORIZED_CARD - EXCEEDS_CREDIT_LIMIT - DEBIT_CARD_USAGE_LIMIT_EXCEEDED - CVN_NOT_MATCH - DUPLICATE_REQUEST - GENERAL_DECLINE - BLACKLISTED_CUSTOMER - GATEWAY_TIMEOUT - INVALID_DATA - SYSTEM_ERROR - SERVICE_UNAVAILABLE - PROCESSOR_TIMEOUT - PAYMENT_REJECTED - PULL_PAYMENT_REFUSED </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
         /// The detail message related to the status and reason listed above. 
         /// </summary>
         /// <value>The detail message related to the status and reason listed above. </value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
         /// Gets or Sets Details
         /// </summary>
-        [DataMember(Name="details", EmitDefaultValue=false)]
+        [JsonPropertyName("details")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<PullFunds201ResponseErrorInformationDetails> Details { get; set; }
 
         /// <summary>
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PullFunds201ResponseErrorInformation {\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
-            if (Details != null) sb.Append("  Details: ").Append(Details).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFunds201ResponseErrorInformation", "reason", Reason.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFunds201ResponseErrorInformation", "message", Message.ToString())).Append("\n");
+            if (Details != null) sb.Append("  Details: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFunds201ResponseErrorInformation", "details", Details.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PullFunds201ResponseErrorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

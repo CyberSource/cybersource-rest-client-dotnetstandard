@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -61,69 +61,79 @@ namespace CyberSource.Model
         /// Merchant reference number of a merchant
         /// </summary>
         /// <value>Merchant reference number of a merchant</value>
-        [DataMember(Name="merchantReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantReferenceNumber { get; set; }
 
         /// <summary>
         /// Date of conversion
         /// </summary>
         /// <value>Date of conversion</value>
-        [DataMember(Name="conversionTime", EmitDefaultValue=false)]
+        [JsonPropertyName("conversionTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? ConversionTime { get; set; }
 
         /// <summary>
         /// Cybersource Transation request id
         /// </summary>
         /// <value>Cybersource Transation request id</value>
-        [DataMember(Name="requestId", EmitDefaultValue=false)]
+        [JsonPropertyName("requestId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestId { get; set; }
 
         /// <summary>
         /// Original decision
         /// </summary>
         /// <value>Original decision</value>
-        [DataMember(Name="originalDecision", EmitDefaultValue=false)]
+        [JsonPropertyName("originalDecision")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalDecision { get; set; }
 
         /// <summary>
         /// New decision
         /// </summary>
         /// <value>New decision</value>
-        [DataMember(Name="newDecision", EmitDefaultValue=false)]
+        [JsonPropertyName("newDecision")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NewDecision { get; set; }
 
         /// <summary>
         /// User name of the reviewer
         /// </summary>
         /// <value>User name of the reviewer</value>
-        [DataMember(Name="reviewer", EmitDefaultValue=false)]
+        [JsonPropertyName("reviewer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reviewer { get; set; }
 
         /// <summary>
         /// Comments of the reviewer
         /// </summary>
         /// <value>Comments of the reviewer</value>
-        [DataMember(Name="reviewerComments", EmitDefaultValue=false)]
+        [JsonPropertyName("reviewerComments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReviewerComments { get; set; }
 
         /// <summary>
         /// Name of the queue
         /// </summary>
         /// <value>Name of the queue</value>
-        [DataMember(Name="queue", EmitDefaultValue=false)]
+        [JsonPropertyName("queue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Queue { get; set; }
 
         /// <summary>
         /// Name of the profile
         /// </summary>
         /// <value>Name of the profile</value>
-        [DataMember(Name="profile", EmitDefaultValue=false)]
+        [JsonPropertyName("profile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Profile { get; set; }
 
         /// <summary>
         /// Gets or Sets Notes
         /// </summary>
-        [DataMember(Name="notes", EmitDefaultValue=false)]
+        [JsonPropertyName("notes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3ConversionDetailsGet200ResponseNotes> Notes { get; set; }
 
         /// <summary>
@@ -134,16 +144,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3ConversionDetailsGet200ResponseConversionDetails {\n");
-            if (MerchantReferenceNumber != null) sb.Append("  MerchantReferenceNumber: ").Append(MerchantReferenceNumber).Append("\n");
-            if (ConversionTime != null) sb.Append("  ConversionTime: ").Append(ConversionTime).Append("\n");
-            if (RequestId != null) sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            if (OriginalDecision != null) sb.Append("  OriginalDecision: ").Append(OriginalDecision).Append("\n");
-            if (NewDecision != null) sb.Append("  NewDecision: ").Append(NewDecision).Append("\n");
-            if (Reviewer != null) sb.Append("  Reviewer: ").Append(Reviewer).Append("\n");
-            if (ReviewerComments != null) sb.Append("  ReviewerComments: ").Append(ReviewerComments).Append("\n");
-            if (Queue != null) sb.Append("  Queue: ").Append(Queue).Append("\n");
-            if (Profile != null) sb.Append("  Profile: ").Append(Profile).Append("\n");
-            if (Notes != null) sb.Append("  Notes: ").Append(Notes).Append("\n");
+            if (MerchantReferenceNumber != null) sb.Append("  MerchantReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseConversionDetails", "merchantReferenceNumber", MerchantReferenceNumber.ToString())).Append("\n");
+            if (ConversionTime != null) sb.Append("  ConversionTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseConversionDetails", "conversionTime", ConversionTime.ToString())).Append("\n");
+            if (RequestId != null) sb.Append("  RequestId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseConversionDetails", "requestId", RequestId.ToString())).Append("\n");
+            if (OriginalDecision != null) sb.Append("  OriginalDecision: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseConversionDetails", "originalDecision", OriginalDecision.ToString())).Append("\n");
+            if (NewDecision != null) sb.Append("  NewDecision: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseConversionDetails", "newDecision", NewDecision.ToString())).Append("\n");
+            if (Reviewer != null) sb.Append("  Reviewer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseConversionDetails", "reviewer", Reviewer.ToString())).Append("\n");
+            if (ReviewerComments != null) sb.Append("  ReviewerComments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseConversionDetails", "reviewerComments", ReviewerComments.ToString())).Append("\n");
+            if (Queue != null) sb.Append("  Queue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseConversionDetails", "queue", Queue.ToString())).Append("\n");
+            if (Profile != null) sb.Append("  Profile: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseConversionDetails", "profile", Profile.ToString())).Append("\n");
+            if (Notes != null) sb.Append("  Notes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseConversionDetails", "notes", Notes.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -154,7 +164,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3ConversionDetailsGet200ResponseConversionDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

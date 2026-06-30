@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -61,65 +61,75 @@ namespace CyberSource.Model
         /// Issuer-generated approval code for the transaction.
         /// </summary>
         /// <value>Issuer-generated approval code for the transaction.</value>
-        [DataMember(Name="approvalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("approvalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApprovalCode { get; set; }
 
         /// <summary>
         /// Transaction status from the processor.
         /// </summary>
         /// <value>Transaction status from the processor.</value>
-        [DataMember(Name="responseCode", EmitDefaultValue=false)]
+        [JsonPropertyName("responseCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseCode { get; set; }
 
         /// <summary>
         /// Network transaction identifier (TID). This value can be used to identify a specific transaction when you are discussing the transaction with your processor. 
         /// </summary>
         /// <value>Network transaction identifier (TID). This value can be used to identify a specific transaction when you are discussing the transaction with your processor. </value>
-        [DataMember(Name="transactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionId { get; set; }
 
         /// <summary>
         /// This field is returned only for **American Express Direct** and **CyberSource through VisaNet**. Returned by authorization and incremental authorization services.  #### American Express Direct  System trace audit number (STAN). This value identifies the transaction and is useful when investigating a chargeback dispute.  #### CyberSource through VisaNet  System trace number that must be printed on the customer&#39;s receipt. 
         /// </summary>
         /// <value>This field is returned only for **American Express Direct** and **CyberSource through VisaNet**. Returned by authorization and incremental authorization services.  #### American Express Direct  System trace audit number (STAN). This value identifies the transaction and is useful when investigating a chargeback dispute.  #### CyberSource through VisaNet  System trace number that must be printed on the customer&#39;s receipt. </value>
-        [DataMember(Name="systemTraceAuditNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("systemTraceAuditNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SystemTraceAuditNumber { get; set; }
 
         /// <summary>
         /// Used by Visa only and contains the response source/reason code that identifies the source of the response decision. 
         /// </summary>
         /// <value>Used by Visa only and contains the response source/reason code that identifies the source of the response decision. </value>
-        [DataMember(Name="responseCodeSource", EmitDefaultValue=false)]
+        [JsonPropertyName("responseCodeSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseCodeSource { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantAdvice
         /// </summary>
-        [DataMember(Name="merchantAdvice", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantAdvice")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsRefundPost201ResponseProcessorInformationMerchantAdvice MerchantAdvice { get; set; }
 
         /// <summary>
         /// Gets or Sets Avs
         /// </summary>
-        [DataMember(Name="avs", EmitDefaultValue=false)]
+        [JsonPropertyName("avs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PayoutsPost201ResponseProcessorInformationAvs Avs { get; set; }
 
         /// <summary>
         /// Gets or Sets Customer
         /// </summary>
-        [DataMember(Name="customer", EmitDefaultValue=false)]
+        [JsonPropertyName("customer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PayoutsPost201ResponseProcessorInformationCustomer Customer { get; set; }
 
         /// <summary>
         /// Gets or Sets ElectronicVerificationResults
         /// </summary>
-        [DataMember(Name="electronicVerificationResults", EmitDefaultValue=false)]
+        [JsonPropertyName("electronicVerificationResults")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PayoutsPost201ResponseProcessorInformationElectronicVerificationResults ElectronicVerificationResults { get; set; }
 
         /// <summary>
         /// Gets or Sets CardVerification
         /// </summary>
-        [DataMember(Name="cardVerification", EmitDefaultValue=false)]
+        [JsonPropertyName("cardVerification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessorInformationCardVerification CardVerification { get; set; }
 
         /// <summary>
@@ -130,16 +140,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PayoutsPost201ResponseProcessorInformation {\n");
-            if (ApprovalCode != null) sb.Append("  ApprovalCode: ").Append(ApprovalCode).Append("\n");
-            if (ResponseCode != null) sb.Append("  ResponseCode: ").Append(ResponseCode).Append("\n");
-            if (TransactionId != null) sb.Append("  TransactionId: ").Append(TransactionId).Append("\n");
-            if (SystemTraceAuditNumber != null) sb.Append("  SystemTraceAuditNumber: ").Append(SystemTraceAuditNumber).Append("\n");
-            if (ResponseCodeSource != null) sb.Append("  ResponseCodeSource: ").Append(ResponseCodeSource).Append("\n");
-            if (MerchantAdvice != null) sb.Append("  MerchantAdvice: ").Append(MerchantAdvice).Append("\n");
-            if (Avs != null) sb.Append("  Avs: ").Append(Avs).Append("\n");
-            if (Customer != null) sb.Append("  Customer: ").Append(Customer).Append("\n");
-            if (ElectronicVerificationResults != null) sb.Append("  ElectronicVerificationResults: ").Append(ElectronicVerificationResults).Append("\n");
-            if (CardVerification != null) sb.Append("  CardVerification: ").Append(CardVerification).Append("\n");
+            if (ApprovalCode != null) sb.Append("  ApprovalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformation", "approvalCode", ApprovalCode.ToString())).Append("\n");
+            if (ResponseCode != null) sb.Append("  ResponseCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformation", "responseCode", ResponseCode.ToString())).Append("\n");
+            if (TransactionId != null) sb.Append("  TransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformation", "transactionId", TransactionId.ToString())).Append("\n");
+            if (SystemTraceAuditNumber != null) sb.Append("  SystemTraceAuditNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformation", "systemTraceAuditNumber", SystemTraceAuditNumber.ToString())).Append("\n");
+            if (ResponseCodeSource != null) sb.Append("  ResponseCodeSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformation", "responseCodeSource", ResponseCodeSource.ToString())).Append("\n");
+            if (MerchantAdvice != null) sb.Append("  MerchantAdvice: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformation", "merchantAdvice", MerchantAdvice.ToString())).Append("\n");
+            if (Avs != null) sb.Append("  Avs: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformation", "avs", Avs.ToString())).Append("\n");
+            if (Customer != null) sb.Append("  Customer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformation", "customer", Customer.ToString())).Append("\n");
+            if (ElectronicVerificationResults != null) sb.Append("  ElectronicVerificationResults: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformation", "electronicVerificationResults", ElectronicVerificationResults.ToString())).Append("\n");
+            if (CardVerification != null) sb.Append("  CardVerification: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformation", "cardVerification", CardVerification.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -150,7 +160,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PayoutsPost201ResponseProcessorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

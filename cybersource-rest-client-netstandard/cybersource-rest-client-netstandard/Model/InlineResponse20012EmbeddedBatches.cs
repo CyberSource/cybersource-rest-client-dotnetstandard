@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -60,69 +60,79 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse20012EmbeddedLinks Links { get; set; }
 
         /// <summary>
         /// Unique identification number assigned to the submitted request.
         /// </summary>
         /// <value>Unique identification number assigned to the submitted request.</value>
-        [DataMember(Name="batchId", EmitDefaultValue=false)]
+        [JsonPropertyName("batchId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BatchId { get; set; }
 
         /// <summary>
         /// ISO-8601 format: yyyy-MM-ddTHH:mm:ssZ
         /// </summary>
         /// <value>ISO-8601 format: yyyy-MM-ddTHH:mm:ssZ</value>
-        [DataMember(Name="batchCreatedDate", EmitDefaultValue=false)]
+        [JsonPropertyName("batchCreatedDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BatchCreatedDate { get; set; }
 
         /// <summary>
         /// ISO-8601 format: yyyy-MM-ddTHH:mm:ssZ
         /// </summary>
         /// <value>ISO-8601 format: yyyy-MM-ddTHH:mm:ssZ</value>
-        [DataMember(Name="batchModifiedDate", EmitDefaultValue=false)]
+        [JsonPropertyName("batchModifiedDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BatchModifiedDate { get; set; }
 
         /// <summary>
         /// Valid Values:   * SCHEDULER   * TOKEN_API   * CREDIT_CARD_FILE_UPLOAD   * AMEX_REGSITRY   * AMEX_REGISTRY_API   * AMEX_REGISTRY_API_SYNC   * AMEX_MAINTENANCE 
         /// </summary>
         /// <value>Valid Values:   * SCHEDULER   * TOKEN_API   * CREDIT_CARD_FILE_UPLOAD   * AMEX_REGSITRY   * AMEX_REGISTRY_API   * AMEX_REGISTRY_API_SYNC   * AMEX_MAINTENANCE </value>
-        [DataMember(Name="batchSource", EmitDefaultValue=false)]
+        [JsonPropertyName("batchSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BatchSource { get; set; }
 
         /// <summary>
         /// Valid Values:   * SECURE_STORAGE   * TMS   * CYBERSOURCE 
         /// </summary>
         /// <value>Valid Values:   * SECURE_STORAGE   * TMS   * CYBERSOURCE </value>
-        [DataMember(Name="tokenSource", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TokenSource { get; set; }
 
         /// <summary>
         /// Reference used by merchant to identify batch.
         /// </summary>
         /// <value>Reference used by merchant to identify batch.</value>
-        [DataMember(Name="merchantReference", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantReference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantReference { get; set; }
 
         /// <summary>
         /// Valid Values:   * VISA   * MASTERCARD   * AMEX 
         /// </summary>
         /// <value>Valid Values:   * VISA   * MASTERCARD   * AMEX </value>
-        [DataMember(Name="batchCaEndpoints", EmitDefaultValue=false)]
+        [JsonPropertyName("batchCaEndpoints")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> BatchCaEndpoints { get; set; }
 
         /// <summary>
         /// Valid Values:   * REJECTED   * RECEIVED   * VALIDATED   * DECLINED   * PROCESSING   * COMPLETE 
         /// </summary>
         /// <value>Valid Values:   * REJECTED   * RECEIVED   * VALIDATED   * DECLINED   * PROCESSING   * COMPLETE </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets Totals
         /// </summary>
-        [DataMember(Name="totals", EmitDefaultValue=false)]
+        [JsonPropertyName("totals")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse20012EmbeddedTotals Totals { get; set; }
 
         /// <summary>
@@ -133,16 +143,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse20012EmbeddedBatches {\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
-            if (BatchId != null) sb.Append("  BatchId: ").Append(BatchId).Append("\n");
-            if (BatchCreatedDate != null) sb.Append("  BatchCreatedDate: ").Append(BatchCreatedDate).Append("\n");
-            if (BatchModifiedDate != null) sb.Append("  BatchModifiedDate: ").Append(BatchModifiedDate).Append("\n");
-            if (BatchSource != null) sb.Append("  BatchSource: ").Append(BatchSource).Append("\n");
-            if (TokenSource != null) sb.Append("  TokenSource: ").Append(TokenSource).Append("\n");
-            if (MerchantReference != null) sb.Append("  MerchantReference: ").Append(MerchantReference).Append("\n");
-            if (BatchCaEndpoints != null) sb.Append("  BatchCaEndpoints: ").Append(BatchCaEndpoints).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (Totals != null) sb.Append("  Totals: ").Append(Totals).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedBatches", "_links", Links.ToString())).Append("\n");
+            if (BatchId != null) sb.Append("  BatchId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedBatches", "batchId", BatchId.ToString())).Append("\n");
+            if (BatchCreatedDate != null) sb.Append("  BatchCreatedDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedBatches", "batchCreatedDate", BatchCreatedDate.ToString())).Append("\n");
+            if (BatchModifiedDate != null) sb.Append("  BatchModifiedDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedBatches", "batchModifiedDate", BatchModifiedDate.ToString())).Append("\n");
+            if (BatchSource != null) sb.Append("  BatchSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedBatches", "batchSource", BatchSource.ToString())).Append("\n");
+            if (TokenSource != null) sb.Append("  TokenSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedBatches", "tokenSource", TokenSource.ToString())).Append("\n");
+            if (MerchantReference != null) sb.Append("  MerchantReference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedBatches", "merchantReference", MerchantReference.ToString())).Append("\n");
+            if (BatchCaEndpoints != null) sb.Append("  BatchCaEndpoints: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedBatches", "batchCaEndpoints", BatchCaEndpoints.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedBatches", "status", Status.ToString())).Append("\n");
+            if (Totals != null) sb.Append("  Totals: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedBatches", "totals", Totals.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -153,7 +163,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse20012EmbeddedBatches", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

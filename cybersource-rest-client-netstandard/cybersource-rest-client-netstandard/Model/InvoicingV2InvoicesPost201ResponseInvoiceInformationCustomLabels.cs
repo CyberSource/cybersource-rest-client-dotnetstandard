@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -75,35 +75,40 @@ namespace CyberSource.Model
         /// The invoice field key. Possible values:   - billTo   - invoiceNumber   - customerId   - companyName   - description   - shipping   - partialPayment   - discount   - tax 
         /// </summary>
         /// <value>The invoice field key. Possible values:   - billTo   - invoiceNumber   - customerId   - companyName   - description   - shipping   - partialPayment   - discount   - tax </value>
-        [DataMember(Name="key", EmitDefaultValue=false)]
+        [JsonPropertyName("key")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Key { get; set; }
 
         /// <summary>
         /// The new (overridden) field name
         /// </summary>
         /// <value>The new (overridden) field name</value>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        [JsonPropertyName("value")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Value { get; set; }
 
         /// <summary>
         /// Hides the specified field. This field is applicable for keys:   - customerId   - companyName   - description   - shipping   - partialPayment 
         /// </summary>
         /// <value>Hides the specified field. This field is applicable for keys:   - customerId   - companyName   - description   - shipping   - partialPayment </value>
-        [DataMember(Name="hidden", EmitDefaultValue=false)]
+        [JsonPropertyName("hidden")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Hidden { get; set; }
 
         /// <summary>
         /// Hides the field at invoice level. This field is applicable for keys:   - discount   - tax 
         /// </summary>
         /// <value>Hides the field at invoice level. This field is applicable for keys:   - discount   - tax </value>
-        [DataMember(Name="hiddenForInvoice", EmitDefaultValue=false)]
+        [JsonPropertyName("hiddenForInvoice")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? HiddenForInvoice { get; set; }
 
         /// <summary>
         /// Hides the field at invoice item level. This field is applicable for keys:   - discount   - tax 
         /// </summary>
         /// <value>Hides the field at invoice item level. This field is applicable for keys:   - discount   - tax </value>
-        [DataMember(Name="hiddenForItem", EmitDefaultValue=false)]
+        [JsonPropertyName("hiddenForItem")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? HiddenForItem { get; set; }
 
         /// <summary>
@@ -114,11 +119,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InvoicingV2InvoicesPost201ResponseInvoiceInformationCustomLabels {\n");
-            if (Key != null) sb.Append("  Key: ").Append(Key).Append("\n");
-            if (Value != null) sb.Append("  Value: ").Append(Value).Append("\n");
-            if (Hidden != null) sb.Append("  Hidden: ").Append(Hidden).Append("\n");
-            if (HiddenForInvoice != null) sb.Append("  HiddenForInvoice: ").Append(HiddenForInvoice).Append("\n");
-            if (HiddenForItem != null) sb.Append("  HiddenForItem: ").Append(HiddenForItem).Append("\n");
+            if (Key != null) sb.Append("  Key: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformationCustomLabels", "key", Key.ToString())).Append("\n");
+            if (Value != null) sb.Append("  Value: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformationCustomLabels", "value", Value.ToString())).Append("\n");
+            if (Hidden != null) sb.Append("  Hidden: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformationCustomLabels", "hidden", Hidden.ToString())).Append("\n");
+            if (HiddenForInvoice != null) sb.Append("  HiddenForInvoice: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformationCustomLabels", "hiddenForInvoice", HiddenForInvoice.ToString())).Append("\n");
+            if (HiddenForItem != null) sb.Append("  HiddenForItem: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformationCustomLabels", "hiddenForItem", HiddenForItem.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -129,7 +134,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InvoicingV2InvoicesPost201ResponseInvoiceInformationCustomLabels", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

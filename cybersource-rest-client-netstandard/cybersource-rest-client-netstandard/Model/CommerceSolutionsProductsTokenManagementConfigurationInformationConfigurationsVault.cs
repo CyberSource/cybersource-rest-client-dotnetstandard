@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,44 +55,51 @@ namespace CyberSource.Model
         /// Default token type to be used. Possible Values:   - &#39;CUSTOMER&#39;  - &#39;PAYMENT_INSTRUMENT&#39;  - &#39;INSTRUMENT_IDENTIFIER&#39; 
         /// </summary>
         /// <value>Default token type to be used. Possible Values:   - &#39;CUSTOMER&#39;  - &#39;PAYMENT_INSTRUMENT&#39;  - &#39;INSTRUMENT_IDENTIFIER&#39; </value>
-        [DataMember(Name="defaultTokenType", EmitDefaultValue=false)]
+        [JsonPropertyName("defaultTokenType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DefaultTokenType { get; set; }
 
         /// <summary>
         /// Location where the vault will be stored.  Use &#39;IDC&#39; (the Indian Data Centre) when merchant is storing token data in India  or &#39;GDC&#39; (the Global Data Centre) for all other cases.  Possible Values:    - &#39;IDC&#39;   - &#39;GDC&#39; 
         /// </summary>
         /// <value>Location where the vault will be stored.  Use &#39;IDC&#39; (the Indian Data Centre) when merchant is storing token data in India  or &#39;GDC&#39; (the Global Data Centre) for all other cases.  Possible Values:    - &#39;IDC&#39;   - &#39;GDC&#39; </value>
-        [DataMember(Name="location", EmitDefaultValue=false)]
+        [JsonPropertyName("location")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Location { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenFormats
         /// </summary>
-        [DataMember(Name="tokenFormats", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenFormats")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsTokenFormats TokenFormats { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenPermissions
         /// </summary>
-        [DataMember(Name="tokenPermissions", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenPermissions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TokenPermissions TokenPermissions { get; set; }
 
         /// <summary>
         /// Gets or Sets SensitivePrivileges
         /// </summary>
-        [DataMember(Name="sensitivePrivileges", EmitDefaultValue=false)]
+        [JsonPropertyName("sensitivePrivileges")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsSensitivePrivileges SensitivePrivileges { get; set; }
 
         /// <summary>
         /// Gets or Sets Nullify
         /// </summary>
-        [DataMember(Name="nullify", EmitDefaultValue=false)]
+        [JsonPropertyName("nullify")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsNullify Nullify { get; set; }
 
         /// <summary>
         /// Gets or Sets NetworkTokenServices
         /// </summary>
-        [DataMember(Name="networkTokenServices", EmitDefaultValue=false)]
+        [JsonPropertyName("networkTokenServices")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsNetworkTokenServices NetworkTokenServices { get; set; }
 
         /// <summary>
@@ -103,13 +110,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurationsVault {\n");
-            if (DefaultTokenType != null) sb.Append("  DefaultTokenType: ").Append(DefaultTokenType).Append("\n");
-            if (Location != null) sb.Append("  Location: ").Append(Location).Append("\n");
-            if (TokenFormats != null) sb.Append("  TokenFormats: ").Append(TokenFormats).Append("\n");
-            if (TokenPermissions != null) sb.Append("  TokenPermissions: ").Append(TokenPermissions).Append("\n");
-            if (SensitivePrivileges != null) sb.Append("  SensitivePrivileges: ").Append(SensitivePrivileges).Append("\n");
-            if (Nullify != null) sb.Append("  Nullify: ").Append(Nullify).Append("\n");
-            if (NetworkTokenServices != null) sb.Append("  NetworkTokenServices: ").Append(NetworkTokenServices).Append("\n");
+            if (DefaultTokenType != null) sb.Append("  DefaultTokenType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurationsVault", "defaultTokenType", DefaultTokenType.ToString())).Append("\n");
+            if (Location != null) sb.Append("  Location: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurationsVault", "location", Location.ToString())).Append("\n");
+            if (TokenFormats != null) sb.Append("  TokenFormats: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurationsVault", "tokenFormats", TokenFormats.ToString())).Append("\n");
+            if (TokenPermissions != null) sb.Append("  TokenPermissions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurationsVault", "tokenPermissions", TokenPermissions.ToString())).Append("\n");
+            if (SensitivePrivileges != null) sb.Append("  SensitivePrivileges: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurationsVault", "sensitivePrivileges", SensitivePrivileges.ToString())).Append("\n");
+            if (Nullify != null) sb.Append("  Nullify: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurationsVault", "nullify", Nullify.ToString())).Append("\n");
+            if (NetworkTokenServices != null) sb.Append("  NetworkTokenServices: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurationsVault", "networkTokenServices", NetworkTokenServices.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -120,7 +127,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CommerceSolutionsProductsTokenManagementConfigurationInformationConfigurationsVault", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

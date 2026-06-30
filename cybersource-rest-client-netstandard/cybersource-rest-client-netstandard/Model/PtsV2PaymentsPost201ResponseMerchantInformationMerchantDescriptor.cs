@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// The identifier of the store. 
         /// </summary>
         /// <value>The identifier of the store. </value>
-        [DataMember(Name="storeId", EmitDefaultValue=false)]
+        [JsonPropertyName("storeId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StoreId { get; set; }
 
         /// <summary>
         /// The name of the store. 
         /// </summary>
         /// <value>The name of the store. </value>
-        [DataMember(Name="storeName", EmitDefaultValue=false)]
+        [JsonPropertyName("storeName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StoreName { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseMerchantInformationMerchantDescriptor {\n");
-            if (StoreId != null) sb.Append("  StoreId: ").Append(StoreId).Append("\n");
-            if (StoreName != null) sb.Append("  StoreName: ").Append(StoreName).Append("\n");
+            if (StoreId != null) sb.Append("  StoreId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseMerchantInformationMerchantDescriptor", "storeId", StoreId.ToString())).Append("\n");
+            if (StoreName != null) sb.Append("  StoreName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseMerchantInformationMerchantDescriptor", "storeName", StoreName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseMerchantInformationMerchantDescriptor", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Settlement Responsibility Flag: VisaNet sets this flag.  This flag is set to true to indicate that VisaNet has settlement responsibility for this transaction. This flag does not indicate the transaction will be settled. 
         /// </summary>
         /// <value>Settlement Responsibility Flag: VisaNet sets this flag.  This flag is set to true to indicate that VisaNet has settlement responsibility for this transaction. This flag does not indicate the transaction will be settled. </value>
-        [DataMember(Name="responsibilityFlag", EmitDefaultValue=false)]
+        [JsonPropertyName("responsibilityFlag")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ResponsibilityFlag { get; set; }
 
         /// <summary>
         /// Settlement Service for the transaction.  Values:  VIP: V.I.P. to decide; or not applicable  INTERNATIONAL_SETTLEMENT: International   NATIONAL_NET_SETTLEMENT: National Net Settlement 
         /// </summary>
         /// <value>Settlement Service for the transaction.  Values:  VIP: V.I.P. to decide; or not applicable  INTERNATIONAL_SETTLEMENT: International   NATIONAL_NET_SETTLEMENT: National Net Settlement </value>
-        [DataMember(Name="serviceFlag", EmitDefaultValue=false)]
+        [JsonPropertyName("serviceFlag")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ServiceFlag { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PushFunds201ResponseProcessorInformationSettlement {\n");
-            if (ResponsibilityFlag != null) sb.Append("  ResponsibilityFlag: ").Append(ResponsibilityFlag).Append("\n");
-            if (ServiceFlag != null) sb.Append("  ServiceFlag: ").Append(ServiceFlag).Append("\n");
+            if (ResponsibilityFlag != null) sb.Append("  ResponsibilityFlag: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponseProcessorInformationSettlement", "responsibilityFlag", ResponsibilityFlag.ToString())).Append("\n");
+            if (ServiceFlag != null) sb.Append("  ServiceFlag: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponseProcessorInformationSettlement", "serviceFlag", ServiceFlag.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PushFunds201ResponseProcessorInformationSettlement", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

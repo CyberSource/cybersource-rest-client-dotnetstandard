@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Indicates if network tokens are provisioned synchronously (i.e. as part of the transaction flow) or asychronously (i.e. in parallel to the payment flow)  NOTE: The synchronous provisioning feature is designed exclusively for aggregator merchants.  Direct merchants should not enable synchronous provisioning as TMS manages the asynchronous creation of network tokens for direct clients.   Activation of this feature by direct merchants will lead to latency in the authorization response. 
         /// </summary>
         /// <value>Indicates if network tokens are provisioned synchronously (i.e. as part of the transaction flow) or asychronously (i.e. in parallel to the payment flow)  NOTE: The synchronous provisioning feature is designed exclusively for aggregator merchants.  Direct merchants should not enable synchronous provisioning as TMS manages the asynchronous creation of network tokens for direct clients.   Activation of this feature by direct merchants will lead to latency in the authorization response. </value>
-        [DataMember(Name="enabled", EmitDefaultValue=false)]
+        [JsonPropertyName("enabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Enabled { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsNetworkTokenServicesSynchronousProvisioning {\n");
-            if (Enabled != null) sb.Append("  Enabled: ").Append(Enabled).Append("\n");
+            if (Enabled != null) sb.Append("  Enabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNetworkTokenServicesSynchronousProvisioning", "enabled", Enabled.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsNetworkTokenServicesSynchronousProvisioning", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

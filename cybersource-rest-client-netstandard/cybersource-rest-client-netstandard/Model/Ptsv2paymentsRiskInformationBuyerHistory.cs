@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -58,62 +58,71 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets CustomerAccount
         /// </summary>
-        [DataMember(Name="customerAccount", EmitDefaultValue=false)]
+        [JsonPropertyName("customerAccount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsRiskInformationBuyerHistoryCustomerAccount CustomerAccount { get; set; }
 
         /// <summary>
         /// Gets or Sets AccountHistory
         /// </summary>
-        [DataMember(Name="accountHistory", EmitDefaultValue=false)]
+        [JsonPropertyName("accountHistory")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsRiskInformationBuyerHistoryAccountHistory AccountHistory { get; set; }
 
         /// <summary>
         /// Number of purchases with this cardholder account during the previous six months. Recommended for Discover ProtectBuy. 
         /// </summary>
         /// <value>Number of purchases with this cardholder account during the previous six months. Recommended for Discover ProtectBuy. </value>
-        [DataMember(Name="accountPurchases", EmitDefaultValue=false)]
+        [JsonPropertyName("accountPurchases")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? AccountPurchases { get; set; }
 
         /// <summary>
         /// Number of add card attempts in the last 24 hours. Recommended for Discover ProtectBuy. 
         /// </summary>
         /// <value>Number of add card attempts in the last 24 hours. Recommended for Discover ProtectBuy. </value>
-        [DataMember(Name="addCardAttempts", EmitDefaultValue=false)]
+        [JsonPropertyName("addCardAttempts")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? AddCardAttempts { get; set; }
 
         /// <summary>
         /// Indicates whether the merchant experienced suspicious activity (including previous fraud) on the account. Recommended for Discover ProtectBuy. 
         /// </summary>
         /// <value>Indicates whether the merchant experienced suspicious activity (including previous fraud) on the account. Recommended for Discover ProtectBuy. </value>
-        [DataMember(Name="priorSuspiciousActivity", EmitDefaultValue=false)]
+        [JsonPropertyName("priorSuspiciousActivity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PriorSuspiciousActivity { get; set; }
 
         /// <summary>
         /// This only applies for NEW_ACCOUNT and EXISTING_ACCOUNT in creationHistory. Possible values are: - PAYMENT_ACCOUNT_EXISTS - PAYMENT_ACCOUNT_ADDED_NOW 
         /// </summary>
         /// <value>This only applies for NEW_ACCOUNT and EXISTING_ACCOUNT in creationHistory. Possible values are: - PAYMENT_ACCOUNT_EXISTS - PAYMENT_ACCOUNT_ADDED_NOW </value>
-        [DataMember(Name="paymentAccountHistory", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentAccountHistory")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentAccountHistory { get; set; }
 
         /// <summary>
         /// Date applicable only for PAYMENT_ACCOUNT_EXISTS in paymentAccountHistory 
         /// </summary>
         /// <value>Date applicable only for PAYMENT_ACCOUNT_EXISTS in paymentAccountHistory </value>
-        [DataMember(Name="paymentAccountDate", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentAccountDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? PaymentAccountDate { get; set; }
 
         /// <summary>
         /// Number of transaction (successful or abandoned) for this cardholder account within the last 24 hours. Recommended for Discover ProtectBuy. 
         /// </summary>
         /// <value>Number of transaction (successful or abandoned) for this cardholder account within the last 24 hours. Recommended for Discover ProtectBuy. </value>
-        [DataMember(Name="transactionCountDay", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionCountDay")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? TransactionCountDay { get; set; }
 
         /// <summary>
         /// Number of transaction (successful or abandoned) for this cardholder account within the last year. Recommended for Discover ProtectBuy. 
         /// </summary>
         /// <value>Number of transaction (successful or abandoned) for this cardholder account within the last year. Recommended for Discover ProtectBuy. </value>
-        [DataMember(Name="transactionCountYear", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionCountYear")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? TransactionCountYear { get; set; }
 
         /// <summary>
@@ -124,15 +133,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsRiskInformationBuyerHistory {\n");
-            if (CustomerAccount != null) sb.Append("  CustomerAccount: ").Append(CustomerAccount).Append("\n");
-            if (AccountHistory != null) sb.Append("  AccountHistory: ").Append(AccountHistory).Append("\n");
-            if (AccountPurchases != null) sb.Append("  AccountPurchases: ").Append(AccountPurchases).Append("\n");
-            if (AddCardAttempts != null) sb.Append("  AddCardAttempts: ").Append(AddCardAttempts).Append("\n");
-            if (PriorSuspiciousActivity != null) sb.Append("  PriorSuspiciousActivity: ").Append(PriorSuspiciousActivity).Append("\n");
-            if (PaymentAccountHistory != null) sb.Append("  PaymentAccountHistory: ").Append(PaymentAccountHistory).Append("\n");
-            if (PaymentAccountDate != null) sb.Append("  PaymentAccountDate: ").Append(PaymentAccountDate).Append("\n");
-            if (TransactionCountDay != null) sb.Append("  TransactionCountDay: ").Append(TransactionCountDay).Append("\n");
-            if (TransactionCountYear != null) sb.Append("  TransactionCountYear: ").Append(TransactionCountYear).Append("\n");
+            if (CustomerAccount != null) sb.Append("  CustomerAccount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistory", "customerAccount", CustomerAccount.ToString())).Append("\n");
+            if (AccountHistory != null) sb.Append("  AccountHistory: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistory", "accountHistory", AccountHistory.ToString())).Append("\n");
+            if (AccountPurchases != null) sb.Append("  AccountPurchases: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistory", "accountPurchases", AccountPurchases.ToString())).Append("\n");
+            if (AddCardAttempts != null) sb.Append("  AddCardAttempts: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistory", "addCardAttempts", AddCardAttempts.ToString())).Append("\n");
+            if (PriorSuspiciousActivity != null) sb.Append("  PriorSuspiciousActivity: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistory", "priorSuspiciousActivity", PriorSuspiciousActivity.ToString())).Append("\n");
+            if (PaymentAccountHistory != null) sb.Append("  PaymentAccountHistory: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistory", "paymentAccountHistory", PaymentAccountHistory.ToString())).Append("\n");
+            if (PaymentAccountDate != null) sb.Append("  PaymentAccountDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistory", "paymentAccountDate", PaymentAccountDate.ToString())).Append("\n");
+            if (TransactionCountDay != null) sb.Append("  TransactionCountDay: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistory", "transactionCountDay", TransactionCountDay.ToString())).Append("\n");
+            if (TransactionCountYear != null) sb.Append("  TransactionCountYear: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistory", "transactionCountYear", TransactionCountYear.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -143,7 +152,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsRiskInformationBuyerHistory", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

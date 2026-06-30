@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -54,43 +54,50 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets CAPTURE
         /// </summary>
-        [DataMember(Name="CAPTURE", EmitDefaultValue=false)]
+        [JsonPropertyName("CAPTURE")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseEmbeddedActionsCAPTURE CAPTURE { get; set; }
 
         /// <summary>
         /// Gets or Sets DECISION
         /// </summary>
-        [DataMember(Name="DECISION", EmitDefaultValue=false)]
+        [JsonPropertyName("DECISION")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseEmbeddedActionsDECISION DECISION { get; set; }
 
         /// <summary>
         /// Gets or Sets CONSUMER_AUTHENTICATION
         /// </summary>
-        [DataMember(Name="CONSUMER_AUTHENTICATION", EmitDefaultValue=false)]
+        [JsonPropertyName("CONSUMER_AUTHENTICATION")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseEmbeddedActionsCONSUMERAUTHENTICATION CONSUMER_AUTHENTICATION { get; set; }
 
         /// <summary>
         /// Gets or Sets VALIDATE_CONSUMER_AUTHENTICATION
         /// </summary>
-        [DataMember(Name="VALIDATE_CONSUMER_AUTHENTICATION", EmitDefaultValue=false)]
+        [JsonPropertyName("VALIDATE_CONSUMER_AUTHENTICATION")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseEmbeddedActionsCONSUMERAUTHENTICATION VALIDATE_CONSUMER_AUTHENTICATION { get; set; }
 
         /// <summary>
         /// Gets or Sets WATCHLIST_SCREENING
         /// </summary>
-        [DataMember(Name="WATCHLIST_SCREENING", EmitDefaultValue=false)]
+        [JsonPropertyName("WATCHLIST_SCREENING")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseEmbeddedActionsWATCHLISTSCREENING WATCHLIST_SCREENING { get; set; }
 
         /// <summary>
         /// Gets or Sets TOKEN_CREATE
         /// </summary>
-        [DataMember(Name="TOKEN_CREATE", EmitDefaultValue=false)]
+        [JsonPropertyName("TOKEN_CREATE")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseEmbeddedActionsTOKENCREATE TOKEN_CREATE { get; set; }
 
         /// <summary>
         /// Gets or Sets TOKEN_UPDATE
         /// </summary>
-        [DataMember(Name="TOKEN_UPDATE", EmitDefaultValue=false)]
+        [JsonPropertyName("TOKEN_UPDATE")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseEmbeddedActionsTOKENUPDATE TOKEN_UPDATE { get; set; }
 
         /// <summary>
@@ -101,13 +108,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseEmbeddedActions {\n");
-            if (CAPTURE != null) sb.Append("  CAPTURE: ").Append(CAPTURE).Append("\n");
-            if (DECISION != null) sb.Append("  DECISION: ").Append(DECISION).Append("\n");
-            if (CONSUMER_AUTHENTICATION != null) sb.Append("  CONSUMER_AUTHENTICATION: ").Append(CONSUMER_AUTHENTICATION).Append("\n");
-            if (VALIDATE_CONSUMER_AUTHENTICATION != null) sb.Append("  VALIDATE_CONSUMER_AUTHENTICATION: ").Append(VALIDATE_CONSUMER_AUTHENTICATION).Append("\n");
-            if (WATCHLIST_SCREENING != null) sb.Append("  WATCHLIST_SCREENING: ").Append(WATCHLIST_SCREENING).Append("\n");
-            if (TOKEN_CREATE != null) sb.Append("  TOKEN_CREATE: ").Append(TOKEN_CREATE).Append("\n");
-            if (TOKEN_UPDATE != null) sb.Append("  TOKEN_UPDATE: ").Append(TOKEN_UPDATE).Append("\n");
+            if (CAPTURE != null) sb.Append("  CAPTURE: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseEmbeddedActions", "CAPTURE", CAPTURE.ToString())).Append("\n");
+            if (DECISION != null) sb.Append("  DECISION: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseEmbeddedActions", "DECISION", DECISION.ToString())).Append("\n");
+            if (CONSUMER_AUTHENTICATION != null) sb.Append("  CONSUMER_AUTHENTICATION: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseEmbeddedActions", "CONSUMER_AUTHENTICATION", CONSUMER_AUTHENTICATION.ToString())).Append("\n");
+            if (VALIDATE_CONSUMER_AUTHENTICATION != null) sb.Append("  VALIDATE_CONSUMER_AUTHENTICATION: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseEmbeddedActions", "VALIDATE_CONSUMER_AUTHENTICATION", VALIDATE_CONSUMER_AUTHENTICATION.ToString())).Append("\n");
+            if (WATCHLIST_SCREENING != null) sb.Append("  WATCHLIST_SCREENING: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseEmbeddedActions", "WATCHLIST_SCREENING", WATCHLIST_SCREENING.ToString())).Append("\n");
+            if (TOKEN_CREATE != null) sb.Append("  TOKEN_CREATE: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseEmbeddedActions", "TOKEN_CREATE", TOKEN_CREATE.ToString())).Append("\n");
+            if (TOKEN_UPDATE != null) sb.Append("  TOKEN_UPDATE: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseEmbeddedActions", "TOKEN_UPDATE", TOKEN_UPDATE.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -118,7 +125,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseEmbeddedActions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

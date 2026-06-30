@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,27 +49,31 @@ namespace CyberSource.Model
         /// Parent Organization ID for the application
         /// </summary>
         /// <value>Parent Organization ID for the application</value>
-        [DataMember(Name="parentOrganizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("parentOrganizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ParentOrganizationId { get; set; }
 
         /// <summary>
         /// Organization ID for the application
         /// </summary>
         /// <value>Organization ID for the application</value>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// Boarding Package ID for the application
         /// </summary>
         /// <value>Boarding Package ID for the application</value>
-        [DataMember(Name="boardingPackageId", EmitDefaultValue=false)]
+        [JsonPropertyName("boardingPackageId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BoardingPackageId { get; set; }
 
         /// <summary>
         /// Gets or Sets BusinessInformation
         /// </summary>
-        [DataMember(Name="businessInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("businessInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationOrganizationInformationBusinessInformation BusinessInformation { get; set; }
 
         /// <summary>
@@ -80,10 +84,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UnderwritingConfigurationOrganizationInformation {\n");
-            if (ParentOrganizationId != null) sb.Append("  ParentOrganizationId: ").Append(ParentOrganizationId).Append("\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (BoardingPackageId != null) sb.Append("  BoardingPackageId: ").Append(BoardingPackageId).Append("\n");
-            if (BusinessInformation != null) sb.Append("  BusinessInformation: ").Append(BusinessInformation).Append("\n");
+            if (ParentOrganizationId != null) sb.Append("  ParentOrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformation", "parentOrganizationId", ParentOrganizationId.ToString())).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformation", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (BoardingPackageId != null) sb.Append("  BoardingPackageId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformation", "boardingPackageId", BoardingPackageId.ToString())).Append("\n");
+            if (BusinessInformation != null) sb.Append("  BusinessInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformation", "businessInformation", BusinessInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -94,7 +98,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UnderwritingConfigurationOrganizationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

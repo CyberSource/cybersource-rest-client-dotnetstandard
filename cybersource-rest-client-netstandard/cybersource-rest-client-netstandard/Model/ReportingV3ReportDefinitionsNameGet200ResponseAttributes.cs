@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -54,45 +54,52 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Description { get; set; }
 
         /// <summary>
         /// Attribute Filter Type.
         /// </summary>
         /// <value>Attribute Filter Type.</value>
-        [DataMember(Name="filterType", EmitDefaultValue=false)]
+        [JsonPropertyName("filterType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FilterType { get; set; }
 
         /// <summary>
         /// Gets or Sets Default
         /// </summary>
-        [DataMember(Name="default", EmitDefaultValue=false)]
+        [JsonPropertyName("default")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Default { get; set; }
 
         /// <summary>
         /// Gets or Sets Required
         /// </summary>
-        [DataMember(Name="required", EmitDefaultValue=false)]
+        [JsonPropertyName("required")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Required { get; set; }
 
         /// <summary>
         /// Valid values for the filter.
         /// </summary>
         /// <value>Valid values for the filter.</value>
-        [DataMember(Name="supportedType", EmitDefaultValue=false)]
+        [JsonPropertyName("supportedType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SupportedType { get; set; }
 
         /// <summary>
@@ -103,13 +110,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3ReportDefinitionsNameGet200ResponseAttributes {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Description != null) sb.Append("  Description: ").Append(Description).Append("\n");
-            if (FilterType != null) sb.Append("  FilterType: ").Append(FilterType).Append("\n");
-            if (Default != null) sb.Append("  Default: ").Append(Default).Append("\n");
-            if (Required != null) sb.Append("  Required: ").Append(Required).Append("\n");
-            if (SupportedType != null) sb.Append("  SupportedType: ").Append(SupportedType).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsNameGet200ResponseAttributes", "id", Id.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsNameGet200ResponseAttributes", "name", Name.ToString())).Append("\n");
+            if (Description != null) sb.Append("  Description: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsNameGet200ResponseAttributes", "description", Description.ToString())).Append("\n");
+            if (FilterType != null) sb.Append("  FilterType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsNameGet200ResponseAttributes", "filterType", FilterType.ToString())).Append("\n");
+            if (Default != null) sb.Append("  Default: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsNameGet200ResponseAttributes", "default", Default.ToString())).Append("\n");
+            if (Required != null) sb.Append("  Required: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsNameGet200ResponseAttributes", "required", Required.ToString())).Append("\n");
+            if (SupportedType != null) sb.Append("  SupportedType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ReportDefinitionsNameGet200ResponseAttributes", "supportedType", SupportedType.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -120,7 +127,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3ReportDefinitionsNameGet200ResponseAttributes", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

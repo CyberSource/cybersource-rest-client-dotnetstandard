@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -35,7 +35,7 @@ namespace CyberSource.Model
         /// </summary>
         /// <param name="MerchantCategoryCode">Merchant Category Code (MCC) is a four-digit number assigned to a business by credit card companies when the business first starts accepting credit cards as a form of payment. The MCC is used to classify the business by the type of goods or services it provides. .</param>
         /// <param name="Processors">This is a map. The allowed keys are below. Value should be an object containing a sole boolean property - enabled. &lt;table&gt;   &lt;tr&gt;     &lt;td&gt;klarna&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;payPal&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;alipay&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;bancontact&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;giropay&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;ideal&lt;/td&gt;   &lt;/tr&gt; &lt;/table&gt; .</param>
-        public PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurations(string MerchantCategoryCode = default(string), Dictionary<string, PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsProcessors> Processors = default(Dictionary<string, PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsProcessors>))
+        public PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurations(string MerchantCategoryCode = default(string), Dictionary<string, AlternativePaymentsProcessorConfiguration> Processors = default(Dictionary<string, AlternativePaymentsProcessorConfiguration>))
         {
             this.MerchantCategoryCode = MerchantCategoryCode;
             this.Processors = Processors;
@@ -45,15 +45,17 @@ namespace CyberSource.Model
         /// Merchant Category Code (MCC) is a four-digit number assigned to a business by credit card companies when the business first starts accepting credit cards as a form of payment. The MCC is used to classify the business by the type of goods or services it provides. 
         /// </summary>
         /// <value>Merchant Category Code (MCC) is a four-digit number assigned to a business by credit card companies when the business first starts accepting credit cards as a form of payment. The MCC is used to classify the business by the type of goods or services it provides. </value>
-        [DataMember(Name="merchantCategoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantCategoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantCategoryCode { get; set; }
 
         /// <summary>
         /// This is a map. The allowed keys are below. Value should be an object containing a sole boolean property - enabled. &lt;table&gt;   &lt;tr&gt;     &lt;td&gt;klarna&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;payPal&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;alipay&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;bancontact&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;giropay&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;ideal&lt;/td&gt;   &lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>This is a map. The allowed keys are below. Value should be an object containing a sole boolean property - enabled. &lt;table&gt;   &lt;tr&gt;     &lt;td&gt;klarna&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;payPal&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;alipay&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;bancontact&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;giropay&lt;/td&gt;   &lt;/tr&gt;   &lt;tr&gt;     &lt;td&gt;ideal&lt;/td&gt;   &lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="processors", EmitDefaultValue=false)]
-        public Dictionary<string, PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsProcessors> Processors { get; set; }
+        [JsonPropertyName("processors")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Dictionary<string, AlternativePaymentsProcessorConfiguration> Processors { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurations {\n");
-            if (MerchantCategoryCode != null) sb.Append("  MerchantCategoryCode: ").Append(MerchantCategoryCode).Append("\n");
-            if (Processors != null) sb.Append("  Processors: ").Append(Processors).Append("\n");
+            if (MerchantCategoryCode != null) sb.Append("  MerchantCategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurations", "merchantCategoryCode", MerchantCategoryCode.ToString())).Append("\n");
+            if (Processors != null) sb.Append("  Processors: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurations", "processors", Processors.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurations", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

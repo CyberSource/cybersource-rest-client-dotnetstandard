@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,34 +51,39 @@ namespace CyberSource.Model
         /// Authorization type. Possible values:   - &#x60;AUTOCAPTURE&#x60;: automatic capture.  - &#x60;STANDARDCAPTURE&#x60;: standard capture.  - &#x60;VERBAL&#x60;: forced capture. Include it in the payment request for a forced capture. Include it in the capture request for a verbal payment.  #### Asia, Middle East, and Africa Gateway; Cielo; Comercio Latino; and CyberSource Latin American Processing Set this field to &#x60;AUTOCAPTURE&#x60; and include it in a bundled request to indicate that you are requesting an automatic capture. If your account is configured to enable automatic captures, set this field to &#x60;STANDARDCAPTURE&#x60; and include it in a standard authorization or bundled request to indicate that you are overriding an automatic capture.  #### Forced Capture Set this field to &#x60;VERBAL&#x60; and include it in the authorization request to indicate that you are performing a forced capture; therefore, you receive the authorization code outside the CyberSource system.  #### Verbal Authorization Set this field to &#x60;VERBAL&#x60; and include it in the capture request to indicate that the request is for a verbal authorization.  #### for PayPal ptsV2CreateOrderPost400Response Set this field to &#39;AUTHORIZE&#39; or &#39;CAPTURE&#39; depending on whether you want to invoke delayed capture or sale respectively. 
         /// </summary>
         /// <value>Authorization type. Possible values:   - &#x60;AUTOCAPTURE&#x60;: automatic capture.  - &#x60;STANDARDCAPTURE&#x60;: standard capture.  - &#x60;VERBAL&#x60;: forced capture. Include it in the payment request for a forced capture. Include it in the capture request for a verbal payment.  #### Asia, Middle East, and Africa Gateway; Cielo; Comercio Latino; and CyberSource Latin American Processing Set this field to &#x60;AUTOCAPTURE&#x60; and include it in a bundled request to indicate that you are requesting an automatic capture. If your account is configured to enable automatic captures, set this field to &#x60;STANDARDCAPTURE&#x60; and include it in a standard authorization or bundled request to indicate that you are overriding an automatic capture.  #### Forced Capture Set this field to &#x60;VERBAL&#x60; and include it in the authorization request to indicate that you are performing a forced capture; therefore, you receive the authorization code outside the CyberSource system.  #### Verbal Authorization Set this field to &#x60;VERBAL&#x60; and include it in the capture request to indicate that the request is for a verbal authorization.  #### for PayPal ptsV2CreateOrderPost400Response Set this field to &#39;AUTHORIZE&#39; or &#39;CAPTURE&#39; depending on whether you want to invoke delayed capture or sale respectively. </value>
-        [DataMember(Name="authType", EmitDefaultValue=false)]
+        [JsonPropertyName("authType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthType { get; set; }
 
         /// <summary>
         /// Flag that specifies the purpose of the authorization.  Possible values:  - **0**: Preauthorization  - **1**: Final authorization  To set the default for this field, contact CyberSource Customer Support.  #### Barclays and Elavon The default for Barclays and Elavon is 1 (final authorization). To change the default for this field, contact CyberSource Customer Support.  #### CyberSource through VisaNet When the value for this field is 0, it corresponds to the following data in the TC 33 capture file:  - Record: CP01 TCR0  - Position: 164  - Field: Additional Authorization Indicators When the value for this field is 1, it does not correspond to any data in the TC 33 capture file. 
         /// </summary>
         /// <value>Flag that specifies the purpose of the authorization.  Possible values:  - **0**: Preauthorization  - **1**: Final authorization  To set the default for this field, contact CyberSource Customer Support.  #### Barclays and Elavon The default for Barclays and Elavon is 1 (final authorization). To change the default for this field, contact CyberSource Customer Support.  #### CyberSource through VisaNet When the value for this field is 0, it corresponds to the following data in the TC 33 capture file:  - Record: CP01 TCR0  - Position: 164  - Field: Additional Authorization Indicators When the value for this field is 1, it does not correspond to any data in the TC 33 capture file. </value>
-        [DataMember(Name="authIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("authIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthIndicator { get; set; }
 
         /// <summary>
         /// Indicates Authorization extension transaction. Extension transaction is used to prolong the settlement period by one additional settlement cycle period.  Possible values: - true: Transaction is an Authorization Extension transaction.  - false: Transaction is not an Authorization Extension transaction. 
         /// </summary>
         /// <value>Indicates Authorization extension transaction. Extension transaction is used to prolong the settlement period by one additional settlement cycle period.  Possible values: - true: Transaction is an Authorization Extension transaction.  - false: Transaction is not an Authorization Extension transaction. </value>
-        [DataMember(Name="extendAuthIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("extendAuthIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExtendAuthIndicator { get; set; }
 
         /// <summary>
         /// This API field will indicate whether a card verification check is being performed during the transaction  Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; (default value) 
         /// </summary>
         /// <value>This API field will indicate whether a card verification check is being performed during the transaction  Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; (default value) </value>
-        [DataMember(Name="cardVerificationIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("cardVerificationIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CardVerificationIndicator { get; set; }
 
         /// <summary>
         /// Gets or Sets Initiator
         /// </summary>
-        [DataMember(Name="initiator", EmitDefaultValue=false)]
+        [JsonPropertyName("initiator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptionsInitiator Initiator { get; set; }
 
         /// <summary>
@@ -89,11 +94,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptions {\n");
-            if (AuthType != null) sb.Append("  AuthType: ").Append(AuthType).Append("\n");
-            if (AuthIndicator != null) sb.Append("  AuthIndicator: ").Append(AuthIndicator).Append("\n");
-            if (ExtendAuthIndicator != null) sb.Append("  ExtendAuthIndicator: ").Append(ExtendAuthIndicator).Append("\n");
-            if (CardVerificationIndicator != null) sb.Append("  CardVerificationIndicator: ").Append(CardVerificationIndicator).Append("\n");
-            if (Initiator != null) sb.Append("  Initiator: ").Append(Initiator).Append("\n");
+            if (AuthType != null) sb.Append("  AuthType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptions", "authType", AuthType.ToString())).Append("\n");
+            if (AuthIndicator != null) sb.Append("  AuthIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptions", "authIndicator", AuthIndicator.ToString())).Append("\n");
+            if (ExtendAuthIndicator != null) sb.Append("  ExtendAuthIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptions", "extendAuthIndicator", ExtendAuthIndicator.ToString())).Append("\n");
+            if (CardVerificationIndicator != null) sb.Append("  CardVerificationIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptions", "cardVerificationIndicator", CardVerificationIndicator.ToString())).Append("\n");
+            if (Initiator != null) sb.Append("  Initiator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptions", "initiator", Initiator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,7 +109,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

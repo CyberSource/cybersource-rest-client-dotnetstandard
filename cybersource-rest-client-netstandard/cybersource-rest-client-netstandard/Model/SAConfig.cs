@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,43 +55,50 @@ namespace CyberSource.Model
         /// You can group Secure Acceptance profiles under parent profiles. By changing the parent profile, you can update all profiles underneath that parent. Specify the Parent Profile ID here.
         /// </summary>
         /// <value>You can group Secure Acceptance profiles under parent profiles. By changing the parent profile, you can update all profiles underneath that parent. Specify the Parent Profile ID here.</value>
-        [DataMember(Name="parentProfileId", EmitDefaultValue=false)]
+        [JsonPropertyName("parentProfileId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ParentProfileId { get; set; }
 
         /// <summary>
         /// Gets or Sets ContactInformation
         /// </summary>
-        [DataMember(Name="contactInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("contactInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SAConfigContactInformation ContactInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets Notifications
         /// </summary>
-        [DataMember(Name="notifications", EmitDefaultValue=false)]
+        [JsonPropertyName("notifications")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SAConfigNotifications Notifications { get; set; }
 
         /// <summary>
         /// Gets or Sets Service
         /// </summary>
-        [DataMember(Name="service", EmitDefaultValue=false)]
+        [JsonPropertyName("service")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SAConfigService Service { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentMethods
         /// </summary>
-        [DataMember(Name="paymentMethods", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentMethods")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SAConfigPaymentMethods PaymentMethods { get; set; }
 
         /// <summary>
         /// Gets or Sets Checkout
         /// </summary>
-        [DataMember(Name="checkout", EmitDefaultValue=false)]
+        [JsonPropertyName("checkout")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SAConfigCheckout Checkout { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentTypes
         /// </summary>
-        [DataMember(Name="paymentTypes", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentTypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SAConfigPaymentTypes PaymentTypes { get; set; }
 
         /// <summary>
@@ -102,13 +109,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class SAConfig {\n");
-            if (ParentProfileId != null) sb.Append("  ParentProfileId: ").Append(ParentProfileId).Append("\n");
-            if (ContactInformation != null) sb.Append("  ContactInformation: ").Append(ContactInformation).Append("\n");
-            if (Notifications != null) sb.Append("  Notifications: ").Append(Notifications).Append("\n");
-            if (Service != null) sb.Append("  Service: ").Append(Service).Append("\n");
-            if (PaymentMethods != null) sb.Append("  PaymentMethods: ").Append(PaymentMethods).Append("\n");
-            if (Checkout != null) sb.Append("  Checkout: ").Append(Checkout).Append("\n");
-            if (PaymentTypes != null) sb.Append("  PaymentTypes: ").Append(PaymentTypes).Append("\n");
+            if (ParentProfileId != null) sb.Append("  ParentProfileId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfig", "parentProfileId", ParentProfileId.ToString())).Append("\n");
+            if (ContactInformation != null) sb.Append("  ContactInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfig", "contactInformation", ContactInformation.ToString())).Append("\n");
+            if (Notifications != null) sb.Append("  Notifications: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfig", "notifications", Notifications.ToString())).Append("\n");
+            if (Service != null) sb.Append("  Service: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfig", "service", Service.ToString())).Append("\n");
+            if (PaymentMethods != null) sb.Append("  PaymentMethods: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfig", "paymentMethods", PaymentMethods.ToString())).Append("\n");
+            if (Checkout != null) sb.Append("  Checkout: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfig", "checkout", Checkout.ToString())).Append("\n");
+            if (PaymentTypes != null) sb.Append("  PaymentTypes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfig", "paymentTypes", PaymentTypes.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -119,7 +126,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("SAConfig", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

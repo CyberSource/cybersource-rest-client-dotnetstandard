@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// Format for customer tokens.  Possible Values:   - &#39;16_DIGIT&#39;   - &#39;19_DIGIT&#39;   - &#39;22_DIGIT&#39;   - &#39;32_HEX&#39; 
         /// </summary>
         /// <value>Format for customer tokens.  Possible Values:   - &#39;16_DIGIT&#39;   - &#39;19_DIGIT&#39;   - &#39;22_DIGIT&#39;   - &#39;32_HEX&#39; </value>
-        [DataMember(Name="customer", EmitDefaultValue=false)]
+        [JsonPropertyName("customer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Customer { get; set; }
 
         /// <summary>
         /// Format for payment instrument tokens.  Possible Values:   - &#39;16_DIGIT&#39;   - &#39;19_DIGIT&#39;   - &#39;22_DIGIT&#39;   - &#39;32_HEX&#39; 
         /// </summary>
         /// <value>Format for payment instrument tokens.  Possible Values:   - &#39;16_DIGIT&#39;   - &#39;19_DIGIT&#39;   - &#39;22_DIGIT&#39;   - &#39;32_HEX&#39; </value>
-        [DataMember(Name="paymentInstrument", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInstrument")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentInstrument { get; set; }
 
         /// <summary>
         /// Format for card based instrument identifier tokens.  Possible Values:   - &#39;16_DIGIT&#39;   - &#39;16_DIGIT_LAST_4&#39;   - &#39;19_DIGIT&#39;   - &#39;19_DIGIT_LAST_4&#39;   - &#39;22_DIGIT&#39;   - &#39;32_HEX&#39; 
         /// </summary>
         /// <value>Format for card based instrument identifier tokens.  Possible Values:   - &#39;16_DIGIT&#39;   - &#39;16_DIGIT_LAST_4&#39;   - &#39;19_DIGIT&#39;   - &#39;19_DIGIT_LAST_4&#39;   - &#39;22_DIGIT&#39;   - &#39;32_HEX&#39; </value>
-        [DataMember(Name="instrumentIdentifierCard", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentIdentifierCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InstrumentIdentifierCard { get; set; }
 
         /// <summary>
         /// Format for bank account based instrument identifier tokens.  Possible Values:    - &#39;16_DIGIT&#39;   - &#39;19_DIGIT&#39;   - &#39;22_DIGIT&#39;   - &#39;32_HEX&#39; 
         /// </summary>
         /// <value>Format for bank account based instrument identifier tokens.  Possible Values:    - &#39;16_DIGIT&#39;   - &#39;19_DIGIT&#39;   - &#39;22_DIGIT&#39;   - &#39;32_HEX&#39; </value>
-        [DataMember(Name="instrumentIdentifierBankAccount", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentIdentifierBankAccount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InstrumentIdentifierBankAccount { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsTokenFormats {\n");
-            if (Customer != null) sb.Append("  Customer: ").Append(Customer).Append("\n");
-            if (PaymentInstrument != null) sb.Append("  PaymentInstrument: ").Append(PaymentInstrument).Append("\n");
-            if (InstrumentIdentifierCard != null) sb.Append("  InstrumentIdentifierCard: ").Append(InstrumentIdentifierCard).Append("\n");
-            if (InstrumentIdentifierBankAccount != null) sb.Append("  InstrumentIdentifierBankAccount: ").Append(InstrumentIdentifierBankAccount).Append("\n");
+            if (Customer != null) sb.Append("  Customer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsTokenFormats", "customer", Customer.ToString())).Append("\n");
+            if (PaymentInstrument != null) sb.Append("  PaymentInstrument: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsTokenFormats", "paymentInstrument", PaymentInstrument.ToString())).Append("\n");
+            if (InstrumentIdentifierCard != null) sb.Append("  InstrumentIdentifierCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsTokenFormats", "instrumentIdentifierCard", InstrumentIdentifierCard.ToString())).Append("\n");
+            if (InstrumentIdentifierBankAccount != null) sb.Append("  InstrumentIdentifierBankAccount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsTokenFormats", "instrumentIdentifierBankAccount", InstrumentIdentifierBankAccount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsTokenFormats", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

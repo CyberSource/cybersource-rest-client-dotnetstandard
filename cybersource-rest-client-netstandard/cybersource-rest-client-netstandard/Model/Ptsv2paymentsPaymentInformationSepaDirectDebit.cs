@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// Mandate reference as returned on the first transaction in the sequence 
         /// </summary>
         /// <value>Mandate reference as returned on the first transaction in the sequence </value>
-        [DataMember(Name="reference", EmitDefaultValue=false)]
+        [JsonPropertyName("reference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reference { get; set; }
 
         /// <summary>
         /// Date of the initial transaction, format is YYYY-MM-DD. Date can be taken from the finaltimestamp of the SUCCEEDED notification for the first transaction in the sequence. 
         /// </summary>
         /// <value>Date of the initial transaction, format is YYYY-MM-DD. Date can be taken from the finaltimestamp of the SUCCEEDED notification for the first transaction in the sequence. </value>
-        [DataMember(Name="signatureDate", EmitDefaultValue=false)]
+        [JsonPropertyName("signatureDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SignatureDate { get; set; }
 
         /// <summary>
         /// Valid URL pointing to the SEPA mandate, needs to be accessible by our risk and compliance department. 
         /// </summary>
         /// <value>Valid URL pointing to the SEPA mandate, needs to be accessible by our risk and compliance department. </value>
-        [DataMember(Name="url", EmitDefaultValue=false)]
+        [JsonPropertyName("url")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Url { get; set; }
 
         /// <summary>
         /// Sequence type of the direct debit, defaults to \&quot;oneOff\&quot;. Valid values: oneOff The direct debit is executed once. first First direct debit in a series of recurring ones. 
         /// </summary>
         /// <value>Sequence type of the direct debit, defaults to \&quot;oneOff\&quot;. Valid values: oneOff The direct debit is executed once. first First direct debit in a series of recurring ones. </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsPaymentInformationSepaDirectDebit {\n");
-            if (Reference != null) sb.Append("  Reference: ").Append(Reference).Append("\n");
-            if (SignatureDate != null) sb.Append("  SignatureDate: ").Append(SignatureDate).Append("\n");
-            if (Url != null) sb.Append("  Url: ").Append(Url).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
+            if (Reference != null) sb.Append("  Reference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPaymentInformationSepaDirectDebit", "reference", Reference.ToString())).Append("\n");
+            if (SignatureDate != null) sb.Append("  SignatureDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPaymentInformationSepaDirectDebit", "signatureDate", SignatureDate.ToString())).Append("\n");
+            if (Url != null) sb.Append("  Url: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPaymentInformationSepaDirectDebit", "url", Url.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPaymentInformationSepaDirectDebit", "type", Type.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsPaymentInformationSepaDirectDebit", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

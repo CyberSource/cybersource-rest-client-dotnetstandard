@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Account number of the sender of the funds. For Gaming Payment of Winnings transactions this is the merchant account number. * Required for Mastercard Payment of Winnings (POW) transactions. * Must contain only ASCII characters in range 32-122. * Must not be greater than 50 characters. * Required for POW on Barclays. 
         /// </summary>
         /// <value>Account number of the sender of the funds. For Gaming Payment of Winnings transactions this is the merchant account number. * Required for Mastercard Payment of Winnings (POW) transactions. * Must contain only ASCII characters in range 32-122. * Must not be greater than 50 characters. * Required for POW on Barclays. </value>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Number { get; set; }
 
         /// <summary>
         /// Source of funds for the sender. For Gaming Payment of Winnings transactions this is the merchant account type. * Required for Mastercard Payment of Winnings (POW) transactions. * Valid values:   * 00 - Other   * 01 - RTN + Bank Account   * 02 - IBAN   * 03 - Card Account   * 04 - Email   * 05 - PhoneNumber   * 06 - Bank account number (BAN) + Bank Identification Code (BIC)   * 07 - Wallet ID   * 08 - Social Network ID 
         /// </summary>
         /// <value>Source of funds for the sender. For Gaming Payment of Winnings transactions this is the merchant account type. * Required for Mastercard Payment of Winnings (POW) transactions. * Valid values:   * 00 - Other   * 01 - RTN + Bank Account   * 02 - IBAN   * 03 - Card Account   * 04 - Email   * 05 - PhoneNumber   * 06 - Bank account number (BAN) + Bank Identification Code (BIC)   * 07 - Wallet ID   * 08 - Social Network ID </value>
-        [DataMember(Name="fundsSource", EmitDefaultValue=false)]
+        [JsonPropertyName("fundsSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FundsSource { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2creditsSenderInformationAccount {\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
-            if (FundsSource != null) sb.Append("  FundsSource: ").Append(FundsSource).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsSenderInformationAccount", "number", Number.ToString())).Append("\n");
+            if (FundsSource != null) sb.Append("  FundsSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsSenderInformationAccount", "fundsSource", FundsSource.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2creditsSenderInformationAccount", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

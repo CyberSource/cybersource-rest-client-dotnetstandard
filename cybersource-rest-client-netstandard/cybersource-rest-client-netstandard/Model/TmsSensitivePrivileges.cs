@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Indicates which digits of the card number will be unmasked.  Possible Values:    - &#39;FIRST_6_LAST_4&#39;   - &#39;LAST_4&#39;   - &#39;MASKED&#39; 
         /// </summary>
         /// <value>Indicates which digits of the card number will be unmasked.  Possible Values:    - &#39;FIRST_6_LAST_4&#39;   - &#39;LAST_4&#39;   - &#39;MASKED&#39; </value>
-        [DataMember(Name="cardNumberMaskingFormat", EmitDefaultValue=false)]
+        [JsonPropertyName("cardNumberMaskingFormat")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardNumberMaskingFormat { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsSensitivePrivileges {\n");
-            if (CardNumberMaskingFormat != null) sb.Append("  CardNumberMaskingFormat: ").Append(CardNumberMaskingFormat).Append("\n");
+            if (CardNumberMaskingFormat != null) sb.Append("  CardNumberMaskingFormat: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsSensitivePrivileges", "cardNumberMaskingFormat", CardNumberMaskingFormat.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsSensitivePrivileges", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

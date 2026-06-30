@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// This is the flattened JSON object field name/path that is either missing or invalid. 
         /// </summary>
         /// <value>This is the flattened JSON object field name/path that is either missing or invalid. </value>
-        [DataMember(Name="field", EmitDefaultValue=false)]
+        [JsonPropertyName("field")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Field { get; set; }
 
         /// <summary>
         /// Possible reasons for the error.   Possible values: - AUTH_ALREADY_REVERSED - CONTACT_PROCESSOR - DEBIT_CARD_USAGE_LIMIT_EXCEEDED - EXCEEDS_AUTH_AMOUNT - EXCEEDS_CREDIT_LIMIT - EXPIRED_CARD - GENERAL_DECLINE - INSUFFICIENT_FUND - INVALID_CVN - INVALID_DATA - MISSING_AUTH - PARTIAL_APPROVAL - PROCESSOR_DECLINED - SERVER_ERROR - STOLEN_LOST_CARD - SUCCESS - UNAUTHORIZED_CARD 
         /// </summary>
         /// <value>Possible reasons for the error.   Possible values: - AUTH_ALREADY_REVERSED - CONTACT_PROCESSOR - DEBIT_CARD_USAGE_LIMIT_EXCEEDED - EXCEEDS_AUTH_AMOUNT - EXCEEDS_CREDIT_LIMIT - EXPIRED_CARD - GENERAL_DECLINE - INSUFFICIENT_FUND - INVALID_CVN - INVALID_DATA - MISSING_AUTH - PARTIAL_APPROVAL - PROCESSOR_DECLINED - SERVER_ERROR - STOLEN_LOST_CARD - SUCCESS - UNAUTHORIZED_CARD </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PullFunds201ResponseErrorInformationDetails {\n");
-            if (Field != null) sb.Append("  Field: ").Append(Field).Append("\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
+            if (Field != null) sb.Append("  Field: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFunds201ResponseErrorInformationDetails", "field", Field.ToString())).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFunds201ResponseErrorInformationDetails", "reason", Reason.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PullFunds201ResponseErrorInformationDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

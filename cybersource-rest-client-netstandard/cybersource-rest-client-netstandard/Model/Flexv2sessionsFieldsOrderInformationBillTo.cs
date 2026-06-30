@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -66,79 +66,92 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Address1
         /// </summary>
-        [DataMember(Name="address1", EmitDefaultValue=false)]
+        [JsonPropertyName("address1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount Address1 { get; set; }
 
         /// <summary>
         /// Gets or Sets Address2
         /// </summary>
-        [DataMember(Name="address2", EmitDefaultValue=false)]
+        [JsonPropertyName("address2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount Address2 { get; set; }
 
         /// <summary>
         /// Gets or Sets AdministrativeArea
         /// </summary>
-        [DataMember(Name="administrativeArea", EmitDefaultValue=false)]
+        [JsonPropertyName("administrativeArea")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount AdministrativeArea { get; set; }
 
         /// <summary>
         /// Gets or Sets BuildingNumber
         /// </summary>
-        [DataMember(Name="buildingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("buildingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount BuildingNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets Country
         /// </summary>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount Country { get; set; }
 
         /// <summary>
         /// Gets or Sets District
         /// </summary>
-        [DataMember(Name="district", EmitDefaultValue=false)]
+        [JsonPropertyName("district")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount District { get; set; }
 
         /// <summary>
         /// Gets or Sets Locality
         /// </summary>
-        [DataMember(Name="locality", EmitDefaultValue=false)]
+        [JsonPropertyName("locality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount Locality { get; set; }
 
         /// <summary>
         /// Gets or Sets PostalCode
         /// </summary>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount PostalCode { get; set; }
 
         /// <summary>
         /// Gets or Sets Email
         /// </summary>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount Email { get; set; }
 
         /// <summary>
         /// Gets or Sets FirstName
         /// </summary>
-        [DataMember(Name="firstName", EmitDefaultValue=false)]
+        [JsonPropertyName("firstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount FirstName { get; set; }
 
         /// <summary>
         /// Gets or Sets LastName
         /// </summary>
-        [DataMember(Name="lastName", EmitDefaultValue=false)]
+        [JsonPropertyName("lastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount LastName { get; set; }
 
         /// <summary>
         /// Gets or Sets PhoneNumber
         /// </summary>
-        [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount PhoneNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets Company
         /// </summary>
-        [DataMember(Name="company", EmitDefaultValue=false)]
+        [JsonPropertyName("company")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount Company { get; set; }
 
         /// <summary>
@@ -149,19 +162,19 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Flexv2sessionsFieldsOrderInformationBillTo {\n");
-            if (Address1 != null) sb.Append("  Address1: ").Append(Address1).Append("\n");
-            if (Address2 != null) sb.Append("  Address2: ").Append(Address2).Append("\n");
-            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(AdministrativeArea).Append("\n");
-            if (BuildingNumber != null) sb.Append("  BuildingNumber: ").Append(BuildingNumber).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (District != null) sb.Append("  District: ").Append(District).Append("\n");
-            if (Locality != null) sb.Append("  Locality: ").Append(Locality).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (FirstName != null) sb.Append("  FirstName: ").Append(FirstName).Append("\n");
-            if (LastName != null) sb.Append("  LastName: ").Append(LastName).Append("\n");
-            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
-            if (Company != null) sb.Append("  Company: ").Append(Company).Append("\n");
+            if (Address1 != null) sb.Append("  Address1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "address1", Address1.ToString())).Append("\n");
+            if (Address2 != null) sb.Append("  Address2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "address2", Address2.ToString())).Append("\n");
+            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "administrativeArea", AdministrativeArea.ToString())).Append("\n");
+            if (BuildingNumber != null) sb.Append("  BuildingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "buildingNumber", BuildingNumber.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "country", Country.ToString())).Append("\n");
+            if (District != null) sb.Append("  District: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "district", District.ToString())).Append("\n");
+            if (Locality != null) sb.Append("  Locality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "locality", Locality.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "postalCode", PostalCode.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "email", Email.ToString())).Append("\n");
+            if (FirstName != null) sb.Append("  FirstName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "firstName", FirstName.ToString())).Append("\n");
+            if (LastName != null) sb.Append("  LastName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "lastName", LastName.ToString())).Append("\n");
+            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "phoneNumber", PhoneNumber.ToString())).Append("\n");
+            if (Company != null) sb.Append("  Company: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsOrderInformationBillTo", "company", Company.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -172,7 +185,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Flexv2sessionsFieldsOrderInformationBillTo", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

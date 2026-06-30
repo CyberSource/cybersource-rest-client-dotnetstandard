@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// The MIME type of the Asset. 
         /// </summary>
         /// <value>The MIME type of the Asset. </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// The base64-encoded data of the Asset. 
         /// </summary>
         /// <value>The base64-encoded data of the Asset. </value>
-        [DataMember(Name="data", EmitDefaultValue=false)]
+        [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Data { get; set; }
 
         /// <summary>
         /// The width of the Asset in pixels. 
         /// </summary>
         /// <value>The width of the Asset in pixels. </value>
-        [DataMember(Name="width", EmitDefaultValue=false)]
+        [JsonPropertyName("width")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Width { get; set; }
 
         /// <summary>
         /// The height of the Asset in pixels. 
         /// </summary>
         /// <value>The height of the Asset in pixels. </value>
-        [DataMember(Name="height", EmitDefaultValue=false)]
+        [JsonPropertyName("height")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Height { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2002Content {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Data != null) sb.Append("  Data: ").Append(Data).Append("\n");
-            if (Width != null) sb.Append("  Width: ").Append(Width).Append("\n");
-            if (Height != null) sb.Append("  Height: ").Append(Height).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2002Content", "type", Type.ToString())).Append("\n");
+            if (Data != null) sb.Append("  Data: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2002Content", "data", Data.ToString())).Append("\n");
+            if (Width != null) sb.Append("  Width: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2002Content", "width", Width.ToString())).Append("\n");
+            if (Height != null) sb.Append("  Height: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2002Content", "height", Height.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2002Content", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

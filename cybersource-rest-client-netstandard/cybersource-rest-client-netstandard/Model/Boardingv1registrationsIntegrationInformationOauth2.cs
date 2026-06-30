@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsIntegrationInformationOauth2" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Boardingv1registrationsIntegrationInformationOauth2() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsIntegrationInformationOauth2" /> class.
@@ -49,13 +49,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ClientId
         /// </summary>
-        [DataMember(Name="client_id", EmitDefaultValue=false)]
+        [JsonPropertyName("client_id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientId { get; set; }
 
         /// <summary>
         /// Gets or Sets State
         /// </summary>
-        [DataMember(Name="state", EmitDefaultValue=false)]
+        [JsonPropertyName("state")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string State { get; set; }
 
         /// <summary>
@@ -66,8 +68,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Boardingv1registrationsIntegrationInformationOauth2 {\n");
-            if (ClientId != null) sb.Append("  ClientId: ").Append(ClientId).Append("\n");
-            if (State != null) sb.Append("  State: ").Append(State).Append("\n");
+            if (ClientId != null) sb.Append("  ClientId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsIntegrationInformationOauth2", "client_id", ClientId.ToString())).Append("\n");
+            if (State != null) sb.Append("  State: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsIntegrationInformationOauth2", "state", State.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -78,7 +80,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Boardingv1registrationsIntegrationInformationOauth2", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

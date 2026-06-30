@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AccountInformation
         /// </summary>
-        [DataMember(Name="accountInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("accountInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UmsV1UsersGet200ResponseAccountInformation AccountInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets OrganizationInformation
         /// </summary>
-        [DataMember(Name="organizationInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UmsV1UsersGet200ResponseOrganizationInformation OrganizationInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ContactInformation
         /// </summary>
-        [DataMember(Name="contactInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("contactInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UmsV1UsersGet200ResponseContactInformation ContactInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets CustomFields
         /// </summary>
-        [DataMember(Name="customFields", EmitDefaultValue=false)]
+        [JsonPropertyName("customFields")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, string> CustomFields { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UmsV1UsersGet200ResponseUsers {\n");
-            if (AccountInformation != null) sb.Append("  AccountInformation: ").Append(AccountInformation).Append("\n");
-            if (OrganizationInformation != null) sb.Append("  OrganizationInformation: ").Append(OrganizationInformation).Append("\n");
-            if (ContactInformation != null) sb.Append("  ContactInformation: ").Append(ContactInformation).Append("\n");
-            if (CustomFields != null) sb.Append("  CustomFields: ").Append(CustomFields).Append("\n");
+            if (AccountInformation != null) sb.Append("  AccountInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseUsers", "accountInformation", AccountInformation.ToString())).Append("\n");
+            if (OrganizationInformation != null) sb.Append("  OrganizationInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseUsers", "organizationInformation", OrganizationInformation.ToString())).Append("\n");
+            if (ContactInformation != null) sb.Append("  ContactInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseUsers", "contactInformation", ContactInformation.ToString())).Append("\n");
+            if (CustomFields != null) sb.Append("  CustomFields: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseUsers", "customFields", CustomFields.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UmsV1UsersGet200ResponseUsers", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

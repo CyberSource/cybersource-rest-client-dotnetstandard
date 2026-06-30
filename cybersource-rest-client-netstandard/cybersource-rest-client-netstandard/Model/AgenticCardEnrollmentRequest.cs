@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticCardEnrollmentRequest" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected AgenticCardEnrollmentRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticCardEnrollmentRequest" /> class.
@@ -47,7 +47,7 @@ namespace CyberSource.Model
         /// <param name="EnrollmentReferenceData">EnrollmentReferenceData.</param>
         /// <param name="AssuranceData">Assurance data..</param>
         /// <param name="ConsentData">Consent data..</param>
-        public AgenticCardEnrollmentRequest(string ClientCorrelationId = default(string), Acpv1tokensDeviceInformation DeviceInformation = default(Acpv1tokensDeviceInformation), Acpv1tokensBuyerInformation BuyerInformation = default(Acpv1tokensBuyerInformation), Acpv1tokensBillTo BillTo = default(Acpv1tokensBillTo), Acpv1tokensConsumerIdentity ConsumerIdentity = default(Acpv1tokensConsumerIdentity), Acpv1tokensPaymentInformation PaymentInformation = default(Acpv1tokensPaymentInformation), Acpv1tokensEnrollmentReferenceData EnrollmentReferenceData = default(Acpv1tokensEnrollmentReferenceData), List<Acpv1tokensAssuranceData> AssuranceData = default(List<Acpv1tokensAssuranceData>), List<Acpv1tokensConsentData> ConsentData = default(List<Acpv1tokensConsentData>))
+        public AgenticCardEnrollmentRequest(string ClientCorrelationId = default(string), Iccv1tokensDeviceInformation DeviceInformation = default(Iccv1tokensDeviceInformation), Iccv1tokensBuyerInformation BuyerInformation = default(Iccv1tokensBuyerInformation), Iccv1tokensBillTo BillTo = default(Iccv1tokensBillTo), Iccv1tokensConsumerIdentity ConsumerIdentity = default(Iccv1tokensConsumerIdentity), Iccv1tokensPaymentInformation PaymentInformation = default(Iccv1tokensPaymentInformation), Iccv1tokensEnrollmentReferenceData EnrollmentReferenceData = default(Iccv1tokensEnrollmentReferenceData), List<Iccv1tokensAssuranceData> AssuranceData = default(List<Iccv1tokensAssuranceData>), List<Iccv1tokensConsentData> ConsentData = default(List<Iccv1tokensConsentData>))
         {
             this.ClientCorrelationId = ClientCorrelationId;
             this.DeviceInformation = DeviceInformation;
@@ -64,58 +64,67 @@ namespace CyberSource.Model
         /// Client Correlation Id used during the tokenization or during FIDO assertion.
         /// </summary>
         /// <value>Client Correlation Id used during the tokenization or during FIDO assertion.</value>
-        [DataMember(Name="clientCorrelationId", EmitDefaultValue=false)]
+        [JsonPropertyName("clientCorrelationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientCorrelationId { get; set; }
 
         /// <summary>
         /// Gets or Sets DeviceInformation
         /// </summary>
-        [DataMember(Name="deviceInformation", EmitDefaultValue=false)]
-        public Acpv1tokensDeviceInformation DeviceInformation { get; set; }
+        [JsonPropertyName("deviceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensDeviceInformation DeviceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerInformation
         /// </summary>
-        [DataMember(Name="buyerInformation", EmitDefaultValue=false)]
-        public Acpv1tokensBuyerInformation BuyerInformation { get; set; }
+        [JsonPropertyName("buyerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensBuyerInformation BuyerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets BillTo
         /// </summary>
-        [DataMember(Name="billTo", EmitDefaultValue=false)]
-        public Acpv1tokensBillTo BillTo { get; set; }
+        [JsonPropertyName("billTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensBillTo BillTo { get; set; }
 
         /// <summary>
         /// Gets or Sets ConsumerIdentity
         /// </summary>
-        [DataMember(Name="consumerIdentity", EmitDefaultValue=false)]
-        public Acpv1tokensConsumerIdentity ConsumerIdentity { get; set; }
+        [JsonPropertyName("consumerIdentity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensConsumerIdentity ConsumerIdentity { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInformation
         /// </summary>
-        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
-        public Acpv1tokensPaymentInformation PaymentInformation { get; set; }
+        [JsonPropertyName("paymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets EnrollmentReferenceData
         /// </summary>
-        [DataMember(Name="enrollmentReferenceData", EmitDefaultValue=false)]
-        public Acpv1tokensEnrollmentReferenceData EnrollmentReferenceData { get; set; }
+        [JsonPropertyName("enrollmentReferenceData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensEnrollmentReferenceData EnrollmentReferenceData { get; set; }
 
         /// <summary>
         /// Assurance data.
         /// </summary>
         /// <value>Assurance data.</value>
-        [DataMember(Name="assuranceData", EmitDefaultValue=false)]
-        public List<Acpv1tokensAssuranceData> AssuranceData { get; set; }
+        [JsonPropertyName("assuranceData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public List<Iccv1tokensAssuranceData> AssuranceData { get; set; }
 
         /// <summary>
         /// Consent data.
         /// </summary>
         /// <value>Consent data.</value>
-        [DataMember(Name="consentData", EmitDefaultValue=false)]
-        public List<Acpv1tokensConsentData> ConsentData { get; set; }
+        [JsonPropertyName("consentData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public List<Iccv1tokensConsentData> ConsentData { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -125,15 +134,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class AgenticCardEnrollmentRequest {\n");
-            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(ClientCorrelationId).Append("\n");
-            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(DeviceInformation).Append("\n");
-            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(BuyerInformation).Append("\n");
-            if (BillTo != null) sb.Append("  BillTo: ").Append(BillTo).Append("\n");
-            if (ConsumerIdentity != null) sb.Append("  ConsumerIdentity: ").Append(ConsumerIdentity).Append("\n");
-            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
-            if (EnrollmentReferenceData != null) sb.Append("  EnrollmentReferenceData: ").Append(EnrollmentReferenceData).Append("\n");
-            if (AssuranceData != null) sb.Append("  AssuranceData: ").Append(AssuranceData).Append("\n");
-            if (ConsentData != null) sb.Append("  ConsentData: ").Append(ConsentData).Append("\n");
+            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentRequest", "clientCorrelationId", ClientCorrelationId.ToString())).Append("\n");
+            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentRequest", "deviceInformation", DeviceInformation.ToString())).Append("\n");
+            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentRequest", "buyerInformation", BuyerInformation.ToString())).Append("\n");
+            if (BillTo != null) sb.Append("  BillTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentRequest", "billTo", BillTo.ToString())).Append("\n");
+            if (ConsumerIdentity != null) sb.Append("  ConsumerIdentity: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentRequest", "consumerIdentity", ConsumerIdentity.ToString())).Append("\n");
+            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentRequest", "paymentInformation", PaymentInformation.ToString())).Append("\n");
+            if (EnrollmentReferenceData != null) sb.Append("  EnrollmentReferenceData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentRequest", "enrollmentReferenceData", EnrollmentReferenceData.ToString())).Append("\n");
+            if (AssuranceData != null) sb.Append("  AssuranceData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentRequest", "assuranceData", AssuranceData.ToString())).Append("\n");
+            if (ConsentData != null) sb.Append("  ConsentData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCardEnrollmentRequest", "consentData", ConsentData.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -144,7 +153,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("AgenticCardEnrollmentRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

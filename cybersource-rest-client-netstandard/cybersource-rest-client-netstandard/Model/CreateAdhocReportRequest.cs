@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -63,74 +63,85 @@ namespace CyberSource.Model
         /// Valid CyberSource Organization Id
         /// </summary>
         /// <value>Valid CyberSource Organization Id</value>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// Gets or Sets ReportDefinitionName
         /// </summary>
-        [DataMember(Name="reportDefinitionName", EmitDefaultValue=false)]
+        [JsonPropertyName("reportDefinitionName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportDefinitionName { get; set; }
 
         /// <summary>
         /// List of fields which needs to get included in a report
         /// </summary>
         /// <value>List of fields which needs to get included in a report</value>
-        [DataMember(Name="reportFields", EmitDefaultValue=false)]
+        [JsonPropertyName("reportFields")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ReportFields { get; set; }
 
         /// <summary>
         /// &#39;Format of the report&#39;                  Valid values: - application/xml - text/csv 
         /// </summary>
         /// <value>&#39;Format of the report&#39;                  Valid values: - application/xml - text/csv </value>
-        [DataMember(Name="reportMimeType", EmitDefaultValue=false)]
+        [JsonPropertyName("reportMimeType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportMimeType { get; set; }
 
         /// <summary>
         /// Name of the report
         /// </summary>
         /// <value>Name of the report</value>
-        [DataMember(Name="reportName", EmitDefaultValue=false)]
+        [JsonPropertyName("reportName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReportName { get; set; }
 
         /// <summary>
         /// Timezone of the report
         /// </summary>
         /// <value>Timezone of the report</value>
-        [DataMember(Name="timezone", EmitDefaultValue=false)]
+        [JsonPropertyName("timezone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Timezone { get; set; }
 
         /// <summary>
         /// Start time of the report
         /// </summary>
         /// <value>Start time of the report</value>
-        [DataMember(Name="reportStartTime", EmitDefaultValue=false)]
+        [JsonPropertyName("reportStartTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? ReportStartTime { get; set; }
 
         /// <summary>
         /// End time of the report
         /// </summary>
         /// <value>End time of the report</value>
-        [DataMember(Name="reportEndTime", EmitDefaultValue=false)]
+        [JsonPropertyName("reportEndTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? ReportEndTime { get; set; }
 
         /// <summary>
         /// Gets or Sets ReportFilters
         /// </summary>
-        [DataMember(Name="reportFilters", EmitDefaultValue=false)]
+        [JsonPropertyName("reportFilters")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Reportingv3reportsReportFilters ReportFilters { get; set; }
 
         /// <summary>
         /// Gets or Sets ReportPreferences
         /// </summary>
-        [DataMember(Name="reportPreferences", EmitDefaultValue=false)]
+        [JsonPropertyName("reportPreferences")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Reportingv3reportsReportPreferences ReportPreferences { get; set; }
 
         /// <summary>
         /// Specifies the group name
         /// </summary>
         /// <value>Specifies the group name</value>
-        [DataMember(Name="groupName", EmitDefaultValue=false)]
+        [JsonPropertyName("groupName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string GroupName { get; set; }
 
         /// <summary>
@@ -141,17 +152,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CreateAdhocReportRequest {\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (ReportDefinitionName != null) sb.Append("  ReportDefinitionName: ").Append(ReportDefinitionName).Append("\n");
-            if (ReportFields != null) sb.Append("  ReportFields: ").Append(ReportFields).Append("\n");
-            if (ReportMimeType != null) sb.Append("  ReportMimeType: ").Append(ReportMimeType).Append("\n");
-            if (ReportName != null) sb.Append("  ReportName: ").Append(ReportName).Append("\n");
-            if (Timezone != null) sb.Append("  Timezone: ").Append(Timezone).Append("\n");
-            if (ReportStartTime != null) sb.Append("  ReportStartTime: ").Append(ReportStartTime).Append("\n");
-            if (ReportEndTime != null) sb.Append("  ReportEndTime: ").Append(ReportEndTime).Append("\n");
-            if (ReportFilters != null) sb.Append("  ReportFilters: ").Append(ReportFilters).Append("\n");
-            if (ReportPreferences != null) sb.Append("  ReportPreferences: ").Append(ReportPreferences).Append("\n");
-            if (GroupName != null) sb.Append("  GroupName: ").Append(GroupName).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateAdhocReportRequest", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (ReportDefinitionName != null) sb.Append("  ReportDefinitionName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateAdhocReportRequest", "reportDefinitionName", ReportDefinitionName.ToString())).Append("\n");
+            if (ReportFields != null) sb.Append("  ReportFields: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateAdhocReportRequest", "reportFields", ReportFields.ToString())).Append("\n");
+            if (ReportMimeType != null) sb.Append("  ReportMimeType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateAdhocReportRequest", "reportMimeType", ReportMimeType.ToString())).Append("\n");
+            if (ReportName != null) sb.Append("  ReportName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateAdhocReportRequest", "reportName", ReportName.ToString())).Append("\n");
+            if (Timezone != null) sb.Append("  Timezone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateAdhocReportRequest", "timezone", Timezone.ToString())).Append("\n");
+            if (ReportStartTime != null) sb.Append("  ReportStartTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateAdhocReportRequest", "reportStartTime", ReportStartTime.ToString())).Append("\n");
+            if (ReportEndTime != null) sb.Append("  ReportEndTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateAdhocReportRequest", "reportEndTime", ReportEndTime.ToString())).Append("\n");
+            if (ReportFilters != null) sb.Append("  ReportFilters: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateAdhocReportRequest", "reportFilters", ReportFilters.ToString())).Append("\n");
+            if (ReportPreferences != null) sb.Append("  ReportPreferences: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateAdhocReportRequest", "reportPreferences", ReportPreferences.ToString())).Append("\n");
+            if (GroupName != null) sb.Append("  GroupName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateAdhocReportRequest", "groupName", GroupName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -162,7 +173,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CreateAdhocReportRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

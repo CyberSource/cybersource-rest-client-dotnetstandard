@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Valid Values: - &#x60;ALL&#x60; - Change applied to all Subscriptions (Existing + New) - &#x60;NEW&#x60; - Change applied to New Subsciptions only 
         /// </summary>
         /// <value>Valid Values: - &#x60;ALL&#x60; - Change applied to all Subscriptions (Existing + New) - &#x60;NEW&#x60; - Change applied to New Subsciptions only </value>
-        [DataMember(Name="applyTo", EmitDefaultValue=false)]
+        [JsonPropertyName("applyTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApplyTo { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Rbsv1plansidProcessingInformationSubscriptionBillingOptions {\n");
-            if (ApplyTo != null) sb.Append("  ApplyTo: ").Append(ApplyTo).Append("\n");
+            if (ApplyTo != null) sb.Append("  ApplyTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1plansidProcessingInformationSubscriptionBillingOptions", "applyTo", ApplyTo.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Rbsv1plansidProcessingInformationSubscriptionBillingOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

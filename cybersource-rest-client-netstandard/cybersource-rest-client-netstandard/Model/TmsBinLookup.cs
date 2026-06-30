@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets PaymentAccountInformation
         /// </summary>
-        [DataMember(Name="paymentAccountInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentAccountInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsBinLookupPaymentAccountInformation PaymentAccountInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets IssuerInformation
         /// </summary>
-        [DataMember(Name="issuerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("issuerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsBinLookupIssuerInformation IssuerInformation { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsBinLookup {\n");
-            if (PaymentAccountInformation != null) sb.Append("  PaymentAccountInformation: ").Append(PaymentAccountInformation).Append("\n");
-            if (IssuerInformation != null) sb.Append("  IssuerInformation: ").Append(IssuerInformation).Append("\n");
+            if (PaymentAccountInformation != null) sb.Append("  PaymentAccountInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookup", "paymentAccountInformation", PaymentAccountInformation.ToString())).Append("\n");
+            if (IssuerInformation != null) sb.Append("  IssuerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookup", "issuerInformation", IssuerInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsBinLookup", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

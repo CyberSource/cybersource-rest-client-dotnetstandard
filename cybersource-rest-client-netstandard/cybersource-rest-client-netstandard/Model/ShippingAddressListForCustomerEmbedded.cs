@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ShippingAddressListForCustomerEmbedded" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         public ShippingAddressListForCustomerEmbedded()
         {
         }
@@ -41,8 +41,9 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ShippingAddresses
         /// </summary>
-        [DataMember(Name="shippingAddresses", EmitDefaultValue=false)]
-        public List<Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddress> ShippingAddresses { get; private set; }
+        [JsonPropertyName("shippingAddresses")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public List<DefaultShippingAddress> ShippingAddresses { get; private set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -52,7 +53,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ShippingAddressListForCustomerEmbedded {\n");
-            if (ShippingAddresses != null) sb.Append("  ShippingAddresses: ").Append(ShippingAddresses).Append("\n");
+            if (ShippingAddresses != null) sb.Append("  ShippingAddresses: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ShippingAddressListForCustomerEmbedded", "shippingAddresses", ShippingAddresses.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -63,7 +64,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ShippingAddressListForCustomerEmbedded", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

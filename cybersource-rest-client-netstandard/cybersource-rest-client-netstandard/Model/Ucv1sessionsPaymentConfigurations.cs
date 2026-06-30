@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -35,30 +35,42 @@ namespace CyberSource.Model
         /// </summary>
         /// <param name="GOOGLEPAY">GOOGLEPAY.</param>
         /// <param name="CLICKTOPAY">CLICKTOPAY.</param>
+        /// <param name="PAYPAL">PAYPAL.</param>
         /// <param name="TMS_TOKEN">TMS_TOKEN.</param>
-        public Ucv1sessionsPaymentConfigurations(Ucv1sessionsPaymentConfigurationsGOOGLEPAY GOOGLEPAY = default(Ucv1sessionsPaymentConfigurationsGOOGLEPAY), Ucv1sessionsPaymentConfigurationsCLICKTOPAY CLICKTOPAY = default(Ucv1sessionsPaymentConfigurationsCLICKTOPAY), Ucv1sessionsPaymentConfigurationsTMSTOKEN TMS_TOKEN = default(Ucv1sessionsPaymentConfigurationsTMSTOKEN))
+        public Ucv1sessionsPaymentConfigurations(Ucv1sessionsPaymentConfigurationsGOOGLEPAY GOOGLEPAY = default(Ucv1sessionsPaymentConfigurationsGOOGLEPAY), Ucv1sessionsPaymentConfigurationsCLICKTOPAY CLICKTOPAY = default(Ucv1sessionsPaymentConfigurationsCLICKTOPAY), Ucv1sessionsPaymentConfigurationsPAYPAL PAYPAL = default(Ucv1sessionsPaymentConfigurationsPAYPAL), Ucv1sessionsPaymentConfigurationsTMSTOKEN TMS_TOKEN = default(Ucv1sessionsPaymentConfigurationsTMSTOKEN))
         {
             this.GOOGLEPAY = GOOGLEPAY;
             this.CLICKTOPAY = CLICKTOPAY;
+            this.PAYPAL = PAYPAL;
             this.TMS_TOKEN = TMS_TOKEN;
         }
         
         /// <summary>
         /// Gets or Sets GOOGLEPAY
         /// </summary>
-        [DataMember(Name="GOOGLEPAY", EmitDefaultValue=false)]
+        [JsonPropertyName("GOOGLEPAY")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsPaymentConfigurationsGOOGLEPAY GOOGLEPAY { get; set; }
 
         /// <summary>
         /// Gets or Sets CLICKTOPAY
         /// </summary>
-        [DataMember(Name="CLICKTOPAY", EmitDefaultValue=false)]
+        [JsonPropertyName("CLICKTOPAY")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsPaymentConfigurationsCLICKTOPAY CLICKTOPAY { get; set; }
+
+        /// <summary>
+        /// Gets or Sets PAYPAL
+        /// </summary>
+        [JsonPropertyName("PAYPAL")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Ucv1sessionsPaymentConfigurationsPAYPAL PAYPAL { get; set; }
 
         /// <summary>
         /// Gets or Sets TMS_TOKEN
         /// </summary>
-        [DataMember(Name="TMS_TOKEN", EmitDefaultValue=false)]
+        [JsonPropertyName("TMS_TOKEN")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsPaymentConfigurationsTMSTOKEN TMS_TOKEN { get; set; }
 
         /// <summary>
@@ -69,9 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsPaymentConfigurations {\n");
-            if (GOOGLEPAY != null) sb.Append("  GOOGLEPAY: ").Append(GOOGLEPAY).Append("\n");
-            if (CLICKTOPAY != null) sb.Append("  CLICKTOPAY: ").Append(CLICKTOPAY).Append("\n");
-            if (TMS_TOKEN != null) sb.Append("  TMS_TOKEN: ").Append(TMS_TOKEN).Append("\n");
+            if (GOOGLEPAY != null) sb.Append("  GOOGLEPAY: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsPaymentConfigurations", "GOOGLEPAY", GOOGLEPAY.ToString())).Append("\n");
+            if (CLICKTOPAY != null) sb.Append("  CLICKTOPAY: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsPaymentConfigurations", "CLICKTOPAY", CLICKTOPAY.ToString())).Append("\n");
+            if (PAYPAL != null) sb.Append("  PAYPAL: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsPaymentConfigurations", "PAYPAL", PAYPAL.ToString())).Append("\n");
+            if (TMS_TOKEN != null) sb.Append("  TMS_TOKEN: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsPaymentConfigurations", "TMS_TOKEN", TMS_TOKEN.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsPaymentConfigurations", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>
@@ -119,6 +132,11 @@ namespace CyberSource.Model
                     this.CLICKTOPAY.Equals(other.CLICKTOPAY)
                 ) && 
                 (
+                    this.PAYPAL == other.PAYPAL ||
+                    this.PAYPAL != null &&
+                    this.PAYPAL.Equals(other.PAYPAL)
+                ) && 
+                (
                     this.TMS_TOKEN == other.TMS_TOKEN ||
                     this.TMS_TOKEN != null &&
                     this.TMS_TOKEN.Equals(other.TMS_TOKEN)
@@ -140,6 +158,8 @@ namespace CyberSource.Model
                     hash = hash * 59 + this.GOOGLEPAY.GetHashCode();
                 if (this.CLICKTOPAY != null)
                     hash = hash * 59 + this.CLICKTOPAY.GetHashCode();
+                if (this.PAYPAL != null)
+                    hash = hash * 59 + this.PAYPAL.GetHashCode();
                 if (this.TMS_TOKEN != null)
                     hash = hash * 59 + this.TMS_TOKEN.GetHashCode();
                 return hash;

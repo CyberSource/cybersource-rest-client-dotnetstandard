@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// This value is a 2-digit code indicating the first bonus month. Valid value from 1 to 12. 
         /// </summary>
         /// <value>This value is a 2-digit code indicating the first bonus month. Valid value from 1 to 12. </value>
-        [DataMember(Name="month", EmitDefaultValue=false)]
+        [JsonPropertyName("month")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Month { get; set; }
 
         /// <summary>
         /// This value contains the bonus amount of the first month. Maximum value without decimal 99999999. 
         /// </summary>
         /// <value>This value contains the bonus amount of the first month. Maximum value without decimal 99999999. </value>
-        [DataMember(Name="amount", EmitDefaultValue=false)]
+        [JsonPropertyName("amount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Amount { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsProcessingInformationJapanPaymentOptionsBonuses {\n");
-            if (Month != null) sb.Append("  Month: ").Append(Month).Append("\n");
-            if (Amount != null) sb.Append("  Amount: ").Append(Amount).Append("\n");
+            if (Month != null) sb.Append("  Month: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationJapanPaymentOptionsBonuses", "month", Month.ToString())).Append("\n");
+            if (Amount != null) sb.Append("  Amount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationJapanPaymentOptionsBonuses", "amount", Amount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsProcessingInformationJapanPaymentOptionsBonuses", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

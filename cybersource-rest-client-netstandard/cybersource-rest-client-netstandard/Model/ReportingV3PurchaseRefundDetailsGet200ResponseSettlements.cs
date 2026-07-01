@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -67,91 +67,104 @@ namespace CyberSource.Model
         /// An unique identification number assigned by CyberSource to identify the submitted request.
         /// </summary>
         /// <value>An unique identification number assigned by CyberSource to identify the submitted request.</value>
-        [DataMember(Name="requestId", EmitDefaultValue=false)]
+        [JsonPropertyName("requestId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestId { get; set; }
 
         /// <summary>
         /// Transaction Type
         /// </summary>
         /// <value>Transaction Type</value>
-        [DataMember(Name="transactionType", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionType { get; set; }
 
         /// <summary>
         /// Submission Date
         /// </summary>
         /// <value>Submission Date</value>
-        [DataMember(Name="submissionTime", EmitDefaultValue=false)]
+        [JsonPropertyName("submissionTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? SubmissionTime { get; set; }
 
         /// <summary>
         /// Amount
         /// </summary>
         /// <value>Amount</value>
-        [DataMember(Name="amount", EmitDefaultValue=false)]
+        [JsonPropertyName("amount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Amount { get; set; }
 
         /// <summary>
         /// Valid ISO 4217 ALPHA-3 currency code
         /// </summary>
         /// <value>Valid ISO 4217 ALPHA-3 currency code</value>
-        [DataMember(Name="currencyCode", EmitDefaultValue=false)]
+        [JsonPropertyName("currencyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CurrencyCode { get; set; }
 
         /// <summary>
         /// payment method
         /// </summary>
         /// <value>payment method</value>
-        [DataMember(Name="paymentMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentMethod { get; set; }
 
         /// <summary>
         /// Solution Type (Wallet)
         /// </summary>
         /// <value>Solution Type (Wallet)</value>
-        [DataMember(Name="walletType", EmitDefaultValue=false)]
+        [JsonPropertyName("walletType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WalletType { get; set; }
 
         /// <summary>
         /// Payment Type
         /// </summary>
         /// <value>Payment Type</value>
-        [DataMember(Name="paymentType", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentType { get; set; }
 
         /// <summary>
         /// Account Suffix
         /// </summary>
         /// <value>Account Suffix</value>
-        [DataMember(Name="accountSuffix", EmitDefaultValue=false)]
+        [JsonPropertyName("accountSuffix")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountSuffix { get; set; }
 
         /// <summary>
         /// Cybersource Batch Time
         /// </summary>
         /// <value>Cybersource Batch Time</value>
-        [DataMember(Name="cybersourceBatchTime", EmitDefaultValue=false)]
+        [JsonPropertyName("cybersourceBatchTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? CybersourceBatchTime { get; set; }
 
         /// <summary>
         /// Cybersource Batch Id
         /// </summary>
         /// <value>Cybersource Batch Id</value>
-        [DataMember(Name="cybersourceBatchId", EmitDefaultValue=false)]
+        [JsonPropertyName("cybersourceBatchId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CybersourceBatchId { get; set; }
 
         /// <summary>
         /// Card Type
         /// </summary>
         /// <value>Card Type</value>
-        [DataMember(Name="cardType", EmitDefaultValue=false)]
+        [JsonPropertyName("cardType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardType { get; set; }
 
         /// <summary>
         /// Debit Network
         /// </summary>
         /// <value>Debit Network</value>
-        [DataMember(Name="debitNetwork", EmitDefaultValue=false)]
+        [JsonPropertyName("debitNetwork")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DebitNetwork { get; set; }
 
         /// <summary>
@@ -162,19 +175,19 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3PurchaseRefundDetailsGet200ResponseSettlements {\n");
-            if (RequestId != null) sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            if (TransactionType != null) sb.Append("  TransactionType: ").Append(TransactionType).Append("\n");
-            if (SubmissionTime != null) sb.Append("  SubmissionTime: ").Append(SubmissionTime).Append("\n");
-            if (Amount != null) sb.Append("  Amount: ").Append(Amount).Append("\n");
-            if (CurrencyCode != null) sb.Append("  CurrencyCode: ").Append(CurrencyCode).Append("\n");
-            if (PaymentMethod != null) sb.Append("  PaymentMethod: ").Append(PaymentMethod).Append("\n");
-            if (WalletType != null) sb.Append("  WalletType: ").Append(WalletType).Append("\n");
-            if (PaymentType != null) sb.Append("  PaymentType: ").Append(PaymentType).Append("\n");
-            if (AccountSuffix != null) sb.Append("  AccountSuffix: ").Append(AccountSuffix).Append("\n");
-            if (CybersourceBatchTime != null) sb.Append("  CybersourceBatchTime: ").Append(CybersourceBatchTime).Append("\n");
-            if (CybersourceBatchId != null) sb.Append("  CybersourceBatchId: ").Append(CybersourceBatchId).Append("\n");
-            if (CardType != null) sb.Append("  CardType: ").Append(CardType).Append("\n");
-            if (DebitNetwork != null) sb.Append("  DebitNetwork: ").Append(DebitNetwork).Append("\n");
+            if (RequestId != null) sb.Append("  RequestId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "requestId", RequestId.ToString())).Append("\n");
+            if (TransactionType != null) sb.Append("  TransactionType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "transactionType", TransactionType.ToString())).Append("\n");
+            if (SubmissionTime != null) sb.Append("  SubmissionTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "submissionTime", SubmissionTime.ToString())).Append("\n");
+            if (Amount != null) sb.Append("  Amount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "amount", Amount.ToString())).Append("\n");
+            if (CurrencyCode != null) sb.Append("  CurrencyCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "currencyCode", CurrencyCode.ToString())).Append("\n");
+            if (PaymentMethod != null) sb.Append("  PaymentMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "paymentMethod", PaymentMethod.ToString())).Append("\n");
+            if (WalletType != null) sb.Append("  WalletType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "walletType", WalletType.ToString())).Append("\n");
+            if (PaymentType != null) sb.Append("  PaymentType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "paymentType", PaymentType.ToString())).Append("\n");
+            if (AccountSuffix != null) sb.Append("  AccountSuffix: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "accountSuffix", AccountSuffix.ToString())).Append("\n");
+            if (CybersourceBatchTime != null) sb.Append("  CybersourceBatchTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "cybersourceBatchTime", CybersourceBatchTime.ToString())).Append("\n");
+            if (CybersourceBatchId != null) sb.Append("  CybersourceBatchId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "cybersourceBatchId", CybersourceBatchId.ToString())).Append("\n");
+            if (CardType != null) sb.Append("  CardType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "cardType", CardType.ToString())).Append("\n");
+            if (DebitNetwork != null) sb.Append("  DebitNetwork: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", "debitNetwork", DebitNetwork.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -185,7 +198,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3PurchaseRefundDetailsGet200ResponseSettlements", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

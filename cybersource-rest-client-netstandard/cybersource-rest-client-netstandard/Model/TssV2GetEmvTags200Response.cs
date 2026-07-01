@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// An array of objects with each object containing a single EMV tag from the dictionary. 
         /// </summary>
         /// <value>An array of objects with each object containing a single EMV tag from the dictionary. </value>
-        [DataMember(Name="emvTagBreakdownList", EmitDefaultValue=false)]
+        [JsonPropertyName("emvTagBreakdownList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<TssV2GetEmvTags200ResponseEmvTagBreakdownList> EmvTagBreakdownList { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2GetEmvTags200Response {\n");
-            if (EmvTagBreakdownList != null) sb.Append("  EmvTagBreakdownList: ").Append(EmvTagBreakdownList).Append("\n");
+            if (EmvTagBreakdownList != null) sb.Append("  EmvTagBreakdownList: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2GetEmvTags200Response", "emvTagBreakdownList", EmvTagBreakdownList.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2GetEmvTags200Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

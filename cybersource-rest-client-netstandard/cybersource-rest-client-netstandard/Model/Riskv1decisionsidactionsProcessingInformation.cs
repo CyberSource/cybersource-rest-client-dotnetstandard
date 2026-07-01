@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Follow-on action to apply to the case after the decision is successfully applied. Possible values are one of the following: - &#x60;CAPTURE&#x60; - &#x60;REVERSE&#x60;  If decision is ACCEPT, then CAPTURE can be used in actionList. If decision is REJECT, then REVERSE can be used. 
         /// </summary>
         /// <value>Follow-on action to apply to the case after the decision is successfully applied. Possible values are one of the following: - &#x60;CAPTURE&#x60; - &#x60;REVERSE&#x60;  If decision is ACCEPT, then CAPTURE can be used in actionList. If decision is REJECT, then REVERSE can be used. </value>
-        [DataMember(Name="actionList", EmitDefaultValue=false)]
+        [JsonPropertyName("actionList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ActionList { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1decisionsidactionsProcessingInformation {\n");
-            if (ActionList != null) sb.Append("  ActionList: ").Append(ActionList).Append("\n");
+            if (ActionList != null) sb.Append("  ActionList: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsidactionsProcessingInformation", "actionList", ActionList.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1decisionsidactionsProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

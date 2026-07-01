@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Daily cost of the room. 
         /// </summary>
         /// <value>Daily cost of the room. </value>
-        [DataMember(Name="dailyRate", EmitDefaultValue=false)]
+        [JsonPropertyName("dailyRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DailyRate { get; set; }
 
         /// <summary>
         /// Number of nights billed at the rate specified by &#x60;travelInformation.lodging.room[].dailyRate&#x60;. 
         /// </summary>
         /// <value>Number of nights billed at the rate specified by &#x60;travelInformation.lodging.room[].dailyRate&#x60;. </value>
-        [DataMember(Name="numberOfNights", EmitDefaultValue=false)]
+        [JsonPropertyName("numberOfNights")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? NumberOfNights { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsTravelInformationLodgingRoom {\n");
-            if (DailyRate != null) sb.Append("  DailyRate: ").Append(DailyRate).Append("\n");
-            if (NumberOfNights != null) sb.Append("  NumberOfNights: ").Append(NumberOfNights).Append("\n");
+            if (DailyRate != null) sb.Append("  DailyRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodgingRoom", "dailyRate", DailyRate.ToString())).Append("\n");
+            if (NumberOfNights != null) sb.Append("  NumberOfNights: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationLodgingRoom", "numberOfNights", NumberOfNights.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsTravelInformationLodgingRoom", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

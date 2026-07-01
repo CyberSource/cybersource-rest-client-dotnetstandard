@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Country in which the card was issued. This information enables you to determine whether the card was issued domestically or internationally. Use the two-character [ISO Standard Country Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).  This field is supported for Visa, Mastercard, Discover, Diners Club, JCB, and Maestro (International) on Chase Paymentech Solutions. 
         /// </summary>
         /// <value>Country in which the card was issued. This information enables you to determine whether the card was issued domestically or internationally. Use the two-character [ISO Standard Country Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).  This field is supported for Visa, Mastercard, Discover, Diners Club, JCB, and Maestro (International) on Chase Paymentech Solutions. </value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// Data defined by the issuer.  The value for this reply field will probably be the same as the value that you submitted in the authorization request, but it is possible for the processor, issuer, or acquirer to modify the value.  This field is supported only for Visa transactions on **CyberSource through VisaNet**. 
         /// </summary>
         /// <value>Data defined by the issuer.  The value for this reply field will probably be the same as the value that you submitted in the authorization request, but it is possible for the processor, issuer, or acquirer to modify the value.  This field is supported only for Visa transactions on **CyberSource through VisaNet**. </value>
-        [DataMember(Name="discretionaryData", EmitDefaultValue=false)]
+        [JsonPropertyName("discretionaryData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscretionaryData { get; set; }
 
         /// <summary>
         /// Data defined by the issuer.  This national use field contains two subfields for information unique to the processing of Visa transactions by members in Japan. This subfield contains the Katakana text to be printed on the receipt. 
         /// </summary>
         /// <value>Data defined by the issuer.  This national use field contains two subfields for information unique to the processing of Visa transactions by members in Japan. This subfield contains the Katakana text to be printed on the receipt. </value>
-        [DataMember(Name="countrySpecificDiscretionaryData", EmitDefaultValue=false)]
+        [JsonPropertyName("countrySpecificDiscretionaryData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CountrySpecificDiscretionaryData { get; set; }
 
         /// <summary>
         /// This is the raw Association/Issuer Response Codes. You can use &#39;issuer/association&#39; response codes to identify when you can retry to authorize a declined transaction and increase successful transaction volumes. You&#39;ll receive an association/issuer response code for the majority of transactions.  #### Processors supported:   - HSBC   - FDC Nashville Global   - SIX  Currently SIX is not receiving Association/Issuer Response Codes here it receives the additional authorization code that must be printed on the receipt when returned by the processor.  #### Possible values: | Card Type   | Response Code | Description                                                                    | | - -- -- -- -- -- | - -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - | | VISA        | 000           | Successful approval/completion or that V.I.P. PIN verification is successful   | | VISA        | 001           | Refer to card issuer                                                           | | VISA        | 002           | Refer to card issuer, special condition                                        | | VISA        | 003           | Invalid merchant or service provider                                           | | VISA        | 004           | Pickup card                                                                    |   | MasterCard  | 000           | Approved or completed successfully                                             | | MasterCard  | 001           | Refer to card issuer                                                           | | MasterCard  | 003           | Invalid merchant                                                               | | MasterCard  | 004           | Capture card                                                                   | | MasterCard  | 005           | Do not honor                                                                   | | AMEX        | 000           | Approved                                                                       | | AMEX        | 001           | Approve with ID                                                                | | AMEX        | 002           | Partial Approval (Prepaid Cards only)                                          | | AMEX        | 100           | Deny                                                                           | | AMEX        | 101           | Expired Card/Invalid Expiration Date                                           | | Discover    | 000           | Approved or completed successfully                                             | | Discover    | 001           | Reserved for future USE                                                        | | Discover    | 002           | Reserved for future USE                                                        | | Discover    | 003           | Invalid Merchant                                                               | | Discover    | 004           | Capture Card                                                                   | 
         /// </summary>
         /// <value>This is the raw Association/Issuer Response Codes. You can use &#39;issuer/association&#39; response codes to identify when you can retry to authorize a declined transaction and increase successful transaction volumes. You&#39;ll receive an association/issuer response code for the majority of transactions.  #### Processors supported:   - HSBC   - FDC Nashville Global   - SIX  Currently SIX is not receiving Association/Issuer Response Codes here it receives the additional authorization code that must be printed on the receipt when returned by the processor.  #### Possible values: | Card Type   | Response Code | Description                                                                    | | - -- -- -- -- -- | - -- -- -- -- -- -- | - -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - | | VISA        | 000           | Successful approval/completion or that V.I.P. PIN verification is successful   | | VISA        | 001           | Refer to card issuer                                                           | | VISA        | 002           | Refer to card issuer, special condition                                        | | VISA        | 003           | Invalid merchant or service provider                                           | | VISA        | 004           | Pickup card                                                                    |   | MasterCard  | 000           | Approved or completed successfully                                             | | MasterCard  | 001           | Refer to card issuer                                                           | | MasterCard  | 003           | Invalid merchant                                                               | | MasterCard  | 004           | Capture card                                                                   | | MasterCard  | 005           | Do not honor                                                                   | | AMEX        | 000           | Approved                                                                       | | AMEX        | 001           | Approve with ID                                                                | | AMEX        | 002           | Partial Approval (Prepaid Cards only)                                          | | AMEX        | 100           | Deny                                                                           | | AMEX        | 101           | Expired Card/Invalid Expiration Date                                           | | Discover    | 000           | Approved or completed successfully                                             | | Discover    | 001           | Reserved for future USE                                                        | | Discover    | 002           | Reserved for future USE                                                        | | Discover    | 003           | Invalid Merchant                                                               | | Discover    | 004           | Capture Card                                                                   | </value>
-        [DataMember(Name="responseCode", EmitDefaultValue=false)]
+        [JsonPropertyName("responseCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseCode { get; set; }
 
         /// <summary>
         /// This field contains value &#39;1&#39; which is sent by Issuer in the response when PIN is requested by issuer,   This field is only supported for Visa Platform Connect. 
         /// </summary>
         /// <value>This field contains value &#39;1&#39; which is sent by Issuer in the response when PIN is requested by issuer,   This field is only supported for Visa Platform Connect. </value>
-        [DataMember(Name="pinRequestIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("pinRequestIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PinRequestIndicator { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseIssuerInformation {\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (DiscretionaryData != null) sb.Append("  DiscretionaryData: ").Append(DiscretionaryData).Append("\n");
-            if (CountrySpecificDiscretionaryData != null) sb.Append("  CountrySpecificDiscretionaryData: ").Append(CountrySpecificDiscretionaryData).Append("\n");
-            if (ResponseCode != null) sb.Append("  ResponseCode: ").Append(ResponseCode).Append("\n");
-            if (PinRequestIndicator != null) sb.Append("  PinRequestIndicator: ").Append(PinRequestIndicator).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseIssuerInformation", "country", Country.ToString())).Append("\n");
+            if (DiscretionaryData != null) sb.Append("  DiscretionaryData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseIssuerInformation", "discretionaryData", DiscretionaryData.ToString())).Append("\n");
+            if (CountrySpecificDiscretionaryData != null) sb.Append("  CountrySpecificDiscretionaryData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseIssuerInformation", "countrySpecificDiscretionaryData", CountrySpecificDiscretionaryData.ToString())).Append("\n");
+            if (ResponseCode != null) sb.Append("  ResponseCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseIssuerInformation", "responseCode", ResponseCode.ToString())).Append("\n");
+            if (PinRequestIndicator != null) sb.Append("  PinRequestIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseIssuerInformation", "pinRequestIndicator", PinRequestIndicator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseIssuerInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

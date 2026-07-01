@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -63,76 +63,87 @@ namespace CyberSource.Model
         /// Your identifier for the customer.  When a subscription or customer profile is being created, the maximum length for this field for most processors is 30. Otherwise, the maximum length is 100.  #### Comercio Latino For recurring payments in Mexico, the value is the customer&#39;s contract number. Note Before you request the authorization, you must inform the issuer of the customer contract numbers that will be used for recurring transactions.  #### Worldpay VAP For a follow-on credit with Worldpay VAP, CyberSource checks the following locations, in the order given, for a customer account ID value and uses the first value it finds: 1. &#x60;customer_account_id&#x60; value in the follow-on credit request 2. Customer account ID value that was used for the capture that is being credited 3. Customer account ID value that was used for the original authorization If a customer account ID value cannot be found in any of these locations, then no value is used. 
         /// </summary>
         /// <value>Your identifier for the customer.  When a subscription or customer profile is being created, the maximum length for this field for most processors is 30. Otherwise, the maximum length is 100.  #### Comercio Latino For recurring payments in Mexico, the value is the customer&#39;s contract number. Note Before you request the authorization, you must inform the issuer of the customer contract numbers that will be used for recurring transactions.  #### Worldpay VAP For a follow-on credit with Worldpay VAP, CyberSource checks the following locations, in the order given, for a customer account ID value and uses the first value it finds: 1. &#x60;customer_account_id&#x60; value in the follow-on credit request 2. Customer account ID value that was used for the capture that is being credited 3. Customer account ID value that was used for the original authorization If a customer account ID value cannot be found in any of these locations, then no value is used. </value>
-        [DataMember(Name="merchantCustomerId", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantCustomerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantCustomerId { get; set; }
 
         /// <summary>
         /// Recipient&#39;s date of birth. **Format**: &#x60;YYYYMMDD&#x60;.  This field is a &#x60;pass-through&#x60;, which means that CyberSource ensures that the value is eight numeric characters but otherwise does not verify the value or modify it in any way before sending it to the processor. If the field is not required for the transaction, CyberSource does not forward it to the processor. 
         /// </summary>
         /// <value>Recipient&#39;s date of birth. **Format**: &#x60;YYYYMMDD&#x60;.  This field is a &#x60;pass-through&#x60;, which means that CyberSource ensures that the value is eight numeric characters but otherwise does not verify the value or modify it in any way before sending it to the processor. If the field is not required for the transaction, CyberSource does not forward it to the processor. </value>
-        [DataMember(Name="dateOfBirth", EmitDefaultValue=false)]
+        [JsonPropertyName("dateOfBirth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DateOfBirth { get; set; }
 
         /// <summary>
         /// Customer&#39;s government-assigned tax identification number.  #### Tax Calculation Optional for international and value added taxes only. Not applicable to U.S. and Canadian taxes. 
         /// </summary>
         /// <value>Customer&#39;s government-assigned tax identification number.  #### Tax Calculation Optional for international and value added taxes only. Not applicable to U.S. and Canadian taxes. </value>
-        [DataMember(Name="vatRegistrationNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("vatRegistrationNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VatRegistrationNumber { get; set; }
 
         /// <summary>
         /// Company&#39;s tax identifier. This is only used for eCheck service.  ** TeleCheck ** Contact your TeleCheck representative to find out whether this field is required or optional.  ** All Other Processors ** Not used. 
         /// </summary>
         /// <value>Company&#39;s tax identifier. This is only used for eCheck service.  ** TeleCheck ** Contact your TeleCheck representative to find out whether this field is required or optional.  ** All Other Processors ** Not used. </value>
-        [DataMember(Name="companyTaxId", EmitDefaultValue=false)]
+        [JsonPropertyName("companyTaxId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CompanyTaxId { get; set; }
 
         /// <summary>
         /// Gets or Sets PersonalIdentification
         /// </summary>
-        [DataMember(Name="personalIdentification", EmitDefaultValue=false)]
+        [JsonPropertyName("personalIdentification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsBuyerInformationPersonalIdentification> PersonalIdentification { get; set; }
 
         /// <summary>
         /// The merchant&#39;s password that CyberSource hashes and stores as a hashed password. 
         /// </summary>
         /// <value>The merchant&#39;s password that CyberSource hashes and stores as a hashed password. </value>
-        [DataMember(Name="hashedPassword", EmitDefaultValue=false)]
+        [JsonPropertyName("hashedPassword")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HashedPassword { get; set; }
 
         /// <summary>
         /// Customer&#39;s gender. Possible values are F (female), M (male),O (other).
         /// </summary>
         /// <value>Customer&#39;s gender. Possible values are F (female), M (male),O (other).</value>
-        [DataMember(Name="gender", EmitDefaultValue=false)]
+        [JsonPropertyName("gender")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Gender { get; set; }
 
         /// <summary>
         /// language setting of the user.  Supports 2-character language codes (e.g., en, fr) and 5-character locale values (e.g., en-US, fr-CA). 
         /// </summary>
         /// <value>language setting of the user.  Supports 2-character language codes (e.g., en, fr) and 5-character locale values (e.g., en-US, fr-CA). </value>
-        [DataMember(Name="language", EmitDefaultValue=false)]
+        [JsonPropertyName("language")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Language { get; set; }
 
         /// <summary>
         /// Note to the recipient of the funds in this transaction
         /// </summary>
         /// <value>Note to the recipient of the funds in this transaction</value>
-        [DataMember(Name="noteToSeller", EmitDefaultValue=false)]
+        [JsonPropertyName("noteToSeller")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NoteToSeller { get; set; }
 
         /// <summary>
         /// Cardholder&#39;s mobile phone number. **Important** Required for Visa Secure transactions in Brazil. Do not use this request field for any other types of transactions. 
         /// </summary>
         /// <value>Cardholder&#39;s mobile phone number. **Important** Required for Visa Secure transactions in Brazil. Do not use this request field for any other types of transactions. </value>
-        [DataMember(Name="mobilePhone", EmitDefaultValue=false)]
+        [JsonPropertyName("mobilePhone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? MobilePhone { get; set; }
 
         /// <summary>
         /// The one-time identification code of the Alipay wallet user.  It is scanned from the barcode that is shown by the mobile application. 
         /// </summary>
         /// <value>The one-time identification code of the Alipay wallet user.  It is scanned from the barcode that is shown by the mobile application. </value>
-        [DataMember(Name="walletId", EmitDefaultValue=false)]
+        [JsonPropertyName("walletId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WalletId { get; set; }
 
         /// <summary>
@@ -143,17 +154,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsBuyerInformation {\n");
-            if (MerchantCustomerId != null) sb.Append("  MerchantCustomerId: ").Append(MerchantCustomerId).Append("\n");
-            if (DateOfBirth != null) sb.Append("  DateOfBirth: ").Append(DateOfBirth).Append("\n");
-            if (VatRegistrationNumber != null) sb.Append("  VatRegistrationNumber: ").Append(VatRegistrationNumber).Append("\n");
-            if (CompanyTaxId != null) sb.Append("  CompanyTaxId: ").Append(CompanyTaxId).Append("\n");
-            if (PersonalIdentification != null) sb.Append("  PersonalIdentification: ").Append(PersonalIdentification).Append("\n");
-            if (HashedPassword != null) sb.Append("  HashedPassword: ").Append(HashedPassword).Append("\n");
-            if (Gender != null) sb.Append("  Gender: ").Append(Gender).Append("\n");
-            if (Language != null) sb.Append("  Language: ").Append(Language).Append("\n");
-            if (NoteToSeller != null) sb.Append("  NoteToSeller: ").Append(NoteToSeller).Append("\n");
-            if (MobilePhone != null) sb.Append("  MobilePhone: ").Append(MobilePhone).Append("\n");
-            if (WalletId != null) sb.Append("  WalletId: ").Append(WalletId).Append("\n");
+            if (MerchantCustomerId != null) sb.Append("  MerchantCustomerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsBuyerInformation", "merchantCustomerId", MerchantCustomerId.ToString())).Append("\n");
+            if (DateOfBirth != null) sb.Append("  DateOfBirth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsBuyerInformation", "dateOfBirth", DateOfBirth.ToString())).Append("\n");
+            if (VatRegistrationNumber != null) sb.Append("  VatRegistrationNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsBuyerInformation", "vatRegistrationNumber", VatRegistrationNumber.ToString())).Append("\n");
+            if (CompanyTaxId != null) sb.Append("  CompanyTaxId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsBuyerInformation", "companyTaxId", CompanyTaxId.ToString())).Append("\n");
+            if (PersonalIdentification != null) sb.Append("  PersonalIdentification: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsBuyerInformation", "personalIdentification", PersonalIdentification.ToString())).Append("\n");
+            if (HashedPassword != null) sb.Append("  HashedPassword: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsBuyerInformation", "hashedPassword", HashedPassword.ToString())).Append("\n");
+            if (Gender != null) sb.Append("  Gender: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsBuyerInformation", "gender", Gender.ToString())).Append("\n");
+            if (Language != null) sb.Append("  Language: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsBuyerInformation", "language", Language.ToString())).Append("\n");
+            if (NoteToSeller != null) sb.Append("  NoteToSeller: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsBuyerInformation", "noteToSeller", NoteToSeller.ToString())).Append("\n");
+            if (MobilePhone != null) sb.Append("  MobilePhone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsBuyerInformation", "mobilePhone", MobilePhone.ToString())).Append("\n");
+            if (WalletId != null) sb.Append("  WalletId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsBuyerInformation", "walletId", WalletId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -164,7 +175,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsBuyerInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

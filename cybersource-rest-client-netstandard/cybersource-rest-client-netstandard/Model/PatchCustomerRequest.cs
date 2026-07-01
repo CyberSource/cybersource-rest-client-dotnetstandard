@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -60,63 +60,73 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizeTokenInformationCustomerLinks Links { get; set; }
 
         /// <summary>
         /// The Id of the Customer Token.
         /// </summary>
         /// <value>The Id of the Customer Token.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets ObjectInformation
         /// </summary>
-        [DataMember(Name="objectInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("objectInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizeTokenInformationCustomerObjectInformation ObjectInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerInformation
         /// </summary>
-        [DataMember(Name="buyerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("buyerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizeTokenInformationCustomerBuyerInformation BuyerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizeTokenInformationCustomerClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Object containing the custom data that the merchant defines. 
         /// </summary>
         /// <value>Object containing the custom data that the merchant defines. </value>
-        [DataMember(Name="merchantDefinedInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDefinedInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Tmsv2tokenizeTokenInformationCustomerMerchantDefinedInformation> MerchantDefinedInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DefaultPaymentInstrument
         /// </summary>
-        [DataMember(Name="defaultPaymentInstrument", EmitDefaultValue=false)]
+        [JsonPropertyName("defaultPaymentInstrument")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizeTokenInformationCustomerDefaultPaymentInstrument DefaultPaymentInstrument { get; set; }
 
         /// <summary>
         /// Gets or Sets DefaultShippingAddress
         /// </summary>
-        [DataMember(Name="defaultShippingAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("defaultShippingAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizeTokenInformationCustomerDefaultShippingAddress DefaultShippingAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets Metadata
         /// </summary>
-        [DataMember(Name="metadata", EmitDefaultValue=false)]
+        [JsonPropertyName("metadata")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizeTokenInformationCustomerMetadata Metadata { get; set; }
 
         /// <summary>
         /// Gets or Sets Embedded
         /// </summary>
-        [DataMember(Name="_embedded", EmitDefaultValue=false)]
+        [JsonPropertyName("_embedded")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2customersEmbedded Embedded { get; set; }
 
         /// <summary>
@@ -127,16 +137,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PatchCustomerRequest {\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (ObjectInformation != null) sb.Append("  ObjectInformation: ").Append(ObjectInformation).Append("\n");
-            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(BuyerInformation).Append("\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(MerchantDefinedInformation).Append("\n");
-            if (DefaultPaymentInstrument != null) sb.Append("  DefaultPaymentInstrument: ").Append(DefaultPaymentInstrument).Append("\n");
-            if (DefaultShippingAddress != null) sb.Append("  DefaultShippingAddress: ").Append(DefaultShippingAddress).Append("\n");
-            if (Metadata != null) sb.Append("  Metadata: ").Append(Metadata).Append("\n");
-            if (Embedded != null) sb.Append("  Embedded: ").Append(Embedded).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerRequest", "_links", Links.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerRequest", "id", Id.ToString())).Append("\n");
+            if (ObjectInformation != null) sb.Append("  ObjectInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerRequest", "objectInformation", ObjectInformation.ToString())).Append("\n");
+            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerRequest", "buyerInformation", BuyerInformation.ToString())).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerRequest", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerRequest", "merchantDefinedInformation", MerchantDefinedInformation.ToString())).Append("\n");
+            if (DefaultPaymentInstrument != null) sb.Append("  DefaultPaymentInstrument: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerRequest", "defaultPaymentInstrument", DefaultPaymentInstrument.ToString())).Append("\n");
+            if (DefaultShippingAddress != null) sb.Append("  DefaultShippingAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerRequest", "defaultShippingAddress", DefaultShippingAddress.ToString())).Append("\n");
+            if (Metadata != null) sb.Append("  Metadata: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerRequest", "metadata", Metadata.ToString())).Append("\n");
+            if (Embedded != null) sb.Append("  Embedded: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerRequest", "_embedded", Embedded.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -147,7 +157,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PatchCustomerRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

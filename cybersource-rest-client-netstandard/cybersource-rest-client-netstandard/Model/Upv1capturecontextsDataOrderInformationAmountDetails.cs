@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,54 +57,62 @@ namespace CyberSource.Model
         /// This field defines the total order amount. 
         /// </summary>
         /// <value>This field defines the total order amount. </value>
-        [DataMember(Name="totalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalAmount { get; set; }
 
         /// <summary>
         /// This field defines the currency applicable to the order. 
         /// </summary>
         /// <value>This field defines the currency applicable to the order. </value>
-        [DataMember(Name="currency", EmitDefaultValue=false)]
+        [JsonPropertyName("currency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Currency { get; set; }
 
         /// <summary>
         /// Gets or Sets Surcharge
         /// </summary>
-        [DataMember(Name="surcharge", EmitDefaultValue=false)]
+        [JsonPropertyName("surcharge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataOrderInformationAmountDetailsSurcharge Surcharge { get; set; }
 
         /// <summary>
         /// This field defines the discount amount applicable to the order. 
         /// </summary>
         /// <value>This field defines the discount amount applicable to the order. </value>
-        [DataMember(Name="discountAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("discountAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscountAmount { get; set; }
 
         /// <summary>
         /// This field defines the sub total amount applicable to the order. 
         /// </summary>
         /// <value>This field defines the sub total amount applicable to the order. </value>
-        [DataMember(Name="subTotalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("subTotalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubTotalAmount { get; set; }
 
         /// <summary>
         /// This field defines the service fee amount applicable to the order. 
         /// </summary>
         /// <value>This field defines the service fee amount applicable to the order. </value>
-        [DataMember(Name="serviceFeeAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("serviceFeeAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ServiceFeeAmount { get; set; }
 
         /// <summary>
         /// This field defines the tax amount applicable to the order. 
         /// </summary>
         /// <value>This field defines the tax amount applicable to the order. </value>
-        [DataMember(Name="taxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets TaxDetails
         /// </summary>
-        [DataMember(Name="taxDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("taxDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataOrderInformationAmountDetailsTaxDetails TaxDetails { get; set; }
 
         /// <summary>
@@ -115,14 +123,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Upv1capturecontextsDataOrderInformationAmountDetails {\n");
-            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(TotalAmount).Append("\n");
-            if (Currency != null) sb.Append("  Currency: ").Append(Currency).Append("\n");
-            if (Surcharge != null) sb.Append("  Surcharge: ").Append(Surcharge).Append("\n");
-            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(DiscountAmount).Append("\n");
-            if (SubTotalAmount != null) sb.Append("  SubTotalAmount: ").Append(SubTotalAmount).Append("\n");
-            if (ServiceFeeAmount != null) sb.Append("  ServiceFeeAmount: ").Append(ServiceFeeAmount).Append("\n");
-            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
-            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(TaxDetails).Append("\n");
+            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationAmountDetails", "totalAmount", TotalAmount.ToString())).Append("\n");
+            if (Currency != null) sb.Append("  Currency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationAmountDetails", "currency", Currency.ToString())).Append("\n");
+            if (Surcharge != null) sb.Append("  Surcharge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationAmountDetails", "surcharge", Surcharge.ToString())).Append("\n");
+            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationAmountDetails", "discountAmount", DiscountAmount.ToString())).Append("\n");
+            if (SubTotalAmount != null) sb.Append("  SubTotalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationAmountDetails", "subTotalAmount", SubTotalAmount.ToString())).Append("\n");
+            if (ServiceFeeAmount != null) sb.Append("  ServiceFeeAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationAmountDetails", "serviceFeeAmount", ServiceFeeAmount.ToString())).Append("\n");
+            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationAmountDetails", "taxAmount", TaxAmount.ToString())).Append("\n");
+            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationAmountDetails", "taxDetails", TaxDetails.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -133,7 +141,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Upv1capturecontextsDataOrderInformationAmountDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

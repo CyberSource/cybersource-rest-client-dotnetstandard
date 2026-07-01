@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Indicates whether this is a committed tax transaction. For a committed tax transaction, the status in the Tax Detail Report is \&quot;Committed.\&quot; For an uncommitted tax transaction, the status in the Tax Detail Report is \&quot;Uncommitted.\&quot; Possible values: - &#x60;true&#x60;: This is a committed tax transaction. - &#x60;false&#x60; (default): This is not a committed tax transaction.  A committed tax request is a tax service request that sets the status field in the Tax Detail Report to committed. The committed status indicates that the amount calculated by the tax service is included in the amount of a capture or credit.  Use a void service request to cancel a committed tax request or a committed refund tax request. The void transaction is included as a separate entry in the Tax Detail Report. The value of the status field is cancelled. The value of the link ID is the request ID of the committed tax request or refund tax request that was voided. You can use the value of the link ID to reconcile your orders.  Optional for U.S., Canadian, international tax, and value added taxes. For more information on Tax Detail Report features refer the [Tax Service Guide](https://developer.cybersource.com/docs/cybs/en-us/tax-calculation/developer/all/rest/tax-calculation/tax-overview.html). 
         /// </summary>
         /// <value>Indicates whether this is a committed tax transaction. For a committed tax transaction, the status in the Tax Detail Report is \&quot;Committed.\&quot; For an uncommitted tax transaction, the status in the Tax Detail Report is \&quot;Uncommitted.\&quot; Possible values: - &#x60;true&#x60;: This is a committed tax transaction. - &#x60;false&#x60; (default): This is not a committed tax transaction.  A committed tax request is a tax service request that sets the status field in the Tax Detail Report to committed. The committed status indicates that the amount calculated by the tax service is included in the amount of a capture or credit.  Use a void service request to cancel a committed tax request or a committed refund tax request. The void transaction is included as a separate entry in the Tax Detail Report. The value of the status field is cancelled. The value of the link ID is the request ID of the committed tax request or refund tax request that was voided. You can use the value of the link ID to reconcile your orders.  Optional for U.S., Canadian, international tax, and value added taxes. For more information on Tax Detail Report features refer the [Tax Service Guide](https://developer.cybersource.com/docs/cybs/en-us/tax-calculation/developer/all/rest/tax-calculation/tax-overview.html). </value>
-        [DataMember(Name="commitIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("commitIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CommitIndicator { get; set; }
 
         /// <summary>
         /// Indicates whether this is a refund tax transaction. For a refund tax transaction, amounts in the Tax Detail Report will be negative. Possible values: - &#x60;true&#x60;: This is a refund tax transaction. - &#x60;false&#x60; (default): This is not a refund tax transaction.  A refund tax request is a tax service request that sets the transaction type field in the Tax Detail Report to refunded and makes the reported amount negative. Tax amounts are returned as positive amounts in reply messages, but they are saved in reports as negative amounts which enables the reporting software to accurately calculate the aggregate amounts.  Optional for U.S., Canadian, international tax, and value added taxes. For more information on Tax Detail Report features refer the [Tax Service Guide](https://developer.cybersource.com/docs/cybs/en-us/tax-calculation/developer/all/rest/tax-calculation/tax-overview.html). 
         /// </summary>
         /// <value>Indicates whether this is a refund tax transaction. For a refund tax transaction, amounts in the Tax Detail Report will be negative. Possible values: - &#x60;true&#x60;: This is a refund tax transaction. - &#x60;false&#x60; (default): This is not a refund tax transaction.  A refund tax request is a tax service request that sets the transaction type field in the Tax Detail Report to refunded and makes the reported amount negative. Tax amounts are returned as positive amounts in reply messages, but they are saved in reports as negative amounts which enables the reporting software to accurately calculate the aggregate amounts.  Optional for U.S., Canadian, international tax, and value added taxes. For more information on Tax Detail Report features refer the [Tax Service Guide](https://developer.cybersource.com/docs/cybs/en-us/tax-calculation/developer/all/rest/tax-calculation/tax-overview.html). </value>
-        [DataMember(Name="refundIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("refundIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? RefundIndicator { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class VasV2PaymentsPost201ResponseTaxInformation {\n");
-            if (CommitIndicator != null) sb.Append("  CommitIndicator: ").Append(CommitIndicator).Append("\n");
-            if (RefundIndicator != null) sb.Append("  RefundIndicator: ").Append(RefundIndicator).Append("\n");
+            if (CommitIndicator != null) sb.Append("  CommitIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseTaxInformation", "commitIndicator", CommitIndicator.ToString())).Append("\n");
+            if (RefundIndicator != null) sb.Append("  RefundIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VasV2PaymentsPost201ResponseTaxInformation", "refundIndicator", RefundIndicator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("VasV2PaymentsPost201ResponseTaxInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -202,7 +203,7 @@ namespace AuthenticationSdk.util
             try
             {
                 X509Certificate2Collection collection = new X509Certificate2Collection();
-                collection.Import(filePath, new System.Net.NetworkCredential(string.Empty, password).Password, X509KeyStorageFlags.Exportable);
+                collection.Import(filePath, new System.Net.NetworkCredential(string.Empty, password).Password, Utility.GetP12KeyStorageFlags());
 
                 foreach (X509Certificate2 cert in collection)
                 {
@@ -280,7 +281,7 @@ namespace AuthenticationSdk.util
 
                 // Load all certificates from P12 file
                 X509Certificate2Collection collection = new X509Certificate2Collection();
-                collection.Import(filePath, new System.Net.NetworkCredential(string.Empty, password).Password, X509KeyStorageFlags.Exportable);
+                collection.Import(filePath, new System.Net.NetworkCredential(string.Empty, password).Password, Utility.GetP12KeyStorageFlags());
 
                 if (collection.Count == 0)
                 {

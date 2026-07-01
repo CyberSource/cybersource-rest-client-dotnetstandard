@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -70,92 +70,107 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessingInformation
         /// </summary>
-        [DataMember(Name="processingInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesProcessingInformation ProcessingInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInformation
         /// </summary>
-        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesOrderInformation OrderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerInformation
         /// </summary>
-        [DataMember(Name="buyerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("buyerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesBuyerInformation BuyerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DeviceInformation
         /// </summary>
-        [DataMember(Name="deviceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesDeviceInformation DeviceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInformation
         /// </summary>
-        [DataMember(Name="merchantInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesMerchantInformation MerchantInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets AggregatorInformation
         /// </summary>
-        [DataMember(Name="aggregatorInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("aggregatorInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesAggregatorInformation AggregatorInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets PointOfSaleInformation
         /// </summary>
-        [DataMember(Name="pointOfSaleInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("pointOfSaleInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesPointOfSaleInformation PointOfSaleInformation { get; set; }
 
         /// <summary>
         /// The object containing the custom data that the merchant defines. 
         /// </summary>
         /// <value>The object containing the custom data that the merchant defines. </value>
-        [DataMember(Name="merchantDefinedInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDefinedInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsMerchantDefinedInformation> MerchantDefinedInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantDefinedSecureInformation
         /// </summary>
-        [DataMember(Name="merchantDefinedSecureInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDefinedSecureInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsMerchantDefinedSecureInformation MerchantDefinedSecureInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets InstallmentInformation
         /// </summary>
-        [DataMember(Name="installmentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("installmentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesInstallmentInformation InstallmentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets TravelInformation
         /// </summary>
-        [DataMember(Name="travelInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("travelInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformation TravelInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets PromotionInformation
         /// </summary>
-        [DataMember(Name="promotionInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("promotionInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPromotionInformation PromotionInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessorInformation
         /// </summary>
-        [DataMember(Name="processorInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processorInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesProcessorInformation ProcessorInformation { get; set; }
 
         /// <summary>
@@ -166,21 +181,21 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CapturePaymentRequest {\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(ProcessingInformation).Append("\n");
-            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
-            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(BuyerInformation).Append("\n");
-            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(DeviceInformation).Append("\n");
-            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(MerchantInformation).Append("\n");
-            if (AggregatorInformation != null) sb.Append("  AggregatorInformation: ").Append(AggregatorInformation).Append("\n");
-            if (PointOfSaleInformation != null) sb.Append("  PointOfSaleInformation: ").Append(PointOfSaleInformation).Append("\n");
-            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(MerchantDefinedInformation).Append("\n");
-            if (MerchantDefinedSecureInformation != null) sb.Append("  MerchantDefinedSecureInformation: ").Append(MerchantDefinedSecureInformation).Append("\n");
-            if (InstallmentInformation != null) sb.Append("  InstallmentInformation: ").Append(InstallmentInformation).Append("\n");
-            if (TravelInformation != null) sb.Append("  TravelInformation: ").Append(TravelInformation).Append("\n");
-            if (PromotionInformation != null) sb.Append("  PromotionInformation: ").Append(PromotionInformation).Append("\n");
-            if (ProcessorInformation != null) sb.Append("  ProcessorInformation: ").Append(ProcessorInformation).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "processingInformation", ProcessingInformation.ToString())).Append("\n");
+            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "paymentInformation", PaymentInformation.ToString())).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "orderInformation", OrderInformation.ToString())).Append("\n");
+            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "buyerInformation", BuyerInformation.ToString())).Append("\n");
+            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "deviceInformation", DeviceInformation.ToString())).Append("\n");
+            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "merchantInformation", MerchantInformation.ToString())).Append("\n");
+            if (AggregatorInformation != null) sb.Append("  AggregatorInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "aggregatorInformation", AggregatorInformation.ToString())).Append("\n");
+            if (PointOfSaleInformation != null) sb.Append("  PointOfSaleInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "pointOfSaleInformation", PointOfSaleInformation.ToString())).Append("\n");
+            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "merchantDefinedInformation", MerchantDefinedInformation.ToString())).Append("\n");
+            if (MerchantDefinedSecureInformation != null) sb.Append("  MerchantDefinedSecureInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "merchantDefinedSecureInformation", MerchantDefinedSecureInformation.ToString())).Append("\n");
+            if (InstallmentInformation != null) sb.Append("  InstallmentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "installmentInformation", InstallmentInformation.ToString())).Append("\n");
+            if (TravelInformation != null) sb.Append("  TravelInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "travelInformation", TravelInformation.ToString())).Append("\n");
+            if (PromotionInformation != null) sb.Append("  PromotionInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "promotionInformation", PromotionInformation.ToString())).Append("\n");
+            if (ProcessorInformation != null) sb.Append("  ProcessorInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CapturePaymentRequest", "processorInformation", ProcessorInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -191,7 +206,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CapturePaymentRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

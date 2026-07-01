@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -65,56 +65,64 @@ namespace CyberSource.Model
         /// This is used to calculate the Retry Sequence.  Sample calculations using firstRetry&#x3D;10, interval&#x3D;30, maxNumberOfRetries&#x3D;3 Arithmetic &#x3D; a+r(n-1) Retry 1 - 10 minutes Retry 2 - 10+30x1 &#x3D; 40 minutes Retry 3 - 10+30x2 &#x3D; 70 minutes  Geometric &#x3D; ar^(n-1) Retry 1 - 10 minutes Retry 2 - 10x30^1 &#x3D; 300 minutes Retry 3 - 10x30^2 &#x3D; 9,000 minutes 
         /// </summary>
         /// <value>This is used to calculate the Retry Sequence.  Sample calculations using firstRetry&#x3D;10, interval&#x3D;30, maxNumberOfRetries&#x3D;3 Arithmetic &#x3D; a+r(n-1) Retry 1 - 10 minutes Retry 2 - 10+30x1 &#x3D; 40 minutes Retry 3 - 10+30x2 &#x3D; 70 minutes  Geometric &#x3D; ar^(n-1) Retry 1 - 10 minutes Retry 2 - 10x30^1 &#x3D; 300 minutes Retry 3 - 10x30^2 &#x3D; 9,000 minutes </value>
-        [DataMember(Name="algorithm", EmitDefaultValue=false)]
+        [JsonPropertyName("algorithm")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Algorithm { get; set; }
 
         /// <summary>
         /// When to initiate first retry, after the initial call failed. (in mins).
         /// </summary>
         /// <value>When to initiate first retry, after the initial call failed. (in mins).</value>
-        [DataMember(Name="firstRetry", EmitDefaultValue=false)]
+        [JsonPropertyName("firstRetry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? FirstRetry { get; set; }
 
         /// <summary>
         /// The interval between retries (in mins).
         /// </summary>
         /// <value>The interval between retries (in mins).</value>
-        [DataMember(Name="interval", EmitDefaultValue=false)]
+        [JsonPropertyName("interval")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Interval { get; set; }
 
         /// <summary>
         /// The number of retries per sequence.
         /// </summary>
         /// <value>The number of retries per sequence.</value>
-        [DataMember(Name="numberOfRetries", EmitDefaultValue=false)]
+        [JsonPropertyName("numberOfRetries")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? NumberOfRetries { get; set; }
 
         /// <summary>
         /// Deactivate the subscription if your retries fail to deliver.  If this is set to &#x60;true&#x60;, the automatic suspend and resume feature will occur. This would prevent new webhooks from attempting to deliver and to queue up until your healthCheckUrl returns 200 again, then all messages will be sent.  If this is set to &#x60;false&#x60;, new individual messages will continue to retry and exhaust all failures, but the subscription will stay active. 
         /// </summary>
         /// <value>Deactivate the subscription if your retries fail to deliver.  If this is set to &#x60;true&#x60;, the automatic suspend and resume feature will occur. This would prevent new webhooks from attempting to deliver and to queue up until your healthCheckUrl returns 200 again, then all messages will be sent.  If this is set to &#x60;false&#x60;, new individual messages will continue to retry and exhaust all failures, but the subscription will stay active. </value>
-        [DataMember(Name="deactivateFlag", EmitDefaultValue=false)]
+        [JsonPropertyName("deactivateFlag")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeactivateFlag { get; set; }
 
         /// <summary>
         /// The number of times to repeat the complete retry sequence. 0 &#x3D;&gt; don&#39;t repeat the retry sequence 1 &#x3D;&gt; repeat the retry sequence once (R1, R2, R3)+ (R1, R2, R3) 2 &#x3D;&gt; repeat the retry sequence twice (R1, R2, R3) + (R1, R2, R3) + (R1, R2, R3) 
         /// </summary>
         /// <value>The number of times to repeat the complete retry sequence. 0 &#x3D;&gt; don&#39;t repeat the retry sequence 1 &#x3D;&gt; repeat the retry sequence once (R1, R2, R3)+ (R1, R2, R3) 2 &#x3D;&gt; repeat the retry sequence twice (R1, R2, R3) + (R1, R2, R3) + (R1, R2, R3) </value>
-        [DataMember(Name="repeatSequenceCount", EmitDefaultValue=false)]
+        [JsonPropertyName("repeatSequenceCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? RepeatSequenceCount { get; set; }
 
         /// <summary>
         /// The time to wait to before repeating the complete retry sequence. Amount of time to wait between each sequence. Sample calculation using repeatSequenceWaitTime&#x3D;10 (R1, R2, R3) + (10) + (R1, R2, R3) + (10) + (R1, R2, R3) 
         /// </summary>
         /// <value>The time to wait to before repeating the complete retry sequence. Amount of time to wait between each sequence. Sample calculation using repeatSequenceWaitTime&#x3D;10 (R1, R2, R3) + (10) + (R1, R2, R3) + (10) + (R1, R2, R3) </value>
-        [DataMember(Name="repeatSequenceWaitTime", EmitDefaultValue=false)]
+        [JsonPropertyName("repeatSequenceWaitTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? RepeatSequenceWaitTime { get; set; }
 
         /// <summary>
         /// Additional data, if any.
         /// </summary>
         /// <value>Additional data, if any.</value>
-        [DataMember(Name="additionalAttributes", EmitDefaultValue=false)]
+        [JsonPropertyName("additionalAttributes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Dictionary<string, string>> AdditionalAttributes { get; set; }
 
         /// <summary>
@@ -125,14 +133,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Notificationsubscriptionsv2webhooksRetryPolicy {\n");
-            if (Algorithm != null) sb.Append("  Algorithm: ").Append(Algorithm).Append("\n");
-            if (FirstRetry != null) sb.Append("  FirstRetry: ").Append(FirstRetry).Append("\n");
-            if (Interval != null) sb.Append("  Interval: ").Append(Interval).Append("\n");
-            if (NumberOfRetries != null) sb.Append("  NumberOfRetries: ").Append(NumberOfRetries).Append("\n");
-            if (DeactivateFlag != null) sb.Append("  DeactivateFlag: ").Append(DeactivateFlag).Append("\n");
-            if (RepeatSequenceCount != null) sb.Append("  RepeatSequenceCount: ").Append(RepeatSequenceCount).Append("\n");
-            if (RepeatSequenceWaitTime != null) sb.Append("  RepeatSequenceWaitTime: ").Append(RepeatSequenceWaitTime).Append("\n");
-            if (AdditionalAttributes != null) sb.Append("  AdditionalAttributes: ").Append(AdditionalAttributes).Append("\n");
+            if (Algorithm != null) sb.Append("  Algorithm: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksRetryPolicy", "algorithm", Algorithm.ToString())).Append("\n");
+            if (FirstRetry != null) sb.Append("  FirstRetry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksRetryPolicy", "firstRetry", FirstRetry.ToString())).Append("\n");
+            if (Interval != null) sb.Append("  Interval: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksRetryPolicy", "interval", Interval.ToString())).Append("\n");
+            if (NumberOfRetries != null) sb.Append("  NumberOfRetries: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksRetryPolicy", "numberOfRetries", NumberOfRetries.ToString())).Append("\n");
+            if (DeactivateFlag != null) sb.Append("  DeactivateFlag: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksRetryPolicy", "deactivateFlag", DeactivateFlag.ToString())).Append("\n");
+            if (RepeatSequenceCount != null) sb.Append("  RepeatSequenceCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksRetryPolicy", "repeatSequenceCount", RepeatSequenceCount.ToString())).Append("\n");
+            if (RepeatSequenceWaitTime != null) sb.Append("  RepeatSequenceWaitTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksRetryPolicy", "repeatSequenceWaitTime", RepeatSequenceWaitTime.ToString())).Append("\n");
+            if (AdditionalAttributes != null) sb.Append("  AdditionalAttributes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2webhooksRetryPolicy", "additionalAttributes", AdditionalAttributes.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -143,7 +151,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Notificationsubscriptionsv2webhooksRetryPolicy", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

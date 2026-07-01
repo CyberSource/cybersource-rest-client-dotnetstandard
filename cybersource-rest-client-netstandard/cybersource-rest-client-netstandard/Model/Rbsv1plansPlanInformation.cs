@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Rbsv1plansPlanInformation" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Rbsv1plansPlanInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Rbsv1plansPlanInformation" /> class.
@@ -58,40 +58,46 @@ namespace CyberSource.Model
         /// Plan code is an optional field, If not provided system generates and assign one 
         /// </summary>
         /// <value>Plan code is an optional field, If not provided system generates and assign one </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Plan name 
         /// </summary>
         /// <value>Plan name </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Plan description 
         /// </summary>
         /// <value>Plan description </value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Description { get; set; }
 
         /// <summary>
         /// Plan Status:  - &#x60;DRAFT&#x60;  - &#x60;ACTIVE&#x60; (default) 
         /// </summary>
         /// <value>Plan Status:  - &#x60;DRAFT&#x60;  - &#x60;ACTIVE&#x60; (default) </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets BillingPeriod
         /// </summary>
-        [DataMember(Name="billingPeriod", EmitDefaultValue=false)]
+        [JsonPropertyName("billingPeriod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public GetAllPlansResponsePlanInformationBillingPeriod BillingPeriod { get; set; }
 
         /// <summary>
         /// Gets or Sets BillingCycles
         /// </summary>
-        [DataMember(Name="billingCycles", EmitDefaultValue=false)]
+        [JsonPropertyName("billingCycles")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Rbsv1plansPlanInformationBillingCycles BillingCycles { get; set; }
 
         /// <summary>
@@ -102,12 +108,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Rbsv1plansPlanInformation {\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Description != null) sb.Append("  Description: ").Append(Description).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (BillingPeriod != null) sb.Append("  BillingPeriod: ").Append(BillingPeriod).Append("\n");
-            if (BillingCycles != null) sb.Append("  BillingCycles: ").Append(BillingCycles).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1plansPlanInformation", "code", Code.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1plansPlanInformation", "name", Name.ToString())).Append("\n");
+            if (Description != null) sb.Append("  Description: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1plansPlanInformation", "description", Description.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1plansPlanInformation", "status", Status.ToString())).Append("\n");
+            if (BillingPeriod != null) sb.Append("  BillingPeriod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1plansPlanInformation", "billingPeriod", BillingPeriod.ToString())).Append("\n");
+            if (BillingCycles != null) sb.Append("  BillingCycles: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1plansPlanInformation", "billingCycles", BillingCycles.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -118,7 +124,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Rbsv1plansPlanInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

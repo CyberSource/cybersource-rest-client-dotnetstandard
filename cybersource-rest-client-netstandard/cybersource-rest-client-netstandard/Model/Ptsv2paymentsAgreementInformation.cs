@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Identifier for the mandate being signed for. This mandate id is required for all the subsequent transactions. 
         /// </summary>
         /// <value>Identifier for the mandate being signed for. This mandate id is required for all the subsequent transactions. </value>
-        [DataMember(Name="agreementId", EmitDefaultValue=false)]
+        [JsonPropertyName("agreementId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AgreementId { get; set; }
 
         /// <summary>
         /// The processor specific billing agreement ID. References an approved recurring payment for goods or services. This value is sent by merchant via Cybersource to processor. The value sent in this field is procured by the merchant from the processor. 
         /// </summary>
         /// <value>The processor specific billing agreement ID. References an approved recurring payment for goods or services. This value is sent by merchant via Cybersource to processor. The value sent in this field is procured by the merchant from the processor. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsAgreementInformation {\n");
-            if (AgreementId != null) sb.Append("  AgreementId: ").Append(AgreementId).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
+            if (AgreementId != null) sb.Append("  AgreementId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAgreementInformation", "agreementId", AgreementId.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAgreementInformation", "id", Id.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsAgreementInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

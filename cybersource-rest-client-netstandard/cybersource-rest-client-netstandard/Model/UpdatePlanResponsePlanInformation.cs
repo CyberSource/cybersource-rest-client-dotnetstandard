@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Plan code 
         /// </summary>
         /// <value>Plan code </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Plan Status:  - &#x60;DRAFT&#x60;  - &#x60;ACTIVE&#x60;  - &#x60;INACTIVE&#x60; 
         /// </summary>
         /// <value>Plan Status:  - &#x60;DRAFT&#x60;  - &#x60;ACTIVE&#x60;  - &#x60;INACTIVE&#x60; </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UpdatePlanResponsePlanInformation {\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UpdatePlanResponsePlanInformation", "code", Code.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UpdatePlanResponsePlanInformation", "status", Status.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UpdatePlanResponsePlanInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

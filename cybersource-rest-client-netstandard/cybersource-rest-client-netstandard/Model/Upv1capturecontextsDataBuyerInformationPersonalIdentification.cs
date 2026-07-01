@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// CPF Number (Brazil).  Must be 11 digits in length. 
         /// </summary>
         /// <value>CPF Number (Brazil).  Must be 11 digits in length. </value>
-        [DataMember(Name="cpf", EmitDefaultValue=false)]
+        [JsonPropertyName("cpf")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Cpf { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Upv1capturecontextsDataBuyerInformationPersonalIdentification {\n");
-            if (Cpf != null) sb.Append("  Cpf: ").Append(Cpf).Append("\n");
+            if (Cpf != null) sb.Append("  Cpf: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataBuyerInformationPersonalIdentification", "cpf", Cpf.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Upv1capturecontextsDataBuyerInformationPersonalIdentification", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

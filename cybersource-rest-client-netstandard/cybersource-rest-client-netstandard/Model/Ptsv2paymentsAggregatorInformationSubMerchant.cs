@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -65,83 +65,95 @@ namespace CyberSource.Model
         /// Unique identifier assigned by the payment card company to the sub-merchant.
         /// </summary>
         /// <value>Unique identifier assigned by the payment card company to the sub-merchant.</value>
-        [DataMember(Name="cardAcceptorId", EmitDefaultValue=false)]
+        [JsonPropertyName("cardAcceptorId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardAcceptorId { get; set; }
 
         /// <summary>
         /// The ID you assigned to your sub-merchant. CyberSource through VisaNet: For American Express transaction, the value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCRB - Position: 65-84 - Field: American Express Seller ID For  Mastercard transactions, the value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 117-131 - Field: Sub-Merchant ID FDC Compass: This value must consist of uppercase characters.  American Express Direct: String (20) CyberSource through VisaNet with American Express: String (20) CyberSource through VisaNet with Visa,Mastercard and Discover: String (15) FDC Compass: String (20) FDC Nashville Global: String (14) 
         /// </summary>
         /// <value>The ID you assigned to your sub-merchant. CyberSource through VisaNet: For American Express transaction, the value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCRB - Position: 65-84 - Field: American Express Seller ID For  Mastercard transactions, the value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 117-131 - Field: Sub-Merchant ID FDC Compass: This value must consist of uppercase characters.  American Express Direct: String (20) CyberSource through VisaNet with American Express: String (20) CyberSource through VisaNet with Visa,Mastercard and Discover: String (15) FDC Compass: String (20) FDC Nashville Global: String (14) </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Sub-merchant&#39;s business name.  #### American Express Direct The maximum length of the sub-merchant name depends on the length of the aggregator name. The combined length for both values must not exceed 36 characters.  #### CyberSource through VisaNet With American Express, the maximum length of the sub-merchant name depends on the length of the aggregator name. The combined length for both values must not exceed 36 characters. The value for this field does not map to the TC 33 capture file5.  #### FDC Compass This value must consist of uppercase characters.  #### FDC Nashville Global With Mastercard, the maximum length of the sub-merchant name depends on the length of the aggregator name: - If aggregator name length is 1 through 3, maximum sub-merchant name length is 21. - If aggregator name length is 4 through 7, maximum sub-merchant name length is 17. - If aggregator name length is 8 through 12, maximum sub-merchant name length is 12. 
         /// </summary>
         /// <value>Sub-merchant&#39;s business name.  #### American Express Direct The maximum length of the sub-merchant name depends on the length of the aggregator name. The combined length for both values must not exceed 36 characters.  #### CyberSource through VisaNet With American Express, the maximum length of the sub-merchant name depends on the length of the aggregator name. The combined length for both values must not exceed 36 characters. The value for this field does not map to the TC 33 capture file5.  #### FDC Compass This value must consist of uppercase characters.  #### FDC Nashville Global With Mastercard, the maximum length of the sub-merchant name depends on the length of the aggregator name: - If aggregator name length is 1 through 3, maximum sub-merchant name length is 21. - If aggregator name length is 4 through 7, maximum sub-merchant name length is 17. - If aggregator name length is 8 through 12, maximum sub-merchant name length is 12. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// First line of the sub-merchant&#39;s street address.  #### CyberSource through VisaNet The value for this field does not map to the TC 33 capture file5.  #### FDC Compass This value must consist of uppercase characters. 
         /// </summary>
         /// <value>First line of the sub-merchant&#39;s street address.  #### CyberSource through VisaNet The value for this field does not map to the TC 33 capture file5.  #### FDC Compass This value must consist of uppercase characters. </value>
-        [DataMember(Name="address1", EmitDefaultValue=false)]
+        [JsonPropertyName("address1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address1 { get; set; }
 
         /// <summary>
         /// Sub-merchant&#39;s city.  #### CyberSource through VisaNet The value for this field does not map to the TC 33 capture file5.  #### FDC Compass This value must consist of uppercase characters. 
         /// </summary>
         /// <value>Sub-merchant&#39;s city.  #### CyberSource through VisaNet The value for this field does not map to the TC 33 capture file5.  #### FDC Compass This value must consist of uppercase characters. </value>
-        [DataMember(Name="locality", EmitDefaultValue=false)]
+        [JsonPropertyName("locality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Locality { get; set; }
 
         /// <summary>
         /// Sub-merchant&#39;s state or province.  #### CyberSource through VisaNet The value for this field does not map to the TC 33 capture file5.  #### FDC Compass This value must consist of uppercase characters. 
         /// </summary>
         /// <value>Sub-merchant&#39;s state or province.  #### CyberSource through VisaNet The value for this field does not map to the TC 33 capture file5.  #### FDC Compass This value must consist of uppercase characters. </value>
-        [DataMember(Name="administrativeArea", EmitDefaultValue=false)]
+        [JsonPropertyName("administrativeArea")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdministrativeArea { get; set; }
 
         /// <summary>
         /// Sub-merchant&#39;s region.  **Example**\\ &#x60;NE&#x60; indicates that the sub-merchant is in the northeast region. 
         /// </summary>
         /// <value>Sub-merchant&#39;s region.  **Example**\\ &#x60;NE&#x60; indicates that the sub-merchant is in the northeast region. </value>
-        [DataMember(Name="region", EmitDefaultValue=false)]
+        [JsonPropertyName("region")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Region { get; set; }
 
         /// <summary>
         /// Partial postal code for the sub-merchant&#39;s address.  #### CyberSource through VisaNet The value for this field does not map to the TC 33 capture file5.  #### FDC Compass This value must consist of uppercase characters. 
         /// </summary>
         /// <value>Partial postal code for the sub-merchant&#39;s address.  #### CyberSource through VisaNet The value for this field does not map to the TC 33 capture file5.  #### FDC Compass This value must consist of uppercase characters. </value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// Sub-merchant&#39;s country. Use the [ISO Standard Country Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).  #### CyberSource through VisaNet The value for this field does not map to the TC 33 capture file.  #### FDC Compass This value must consist of uppercase characters. 
         /// </summary>
         /// <value>Sub-merchant&#39;s country. Use the [ISO Standard Country Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).  #### CyberSource through VisaNet The value for this field does not map to the TC 33 capture file.  #### FDC Compass This value must consist of uppercase characters. </value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// Sub-merchant&#39;s email address.  **Maximum length for processors**   - American Express Direct: 40  - CyberSource through VisaNet: 40  - FDC Compass: 40  - FDC Nashville Global: 19  #### CyberSource through VisaNet With American Express, the value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCRB - Position: 25-64 - Field: American Express Seller E-mail Address  **Note** The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies. 
         /// </summary>
         /// <value>Sub-merchant&#39;s email address.  **Maximum length for processors**   - American Express Direct: 40  - CyberSource through VisaNet: 40  - FDC Compass: 40  - FDC Nashville Global: 19  #### CyberSource through VisaNet With American Express, the value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCRB - Position: 25-64 - Field: American Express Seller E-mail Address  **Note** The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies. </value>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Email { get; set; }
 
         /// <summary>
         /// Sub-merchant&#39;s telephone number.  **Maximum length for procesors**   - American Express Direct: 20  - CyberSource through VisaNet: 20  - FDC Compass: 13  - FDC Nashville Global: 10  #### CyberSource through VisaNet With American Express, the value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCRB - Position: 5-24 - Field: American Express Seller Telephone Number  **FDC Compass**\\ This value must consist of uppercase characters. Use one of these recommended formats:\\ &#x60;NNN-NNN-NNNN&#x60;\\ &#x60;NNN-AAAAAAA&#x60; 
         /// </summary>
         /// <value>Sub-merchant&#39;s telephone number.  **Maximum length for procesors**   - American Express Direct: 20  - CyberSource through VisaNet: 20  - FDC Compass: 13  - FDC Nashville Global: 10  #### CyberSource through VisaNet With American Express, the value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCRB - Position: 5-24 - Field: American Express Seller Telephone Number  **FDC Compass**\\ This value must consist of uppercase characters. Use one of these recommended formats:\\ &#x60;NNN-NNN-NNNN&#x60;\\ &#x60;NNN-AAAAAAA&#x60; </value>
-        [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantCategoryCode
         /// </summary>
-        [DataMember(Name="merchantCategoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantCategoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? MerchantCategoryCode { get; set; }
 
         /// <summary>
@@ -152,18 +164,18 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsAggregatorInformationSubMerchant {\n");
-            if (CardAcceptorId != null) sb.Append("  CardAcceptorId: ").Append(CardAcceptorId).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Address1 != null) sb.Append("  Address1: ").Append(Address1).Append("\n");
-            if (Locality != null) sb.Append("  Locality: ").Append(Locality).Append("\n");
-            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(AdministrativeArea).Append("\n");
-            if (Region != null) sb.Append("  Region: ").Append(Region).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
-            if (MerchantCategoryCode != null) sb.Append("  MerchantCategoryCode: ").Append(MerchantCategoryCode).Append("\n");
+            if (CardAcceptorId != null) sb.Append("  CardAcceptorId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "cardAcceptorId", CardAcceptorId.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "id", Id.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "name", Name.ToString())).Append("\n");
+            if (Address1 != null) sb.Append("  Address1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "address1", Address1.ToString())).Append("\n");
+            if (Locality != null) sb.Append("  Locality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "locality", Locality.ToString())).Append("\n");
+            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "administrativeArea", AdministrativeArea.ToString())).Append("\n");
+            if (Region != null) sb.Append("  Region: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "region", Region.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "postalCode", PostalCode.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "country", Country.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "email", Email.ToString())).Append("\n");
+            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "phoneNumber", PhoneNumber.ToString())).Append("\n");
+            if (MerchantCategoryCode != null) sb.Append("  MerchantCategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAggregatorInformationSubMerchant", "merchantCategoryCode", MerchantCategoryCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -174,7 +186,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsAggregatorInformationSubMerchant", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

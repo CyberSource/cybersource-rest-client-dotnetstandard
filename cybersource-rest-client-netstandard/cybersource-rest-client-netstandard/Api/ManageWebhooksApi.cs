@@ -436,7 +436,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("webhookId", ApiClient.ParameterToString(webhookId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Delete == Method.Post)
             {
@@ -554,7 +554,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("webhookId", ApiClient.ParameterToString(webhookId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Delete == Method.Post)
             {
@@ -672,7 +672,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("webhookId", ApiClient.ParameterToString(webhookId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -792,7 +792,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("webhookId", ApiClient.ParameterToString(webhookId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -913,19 +913,19 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("organizationId", ApiClient.ParameterToString(organizationId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (productId != null)
             {
                 localVarQueryParams.Add("productId", ApiClient.ParameterToString(productId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (eventType != null)
             {
                 localVarQueryParams.Add("eventType", ApiClient.ParameterToString(eventType)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -1049,19 +1049,19 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("organizationId", ApiClient.ParameterToString(organizationId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (productId != null)
             {
                 localVarQueryParams.Add("productId", ApiClient.ParameterToString(productId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (eventType != null)
             {
                 localVarQueryParams.Add("eventType", ApiClient.ParameterToString(eventType)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -1178,7 +1178,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("webhookId", ApiClient.ParameterToString(webhookId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Post == Method.Post)
             {
@@ -1298,7 +1298,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("webhookId", ApiClient.ParameterToString(webhookId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Post == Method.Post)
             {
@@ -1417,7 +1417,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("webhookId", ApiClient.ParameterToString(webhookId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (updateWebhook != null && updateWebhook.GetType() != typeof(byte[]))
             {
@@ -1536,7 +1536,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("webhookId", ApiClient.ParameterToString(webhookId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (updateWebhook != null && updateWebhook.GetType() != typeof(byte[]))
             {
@@ -1650,7 +1650,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("webhookId", ApiClient.ParameterToString(webhookId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (updateStatus != null && updateStatus.GetType() != typeof(byte[]))
             {
@@ -1767,7 +1767,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("webhookId", ApiClient.ParameterToString(webhookId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (updateStatus != null && updateStatus.GetType() != typeof(byte[]))
             {

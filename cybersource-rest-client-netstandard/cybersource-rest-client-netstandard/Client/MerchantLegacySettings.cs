@@ -18,12 +18,6 @@ namespace CyberSource.Client
     /// </summary>
     public class MerchantLegacySettings : IMerchantLegacySettings
     {
-        #region Constants
-        /// <summary>
-        /// The default HTTP user agent string for API requests.
-        /// </summary>
-        private const string DEFAULT_USER_AGENT = "Swagger-Codegen/1.0.0/csharp";
-        #endregion Constants
 
         #region Constructors
         /// <summary>
@@ -32,7 +26,7 @@ namespace CyberSource.Client
         /// </summary>
         public MerchantLegacySettings()
         {
-            UserAgent = DEFAULT_USER_AGENT;
+            UserAgent = GetUserAgent();
         }
         #endregion Constructors
 
@@ -139,6 +133,17 @@ namespace CyberSource.Client
         /// </summary>
         public static Logger Logger { get; set; }
         #endregion Properties
+
+        #region New Methods
+        private string GetUserAgent()
+        {
+            var assembly = typeof(MerchantNetworkSettings).Assembly;
+
+            var assemblyVersion = MyNewAssemblyHelper.GetAssemblyAttribute<AssemblyFileVersionAttribute>(assembly).Version;
+
+            return "cybs-rest-sdk-dotnet/" + assemblyVersion;
+        }
+        #endregion New Methods
 
         #region Legacy Methods
         /// <summary>

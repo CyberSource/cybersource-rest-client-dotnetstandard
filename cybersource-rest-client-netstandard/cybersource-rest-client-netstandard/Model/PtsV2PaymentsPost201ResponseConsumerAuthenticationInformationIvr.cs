@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// Flag to indicate if a valid IVR transaction was detected. 
         /// </summary>
         /// <value>Flag to indicate if a valid IVR transaction was detected. </value>
-        [DataMember(Name="enabledMessage", EmitDefaultValue=false)]
+        [JsonPropertyName("enabledMessage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnabledMessage { get; set; }
 
         /// <summary>
         /// Encryption key to be used in the event the ACS requires encryption of the credential field. 
         /// </summary>
         /// <value>Encryption key to be used in the event the ACS requires encryption of the credential field. </value>
-        [DataMember(Name="encryptionKey", EmitDefaultValue=false)]
+        [JsonPropertyName("encryptionKey")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EncryptionKey { get; set; }
 
         /// <summary>
         /// Flag to indicate if the ACS requires the credential to be encrypted. 
         /// </summary>
         /// <value>Flag to indicate if the ACS requires the credential to be encrypted. </value>
-        [DataMember(Name="encryptionMandatory", EmitDefaultValue=false)]
+        [JsonPropertyName("encryptionMandatory")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EncryptionMandatory { get; set; }
 
         /// <summary>
         /// An indicator from the ACS to inform the type of encryption that should be used in the event the ACS requires encryption of the credential field. 
         /// </summary>
         /// <value>An indicator from the ACS to inform the type of encryption that should be used in the event the ACS requires encryption of the credential field. </value>
-        [DataMember(Name="encryptionType", EmitDefaultValue=false)]
+        [JsonPropertyName("encryptionType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EncryptionType { get; set; }
 
         /// <summary>
         /// An ACS Provided label that can be presented to the Consumer. Recommended use with an application. 
         /// </summary>
         /// <value>An ACS Provided label that can be presented to the Consumer. Recommended use with an application. </value>
-        [DataMember(Name="label", EmitDefaultValue=false)]
+        [JsonPropertyName("label")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Label { get; set; }
 
         /// <summary>
         /// An ACS provided string that can be presented to the Consumer. Recommended use with an application. 
         /// </summary>
         /// <value>An ACS provided string that can be presented to the Consumer. Recommended use with an application. </value>
-        [DataMember(Name="prompt", EmitDefaultValue=false)]
+        [JsonPropertyName("prompt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Prompt { get; set; }
 
         /// <summary>
         /// An ACS provided message that can provide additional information or details. 
         /// </summary>
         /// <value>An ACS provided message that can provide additional information or details. </value>
-        [DataMember(Name="statusMessage", EmitDefaultValue=false)]
+        [JsonPropertyName("statusMessage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StatusMessage { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseConsumerAuthenticationInformationIvr {\n");
-            if (EnabledMessage != null) sb.Append("  EnabledMessage: ").Append(EnabledMessage).Append("\n");
-            if (EncryptionKey != null) sb.Append("  EncryptionKey: ").Append(EncryptionKey).Append("\n");
-            if (EncryptionMandatory != null) sb.Append("  EncryptionMandatory: ").Append(EncryptionMandatory).Append("\n");
-            if (EncryptionType != null) sb.Append("  EncryptionType: ").Append(EncryptionType).Append("\n");
-            if (Label != null) sb.Append("  Label: ").Append(Label).Append("\n");
-            if (Prompt != null) sb.Append("  Prompt: ").Append(Prompt).Append("\n");
-            if (StatusMessage != null) sb.Append("  StatusMessage: ").Append(StatusMessage).Append("\n");
+            if (EnabledMessage != null) sb.Append("  EnabledMessage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseConsumerAuthenticationInformationIvr", "enabledMessage", EnabledMessage.ToString())).Append("\n");
+            if (EncryptionKey != null) sb.Append("  EncryptionKey: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseConsumerAuthenticationInformationIvr", "encryptionKey", EncryptionKey.ToString())).Append("\n");
+            if (EncryptionMandatory != null) sb.Append("  EncryptionMandatory: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseConsumerAuthenticationInformationIvr", "encryptionMandatory", EncryptionMandatory.ToString())).Append("\n");
+            if (EncryptionType != null) sb.Append("  EncryptionType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseConsumerAuthenticationInformationIvr", "encryptionType", EncryptionType.ToString())).Append("\n");
+            if (Label != null) sb.Append("  Label: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseConsumerAuthenticationInformationIvr", "label", Label.ToString())).Append("\n");
+            if (Prompt != null) sb.Append("  Prompt: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseConsumerAuthenticationInformationIvr", "prompt", Prompt.ToString())).Append("\n");
+            if (StatusMessage != null) sb.Append("  StatusMessage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseConsumerAuthenticationInformationIvr", "statusMessage", StatusMessage.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseConsumerAuthenticationInformationIvr", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// City where the product is shipped from. This field is used only when the &#x60;orderInformation.shipTo.administrativeArea&#x60; and &#x60;orderInformation.shipTo.country&#x60; fields are present.  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. 
         /// </summary>
         /// <value>City where the product is shipped from. This field is used only when the &#x60;orderInformation.shipTo.administrativeArea&#x60; and &#x60;orderInformation.shipTo.country&#x60; fields are present.  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. </value>
-        [DataMember(Name="shipFromLocality", EmitDefaultValue=false)]
+        [JsonPropertyName("shipFromLocality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShipFromLocality { get; set; }
 
         /// <summary>
         /// Country from which the order is shipped. This field is used only when &#x60;orderInformation.shippingDetails.shipFromLocality&#x60; and &#x60;orderInformation.shippingDetails.shipFromAdministrativeArea&#x60; are present. Use the [ISO Standard Country Codes](http://apps.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/ or rates applied to the transaction based on sourcing.  Optional for U.S., Canadian, international tax, and value added taxes. 
         /// </summary>
         /// <value>Country from which the order is shipped. This field is used only when &#x60;orderInformation.shippingDetails.shipFromLocality&#x60; and &#x60;orderInformation.shippingDetails.shipFromAdministrativeArea&#x60; are present. Use the [ISO Standard Country Codes](http://apps.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/ or rates applied to the transaction based on sourcing.  Optional for U.S., Canadian, international tax, and value added taxes. </value>
-        [DataMember(Name="shipFromCountry", EmitDefaultValue=false)]
+        [JsonPropertyName("shipFromCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShipFromCountry { get; set; }
 
         /// <summary>
         /// Postal code where the product is shipped from.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. 
         /// </summary>
         /// <value>Postal code where the product is shipped from.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. </value>
-        [DataMember(Name="shipFromPostalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("shipFromPostalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShipFromPostalCode { get; set; }
 
         /// <summary>
         /// State from which the order is shipped. This field is used only when &#x60;orderInformation.shippingDetails.shipFromLocality&#x60; and &#x60;orderInformation.shippingDetails.shipFromCountry&#x60; are present. Use the [State, Province, and Territory Codes for the United States and Canada](http://apps.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf).  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. 
         /// </summary>
         /// <value>State from which the order is shipped. This field is used only when &#x60;orderInformation.shippingDetails.shipFromLocality&#x60; and &#x60;orderInformation.shippingDetails.shipFromCountry&#x60; are present. Use the [State, Province, and Territory Codes for the United States and Canada](http://apps.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf).  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. </value>
-        [DataMember(Name="shipFromAdministrativeArea", EmitDefaultValue=false)]
+        [JsonPropertyName("shipFromAdministrativeArea")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShipFromAdministrativeArea { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Vasv2taxOrderInformationShippingDetails {\n");
-            if (ShipFromLocality != null) sb.Append("  ShipFromLocality: ").Append(ShipFromLocality).Append("\n");
-            if (ShipFromCountry != null) sb.Append("  ShipFromCountry: ").Append(ShipFromCountry).Append("\n");
-            if (ShipFromPostalCode != null) sb.Append("  ShipFromPostalCode: ").Append(ShipFromPostalCode).Append("\n");
-            if (ShipFromAdministrativeArea != null) sb.Append("  ShipFromAdministrativeArea: ").Append(ShipFromAdministrativeArea).Append("\n");
+            if (ShipFromLocality != null) sb.Append("  ShipFromLocality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationShippingDetails", "shipFromLocality", ShipFromLocality.ToString())).Append("\n");
+            if (ShipFromCountry != null) sb.Append("  ShipFromCountry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationShippingDetails", "shipFromCountry", ShipFromCountry.ToString())).Append("\n");
+            if (ShipFromPostalCode != null) sb.Append("  ShipFromPostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationShippingDetails", "shipFromPostalCode", ShipFromPostalCode.ToString())).Append("\n");
+            if (ShipFromAdministrativeArea != null) sb.Append("  ShipFromAdministrativeArea: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationShippingDetails", "shipFromAdministrativeArea", ShipFromAdministrativeArea.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Vasv2taxOrderInformationShippingDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -67,91 +67,104 @@ namespace CyberSource.Model
         /// An unique identification number assigned by CyberSource to identify the submitted request.
         /// </summary>
         /// <value>An unique identification number assigned by CyberSource to identify the submitted request.</value>
-        [DataMember(Name="requestId", EmitDefaultValue=false)]
+        [JsonPropertyName("requestId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestId { get; set; }
 
         /// <summary>
         /// interchange Per Item Fee
         /// </summary>
         /// <value>interchange Per Item Fee</value>
-        [DataMember(Name="interchangePerItemFee", EmitDefaultValue=false)]
+        [JsonPropertyName("interchangePerItemFee")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InterchangePerItemFee { get; set; }
 
         /// <summary>
         /// interchange Description
         /// </summary>
         /// <value>interchange Description</value>
-        [DataMember(Name="interchangeDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("interchangeDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InterchangeDescription { get; set; }
 
         /// <summary>
         /// interchange Percentage
         /// </summary>
         /// <value>interchange Percentage</value>
-        [DataMember(Name="interchangePercentage", EmitDefaultValue=false)]
+        [JsonPropertyName("interchangePercentage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InterchangePercentage { get; set; }
 
         /// <summary>
         /// interchange Percentage Amount
         /// </summary>
         /// <value>interchange Percentage Amount</value>
-        [DataMember(Name="interchangePercentageAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("interchangePercentageAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InterchangePercentageAmount { get; set; }
 
         /// <summary>
         /// Discount Percentage
         /// </summary>
         /// <value>Discount Percentage</value>
-        [DataMember(Name="discountPercentage", EmitDefaultValue=false)]
+        [JsonPropertyName("discountPercentage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscountPercentage { get; set; }
 
         /// <summary>
         /// Discount Amount
         /// </summary>
         /// <value>Discount Amount</value>
-        [DataMember(Name="discountAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("discountAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscountAmount { get; set; }
 
         /// <summary>
         /// Discount Per Item Fee
         /// </summary>
         /// <value>Discount Per Item Fee</value>
-        [DataMember(Name="discountPerItemFee", EmitDefaultValue=false)]
+        [JsonPropertyName("discountPerItemFee")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscountPerItemFee { get; set; }
 
         /// <summary>
         /// Total Fee
         /// </summary>
         /// <value>Total Fee</value>
-        [DataMember(Name="totalFee", EmitDefaultValue=false)]
+        [JsonPropertyName("totalFee")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalFee { get; set; }
 
         /// <summary>
         /// Fee Currency
         /// </summary>
         /// <value>Fee Currency</value>
-        [DataMember(Name="feeCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("feeCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FeeCurrency { get; set; }
 
         /// <summary>
         /// Dues Assessments
         /// </summary>
         /// <value>Dues Assessments</value>
-        [DataMember(Name="duesAssessments", EmitDefaultValue=false)]
+        [JsonPropertyName("duesAssessments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DuesAssessments { get; set; }
 
         /// <summary>
         /// Funding Amount
         /// </summary>
         /// <value>Funding Amount</value>
-        [DataMember(Name="fundingAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("fundingAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FundingAmount { get; set; }
 
         /// <summary>
         /// Funding Currency (ISO 4217)
         /// </summary>
         /// <value>Funding Currency (ISO 4217)</value>
-        [DataMember(Name="fundingCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("fundingCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FundingCurrency { get; set; }
 
         /// <summary>
@@ -162,19 +175,19 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails {\n");
-            if (RequestId != null) sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            if (InterchangePerItemFee != null) sb.Append("  InterchangePerItemFee: ").Append(InterchangePerItemFee).Append("\n");
-            if (InterchangeDescription != null) sb.Append("  InterchangeDescription: ").Append(InterchangeDescription).Append("\n");
-            if (InterchangePercentage != null) sb.Append("  InterchangePercentage: ").Append(InterchangePercentage).Append("\n");
-            if (InterchangePercentageAmount != null) sb.Append("  InterchangePercentageAmount: ").Append(InterchangePercentageAmount).Append("\n");
-            if (DiscountPercentage != null) sb.Append("  DiscountPercentage: ").Append(DiscountPercentage).Append("\n");
-            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(DiscountAmount).Append("\n");
-            if (DiscountPerItemFee != null) sb.Append("  DiscountPerItemFee: ").Append(DiscountPerItemFee).Append("\n");
-            if (TotalFee != null) sb.Append("  TotalFee: ").Append(TotalFee).Append("\n");
-            if (FeeCurrency != null) sb.Append("  FeeCurrency: ").Append(FeeCurrency).Append("\n");
-            if (DuesAssessments != null) sb.Append("  DuesAssessments: ").Append(DuesAssessments).Append("\n");
-            if (FundingAmount != null) sb.Append("  FundingAmount: ").Append(FundingAmount).Append("\n");
-            if (FundingCurrency != null) sb.Append("  FundingCurrency: ").Append(FundingCurrency).Append("\n");
+            if (RequestId != null) sb.Append("  RequestId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "requestId", RequestId.ToString())).Append("\n");
+            if (InterchangePerItemFee != null) sb.Append("  InterchangePerItemFee: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "interchangePerItemFee", InterchangePerItemFee.ToString())).Append("\n");
+            if (InterchangeDescription != null) sb.Append("  InterchangeDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "interchangeDescription", InterchangeDescription.ToString())).Append("\n");
+            if (InterchangePercentage != null) sb.Append("  InterchangePercentage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "interchangePercentage", InterchangePercentage.ToString())).Append("\n");
+            if (InterchangePercentageAmount != null) sb.Append("  InterchangePercentageAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "interchangePercentageAmount", InterchangePercentageAmount.ToString())).Append("\n");
+            if (DiscountPercentage != null) sb.Append("  DiscountPercentage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "discountPercentage", DiscountPercentage.ToString())).Append("\n");
+            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "discountAmount", DiscountAmount.ToString())).Append("\n");
+            if (DiscountPerItemFee != null) sb.Append("  DiscountPerItemFee: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "discountPerItemFee", DiscountPerItemFee.ToString())).Append("\n");
+            if (TotalFee != null) sb.Append("  TotalFee: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "totalFee", TotalFee.ToString())).Append("\n");
+            if (FeeCurrency != null) sb.Append("  FeeCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "feeCurrency", FeeCurrency.ToString())).Append("\n");
+            if (DuesAssessments != null) sb.Append("  DuesAssessments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "duesAssessments", DuesAssessments.ToString())).Append("\n");
+            if (FundingAmount != null) sb.Append("  FundingAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "fundingAmount", FundingAmount.ToString())).Append("\n");
+            if (FundingCurrency != null) sb.Append("  FundingCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", "fundingCurrency", FundingCurrency.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -185,7 +198,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

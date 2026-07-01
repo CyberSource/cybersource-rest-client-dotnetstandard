@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -34,17 +34,28 @@ namespace CyberSource.Model
         /// Initializes a new instance of the <see cref="Ptsv2paymentsidrefundsProcessingInformationRefundOptions" /> class.
         /// </summary>
         /// <param name="Reason">The reason for the refund..</param>
-        public Ptsv2paymentsidrefundsProcessingInformationRefundOptions(string Reason = default(string))
+        /// <param name="ReconciliationIdAlternate">Alternative reference number that can be up to 12 characters in length. If this field is used, it overrides any data added to the ccCaptureService_reconciliationID field. You can use this value to reconcile Cybersource reports with processor reports..</param>
+        public Ptsv2paymentsidrefundsProcessingInformationRefundOptions(string Reason = default(string), string ReconciliationIdAlternate = default(string))
         {
             this.Reason = Reason;
+            this.ReconciliationIdAlternate = ReconciliationIdAlternate;
         }
         
         /// <summary>
         /// The reason for the refund.
         /// </summary>
         /// <value>The reason for the refund.</value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
+
+        /// <summary>
+        /// Alternative reference number that can be up to 12 characters in length. If this field is used, it overrides any data added to the ccCaptureService_reconciliationID field. You can use this value to reconcile Cybersource reports with processor reports.
+        /// </summary>
+        /// <value>Alternative reference number that can be up to 12 characters in length. If this field is used, it overrides any data added to the ccCaptureService_reconciliationID field. You can use this value to reconcile Cybersource reports with processor reports.</value>
+        [JsonPropertyName("reconciliationIdAlternate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string ReconciliationIdAlternate { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -54,7 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidrefundsProcessingInformationRefundOptions {\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsProcessingInformationRefundOptions", "reason", Reason.ToString())).Append("\n");
+            if (ReconciliationIdAlternate != null) sb.Append("  ReconciliationIdAlternate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsProcessingInformationRefundOptions", "reconciliationIdAlternate", ReconciliationIdAlternate.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidrefundsProcessingInformationRefundOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>
@@ -95,6 +107,11 @@ namespace CyberSource.Model
                     this.Reason == other.Reason ||
                     this.Reason != null &&
                     this.Reason.Equals(other.Reason)
+                ) && 
+                (
+                    this.ReconciliationIdAlternate == other.ReconciliationIdAlternate ||
+                    this.ReconciliationIdAlternate != null &&
+                    this.ReconciliationIdAlternate.Equals(other.ReconciliationIdAlternate)
                 );
         }
 
@@ -111,6 +128,8 @@ namespace CyberSource.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.Reason != null)
                     hash = hash * 59 + this.Reason.GetHashCode();
+                if (this.ReconciliationIdAlternate != null)
+                    hash = hash * 59 + this.ReconciliationIdAlternate.GetHashCode();
                 return hash;
             }
         }

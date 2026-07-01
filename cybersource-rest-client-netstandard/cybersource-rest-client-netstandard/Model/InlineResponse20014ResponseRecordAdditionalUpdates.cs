@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -50,32 +50,37 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets CustomerId
         /// </summary>
-        [DataMember(Name="customerId", EmitDefaultValue=false)]
+        [JsonPropertyName("customerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerId { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInstrumentId
         /// </summary>
-        [DataMember(Name="paymentInstrumentId", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInstrumentId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentInstrumentId { get; set; }
 
         /// <summary>
         /// Gets or Sets Creator
         /// </summary>
-        [DataMember(Name="creator", EmitDefaultValue=false)]
+        [JsonPropertyName("creator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Creator { get; set; }
 
         /// <summary>
         /// Valid Values:   * ACTIVE   * CLOSED 
         /// </summary>
         /// <value>Valid Values:   * ACTIVE   * CLOSED </value>
-        [DataMember(Name="state", EmitDefaultValue=false)]
+        [JsonPropertyName("state")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string State { get; set; }
 
         /// <summary>
         /// Gets or Sets Message
         /// </summary>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
@@ -86,11 +91,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse20014ResponseRecordAdditionalUpdates {\n");
-            if (CustomerId != null) sb.Append("  CustomerId: ").Append(CustomerId).Append("\n");
-            if (PaymentInstrumentId != null) sb.Append("  PaymentInstrumentId: ").Append(PaymentInstrumentId).Append("\n");
-            if (Creator != null) sb.Append("  Creator: ").Append(Creator).Append("\n");
-            if (State != null) sb.Append("  State: ").Append(State).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
+            if (CustomerId != null) sb.Append("  CustomerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecordAdditionalUpdates", "customerId", CustomerId.ToString())).Append("\n");
+            if (PaymentInstrumentId != null) sb.Append("  PaymentInstrumentId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecordAdditionalUpdates", "paymentInstrumentId", PaymentInstrumentId.ToString())).Append("\n");
+            if (Creator != null) sb.Append("  Creator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecordAdditionalUpdates", "creator", Creator.ToString())).Append("\n");
+            if (State != null) sb.Append("  State: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecordAdditionalUpdates", "state", State.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20014ResponseRecordAdditionalUpdates", "message", Message.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -101,7 +106,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse20014ResponseRecordAdditionalUpdates", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

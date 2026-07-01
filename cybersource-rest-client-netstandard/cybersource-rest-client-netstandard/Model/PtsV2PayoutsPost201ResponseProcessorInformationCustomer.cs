@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Personal identifier validation result.  Valid values: - &#39;1&#39;: Verified - &#39;2&#39;: Failed - &#39;3&#39;: Not performed - &#39;4&#39;: Issuer does not support id verification 
         /// </summary>
         /// <value>Personal identifier validation result.  Valid values: - &#39;1&#39;: Verified - &#39;2&#39;: Failed - &#39;3&#39;: Not performed - &#39;4&#39;: Issuer does not support id verification </value>
-        [DataMember(Name="personalIdResult", EmitDefaultValue=false)]
+        [JsonPropertyName("personalIdResult")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PersonalIdResult { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PayoutsPost201ResponseProcessorInformationCustomer {\n");
-            if (PersonalIdResult != null) sb.Append("  PersonalIdResult: ").Append(PersonalIdResult).Append("\n");
+            if (PersonalIdResult != null) sb.Append("  PersonalIdResult: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformationCustomer", "personalIdResult", PersonalIdResult.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PayoutsPost201ResponseProcessorInformationCustomer", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

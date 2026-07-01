@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,28 +48,32 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Network
         /// </summary>
-        [DataMember(Name="network", EmitDefaultValue=false)]
+        [JsonPropertyName("network")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessorInformationReversalNetwork Network { get; set; }
 
         /// <summary>
         /// Field contains the response source code that identifies the source. 
         /// </summary>
         /// <value>Field contains the response source code that identifies the source. </value>
-        [DataMember(Name="responseSourceCode", EmitDefaultValue=false)]
+        [JsonPropertyName("responseSourceCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseSourceCode { get; set; }
 
         /// <summary>
         /// Supplementary transaction data for Klarna Advantage Plus. Fields to capture Interoperability Data from Merchant and transfer to Klarna for Authorization/Sale/Re-Auth/Capture APIs. 
         /// </summary>
         /// <value>Supplementary transaction data for Klarna Advantage Plus. Fields to capture Interoperability Data from Merchant and transfer to Klarna for Authorization/Sale/Re-Auth/Capture APIs. </value>
-        [DataMember(Name="supplementaryTransactionData", EmitDefaultValue=false)]
+        [JsonPropertyName("supplementaryTransactionData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SupplementaryTransactionData { get; set; }
 
         /// <summary>
         /// Merchant Commercial Enhanced Data Program (CEDP) verified indicator for capture/bill requests.  This field is used when the client is doing authorization with a different gateway and capture/settlement with CyberSource.  This field flows in ISO field 34, DSID 02 tag DA, in AN, EBCDIC format.  Possible values: - &#x60;Y&#x60;: Merchant CEDP verified  #### Used by **Capture Request** Request field for force capture/bill support when auth is done with a different gateway. 
         /// </summary>
         /// <value>Merchant Commercial Enhanced Data Program (CEDP) verified indicator for capture/bill requests.  This field is used when the client is doing authorization with a different gateway and capture/settlement with CyberSource.  This field flows in ISO field 34, DSID 02 tag DA, in AN, EBCDIC format.  Possible values: - &#x60;Y&#x60;: Merchant CEDP verified  #### Used by **Capture Request** Request field for force capture/bill support when auth is done with a different gateway. </value>
-        [DataMember(Name="cedpVerifiedIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("cedpVerifiedIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CedpVerifiedIndicator { get; set; }
 
         /// <summary>
@@ -80,10 +84,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidcapturesProcessorInformation {\n");
-            if (Network != null) sb.Append("  Network: ").Append(Network).Append("\n");
-            if (ResponseSourceCode != null) sb.Append("  ResponseSourceCode: ").Append(ResponseSourceCode).Append("\n");
-            if (SupplementaryTransactionData != null) sb.Append("  SupplementaryTransactionData: ").Append(SupplementaryTransactionData).Append("\n");
-            if (CedpVerifiedIndicator != null) sb.Append("  CedpVerifiedIndicator: ").Append(CedpVerifiedIndicator).Append("\n");
+            if (Network != null) sb.Append("  Network: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessorInformation", "network", Network.ToString())).Append("\n");
+            if (ResponseSourceCode != null) sb.Append("  ResponseSourceCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessorInformation", "responseSourceCode", ResponseSourceCode.ToString())).Append("\n");
+            if (SupplementaryTransactionData != null) sb.Append("  SupplementaryTransactionData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessorInformation", "supplementaryTransactionData", SupplementaryTransactionData.ToString())).Append("\n");
+            if (CedpVerifiedIndicator != null) sb.Append("  CedpVerifiedIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessorInformation", "cedpVerifiedIndicator", CedpVerifiedIndicator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -94,7 +98,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidcapturesProcessorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

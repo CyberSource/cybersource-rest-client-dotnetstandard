@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderwritingConfigurationMerchantApplication" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected UnderwritingConfigurationMerchantApplication() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderwritingConfigurationMerchantApplication" /> class.
@@ -53,41 +53,47 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ApplicationId
         /// </summary>
-        [DataMember(Name="applicationId", EmitDefaultValue=false)]
+        [JsonPropertyName("applicationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApplicationId { get; private set; }
 
         /// <summary>
         /// Gets or Sets ApplicationStatus
         /// </summary>
-        [DataMember(Name="applicationStatus", EmitDefaultValue=false)]
+        [JsonPropertyName("applicationStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApplicationStatus { get; private set; }
 
         /// <summary>
         /// The product(s) that are being underwritten
         /// </summary>
         /// <value>The product(s) that are being underwritten</value>
-        [DataMember(Name="products", EmitDefaultValue=false)]
+        [JsonPropertyName("products")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<UnderwritingConfigurationMerchantApplicationProducts> Products { get; set; }
 
         /// <summary>
         /// Driver Campaign ID, identifies where the application came from
         /// </summary>
         /// <value>Driver Campaign ID, identifies where the application came from</value>
-        [DataMember(Name="campaignId", EmitDefaultValue=false)]
+        [JsonPropertyName("campaignId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CampaignId { get; set; }
 
         /// <summary>
         /// Offer CampaignID, used by Sales
         /// </summary>
         /// <value>Offer CampaignID, used by Sales</value>
-        [DataMember(Name="ocId", EmitDefaultValue=false)]
+        [JsonPropertyName("ocId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OcId { get; set; }
 
         /// <summary>
         /// ResellerID, used by Sales
         /// </summary>
         /// <value>ResellerID, used by Sales</value>
-        [DataMember(Name="resellerId", EmitDefaultValue=false)]
+        [JsonPropertyName("resellerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResellerId { get; set; }
 
         /// <summary>
@@ -98,12 +104,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UnderwritingConfigurationMerchantApplication {\n");
-            if (ApplicationId != null) sb.Append("  ApplicationId: ").Append(ApplicationId).Append("\n");
-            if (ApplicationStatus != null) sb.Append("  ApplicationStatus: ").Append(ApplicationStatus).Append("\n");
-            if (Products != null) sb.Append("  Products: ").Append(Products).Append("\n");
-            if (CampaignId != null) sb.Append("  CampaignId: ").Append(CampaignId).Append("\n");
-            if (OcId != null) sb.Append("  OcId: ").Append(OcId).Append("\n");
-            if (ResellerId != null) sb.Append("  ResellerId: ").Append(ResellerId).Append("\n");
+            if (ApplicationId != null) sb.Append("  ApplicationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationMerchantApplication", "applicationId", ApplicationId.ToString())).Append("\n");
+            if (ApplicationStatus != null) sb.Append("  ApplicationStatus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationMerchantApplication", "applicationStatus", ApplicationStatus.ToString())).Append("\n");
+            if (Products != null) sb.Append("  Products: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationMerchantApplication", "products", Products.ToString())).Append("\n");
+            if (CampaignId != null) sb.Append("  CampaignId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationMerchantApplication", "campaignId", CampaignId.ToString())).Append("\n");
+            if (OcId != null) sb.Append("  OcId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationMerchantApplication", "ocId", OcId.ToString())).Append("\n");
+            if (ResellerId != null) sb.Append("  ResellerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationMerchantApplication", "resellerId", ResellerId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -114,7 +120,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UnderwritingConfigurationMerchantApplication", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

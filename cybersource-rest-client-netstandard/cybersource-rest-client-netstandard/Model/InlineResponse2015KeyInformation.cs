@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -63,76 +63,87 @@ namespace CyberSource.Model
         /// Provider name 
         /// </summary>
         /// <value>Provider name </value>
-        [DataMember(Name="provider", EmitDefaultValue=false)]
+        [JsonPropertyName("provider")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Provider { get; set; }
 
         /// <summary>
         /// Tenant name 
         /// </summary>
         /// <value>Tenant name </value>
-        [DataMember(Name="tenant", EmitDefaultValue=false)]
+        [JsonPropertyName("tenant")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Tenant { get; set; }
 
         /// <summary>
         /// Organization Id 
         /// </summary>
         /// <value>Organization Id </value>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// Client key Id 
         /// </summary>
         /// <value>Client key Id </value>
-        [DataMember(Name="clientKeyId", EmitDefaultValue=false)]
+        [JsonPropertyName("clientKeyId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientKeyId { get; set; }
 
         /// <summary>
         /// Key Serial Number 
         /// </summary>
         /// <value>Key Serial Number </value>
-        [DataMember(Name="keyId", EmitDefaultValue=false)]
+        [JsonPropertyName("keyId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string KeyId { get; set; }
 
         /// <summary>
         /// Value of the key 
         /// </summary>
         /// <value>Value of the key </value>
-        [DataMember(Name="key", EmitDefaultValue=false)]
+        [JsonPropertyName("key")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Key { get; set; }
 
         /// <summary>
         /// Type of the key 
         /// </summary>
         /// <value>Type of the key </value>
-        [DataMember(Name="keyType", EmitDefaultValue=false)]
+        [JsonPropertyName("keyType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string KeyType { get; set; }
 
         /// <summary>
         /// The status of the key 
         /// </summary>
         /// <value>The status of the key </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// The expiration time in UTC. &#x60;Format: YYYY-MM-DDThh:mm:ssZ&#x60; Example 2016-08-11T22:47:57Z equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The T separates the date and the time. The Z indicates UTC. 
         /// </summary>
         /// <value>The expiration time in UTC. &#x60;Format: YYYY-MM-DDThh:mm:ssZ&#x60; Example 2016-08-11T22:47:57Z equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The T separates the date and the time. The Z indicates UTC. </value>
-        [DataMember(Name="expirationDate", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationDate { get; set; }
 
         /// <summary>
         /// Message in case of failed key 
         /// </summary>
         /// <value>Message in case of failed key </value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
         /// Gets or Sets ErrorInformation
         /// </summary>
-        [DataMember(Name="errorInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("errorInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse2015KeyInformationErrorInformation ErrorInformation { get; set; }
 
         /// <summary>
@@ -143,17 +154,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2015KeyInformation {\n");
-            if (Provider != null) sb.Append("  Provider: ").Append(Provider).Append("\n");
-            if (Tenant != null) sb.Append("  Tenant: ").Append(Tenant).Append("\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (ClientKeyId != null) sb.Append("  ClientKeyId: ").Append(ClientKeyId).Append("\n");
-            if (KeyId != null) sb.Append("  KeyId: ").Append(KeyId).Append("\n");
-            if (Key != null) sb.Append("  Key: ").Append(Key).Append("\n");
-            if (KeyType != null) sb.Append("  KeyType: ").Append(KeyType).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (ExpirationDate != null) sb.Append("  ExpirationDate: ").Append(ExpirationDate).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
-            if (ErrorInformation != null) sb.Append("  ErrorInformation: ").Append(ErrorInformation).Append("\n");
+            if (Provider != null) sb.Append("  Provider: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2015KeyInformation", "provider", Provider.ToString())).Append("\n");
+            if (Tenant != null) sb.Append("  Tenant: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2015KeyInformation", "tenant", Tenant.ToString())).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2015KeyInformation", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (ClientKeyId != null) sb.Append("  ClientKeyId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2015KeyInformation", "clientKeyId", ClientKeyId.ToString())).Append("\n");
+            if (KeyId != null) sb.Append("  KeyId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2015KeyInformation", "keyId", KeyId.ToString())).Append("\n");
+            if (Key != null) sb.Append("  Key: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2015KeyInformation", "key", Key.ToString())).Append("\n");
+            if (KeyType != null) sb.Append("  KeyType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2015KeyInformation", "keyType", KeyType.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2015KeyInformation", "status", Status.ToString())).Append("\n");
+            if (ExpirationDate != null) sb.Append("  ExpirationDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2015KeyInformation", "expirationDate", ExpirationDate.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2015KeyInformation", "message", Message.ToString())).Append("\n");
+            if (ErrorInformation != null) sb.Append("  ErrorInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2015KeyInformation", "errorInformation", ErrorInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -164,7 +175,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2015KeyInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

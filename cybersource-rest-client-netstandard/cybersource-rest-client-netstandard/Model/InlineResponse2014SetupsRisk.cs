@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -36,7 +36,7 @@ namespace CyberSource.Model
         /// <param name="FraudManagementEssentials">FraudManagementEssentials.</param>
         /// <param name="DecisionManager">DecisionManager.</param>
         /// <param name="EnhancedAuthentication">EnhancedAuthentication.</param>
-        public InlineResponse2014SetupsRisk(InlineResponse2014SetupsPaymentsCardProcessing FraudManagementEssentials = default(InlineResponse2014SetupsPaymentsCardProcessing), InlineResponse2014SetupsPaymentsCardProcessing DecisionManager = default(InlineResponse2014SetupsPaymentsCardProcessing), InlineResponse2014SetupsPaymentsCardProcessing EnhancedAuthentication = default(InlineResponse2014SetupsPaymentsCardProcessing))
+        public InlineResponse2014SetupsRisk(PaymentsConfigurationSetupCardProcessing FraudManagementEssentials = default(PaymentsConfigurationSetupCardProcessing), PaymentsConfigurationSetupCardProcessing DecisionManager = default(PaymentsConfigurationSetupCardProcessing), PaymentsConfigurationSetupCardProcessing EnhancedAuthentication = default(PaymentsConfigurationSetupCardProcessing))
         {
             this.FraudManagementEssentials = FraudManagementEssentials;
             this.DecisionManager = DecisionManager;
@@ -46,20 +46,23 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets FraudManagementEssentials
         /// </summary>
-        [DataMember(Name="fraudManagementEssentials", EmitDefaultValue=false)]
-        public InlineResponse2014SetupsPaymentsCardProcessing FraudManagementEssentials { get; set; }
+        [JsonPropertyName("fraudManagementEssentials")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public PaymentsConfigurationSetupCardProcessing FraudManagementEssentials { get; set; }
 
         /// <summary>
         /// Gets or Sets DecisionManager
         /// </summary>
-        [DataMember(Name="decisionManager", EmitDefaultValue=false)]
-        public InlineResponse2014SetupsPaymentsCardProcessing DecisionManager { get; set; }
+        [JsonPropertyName("decisionManager")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public PaymentsConfigurationSetupCardProcessing DecisionManager { get; set; }
 
         /// <summary>
         /// Gets or Sets EnhancedAuthentication
         /// </summary>
-        [DataMember(Name="enhancedAuthentication", EmitDefaultValue=false)]
-        public InlineResponse2014SetupsPaymentsCardProcessing EnhancedAuthentication { get; set; }
+        [JsonPropertyName("enhancedAuthentication")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public PaymentsConfigurationSetupCardProcessing EnhancedAuthentication { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -69,9 +72,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2014SetupsRisk {\n");
-            if (FraudManagementEssentials != null) sb.Append("  FraudManagementEssentials: ").Append(FraudManagementEssentials).Append("\n");
-            if (DecisionManager != null) sb.Append("  DecisionManager: ").Append(DecisionManager).Append("\n");
-            if (EnhancedAuthentication != null) sb.Append("  EnhancedAuthentication: ").Append(EnhancedAuthentication).Append("\n");
+            if (FraudManagementEssentials != null) sb.Append("  FraudManagementEssentials: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014SetupsRisk", "fraudManagementEssentials", FraudManagementEssentials.ToString())).Append("\n");
+            if (DecisionManager != null) sb.Append("  DecisionManager: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014SetupsRisk", "decisionManager", DecisionManager.ToString())).Append("\n");
+            if (EnhancedAuthentication != null) sb.Append("  EnhancedAuthentication: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014SetupsRisk", "enhancedAuthentication", EnhancedAuthentication.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +85,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2014SetupsRisk", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

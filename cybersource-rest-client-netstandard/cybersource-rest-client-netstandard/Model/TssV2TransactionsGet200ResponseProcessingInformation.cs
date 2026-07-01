@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -65,80 +65,92 @@ namespace CyberSource.Model
         /// Bin Source File Identifier. Possible values: - itmx - rupay 
         /// </summary>
         /// <value>Bin Source File Identifier. Possible values: - itmx - rupay </value>
-        [DataMember(Name="binSource", EmitDefaultValue=false)]
+        [JsonPropertyName("binSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BinSource { get; set; }
 
         /// <summary>
         /// Indicates that the transaction includes industry-specific data.  Possible Values: - &#x60;airline&#x60; - &#x60;restaurant&#x60; - &#x60;lodging&#x60; - &#x60;auto_rental&#x60; - &#x60;transit&#x60; - &#x60;healthcare_medical&#x60; - &#x60;healthcare_transit&#x60; - &#x60;transit&#x60;  #### Card Present, Airlines and Auto Rental You must set this field to &#x60;airline&#x60; in order for airline data to be sent to the processor. For example, if this field is not set to &#x60;airline&#x60; or is not included in the request, no airline data is sent to the processor.  You must set this field to &#x60;restaurant&#x60; in order for restaurant data to be sent to the processor. When this field is not set to &#x60;restaurant&#x60; or is not included in the request, no restaurant data is sent to the processor.  You must set this field to &#x60;auto_rental&#x60; in order for auto rental data to be sent to the processor. For example, if this field is not set to &#x60;auto_rental&#x60; or is not included in the request, no auto rental data is sent to the processor.  Restaurant data is supported only on CyberSource through VisaNet. 
         /// </summary>
         /// <value>Indicates that the transaction includes industry-specific data.  Possible Values: - &#x60;airline&#x60; - &#x60;restaurant&#x60; - &#x60;lodging&#x60; - &#x60;auto_rental&#x60; - &#x60;transit&#x60; - &#x60;healthcare_medical&#x60; - &#x60;healthcare_transit&#x60; - &#x60;transit&#x60;  #### Card Present, Airlines and Auto Rental You must set this field to &#x60;airline&#x60; in order for airline data to be sent to the processor. For example, if this field is not set to &#x60;airline&#x60; or is not included in the request, no airline data is sent to the processor.  You must set this field to &#x60;restaurant&#x60; in order for restaurant data to be sent to the processor. When this field is not set to &#x60;restaurant&#x60; or is not included in the request, no restaurant data is sent to the processor.  You must set this field to &#x60;auto_rental&#x60; in order for auto rental data to be sent to the processor. For example, if this field is not set to &#x60;auto_rental&#x60; or is not included in the request, no auto rental data is sent to the processor.  Restaurant data is supported only on CyberSource through VisaNet. </value>
-        [DataMember(Name="industryDataType", EmitDefaultValue=false)]
+        [JsonPropertyName("industryDataType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IndustryDataType { get; set; }
 
         /// <summary>
         /// Type of digital payment solution for the transaction. 
         /// </summary>
         /// <value>Type of digital payment solution for the transaction. </value>
-        [DataMember(Name="paymentSolution", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentSolution")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentSolution { get; set; }
 
         /// <summary>
         /// Type of transaction. Some payment card companies use this information when determining discount rates.  #### Used by **Authorization** Required payer authentication transactions; otherwise, optional. **Credit** Required for standalone credits on Chase Paymentech solutions; otherwise, optional.  The list of valid values in this field depends on your processor.  #### Ingenico ePayments When you omit this field for Ingenico ePayments, the processor uses the default transaction type they have on file for you instead of the default value   #### Card Present You must set this field to &#x60;retail&#x60;. This field is required for a card-present transaction. Note that this should ONLY be used when the cardholder and card are present at the time of the transaction. For all keyed transactions originated from a POS terminal where the cardholder and card are not present, commerceIndicator should be submitted as \&quot;moto\&quot; 
         /// </summary>
         /// <value>Type of transaction. Some payment card companies use this information when determining discount rates.  #### Used by **Authorization** Required payer authentication transactions; otherwise, optional. **Credit** Required for standalone credits on Chase Paymentech solutions; otherwise, optional.  The list of valid values in this field depends on your processor.  #### Ingenico ePayments When you omit this field for Ingenico ePayments, the processor uses the default transaction type they have on file for you instead of the default value   #### Card Present You must set this field to &#x60;retail&#x60;. This field is required for a card-present transaction. Note that this should ONLY be used when the cardholder and card are present at the time of the transaction. For all keyed transactions originated from a POS terminal where the cardholder and card are not present, commerceIndicator should be submitted as \&quot;moto\&quot; </value>
-        [DataMember(Name="commerceIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("commerceIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommerceIndicator { get; set; }
 
         /// <summary>
         /// Type of transaction. Some payment card companies use this information when determining discount rates.  #### Used by **Authorization** Required payer authentication transactions; otherwise, optional. **Credit** Required for standalone credits on Chase Paymentech solutions; otherwise, optional.  The list of valid values in this field depends on your processor.  #### Ingenico ePayments When you omit this field for Ingenico ePayments, the processor uses the default transaction type they have on file for you instead of the default value   #### Card Present You must set this field to &#x60;retail&#x60;. This field is required for a card-present transaction. Note that this should ONLY be used when the cardholder and card are present at the time of the transaction. For all keyed transactions originated from a POS terminal where the cardholder and card are not present, commerceIndicator should be submitted as &#x60;moto&#x60; 
         /// </summary>
         /// <value>Type of transaction. Some payment card companies use this information when determining discount rates.  #### Used by **Authorization** Required payer authentication transactions; otherwise, optional. **Credit** Required for standalone credits on Chase Paymentech solutions; otherwise, optional.  The list of valid values in this field depends on your processor.  #### Ingenico ePayments When you omit this field for Ingenico ePayments, the processor uses the default transaction type they have on file for you instead of the default value   #### Card Present You must set this field to &#x60;retail&#x60;. This field is required for a card-present transaction. Note that this should ONLY be used when the cardholder and card are present at the time of the transaction. For all keyed transactions originated from a POS terminal where the cardholder and card are not present, commerceIndicator should be submitted as &#x60;moto&#x60; </value>
-        [DataMember(Name="commerceIndicatorLabel", EmitDefaultValue=false)]
+        [JsonPropertyName("commerceIndicatorLabel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommerceIndicatorLabel { get; set; }
 
         /// <summary>
         /// Required for AFT and OCT transactions.  Given below is a list of all the BAI values available. However, the processors may support only few specific BAI values.  - AA : Account-to-account  - BB : Supplier Payments - BI : Bank-Initiated P2P Money Transfer - BP : Non-Card Bill Pay/Bill Pay - CD : Cash Deposit - CP : Credit card Bill Payment - FD : Funds disbursement  - FT : Funds transfer - GD : Government Disbursement - GP : Gambling payout (non-online gambling) - LO : Loyalty credits and rebates - MD : Merchant Settlement - OG : Online Gambling Payout - PD : Payroll and pension disbursement - PP : Person-to-Person or Peer-to-Peer - TU : Top up, prepaid load - WT : Digital wallet  
         /// </summary>
         /// <value>Required for AFT and OCT transactions.  Given below is a list of all the BAI values available. However, the processors may support only few specific BAI values.  - AA : Account-to-account  - BB : Supplier Payments - BI : Bank-Initiated P2P Money Transfer - BP : Non-Card Bill Pay/Bill Pay - CD : Cash Deposit - CP : Credit card Bill Payment - FD : Funds disbursement  - FT : Funds transfer - GD : Government Disbursement - GP : Gambling payout (non-online gambling) - LO : Loyalty credits and rebates - MD : Merchant Settlement - OG : Online Gambling Payout - PD : Payroll and pension disbursement - PP : Person-to-Person or Peer-to-Peer - TU : Top up, prepaid load - WT : Digital wallet  </value>
-        [DataMember(Name="businessApplicationId", EmitDefaultValue=false)]
+        [JsonPropertyName("businessApplicationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessApplicationId { get; set; }
 
         /// <summary>
         /// Gets or Sets AuthorizationOptions
         /// </summary>
-        [DataMember(Name="authorizationOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("authorizationOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsGet200ResponseProcessingInformationAuthorizationOptions AuthorizationOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets BankTransferOptions
         /// </summary>
-        [DataMember(Name="bankTransferOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("bankTransferOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsGet200ResponseProcessingInformationBankTransferOptions BankTransferOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets CaptureOptions
         /// </summary>
-        [DataMember(Name="captureOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("captureOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsGet200ResponseProcessingInformationCaptureOptions CaptureOptions { get; set; }
 
         /// <summary>
         /// Reference number for the transaction. Depending on how your Cybersource account is configured, this value could either be provided in the API request or generated by CyberSource. The actual value used in the request to the processor is provided back to you by Cybersource in the response. 
         /// </summary>
         /// <value>Reference number for the transaction. Depending on how your Cybersource account is configured, this value could either be provided in the API request or generated by CyberSource. The actual value used in the request to the processor is provided back to you by Cybersource in the response. </value>
-        [DataMember(Name="reconciliationId", EmitDefaultValue=false)]
+        [JsonPropertyName("reconciliationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReconciliationId { get; set; }
 
         /// <summary>
         /// Gets or Sets JapanPaymentOptions
         /// </summary>
-        [DataMember(Name="japanPaymentOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("japanPaymentOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions JapanPaymentOptions { get; set; }
 
         /// <summary>
         /// Enter 1 for routing and account number validation. 
         /// </summary>
         /// <value>Enter 1 for routing and account number validation. </value>
-        [DataMember(Name="validationLevel", EmitDefaultValue=false)]
+        [JsonPropertyName("validationLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? ValidationLevel { get; set; }
 
         /// <summary>
@@ -149,18 +161,18 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseProcessingInformation {\n");
-            if (BinSource != null) sb.Append("  BinSource: ").Append(BinSource).Append("\n");
-            if (IndustryDataType != null) sb.Append("  IndustryDataType: ").Append(IndustryDataType).Append("\n");
-            if (PaymentSolution != null) sb.Append("  PaymentSolution: ").Append(PaymentSolution).Append("\n");
-            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CommerceIndicator).Append("\n");
-            if (CommerceIndicatorLabel != null) sb.Append("  CommerceIndicatorLabel: ").Append(CommerceIndicatorLabel).Append("\n");
-            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(BusinessApplicationId).Append("\n");
-            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(AuthorizationOptions).Append("\n");
-            if (BankTransferOptions != null) sb.Append("  BankTransferOptions: ").Append(BankTransferOptions).Append("\n");
-            if (CaptureOptions != null) sb.Append("  CaptureOptions: ").Append(CaptureOptions).Append("\n");
-            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(ReconciliationId).Append("\n");
-            if (JapanPaymentOptions != null) sb.Append("  JapanPaymentOptions: ").Append(JapanPaymentOptions).Append("\n");
-            if (ValidationLevel != null) sb.Append("  ValidationLevel: ").Append(ValidationLevel).Append("\n");
+            if (BinSource != null) sb.Append("  BinSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "binSource", BinSource.ToString())).Append("\n");
+            if (IndustryDataType != null) sb.Append("  IndustryDataType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "industryDataType", IndustryDataType.ToString())).Append("\n");
+            if (PaymentSolution != null) sb.Append("  PaymentSolution: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "paymentSolution", PaymentSolution.ToString())).Append("\n");
+            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "commerceIndicator", CommerceIndicator.ToString())).Append("\n");
+            if (CommerceIndicatorLabel != null) sb.Append("  CommerceIndicatorLabel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "commerceIndicatorLabel", CommerceIndicatorLabel.ToString())).Append("\n");
+            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "businessApplicationId", BusinessApplicationId.ToString())).Append("\n");
+            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "authorizationOptions", AuthorizationOptions.ToString())).Append("\n");
+            if (BankTransferOptions != null) sb.Append("  BankTransferOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "bankTransferOptions", BankTransferOptions.ToString())).Append("\n");
+            if (CaptureOptions != null) sb.Append("  CaptureOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "captureOptions", CaptureOptions.ToString())).Append("\n");
+            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "reconciliationId", ReconciliationId.ToString())).Append("\n");
+            if (JapanPaymentOptions != null) sb.Append("  JapanPaymentOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "japanPaymentOptions", JapanPaymentOptions.ToString())).Append("\n");
+            if (ValidationLevel != null) sb.Append("  ValidationLevel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformation", "validationLevel", ValidationLevel.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -171,7 +183,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

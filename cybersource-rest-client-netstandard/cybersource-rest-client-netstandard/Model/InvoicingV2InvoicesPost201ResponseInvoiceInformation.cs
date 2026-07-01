@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -65,21 +65,24 @@ namespace CyberSource.Model
         /// Invoice Number.
         /// </summary>
         /// <value>Invoice Number.</value>
-        [DataMember(Name="invoiceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InvoiceNumber { get; set; }
 
         /// <summary>
         /// The description included in the invoice.
         /// </summary>
         /// <value>The description included in the invoice.</value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Description { get; set; }
 
         /// <summary>
         /// The invoice due date. This field is required for creating an invoice. Format: &#x60;YYYY-MM-DD&#x60;, where &#x60;YYYY&#x60; &#x3D; year, &#x60;MM&#x60; &#x3D; month, and &#x60;DD&#x60; &#x3D; day 
         /// </summary>
         /// <value>The invoice due date. This field is required for creating an invoice. Format: &#x60;YYYY-MM-DD&#x60;, where &#x60;YYYY&#x60; &#x3D; year, &#x60;MM&#x60; &#x3D; month, and &#x60;DD&#x60; &#x3D; day </value>
-        [DataMember(Name="dueDate", EmitDefaultValue=false)]
+        [JsonPropertyName("dueDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [JsonConverter(typeof(SwaggerDateConverter))]
         public DateTime? DueDate { get; set; }
 
@@ -87,7 +90,8 @@ namespace CyberSource.Model
         /// Define an expiration date for the link.  Format: &#x60;YYYY-MM-DD&#x60;, where &#x60;YYYY&#x60; &#x3D; year, &#x60;MM&#x60; &#x3D; month, and &#x60;DD&#x60; &#x3D; day 
         /// </summary>
         /// <value>Define an expiration date for the link.  Format: &#x60;YYYY-MM-DD&#x60;, where &#x60;YYYY&#x60; &#x3D; year, &#x60;MM&#x60; &#x3D; month, and &#x60;DD&#x60; &#x3D; day </value>
-        [DataMember(Name="expirationDate", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [JsonConverter(typeof(SwaggerDateConverter))]
         public DateTime? ExpirationDate { get; set; }
 
@@ -95,28 +99,32 @@ namespace CyberSource.Model
         /// If set to &#x60;true&#x60;, the payer can make a partial invoice payment.
         /// </summary>
         /// <value>If set to &#x60;true&#x60;, the payer can make a partial invoice payment.</value>
-        [DataMember(Name="allowPartialPayments", EmitDefaultValue=false)]
+        [JsonPropertyName("allowPartialPayments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AllowPartialPayments { get; set; }
 
         /// <summary>
         /// Returns the payment link to an invoice when the invoice status is &#x60;SENT&#x60;, &#x60;CREATED&#x60;, &#x60;PARTIAL&#x60;, or &#x60;PAID&#x60;.
         /// </summary>
         /// <value>Returns the payment link to an invoice when the invoice status is &#x60;SENT&#x60;, &#x60;CREATED&#x60;, &#x60;PARTIAL&#x60;, or &#x60;PAID&#x60;.</value>
-        [DataMember(Name="paymentLink", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentLink")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentLink { get; set; }
 
         /// <summary>
         /// If this field is set to &#39;None&#39;, an invoice will be generated with the status &#39;CREATED&#39;, but no email will be dispatched.    Possible values:        - &#x60;None&#x60;   - &#x60;Email&#x60;    
         /// </summary>
         /// <value>If this field is set to &#39;None&#39;, an invoice will be generated with the status &#39;CREATED&#39;, but no email will be dispatched.    Possible values:        - &#x60;None&#x60;   - &#x60;Email&#x60;    </value>
-        [DataMember(Name="deliveryMode", EmitDefaultValue=false)]
+        [JsonPropertyName("deliveryMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeliveryMode { get; set; }
 
         /// <summary>
         /// A list of custom labels that allows you to override (rename) default field names and control the visibility of specific fields on invoices and items. If the list is empty, the labels will not be overwritten. 
         /// </summary>
         /// <value>A list of custom labels that allows you to override (rename) default field names and control the visibility of specific fields on invoices and items. If the list is empty, the labels will not be overwritten. </value>
-        [DataMember(Name="customLabels", EmitDefaultValue=false)]
+        [JsonPropertyName("customLabels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<InvoicingV2InvoicesPost201ResponseInvoiceInformationCustomLabels> CustomLabels { get; set; }
 
         /// <summary>
@@ -127,14 +135,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InvoicingV2InvoicesPost201ResponseInvoiceInformation {\n");
-            if (InvoiceNumber != null) sb.Append("  InvoiceNumber: ").Append(InvoiceNumber).Append("\n");
-            if (Description != null) sb.Append("  Description: ").Append(Description).Append("\n");
-            if (DueDate != null) sb.Append("  DueDate: ").Append(DueDate).Append("\n");
-            if (ExpirationDate != null) sb.Append("  ExpirationDate: ").Append(ExpirationDate).Append("\n");
-            if (AllowPartialPayments != null) sb.Append("  AllowPartialPayments: ").Append(AllowPartialPayments).Append("\n");
-            if (PaymentLink != null) sb.Append("  PaymentLink: ").Append(PaymentLink).Append("\n");
-            if (DeliveryMode != null) sb.Append("  DeliveryMode: ").Append(DeliveryMode).Append("\n");
-            if (CustomLabels != null) sb.Append("  CustomLabels: ").Append(CustomLabels).Append("\n");
+            if (InvoiceNumber != null) sb.Append("  InvoiceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformation", "invoiceNumber", InvoiceNumber.ToString())).Append("\n");
+            if (Description != null) sb.Append("  Description: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformation", "description", Description.ToString())).Append("\n");
+            if (DueDate != null) sb.Append("  DueDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformation", "dueDate", DueDate.ToString())).Append("\n");
+            if (ExpirationDate != null) sb.Append("  ExpirationDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformation", "expirationDate", ExpirationDate.ToString())).Append("\n");
+            if (AllowPartialPayments != null) sb.Append("  AllowPartialPayments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformation", "allowPartialPayments", AllowPartialPayments.ToString())).Append("\n");
+            if (PaymentLink != null) sb.Append("  PaymentLink: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformation", "paymentLink", PaymentLink.ToString())).Append("\n");
+            if (DeliveryMode != null) sb.Append("  DeliveryMode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformation", "deliveryMode", DeliveryMode.ToString())).Append("\n");
+            if (CustomLabels != null) sb.Append("  CustomLabels: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoicesPost201ResponseInvoiceInformation", "customLabels", CustomLabels.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -145,7 +153,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InvoicingV2InvoicesPost201ResponseInvoiceInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

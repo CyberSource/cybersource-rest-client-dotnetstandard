@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using AuthenticationSdk.core;
 using AuthenticationSdk.util;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Digests;
 using Org.BouncyCastle.Crypto.Parameters;
@@ -34,6 +35,10 @@ namespace AuthenticationSdk.authentication.jwt
         private readonly JwtToken _jwtToken;
         private readonly bool _isResponseMLEForApi;
         private readonly bool _isSharedSecret;
+        private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
+        {
+            WriteIndented = false
+        };
         #endregion
 
         #region NEW CONSTRUCTOR
@@ -88,9 +93,9 @@ namespace AuthenticationSdk.authentication.jwt
                     "Ensure the certificate contains a private key and that the current platform/certificate store grants access to it.");
             }
 
-            var jwtBody = payloadClaimSet.ToString(Newtonsoft.Json.Formatting.None);
+            var jwtBody = payloadClaimSet.ToJsonString(_jsonSerializerOptions);
 
-            string headerJson = headerClaimSet.ToString(Newtonsoft.Json.Formatting.None);
+            string headerJson = headerClaimSet.ToJsonString(_jsonSerializerOptions);
 
             // JWS compact serialization: Base64Url(header) + "." + Base64Url(payload)
             string headerEncoded = Base64UrlEncoder.Encode(Encoding.UTF8.GetBytes(headerJson));
@@ -130,8 +135,8 @@ namespace AuthenticationSdk.authentication.jwt
             var payloadClaimSet = GetPayloadClaimSet(jwtTokenValue);
             var headerClaimSet = GetSharedSecretHeaderClaimSet(jwtTokenValue);
 
-            var jwtBody = payloadClaimSet.ToString(Newtonsoft.Json.Formatting.None);
-            string headerJson = headerClaimSet.ToString(Newtonsoft.Json.Formatting.None);
+            var jwtBody = payloadClaimSet.ToJsonString(_jsonSerializerOptions);
+            string headerJson = headerClaimSet.ToJsonString(_jsonSerializerOptions);
 
             // JWS compact serialization: Base64Url(header) + "." + Base64Url(payload)
             string headerEncoded = Base64UrlEncoder.Encode(Encoding.UTF8.GetBytes(headerJson));
@@ -152,9 +157,9 @@ namespace AuthenticationSdk.authentication.jwt
             return token;
         }
 
-        private JObject GetPayloadClaimSet(JwtToken jwtTokenValue)
+        private JsonObject GetPayloadClaimSet(JwtToken jwtTokenValue)
         {
-            var jwtPayload = new JObject();
+            var jwtPayload = new JsonObject();
 
             // Setting the JWT digest and digest Algorithm when a POST, PUT, or PATCH request is made
             if (_merchantRequestSettings.RequestType.Equals("POST", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PUT", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
@@ -204,12 +209,12 @@ namespace AuthenticationSdk.authentication.jwt
         /// <summary>
         /// RS256 header for JWT with P12 certificate.
         /// </summary>
-        private JObject GetHeaderClaimSet(JwtToken jwtTokenValue)
+        private JsonObject GetHeaderClaimSet(JwtToken jwtTokenValue)
         {
             var x5Cert = jwtTokenValue.Certificate;
             var serialNumber = CertificateUtility.ExtractSerialNumber(x5Cert);
 
-            return new JObject
+            return new JsonObject
             {
                 ["alg"] = "RS256",
                 ["kid"] = serialNumber,
@@ -220,9 +225,9 @@ namespace AuthenticationSdk.authentication.jwt
         /// <summary>
         /// HS256 header for JWT with SHARED_SECRET.
         /// </summary>
-        private JObject GetSharedSecretHeaderClaimSet(JwtToken jwtTokenValue)
+        private JsonObject GetSharedSecretHeaderClaimSet(JwtToken jwtTokenValue)
         {
-            return new JObject
+            return new JsonObject
             {
                 ["alg"] = "HS256",
                 ["kid"] = jwtTokenValue.MerchantKeyId,

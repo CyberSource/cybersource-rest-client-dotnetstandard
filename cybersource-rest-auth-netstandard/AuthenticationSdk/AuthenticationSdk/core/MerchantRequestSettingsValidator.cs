@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
-using Newtonsoft.Json.Linq;
 
 namespace AuthenticationSdk.core
 {
@@ -125,7 +125,7 @@ namespace AuthenticationSdk.core
                 }
 
                 // Try to parse it with JToken - this validates the JSON structure
-                JToken.Parse(jsonString);
+                JsonNode.Parse(jsonString);
                 return true;
             }
             catch (Exception)

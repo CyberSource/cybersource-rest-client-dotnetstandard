@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -59,63 +59,72 @@ namespace CyberSource.Model
         /// This value is a 2-digit code indicating the payment method. Use Payment Method Code value that applies to the tranasction. - 10 (One-time payment) - 21, 22, 23, 24  (Bonus(one-time)payment) - 61 (Installment payment) - 31, 32, 33, 34  (Integrated (Bonus + Installment)payment) - 80 (Revolving payment) 
         /// </summary>
         /// <value>This value is a 2-digit code indicating the payment method. Use Payment Method Code value that applies to the tranasction. - 10 (One-time payment) - 21, 22, 23, 24  (Bonus(one-time)payment) - 61 (Installment payment) - 31, 32, 33, 34  (Integrated (Bonus + Installment)payment) - 80 (Revolving payment) </value>
-        [DataMember(Name="paymentMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentMethod { get; set; }
 
         /// <summary>
         /// Unique Japan Credit Card Association (JCCA) terminal identifier.  The difference between this field and the &#x60;pointOfSaleInformation.terminalID&#x60; field is that you can define &#x60;pointOfSaleInformation.terminalID&#x60;, but &#x60;processingInformation.japanPaymentOptions.terminalId&#x60; is defined by the JCCA and is used only in Japan.  This field is supported only on CyberSource through VisaNet and JCN Gateway.  Optional field. 
         /// </summary>
         /// <value>Unique Japan Credit Card Association (JCCA) terminal identifier.  The difference between this field and the &#x60;pointOfSaleInformation.terminalID&#x60; field is that you can define &#x60;pointOfSaleInformation.terminalID&#x60;, but &#x60;processingInformation.japanPaymentOptions.terminalId&#x60; is defined by the JCCA and is used only in Japan.  This field is supported only on CyberSource through VisaNet and JCN Gateway.  Optional field. </value>
-        [DataMember(Name="terminalId", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalId { get; set; }
 
         /// <summary>
         /// Business name in Japanese characters. This field is supported only on JCN Gateway and for the Sumitomo Mitsui Card Co. acquirer on CyberSource through VisaNet. 
         /// </summary>
         /// <value>Business name in Japanese characters. This field is supported only on JCN Gateway and for the Sumitomo Mitsui Card Co. acquirer on CyberSource through VisaNet. </value>
-        [DataMember(Name="businessName", EmitDefaultValue=false)]
+        [JsonPropertyName("businessName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessName { get; set; }
 
         /// <summary>
         /// Business name in Katakana characters. This field is supported only on JCN Gateway and for the Sumitomo Mitsui Card Co. acquirer on CyberSource through VisaNet. 
         /// </summary>
         /// <value>Business name in Katakana characters. This field is supported only on JCN Gateway and for the Sumitomo Mitsui Card Co. acquirer on CyberSource through VisaNet. </value>
-        [DataMember(Name="businessNameKatakana", EmitDefaultValue=false)]
+        [JsonPropertyName("businessNameKatakana")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessNameKatakana { get; set; }
 
         /// <summary>
         /// Business name in English characters. This field is supported only on JCN Gateway and for the Sumitomo Mitsui Card Co. acquirer on CyberSource through VisaNet. 
         /// </summary>
         /// <value>Business name in English characters. This field is supported only on JCN Gateway and for the Sumitomo Mitsui Card Co. acquirer on CyberSource through VisaNet. </value>
-        [DataMember(Name="businessNameEnglish", EmitDefaultValue=false)]
+        [JsonPropertyName("businessNameEnglish")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessNameEnglish { get; set; }
 
         /// <summary>
         /// An array of objects, each of which contains a bonus month and bonus amount.  Length of bonuses array is equal to the number of bonuses.  Max length &#x3D; 6.  In case of bonus month and amount not specified, null objects to be returned in the array. Example: bonuses : [ {\&quot;month\&quot;: \&quot;1\&quot;,\&quot;amount\&quot;: \&quot;200\&quot;}, {\&quot;month\&quot;: \&quot;3\&quot;,\&quot;amount\&quot;: \&quot;2500\&quot;}, null] 
         /// </summary>
         /// <value>An array of objects, each of which contains a bonus month and bonus amount.  Length of bonuses array is equal to the number of bonuses.  Max length &#x3D; 6.  In case of bonus month and amount not specified, null objects to be returned in the array. Example: bonuses : [ {\&quot;month\&quot;: \&quot;1\&quot;,\&quot;amount\&quot;: \&quot;200\&quot;}, {\&quot;month\&quot;: \&quot;3\&quot;,\&quot;amount\&quot;: \&quot;2500\&quot;}, null] </value>
-        [DataMember(Name="bonuses", EmitDefaultValue=false)]
+        [JsonPropertyName("bonuses")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsProcessingInformationJapanPaymentOptionsBonuses> Bonuses { get; set; }
 
         /// <summary>
         /// Billing month in MM format. 
         /// </summary>
         /// <value>Billing month in MM format. </value>
-        [DataMember(Name="firstBillingMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("firstBillingMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstBillingMonth { get; set; }
 
         /// <summary>
         /// Number of Installments. 
         /// </summary>
         /// <value>Number of Installments. </value>
-        [DataMember(Name="numberOfInstallments", EmitDefaultValue=false)]
+        [JsonPropertyName("numberOfInstallments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NumberOfInstallments { get; set; }
 
         /// <summary>
         /// This will contain the details of the kind of transaction that has been processe. Used only for Japan. Possible Values: - 0 &#x3D; Normal (authorization with amount and clearing/settlement; data capture or paper draft) - 1 &#x3D; Negative card authorization (authorization-only with 0 or 1 amount) - 2 &#x3D; Reservation of authorization (authorization-only with amount) - 3 &#x3D; Cancel transaction - 4 &#x3D; Merchant-initiated reversal/refund transactions - 5 &#x3D; Cancel reservation of authorization - 6 &#x3D; Post authorization 
         /// </summary>
         /// <value>This will contain the details of the kind of transaction that has been processe. Used only for Japan. Possible Values: - 0 &#x3D; Normal (authorization with amount and clearing/settlement; data capture or paper draft) - 1 &#x3D; Negative card authorization (authorization-only with 0 or 1 amount) - 2 &#x3D; Reservation of authorization (authorization-only with amount) - 3 &#x3D; Cancel transaction - 4 &#x3D; Merchant-initiated reversal/refund transactions - 5 &#x3D; Cancel reservation of authorization - 6 &#x3D; Post authorization </value>
-        [DataMember(Name="preApprovalType", EmitDefaultValue=false)]
+        [JsonPropertyName("preApprovalType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PreApprovalType { get; set; }
 
         /// <summary>
@@ -126,15 +135,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions {\n");
-            if (PaymentMethod != null) sb.Append("  PaymentMethod: ").Append(PaymentMethod).Append("\n");
-            if (TerminalId != null) sb.Append("  TerminalId: ").Append(TerminalId).Append("\n");
-            if (BusinessName != null) sb.Append("  BusinessName: ").Append(BusinessName).Append("\n");
-            if (BusinessNameKatakana != null) sb.Append("  BusinessNameKatakana: ").Append(BusinessNameKatakana).Append("\n");
-            if (BusinessNameEnglish != null) sb.Append("  BusinessNameEnglish: ").Append(BusinessNameEnglish).Append("\n");
-            if (Bonuses != null) sb.Append("  Bonuses: ").Append(Bonuses).Append("\n");
-            if (FirstBillingMonth != null) sb.Append("  FirstBillingMonth: ").Append(FirstBillingMonth).Append("\n");
-            if (NumberOfInstallments != null) sb.Append("  NumberOfInstallments: ").Append(NumberOfInstallments).Append("\n");
-            if (PreApprovalType != null) sb.Append("  PreApprovalType: ").Append(PreApprovalType).Append("\n");
+            if (PaymentMethod != null) sb.Append("  PaymentMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions", "paymentMethod", PaymentMethod.ToString())).Append("\n");
+            if (TerminalId != null) sb.Append("  TerminalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions", "terminalId", TerminalId.ToString())).Append("\n");
+            if (BusinessName != null) sb.Append("  BusinessName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions", "businessName", BusinessName.ToString())).Append("\n");
+            if (BusinessNameKatakana != null) sb.Append("  BusinessNameKatakana: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions", "businessNameKatakana", BusinessNameKatakana.ToString())).Append("\n");
+            if (BusinessNameEnglish != null) sb.Append("  BusinessNameEnglish: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions", "businessNameEnglish", BusinessNameEnglish.ToString())).Append("\n");
+            if (Bonuses != null) sb.Append("  Bonuses: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions", "bonuses", Bonuses.ToString())).Append("\n");
+            if (FirstBillingMonth != null) sb.Append("  FirstBillingMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions", "firstBillingMonth", FirstBillingMonth.ToString())).Append("\n");
+            if (NumberOfInstallments != null) sb.Append("  NumberOfInstallments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions", "numberOfInstallments", NumberOfInstallments.ToString())).Append("\n");
+            if (PreApprovalType != null) sb.Append("  PreApprovalType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions", "preApprovalType", PreApprovalType.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -145,7 +154,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseProcessingInformationJapanPaymentOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

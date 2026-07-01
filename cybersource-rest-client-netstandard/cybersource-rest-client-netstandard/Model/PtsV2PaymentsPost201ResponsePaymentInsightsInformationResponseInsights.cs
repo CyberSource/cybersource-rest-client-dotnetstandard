@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Categorization of response message from processor  Possible Values: - &#x60;ISSUER_WILL_NEVER_APPROVE&#x60; - &#x60;ISSUER_CANNOT_APPROVE_AT_THIS_TIME&#x60; - &#x60;ISSUER_CANNOT_APPROVE_WITH_THESE_DETAILS&#x60; - &#x60;GENERIC_ERROR&#x60; - &#x60;PAYMENT_INSIGHTS_INTERNAL_ERROR&#x60; - &#x60;OTHERS&#x60; - &#x60;PAYMENT_INSIGHTS_RESPONSE_CATEGORY_MATCH_NOT_FOUND&#x60; 
         /// </summary>
         /// <value>Categorization of response message from processor  Possible Values: - &#x60;ISSUER_WILL_NEVER_APPROVE&#x60; - &#x60;ISSUER_CANNOT_APPROVE_AT_THIS_TIME&#x60; - &#x60;ISSUER_CANNOT_APPROVE_WITH_THESE_DETAILS&#x60; - &#x60;GENERIC_ERROR&#x60; - &#x60;PAYMENT_INSIGHTS_INTERNAL_ERROR&#x60; - &#x60;OTHERS&#x60; - &#x60;PAYMENT_INSIGHTS_RESPONSE_CATEGORY_MATCH_NOT_FOUND&#x60; </value>
-        [DataMember(Name="category", EmitDefaultValue=false)]
+        [JsonPropertyName("category")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Category { get; set; }
 
         /// <summary>
         /// Categorization Code of response message from processor  Possible Values: - &#x60;01&#x60; : ISSUER_WILL_NEVER_APPROVE - &#x60;02&#x60; : ISSUER_CANNOT_APPROVE_AT_THIS_TIME - &#x60;03&#x60; : ISSUER_CANNOT_APPROVE_WITH_THESE_DETAILS - &#x60;04&#x60; : GENERIC_ERROR - &#x60;97&#x60; : PAYMENT_INSIGHTS_INTERNAL_ERROR - &#x60;98&#x60; : OTHERS - &#x60;99&#x60; : PAYMENT_INSIGHTS_RESPONSE_CATEGORY_MATCH_NOT_FOUND 
         /// </summary>
         /// <value>Categorization Code of response message from processor  Possible Values: - &#x60;01&#x60; : ISSUER_WILL_NEVER_APPROVE - &#x60;02&#x60; : ISSUER_CANNOT_APPROVE_AT_THIS_TIME - &#x60;03&#x60; : ISSUER_CANNOT_APPROVE_WITH_THESE_DETAILS - &#x60;04&#x60; : GENERIC_ERROR - &#x60;97&#x60; : PAYMENT_INSIGHTS_INTERNAL_ERROR - &#x60;98&#x60; : OTHERS - &#x60;99&#x60; : PAYMENT_INSIGHTS_RESPONSE_CATEGORY_MATCH_NOT_FOUND </value>
-        [DataMember(Name="categoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("categoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CategoryCode { get; set; }
 
         /// <summary>
         /// Raw name of the processor used for the transaction processing, especially useful during acquirer swing to see which processor transaction settled with 
         /// </summary>
         /// <value>Raw name of the processor used for the transaction processing, especially useful during acquirer swing to see which processor transaction settled with </value>
-        [DataMember(Name="processorRawName", EmitDefaultValue=false)]
+        [JsonPropertyName("processorRawName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessorRawName { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponsePaymentInsightsInformationResponseInsights {\n");
-            if (Category != null) sb.Append("  Category: ").Append(Category).Append("\n");
-            if (CategoryCode != null) sb.Append("  CategoryCode: ").Append(CategoryCode).Append("\n");
-            if (ProcessorRawName != null) sb.Append("  ProcessorRawName: ").Append(ProcessorRawName).Append("\n");
+            if (Category != null) sb.Append("  Category: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponsePaymentInsightsInformationResponseInsights", "category", Category.ToString())).Append("\n");
+            if (CategoryCode != null) sb.Append("  CategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponsePaymentInsightsInformationResponseInsights", "categoryCode", CategoryCode.ToString())).Append("\n");
+            if (ProcessorRawName != null) sb.Append("  ProcessorRawName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponsePaymentInsightsInformationResponseInsights", "processorRawName", ProcessorRawName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponsePaymentInsightsInformationResponseInsights", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Value of the Accept header sent by the customer&#39;s web browser. **Note** If the customer&#39;s browser provides a value, you must include it in your request. 
         /// </summary>
         /// <value>Value of the Accept header sent by the customer&#39;s web browser. **Note** If the customer&#39;s browser provides a value, you must include it in your request. </value>
-        [DataMember(Name="httpAcceptBrowserValue", EmitDefaultValue=false)]
+        [JsonPropertyName("httpAcceptBrowserValue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpAcceptBrowserValue { get; set; }
 
         /// <summary>
         /// IP address of the customer.  #### Used by **Authorization, Capture, and Credit** Optional field. 
         /// </summary>
         /// <value>IP address of the customer.  #### Used by **Authorization, Capture, and Credit** Optional field. </value>
-        [DataMember(Name="ipAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("ipAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IpAddress { get; set; }
 
         /// <summary>
         /// Value of the User-Agent header sent by the customer&#39;s web browser. Note If the customer&#39;s browser provides a value, you must include it in your request. 
         /// </summary>
         /// <value>Value of the User-Agent header sent by the customer&#39;s web browser. Note If the customer&#39;s browser provides a value, you must include it in your request. </value>
-        [DataMember(Name="userAgentBrowserValue", EmitDefaultValue=false)]
+        [JsonPropertyName("userAgentBrowserValue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UserAgentBrowserValue { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2billingagreementsDeviceInformation {\n");
-            if (HttpAcceptBrowserValue != null) sb.Append("  HttpAcceptBrowserValue: ").Append(HttpAcceptBrowserValue).Append("\n");
-            if (IpAddress != null) sb.Append("  IpAddress: ").Append(IpAddress).Append("\n");
-            if (UserAgentBrowserValue != null) sb.Append("  UserAgentBrowserValue: ").Append(UserAgentBrowserValue).Append("\n");
+            if (HttpAcceptBrowserValue != null) sb.Append("  HttpAcceptBrowserValue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsDeviceInformation", "httpAcceptBrowserValue", HttpAcceptBrowserValue.ToString())).Append("\n");
+            if (IpAddress != null) sb.Append("  IpAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsDeviceInformation", "ipAddress", IpAddress.ToString())).Append("\n");
+            if (UserAgentBrowserValue != null) sb.Append("  UserAgentBrowserValue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsDeviceInformation", "userAgentBrowserValue", UserAgentBrowserValue.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2billingagreementsDeviceInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

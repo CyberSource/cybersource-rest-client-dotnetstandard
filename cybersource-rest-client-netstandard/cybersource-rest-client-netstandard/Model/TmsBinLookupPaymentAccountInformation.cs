@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,19 +46,22 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Card
         /// </summary>
-        [DataMember(Name="card", EmitDefaultValue=false)]
+        [JsonPropertyName("card")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsBinLookupPaymentAccountInformationCard Card { get; set; }
 
         /// <summary>
         /// Gets or Sets Features
         /// </summary>
-        [DataMember(Name="features", EmitDefaultValue=false)]
+        [JsonPropertyName("features")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsBinLookupPaymentAccountInformationFeatures Features { get; set; }
 
         /// <summary>
         /// Gets or Sets Network
         /// </summary>
-        [DataMember(Name="network", EmitDefaultValue=false)]
+        [JsonPropertyName("network")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsBinLookupPaymentAccountInformationNetwork Network { get; set; }
 
         /// <summary>
@@ -69,9 +72,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsBinLookupPaymentAccountInformation {\n");
-            if (Card != null) sb.Append("  Card: ").Append(Card).Append("\n");
-            if (Features != null) sb.Append("  Features: ").Append(Features).Append("\n");
-            if (Network != null) sb.Append("  Network: ").Append(Network).Append("\n");
+            if (Card != null) sb.Append("  Card: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformation", "card", Card.ToString())).Append("\n");
+            if (Features != null) sb.Append("  Features: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformation", "features", Features.ToString())).Append("\n");
+            if (Network != null) sb.Append("  Network: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupPaymentAccountInformation", "network", Network.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +85,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsBinLookupPaymentAccountInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// This is the flattened JSON object field name/path that is either missing or invalid.
         /// </summary>
         /// <value>This is the flattened JSON object field name/path that is either missing or invalid.</value>
-        [DataMember(Name="field", EmitDefaultValue=false)]
+        [JsonPropertyName("field")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Field { get; set; }
 
         /// <summary>
         /// Possible reasons for the error. 
         /// </summary>
         /// <value>Possible reasons for the error. </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
         /// An optional short string which identifies the exact field error.
         /// </summary>
         /// <value>An optional short string which identifies the exact field error.</value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse40010Details {\n");
-            if (Field != null) sb.Append("  Field: ").Append(Field).Append("\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
+            if (Field != null) sb.Append("  Field: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse40010Details", "field", Field.ToString())).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse40010Details", "reason", Reason.ToString())).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse40010Details", "code", Code.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse40010Details", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

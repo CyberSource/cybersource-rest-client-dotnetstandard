@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -50,31 +50,36 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessingInformation
         /// </summary>
-        [DataMember(Name="processingInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidProcessingInformation ProcessingInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidOrderInformation OrderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInformation
         /// </summary>
-        [DataMember(Name="merchantInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidMerchantInformation MerchantInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets TravelInformation
         /// </summary>
-        [DataMember(Name="travelInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("travelInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidTravelInformation TravelInformation { get; set; }
 
         /// <summary>
@@ -85,11 +90,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class IncrementAuthRequest {\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(ProcessingInformation).Append("\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
-            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(MerchantInformation).Append("\n");
-            if (TravelInformation != null) sb.Append("  TravelInformation: ").Append(TravelInformation).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("IncrementAuthRequest", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("IncrementAuthRequest", "processingInformation", ProcessingInformation.ToString())).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("IncrementAuthRequest", "orderInformation", OrderInformation.ToString())).Append("\n");
+            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("IncrementAuthRequest", "merchantInformation", MerchantInformation.ToString())).Append("\n");
+            if (TravelInformation != null) sb.Append("  TravelInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("IncrementAuthRequest", "travelInformation", TravelInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -100,7 +105,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("IncrementAuthRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

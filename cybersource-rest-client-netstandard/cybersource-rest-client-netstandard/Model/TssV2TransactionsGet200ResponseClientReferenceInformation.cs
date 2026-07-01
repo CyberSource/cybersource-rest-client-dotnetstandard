@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,41 +53,47 @@ namespace CyberSource.Model
         /// Merchant-generated order reference or tracking number. It is recommended that you send a unique value for each transaction so that you can perform meaningful searches for the transaction.  #### Used by **Authorization** Required field.  #### PIN Debit Requests for PIN debit reversals need to use the same merchant reference number that was used in the transaction that is being reversed.  Required field for all PIN Debit requests (purchase, credit, and reversal).  #### FDC Nashville Global Certain circumstances can cause the processor to truncate this value to 15 or 17 characters for Level II and Level III processing, which can cause a discrepancy between the value you submit and the value included in some processor reports. 
         /// </summary>
         /// <value>Merchant-generated order reference or tracking number. It is recommended that you send a unique value for each transaction so that you can perform meaningful searches for the transaction.  #### Used by **Authorization** Required field.  #### PIN Debit Requests for PIN debit reversals need to use the same merchant reference number that was used in the transaction that is being reversed.  Required field for all PIN Debit requests (purchase, credit, and reversal).  #### FDC Nashville Global Certain circumstances can cause the processor to truncate this value to 15 or 17 characters for Level II and Level III processing, which can cause a discrepancy between the value you submit and the value included in some processor reports. </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Version of the CyberSource application or integration used for a transaction. 
         /// </summary>
         /// <value>Version of the CyberSource application or integration used for a transaction. </value>
-        [DataMember(Name="applicationVersion", EmitDefaultValue=false)]
+        [JsonPropertyName("applicationVersion")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApplicationVersion { get; set; }
 
         /// <summary>
         /// The name of the Connection Method client (such as Virtual Terminal or SOAP Toolkit API) that the merchant uses to send a transaction request to CyberSource. 
         /// </summary>
         /// <value>The name of the Connection Method client (such as Virtual Terminal or SOAP Toolkit API) that the merchant uses to send a transaction request to CyberSource. </value>
-        [DataMember(Name="applicationName", EmitDefaultValue=false)]
+        [JsonPropertyName("applicationName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApplicationName { get; set; }
 
         /// <summary>
         /// The entity that is responsible for running the transaction and submitting the processing request to CyberSource. This could be a person, a system, or a connection method. 
         /// </summary>
         /// <value>The entity that is responsible for running the transaction and submitting the processing request to CyberSource. This could be a person, a system, or a connection method. </value>
-        [DataMember(Name="applicationUser", EmitDefaultValue=false)]
+        [JsonPropertyName("applicationUser")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApplicationUser { get; set; }
 
         /// <summary>
         /// Gets or Sets Partner
         /// </summary>
-        [DataMember(Name="partner", EmitDefaultValue=false)]
+        [JsonPropertyName("partner")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsGet200ResponseClientReferenceInformationPartner Partner { get; set; }
 
         /// <summary>
         /// Brief description of the order or any comment you wish to add to the order. 
         /// </summary>
         /// <value>Brief description of the order or any comment you wish to add to the order. </value>
-        [DataMember(Name="comments", EmitDefaultValue=false)]
+        [JsonPropertyName("comments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Comments { get; set; }
 
         /// <summary>
@@ -98,12 +104,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseClientReferenceInformation {\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (ApplicationVersion != null) sb.Append("  ApplicationVersion: ").Append(ApplicationVersion).Append("\n");
-            if (ApplicationName != null) sb.Append("  ApplicationName: ").Append(ApplicationName).Append("\n");
-            if (ApplicationUser != null) sb.Append("  ApplicationUser: ").Append(ApplicationUser).Append("\n");
-            if (Partner != null) sb.Append("  Partner: ").Append(Partner).Append("\n");
-            if (Comments != null) sb.Append("  Comments: ").Append(Comments).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseClientReferenceInformation", "code", Code.ToString())).Append("\n");
+            if (ApplicationVersion != null) sb.Append("  ApplicationVersion: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseClientReferenceInformation", "applicationVersion", ApplicationVersion.ToString())).Append("\n");
+            if (ApplicationName != null) sb.Append("  ApplicationName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseClientReferenceInformation", "applicationName", ApplicationName.ToString())).Append("\n");
+            if (ApplicationUser != null) sb.Append("  ApplicationUser: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseClientReferenceInformation", "applicationUser", ApplicationUser.ToString())).Append("\n");
+            if (Partner != null) sb.Append("  Partner: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseClientReferenceInformation", "partner", Partner.ToString())).Append("\n");
+            if (Comments != null) sb.Append("  Comments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseClientReferenceInformation", "comments", Comments.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -114,7 +120,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseClientReferenceInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

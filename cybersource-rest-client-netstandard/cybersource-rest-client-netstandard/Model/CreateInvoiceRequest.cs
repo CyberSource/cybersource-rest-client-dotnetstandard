@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInvoiceRequest" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected CreateInvoiceRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateInvoiceRequest" /> class.
@@ -57,37 +57,43 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Invoicingv2invoicesClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets CustomerInformation
         /// </summary>
-        [DataMember(Name="customerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("customerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Invoicingv2invoicesCustomerInformation CustomerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessingInformation
         /// </summary>
-        [DataMember(Name="processingInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Invoicingv2invoicesProcessingInformation ProcessingInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets InvoiceInformation
         /// </summary>
-        [DataMember(Name="invoiceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Invoicingv2invoicesInvoiceInformation InvoiceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Invoicingv2invoicesOrderInformation OrderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantDefinedFieldValues
         /// </summary>
-        [DataMember(Name="merchantDefinedFieldValues", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDefinedFieldValues")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Invoicingv2invoicesMerchantDefinedFieldValues> MerchantDefinedFieldValues { get; set; }
 
         /// <summary>
@@ -98,12 +104,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CreateInvoiceRequest {\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (CustomerInformation != null) sb.Append("  CustomerInformation: ").Append(CustomerInformation).Append("\n");
-            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(ProcessingInformation).Append("\n");
-            if (InvoiceInformation != null) sb.Append("  InvoiceInformation: ").Append(InvoiceInformation).Append("\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
-            if (MerchantDefinedFieldValues != null) sb.Append("  MerchantDefinedFieldValues: ").Append(MerchantDefinedFieldValues).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateInvoiceRequest", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (CustomerInformation != null) sb.Append("  CustomerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateInvoiceRequest", "customerInformation", CustomerInformation.ToString())).Append("\n");
+            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateInvoiceRequest", "processingInformation", ProcessingInformation.ToString())).Append("\n");
+            if (InvoiceInformation != null) sb.Append("  InvoiceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateInvoiceRequest", "invoiceInformation", InvoiceInformation.ToString())).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateInvoiceRequest", "orderInformation", OrderInformation.ToString())).Append("\n");
+            if (MerchantDefinedFieldValues != null) sb.Append("  MerchantDefinedFieldValues: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateInvoiceRequest", "merchantDefinedFieldValues", MerchantDefinedFieldValues.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -114,7 +120,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CreateInvoiceRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

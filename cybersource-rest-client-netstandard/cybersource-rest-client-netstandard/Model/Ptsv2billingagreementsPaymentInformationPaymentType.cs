@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,14 +44,16 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Method
         /// </summary>
-        [DataMember(Name="method", EmitDefaultValue=false)]
+        [JsonPropertyName("method")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsPaymentInformationPaymentTypeMethod Method { get; set; }
 
         /// <summary>
         /// A Payment Type is an agreed means for a payee to receive legal tender from a payer. The way one pays for a commercial financial transaction. Examples: Card, Bank Transfer, Digital, Direct Debit. Possible values: - &#x60;EWALLET&#x60; - &#x60;directDebitSepa&#x60; - &#x60;directDebitBacs&#x60; #### SEPA/BACS Required for mandates services #### Paypal Required for billing agreements 
         /// </summary>
         /// <value>A Payment Type is an agreed means for a payee to receive legal tender from a payer. The way one pays for a commercial financial transaction. Examples: Card, Bank Transfer, Digital, Direct Debit. Possible values: - &#x60;EWALLET&#x60; - &#x60;directDebitSepa&#x60; - &#x60;directDebitBacs&#x60; #### SEPA/BACS Required for mandates services #### Paypal Required for billing agreements </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2billingagreementsPaymentInformationPaymentType {\n");
-            if (Method != null) sb.Append("  Method: ").Append(Method).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
+            if (Method != null) sb.Append("  Method: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsPaymentInformationPaymentType", "method", Method.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsPaymentInformationPaymentType", "name", Name.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,7 +76,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2billingagreementsPaymentInformationPaymentType", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

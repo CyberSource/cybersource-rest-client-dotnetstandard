@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -133,321 +133,367 @@ namespace CyberSource.Model
         /// JSON Web Token (JWT) used to authenticate the consumer with the authentication provider, such as, CardinalCommerce or Rupay. Note - Max Length of this field is 2048 characters. 
         /// </summary>
         /// <value>JSON Web Token (JWT) used to authenticate the consumer with the authentication provider, such as, CardinalCommerce or Rupay. Note - Max Length of this field is 2048 characters. </value>
-        [DataMember(Name="accessToken", EmitDefaultValue=false)]
+        [JsonPropertyName("accessToken")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccessToken { get; set; }
 
         /// <summary>
         /// Identifies the UI Type the ACS will use to complete the challenge. **NOTE**: Only available for App transactions using the Cardinal Mobile SDK. 
         /// </summary>
         /// <value>Identifies the UI Type the ACS will use to complete the challenge. **NOTE**: Only available for App transactions using the Cardinal Mobile SDK. </value>
-        [DataMember(Name="acsRenderingType", EmitDefaultValue=false)]
+        [JsonPropertyName("acsRenderingType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcsRenderingType { get; set; }
 
         /// <summary>
         /// Unique transaction identifier assigned by the ACS to identify a single transaction. 
         /// </summary>
         /// <value>Unique transaction identifier assigned by the ACS to identify a single transaction. </value>
-        [DataMember(Name="acsTransactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("acsTransactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcsTransactionId { get; set; }
 
         /// <summary>
         /// URL for the card-issuing bank&#39;s authentication form that you receive when the card is enrolled. The value can be very large. 
         /// </summary>
         /// <value>URL for the card-issuing bank&#39;s authentication form that you receive when the card is enrolled. The value can be very large. </value>
-        [DataMember(Name="acsUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("acsUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcsUrl { get; set; }
 
         /// <summary>
         /// Indicates what displays to the customer during the authentication process. This field can contain one of these values: - &#x60;ADS&#x60;: (Card not enrolled) customer prompted to activate the card during the checkout process. - &#x60;ATTEMPTS&#x60;: (Attempts processing) Processing briefly displays before the checkout process is completed. - &#x60;ENROLLED&#x60;: (Card enrolled) the card issuer&#39;s authentication window displays. - &#x60;UNKNOWN&#x60;: Card enrollment status cannot be determined. - &#x60;NOREDIRECT&#x60;: (Card not enrolled, authentication unavailable, or error occurred) nothing displays to the customer.  The following values can be returned if you are using rules-based payer authentication. - &#x60;RIBA&#x60;: The card-issuing bank supports risk-based authentication, but whether the cardholder is likely to be challenged cannot be determined. - &#x60;RIBA_PASS&#x60;: The card-issuing bank supports risk-based authentication and it is likely that the cardholder will not be challenged to provide credentials, also known as _silent authentication_. 
         /// </summary>
         /// <value>Indicates what displays to the customer during the authentication process. This field can contain one of these values: - &#x60;ADS&#x60;: (Card not enrolled) customer prompted to activate the card during the checkout process. - &#x60;ATTEMPTS&#x60;: (Attempts processing) Processing briefly displays before the checkout process is completed. - &#x60;ENROLLED&#x60;: (Card enrolled) the card issuer&#39;s authentication window displays. - &#x60;UNKNOWN&#x60;: Card enrollment status cannot be determined. - &#x60;NOREDIRECT&#x60;: (Card not enrolled, authentication unavailable, or error occurred) nothing displays to the customer.  The following values can be returned if you are using rules-based payer authentication. - &#x60;RIBA&#x60;: The card-issuing bank supports risk-based authentication, but whether the cardholder is likely to be challenged cannot be determined. - &#x60;RIBA_PASS&#x60;: The card-issuing bank supports risk-based authentication and it is likely that the cardholder will not be challenged to provide credentials, also known as _silent authentication_. </value>
-        [DataMember(Name="authenticationPath", EmitDefaultValue=false)]
+        [JsonPropertyName("authenticationPath")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthenticationPath { get; set; }
 
         /// <summary>
         /// The Base64 encoded JSON Payload of CB specific Authorization Values returned in the challenge Flow 
         /// </summary>
         /// <value>The Base64 encoded JSON Payload of CB specific Authorization Values returned in the challenge Flow </value>
-        [DataMember(Name="authorizationPayload", EmitDefaultValue=false)]
+        [JsonPropertyName("authorizationPayload")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthorizationPayload { get; set; }
 
         /// <summary>
         /// Indicates the type of authentication that will be used to challenge the card holder.  Possible Values:  01 - Static  02 - Dynamic  03 - OOB (Out of Band)  04 - Decoupled  20 - OTP hosted at merchant end. (Rupay S2S flow) **NOTE**:  EMV 3-D Secure version 2.1.0 supports values 01-03.  Version 2.2.0 supports values 01-04.  Decoupled authentication is not supported at this time. 
         /// </summary>
         /// <value>Indicates the type of authentication that will be used to challenge the card holder.  Possible Values:  01 - Static  02 - Dynamic  03 - OOB (Out of Band)  04 - Decoupled  20 - OTP hosted at merchant end. (Rupay S2S flow) **NOTE**:  EMV 3-D Secure version 2.1.0 supports values 01-03.  Version 2.2.0 supports values 01-04.  Decoupled authentication is not supported at this time. </value>
-        [DataMember(Name="authenticationType", EmitDefaultValue=false)]
+        [JsonPropertyName("authenticationType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthenticationType { get; set; }
 
         /// <summary>
         /// Payer authentication transaction identifier is used to link the check enrollment and validate authentication messages. For Rupay, this field should be passed as request only for Resend OTP use case. 
         /// </summary>
         /// <value>Payer authentication transaction identifier is used to link the check enrollment and validate authentication messages. For Rupay, this field should be passed as request only for Resend OTP use case. </value>
-        [DataMember(Name="authenticationTransactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("authenticationTransactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthenticationTransactionId { get; set; }
 
         /// <summary>
         /// Payer authentication transaction identifier passed to link the validation and authorization calls. 
         /// </summary>
         /// <value>Payer authentication transaction identifier passed to link the validation and authorization calls. </value>
-        [DataMember(Name="authenticationTransactionContextId", EmitDefaultValue=false)]
+        [JsonPropertyName("authenticationTransactionContextId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthenticationTransactionContextId { get; set; }
 
         /// <summary>
         /// Describes validity of OTP in minutes for incoming transaction.        . 
         /// </summary>
         /// <value>Describes validity of OTP in minutes for incoming transaction.        . </value>
-        [DataMember(Name="validityPeriod", EmitDefaultValue=false)]
+        [JsonPropertyName("validityPeriod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? ValidityPeriod { get; set; }
 
         /// <summary>
         /// Text provided by the ACS/Issuer to Cardholder during a Frictionless or Decoupled transaction.The Issuer can provide information to Cardholder. For example, \&quot;Additional authentication is needed for this transaction, please contact (Issuer Name) at xxx-xxx-xxxx.\&quot;. The Issuing Bank can optionally support this value. 
         /// </summary>
         /// <value>Text provided by the ACS/Issuer to Cardholder during a Frictionless or Decoupled transaction.The Issuer can provide information to Cardholder. For example, \&quot;Additional authentication is needed for this transaction, please contact (Issuer Name) at xxx-xxx-xxxx.\&quot;. The Issuing Bank can optionally support this value. </value>
-        [DataMember(Name="cardholderMessage", EmitDefaultValue=false)]
+        [JsonPropertyName("cardholderMessage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardholderMessage { get; set; }
 
         /// <summary>
         /// Unique identifier generated by the card-issuing bank for Visa, American Express, JCB, Diners Club, and Discover transactions after the customer is authenticated. The value is in base64. When you request the card authorization service, CyberSource automatically converts the value, not the field name, to the format required by your payment processor. 
         /// </summary>
         /// <value>Unique identifier generated by the card-issuing bank for Visa, American Express, JCB, Diners Club, and Discover transactions after the customer is authenticated. The value is in base64. When you request the card authorization service, CyberSource automatically converts the value, not the field name, to the format required by your payment processor. </value>
-        [DataMember(Name="cavv", EmitDefaultValue=false)]
+        [JsonPropertyName("cavv")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Cavv { get; set; }
 
         /// <summary>
         /// Field that is returned only when the CAVV is generated, which occurs when paresStatus contains the values Y (successful authentication) or A (attempted authentication). If you use the ATOS processor, send the value of this field in the &#x60;cavv_algorithm&#x60; request field of the authorization service. This field contains one of these values: - &#x60;2&#x60;: Visa, American Express, JCB, Diners Club, and Discover - &#x60;3&#x60;: Mastercard 
         /// </summary>
         /// <value>Field that is returned only when the CAVV is generated, which occurs when paresStatus contains the values Y (successful authentication) or A (attempted authentication). If you use the ATOS processor, send the value of this field in the &#x60;cavv_algorithm&#x60; request field of the authorization service. This field contains one of these values: - &#x60;2&#x60;: Visa, American Express, JCB, Diners Club, and Discover - &#x60;3&#x60;: Mastercard </value>
-        [DataMember(Name="cavvAlgorithm", EmitDefaultValue=false)]
+        [JsonPropertyName("cavvAlgorithm")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CavvAlgorithm { get; set; }
 
         /// <summary>
         /// An indicator as to why the transaction was canceled. Possible Values:  - &#x60;01&#x60;: Cardholder selected Cancel. - &#x60;02&#x60;: Reserved for future EMVCo use (values invalid until defined by EMVCo). - &#x60;03&#x60;: Transaction Timed Out—Decoupled Authentication - &#x60;04&#x60;: Transaction timed out at ACS—other timeouts - &#x60;05&#x60;: Transaction Timed out at ACS - First CReq not received by ACS - &#x60;06&#x60;: Transaction Error - &#x60;07&#x60;: Unknown - &#x60;08&#x60;: Transaction Timed Out at SDK 
         /// </summary>
         /// <value>An indicator as to why the transaction was canceled. Possible Values:  - &#x60;01&#x60;: Cardholder selected Cancel. - &#x60;02&#x60;: Reserved for future EMVCo use (values invalid until defined by EMVCo). - &#x60;03&#x60;: Transaction Timed Out—Decoupled Authentication - &#x60;04&#x60;: Transaction timed out at ACS—other timeouts - &#x60;05&#x60;: Transaction Timed out at ACS - First CReq not received by ACS - &#x60;06&#x60;: Transaction Error - &#x60;07&#x60;: Unknown - &#x60;08&#x60;: Transaction Timed Out at SDK </value>
-        [DataMember(Name="challengeCancelCode", EmitDefaultValue=false)]
+        [JsonPropertyName("challengeCancelCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ChallengeCancelCode { get; set; }
 
         /// <summary>
         /// Indicates whether a challenge is required in order to complete authentication. **Note** Regional mandates might determine that a challenge is required.  Possible values: - &#x60;Y&#x60;: Challenge required - &#x60;N&#x60;: Challenge not required **Note**  Used by the Hybrid integration. 
         /// </summary>
         /// <value>Indicates whether a challenge is required in order to complete authentication. **Note** Regional mandates might determine that a challenge is required.  Possible values: - &#x60;Y&#x60;: Challenge required - &#x60;N&#x60;: Challenge not required **Note**  Used by the Hybrid integration. </value>
-        [DataMember(Name="challengeRequired", EmitDefaultValue=false)]
+        [JsonPropertyName("challengeRequired")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ChallengeRequired { get; set; }
 
         /// <summary>
         /// Indicates whether the 3DS Requestor requests the ACS to utilize Decoupled Authentication and agrees to utilize Decoupled Authentication if the ACS confirms its use.  Possible Values:  Y - Decoupled Authentication is supported and preferred if challenge is necessary  N - Do not use Decoupled Authentication  **Default Value**: N 
         /// </summary>
         /// <value>Indicates whether the 3DS Requestor requests the ACS to utilize Decoupled Authentication and agrees to utilize Decoupled Authentication if the ACS confirms its use.  Possible Values:  Y - Decoupled Authentication is supported and preferred if challenge is necessary  N - Do not use Decoupled Authentication  **Default Value**: N </value>
-        [DataMember(Name="decoupledAuthenticationIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("decoupledAuthenticationIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DecoupledAuthenticationIndicator { get; set; }
 
         /// <summary>
         /// The directory server error code indicating a problem with this transaction. Note - Max Length of this field is typically 3 characters. 
         /// </summary>
         /// <value>The directory server error code indicating a problem with this transaction. Note - Max Length of this field is typically 3 characters. </value>
-        [DataMember(Name="directoryServerErrorCode", EmitDefaultValue=false)]
+        [JsonPropertyName("directoryServerErrorCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DirectoryServerErrorCode { get; set; }
 
         /// <summary>
         /// Directory server text and additional detail about the error for this transaction. 
         /// </summary>
         /// <value>Directory server text and additional detail about the error for this transaction. </value>
-        [DataMember(Name="directoryServerErrorDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("directoryServerErrorDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DirectoryServerErrorDescription { get; set; }
 
         /// <summary>
         /// Commerce indicator for cards not enrolled. This field contains one of these values: - &#x60;internet&#x60;: Card not enrolled, or card type not supported by payer authentication. No liability shift. - &#x60;js_attempted&#x60;: Card not enrolled, but attempt to authenticate is recorded. Liability shift. - &#x60;js_failure&#x60;: J/Secure directory service is not available. No liability shift. - &#x60;spa&#x60;: Mastercard card not enrolled in the SecureCode program. No liability shift. - &#x60;vbv_attempted&#x60;: Card not enrolled, but attempt to authenticate is recorded. Liability shift. - &#x60;vbv_failure&#x60;: For payment processor Barclays, Streamline, AIBMS, or FDC Germany, you receive this result if Visa&#39;s directory service is not available. No liability shift. 
         /// </summary>
         /// <value>Commerce indicator for cards not enrolled. This field contains one of these values: - &#x60;internet&#x60;: Card not enrolled, or card type not supported by payer authentication. No liability shift. - &#x60;js_attempted&#x60;: Card not enrolled, but attempt to authenticate is recorded. Liability shift. - &#x60;js_failure&#x60;: J/Secure directory service is not available. No liability shift. - &#x60;spa&#x60;: Mastercard card not enrolled in the SecureCode program. No liability shift. - &#x60;vbv_attempted&#x60;: Card not enrolled, but attempt to authenticate is recorded. Liability shift. - &#x60;vbv_failure&#x60;: For payment processor Barclays, Streamline, AIBMS, or FDC Germany, you receive this result if Visa&#39;s directory service is not available. No liability shift. </value>
-        [DataMember(Name="ecommerceIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("ecommerceIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EcommerceIndicator { get; set; }
 
         /// <summary>
         /// Note This field applies only to non-U.S-issued cards.  For enroll, Numeric electronic commerce indicator (ECI) returned only for Visa, American Express, JCB, Diners Club, and Discover transactions when the card is not enrolled. For more information, see \&quot;Interpreting the Reply,\&quot; page 22.  If you are not using the CyberSource payment services, you must send this value to your payment processor in the subsequent request for card authorization. This field contains one of these values: - &#x60;06&#x60;: The card can be enrolled. Liability shift. - &#x60;07&#x60;: The card cannot be enrolled. No liability shift.  For validate, Numeric electronic commerce indicator (ECI) returned only for Visa, American Express, JCB, Diners Club, and Discover transactions. The field is absent when authentication fails. You must send this value to your payment processor in the subsequent request for card authorization. This field contains one of these values: - &#x60;05&#x60;: Successful authentication - &#x60;06&#x60;: Authentication attempted - &#x60;07&#x60;: Failed authentication (No response from the merchant because of a problem.) 
         /// </summary>
         /// <value>Note This field applies only to non-U.S-issued cards.  For enroll, Numeric electronic commerce indicator (ECI) returned only for Visa, American Express, JCB, Diners Club, and Discover transactions when the card is not enrolled. For more information, see \&quot;Interpreting the Reply,\&quot; page 22.  If you are not using the CyberSource payment services, you must send this value to your payment processor in the subsequent request for card authorization. This field contains one of these values: - &#x60;06&#x60;: The card can be enrolled. Liability shift. - &#x60;07&#x60;: The card cannot be enrolled. No liability shift.  For validate, Numeric electronic commerce indicator (ECI) returned only for Visa, American Express, JCB, Diners Club, and Discover transactions. The field is absent when authentication fails. You must send this value to your payment processor in the subsequent request for card authorization. This field contains one of these values: - &#x60;05&#x60;: Successful authentication - &#x60;06&#x60;: Authentication attempted - &#x60;07&#x60;: Failed authentication (No response from the merchant because of a problem.) </value>
-        [DataMember(Name="eci", EmitDefaultValue=false)]
+        [JsonPropertyName("eci")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Eci { get; set; }
 
         /// <summary>
         /// ECI value that can be returned for Visa, Mastercard, American Express, JCB, Diners Club, and Discover. The field is absent when authentication fails. If your payment processor is Streamline, you must pass the value of this field instead of the value of &#x60;eci&#x60; or &#x60;ucafCollectionIndicator&#x60;.  This field can contain one of these values: - &#x60;01&#x60;: Authentication attempted (Mastercard) - &#x60;02&#x60;: Successful authentication (Mastercard) - &#x60;05&#x60;: Successful authentication (Visa, American Express, JCB, Diners Club, and Discover) - &#x60;06&#x60;: Authentication attempted (Visa, American Express, JCB, Diners Club, and Discover) 
         /// </summary>
         /// <value>ECI value that can be returned for Visa, Mastercard, American Express, JCB, Diners Club, and Discover. The field is absent when authentication fails. If your payment processor is Streamline, you must pass the value of this field instead of the value of &#x60;eci&#x60; or &#x60;ucafCollectionIndicator&#x60;.  This field can contain one of these values: - &#x60;01&#x60;: Authentication attempted (Mastercard) - &#x60;02&#x60;: Successful authentication (Mastercard) - &#x60;05&#x60;: Successful authentication (Visa, American Express, JCB, Diners Club, and Discover) - &#x60;06&#x60;: Authentication attempted (Visa, American Express, JCB, Diners Club, and Discover) </value>
-        [DataMember(Name="eciRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("eciRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EciRaw { get; set; }
 
         /// <summary>
         /// This field describes the type of 3DS transaction flow that took place.  It can be one of three possible flows; CH - Challenge FR - Frictionless FD - Frictionless with delegation, (challenge not generated by the issuer but by the scheme on behalf of the issuer). 
         /// </summary>
         /// <value>This field describes the type of 3DS transaction flow that took place.  It can be one of three possible flows; CH - Challenge FR - Frictionless FD - Frictionless with delegation, (challenge not generated by the issuer but by the scheme on behalf of the issuer). </value>
-        [DataMember(Name="effectiveAuthenticationType", EmitDefaultValue=false)]
+        [JsonPropertyName("effectiveAuthenticationType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EffectiveAuthenticationType { get; set; }
 
         /// <summary>
         /// Payer authentication exemption indicator for Carte Bancaire exemptions.  This is used with unbundled authentication and authorizations calls, for example: \&quot;low fraud merchant program\&quot;. The value returned in this field should be passed in the authorization request under the field - &#x60;consumerAuthenticationInformation.strongAuthentication.issuerInformation.exemptionDataRaw&#x60;. 
         /// </summary>
         /// <value>Payer authentication exemption indicator for Carte Bancaire exemptions.  This is used with unbundled authentication and authorizations calls, for example: \&quot;low fraud merchant program\&quot;. The value returned in this field should be passed in the authorization request under the field - &#x60;consumerAuthenticationInformation.strongAuthentication.issuerInformation.exemptionDataRaw&#x60;. </value>
-        [DataMember(Name="exemptionDataRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("exemptionDataRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExemptionDataRaw { get; set; }
 
         /// <summary>
         /// Gets or Sets Ivr
         /// </summary>
-        [DataMember(Name="ivr", EmitDefaultValue=false)]
+        [JsonPropertyName("ivr")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseConsumerAuthenticationInformationIvr Ivr { get; set; }
 
         /// <summary>
         /// The global score calculated by the CB scoring platform and returned to merchants. 
         /// </summary>
         /// <value>The global score calculated by the CB scoring platform and returned to merchants. </value>
-        [DataMember(Name="networkScore", EmitDefaultValue=false)]
+        [JsonPropertyName("networkScore")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NetworkScore { get; set; }
 
         /// <summary>
         /// Payer authentication request (PAReq) message that you need to forward to the ACS. The value can be very large. The value is in base64. 
         /// </summary>
         /// <value>Payer authentication request (PAReq) message that you need to forward to the ACS. The value can be very large. The value is in base64. </value>
-        [DataMember(Name="pareq", EmitDefaultValue=false)]
+        [JsonPropertyName("pareq")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Pareq { get; set; }
 
         /// <summary>
         /// Raw result of the authentication check. If you are configured for Asia, Middle East, and Africa Gateway Processing, you need to send the value of this field in your authorization request. This field can contain one of these values: - &#x60;A&#x60;: Proof of authentication attempt was generated. - &#x60;N&#x60;: Customer failed or canceled authentication. Transaction denied. - &#x60;U&#x60;: Authentication not completed regardless of the reason. - &#x60;Y&#x60;: Customer was successfully authenticated. 
         /// </summary>
         /// <value>Raw result of the authentication check. If you are configured for Asia, Middle East, and Africa Gateway Processing, you need to send the value of this field in your authorization request. This field can contain one of these values: - &#x60;A&#x60;: Proof of authentication attempt was generated. - &#x60;N&#x60;: Customer failed or canceled authentication. Transaction denied. - &#x60;U&#x60;: Authentication not completed regardless of the reason. - &#x60;Y&#x60;: Customer was successfully authenticated. </value>
-        [DataMember(Name="paresStatus", EmitDefaultValue=false)]
+        [JsonPropertyName("paresStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ParesStatus { get; set; }
 
         /// <summary>
         /// Date and time of the enrollment check combined with the VEReq and VERes elements. If you ever need to show proof of enrollment checking, you may need to parse the string for the information required by the payment card company. The value can be very large.  For cards issued in the U.S. or Canada, Visa may require this data for specific merchant category codes.For cards not issued in the U.S. or Canada, your bank may require this data as proof of enrollment checking for any payer authentication transaction that you re-present because of a chargeback. 
         /// </summary>
         /// <value>Date and time of the enrollment check combined with the VEReq and VERes elements. If you ever need to show proof of enrollment checking, you may need to parse the string for the information required by the payment card company. The value can be very large.  For cards issued in the U.S. or Canada, Visa may require this data for specific merchant category codes.For cards not issued in the U.S. or Canada, your bank may require this data as proof of enrollment checking for any payer authentication transaction that you re-present because of a chargeback. </value>
-        [DataMember(Name="proofXml", EmitDefaultValue=false)]
+        [JsonPropertyName("proofXml")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProofXml { get; set; }
 
         /// <summary>
         /// Encrypted version of the card number used in the payer authentication request message. 
         /// </summary>
         /// <value>Encrypted version of the card number used in the payer authentication request message. </value>
-        [DataMember(Name="proxyPan", EmitDefaultValue=false)]
+        [JsonPropertyName("proxyPan")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProxyPan { get; set; }
 
         /// <summary>
         /// SDK unique transaction identifier that is generated on each new transaction. 
         /// </summary>
         /// <value>SDK unique transaction identifier that is generated on each new transaction. </value>
-        [DataMember(Name="sdkTransactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("sdkTransactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SdkTransactionId { get; set; }
 
         /// <summary>
         /// Provides additional information as to why the PAResStatus has a specific value. 
         /// </summary>
         /// <value>Provides additional information as to why the PAResStatus has a specific value. </value>
-        [DataMember(Name="signedParesStatusReason", EmitDefaultValue=false)]
+        [JsonPropertyName("signedParesStatusReason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SignedParesStatusReason { get; set; }
 
         /// <summary>
         /// This field contains the 3D Secure version that was used to process the transaction. For example: 2.2.0 
         /// </summary>
         /// <value>This field contains the 3D Secure version that was used to process the transaction. For example: 2.2.0 </value>
-        [DataMember(Name="specificationVersion", EmitDefaultValue=false)]
+        [JsonPropertyName("specificationVersion")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SpecificationVersion { get; set; }
 
         /// <summary>
         /// The fully qualified URL that the merchant uses to post a form to the cardholder in order to complete the Consumer Authentication transaction for the Cardinal Cruise API integration. 
         /// </summary>
         /// <value>The fully qualified URL that the merchant uses to post a form to the cardholder in order to complete the Consumer Authentication transaction for the Cardinal Cruise API integration. </value>
-        [DataMember(Name="stepUpUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("stepUpUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StepUpUrl { get; set; }
 
         /// <summary>
         /// Unique transaction identifier assigned by the 3DS Server to identify a single transaction. 
         /// </summary>
         /// <value>Unique transaction identifier assigned by the 3DS Server to identify a single transaction. </value>
-        [DataMember(Name="threeDSServerTransactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("threeDSServerTransactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ThreeDSServerTransactionId { get; set; }
 
         /// <summary>
         /// AAV is a unique identifier generated by the card-issuing bank for Mastercard Identity Check transactions after the customer is authenticated. The value is in base64. Include the data in the card authorization request. 
         /// </summary>
         /// <value>AAV is a unique identifier generated by the card-issuing bank for Mastercard Identity Check transactions after the customer is authenticated. The value is in base64. Include the data in the card authorization request. </value>
-        [DataMember(Name="ucafAuthenticationData", EmitDefaultValue=false)]
+        [JsonPropertyName("ucafAuthenticationData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UcafAuthenticationData { get; set; }
 
         /// <summary>
         /// For enroll, Returned only for Mastercard transactions. Indicates that authentication is not required because the customer is not enrolled. Add the value of this field to the authorization field ucaf_collection_indicator. This field can contain these values: 0, 1.  For validate, Numeric electronic commerce indicator (ECI) returned only for Mastercard Identity Check transactions. The field is absent when authentication fails. You must send this value to your payment processor in the request for card authorization. This field contain one of these values: - &#x60;0&#x60;: Authentication data not collected, and customer authentication was not completed. - &#x60;1&#x60;: Authentication data not collected because customer authentication was not completed. - &#x60;2&#x60;: Authentication data collected because customer completed authentication. 
         /// </summary>
         /// <value>For enroll, Returned only for Mastercard transactions. Indicates that authentication is not required because the customer is not enrolled. Add the value of this field to the authorization field ucaf_collection_indicator. This field can contain these values: 0, 1.  For validate, Numeric electronic commerce indicator (ECI) returned only for Mastercard Identity Check transactions. The field is absent when authentication fails. You must send this value to your payment processor in the request for card authorization. This field contain one of these values: - &#x60;0&#x60;: Authentication data not collected, and customer authentication was not completed. - &#x60;1&#x60;: Authentication data not collected because customer authentication was not completed. - &#x60;2&#x60;: Authentication data collected because customer completed authentication. </value>
-        [DataMember(Name="ucafCollectionIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("ucafCollectionIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UcafCollectionIndicator { get; set; }
 
         /// <summary>
         /// Result of the enrollment check. This field can contain one of these values: - &#x60;Y&#x60;: Card enrolled or can be enrolled; you must authenticate. Liability shift. - &#x60;N&#x60;: Card not enrolled; proceed with authorization. Liability shift. - &#x60;U&#x60;: Unable to authenticate regardless of the reason. No liability shift.  **Note** This field only applies to the Asia, Middle East, and Africa Gateway. If you are configured for this processor, you must send the value of this field in your authorization request.  The following value can be returned if you are using rules-based Payer Authentication: - &#x60;B&#x60;: Indicates that authentication was bypassed. 
         /// </summary>
         /// <value>Result of the enrollment check. This field can contain one of these values: - &#x60;Y&#x60;: Card enrolled or can be enrolled; you must authenticate. Liability shift. - &#x60;N&#x60;: Card not enrolled; proceed with authorization. Liability shift. - &#x60;U&#x60;: Unable to authenticate regardless of the reason. No liability shift.  **Note** This field only applies to the Asia, Middle East, and Africa Gateway. If you are configured for this processor, you must send the value of this field in your authorization request.  The following value can be returned if you are using rules-based Payer Authentication: - &#x60;B&#x60;: Indicates that authentication was bypassed. </value>
-        [DataMember(Name="veresEnrolled", EmitDefaultValue=false)]
+        [JsonPropertyName("veresEnrolled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VeresEnrolled { get; set; }
 
         /// <summary>
         /// This data element will be populated by the system setting Whitelist Status. Possible Values: 01 - 3DS/ Server/ 02 – DS/03 - ACS 
         /// </summary>
         /// <value>This data element will be populated by the system setting Whitelist Status. Possible Values: 01 - 3DS/ Server/ 02 – DS/03 - ACS </value>
-        [DataMember(Name="whiteListStatusSource", EmitDefaultValue=false)]
+        [JsonPropertyName("whiteListStatusSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WhiteListStatusSource { get; set; }
 
         /// <summary>
         /// Transaction identifier generated by CyberSource for successful enrollment or validation checks. Use this value, which is in base64, to match an outgoing PAReq with an incoming PARes. CyberSource forwards the XID with the card authorization service to these payment processors in these cases: - Barclays - Streamline (when the **ecommerceIndicator**&#x60;&#x3D;spa&#x60;) 
         /// </summary>
         /// <value>Transaction identifier generated by CyberSource for successful enrollment or validation checks. Use this value, which is in base64, to match an outgoing PAReq with an incoming PARes. CyberSource forwards the XID with the card authorization service to these payment processors in these cases: - Barclays - Streamline (when the **ecommerceIndicator**&#x60;&#x3D;spa&#x60;) </value>
-        [DataMember(Name="xid", EmitDefaultValue=false)]
+        [JsonPropertyName("xid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Xid { get; set; }
 
         /// <summary>
         /// The Directory Server Transaction ID is generated by the Mastercard Directory Server during the authentication transaction and passed back to the merchant with the authentication results. For Cybersource Through Visanet Gateway: The value for this field corresponds to the following data in the TC 33 capture file3: Record: CP01 TCR7, Position: 114-149, Field: MC AVV Verification—Directory Server Transaction ID 
         /// </summary>
         /// <value>The Directory Server Transaction ID is generated by the Mastercard Directory Server during the authentication transaction and passed back to the merchant with the authentication results. For Cybersource Through Visanet Gateway: The value for this field corresponds to the following data in the TC 33 capture file3: Record: CP01 TCR7, Position: 114-149, Field: MC AVV Verification—Directory Server Transaction ID </value>
-        [DataMember(Name="directoryServerTransactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("directoryServerTransactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DirectoryServerTransactionId { get; set; }
 
         /// <summary>
         /// Directory Server assigned ACS identifier.
         /// </summary>
         /// <value>Directory Server assigned ACS identifier.</value>
-        [DataMember(Name="acsOperatorID", EmitDefaultValue=false)]
+        [JsonPropertyName("acsOperatorID")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcsOperatorID { get; set; }
 
         /// <summary>
         /// Unique identifier assigned by the EMVCo Secretariat upon Testing and Approval.
         /// </summary>
         /// <value>Unique identifier assigned by the EMVCo Secretariat upon Testing and Approval.</value>
-        [DataMember(Name="acsReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("acsReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcsReferenceNumber { get; set; }
 
         /// <summary>
         /// Decision on the Risk Assessment from Mastercard.
         /// </summary>
         /// <value>Decision on the Risk Assessment from Mastercard.</value>
-        [DataMember(Name="idciDecision", EmitDefaultValue=false)]
+        [JsonPropertyName("idciDecision")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IdciDecision { get; set; }
 
         /// <summary>
         /// ReasonCode from Mastercard
         /// </summary>
         /// <value>ReasonCode from Mastercard</value>
-        [DataMember(Name="idciReasonCode1", EmitDefaultValue=false)]
+        [JsonPropertyName("idciReasonCode1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IdciReasonCode1 { get; set; }
 
         /// <summary>
         /// ReasonCode from Mastercard
         /// </summary>
         /// <value>ReasonCode from Mastercard</value>
-        [DataMember(Name="idciReasonCode2", EmitDefaultValue=false)]
+        [JsonPropertyName("idciReasonCode2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IdciReasonCode2 { get; set; }
 
         /// <summary>
         /// Risk Assessment from Mastercard
         /// </summary>
         /// <value>Risk Assessment from Mastercard</value>
-        [DataMember(Name="idciScore", EmitDefaultValue=false)]
+        [JsonPropertyName("idciScore")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? IdciScore { get; set; }
 
         /// <summary>
@@ -458,52 +504,52 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation {\n");
-            if (AccessToken != null) sb.Append("  AccessToken: ").Append(AccessToken).Append("\n");
-            if (AcsRenderingType != null) sb.Append("  AcsRenderingType: ").Append(AcsRenderingType).Append("\n");
-            if (AcsTransactionId != null) sb.Append("  AcsTransactionId: ").Append(AcsTransactionId).Append("\n");
-            if (AcsUrl != null) sb.Append("  AcsUrl: ").Append(AcsUrl).Append("\n");
-            if (AuthenticationPath != null) sb.Append("  AuthenticationPath: ").Append(AuthenticationPath).Append("\n");
-            if (AuthorizationPayload != null) sb.Append("  AuthorizationPayload: ").Append(AuthorizationPayload).Append("\n");
-            if (AuthenticationType != null) sb.Append("  AuthenticationType: ").Append(AuthenticationType).Append("\n");
-            if (AuthenticationTransactionId != null) sb.Append("  AuthenticationTransactionId: ").Append(AuthenticationTransactionId).Append("\n");
-            if (AuthenticationTransactionContextId != null) sb.Append("  AuthenticationTransactionContextId: ").Append(AuthenticationTransactionContextId).Append("\n");
-            if (ValidityPeriod != null) sb.Append("  ValidityPeriod: ").Append(ValidityPeriod).Append("\n");
-            if (CardholderMessage != null) sb.Append("  CardholderMessage: ").Append(CardholderMessage).Append("\n");
-            if (Cavv != null) sb.Append("  Cavv: ").Append(Cavv).Append("\n");
-            if (CavvAlgorithm != null) sb.Append("  CavvAlgorithm: ").Append(CavvAlgorithm).Append("\n");
-            if (ChallengeCancelCode != null) sb.Append("  ChallengeCancelCode: ").Append(ChallengeCancelCode).Append("\n");
-            if (ChallengeRequired != null) sb.Append("  ChallengeRequired: ").Append(ChallengeRequired).Append("\n");
-            if (DecoupledAuthenticationIndicator != null) sb.Append("  DecoupledAuthenticationIndicator: ").Append(DecoupledAuthenticationIndicator).Append("\n");
-            if (DirectoryServerErrorCode != null) sb.Append("  DirectoryServerErrorCode: ").Append(DirectoryServerErrorCode).Append("\n");
-            if (DirectoryServerErrorDescription != null) sb.Append("  DirectoryServerErrorDescription: ").Append(DirectoryServerErrorDescription).Append("\n");
-            if (EcommerceIndicator != null) sb.Append("  EcommerceIndicator: ").Append(EcommerceIndicator).Append("\n");
-            if (Eci != null) sb.Append("  Eci: ").Append(Eci).Append("\n");
-            if (EciRaw != null) sb.Append("  EciRaw: ").Append(EciRaw).Append("\n");
-            if (EffectiveAuthenticationType != null) sb.Append("  EffectiveAuthenticationType: ").Append(EffectiveAuthenticationType).Append("\n");
-            if (ExemptionDataRaw != null) sb.Append("  ExemptionDataRaw: ").Append(ExemptionDataRaw).Append("\n");
-            if (Ivr != null) sb.Append("  Ivr: ").Append(Ivr).Append("\n");
-            if (NetworkScore != null) sb.Append("  NetworkScore: ").Append(NetworkScore).Append("\n");
-            if (Pareq != null) sb.Append("  Pareq: ").Append(Pareq).Append("\n");
-            if (ParesStatus != null) sb.Append("  ParesStatus: ").Append(ParesStatus).Append("\n");
-            if (ProofXml != null) sb.Append("  ProofXml: ").Append(ProofXml).Append("\n");
-            if (ProxyPan != null) sb.Append("  ProxyPan: ").Append(ProxyPan).Append("\n");
-            if (SdkTransactionId != null) sb.Append("  SdkTransactionId: ").Append(SdkTransactionId).Append("\n");
-            if (SignedParesStatusReason != null) sb.Append("  SignedParesStatusReason: ").Append(SignedParesStatusReason).Append("\n");
-            if (SpecificationVersion != null) sb.Append("  SpecificationVersion: ").Append(SpecificationVersion).Append("\n");
-            if (StepUpUrl != null) sb.Append("  StepUpUrl: ").Append(StepUpUrl).Append("\n");
-            if (ThreeDSServerTransactionId != null) sb.Append("  ThreeDSServerTransactionId: ").Append(ThreeDSServerTransactionId).Append("\n");
-            if (UcafAuthenticationData != null) sb.Append("  UcafAuthenticationData: ").Append(UcafAuthenticationData).Append("\n");
-            if (UcafCollectionIndicator != null) sb.Append("  UcafCollectionIndicator: ").Append(UcafCollectionIndicator).Append("\n");
-            if (VeresEnrolled != null) sb.Append("  VeresEnrolled: ").Append(VeresEnrolled).Append("\n");
-            if (WhiteListStatusSource != null) sb.Append("  WhiteListStatusSource: ").Append(WhiteListStatusSource).Append("\n");
-            if (Xid != null) sb.Append("  Xid: ").Append(Xid).Append("\n");
-            if (DirectoryServerTransactionId != null) sb.Append("  DirectoryServerTransactionId: ").Append(DirectoryServerTransactionId).Append("\n");
-            if (AcsOperatorID != null) sb.Append("  AcsOperatorID: ").Append(AcsOperatorID).Append("\n");
-            if (AcsReferenceNumber != null) sb.Append("  AcsReferenceNumber: ").Append(AcsReferenceNumber).Append("\n");
-            if (IdciDecision != null) sb.Append("  IdciDecision: ").Append(IdciDecision).Append("\n");
-            if (IdciReasonCode1 != null) sb.Append("  IdciReasonCode1: ").Append(IdciReasonCode1).Append("\n");
-            if (IdciReasonCode2 != null) sb.Append("  IdciReasonCode2: ").Append(IdciReasonCode2).Append("\n");
-            if (IdciScore != null) sb.Append("  IdciScore: ").Append(IdciScore).Append("\n");
+            if (AccessToken != null) sb.Append("  AccessToken: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "accessToken", AccessToken.ToString())).Append("\n");
+            if (AcsRenderingType != null) sb.Append("  AcsRenderingType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "acsRenderingType", AcsRenderingType.ToString())).Append("\n");
+            if (AcsTransactionId != null) sb.Append("  AcsTransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "acsTransactionId", AcsTransactionId.ToString())).Append("\n");
+            if (AcsUrl != null) sb.Append("  AcsUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "acsUrl", AcsUrl.ToString())).Append("\n");
+            if (AuthenticationPath != null) sb.Append("  AuthenticationPath: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "authenticationPath", AuthenticationPath.ToString())).Append("\n");
+            if (AuthorizationPayload != null) sb.Append("  AuthorizationPayload: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "authorizationPayload", AuthorizationPayload.ToString())).Append("\n");
+            if (AuthenticationType != null) sb.Append("  AuthenticationType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "authenticationType", AuthenticationType.ToString())).Append("\n");
+            if (AuthenticationTransactionId != null) sb.Append("  AuthenticationTransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "authenticationTransactionId", AuthenticationTransactionId.ToString())).Append("\n");
+            if (AuthenticationTransactionContextId != null) sb.Append("  AuthenticationTransactionContextId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "authenticationTransactionContextId", AuthenticationTransactionContextId.ToString())).Append("\n");
+            if (ValidityPeriod != null) sb.Append("  ValidityPeriod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "validityPeriod", ValidityPeriod.ToString())).Append("\n");
+            if (CardholderMessage != null) sb.Append("  CardholderMessage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "cardholderMessage", CardholderMessage.ToString())).Append("\n");
+            if (Cavv != null) sb.Append("  Cavv: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "cavv", Cavv.ToString())).Append("\n");
+            if (CavvAlgorithm != null) sb.Append("  CavvAlgorithm: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "cavvAlgorithm", CavvAlgorithm.ToString())).Append("\n");
+            if (ChallengeCancelCode != null) sb.Append("  ChallengeCancelCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "challengeCancelCode", ChallengeCancelCode.ToString())).Append("\n");
+            if (ChallengeRequired != null) sb.Append("  ChallengeRequired: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "challengeRequired", ChallengeRequired.ToString())).Append("\n");
+            if (DecoupledAuthenticationIndicator != null) sb.Append("  DecoupledAuthenticationIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "decoupledAuthenticationIndicator", DecoupledAuthenticationIndicator.ToString())).Append("\n");
+            if (DirectoryServerErrorCode != null) sb.Append("  DirectoryServerErrorCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "directoryServerErrorCode", DirectoryServerErrorCode.ToString())).Append("\n");
+            if (DirectoryServerErrorDescription != null) sb.Append("  DirectoryServerErrorDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "directoryServerErrorDescription", DirectoryServerErrorDescription.ToString())).Append("\n");
+            if (EcommerceIndicator != null) sb.Append("  EcommerceIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "ecommerceIndicator", EcommerceIndicator.ToString())).Append("\n");
+            if (Eci != null) sb.Append("  Eci: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "eci", Eci.ToString())).Append("\n");
+            if (EciRaw != null) sb.Append("  EciRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "eciRaw", EciRaw.ToString())).Append("\n");
+            if (EffectiveAuthenticationType != null) sb.Append("  EffectiveAuthenticationType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "effectiveAuthenticationType", EffectiveAuthenticationType.ToString())).Append("\n");
+            if (ExemptionDataRaw != null) sb.Append("  ExemptionDataRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "exemptionDataRaw", ExemptionDataRaw.ToString())).Append("\n");
+            if (Ivr != null) sb.Append("  Ivr: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "ivr", Ivr.ToString())).Append("\n");
+            if (NetworkScore != null) sb.Append("  NetworkScore: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "networkScore", NetworkScore.ToString())).Append("\n");
+            if (Pareq != null) sb.Append("  Pareq: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "pareq", Pareq.ToString())).Append("\n");
+            if (ParesStatus != null) sb.Append("  ParesStatus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "paresStatus", ParesStatus.ToString())).Append("\n");
+            if (ProofXml != null) sb.Append("  ProofXml: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "proofXml", ProofXml.ToString())).Append("\n");
+            if (ProxyPan != null) sb.Append("  ProxyPan: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "proxyPan", ProxyPan.ToString())).Append("\n");
+            if (SdkTransactionId != null) sb.Append("  SdkTransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "sdkTransactionId", SdkTransactionId.ToString())).Append("\n");
+            if (SignedParesStatusReason != null) sb.Append("  SignedParesStatusReason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "signedParesStatusReason", SignedParesStatusReason.ToString())).Append("\n");
+            if (SpecificationVersion != null) sb.Append("  SpecificationVersion: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "specificationVersion", SpecificationVersion.ToString())).Append("\n");
+            if (StepUpUrl != null) sb.Append("  StepUpUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "stepUpUrl", StepUpUrl.ToString())).Append("\n");
+            if (ThreeDSServerTransactionId != null) sb.Append("  ThreeDSServerTransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "threeDSServerTransactionId", ThreeDSServerTransactionId.ToString())).Append("\n");
+            if (UcafAuthenticationData != null) sb.Append("  UcafAuthenticationData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "ucafAuthenticationData", UcafAuthenticationData.ToString())).Append("\n");
+            if (UcafCollectionIndicator != null) sb.Append("  UcafCollectionIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "ucafCollectionIndicator", UcafCollectionIndicator.ToString())).Append("\n");
+            if (VeresEnrolled != null) sb.Append("  VeresEnrolled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "veresEnrolled", VeresEnrolled.ToString())).Append("\n");
+            if (WhiteListStatusSource != null) sb.Append("  WhiteListStatusSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "whiteListStatusSource", WhiteListStatusSource.ToString())).Append("\n");
+            if (Xid != null) sb.Append("  Xid: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "xid", Xid.ToString())).Append("\n");
+            if (DirectoryServerTransactionId != null) sb.Append("  DirectoryServerTransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "directoryServerTransactionId", DirectoryServerTransactionId.ToString())).Append("\n");
+            if (AcsOperatorID != null) sb.Append("  AcsOperatorID: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "acsOperatorID", AcsOperatorID.ToString())).Append("\n");
+            if (AcsReferenceNumber != null) sb.Append("  AcsReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "acsReferenceNumber", AcsReferenceNumber.ToString())).Append("\n");
+            if (IdciDecision != null) sb.Append("  IdciDecision: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "idciDecision", IdciDecision.ToString())).Append("\n");
+            if (IdciReasonCode1 != null) sb.Append("  IdciReasonCode1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "idciReasonCode1", IdciReasonCode1.ToString())).Append("\n");
+            if (IdciReasonCode2 != null) sb.Append("  IdciReasonCode2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "idciReasonCode2", IdciReasonCode2.ToString())).Append("\n");
+            if (IdciScore != null) sb.Append("  IdciScore: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", "idciScore", IdciScore.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -514,7 +560,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("RiskV1DecisionsPost201ResponseConsumerAuthenticationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

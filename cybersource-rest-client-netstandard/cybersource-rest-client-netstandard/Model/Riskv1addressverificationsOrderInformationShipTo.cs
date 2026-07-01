@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Riskv1addressverificationsOrderInformationShipTo" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Riskv1addressverificationsOrderInformationShipTo() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Riskv1addressverificationsOrderInformationShipTo" /> class.
@@ -62,56 +62,64 @@ namespace CyberSource.Model
         /// First line of the shipping address.  Required field for authorization if any shipping address information is included in the request; otherwise, optional.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. 
         /// </summary>
         /// <value>First line of the shipping address.  Required field for authorization if any shipping address information is included in the request; otherwise, optional.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. </value>
-        [DataMember(Name="address1", EmitDefaultValue=false)]
+        [JsonPropertyName("address1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address1 { get; set; }
 
         /// <summary>
         /// Second line of the shipping address.  Optional field.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. 
         /// </summary>
         /// <value>Second line of the shipping address.  Optional field.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. </value>
-        [DataMember(Name="address2", EmitDefaultValue=false)]
+        [JsonPropertyName("address2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address2 { get; set; }
 
         /// <summary>
         /// Third line of the shipping address.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. 
         /// </summary>
         /// <value>Third line of the shipping address.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. </value>
-        [DataMember(Name="address3", EmitDefaultValue=false)]
+        [JsonPropertyName("address3")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address3 { get; set; }
 
         /// <summary>
         /// Fourth line of the shipping address.
         /// </summary>
         /// <value>Fourth line of the shipping address.</value>
-        [DataMember(Name="address4", EmitDefaultValue=false)]
+        [JsonPropertyName("address4")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address4 { get; set; }
 
         /// <summary>
         /// State or province of the shipping address. Use the [State, Province, and Territory Codes for the United States and Canada](https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf) (maximum length: 2)   Required field for authorization if any shipping address information is included in the request and shipping to the U.S. or Canada; otherwise, optional.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. 
         /// </summary>
         /// <value>State or province of the shipping address. Use the [State, Province, and Territory Codes for the United States and Canada](https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf) (maximum length: 2)   Required field for authorization if any shipping address information is included in the request and shipping to the U.S. or Canada; otherwise, optional.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. </value>
-        [DataMember(Name="administrativeArea", EmitDefaultValue=false)]
+        [JsonPropertyName("administrativeArea")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdministrativeArea { get; set; }
 
         /// <summary>
         /// Country of the shipping address. Use the two-character [ISO Standard Country Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf)  Required field for authorization if any shipping address information is included in the request; otherwise, optional.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. 
         /// </summary>
         /// <value>Country of the shipping address. Use the two-character [ISO Standard Country Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf)  Required field for authorization if any shipping address information is included in the request; otherwise, optional.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. </value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// City of the shipping address.  Required field for authorization if any shipping address information is included in the request and shipping to the U.S. or Canada; otherwise, optional.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. 
         /// </summary>
         /// <value>City of the shipping address.  Required field for authorization if any shipping address information is included in the request and shipping to the U.S. or Canada; otherwise, optional.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. </value>
-        [DataMember(Name="locality", EmitDefaultValue=false)]
+        [JsonPropertyName("locality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Locality { get; set; }
 
         /// <summary>
         /// Postal code for the shipping address. The postal code must consist of 5 to 9 digits.  Required field for authorization if any shipping address information is included in the request and shipping to the U.S. or Canada; otherwise, optional.  When the billing country is the U.S., the 9-digit postal code must follow this format: [5 digits][dash][4 digits]  Example 12345-6789  When the billing country is Canada, the 6-digit postal code must follow this format: [alpha][numeric][alpha][space][numeric][alpha][numeric]  Example A1B 2C3  #### American Express Direct Before sending the postal code to the processor, all nonalphanumeric characters are removed and, if the remaining value is longer than nine characters, the value is truncated starting from the right side. #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. 
         /// </summary>
         /// <value>Postal code for the shipping address. The postal code must consist of 5 to 9 digits.  Required field for authorization if any shipping address information is included in the request and shipping to the U.S. or Canada; otherwise, optional.  When the billing country is the U.S., the 9-digit postal code must follow this format: [5 digits][dash][4 digits]  Example 12345-6789  When the billing country is Canada, the 6-digit postal code must follow this format: [alpha][numeric][alpha][space][numeric][alpha][numeric]  Example A1B 2C3  #### American Express Direct Before sending the postal code to the processor, all nonalphanumeric characters are removed and, if the remaining value is longer than nine characters, the value is truncated starting from the right side. #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. Billing address objects will be used to determine the cardholder&#39;s location when shipTo objects are not present. </value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
@@ -122,14 +130,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1addressverificationsOrderInformationShipTo {\n");
-            if (Address1 != null) sb.Append("  Address1: ").Append(Address1).Append("\n");
-            if (Address2 != null) sb.Append("  Address2: ").Append(Address2).Append("\n");
-            if (Address3 != null) sb.Append("  Address3: ").Append(Address3).Append("\n");
-            if (Address4 != null) sb.Append("  Address4: ").Append(Address4).Append("\n");
-            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(AdministrativeArea).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (Locality != null) sb.Append("  Locality: ").Append(Locality).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
+            if (Address1 != null) sb.Append("  Address1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1addressverificationsOrderInformationShipTo", "address1", Address1.ToString())).Append("\n");
+            if (Address2 != null) sb.Append("  Address2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1addressverificationsOrderInformationShipTo", "address2", Address2.ToString())).Append("\n");
+            if (Address3 != null) sb.Append("  Address3: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1addressverificationsOrderInformationShipTo", "address3", Address3.ToString())).Append("\n");
+            if (Address4 != null) sb.Append("  Address4: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1addressverificationsOrderInformationShipTo", "address4", Address4.ToString())).Append("\n");
+            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1addressverificationsOrderInformationShipTo", "administrativeArea", AdministrativeArea.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1addressverificationsOrderInformationShipTo", "country", Country.ToString())).Append("\n");
+            if (Locality != null) sb.Append("  Locality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1addressverificationsOrderInformationShipTo", "locality", Locality.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1addressverificationsOrderInformationShipTo", "postalCode", PostalCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -140,7 +148,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1addressverificationsOrderInformationShipTo", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

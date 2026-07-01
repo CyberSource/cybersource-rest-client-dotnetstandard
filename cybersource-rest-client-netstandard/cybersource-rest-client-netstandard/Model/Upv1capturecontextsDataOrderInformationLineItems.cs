@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -65,7 +65,7 @@ namespace CyberSource.Model
         /// <param name="ShippingDestinationTypes">Shipping destination types.</param>
         /// <param name="Gift">Indicates if item is a gift.</param>
         /// <param name="Passenger">Passenger.</param>
-        public Upv1capturecontextsDataOrderInformationLineItems(string ProductCode = default(string), string ProductName = default(string), string ProductSku = default(string), int? Quantity = default(int?), string UnitPrice = default(string), string UnitOfMeasure = default(string), string TotalAmount = default(string), string TaxAmount = default(string), string TaxRate = default(string), string TaxAppliedAfterDiscount = default(string), string TaxStatusIndicator = default(string), string TaxTypeCode = default(string), bool? AmountIncludesTax = default(bool?), string TypeOfSupply = default(string), string CommodityCode = default(string), string DiscountAmount = default(string), bool? DiscountApplied = default(bool?), string DiscountRate = default(string), string InvoiceNumber = default(string), Upv1capturecontextsDataOrderInformationLineItemsTaxDetails TaxDetails = default(Upv1capturecontextsDataOrderInformationLineItemsTaxDetails), string FulfillmentType = default(string), string Weight = default(string), string WeightIdentifier = default(string), string WeightUnit = default(string), string ReferenceDataCode = default(string), string ReferenceDataNumber = default(string), string UnitTaxAmount = default(string), string ProductDescription = default(string), string GiftCardCurrency = default(string), string ShippingDestinationTypes = default(string), bool? Gift = default(bool?), Upv1capturecontextsDataOrderInformationLineItemsPassenger Passenger = default(Upv1capturecontextsDataOrderInformationLineItemsPassenger))
+        public Upv1capturecontextsDataOrderInformationLineItems(string ProductCode = default(string), string ProductName = default(string), string ProductSku = default(string), int? Quantity = default(int?), string UnitPrice = default(string), string UnitOfMeasure = default(string), string TotalAmount = default(string), string TaxAmount = default(string), string TaxRate = default(string), string TaxAppliedAfterDiscount = default(string), string TaxStatusIndicator = default(string), string TaxTypeCode = default(string), bool? AmountIncludesTax = default(bool?), string TypeOfSupply = default(string), string CommodityCode = default(string), string DiscountAmount = default(string), bool? DiscountApplied = default(bool?), string DiscountRate = default(string), string InvoiceNumber = default(string), Upv1capturecontextsDataOrderInformationTaxDetails TaxDetails = default(Upv1capturecontextsDataOrderInformationTaxDetails), string FulfillmentType = default(string), string Weight = default(string), string WeightIdentifier = default(string), string WeightUnit = default(string), string ReferenceDataCode = default(string), string ReferenceDataNumber = default(string), string UnitTaxAmount = default(string), string ProductDescription = default(string), string GiftCardCurrency = default(string), string ShippingDestinationTypes = default(string), bool? Gift = default(bool?), Upv1capturecontextsDataOrderInformationPassenger Passenger = default(Upv1capturecontextsDataOrderInformationPassenger))
         {
             this.ProductCode = ProductCode;
             this.ProductName = ProductName;
@@ -105,223 +105,255 @@ namespace CyberSource.Model
         /// Code identifying the product.
         /// </summary>
         /// <value>Code identifying the product.</value>
-        [DataMember(Name="productCode", EmitDefaultValue=false)]
+        [JsonPropertyName("productCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductCode { get; set; }
 
         /// <summary>
         /// Name of the product.
         /// </summary>
         /// <value>Name of the product.</value>
-        [DataMember(Name="productName", EmitDefaultValue=false)]
+        [JsonPropertyName("productName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductName { get; set; }
 
         /// <summary>
         /// Stock Keeping Unit identifier
         /// </summary>
         /// <value>Stock Keeping Unit identifier</value>
-        [DataMember(Name="productSku", EmitDefaultValue=false)]
+        [JsonPropertyName("productSku")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductSku { get; set; }
 
         /// <summary>
         /// Quantity of the product
         /// </summary>
         /// <value>Quantity of the product</value>
-        [DataMember(Name="quantity", EmitDefaultValue=false)]
+        [JsonPropertyName("quantity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Quantity { get; set; }
 
         /// <summary>
         /// Price per unit
         /// </summary>
         /// <value>Price per unit</value>
-        [DataMember(Name="unitPrice", EmitDefaultValue=false)]
+        [JsonPropertyName("unitPrice")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UnitPrice { get; set; }
 
         /// <summary>
         /// Unit of measure (e.g. EA, KG, LB)
         /// </summary>
         /// <value>Unit of measure (e.g. EA, KG, LB)</value>
-        [DataMember(Name="unitOfMeasure", EmitDefaultValue=false)]
+        [JsonPropertyName("unitOfMeasure")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UnitOfMeasure { get; set; }
 
         /// <summary>
         /// Total amount for the line item
         /// </summary>
         /// <value>Total amount for the line item</value>
-        [DataMember(Name="totalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalAmount { get; set; }
 
         /// <summary>
         /// Tax amount applied
         /// </summary>
         /// <value>Tax amount applied</value>
-        [DataMember(Name="taxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAmount { get; set; }
 
         /// <summary>
         /// Tax rate applied
         /// </summary>
         /// <value>Tax rate applied</value>
-        [DataMember(Name="taxRate", EmitDefaultValue=false)]
+        [JsonPropertyName("taxRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxRate { get; set; }
 
         /// <summary>
         /// Indicates if tax applied after discount
         /// </summary>
         /// <value>Indicates if tax applied after discount</value>
-        [DataMember(Name="taxAppliedAfterDiscount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAppliedAfterDiscount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAppliedAfterDiscount { get; set; }
 
         /// <summary>
         /// Tax status indicator
         /// </summary>
         /// <value>Tax status indicator</value>
-        [DataMember(Name="taxStatusIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("taxStatusIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxStatusIndicator { get; set; }
 
         /// <summary>
         /// Tax type code
         /// </summary>
         /// <value>Tax type code</value>
-        [DataMember(Name="taxTypeCode", EmitDefaultValue=false)]
+        [JsonPropertyName("taxTypeCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxTypeCode { get; set; }
 
         /// <summary>
         /// Indicates if amount includes tax
         /// </summary>
         /// <value>Indicates if amount includes tax</value>
-        [DataMember(Name="amountIncludesTax", EmitDefaultValue=false)]
+        [JsonPropertyName("amountIncludesTax")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AmountIncludesTax { get; set; }
 
         /// <summary>
         /// Type of supply
         /// </summary>
         /// <value>Type of supply</value>
-        [DataMember(Name="typeOfSupply", EmitDefaultValue=false)]
+        [JsonPropertyName("typeOfSupply")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TypeOfSupply { get; set; }
 
         /// <summary>
         /// Commodity code
         /// </summary>
         /// <value>Commodity code</value>
-        [DataMember(Name="commodityCode", EmitDefaultValue=false)]
+        [JsonPropertyName("commodityCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommodityCode { get; set; }
 
         /// <summary>
         /// Discount amount applied
         /// </summary>
         /// <value>Discount amount applied</value>
-        [DataMember(Name="discountAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("discountAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscountAmount { get; set; }
 
         /// <summary>
         /// Indicates if discount applied
         /// </summary>
         /// <value>Indicates if discount applied</value>
-        [DataMember(Name="discountApplied", EmitDefaultValue=false)]
+        [JsonPropertyName("discountApplied")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DiscountApplied { get; set; }
 
         /// <summary>
         /// Discount rate applied
         /// </summary>
         /// <value>Discount rate applied</value>
-        [DataMember(Name="discountRate", EmitDefaultValue=false)]
+        [JsonPropertyName("discountRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscountRate { get; set; }
 
         /// <summary>
         /// Invoice number for the line item
         /// </summary>
         /// <value>Invoice number for the line item</value>
-        [DataMember(Name="invoiceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InvoiceNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets TaxDetails
         /// </summary>
-        [DataMember(Name="taxDetails", EmitDefaultValue=false)]
-        public Upv1capturecontextsDataOrderInformationLineItemsTaxDetails TaxDetails { get; set; }
+        [JsonPropertyName("taxDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Upv1capturecontextsDataOrderInformationTaxDetails TaxDetails { get; set; }
 
         /// <summary>
         /// Fulfillment type
         /// </summary>
         /// <value>Fulfillment type</value>
-        [DataMember(Name="fulfillmentType", EmitDefaultValue=false)]
+        [JsonPropertyName("fulfillmentType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FulfillmentType { get; set; }
 
         /// <summary>
         /// Weight of the product
         /// </summary>
         /// <value>Weight of the product</value>
-        [DataMember(Name="weight", EmitDefaultValue=false)]
+        [JsonPropertyName("weight")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Weight { get; set; }
 
         /// <summary>
         /// Weight identifier
         /// </summary>
         /// <value>Weight identifier</value>
-        [DataMember(Name="weightIdentifier", EmitDefaultValue=false)]
+        [JsonPropertyName("weightIdentifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WeightIdentifier { get; set; }
 
         /// <summary>
         /// Unit of weight of the product
         /// </summary>
         /// <value>Unit of weight of the product</value>
-        [DataMember(Name="weightUnit", EmitDefaultValue=false)]
+        [JsonPropertyName("weightUnit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WeightUnit { get; set; }
 
         /// <summary>
         /// Reference data code
         /// </summary>
         /// <value>Reference data code</value>
-        [DataMember(Name="referenceDataCode", EmitDefaultValue=false)]
+        [JsonPropertyName("referenceDataCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReferenceDataCode { get; set; }
 
         /// <summary>
         /// Reference data number
         /// </summary>
         /// <value>Reference data number</value>
-        [DataMember(Name="referenceDataNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("referenceDataNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReferenceDataNumber { get; set; }
 
         /// <summary>
         /// Unit tax amount
         /// </summary>
         /// <value>Unit tax amount</value>
-        [DataMember(Name="unitTaxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("unitTaxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UnitTaxAmount { get; set; }
 
         /// <summary>
         /// Description of the product
         /// </summary>
         /// <value>Description of the product</value>
-        [DataMember(Name="productDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("productDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductDescription { get; set; }
 
         /// <summary>
         /// Gift card currency
         /// </summary>
         /// <value>Gift card currency</value>
-        [DataMember(Name="giftCardCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("giftCardCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string GiftCardCurrency { get; set; }
 
         /// <summary>
         /// Shipping destination types
         /// </summary>
         /// <value>Shipping destination types</value>
-        [DataMember(Name="shippingDestinationTypes", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingDestinationTypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShippingDestinationTypes { get; set; }
 
         /// <summary>
         /// Indicates if item is a gift
         /// </summary>
         /// <value>Indicates if item is a gift</value>
-        [DataMember(Name="gift", EmitDefaultValue=false)]
+        [JsonPropertyName("gift")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Gift { get; set; }
 
         /// <summary>
         /// Gets or Sets Passenger
         /// </summary>
-        [DataMember(Name="passenger", EmitDefaultValue=false)]
-        public Upv1capturecontextsDataOrderInformationLineItemsPassenger Passenger { get; set; }
+        [JsonPropertyName("passenger")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Upv1capturecontextsDataOrderInformationPassenger Passenger { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -331,38 +363,38 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Upv1capturecontextsDataOrderInformationLineItems {\n");
-            if (ProductCode != null) sb.Append("  ProductCode: ").Append(ProductCode).Append("\n");
-            if (ProductName != null) sb.Append("  ProductName: ").Append(ProductName).Append("\n");
-            if (ProductSku != null) sb.Append("  ProductSku: ").Append(ProductSku).Append("\n");
-            if (Quantity != null) sb.Append("  Quantity: ").Append(Quantity).Append("\n");
-            if (UnitPrice != null) sb.Append("  UnitPrice: ").Append(UnitPrice).Append("\n");
-            if (UnitOfMeasure != null) sb.Append("  UnitOfMeasure: ").Append(UnitOfMeasure).Append("\n");
-            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(TotalAmount).Append("\n");
-            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
-            if (TaxRate != null) sb.Append("  TaxRate: ").Append(TaxRate).Append("\n");
-            if (TaxAppliedAfterDiscount != null) sb.Append("  TaxAppliedAfterDiscount: ").Append(TaxAppliedAfterDiscount).Append("\n");
-            if (TaxStatusIndicator != null) sb.Append("  TaxStatusIndicator: ").Append(TaxStatusIndicator).Append("\n");
-            if (TaxTypeCode != null) sb.Append("  TaxTypeCode: ").Append(TaxTypeCode).Append("\n");
-            if (AmountIncludesTax != null) sb.Append("  AmountIncludesTax: ").Append(AmountIncludesTax).Append("\n");
-            if (TypeOfSupply != null) sb.Append("  TypeOfSupply: ").Append(TypeOfSupply).Append("\n");
-            if (CommodityCode != null) sb.Append("  CommodityCode: ").Append(CommodityCode).Append("\n");
-            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(DiscountAmount).Append("\n");
-            if (DiscountApplied != null) sb.Append("  DiscountApplied: ").Append(DiscountApplied).Append("\n");
-            if (DiscountRate != null) sb.Append("  DiscountRate: ").Append(DiscountRate).Append("\n");
-            if (InvoiceNumber != null) sb.Append("  InvoiceNumber: ").Append(InvoiceNumber).Append("\n");
-            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(TaxDetails).Append("\n");
-            if (FulfillmentType != null) sb.Append("  FulfillmentType: ").Append(FulfillmentType).Append("\n");
-            if (Weight != null) sb.Append("  Weight: ").Append(Weight).Append("\n");
-            if (WeightIdentifier != null) sb.Append("  WeightIdentifier: ").Append(WeightIdentifier).Append("\n");
-            if (WeightUnit != null) sb.Append("  WeightUnit: ").Append(WeightUnit).Append("\n");
-            if (ReferenceDataCode != null) sb.Append("  ReferenceDataCode: ").Append(ReferenceDataCode).Append("\n");
-            if (ReferenceDataNumber != null) sb.Append("  ReferenceDataNumber: ").Append(ReferenceDataNumber).Append("\n");
-            if (UnitTaxAmount != null) sb.Append("  UnitTaxAmount: ").Append(UnitTaxAmount).Append("\n");
-            if (ProductDescription != null) sb.Append("  ProductDescription: ").Append(ProductDescription).Append("\n");
-            if (GiftCardCurrency != null) sb.Append("  GiftCardCurrency: ").Append(GiftCardCurrency).Append("\n");
-            if (ShippingDestinationTypes != null) sb.Append("  ShippingDestinationTypes: ").Append(ShippingDestinationTypes).Append("\n");
-            if (Gift != null) sb.Append("  Gift: ").Append(Gift).Append("\n");
-            if (Passenger != null) sb.Append("  Passenger: ").Append(Passenger).Append("\n");
+            if (ProductCode != null) sb.Append("  ProductCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "productCode", ProductCode.ToString())).Append("\n");
+            if (ProductName != null) sb.Append("  ProductName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "productName", ProductName.ToString())).Append("\n");
+            if (ProductSku != null) sb.Append("  ProductSku: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "productSku", ProductSku.ToString())).Append("\n");
+            if (Quantity != null) sb.Append("  Quantity: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "quantity", Quantity.ToString())).Append("\n");
+            if (UnitPrice != null) sb.Append("  UnitPrice: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "unitPrice", UnitPrice.ToString())).Append("\n");
+            if (UnitOfMeasure != null) sb.Append("  UnitOfMeasure: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "unitOfMeasure", UnitOfMeasure.ToString())).Append("\n");
+            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "totalAmount", TotalAmount.ToString())).Append("\n");
+            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "taxAmount", TaxAmount.ToString())).Append("\n");
+            if (TaxRate != null) sb.Append("  TaxRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "taxRate", TaxRate.ToString())).Append("\n");
+            if (TaxAppliedAfterDiscount != null) sb.Append("  TaxAppliedAfterDiscount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "taxAppliedAfterDiscount", TaxAppliedAfterDiscount.ToString())).Append("\n");
+            if (TaxStatusIndicator != null) sb.Append("  TaxStatusIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "taxStatusIndicator", TaxStatusIndicator.ToString())).Append("\n");
+            if (TaxTypeCode != null) sb.Append("  TaxTypeCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "taxTypeCode", TaxTypeCode.ToString())).Append("\n");
+            if (AmountIncludesTax != null) sb.Append("  AmountIncludesTax: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "amountIncludesTax", AmountIncludesTax.ToString())).Append("\n");
+            if (TypeOfSupply != null) sb.Append("  TypeOfSupply: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "typeOfSupply", TypeOfSupply.ToString())).Append("\n");
+            if (CommodityCode != null) sb.Append("  CommodityCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "commodityCode", CommodityCode.ToString())).Append("\n");
+            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "discountAmount", DiscountAmount.ToString())).Append("\n");
+            if (DiscountApplied != null) sb.Append("  DiscountApplied: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "discountApplied", DiscountApplied.ToString())).Append("\n");
+            if (DiscountRate != null) sb.Append("  DiscountRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "discountRate", DiscountRate.ToString())).Append("\n");
+            if (InvoiceNumber != null) sb.Append("  InvoiceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "invoiceNumber", InvoiceNumber.ToString())).Append("\n");
+            if (TaxDetails != null) sb.Append("  TaxDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "taxDetails", TaxDetails.ToString())).Append("\n");
+            if (FulfillmentType != null) sb.Append("  FulfillmentType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "fulfillmentType", FulfillmentType.ToString())).Append("\n");
+            if (Weight != null) sb.Append("  Weight: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "weight", Weight.ToString())).Append("\n");
+            if (WeightIdentifier != null) sb.Append("  WeightIdentifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "weightIdentifier", WeightIdentifier.ToString())).Append("\n");
+            if (WeightUnit != null) sb.Append("  WeightUnit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "weightUnit", WeightUnit.ToString())).Append("\n");
+            if (ReferenceDataCode != null) sb.Append("  ReferenceDataCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "referenceDataCode", ReferenceDataCode.ToString())).Append("\n");
+            if (ReferenceDataNumber != null) sb.Append("  ReferenceDataNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "referenceDataNumber", ReferenceDataNumber.ToString())).Append("\n");
+            if (UnitTaxAmount != null) sb.Append("  UnitTaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "unitTaxAmount", UnitTaxAmount.ToString())).Append("\n");
+            if (ProductDescription != null) sb.Append("  ProductDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "productDescription", ProductDescription.ToString())).Append("\n");
+            if (GiftCardCurrency != null) sb.Append("  GiftCardCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "giftCardCurrency", GiftCardCurrency.ToString())).Append("\n");
+            if (ShippingDestinationTypes != null) sb.Append("  ShippingDestinationTypes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "shippingDestinationTypes", ShippingDestinationTypes.ToString())).Append("\n");
+            if (Gift != null) sb.Append("  Gift: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "gift", Gift.ToString())).Append("\n");
+            if (Passenger != null) sb.Append("  Passenger: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsDataOrderInformationLineItems", "passenger", Passenger.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -373,7 +405,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Upv1capturecontextsDataOrderInformationLineItems", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

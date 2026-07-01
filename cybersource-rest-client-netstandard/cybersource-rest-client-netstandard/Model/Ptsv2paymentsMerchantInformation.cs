@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -76,124 +76,142 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets MerchantDescriptor
         /// </summary>
-        [DataMember(Name="merchantDescriptor", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDescriptor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsMerchantInformationMerchantDescriptor MerchantDescriptor { get; set; }
 
         /// <summary>
         /// This field will contain either the merchant url or the reverse domain as per the requirement for DSRP Format 3. This might vary transaction to transaction and might not be static. Merchant needs to have access to send this value for all DSRP program. 
         /// </summary>
         /// <value>This field will contain either the merchant url or the reverse domain as per the requirement for DSRP Format 3. This might vary transaction to transaction and might not be static. Merchant needs to have access to send this value for all DSRP program. </value>
-        [DataMember(Name="domainName", EmitDefaultValue=false)]
+        [JsonPropertyName("domainName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DomainName { get; set; }
 
         /// <summary>
         /// Company ID assigned to an independent sales organization. Get this value from Mastercard.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 106-116 - Field: Independent Sales Organization ID  This field is supported for Visa, Mastercard and Discover Transactions.  **Note** The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies. 
         /// </summary>
         /// <value>Company ID assigned to an independent sales organization. Get this value from Mastercard.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 106-116 - Field: Independent Sales Organization ID  This field is supported for Visa, Mastercard and Discover Transactions.  **Note** The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies. </value>
-        [DataMember(Name="salesOrganizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("salesOrganizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SalesOrganizationId { get; set; }
 
         /// <summary>
         /// The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. When you do not include this field in your request, CyberSource uses the value in your CyberSource account.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR4 - Position: 150-153 - Field: Merchant Category Code 
         /// </summary>
         /// <value>The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. When you do not include this field in your request, CyberSource uses the value in your CyberSource account.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR4 - Position: 150-153 - Field: Merchant Category Code </value>
-        [DataMember(Name="categoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("categoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? CategoryCode { get; set; }
 
         /// <summary>
         /// Merchant category code for domestic transactions. The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. Including this field in a request for a domestic transaction might reduce interchange fees.  When you include this field in a request: - Do not include the &#x60;merchant_category_code&#x60; field. - The value for this field overrides the value in your CyberSource account.  This field is supported only for: - Domestic transactions with Mastercard in Spain. Domestic means that you and the cardholder are in the same country. - Merchants enrolled in the OmniPay Direct interchange program. - First Data Merchant Solutions (Europe) on OmniPay Direct. 
         /// </summary>
         /// <value>Merchant category code for domestic transactions. The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. Including this field in a request for a domestic transaction might reduce interchange fees.  When you include this field in a request: - Do not include the &#x60;merchant_category_code&#x60; field. - The value for this field overrides the value in your CyberSource account.  This field is supported only for: - Domestic transactions with Mastercard in Spain. Domestic means that you and the cardholder are in the same country. - Merchants enrolled in the OmniPay Direct interchange program. - First Data Merchant Solutions (Europe) on OmniPay Direct. </value>
-        [DataMember(Name="categoryCodeDomestic", EmitDefaultValue=false)]
+        [JsonPropertyName("categoryCodeDomestic")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? CategoryCodeDomestic { get; set; }
 
         /// <summary>
         /// Your Cadastro Nacional da Pessoa Jurídica (CNPJ) number.  This field is supported only for BNDES transactions on CyberSource through VisaNet.  The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP07 TCR6 - Position: 40-59 - Field: BNDES Reference Field 1 
         /// </summary>
         /// <value>Your Cadastro Nacional da Pessoa Jurídica (CNPJ) number.  This field is supported only for BNDES transactions on CyberSource through VisaNet.  The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP07 TCR6 - Position: 40-59 - Field: BNDES Reference Field 1 </value>
-        [DataMember(Name="taxId", EmitDefaultValue=false)]
+        [JsonPropertyName("taxId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxId { get; set; }
 
         /// <summary>
         /// Your government-assigned tax identification number.  #### Tax Calculation Required field for value added tax only. Not applicable to U.S. and Canadian taxes.  #### CyberSource through VisaNet For CtV processors, the maximum length is 20. 
         /// </summary>
         /// <value>Your government-assigned tax identification number.  #### Tax Calculation Required field for value added tax only. Not applicable to U.S. and Canadian taxes.  #### CyberSource through VisaNet For CtV processors, the maximum length is 20. </value>
-        [DataMember(Name="vatRegistrationNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("vatRegistrationNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VatRegistrationNumber { get; set; }
 
         /// <summary>
         /// Reference number that facilitates card acceptor/corporation communication and record keeping. 
         /// </summary>
         /// <value>Reference number that facilitates card acceptor/corporation communication and record keeping. </value>
-        [DataMember(Name="cardAcceptorReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("cardAcceptorReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardAcceptorReferenceNumber { get; set; }
 
         /// <summary>
         /// Date and time at your physical location.  Format: &#x60;YYYYMMDDhhmmss&#x60;, where:  - &#x60;YYYY&#x60; &#x3D; year  - &#x60;MM&#x60; &#x3D; month  - &#x60;DD&#x60; &#x3D; day  - &#x60;hh&#x60; &#x3D; hour  - &#x60;mm&#x60; &#x3D; minutes  - &#x60;ss&#x60; &#x3D; seconds  #### Used by **Authorization** Required for these processors: - American Express Direct                                                                                                                                                                                                                                                                                                                         - American Express Direct - Credit Mutuel-CIC - FDC Nashville Global - SIX  Optional for all other processors. 
         /// </summary>
         /// <value>Date and time at your physical location.  Format: &#x60;YYYYMMDDhhmmss&#x60;, where:  - &#x60;YYYY&#x60; &#x3D; year  - &#x60;MM&#x60; &#x3D; month  - &#x60;DD&#x60; &#x3D; day  - &#x60;hh&#x60; &#x3D; hour  - &#x60;mm&#x60; &#x3D; minutes  - &#x60;ss&#x60; &#x3D; seconds  #### Used by **Authorization** Required for these processors: - American Express Direct                                                                                                                                                                                                                                                                                                                         - American Express Direct - Credit Mutuel-CIC - FDC Nashville Global - SIX  Optional for all other processors. </value>
-        [DataMember(Name="transactionLocalDateTime", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionLocalDateTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionLocalDateTime { get; set; }
 
         /// <summary>
         /// Gets or Sets ServiceFeeDescriptor
         /// </summary>
-        [DataMember(Name="serviceFeeDescriptor", EmitDefaultValue=false)]
+        [JsonPropertyName("serviceFeeDescriptor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsMerchantInformationServiceFeeDescriptor ServiceFeeDescriptor { get; set; }
 
         /// <summary>
         /// customer would be redirected to this url based on the decision of the transaction
         /// </summary>
         /// <value>customer would be redirected to this url based on the decision of the transaction</value>
-        [DataMember(Name="cancelUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("cancelUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CancelUrl { get; set; }
 
         /// <summary>
         /// customer would be redirected to this url based on the decision of the transaction
         /// </summary>
         /// <value>customer would be redirected to this url based on the decision of the transaction</value>
-        [DataMember(Name="successUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("successUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SuccessUrl { get; set; }
 
         /// <summary>
         /// customer would be redirected to this url based on the decision of the transaction
         /// </summary>
         /// <value>customer would be redirected to this url based on the decision of the transaction</value>
-        [DataMember(Name="failureUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("failureUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FailureUrl { get; set; }
 
         /// <summary>
         /// URL for displaying payment results to the consumer (notifications) after the transaction is processed. Usually this URL belongs to merchant and its behavior is defined by merchant 
         /// </summary>
         /// <value>URL for displaying payment results to the consumer (notifications) after the transaction is processed. Usually this URL belongs to merchant and its behavior is defined by merchant </value>
-        [DataMember(Name="returnUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("returnUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReturnUrl { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect This field may be used for transactions on accounts issued under co-branding agreements when one of the co-branding partners. 
         /// </summary>
         /// <value>#### Visa Platform Connect This field may be used for transactions on accounts issued under co-branding agreements when one of the co-branding partners. </value>
-        [DataMember(Name="partnerIdCode", EmitDefaultValue=false)]
+        [JsonPropertyName("partnerIdCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PartnerIdCode { get; set; }
 
         /// <summary>
         /// Gets or Sets ServiceLocation
         /// </summary>
-        [DataMember(Name="serviceLocation", EmitDefaultValue=false)]
+        [JsonPropertyName("serviceLocation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsMerchantInformationServiceLocation ServiceLocation { get; set; }
 
         /// <summary>
         /// Free-form text field. 
         /// </summary>
         /// <value>Free-form text field. </value>
-        [DataMember(Name="noteToBuyer", EmitDefaultValue=false)]
+        [JsonPropertyName("noteToBuyer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NoteToBuyer { get; set; }
 
         /// <summary>
         /// Use this field only if you are requesting payment with Payer Authentication serice together.  Your company&#39;s name as you want it to appear to the customer in the issuing bank&#39;s authentication form. This value overrides the value specified by your merchant bank. 
         /// </summary>
         /// <value>Use this field only if you are requesting payment with Payer Authentication serice together.  Your company&#39;s name as you want it to appear to the customer in the issuing bank&#39;s authentication form. This value overrides the value specified by your merchant bank. </value>
-        [DataMember(Name="merchantName", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantName { get; set; }
 
         /// <summary>
@@ -204,24 +222,24 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsMerchantInformation {\n");
-            if (MerchantDescriptor != null) sb.Append("  MerchantDescriptor: ").Append(MerchantDescriptor).Append("\n");
-            if (DomainName != null) sb.Append("  DomainName: ").Append(DomainName).Append("\n");
-            if (SalesOrganizationId != null) sb.Append("  SalesOrganizationId: ").Append(SalesOrganizationId).Append("\n");
-            if (CategoryCode != null) sb.Append("  CategoryCode: ").Append(CategoryCode).Append("\n");
-            if (CategoryCodeDomestic != null) sb.Append("  CategoryCodeDomestic: ").Append(CategoryCodeDomestic).Append("\n");
-            if (TaxId != null) sb.Append("  TaxId: ").Append(TaxId).Append("\n");
-            if (VatRegistrationNumber != null) sb.Append("  VatRegistrationNumber: ").Append(VatRegistrationNumber).Append("\n");
-            if (CardAcceptorReferenceNumber != null) sb.Append("  CardAcceptorReferenceNumber: ").Append(CardAcceptorReferenceNumber).Append("\n");
-            if (TransactionLocalDateTime != null) sb.Append("  TransactionLocalDateTime: ").Append(TransactionLocalDateTime).Append("\n");
-            if (ServiceFeeDescriptor != null) sb.Append("  ServiceFeeDescriptor: ").Append(ServiceFeeDescriptor).Append("\n");
-            if (CancelUrl != null) sb.Append("  CancelUrl: ").Append(CancelUrl).Append("\n");
-            if (SuccessUrl != null) sb.Append("  SuccessUrl: ").Append(SuccessUrl).Append("\n");
-            if (FailureUrl != null) sb.Append("  FailureUrl: ").Append(FailureUrl).Append("\n");
-            if (ReturnUrl != null) sb.Append("  ReturnUrl: ").Append(ReturnUrl).Append("\n");
-            if (PartnerIdCode != null) sb.Append("  PartnerIdCode: ").Append(PartnerIdCode).Append("\n");
-            if (ServiceLocation != null) sb.Append("  ServiceLocation: ").Append(ServiceLocation).Append("\n");
-            if (NoteToBuyer != null) sb.Append("  NoteToBuyer: ").Append(NoteToBuyer).Append("\n");
-            if (MerchantName != null) sb.Append("  MerchantName: ").Append(MerchantName).Append("\n");
+            if (MerchantDescriptor != null) sb.Append("  MerchantDescriptor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "merchantDescriptor", MerchantDescriptor.ToString())).Append("\n");
+            if (DomainName != null) sb.Append("  DomainName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "domainName", DomainName.ToString())).Append("\n");
+            if (SalesOrganizationId != null) sb.Append("  SalesOrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "salesOrganizationId", SalesOrganizationId.ToString())).Append("\n");
+            if (CategoryCode != null) sb.Append("  CategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "categoryCode", CategoryCode.ToString())).Append("\n");
+            if (CategoryCodeDomestic != null) sb.Append("  CategoryCodeDomestic: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "categoryCodeDomestic", CategoryCodeDomestic.ToString())).Append("\n");
+            if (TaxId != null) sb.Append("  TaxId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "taxId", TaxId.ToString())).Append("\n");
+            if (VatRegistrationNumber != null) sb.Append("  VatRegistrationNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "vatRegistrationNumber", VatRegistrationNumber.ToString())).Append("\n");
+            if (CardAcceptorReferenceNumber != null) sb.Append("  CardAcceptorReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "cardAcceptorReferenceNumber", CardAcceptorReferenceNumber.ToString())).Append("\n");
+            if (TransactionLocalDateTime != null) sb.Append("  TransactionLocalDateTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "transactionLocalDateTime", TransactionLocalDateTime.ToString())).Append("\n");
+            if (ServiceFeeDescriptor != null) sb.Append("  ServiceFeeDescriptor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "serviceFeeDescriptor", ServiceFeeDescriptor.ToString())).Append("\n");
+            if (CancelUrl != null) sb.Append("  CancelUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "cancelUrl", CancelUrl.ToString())).Append("\n");
+            if (SuccessUrl != null) sb.Append("  SuccessUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "successUrl", SuccessUrl.ToString())).Append("\n");
+            if (FailureUrl != null) sb.Append("  FailureUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "failureUrl", FailureUrl.ToString())).Append("\n");
+            if (ReturnUrl != null) sb.Append("  ReturnUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "returnUrl", ReturnUrl.ToString())).Append("\n");
+            if (PartnerIdCode != null) sb.Append("  PartnerIdCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "partnerIdCode", PartnerIdCode.ToString())).Append("\n");
+            if (ServiceLocation != null) sb.Append("  ServiceLocation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "serviceLocation", ServiceLocation.ToString())).Append("\n");
+            if (NoteToBuyer != null) sb.Append("  NoteToBuyer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "noteToBuyer", NoteToBuyer.ToString())).Append("\n");
+            if (MerchantName != null) sb.Append("  MerchantName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformation", "merchantName", MerchantName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -232,7 +250,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsMerchantInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -77,125 +77,143 @@ namespace CyberSource.Model
         /// Whether the customer&#39;s browser accepts cookies. This field can contain one of the following values: - &#x60;yes&#x60;: The customer&#39;s browser accepts cookies. - &#x60;no&#x60;: The customer&#39;s browser does not accept cookies. 
         /// </summary>
         /// <value>Whether the customer&#39;s browser accepts cookies. This field can contain one of the following values: - &#x60;yes&#x60;: The customer&#39;s browser accepts cookies. - &#x60;no&#x60;: The customer&#39;s browser does not accept cookies. </value>
-        [DataMember(Name="cookiesAccepted", EmitDefaultValue=false)]
+        [JsonPropertyName("cookiesAccepted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CookiesAccepted { get; set; }
 
         /// <summary>
         /// IP address of the customer.  #### Used by **Authorization, Capture, and Credit** Optional field. 
         /// </summary>
         /// <value>IP address of the customer.  #### Used by **Authorization, Capture, and Credit** Optional field. </value>
-        [DataMember(Name="ipAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("ipAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IpAddress { get; set; }
 
         /// <summary>
         /// DNS resolved hostname from &#x60;ipAddress&#x60;.
         /// </summary>
         /// <value>DNS resolved hostname from &#x60;ipAddress&#x60;.</value>
-        [DataMember(Name="hostName", EmitDefaultValue=false)]
+        [JsonPropertyName("hostName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HostName { get; set; }
 
         /// <summary>
         /// Field that contains the session ID that you send to Decision Manager to obtain the device fingerprint information. The string can contain uppercase and lowercase letters, digits, hyphen (-), and underscore (_). However, do not use the same uppercase and lowercase letters to indicate different session IDs.  The session ID must be unique for each merchant ID. You can use any string that you are already generating, such as an order number or web session ID.  The session ID must be unique for each page load, regardless of an individual&#39;s web session ID. If a user navigates to a profiled page and is assigned a web session, navigates away from the profiled page, then navigates back to the profiled page, the generated session ID should be different and unique. You may use a web session ID, but it is preferable to use an application GUID (Globally Unique Identifier). This measure ensures that a unique ID is generated every time the page is loaded, even if it is the same user reloading the page. 
         /// </summary>
         /// <value>Field that contains the session ID that you send to Decision Manager to obtain the device fingerprint information. The string can contain uppercase and lowercase letters, digits, hyphen (-), and underscore (_). However, do not use the same uppercase and lowercase letters to indicate different session IDs.  The session ID must be unique for each merchant ID. You can use any string that you are already generating, such as an order number or web session ID.  The session ID must be unique for each page load, regardless of an individual&#39;s web session ID. If a user navigates to a profiled page and is assigned a web session, navigates away from the profiled page, then navigates back to the profiled page, the generated session ID should be different and unique. You may use a web session ID, but it is preferable to use an application GUID (Globally Unique Identifier). This measure ensures that a unique ID is generated every time the page is loaded, even if it is the same user reloading the page. </value>
-        [DataMember(Name="fingerprintSessionId", EmitDefaultValue=false)]
+        [JsonPropertyName("fingerprintSessionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FingerprintSessionId { get; set; }
 
         /// <summary>
         /// Boolean that indicates whether request contains the device fingerprint information. Values: - &#x60;true&#x60;: Use raw fingerprintSessionId when looking up device details. - &#x60;false&#x60; (default): Use merchant id + fingerprintSessionId as the session id for Device detail collection. 
         /// </summary>
         /// <value>Boolean that indicates whether request contains the device fingerprint information. Values: - &#x60;true&#x60;: Use raw fingerprintSessionId when looking up device details. - &#x60;false&#x60; (default): Use merchant id + fingerprintSessionId as the session id for Device detail collection. </value>
-        [DataMember(Name="useRawFingerprintSessionId", EmitDefaultValue=false)]
+        [JsonPropertyName("useRawFingerprintSessionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? UseRawFingerprintSessionId { get; set; }
 
         /// <summary>
         /// Email address set in the customer&#39;s browser, which may differ from customer email. 
         /// </summary>
         /// <value>Email address set in the customer&#39;s browser, which may differ from customer email. </value>
-        [DataMember(Name="httpBrowserEmail", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserEmail")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpBrowserEmail { get; set; }
 
         /// <summary>
         /// Customer&#39;s browser as identified from the HTTP header data. For example, &#x60;Mozilla&#x60; is the value that identifies the Netscape browser. 
         /// </summary>
         /// <value>Customer&#39;s browser as identified from the HTTP header data. For example, &#x60;Mozilla&#x60; is the value that identifies the Netscape browser. </value>
-        [DataMember(Name="userAgent", EmitDefaultValue=false)]
+        [JsonPropertyName("userAgent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UserAgent { get; set; }
 
         /// <summary>
         /// Gets or Sets RawData
         /// </summary>
-        [DataMember(Name="rawData", EmitDefaultValue=false)]
+        [JsonPropertyName("rawData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsDeviceInformationRawData> RawData { get; set; }
 
         /// <summary>
         /// Value of the Accept header sent by the customer&#39;s web browser. **Note** If the customer&#39;s browser provides a value, you must include it in your request. 
         /// </summary>
         /// <value>Value of the Accept header sent by the customer&#39;s web browser. **Note** If the customer&#39;s browser provides a value, you must include it in your request. </value>
-        [DataMember(Name="httpAcceptBrowserValue", EmitDefaultValue=false)]
+        [JsonPropertyName("httpAcceptBrowserValue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpAcceptBrowserValue { get; set; }
 
         /// <summary>
         /// The exact content of the HTTP accept header. 
         /// </summary>
         /// <value>The exact content of the HTTP accept header. </value>
-        [DataMember(Name="httpAcceptContent", EmitDefaultValue=false)]
+        [JsonPropertyName("httpAcceptContent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpAcceptContent { get; set; }
 
         /// <summary>
         /// Value represents the browser language as defined in IETF BCP47. Example:en-US, refer  https://en.wikipedia.org/wiki/IETF_language_tag for more details. 
         /// </summary>
         /// <value>Value represents the browser language as defined in IETF BCP47. Example:en-US, refer  https://en.wikipedia.org/wiki/IETF_language_tag for more details. </value>
-        [DataMember(Name="httpBrowserLanguage", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserLanguage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpBrowserLanguage { get; set; }
 
         /// <summary>
         /// A Boolean value that represents the ability of the cardholder browser to execute Java. Value is returned from the navigator.javaEnabled property. Possible Values:True/False 
         /// </summary>
         /// <value>A Boolean value that represents the ability of the cardholder browser to execute Java. Value is returned from the navigator.javaEnabled property. Possible Values:True/False </value>
-        [DataMember(Name="httpBrowserJavaEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserJavaEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? HttpBrowserJavaEnabled { get; set; }
 
         /// <summary>
         /// A Boolean value that represents the ability of the cardholder browser to execute JavaScript. Possible Values:True/False. **Note**: Merchants should be able to know the values from fingerprint details of cardholder&#39;s browser. 
         /// </summary>
         /// <value>A Boolean value that represents the ability of the cardholder browser to execute JavaScript. Possible Values:True/False. **Note**: Merchants should be able to know the values from fingerprint details of cardholder&#39;s browser. </value>
-        [DataMember(Name="httpBrowserJavaScriptEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserJavaScriptEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? HttpBrowserJavaScriptEnabled { get; set; }
 
         /// <summary>
         /// Value represents the bit depth of the color palette for displaying images, in bits per pixel. Example : 24, refer https://en.wikipedia.org/wiki/Color_depth for more details 
         /// </summary>
         /// <value>Value represents the bit depth of the color palette for displaying images, in bits per pixel. Example : 24, refer https://en.wikipedia.org/wiki/Color_depth for more details </value>
-        [DataMember(Name="httpBrowserColorDepth", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserColorDepth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpBrowserColorDepth { get; set; }
 
         /// <summary>
         /// Total height of the Cardholder&#39;s scree in pixels, example: 864. 
         /// </summary>
         /// <value>Total height of the Cardholder&#39;s scree in pixels, example: 864. </value>
-        [DataMember(Name="httpBrowserScreenHeight", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserScreenHeight")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpBrowserScreenHeight { get; set; }
 
         /// <summary>
         /// Total width of the cardholder&#39;s screen in pixels. Example: 1536. 
         /// </summary>
         /// <value>Total width of the cardholder&#39;s screen in pixels. Example: 1536. </value>
-        [DataMember(Name="httpBrowserScreenWidth", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserScreenWidth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpBrowserScreenWidth { get; set; }
 
         /// <summary>
         /// Time difference between UTC time and the cardholder browser local time, in minutes, Example:300 
         /// </summary>
         /// <value>Time difference between UTC time and the cardholder browser local time, in minutes, Example:300 </value>
-        [DataMember(Name="httpBrowserTimeDifference", EmitDefaultValue=false)]
+        [JsonPropertyName("httpBrowserTimeDifference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HttpBrowserTimeDifference { get; set; }
 
         /// <summary>
         /// Value of the User-Agent header sent by the customer&#39;s web browser. Note If the customer&#39;s browser provides a value, you must include it in your request. 
         /// </summary>
         /// <value>Value of the User-Agent header sent by the customer&#39;s web browser. Note If the customer&#39;s browser provides a value, you must include it in your request. </value>
-        [DataMember(Name="userAgentBrowserValue", EmitDefaultValue=false)]
+        [JsonPropertyName("userAgentBrowserValue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UserAgentBrowserValue { get; set; }
 
         /// <summary>
@@ -206,24 +224,24 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1decisionsDeviceInformation {\n");
-            if (CookiesAccepted != null) sb.Append("  CookiesAccepted: ").Append(CookiesAccepted).Append("\n");
-            if (IpAddress != null) sb.Append("  IpAddress: ").Append(IpAddress).Append("\n");
-            if (HostName != null) sb.Append("  HostName: ").Append(HostName).Append("\n");
-            if (FingerprintSessionId != null) sb.Append("  FingerprintSessionId: ").Append(FingerprintSessionId).Append("\n");
-            if (UseRawFingerprintSessionId != null) sb.Append("  UseRawFingerprintSessionId: ").Append(UseRawFingerprintSessionId).Append("\n");
-            if (HttpBrowserEmail != null) sb.Append("  HttpBrowserEmail: ").Append(HttpBrowserEmail).Append("\n");
-            if (UserAgent != null) sb.Append("  UserAgent: ").Append(UserAgent).Append("\n");
-            if (RawData != null) sb.Append("  RawData: ").Append(RawData).Append("\n");
-            if (HttpAcceptBrowserValue != null) sb.Append("  HttpAcceptBrowserValue: ").Append(HttpAcceptBrowserValue).Append("\n");
-            if (HttpAcceptContent != null) sb.Append("  HttpAcceptContent: ").Append(HttpAcceptContent).Append("\n");
-            if (HttpBrowserLanguage != null) sb.Append("  HttpBrowserLanguage: ").Append(HttpBrowserLanguage).Append("\n");
-            if (HttpBrowserJavaEnabled != null) sb.Append("  HttpBrowserJavaEnabled: ").Append(HttpBrowserJavaEnabled).Append("\n");
-            if (HttpBrowserJavaScriptEnabled != null) sb.Append("  HttpBrowserJavaScriptEnabled: ").Append(HttpBrowserJavaScriptEnabled).Append("\n");
-            if (HttpBrowserColorDepth != null) sb.Append("  HttpBrowserColorDepth: ").Append(HttpBrowserColorDepth).Append("\n");
-            if (HttpBrowserScreenHeight != null) sb.Append("  HttpBrowserScreenHeight: ").Append(HttpBrowserScreenHeight).Append("\n");
-            if (HttpBrowserScreenWidth != null) sb.Append("  HttpBrowserScreenWidth: ").Append(HttpBrowserScreenWidth).Append("\n");
-            if (HttpBrowserTimeDifference != null) sb.Append("  HttpBrowserTimeDifference: ").Append(HttpBrowserTimeDifference).Append("\n");
-            if (UserAgentBrowserValue != null) sb.Append("  UserAgentBrowserValue: ").Append(UserAgentBrowserValue).Append("\n");
+            if (CookiesAccepted != null) sb.Append("  CookiesAccepted: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "cookiesAccepted", CookiesAccepted.ToString())).Append("\n");
+            if (IpAddress != null) sb.Append("  IpAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "ipAddress", IpAddress.ToString())).Append("\n");
+            if (HostName != null) sb.Append("  HostName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "hostName", HostName.ToString())).Append("\n");
+            if (FingerprintSessionId != null) sb.Append("  FingerprintSessionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "fingerprintSessionId", FingerprintSessionId.ToString())).Append("\n");
+            if (UseRawFingerprintSessionId != null) sb.Append("  UseRawFingerprintSessionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "useRawFingerprintSessionId", UseRawFingerprintSessionId.ToString())).Append("\n");
+            if (HttpBrowserEmail != null) sb.Append("  HttpBrowserEmail: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "httpBrowserEmail", HttpBrowserEmail.ToString())).Append("\n");
+            if (UserAgent != null) sb.Append("  UserAgent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "userAgent", UserAgent.ToString())).Append("\n");
+            if (RawData != null) sb.Append("  RawData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "rawData", RawData.ToString())).Append("\n");
+            if (HttpAcceptBrowserValue != null) sb.Append("  HttpAcceptBrowserValue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "httpAcceptBrowserValue", HttpAcceptBrowserValue.ToString())).Append("\n");
+            if (HttpAcceptContent != null) sb.Append("  HttpAcceptContent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "httpAcceptContent", HttpAcceptContent.ToString())).Append("\n");
+            if (HttpBrowserLanguage != null) sb.Append("  HttpBrowserLanguage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "httpBrowserLanguage", HttpBrowserLanguage.ToString())).Append("\n");
+            if (HttpBrowserJavaEnabled != null) sb.Append("  HttpBrowserJavaEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "httpBrowserJavaEnabled", HttpBrowserJavaEnabled.ToString())).Append("\n");
+            if (HttpBrowserJavaScriptEnabled != null) sb.Append("  HttpBrowserJavaScriptEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "httpBrowserJavaScriptEnabled", HttpBrowserJavaScriptEnabled.ToString())).Append("\n");
+            if (HttpBrowserColorDepth != null) sb.Append("  HttpBrowserColorDepth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "httpBrowserColorDepth", HttpBrowserColorDepth.ToString())).Append("\n");
+            if (HttpBrowserScreenHeight != null) sb.Append("  HttpBrowserScreenHeight: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "httpBrowserScreenHeight", HttpBrowserScreenHeight.ToString())).Append("\n");
+            if (HttpBrowserScreenWidth != null) sb.Append("  HttpBrowserScreenWidth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "httpBrowserScreenWidth", HttpBrowserScreenWidth.ToString())).Append("\n");
+            if (HttpBrowserTimeDifference != null) sb.Append("  HttpBrowserTimeDifference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "httpBrowserTimeDifference", HttpBrowserTimeDifference.ToString())).Append("\n");
+            if (UserAgentBrowserValue != null) sb.Append("  UserAgentBrowserValue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsDeviceInformation", "userAgentBrowserValue", UserAgentBrowserValue.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -234,7 +252,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1decisionsDeviceInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,14 +33,14 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="MppCredentialsRequest" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected MppCredentialsRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="MppCredentialsRequest" /> class.
         /// </summary>
         /// <param name="InstrumentId">TMS instrument identifier referencing the stored card. (required).</param>
         /// <param name="Challenge">Challenge (required).</param>
-        public MppCredentialsRequest(string InstrumentId = default(string), Acpv1mppcredentialsChallenge Challenge = default(Acpv1mppcredentialsChallenge))
+        public MppCredentialsRequest(string InstrumentId = default(string), Iccv1mppcredentialsChallenge Challenge = default(Iccv1mppcredentialsChallenge))
         {
             this.InstrumentId = InstrumentId;
             this.Challenge = Challenge;
@@ -50,14 +50,16 @@ namespace CyberSource.Model
         /// TMS instrument identifier referencing the stored card.
         /// </summary>
         /// <value>TMS instrument identifier referencing the stored card.</value>
-        [DataMember(Name="instrumentId", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InstrumentId { get; set; }
 
         /// <summary>
         /// Gets or Sets Challenge
         /// </summary>
-        [DataMember(Name="challenge", EmitDefaultValue=false)]
-        public Acpv1mppcredentialsChallenge Challenge { get; set; }
+        [JsonPropertyName("challenge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1mppcredentialsChallenge Challenge { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -67,8 +69,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class MppCredentialsRequest {\n");
-            if (InstrumentId != null) sb.Append("  InstrumentId: ").Append(InstrumentId).Append("\n");
-            if (Challenge != null) sb.Append("  Challenge: ").Append(Challenge).Append("\n");
+            if (InstrumentId != null) sb.Append("  InstrumentId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MppCredentialsRequest", "instrumentId", InstrumentId.ToString())).Append("\n");
+            if (Challenge != null) sb.Append("  Challenge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("MppCredentialsRequest", "challenge", Challenge.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -79,7 +81,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("MppCredentialsRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

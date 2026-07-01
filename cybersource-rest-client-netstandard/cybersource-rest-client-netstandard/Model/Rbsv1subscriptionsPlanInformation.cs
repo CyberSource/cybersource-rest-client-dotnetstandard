@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets BillingPeriod
         /// </summary>
-        [DataMember(Name="billingPeriod", EmitDefaultValue=false)]
+        [JsonPropertyName("billingPeriod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public GetAllPlansResponsePlanInformationBillingPeriod BillingPeriod { get; set; }
 
         /// <summary>
         /// Gets or Sets BillingCycles
         /// </summary>
-        [DataMember(Name="billingCycles", EmitDefaultValue=false)]
+        [JsonPropertyName("billingCycles")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Rbsv1plansPlanInformationBillingCycles BillingCycles { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Rbsv1subscriptionsPlanInformation {\n");
-            if (BillingPeriod != null) sb.Append("  BillingPeriod: ").Append(BillingPeriod).Append("\n");
-            if (BillingCycles != null) sb.Append("  BillingCycles: ").Append(BillingCycles).Append("\n");
+            if (BillingPeriod != null) sb.Append("  BillingPeriod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1subscriptionsPlanInformation", "billingPeriod", BillingPeriod.ToString())).Append("\n");
+            if (BillingCycles != null) sb.Append("  BillingCycles: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1subscriptionsPlanInformation", "billingCycles", BillingCycles.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Rbsv1subscriptionsPlanInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

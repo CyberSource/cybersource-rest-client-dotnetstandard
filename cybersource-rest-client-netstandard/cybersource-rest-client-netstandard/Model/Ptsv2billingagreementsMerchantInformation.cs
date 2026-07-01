@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -54,49 +54,56 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets MerchantDescriptor
         /// </summary>
-        [DataMember(Name="merchantDescriptor", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDescriptor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsMerchantInformationMerchantDescriptor MerchantDescriptor { get; set; }
 
         /// <summary>
         /// The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. When you do not include this field in your request, CyberSource uses the value in your CyberSource account.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR4 - Position: 150-153 - Field: Merchant Category Code 
         /// </summary>
         /// <value>The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. When you do not include this field in your request, CyberSource uses the value in your CyberSource account.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR4 - Position: 150-153 - Field: Merchant Category Code </value>
-        [DataMember(Name="categoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("categoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? CategoryCode { get; set; }
 
         /// <summary>
         /// The state where the merchant is located.  #### PIN debit State code or region code for your business. Use the Use the [State, Province, and Territory Codes for the United States and Canada](https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf) This value might be displayed on the cardholder&#39;s statement.  When you do not include this value in your PIN debit request, the merchant name from your account is used. **Important** This value must consist of English characters.  **Note** This field is supported only for businesses located in the U.S. or Canada.  Optional field for PIN debit credit or PIN debit purchase. 
         /// </summary>
         /// <value>The state where the merchant is located.  #### PIN debit State code or region code for your business. Use the Use the [State, Province, and Territory Codes for the United States and Canada](https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf) This value might be displayed on the cardholder&#39;s statement.  When you do not include this value in your PIN debit request, the merchant name from your account is used. **Important** This value must consist of English characters.  **Note** This field is supported only for businesses located in the U.S. or Canada.  Optional field for PIN debit credit or PIN debit purchase. </value>
-        [DataMember(Name="administrativeArea", EmitDefaultValue=false)]
+        [JsonPropertyName("administrativeArea")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdministrativeArea { get; set; }
 
         /// <summary>
         /// Date and time at your physical location.  Format: &#x60;YYYYMMDDhhmmss&#x60;, where:  - &#x60;YYYY&#x60; &#x3D; year  - &#x60;MM&#x60; &#x3D; month  - &#x60;DD&#x60; &#x3D; day  - &#x60;hh&#x60; &#x3D; hour  - &#x60;mm&#x60; &#x3D; minutes  - &#x60;ss&#x60; &#x3D; seconds  #### Used by **Authorization** Required for these processors: - American Express Direct                                                                                                                                                                                                                                                                                                                         - American Express Direct - Credit Mutuel-CIC - FDC Nashville Global - SIX  Optional for all other processors. 
         /// </summary>
         /// <value>Date and time at your physical location.  Format: &#x60;YYYYMMDDhhmmss&#x60;, where:  - &#x60;YYYY&#x60; &#x3D; year  - &#x60;MM&#x60; &#x3D; month  - &#x60;DD&#x60; &#x3D; day  - &#x60;hh&#x60; &#x3D; hour  - &#x60;mm&#x60; &#x3D; minutes  - &#x60;ss&#x60; &#x3D; seconds  #### Used by **Authorization** Required for these processors: - American Express Direct                                                                                                                                                                                                                                                                                                                         - American Express Direct - Credit Mutuel-CIC - FDC Nashville Global - SIX  Optional for all other processors. </value>
-        [DataMember(Name="transactionLocalDateTime", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionLocalDateTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionLocalDateTime { get; set; }
 
         /// <summary>
         /// URL to which the customer is directed if they fail to sign the mandate. #### SEPA Required for Create Mandate and Update Mandate #### BACS Required for Create Mandate 
         /// </summary>
         /// <value>URL to which the customer is directed if they fail to sign the mandate. #### SEPA Required for Create Mandate and Update Mandate #### BACS Required for Create Mandate </value>
-        [DataMember(Name="cancelUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("cancelUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CancelUrl { get; set; }
 
         /// <summary>
         /// URL to which the customer is directed if they fail to sign the mandate. #### SEPA Required for Create Mandate and Update Mandate #### BACS Required for Create Mandate 
         /// </summary>
         /// <value>URL to which the customer is directed if they fail to sign the mandate. #### SEPA Required for Create Mandate and Update Mandate #### BACS Required for Create Mandate </value>
-        [DataMember(Name="successUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("successUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SuccessUrl { get; set; }
 
         /// <summary>
         /// URL to which the customer is directed if they fail to sign the mandate. #### SEPA Required for Create Mandate and Update Mandate #### BACS Required for Create Mandate 
         /// </summary>
         /// <value>URL to which the customer is directed if they fail to sign the mandate. #### SEPA Required for Create Mandate and Update Mandate #### BACS Required for Create Mandate </value>
-        [DataMember(Name="failureUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("failureUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FailureUrl { get; set; }
 
         /// <summary>
@@ -107,13 +114,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2billingagreementsMerchantInformation {\n");
-            if (MerchantDescriptor != null) sb.Append("  MerchantDescriptor: ").Append(MerchantDescriptor).Append("\n");
-            if (CategoryCode != null) sb.Append("  CategoryCode: ").Append(CategoryCode).Append("\n");
-            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(AdministrativeArea).Append("\n");
-            if (TransactionLocalDateTime != null) sb.Append("  TransactionLocalDateTime: ").Append(TransactionLocalDateTime).Append("\n");
-            if (CancelUrl != null) sb.Append("  CancelUrl: ").Append(CancelUrl).Append("\n");
-            if (SuccessUrl != null) sb.Append("  SuccessUrl: ").Append(SuccessUrl).Append("\n");
-            if (FailureUrl != null) sb.Append("  FailureUrl: ").Append(FailureUrl).Append("\n");
+            if (MerchantDescriptor != null) sb.Append("  MerchantDescriptor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsMerchantInformation", "merchantDescriptor", MerchantDescriptor.ToString())).Append("\n");
+            if (CategoryCode != null) sb.Append("  CategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsMerchantInformation", "categoryCode", CategoryCode.ToString())).Append("\n");
+            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsMerchantInformation", "administrativeArea", AdministrativeArea.ToString())).Append("\n");
+            if (TransactionLocalDateTime != null) sb.Append("  TransactionLocalDateTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsMerchantInformation", "transactionLocalDateTime", TransactionLocalDateTime.ToString())).Append("\n");
+            if (CancelUrl != null) sb.Append("  CancelUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsMerchantInformation", "cancelUrl", CancelUrl.ToString())).Append("\n");
+            if (SuccessUrl != null) sb.Append("  SuccessUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsMerchantInformation", "successUrl", SuccessUrl.ToString())).Append("\n");
+            if (FailureUrl != null) sb.Append("  FailureUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsMerchantInformation", "failureUrl", FailureUrl.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -124,7 +131,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2billingagreementsMerchantInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

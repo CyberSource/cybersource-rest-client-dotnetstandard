@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -68,85 +68,99 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1decisionsClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsOrderInformation OrderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInformation
         /// </summary>
-        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessingInformation
         /// </summary>
-        [DataMember(Name="processingInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsetupsProcessingInformation ProcessingInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenInformation
         /// </summary>
-        [DataMember(Name="tokenInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsetupsTokenInformation TokenInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerInformation
         /// </summary>
-        [DataMember(Name="buyerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("buyerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsBuyerInformation BuyerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DeviceInformation
         /// </summary>
-        [DataMember(Name="deviceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsDeviceInformation DeviceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInformation
         /// </summary>
-        [DataMember(Name="merchantInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1decisionsMerchantInformation MerchantInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets AcquirerInformation
         /// </summary>
-        [DataMember(Name="acquirerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1decisionsAcquirerInformation AcquirerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets RecurringPaymentInformation
         /// </summary>
-        [DataMember(Name="recurringPaymentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("recurringPaymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsRecurringPaymentInformation RecurringPaymentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ConsumerAuthenticationInformation
         /// </summary>
-        [DataMember(Name="consumerAuthenticationInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("consumerAuthenticationInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1decisionsConsumerAuthenticationInformation ConsumerAuthenticationInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets RiskInformation
         /// </summary>
-        [DataMember(Name="riskInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("riskInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsRiskInformation RiskInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets TravelInformation
         /// </summary>
-        [DataMember(Name="travelInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("travelInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsTravelInformation TravelInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantDefinedInformation
         /// </summary>
-        [DataMember(Name="merchantDefinedInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDefinedInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Riskv1decisionsMerchantDefinedInformation> MerchantDefinedInformation { get; set; }
 
         /// <summary>
@@ -157,20 +171,20 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CheckPayerAuthEnrollmentRequest {\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
-            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
-            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(ProcessingInformation).Append("\n");
-            if (TokenInformation != null) sb.Append("  TokenInformation: ").Append(TokenInformation).Append("\n");
-            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(BuyerInformation).Append("\n");
-            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(DeviceInformation).Append("\n");
-            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(MerchantInformation).Append("\n");
-            if (AcquirerInformation != null) sb.Append("  AcquirerInformation: ").Append(AcquirerInformation).Append("\n");
-            if (RecurringPaymentInformation != null) sb.Append("  RecurringPaymentInformation: ").Append(RecurringPaymentInformation).Append("\n");
-            if (ConsumerAuthenticationInformation != null) sb.Append("  ConsumerAuthenticationInformation: ").Append(ConsumerAuthenticationInformation).Append("\n");
-            if (RiskInformation != null) sb.Append("  RiskInformation: ").Append(RiskInformation).Append("\n");
-            if (TravelInformation != null) sb.Append("  TravelInformation: ").Append(TravelInformation).Append("\n");
-            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(MerchantDefinedInformation).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "orderInformation", OrderInformation.ToString())).Append("\n");
+            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "paymentInformation", PaymentInformation.ToString())).Append("\n");
+            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "processingInformation", ProcessingInformation.ToString())).Append("\n");
+            if (TokenInformation != null) sb.Append("  TokenInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "tokenInformation", TokenInformation.ToString())).Append("\n");
+            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "buyerInformation", BuyerInformation.ToString())).Append("\n");
+            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "deviceInformation", DeviceInformation.ToString())).Append("\n");
+            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "merchantInformation", MerchantInformation.ToString())).Append("\n");
+            if (AcquirerInformation != null) sb.Append("  AcquirerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "acquirerInformation", AcquirerInformation.ToString())).Append("\n");
+            if (RecurringPaymentInformation != null) sb.Append("  RecurringPaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "recurringPaymentInformation", RecurringPaymentInformation.ToString())).Append("\n");
+            if (ConsumerAuthenticationInformation != null) sb.Append("  ConsumerAuthenticationInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "consumerAuthenticationInformation", ConsumerAuthenticationInformation.ToString())).Append("\n");
+            if (RiskInformation != null) sb.Append("  RiskInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "riskInformation", RiskInformation.ToString())).Append("\n");
+            if (TravelInformation != null) sb.Append("  TravelInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "travelInformation", TravelInformation.ToString())).Append("\n");
+            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CheckPayerAuthEnrollmentRequest", "merchantDefinedInformation", MerchantDefinedInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -181,7 +195,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CheckPayerAuthEnrollmentRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

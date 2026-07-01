@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Time of the note added by reviewer
         /// </summary>
         /// <value>Time of the note added by reviewer</value>
-        [DataMember(Name="time", EmitDefaultValue=false)]
+        [JsonPropertyName("time")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? Time { get; set; }
 
         /// <summary>
         /// Note added by reviewer
         /// </summary>
         /// <value>Note added by reviewer</value>
-        [DataMember(Name="addedBy", EmitDefaultValue=false)]
+        [JsonPropertyName("addedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AddedBy { get; set; }
 
         /// <summary>
         /// Comments given by the reviewer
         /// </summary>
         /// <value>Comments given by the reviewer</value>
-        [DataMember(Name="comments", EmitDefaultValue=false)]
+        [JsonPropertyName("comments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Comments { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3ConversionDetailsGet200ResponseNotes {\n");
-            if (Time != null) sb.Append("  Time: ").Append(Time).Append("\n");
-            if (AddedBy != null) sb.Append("  AddedBy: ").Append(AddedBy).Append("\n");
-            if (Comments != null) sb.Append("  Comments: ").Append(Comments).Append("\n");
+            if (Time != null) sb.Append("  Time: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseNotes", "time", Time.ToString())).Append("\n");
+            if (AddedBy != null) sb.Append("  AddedBy: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseNotes", "addedBy", AddedBy.ToString())).Append("\n");
+            if (Comments != null) sb.Append("  Comments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ConversionDetailsGet200ResponseNotes", "comments", Comments.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3ConversionDetailsGet200ResponseNotes", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

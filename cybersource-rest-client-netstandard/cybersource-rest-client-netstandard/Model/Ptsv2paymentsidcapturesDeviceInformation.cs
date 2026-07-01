@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// DNS resolved hostname from &#x60;ipAddress&#x60;.
         /// </summary>
         /// <value>DNS resolved hostname from &#x60;ipAddress&#x60;.</value>
-        [DataMember(Name="hostName", EmitDefaultValue=false)]
+        [JsonPropertyName("hostName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HostName { get; set; }
 
         /// <summary>
         /// IP address of the customer.  #### Used by **Authorization, Capture, and Credit** Optional field. 
         /// </summary>
         /// <value>IP address of the customer.  #### Used by **Authorization, Capture, and Credit** Optional field. </value>
-        [DataMember(Name="ipAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("ipAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IpAddress { get; set; }
 
         /// <summary>
         /// Customer&#39;s browser as identified from the HTTP header data. For example, &#x60;Mozilla&#x60; is the value that identifies the Netscape browser. 
         /// </summary>
         /// <value>Customer&#39;s browser as identified from the HTTP header data. For example, &#x60;Mozilla&#x60; is the value that identifies the Netscape browser. </value>
-        [DataMember(Name="userAgent", EmitDefaultValue=false)]
+        [JsonPropertyName("userAgent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UserAgent { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidcapturesDeviceInformation {\n");
-            if (HostName != null) sb.Append("  HostName: ").Append(HostName).Append("\n");
-            if (IpAddress != null) sb.Append("  IpAddress: ").Append(IpAddress).Append("\n");
-            if (UserAgent != null) sb.Append("  UserAgent: ").Append(UserAgent).Append("\n");
+            if (HostName != null) sb.Append("  HostName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesDeviceInformation", "hostName", HostName.ToString())).Append("\n");
+            if (IpAddress != null) sb.Append("  IpAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesDeviceInformation", "ipAddress", IpAddress.ToString())).Append("\n");
+            if (UserAgent != null) sb.Append("  UserAgent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesDeviceInformation", "userAgent", UserAgent.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidcapturesDeviceInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

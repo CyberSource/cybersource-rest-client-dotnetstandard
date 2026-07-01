@@ -351,7 +351,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (caseManagementActionsRequest != null && caseManagementActionsRequest.GetType() != typeof(byte[]))
             {
@@ -476,7 +476,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (caseManagementActionsRequest != null && caseManagementActionsRequest.GetType() != typeof(byte[]))
             {
@@ -599,7 +599,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("type", ApiClient.ParameterToString(type)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (addNegativeListRequest != null && addNegativeListRequest.GetType() != typeof(byte[]))
             {
@@ -724,7 +724,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("type", ApiClient.ParameterToString(type)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (addNegativeListRequest != null && addNegativeListRequest.GetType() != typeof(byte[]))
             {
@@ -847,7 +847,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (caseManagementCommentsRequest != null && caseManagementCommentsRequest.GetType() != typeof(byte[]))
             {
@@ -972,7 +972,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (caseManagementCommentsRequest != null && caseManagementCommentsRequest.GetType() != typeof(byte[]))
             {
@@ -1315,7 +1315,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (fraudMarkingActionRequest != null && fraudMarkingActionRequest.GetType() != typeof(byte[]))
             {
@@ -1440,7 +1440,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (fraudMarkingActionRequest != null && fraudMarkingActionRequest.GetType() != typeof(byte[]))
             {

@@ -216,7 +216,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("requestId", ApiClient.ParameterToString(requestId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (createSubscriptionRequest != null && createSubscriptionRequest.GetType() != typeof(byte[]))
             {
@@ -344,7 +344,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("requestId", ApiClient.ParameterToString(requestId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (createSubscriptionRequest != null && createSubscriptionRequest.GetType() != typeof(byte[]))
             {
@@ -462,7 +462,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("requestId", ApiClient.ParameterToString(requestId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -585,7 +585,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("requestId", ApiClient.ParameterToString(requestId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Get == Method.Post)
             {

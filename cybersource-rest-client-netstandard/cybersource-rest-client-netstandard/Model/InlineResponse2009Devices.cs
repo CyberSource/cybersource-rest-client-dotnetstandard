@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -58,56 +58,65 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ReaderId
         /// </summary>
-        [DataMember(Name="readerId", EmitDefaultValue=false)]
+        [JsonPropertyName("readerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReaderId { get; set; }
 
         /// <summary>
         /// Gets or Sets TerminalSerialNumber
         /// </summary>
-        [DataMember(Name="terminalSerialNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalSerialNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalSerialNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets TerminalId
         /// </summary>
-        [DataMember(Name="terminalId", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalId { get; set; }
 
         /// <summary>
         /// Gets or Sets Model
         /// </summary>
-        [DataMember(Name="model", EmitDefaultValue=false)]
+        [JsonPropertyName("model")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Model { get; set; }
 
         /// <summary>
         /// Gets or Sets Make
         /// </summary>
-        [DataMember(Name="make", EmitDefaultValue=false)]
+        [JsonPropertyName("make")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Make { get; set; }
 
         /// <summary>
         /// Gets or Sets HardwareRevision
         /// </summary>
-        [DataMember(Name="hardwareRevision", EmitDefaultValue=false)]
+        [JsonPropertyName("hardwareRevision")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HardwareRevision { get; set; }
 
         /// <summary>
         /// Status of the device. Possible Values:   - &#39;ACTIVE&#39;   - &#39;INACTIVE&#39; 
         /// </summary>
         /// <value>Status of the device. Possible Values:   - &#39;ACTIVE&#39;   - &#39;INACTIVE&#39; </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets CreationDate
         /// </summary>
-        [DataMember(Name="creationDate", EmitDefaultValue=false)]
+        [JsonPropertyName("creationDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CreationDate { get; set; }
 
         /// <summary>
         /// Gets or Sets Pin
         /// </summary>
-        [DataMember(Name="pin", EmitDefaultValue=false)]
+        [JsonPropertyName("pin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Pin { get; set; }
 
         /// <summary>
@@ -118,15 +127,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2009Devices {\n");
-            if (ReaderId != null) sb.Append("  ReaderId: ").Append(ReaderId).Append("\n");
-            if (TerminalSerialNumber != null) sb.Append("  TerminalSerialNumber: ").Append(TerminalSerialNumber).Append("\n");
-            if (TerminalId != null) sb.Append("  TerminalId: ").Append(TerminalId).Append("\n");
-            if (Model != null) sb.Append("  Model: ").Append(Model).Append("\n");
-            if (Make != null) sb.Append("  Make: ").Append(Make).Append("\n");
-            if (HardwareRevision != null) sb.Append("  HardwareRevision: ").Append(HardwareRevision).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (CreationDate != null) sb.Append("  CreationDate: ").Append(CreationDate).Append("\n");
-            if (Pin != null) sb.Append("  Pin: ").Append(Pin).Append("\n");
+            if (ReaderId != null) sb.Append("  ReaderId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2009Devices", "readerId", ReaderId.ToString())).Append("\n");
+            if (TerminalSerialNumber != null) sb.Append("  TerminalSerialNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2009Devices", "terminalSerialNumber", TerminalSerialNumber.ToString())).Append("\n");
+            if (TerminalId != null) sb.Append("  TerminalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2009Devices", "terminalId", TerminalId.ToString())).Append("\n");
+            if (Model != null) sb.Append("  Model: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2009Devices", "model", Model.ToString())).Append("\n");
+            if (Make != null) sb.Append("  Make: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2009Devices", "make", Make.ToString())).Append("\n");
+            if (HardwareRevision != null) sb.Append("  HardwareRevision: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2009Devices", "hardwareRevision", HardwareRevision.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2009Devices", "status", Status.ToString())).Append("\n");
+            if (CreationDate != null) sb.Append("  CreationDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2009Devices", "creationDate", CreationDate.ToString())).Append("\n");
+            if (Pin != null) sb.Append("  Pin: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2009Devices", "pin", Pin.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -137,7 +146,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2009Devices", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

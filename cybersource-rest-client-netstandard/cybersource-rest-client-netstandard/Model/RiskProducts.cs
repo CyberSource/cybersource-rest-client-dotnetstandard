@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets FraudManagementEssentials
         /// </summary>
-        [DataMember(Name="fraudManagementEssentials", EmitDefaultValue=false)]
+        [JsonPropertyName("fraudManagementEssentials")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public RiskProductsFraudManagementEssentials FraudManagementEssentials { get; set; }
 
         /// <summary>
         /// Gets or Sets DecisionManager
         /// </summary>
-        [DataMember(Name="decisionManager", EmitDefaultValue=false)]
+        [JsonPropertyName("decisionManager")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public RiskProductsDecisionManager DecisionManager { get; set; }
 
         /// <summary>
         /// Gets or Sets PortfolioRiskControls
         /// </summary>
-        [DataMember(Name="portfolioRiskControls", EmitDefaultValue=false)]
+        [JsonPropertyName("portfolioRiskControls")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public RiskProductsPortfolioRiskControls PortfolioRiskControls { get; set; }
 
         /// <summary>
         /// Gets or Sets EnhancedAuthentication
         /// </summary>
-        [DataMember(Name="enhancedAuthentication", EmitDefaultValue=false)]
+        [JsonPropertyName("enhancedAuthentication")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsPayerAuthentication EnhancedAuthentication { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class RiskProducts {\n");
-            if (FraudManagementEssentials != null) sb.Append("  FraudManagementEssentials: ").Append(FraudManagementEssentials).Append("\n");
-            if (DecisionManager != null) sb.Append("  DecisionManager: ").Append(DecisionManager).Append("\n");
-            if (PortfolioRiskControls != null) sb.Append("  PortfolioRiskControls: ").Append(PortfolioRiskControls).Append("\n");
-            if (EnhancedAuthentication != null) sb.Append("  EnhancedAuthentication: ").Append(EnhancedAuthentication).Append("\n");
+            if (FraudManagementEssentials != null) sb.Append("  FraudManagementEssentials: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskProducts", "fraudManagementEssentials", FraudManagementEssentials.ToString())).Append("\n");
+            if (DecisionManager != null) sb.Append("  DecisionManager: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskProducts", "decisionManager", DecisionManager.ToString())).Append("\n");
+            if (PortfolioRiskControls != null) sb.Append("  PortfolioRiskControls: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskProducts", "portfolioRiskControls", PortfolioRiskControls.ToString())).Append("\n");
+            if (EnhancedAuthentication != null) sb.Append("  EnhancedAuthentication: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskProducts", "enhancedAuthentication", EnhancedAuthentication.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("RiskProducts", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// This field is returned by authorization and incremental authorization services. System trace number that must be printed on the customer&#39;s receipt. 
         /// </summary>
         /// <value>This field is returned by authorization and incremental authorization services. System trace number that must be printed on the customer&#39;s receipt. </value>
-        [DataMember(Name="systemTraceAuditNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("systemTraceAuditNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SystemTraceAuditNumber { get; set; }
 
         /// <summary>
         /// Issuer-generated approval code for the transaction. 
         /// </summary>
         /// <value>Issuer-generated approval code for the transaction. </value>
-        [DataMember(Name="approvalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("approvalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApprovalCode { get; set; }
 
         /// <summary>
         /// Transaction status from the processor. 
         /// </summary>
         /// <value>Transaction status from the processor. </value>
-        [DataMember(Name="responseCode", EmitDefaultValue=false)]
+        [JsonPropertyName("responseCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseCode { get; set; }
 
         /// <summary>
         /// Network transaction identifier (TID). This value can be used to identify a specific transaction when you are discussing the transaction with your processor. 
         /// </summary>
         /// <value>Network transaction identifier (TID). This value can be used to identify a specific transaction when you are discussing the transaction with your processor. </value>
-        [DataMember(Name="transactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionId { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PullFundsReversal201ResponseProcessorInformation {\n");
-            if (SystemTraceAuditNumber != null) sb.Append("  SystemTraceAuditNumber: ").Append(SystemTraceAuditNumber).Append("\n");
-            if (ApprovalCode != null) sb.Append("  ApprovalCode: ").Append(ApprovalCode).Append("\n");
-            if (ResponseCode != null) sb.Append("  ResponseCode: ").Append(ResponseCode).Append("\n");
-            if (TransactionId != null) sb.Append("  TransactionId: ").Append(TransactionId).Append("\n");
+            if (SystemTraceAuditNumber != null) sb.Append("  SystemTraceAuditNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201ResponseProcessorInformation", "systemTraceAuditNumber", SystemTraceAuditNumber.ToString())).Append("\n");
+            if (ApprovalCode != null) sb.Append("  ApprovalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201ResponseProcessorInformation", "approvalCode", ApprovalCode.ToString())).Append("\n");
+            if (ResponseCode != null) sb.Append("  ResponseCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201ResponseProcessorInformation", "responseCode", ResponseCode.ToString())).Append("\n");
+            if (TransactionId != null) sb.Append("  TransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201ResponseProcessorInformation", "transactionId", TransactionId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PullFundsReversal201ResponseProcessorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

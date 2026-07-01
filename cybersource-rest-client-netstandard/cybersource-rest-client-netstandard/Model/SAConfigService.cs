@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// Toggles whether verbose Decision Manager results should be present in the Secure Acceptance response. As this response passes through the browser, it is recommended to set this to \&quot;false\&quot; outside of debugging.
         /// </summary>
         /// <value>Toggles whether verbose Decision Manager results should be present in the Secure Acceptance response. As this response passes through the browser, it is recommended to set this to \&quot;false\&quot; outside of debugging.</value>
-        [DataMember(Name="decisionManagerVerboseEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("decisionManagerVerboseEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DecisionManagerVerboseEnabled { get; set; }
 
         /// <summary>
         /// Defines the number of retries a payer is presented with on payment declines on Hosted Checkout. Valid values are between 0 and 5.
         /// </summary>
         /// <value>Defines the number of retries a payer is presented with on payment declines on Hosted Checkout. Valid values are between 0 and 5.</value>
-        [DataMember(Name="declinedRetryLimit", EmitDefaultValue=false)]
+        [JsonPropertyName("declinedRetryLimit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? DeclinedRetryLimit { get; set; }
 
         /// <summary>
         /// Toggles whether Decision Manager is enabled or not for Secure Acceptance transactions. Requires the transacting MID to be enabled and configured for Decicion Manager.
         /// </summary>
         /// <value>Toggles whether Decision Manager is enabled or not for Secure Acceptance transactions. Requires the transacting MID to be enabled and configured for Decicion Manager.</value>
-        [DataMember(Name="decisionManagerEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("decisionManagerEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DecisionManagerEnabled { get; set; }
 
         /// <summary>
         /// Toggles whether Tokenization is enabled or not for Secure Acceptance transactions. Requires the transacting MID to be enabled and configured for Tokenization.
         /// </summary>
         /// <value>Toggles whether Tokenization is enabled or not for Secure Acceptance transactions. Requires the transacting MID to be enabled and configured for Tokenization.</value>
-        [DataMember(Name="tokenizationEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenizationEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? TokenizationEnabled { get; set; }
 
         /// <summary>
         /// Toggles whether or not an approved Authorization that fails AVS should be automatically reversed.
         /// </summary>
         /// <value>Toggles whether or not an approved Authorization that fails AVS should be automatically reversed.</value>
-        [DataMember(Name="reverseAuthOnAddressVerificationSystemFailure", EmitDefaultValue=false)]
+        [JsonPropertyName("reverseAuthOnAddressVerificationSystemFailure")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ReverseAuthOnAddressVerificationSystemFailure { get; set; }
 
         /// <summary>
         /// Toggles whether or not fraud Device Fingerprinting is enabled on the Hosted Checkout. This simplifies enablement for Decision Manager.
         /// </summary>
         /// <value>Toggles whether or not fraud Device Fingerprinting is enabled on the Hosted Checkout. This simplifies enablement for Decision Manager.</value>
-        [DataMember(Name="deviceFingerprintEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceFingerprintEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DeviceFingerprintEnabled { get; set; }
 
         /// <summary>
         /// Toggles whether or not an approved Authorization that fails CVN check that should be automatically reversed.
         /// </summary>
         /// <value>Toggles whether or not an approved Authorization that fails CVN check that should be automatically reversed.</value>
-        [DataMember(Name="reverseAuthOnCardVerificationNumberFailure", EmitDefaultValue=false)]
+        [JsonPropertyName("reverseAuthOnCardVerificationNumberFailure")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ReverseAuthOnCardVerificationNumberFailure { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class SAConfigService {\n");
-            if (DecisionManagerVerboseEnabled != null) sb.Append("  DecisionManagerVerboseEnabled: ").Append(DecisionManagerVerboseEnabled).Append("\n");
-            if (DeclinedRetryLimit != null) sb.Append("  DeclinedRetryLimit: ").Append(DeclinedRetryLimit).Append("\n");
-            if (DecisionManagerEnabled != null) sb.Append("  DecisionManagerEnabled: ").Append(DecisionManagerEnabled).Append("\n");
-            if (TokenizationEnabled != null) sb.Append("  TokenizationEnabled: ").Append(TokenizationEnabled).Append("\n");
-            if (ReverseAuthOnAddressVerificationSystemFailure != null) sb.Append("  ReverseAuthOnAddressVerificationSystemFailure: ").Append(ReverseAuthOnAddressVerificationSystemFailure).Append("\n");
-            if (DeviceFingerprintEnabled != null) sb.Append("  DeviceFingerprintEnabled: ").Append(DeviceFingerprintEnabled).Append("\n");
-            if (ReverseAuthOnCardVerificationNumberFailure != null) sb.Append("  ReverseAuthOnCardVerificationNumberFailure: ").Append(ReverseAuthOnCardVerificationNumberFailure).Append("\n");
+            if (DecisionManagerVerboseEnabled != null) sb.Append("  DecisionManagerVerboseEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigService", "decisionManagerVerboseEnabled", DecisionManagerVerboseEnabled.ToString())).Append("\n");
+            if (DeclinedRetryLimit != null) sb.Append("  DeclinedRetryLimit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigService", "declinedRetryLimit", DeclinedRetryLimit.ToString())).Append("\n");
+            if (DecisionManagerEnabled != null) sb.Append("  DecisionManagerEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigService", "decisionManagerEnabled", DecisionManagerEnabled.ToString())).Append("\n");
+            if (TokenizationEnabled != null) sb.Append("  TokenizationEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigService", "tokenizationEnabled", TokenizationEnabled.ToString())).Append("\n");
+            if (ReverseAuthOnAddressVerificationSystemFailure != null) sb.Append("  ReverseAuthOnAddressVerificationSystemFailure: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigService", "reverseAuthOnAddressVerificationSystemFailure", ReverseAuthOnAddressVerificationSystemFailure.ToString())).Append("\n");
+            if (DeviceFingerprintEnabled != null) sb.Append("  DeviceFingerprintEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigService", "deviceFingerprintEnabled", DeviceFingerprintEnabled.ToString())).Append("\n");
+            if (ReverseAuthOnCardVerificationNumberFailure != null) sb.Append("  ReverseAuthOnCardVerificationNumberFailure: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigService", "reverseAuthOnCardVerificationNumberFailure", ReverseAuthOnCardVerificationNumberFailure.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("SAConfigService", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

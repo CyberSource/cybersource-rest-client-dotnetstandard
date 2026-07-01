@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -34,7 +34,7 @@ namespace CyberSource.Model
         /// Initializes a new instance of the <see cref="CardProcessingConfigCommonAcquirerAgreement" /> class.
         /// </summary>
         /// <param name="AcquirerCode">AcquirerCode.</param>
-        public CardProcessingConfigCommonAcquirerAgreement(CardProcessingConfigCommonAcquirerAgreementAcquirerCode AcquirerCode = default(CardProcessingConfigCommonAcquirerAgreementAcquirerCode))
+        public CardProcessingConfigCommonAcquirerAgreement(BoardingAcquirerDetails AcquirerCode = default(BoardingAcquirerDetails))
         {
             this.AcquirerCode = AcquirerCode;
         }
@@ -42,8 +42,9 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AcquirerCode
         /// </summary>
-        [DataMember(Name="acquirerCode", EmitDefaultValue=false)]
-        public CardProcessingConfigCommonAcquirerAgreementAcquirerCode AcquirerCode { get; set; }
+        [JsonPropertyName("acquirerCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public BoardingAcquirerDetails AcquirerCode { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -53,7 +54,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CardProcessingConfigCommonAcquirerAgreement {\n");
-            if (AcquirerCode != null) sb.Append("  AcquirerCode: ").Append(AcquirerCode).Append("\n");
+            if (AcquirerCode != null) sb.Append("  AcquirerCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirerAgreement", "acquirerCode", AcquirerCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -64,7 +65,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CardProcessingConfigCommonAcquirerAgreement", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

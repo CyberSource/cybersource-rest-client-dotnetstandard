@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,46 +55,53 @@ namespace CyberSource.Model
         /// Dictates whether or Card Verification Number is supported by the card type. Usually this is set at system level.
         /// </summary>
         /// <value>Dictates whether or Card Verification Number is supported by the card type. Usually this is set at system level.</value>
-        [DataMember(Name="cardVerificationNumberSupported", EmitDefaultValue=false)]
+        [JsonPropertyName("cardVerificationNumberSupported")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CardVerificationNumberSupported { get; set; }
 
         /// <summary>
         /// Toggles whether or Card Verification Number is displayed on the Hosted Checkout.
         /// </summary>
         /// <value>Toggles whether or Card Verification Number is displayed on the Hosted Checkout.</value>
-        [DataMember(Name="cardVerificationNumberDisplay", EmitDefaultValue=false)]
+        [JsonPropertyName("cardVerificationNumberDisplay")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CardVerificationNumberDisplay { get; set; }
 
         /// <summary>
         /// Dictates whether or Payer Authentication is supported by the card type. Usually this is set at system level.
         /// </summary>
         /// <value>Dictates whether or Payer Authentication is supported by the card type. Usually this is set at system level.</value>
-        [DataMember(Name="payerAuthenticationSupported", EmitDefaultValue=false)]
+        [JsonPropertyName("payerAuthenticationSupported")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PayerAuthenticationSupported { get; set; }
 
         /// <summary>
         /// Array of the supported  ISO 4217 alphabetic currency codes.
         /// </summary>
         /// <value>Array of the supported  ISO 4217 alphabetic currency codes.</value>
-        [DataMember(Name="supportedCurrencies", EmitDefaultValue=false)]
+        [JsonPropertyName("supportedCurrencies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> SupportedCurrencies { get; set; }
 
         /// <summary>
         /// Gets or Sets Method
         /// </summary>
-        [DataMember(Name="method", EmitDefaultValue=false)]
+        [JsonPropertyName("method")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Method { get; set; }
 
         /// <summary>
         /// Gets or Sets CardVerificationNumberRequired
         /// </summary>
-        [DataMember(Name="cardVerificationNumberRequired", EmitDefaultValue=false)]
+        [JsonPropertyName("cardVerificationNumberRequired")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CardVerificationNumberRequired { get; set; }
 
         /// <summary>
         /// Gets or Sets PayerAuthenticationEnabled
         /// </summary>
-        [DataMember(Name="payerAuthenticationEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("payerAuthenticationEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PayerAuthenticationEnabled { get; set; }
 
         /// <summary>
@@ -105,13 +112,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class SAConfigPaymentTypesCardTypesDiscover {\n");
-            if (CardVerificationNumberSupported != null) sb.Append("  CardVerificationNumberSupported: ").Append(CardVerificationNumberSupported).Append("\n");
-            if (CardVerificationNumberDisplay != null) sb.Append("  CardVerificationNumberDisplay: ").Append(CardVerificationNumberDisplay).Append("\n");
-            if (PayerAuthenticationSupported != null) sb.Append("  PayerAuthenticationSupported: ").Append(PayerAuthenticationSupported).Append("\n");
-            if (SupportedCurrencies != null) sb.Append("  SupportedCurrencies: ").Append(SupportedCurrencies).Append("\n");
-            if (Method != null) sb.Append("  Method: ").Append(Method).Append("\n");
-            if (CardVerificationNumberRequired != null) sb.Append("  CardVerificationNumberRequired: ").Append(CardVerificationNumberRequired).Append("\n");
-            if (PayerAuthenticationEnabled != null) sb.Append("  PayerAuthenticationEnabled: ").Append(PayerAuthenticationEnabled).Append("\n");
+            if (CardVerificationNumberSupported != null) sb.Append("  CardVerificationNumberSupported: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigPaymentTypesCardTypesDiscover", "cardVerificationNumberSupported", CardVerificationNumberSupported.ToString())).Append("\n");
+            if (CardVerificationNumberDisplay != null) sb.Append("  CardVerificationNumberDisplay: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigPaymentTypesCardTypesDiscover", "cardVerificationNumberDisplay", CardVerificationNumberDisplay.ToString())).Append("\n");
+            if (PayerAuthenticationSupported != null) sb.Append("  PayerAuthenticationSupported: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigPaymentTypesCardTypesDiscover", "payerAuthenticationSupported", PayerAuthenticationSupported.ToString())).Append("\n");
+            if (SupportedCurrencies != null) sb.Append("  SupportedCurrencies: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigPaymentTypesCardTypesDiscover", "supportedCurrencies", SupportedCurrencies.ToString())).Append("\n");
+            if (Method != null) sb.Append("  Method: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigPaymentTypesCardTypesDiscover", "method", Method.ToString())).Append("\n");
+            if (CardVerificationNumberRequired != null) sb.Append("  CardVerificationNumberRequired: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigPaymentTypesCardTypesDiscover", "cardVerificationNumberRequired", CardVerificationNumberRequired.ToString())).Append("\n");
+            if (PayerAuthenticationEnabled != null) sb.Append("  PayerAuthenticationEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigPaymentTypesCardTypesDiscover", "payerAuthenticationEnabled", PayerAuthenticationEnabled.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -122,7 +129,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("SAConfigPaymentTypesCardTypesDiscover", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

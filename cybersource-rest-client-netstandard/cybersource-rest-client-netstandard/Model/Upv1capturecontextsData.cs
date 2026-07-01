@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -60,61 +60,71 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataOrderInformation OrderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerInformation
         /// </summary>
-        [DataMember(Name="buyerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("buyerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataBuyerInformation BuyerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ConsumerAuthenticationInformation
         /// </summary>
-        [DataMember(Name="consumerAuthenticationInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("consumerAuthenticationInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataConsumerAuthenticationInformation ConsumerAuthenticationInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInformation
         /// </summary>
-        [DataMember(Name="merchantInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataMerchantInformation MerchantInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessingInformation
         /// </summary>
-        [DataMember(Name="processingInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataProcessingInformation ProcessingInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets RecipientInformation
         /// </summary>
-        [DataMember(Name="recipientInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("recipientInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataRecipientInformation RecipientInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantDefinedInformation
         /// </summary>
-        [DataMember(Name="merchantDefinedInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDefinedInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Upv1capturecontextsDataMerchantDefinedInformation> MerchantDefinedInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DeviceInformation
         /// </summary>
-        [DataMember(Name="deviceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataDeviceInformation DeviceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInformation
         /// </summary>
-        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsDataPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
@@ -125,16 +135,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Upv1capturecontextsData {\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
-            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(BuyerInformation).Append("\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (ConsumerAuthenticationInformation != null) sb.Append("  ConsumerAuthenticationInformation: ").Append(ConsumerAuthenticationInformation).Append("\n");
-            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(MerchantInformation).Append("\n");
-            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(ProcessingInformation).Append("\n");
-            if (RecipientInformation != null) sb.Append("  RecipientInformation: ").Append(RecipientInformation).Append("\n");
-            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(MerchantDefinedInformation).Append("\n");
-            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(DeviceInformation).Append("\n");
-            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsData", "orderInformation", OrderInformation.ToString())).Append("\n");
+            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsData", "buyerInformation", BuyerInformation.ToString())).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsData", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (ConsumerAuthenticationInformation != null) sb.Append("  ConsumerAuthenticationInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsData", "consumerAuthenticationInformation", ConsumerAuthenticationInformation.ToString())).Append("\n");
+            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsData", "merchantInformation", MerchantInformation.ToString())).Append("\n");
+            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsData", "processingInformation", ProcessingInformation.ToString())).Append("\n");
+            if (RecipientInformation != null) sb.Append("  RecipientInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsData", "recipientInformation", RecipientInformation.ToString())).Append("\n");
+            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsData", "merchantDefinedInformation", MerchantDefinedInformation.ToString())).Append("\n");
+            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsData", "deviceInformation", DeviceInformation.ToString())).Append("\n");
+            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsData", "paymentInformation", PaymentInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -145,7 +155,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Upv1capturecontextsData", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

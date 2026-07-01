@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// Last four digits of the customer&#39;s payment account number. 
         /// </summary>
         /// <value>Last four digits of the customer&#39;s payment account number. </value>
-        [DataMember(Name="suffix", EmitDefaultValue=false)]
+        [JsonPropertyName("suffix")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Suffix { get; set; }
 
         /// <summary>
         /// Bank Identification Number (BIN). This is the initial four to six numbers on a credit card account number. 
         /// </summary>
         /// <value>Bank Identification Number (BIN). This is the initial four to six numbers on a credit card account number. </value>
-        [DataMember(Name="prefix", EmitDefaultValue=false)]
+        [JsonPropertyName("prefix")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Prefix { get; set; }
 
         /// <summary>
         /// Check number.  Chase Paymentech Solutions - Optional. CyberSource ACH Service - Not used. RBS WorldPay Atlanta - Optional on debits. Required on credits. TeleCheck - Strongly recommended on debit requests. Optional on credits. 
         /// </summary>
         /// <value>Check number.  Chase Paymentech Solutions - Optional. CyberSource ACH Service - Not used. RBS WorldPay Atlanta - Optional on debits. Required on credits. TeleCheck - Strongly recommended on debit requests. Optional on credits. </value>
-        [DataMember(Name="checkNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("checkNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CheckNumber { get; set; }
 
         /// <summary>
         /// Account type.  Possible values:  - **C**: Checking.  - **G**: General ledger. This value is supported only on Wells Fargo ACH.  - **S**: Savings (U.S. dollars only).  - **X**: Corporate checking (U.S. dollars only). 
         /// </summary>
         /// <value>Account type.  Possible values:  - **C**: Checking.  - **G**: General ledger. This value is supported only on Wells Fargo ACH.  - **S**: Savings (U.S. dollars only).  - **X**: Corporate checking (U.S. dollars only). </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Name used on the bank account. You can use this field only when scoring a direct debit transaction 
         /// </summary>
         /// <value>Name used on the bank account. You can use this field only when scoring a direct debit transaction </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Code used to validate the customer&#39;s account number. Required for some countries if you do not or are not allowed to provide the IBAN instead. You may use this field only when scoring a direct debit transaction. 
         /// </summary>
         /// <value>Code used to validate the customer&#39;s account number. Required for some countries if you do not or are not allowed to provide the IBAN instead. You may use this field only when scoring a direct debit transaction. </value>
-        [DataMember(Name="checkDigit", EmitDefaultValue=false)]
+        [JsonPropertyName("checkDigit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CheckDigit { get; set; }
 
         /// <summary>
         /// Identifier for the bank that provided the customer&#39;s encoded account number.  To obtain the bank identifier, contact your processor. 
         /// </summary>
         /// <value>Identifier for the bank that provided the customer&#39;s encoded account number.  To obtain the bank identifier, contact your processor. </value>
-        [DataMember(Name="encoderId", EmitDefaultValue=false)]
+        [JsonPropertyName("encoderId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EncoderId { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponsePaymentInformationBankAccount {\n");
-            if (Suffix != null) sb.Append("  Suffix: ").Append(Suffix).Append("\n");
-            if (Prefix != null) sb.Append("  Prefix: ").Append(Prefix).Append("\n");
-            if (CheckNumber != null) sb.Append("  CheckNumber: ").Append(CheckNumber).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (CheckDigit != null) sb.Append("  CheckDigit: ").Append(CheckDigit).Append("\n");
-            if (EncoderId != null) sb.Append("  EncoderId: ").Append(EncoderId).Append("\n");
+            if (Suffix != null) sb.Append("  Suffix: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBankAccount", "suffix", Suffix.ToString())).Append("\n");
+            if (Prefix != null) sb.Append("  Prefix: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBankAccount", "prefix", Prefix.ToString())).Append("\n");
+            if (CheckNumber != null) sb.Append("  CheckNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBankAccount", "checkNumber", CheckNumber.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBankAccount", "type", Type.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBankAccount", "name", Name.ToString())).Append("\n");
+            if (CheckDigit != null) sb.Append("  CheckDigit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBankAccount", "checkDigit", CheckDigit.ToString())).Append("\n");
+            if (EncoderId != null) sb.Append("  EncoderId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBankAccount", "encoderId", EncoderId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponsePaymentInformationBankAccount", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -56,56 +56,64 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets IssuerInformation
         /// </summary>
-        [DataMember(Name="issuerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("issuerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsConsumerAuthenticationInformationStrongAuthenticationIssuerInformation IssuerInformation { get; set; }
 
         /// <summary>
         /// This field will contain the low value exemption indicator with one of the following values: Possible values: - &#x60;0&#x60;  ( low value exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it to be a low value payment) 
         /// </summary>
         /// <value>This field will contain the low value exemption indicator with one of the following values: Possible values: - &#x60;0&#x60;  ( low value exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it to be a low value payment) </value>
-        [DataMember(Name="lowValueExemptionIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("lowValueExemptionIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LowValueExemptionIndicator { get; set; }
 
         /// <summary>
         /// This field will contain the transaction risk analysis exemption indicator with one of the following values: Possible values: - &#x60;0&#x60;  (TRA exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it to be low risk in accordance with the criteria defined by PSD2/RTS) 
         /// </summary>
         /// <value>This field will contain the transaction risk analysis exemption indicator with one of the following values: Possible values: - &#x60;0&#x60;  (TRA exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it to be low risk in accordance with the criteria defined by PSD2/RTS) </value>
-        [DataMember(Name="riskAnalysisExemptionIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("riskAnalysisExemptionIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RiskAnalysisExemptionIndicator { get; set; }
 
         /// <summary>
         /// Possible values: - &#x60;0&#x60;  (Trusted merchant exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as it originated at a merchant trusted by the cardholder) 
         /// </summary>
         /// <value>Possible values: - &#x60;0&#x60;  (Trusted merchant exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as it originated at a merchant trusted by the cardholder) </value>
-        [DataMember(Name="trustedMerchantExemptionIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("trustedMerchantExemptionIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TrustedMerchantExemptionIndicator { get; set; }
 
         /// <summary>
         /// This field will contain the secure corporate payment exemption indicator with one of the following values: Possible values: - &#x60;0&#x60;  (SCA exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it as a secure corporate payment) 
         /// </summary>
         /// <value>This field will contain the secure corporate payment exemption indicator with one of the following values: Possible values: - &#x60;0&#x60;  (SCA exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it as a secure corporate payment) </value>
-        [DataMember(Name="secureCorporatePaymentIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("secureCorporatePaymentIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecureCorporatePaymentIndicator { get; set; }
 
         /// <summary>
         /// This field will contain the delegated authentication exemption indicator with one of the following values: Possible values: - &#x60;0&#x60;  (delegated Authentication exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as authentication has been delegated to other provider (PSP,Acquirer)) 
         /// </summary>
         /// <value>This field will contain the delegated authentication exemption indicator with one of the following values: Possible values: - &#x60;0&#x60;  (delegated Authentication exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as authentication has been delegated to other provider (PSP,Acquirer)) </value>
-        [DataMember(Name="delegatedAuthenticationExemptionIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("delegatedAuthenticationExemptionIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DelegatedAuthenticationExemptionIndicator { get; set; }
 
         /// <summary>
         /// This field will contain the outage exemption indicator with one of the following values: Possible values: - &#x60;0&#x60;  (Outage Authentication exemption does not apply to the transaction) - &#x60;1&#x60; (Outage exempt from SCA as authentication could not be done due to outage) 
         /// </summary>
         /// <value>This field will contain the outage exemption indicator with one of the following values: Possible values: - &#x60;0&#x60;  (Outage Authentication exemption does not apply to the transaction) - &#x60;1&#x60; (Outage exempt from SCA as authentication could not be done due to outage) </value>
-        [DataMember(Name="outageExemptionIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("outageExemptionIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OutageExemptionIndicator { get; set; }
 
         /// <summary>
         /// Indicates the type of Authentication request  01 - Payment transaction  02 - Recurring transaction  03 - Installment transaction  04 - Add card  05 - Maintain card  06 - Cardholder verification as part of EMV token ID and V 
         /// </summary>
         /// <value>Indicates the type of Authentication request  01 - Payment transaction  02 - Recurring transaction  03 - Installment transaction  04 - Add card  05 - Maintain card  06 - Cardholder verification as part of EMV token ID and V </value>
-        [DataMember(Name="authenticationIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("authenticationIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthenticationIndicator { get; set; }
 
         /// <summary>
@@ -116,14 +124,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsConsumerAuthenticationInformationStrongAuthentication {\n");
-            if (IssuerInformation != null) sb.Append("  IssuerInformation: ").Append(IssuerInformation).Append("\n");
-            if (LowValueExemptionIndicator != null) sb.Append("  LowValueExemptionIndicator: ").Append(LowValueExemptionIndicator).Append("\n");
-            if (RiskAnalysisExemptionIndicator != null) sb.Append("  RiskAnalysisExemptionIndicator: ").Append(RiskAnalysisExemptionIndicator).Append("\n");
-            if (TrustedMerchantExemptionIndicator != null) sb.Append("  TrustedMerchantExemptionIndicator: ").Append(TrustedMerchantExemptionIndicator).Append("\n");
-            if (SecureCorporatePaymentIndicator != null) sb.Append("  SecureCorporatePaymentIndicator: ").Append(SecureCorporatePaymentIndicator).Append("\n");
-            if (DelegatedAuthenticationExemptionIndicator != null) sb.Append("  DelegatedAuthenticationExemptionIndicator: ").Append(DelegatedAuthenticationExemptionIndicator).Append("\n");
-            if (OutageExemptionIndicator != null) sb.Append("  OutageExemptionIndicator: ").Append(OutageExemptionIndicator).Append("\n");
-            if (AuthenticationIndicator != null) sb.Append("  AuthenticationIndicator: ").Append(AuthenticationIndicator).Append("\n");
+            if (IssuerInformation != null) sb.Append("  IssuerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsConsumerAuthenticationInformationStrongAuthentication", "issuerInformation", IssuerInformation.ToString())).Append("\n");
+            if (LowValueExemptionIndicator != null) sb.Append("  LowValueExemptionIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsConsumerAuthenticationInformationStrongAuthentication", "lowValueExemptionIndicator", LowValueExemptionIndicator.ToString())).Append("\n");
+            if (RiskAnalysisExemptionIndicator != null) sb.Append("  RiskAnalysisExemptionIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsConsumerAuthenticationInformationStrongAuthentication", "riskAnalysisExemptionIndicator", RiskAnalysisExemptionIndicator.ToString())).Append("\n");
+            if (TrustedMerchantExemptionIndicator != null) sb.Append("  TrustedMerchantExemptionIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsConsumerAuthenticationInformationStrongAuthentication", "trustedMerchantExemptionIndicator", TrustedMerchantExemptionIndicator.ToString())).Append("\n");
+            if (SecureCorporatePaymentIndicator != null) sb.Append("  SecureCorporatePaymentIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsConsumerAuthenticationInformationStrongAuthentication", "secureCorporatePaymentIndicator", SecureCorporatePaymentIndicator.ToString())).Append("\n");
+            if (DelegatedAuthenticationExemptionIndicator != null) sb.Append("  DelegatedAuthenticationExemptionIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsConsumerAuthenticationInformationStrongAuthentication", "delegatedAuthenticationExemptionIndicator", DelegatedAuthenticationExemptionIndicator.ToString())).Append("\n");
+            if (OutageExemptionIndicator != null) sb.Append("  OutageExemptionIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsConsumerAuthenticationInformationStrongAuthentication", "outageExemptionIndicator", OutageExemptionIndicator.ToString())).Append("\n");
+            if (AuthenticationIndicator != null) sb.Append("  AuthenticationIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsConsumerAuthenticationInformationStrongAuthentication", "authenticationIndicator", AuthenticationIndicator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -134,7 +142,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsConsumerAuthenticationInformationStrongAuthentication", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

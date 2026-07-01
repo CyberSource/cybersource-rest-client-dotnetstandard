@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// An unique identification number assigned by CyberSource to identify the submitted request.
         /// </summary>
         /// <value>An unique identification number assigned by CyberSource to identify the submitted request.</value>
-        [DataMember(Name="requestId", EmitDefaultValue=false)]
+        [JsonPropertyName("requestId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestId { get; set; }
 
         /// <summary>
         /// Merchant Defined Data
         /// </summary>
         /// <value>Merchant Defined Data</value>
-        [DataMember(Name="merchantData1", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantData1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantData1 { get; set; }
 
         /// <summary>
         /// Merchant Defined Data
         /// </summary>
         /// <value>Merchant Defined Data</value>
-        [DataMember(Name="merchantData2", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantData2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantData2 { get; set; }
 
         /// <summary>
         /// Merchant Defined Data
         /// </summary>
         /// <value>Merchant Defined Data</value>
-        [DataMember(Name="merchantData3", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantData3")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantData3 { get; set; }
 
         /// <summary>
         /// Merchant Defined Data
         /// </summary>
         /// <value>Merchant Defined Data</value>
-        [DataMember(Name="merchantData4", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantData4")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantData4 { get; set; }
 
         /// <summary>
         /// First Name
         /// </summary>
         /// <value>First Name</value>
-        [DataMember(Name="firstName", EmitDefaultValue=false)]
+        [JsonPropertyName("firstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Last Name
         /// </summary>
         /// <value>Last Name</value>
-        [DataMember(Name="lastName", EmitDefaultValue=false)]
+        [JsonPropertyName("lastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastName { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3PurchaseRefundDetailsGet200ResponseOthers {\n");
-            if (RequestId != null) sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            if (MerchantData1 != null) sb.Append("  MerchantData1: ").Append(MerchantData1).Append("\n");
-            if (MerchantData2 != null) sb.Append("  MerchantData2: ").Append(MerchantData2).Append("\n");
-            if (MerchantData3 != null) sb.Append("  MerchantData3: ").Append(MerchantData3).Append("\n");
-            if (MerchantData4 != null) sb.Append("  MerchantData4: ").Append(MerchantData4).Append("\n");
-            if (FirstName != null) sb.Append("  FirstName: ").Append(FirstName).Append("\n");
-            if (LastName != null) sb.Append("  LastName: ").Append(LastName).Append("\n");
+            if (RequestId != null) sb.Append("  RequestId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseOthers", "requestId", RequestId.ToString())).Append("\n");
+            if (MerchantData1 != null) sb.Append("  MerchantData1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseOthers", "merchantData1", MerchantData1.ToString())).Append("\n");
+            if (MerchantData2 != null) sb.Append("  MerchantData2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseOthers", "merchantData2", MerchantData2.ToString())).Append("\n");
+            if (MerchantData3 != null) sb.Append("  MerchantData3: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseOthers", "merchantData3", MerchantData3.ToString())).Append("\n");
+            if (MerchantData4 != null) sb.Append("  MerchantData4: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseOthers", "merchantData4", MerchantData4.ToString())).Append("\n");
+            if (FirstName != null) sb.Append("  FirstName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseOthers", "firstName", FirstName.ToString())).Append("\n");
+            if (LastName != null) sb.Append("  LastName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseOthers", "lastName", LastName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3PurchaseRefundDetailsGet200ResponseOthers", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

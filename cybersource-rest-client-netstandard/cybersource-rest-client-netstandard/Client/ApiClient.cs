@@ -14,6 +14,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Web;
@@ -22,12 +23,13 @@ using System.Net;
 using System.Net.Http;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
-using Newtonsoft.Json;
 using NLog;
 using RestSharp;
 using AuthenticationSdk.core;
 using AuthenticationSdk.util;
 using CyberSource.Utilities;
+using System.Text.Json.Serialization;
+using CyberSource.Utilities.Serialization;
 
 namespace CyberSource.Client
 {
@@ -42,9 +44,32 @@ namespace CyberSource.Client
         private readonly IMerchantNetworkSettings _merchantNetworkSettings;
         private readonly IMerchantLegacySettings _merchantLegacySettings;
 
-        private JsonSerializerSettings serializerSettings = new JsonSerializerSettings
+        private static readonly JsonSerializerOptions deserializationSettings = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
-            ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            Converters =
+            {
+                new ProtectedConstructorConverterFactory(),
+                new StringOrNumberConverter(),
+                new BooleanOrStringConverter()
+            }
+        };
+
+        private static readonly JsonSerializerOptions serializationSettings = new JsonSerializerOptions(JsonSerializerDefaults.Web)
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        };
+
+        private static readonly JsonSerializerOptions pblModelDeserializerOptions = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = new Utilities.Serialization.CustomContractResolver(),
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            Converters =
+            {
+                new ProtectedConstructorConverterFactory(),
+                new StringOrNumberConverter(),
+                new BooleanOrStringConverter()
+            }
         };
 
         /// <summary>
@@ -147,74 +172,79 @@ namespace CyberSource.Client
             Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
             string contentType, bool isResponseMLEForApi = false)
         {
-            //declared separately to handle both regular call and download file calls
-            int httpResponseStatusCode;
-            IList<Parameter> httpResponseHeaders = null;
-            string httpResponseData = string.Empty;
+            return CallApiAsync(path, method, queryParams, postBody, headerParams, formParams, fileParams, pathParams, contentType, isResponseMLEForApi).GetAwaiter().GetResult();
 
-            LogUtility logUtility = new LogUtility();
+            ////declared separately to handle both regular call and download file calls
+            //int httpResponseStatusCode;
+            //IList<Parameter> httpResponseHeaders = null;
+            //string httpResponseData = string.Empty;
 
-            if (!string.IsNullOrEmpty(AcceptHeader))
-            {
-                var defaultAcceptHeader = "," + headerParams["Accept"];
-                defaultAcceptHeader = AcceptHeader + defaultAcceptHeader.Replace("," + AcceptHeader, "");
-                headerParams.Remove("Accept");
-                headerParams.Add("Accept", defaultAcceptHeader);
-            }
+            //LogUtility logUtility = new LogUtility();
 
-            //check if the Response is to be downloaded as a file, this value to be set by the calling API class
-            var request = PrepareRequest(
-                path, method, queryParams, postBody, headerParams, formParams, fileParams,
-                pathParams, contentType, isResponseMLEForApi);
+            //if (!string.IsNullOrEmpty(AcceptHeader))
+            //{
+            //    var defaultAcceptHeader = "," + headerParams["Accept"];
+            //    defaultAcceptHeader = AcceptHeader + defaultAcceptHeader.Replace("," + AcceptHeader, "");
+            //    headerParams.Remove("Accept");
+            //    headerParams.Add("Accept", defaultAcceptHeader);
+            //}
 
-            var newRestClientOptions = GetRestClientOptions(_merchantNetworkSettings, _merchantCredentialSettings, _merchantLegacySettings.UserAgent, TimeSpan.FromMilliseconds(_merchantNetworkSettings.TimeOut));
+            ////check if the Response is to be downloaded as a file, this value to be set by the calling API class
+            //var request = PrepareRequest(
+            //    path, method, queryParams, postBody, headerParams, formParams, fileParams,
+            //    pathParams, contentType, isResponseMLEForApi);
 
-            // RestClient.ClearHandlers();
+            //var newRestClientOptions = GetRestClientOptions(_merchantNetworkSettings, _merchantCredentialSettings, _merchantLegacySettings.UserAgent, TimeSpan.FromMilliseconds(_merchantNetworkSettings.TimeOut));
 
-            var actualRestClient = RestClientFactory.GetRestClient(_merchantNetworkSettings, newRestClientOptions);
+            //// RestClient.ClearHandlers();
 
-            // Logging Request Headers
-            var headerPrintOutput = new StringBuilder();
-            foreach (var param in request.Parameters)
-            {
-                if (param.Type.ToString().Equals("HttpHeader"))
-                {
-                    headerPrintOutput.Append($"{param.Name} : {param.Value}\n");
-                }
-            }
+            //var actualRestClient = RestClientFactory.GetRestClient(_merchantNetworkSettings, newRestClientOptions);
 
-            logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
+            //// Logging Request Headers
+            //var headerPrintOutput = new StringBuilder();
+            //foreach (var param in request.Parameters)
+            //{
+            //    if (param.Type.ToString().Equals("HttpHeader"))
+            //    {
+            //        headerPrintOutput.Append($"{param.Name} : {param.Value}\n");
+            //    }
+            //}
 
-            InterceptRequest(request);
-            var response = (RestResponse) actualRestClient.Execute(request);
-            InterceptResponse(request, response);
+            //logger.Debug($"HTTP Request Headers :\n{logUtility.MaskSensitiveData(headerPrintOutput.ToString())}");
 
-            // check if Response MLE is enabled, then decrypt the response content and then deserialize
-            ResponseMleHandler.DecryptMleResponseIfNeeded(response, _merchantCredentialSettings, _merchantMLESettings);
+            //InterceptRequest(request);
+            ////var response = (RestResponse) actualRestClient.Execute(request);
+            //var response = actualRestClient.ExecuteAsync(request).GetAwaiter().GetResult();
+            //InterceptResponse(request, response);
 
-            _merchantLegacySettings.DefaultHeader.Clear();
+            //// check if Response MLE is enabled, then decrypt the response content and then deserialize
+            //ResponseMleHandler.DecryptMleResponseIfNeeded(response, _merchantCredentialSettings, _merchantMLESettings);
 
-            // Logging Response Headers
-            httpResponseStatusCode = (int)response.StatusCode;
-            httpResponseHeaders = response.Headers.ToList<Parameter>();
-            httpResponseData = response.Content;
+            // Note: per-request auth headers are now scoped locally inside PrepareRequest
+            // (see CallAuthenticationHeaders) to avoid a race condition on the shared
+            // _merchantLegacySettings.DefaultHeader dictionary between concurrent calls.
 
-            logger.Debug($"HTTP Response Status Code: {httpResponseStatusCode}");
+            //// Logging Response Headers
+            //httpResponseStatusCode = (int)response.StatusCode;
+            //httpResponseHeaders = response.Headers?.ToList<Parameter>();
+            //httpResponseData = response.Content;
 
-            var responseHeadersBuilder = new StringBuilder();
-            foreach (var header in httpResponseHeaders)
-            {
-                responseHeadersBuilder.Append($"{header}\n");
-            }
+            //logger.Debug($"HTTP Response Status Code: {httpResponseStatusCode}");
 
-            logger.Debug($"HTTP Response Headers :\n{logUtility.MaskSensitiveData(responseHeadersBuilder.ToString())}");
+            //var responseHeadersBuilder = new StringBuilder();
+            //foreach (var header in httpResponseHeaders)
+            //{
+            //    responseHeadersBuilder.Append($"{header}\n");
+            //}
 
-            if (!string.IsNullOrEmpty(httpResponseData))
-            {
-                logger.Debug($"HTTP Response Body :\n{logUtility.MaskSensitiveData(httpResponseData)}");
-            }
+            //logger.Debug($"HTTP Response Headers :\n{logUtility.MaskSensitiveData(responseHeadersBuilder.ToString())}");
 
-            return response;
+            //if (!string.IsNullOrEmpty(httpResponseData))
+            //{
+            //    logger.Debug($"HTTP Response Body :\n{logUtility.MaskSensitiveData(httpResponseData)}");
+            //}
+
+            //return response;
         }
 
         /// <summary>
@@ -229,6 +259,7 @@ namespace CyberSource.Client
         /// <param name="fileParams">File parameters.</param>
         /// <param name="pathParams">Path parameters.</param>
         /// <param name="contentType">Content type.</param>
+        /// <param name="isResponseMLEForApi">Indicates if the response is MLE for the API.</param>
         /// <returns>The Task instance.</returns>
         public async System.Threading.Tasks.Task<object> CallApiAsync(
             string path, Method method, Dictionary<string, string> queryParams, object postBody,
@@ -236,6 +267,10 @@ namespace CyberSource.Client
             Dictionary<string, FileParameter> fileParams, Dictionary<string, string> pathParams,
             string contentType, bool isResponseMLEForApi = false)
         {
+            int httpResponseStatusCode;
+            IList<Parameter> httpResponseHeaders = null;
+            string httpResponseData = string.Empty;
+
             LogUtility logUtility = new LogUtility();
 
             var request = PrepareRequest(
@@ -265,12 +300,14 @@ namespace CyberSource.Client
             // check if Response MLE is enabled, then decrypt the response content and then deserialize
             ResponseMleHandler.DecryptMleResponseIfNeeded(response, _merchantCredentialSettings, _merchantMLESettings);
 
-            _merchantLegacySettings.DefaultHeader.Clear();
-            
+            // Note: per-request auth headers are now scoped locally inside PrepareRequest
+            // (see CallAuthenticationHeaders) to avoid a race condition on the shared
+            // _merchantLegacySettings.DefaultHeader dictionary between concurrent calls.
+
             // Logging Response Headers
-            var httpResponseStatusCode = (int)response.StatusCode;
-            var httpResponseHeaders = response.Headers;
-            var httpResponseData = response.Content;
+            httpResponseStatusCode = (int)response.StatusCode;
+            httpResponseHeaders = response.Headers?.ToList<Parameter>();
+            httpResponseData = response.Content;
 
             logger.Debug($"HTTP Response Status Code: {httpResponseStatusCode}");
 
@@ -355,7 +392,13 @@ namespace CyberSource.Client
         /// <returns>Object representation of the JSON string.</returns>
         public object Deserialize(RestResponse response, Type type) // CHANGED
         {
-            IList<Parameter> headers = response.Headers.ToList<Parameter>();
+            IList<Parameter> headers = response.Headers?.ToList<Parameter>();
+
+            if (response == null || string.IsNullOrEmpty(response.Content))
+            {
+                return null;
+            }
+
             if (type == typeof(byte[])) // return byte array
             {
                 return response.RawBytes;
@@ -397,8 +440,7 @@ namespace CyberSource.Client
                 return DateTime.Parse(response.Content, null, System.Globalization.DateTimeStyles.RoundtripKind);
             }
 
-
-            if (type == typeof(string) || type.Name.StartsWith("System.Nullable")) // return primitive type
+            if (type == typeof(string) || Nullable.GetUnderlyingType(type) != null) // return primitive type
             {
                 return ConvertType(response.Content, type);
             }
@@ -408,16 +450,11 @@ namespace CyberSource.Client
             {
                 if (type == typeof(Model.PblPaymentLinksAllGet200Response))
                 {
-                    JsonSerializerSettings customSerializerSettings = new JsonSerializerSettings
-                    {
-                        ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-                        ContractResolver = new Utilities.CustomContractResolver()
-                    };
-                    return JsonConvert.DeserializeObject(response.Content, type, customSerializerSettings);
+                    return JsonSerializer.Deserialize(response.Content, type, pblModelDeserializerOptions);
                 }
                 else
                 {
-                    return JsonConvert.DeserializeObject(response.Content, type, serializerSettings);
+                    return JsonSerializer.Deserialize(response.Content, type, deserializationSettings);
                 }
             }
             catch (Exception e)
@@ -436,7 +473,7 @@ namespace CyberSource.Client
         {
             try
             {
-                return obj != null ? JsonConvert.SerializeObject(obj) : null;
+                return obj != null ? JsonSerializer.Serialize(obj, serializationSettings) : null;
             }
             catch (Exception e)
             {
@@ -533,12 +570,17 @@ namespace CyberSource.Client
         }
 
         /// <summary>
-        /// Generate Request Authentication Headers using the Authentication SDK
+        /// Generate Request Authentication Headers using the Authentication SDK and return them
+        /// as a new dictionary. This method does NOT mutate any shared state, so it is safe to
+        /// call concurrently from multiple threads against the same <see cref="ApiClient"/> /
+        /// configuration instance (fixes AISAST-10819 race condition where the previous
+        /// implementation stored auth headers in the shared
+        /// <c>IMerchantLegacySettings.DefaultHeader</c> dictionary).
         /// </summary>
-        /// <param name="requestType">GET/POST/PUT/PATCH/DELETE</param>
-        /// <param name="requestTarget">Resource Path</param>
-        /// <param name="requestJsonData">Request Payload</param>
-        public void CallAuthenticationHeaders(IMerchantRequestSettings merchantRequestSettings, bool isResponseMLEForApi = false)
+        /// <param name="merchantRequestSettings">Per-request settings (method, target, payload).</param>
+        /// <param name="isResponseMLEForApi">Whether the response is expected to be MLE-encrypted.</param>
+        /// <returns>A new dictionary of authentication headers for this request only.</returns>
+        public Dictionary<string, string> CallAuthenticationHeaders(IMerchantRequestSettings merchantRequestSettings, bool isResponseMLEForApi = false)
         {
             var authorize = new Authorize(_merchantCredentialSettings, merchantRequestSettings, _merchantMLESettings);
 
@@ -592,8 +634,7 @@ namespace CyberSource.Client
             //     authenticationHeaders.Add("v-c-solution-id", Configuration.SolutionId);
             // }
 
-            //Set the Configuration
-            _merchantLegacySettings.DefaultHeader = authenticationHeaders;
+            return authenticationHeaders;
         }
         #endregion Public Methods
 
@@ -662,18 +703,24 @@ namespace CyberSource.Client
             var _requestMethod = method.ToString();
             IMerchantRequestSettings _merchantRequestSettings;
 
+            // Build per-request authentication headers into a LOCAL dictionary.
+            // Do NOT route them through _merchantLegacySettings.DefaultHeader: that field is
+            // a shared mutable dictionary on the configuration instance, and using it as a
+            // handoff between header-generation and request-construction causes a race
+            // condition under concurrent CallApi/CallApiAsync invocations (AISAST-10819)
+            // where one request can be signed/authenticated with another request's headers.
             if (postBody == null)
             {
                 _merchantRequestSettings = new MerchantRequestSettingsFactory().Create(_requestMethod, _requestTarget, null);
-                CallAuthenticationHeaders(_merchantRequestSettings, isResponseMLEForApi);
             }
             else
             {
                 _merchantRequestSettings = new MerchantRequestSettingsFactory().Create(_requestMethod, _requestTarget, postBody.ToString());
-                CallAuthenticationHeaders(_merchantRequestSettings, isResponseMLEForApi);
             }
 
-            foreach (var param in _merchantLegacySettings.DefaultHeader)
+            var authenticationHeaders = CallAuthenticationHeaders(_merchantRequestSettings, isResponseMLEForApi);
+
+            foreach (var param in authenticationHeaders)
             {
                 if (param.Key == "Authorization")
                 {
@@ -710,7 +757,7 @@ namespace CyberSource.Client
                 {
                     if (contentType == "application/x-www-form-urlencoded")
                     {
-                        var bodyParams = JsonConvert.DeserializeObject<Dictionary<string, string>>((string)postBody);
+                        var bodyParams = JsonSerializer.Deserialize<Dictionary<string, string>>((string)postBody);
                         foreach (KeyValuePair<string, string> param in bodyParams)
                         {
                             request.AddParameter(param.Key, param.Value, ParameterType.GetOrPost);

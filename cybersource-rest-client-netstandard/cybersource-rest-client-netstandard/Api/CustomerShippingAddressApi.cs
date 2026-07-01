@@ -386,13 +386,13 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (shippingAddressId != null)
             {
                 localVarPathParams.Add("shippingAddressId", ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (profileId != null)
             {
@@ -525,13 +525,13 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (shippingAddressId != null)
             {
                 localVarPathParams.Add("shippingAddressId", ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (profileId != null)
             {
@@ -664,13 +664,13 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (shippingAddressId != null)
             {
                 localVarPathParams.Add("shippingAddressId", ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (profileId != null)
             {
@@ -805,13 +805,13 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (shippingAddressId != null)
             {
                 localVarPathParams.Add("shippingAddressId", ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (profileId != null)
             {
@@ -939,19 +939,19 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (offset != null)
             {
                 localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (limit != null)
             {
                 localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (profileId != null)
             {
@@ -1082,19 +1082,19 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (offset != null)
             {
                 localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (limit != null)
             {
                 localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (profileId != null)
             {
@@ -1236,13 +1236,13 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (shippingAddressId != null)
             {
                 localVarPathParams.Add("shippingAddressId", ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (profileId != null)
             {
@@ -1389,13 +1389,13 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (shippingAddressId != null)
             {
                 localVarPathParams.Add("shippingAddressId", ApiClient.ParameterToString(shippingAddressId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (profileId != null)
             {
@@ -1530,7 +1530,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (profileId != null)
             {
@@ -1662,7 +1662,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("customerId", ApiClient.ParameterToString(customerId)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (profileId != null)
             {

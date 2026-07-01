@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete" /> class.
@@ -56,35 +56,40 @@ namespace CyberSource.Model
         /// Client Correlation Id used during the tokenization or during FIDO assertion.
         /// </summary>
         /// <value>Client Correlation Id used during the tokenization or during FIDO assertion.</value>
-        [DataMember(Name="clientCorrelationId", EmitDefaultValue=false)]
+        [JsonPropertyName("clientCorrelationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientCorrelationId { get; set; }
 
         /// <summary>
         /// Instruction identifier.
         /// </summary>
         /// <value>Instruction identifier.</value>
-        [DataMember(Name="instructionId", EmitDefaultValue=false)]
+        [JsonPropertyName("instructionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InstructionId { get; set; }
 
         /// <summary>
         /// Status of the Retrieve Payment Credentials request.
         /// </summary>
         /// <value>Status of the Retrieve Payment Credentials request.</value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// First Party Authorization Token/code.
         /// </summary>
         /// <value>First Party Authorization Token/code.</value>
-        [DataMember(Name="authorization", EmitDefaultValue=false)]
+        [JsonPropertyName("authorization")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Authorization { get; set; }
 
         /// <summary>
         /// Signed payload containing the payment credentials.
         /// </summary>
         /// <value>Signed payload containing the payment credentials.</value>
-        [DataMember(Name="signedPayload", EmitDefaultValue=false)]
+        [JsonPropertyName("signedPayload")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SignedPayload { get; set; }
 
         /// <summary>
@@ -95,11 +100,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete {\n");
-            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(ClientCorrelationId).Append("\n");
-            if (InstructionId != null) sb.Append("  InstructionId: ").Append(InstructionId).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (Authorization != null) sb.Append("  Authorization: ").Append(Authorization).Append("\n");
-            if (SignedPayload != null) sb.Append("  SignedPayload: ").Append(SignedPayload).Append("\n");
+            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete", "clientCorrelationId", ClientCorrelationId.ToString())).Append("\n");
+            if (InstructionId != null) sb.Append("  InstructionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete", "instructionId", InstructionId.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete", "status", Status.ToString())).Append("\n");
+            if (Authorization != null) sb.Append("  Authorization: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete", "authorization", Authorization.ToString())).Append("\n");
+            if (SignedPayload != null) sb.Append("  SignedPayload: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete", "signedPayload", SignedPayload.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -110,7 +115,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

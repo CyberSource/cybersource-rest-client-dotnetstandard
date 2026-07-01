@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ShippingAddressListForCustomerLinksFirst" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         public ShippingAddressListForCustomerLinksFirst()
         {
         }
@@ -42,7 +42,8 @@ namespace CyberSource.Model
         /// Link to the first page. 
         /// </summary>
         /// <value>Link to the first page. </value>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        [JsonPropertyName("href")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Href { get; private set; }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ShippingAddressListForCustomerLinksFirst {\n");
-            if (Href != null) sb.Append("  Href: ").Append(Href).Append("\n");
+            if (Href != null) sb.Append("  Href: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ShippingAddressListForCustomerLinksFirst", "href", Href.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -64,7 +65,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ShippingAddressListForCustomerLinksFirst", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

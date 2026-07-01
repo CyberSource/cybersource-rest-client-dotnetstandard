@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Identifier for the terminal used by the merchant&#39;s to process the transaction.
         /// </summary>
         /// <value>Identifier for the terminal used by the merchant&#39;s to process the transaction.</value>
-        [DataMember(Name="terminalId", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalId { get; set; }
 
         /// <summary>
         /// Valid Values: - &#39;KEYED&#39; - &#39;SWIPED&#39; - &#39;CONTACT&#39; - &#39;CONTACTLESS&#39;  How the transaction information was captured. Optional. &#x60;KEYED&#x60; can refer to MOTO on a terminal, MOTO on a virtual terminal, or eCommerce. All other options refer to card holder present transactions. Optional. 
         /// </summary>
         /// <value>Valid Values: - &#39;KEYED&#39; - &#39;SWIPED&#39; - &#39;CONTACT&#39; - &#39;CONTACTLESS&#39;  How the transaction information was captured. Optional. &#x60;KEYED&#x60; can refer to MOTO on a terminal, MOTO on a virtual terminal, or eCommerce. All other options refer to card holder present transactions. Optional. </value>
-        [DataMember(Name="entryMode", EmitDefaultValue=false)]
+        [JsonPropertyName("entryMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EntryMode { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Vasv1currencyconversionPointOfSaleInformation {\n");
-            if (TerminalId != null) sb.Append("  TerminalId: ").Append(TerminalId).Append("\n");
-            if (EntryMode != null) sb.Append("  EntryMode: ").Append(EntryMode).Append("\n");
+            if (TerminalId != null) sb.Append("  TerminalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv1currencyconversionPointOfSaleInformation", "terminalId", TerminalId.ToString())).Append("\n");
+            if (EntryMode != null) sb.Append("  EntryMode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv1currencyconversionPointOfSaleInformation", "entryMode", EntryMode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Vasv1currencyconversionPointOfSaleInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

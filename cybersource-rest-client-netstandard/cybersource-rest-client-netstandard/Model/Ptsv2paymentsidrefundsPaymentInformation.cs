@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -68,86 +68,100 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Card
         /// </summary>
-        [DataMember(Name="card", EmitDefaultValue=false)]
+        [JsonPropertyName("card")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidrefundsPaymentInformationCard Card { get; set; }
 
         /// <summary>
         /// Gets or Sets Bank
         /// </summary>
-        [DataMember(Name="bank", EmitDefaultValue=false)]
+        [JsonPropertyName("bank")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidrefundsPaymentInformationBank Bank { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenizedCard
         /// </summary>
-        [DataMember(Name="tokenizedCard", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenizedCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationTokenizedCard TokenizedCard { get; set; }
 
         /// <summary>
         /// Gets or Sets FluidData
         /// </summary>
-        [DataMember(Name="fluidData", EmitDefaultValue=false)]
+        [JsonPropertyName("fluidData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationFluidData FluidData { get; set; }
 
         /// <summary>
         /// Gets or Sets Customer
         /// </summary>
-        [DataMember(Name="customer", EmitDefaultValue=false)]
+        [JsonPropertyName("customer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationCustomer Customer { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInstrument
         /// </summary>
-        [DataMember(Name="paymentInstrument", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInstrument")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationPaymentInstrument PaymentInstrument { get; set; }
 
         /// <summary>
         /// Gets or Sets InstrumentIdentifier
         /// </summary>
-        [DataMember(Name="instrumentIdentifier", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentIdentifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationInstrumentIdentifier InstrumentIdentifier { get; set; }
 
         /// <summary>
         /// Gets or Sets ShippingAddress
         /// </summary>
-        [DataMember(Name="shippingAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationShippingAddress ShippingAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets LegacyToken
         /// </summary>
-        [DataMember(Name="legacyToken", EmitDefaultValue=false)]
+        [JsonPropertyName("legacyToken")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationLegacyToken LegacyToken { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentType
         /// </summary>
-        [DataMember(Name="paymentType", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidrefundsPaymentInformationPaymentType PaymentType { get; set; }
 
         /// <summary>
         /// Gets or Sets EWallet
         /// </summary>
-        [DataMember(Name="eWallet", EmitDefaultValue=false)]
+        [JsonPropertyName("eWallet")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidrefundsPaymentInformationEWallet EWallet { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentAccountReference
         /// </summary>
-        [DataMember(Name="paymentAccountReference", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentAccountReference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationPaymentAccountReference PaymentAccountReference { get; set; }
 
         /// <summary>
         /// Gets or Sets ThirdPartyToken
         /// </summary>
-        [DataMember(Name="thirdPartyToken", EmitDefaultValue=false)]
+        [JsonPropertyName("thirdPartyToken")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationThirdPartyToken ThirdPartyToken { get; set; }
 
         /// <summary>
         /// Mastercard-defined code that indicates how the account information was obtained for credit authorization transactions.  Possible values: - &#x60;00&#x60;: Card (default) - &#x60;01&#x60;: Mobile network operator (MNO) controlled removable secure element (SIM or UICC) personalized for use with a mobile phone or smartphone - &#x60;02&#x60;: Key fob - &#x60;03&#x60;: Watch - &#x60;04&#x60;: Mobile tag - &#x60;05&#x60;: Wristband - &#x60;06&#x60;: Mobile phone case or sleeve - &#x60;07&#x60;: Mobile phone or smartphone with fixed (nonremovable) secure element controlled by the MNO (for example, code division multiple access (CDMA)) - &#x60;08&#x60;: Removable secure element not controlled by the MNO (for example, memory card personalized for use with a mobile phone or smartphone) - &#x60;09&#x60;: Mobile phone or smartphone with a fixed (nonremovable) secure element not controlled by the MNO - &#x60;10&#x60;: MNO-controlled removable secure element (SIM or UICC) personalized for use with a tablet or e-book - &#x60;11&#x60;: Tablet or e-book with a fixed (nonremovable) secure element controlled by the MNO - &#x60;12&#x60;: Removable secure element not controlled by the MNO (for example, memory card personalized for use with a tablet or e-book) - &#x60;13&#x60;: Tablet or e-book with fixed (nonremovable) secure element not controlled by the MNO - &#x60;14&#x60; - &#x60;99&#x60;: Reserved for future use  This field flows in ISO Field 104 DSID 65 Tag 04.  This field is supported for Mastercard credit authorization transactions.  #### Used by **Credit Authorization (Standalone)** Optional field. 
         /// </summary>
         /// <value>Mastercard-defined code that indicates how the account information was obtained for credit authorization transactions.  Possible values: - &#x60;00&#x60;: Card (default) - &#x60;01&#x60;: Mobile network operator (MNO) controlled removable secure element (SIM or UICC) personalized for use with a mobile phone or smartphone - &#x60;02&#x60;: Key fob - &#x60;03&#x60;: Watch - &#x60;04&#x60;: Mobile tag - &#x60;05&#x60;: Wristband - &#x60;06&#x60;: Mobile phone case or sleeve - &#x60;07&#x60;: Mobile phone or smartphone with fixed (nonremovable) secure element controlled by the MNO (for example, code division multiple access (CDMA)) - &#x60;08&#x60;: Removable secure element not controlled by the MNO (for example, memory card personalized for use with a mobile phone or smartphone) - &#x60;09&#x60;: Mobile phone or smartphone with a fixed (nonremovable) secure element not controlled by the MNO - &#x60;10&#x60;: MNO-controlled removable secure element (SIM or UICC) personalized for use with a tablet or e-book - &#x60;11&#x60;: Tablet or e-book with a fixed (nonremovable) secure element controlled by the MNO - &#x60;12&#x60;: Removable secure element not controlled by the MNO (for example, memory card personalized for use with a tablet or e-book) - &#x60;13&#x60;: Tablet or e-book with fixed (nonremovable) secure element not controlled by the MNO - &#x60;14&#x60; - &#x60;99&#x60;: Reserved for future use  This field flows in ISO Field 104 DSID 65 Tag 04.  This field is supported for Mastercard credit authorization transactions.  #### Used by **Credit Authorization (Standalone)** Optional field. </value>
-        [DataMember(Name="initiationChannel", EmitDefaultValue=false)]
+        [JsonPropertyName("initiationChannel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InitiationChannel { get; set; }
 
         /// <summary>
@@ -158,20 +172,20 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidrefundsPaymentInformation {\n");
-            if (Card != null) sb.Append("  Card: ").Append(Card).Append("\n");
-            if (Bank != null) sb.Append("  Bank: ").Append(Bank).Append("\n");
-            if (TokenizedCard != null) sb.Append("  TokenizedCard: ").Append(TokenizedCard).Append("\n");
-            if (FluidData != null) sb.Append("  FluidData: ").Append(FluidData).Append("\n");
-            if (Customer != null) sb.Append("  Customer: ").Append(Customer).Append("\n");
-            if (PaymentInstrument != null) sb.Append("  PaymentInstrument: ").Append(PaymentInstrument).Append("\n");
-            if (InstrumentIdentifier != null) sb.Append("  InstrumentIdentifier: ").Append(InstrumentIdentifier).Append("\n");
-            if (ShippingAddress != null) sb.Append("  ShippingAddress: ").Append(ShippingAddress).Append("\n");
-            if (LegacyToken != null) sb.Append("  LegacyToken: ").Append(LegacyToken).Append("\n");
-            if (PaymentType != null) sb.Append("  PaymentType: ").Append(PaymentType).Append("\n");
-            if (EWallet != null) sb.Append("  EWallet: ").Append(EWallet).Append("\n");
-            if (PaymentAccountReference != null) sb.Append("  PaymentAccountReference: ").Append(PaymentAccountReference).Append("\n");
-            if (ThirdPartyToken != null) sb.Append("  ThirdPartyToken: ").Append(ThirdPartyToken).Append("\n");
-            if (InitiationChannel != null) sb.Append("  InitiationChannel: ").Append(InitiationChannel).Append("\n");
+            if (Card != null) sb.Append("  Card: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "card", Card.ToString())).Append("\n");
+            if (Bank != null) sb.Append("  Bank: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "bank", Bank.ToString())).Append("\n");
+            if (TokenizedCard != null) sb.Append("  TokenizedCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "tokenizedCard", TokenizedCard.ToString())).Append("\n");
+            if (FluidData != null) sb.Append("  FluidData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "fluidData", FluidData.ToString())).Append("\n");
+            if (Customer != null) sb.Append("  Customer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "customer", Customer.ToString())).Append("\n");
+            if (PaymentInstrument != null) sb.Append("  PaymentInstrument: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "paymentInstrument", PaymentInstrument.ToString())).Append("\n");
+            if (InstrumentIdentifier != null) sb.Append("  InstrumentIdentifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "instrumentIdentifier", InstrumentIdentifier.ToString())).Append("\n");
+            if (ShippingAddress != null) sb.Append("  ShippingAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "shippingAddress", ShippingAddress.ToString())).Append("\n");
+            if (LegacyToken != null) sb.Append("  LegacyToken: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "legacyToken", LegacyToken.ToString())).Append("\n");
+            if (PaymentType != null) sb.Append("  PaymentType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "paymentType", PaymentType.ToString())).Append("\n");
+            if (EWallet != null) sb.Append("  EWallet: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "eWallet", EWallet.ToString())).Append("\n");
+            if (PaymentAccountReference != null) sb.Append("  PaymentAccountReference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "paymentAccountReference", PaymentAccountReference.ToString())).Append("\n");
+            if (ThirdPartyToken != null) sb.Append("  ThirdPartyToken: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "thirdPartyToken", ThirdPartyToken.ToString())).Append("\n");
+            if (InitiationChannel != null) sb.Append("  InitiationChannel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformation", "initiationChannel", InitiationChannel.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -182,7 +196,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidrefundsPaymentInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

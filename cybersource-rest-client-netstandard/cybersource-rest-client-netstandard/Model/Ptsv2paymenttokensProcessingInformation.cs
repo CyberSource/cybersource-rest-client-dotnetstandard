@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Array of actions (one or more) to be included in the payment to invoke bundled services. Possible values are one or more of follows:   - &#x60;TOKEN_RETRIEVE&#x60;: Use this when Alternative Payment token retrieval is requested.  - &#x60;TOKEN_DELETE&#x60;: Use this when Alternative Payment token deletion is requested. 
         /// </summary>
         /// <value>Array of actions (one or more) to be included in the payment to invoke bundled services. Possible values are one or more of follows:   - &#x60;TOKEN_RETRIEVE&#x60;: Use this when Alternative Payment token retrieval is requested.  - &#x60;TOKEN_DELETE&#x60;: Use this when Alternative Payment token deletion is requested. </value>
-        [DataMember(Name="actionList", EmitDefaultValue=false)]
+        [JsonPropertyName("actionList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ActionList { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymenttokensProcessingInformation {\n");
-            if (ActionList != null) sb.Append("  ActionList: ").Append(ActionList).Append("\n");
+            if (ActionList != null) sb.Append("  ActionList: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymenttokensProcessingInformation", "actionList", ActionList.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymenttokensProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

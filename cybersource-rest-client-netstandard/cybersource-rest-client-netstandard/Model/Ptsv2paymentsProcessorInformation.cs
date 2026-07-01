@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -41,7 +41,8 @@ namespace CyberSource.Model
         /// <param name="SupplementaryTransactionData">Supplementary transaction data for Klarna Advantage Plus. Fields to capture Interoperability Data from Merchant and transfer to Klarna for Authorization/Sale/Re-Auth/Capture APIs. .</param>
         /// <param name="ResponseSourceCode">Field contains the response source code that identifies the source. .</param>
         /// <param name="CedpVerifiedIndicator">Merchant Commercial Enhanced Data Program (CEDP) verified indicator for capture/bill requests.  This field is used when the client is doing authorization with a different gateway and capture/settlement with CyberSource.  This field flows in ISO field 34, DSID 02 tag DA, in AN, EBCDIC format.  Possible values: - &#x60;Y&#x60;: Merchant CEDP verified  #### Used by **Capture Request** Request field for force capture/bill support when auth is done with a different gateway. .</param>
-        public Ptsv2paymentsProcessorInformation(string PreApprovalToken = default(string), Ptsv2paymentsProcessorInformationAuthorizationOptions AuthorizationOptions = default(Ptsv2paymentsProcessorInformationAuthorizationOptions), Ptsv2paymentsProcessorInformationReversal Reversal = default(Ptsv2paymentsProcessorInformationReversal), Ptsv2paymentsProcessorInformationReversalNetwork Network = default(Ptsv2paymentsProcessorInformationReversalNetwork), string AuthApprovalToken = default(string), string SupplementaryTransactionData = default(string), string ResponseSourceCode = default(string), string CedpVerifiedIndicator = default(string))
+        /// <param name="FeeProgramIndicator">Interchange reimbursement fee program indicator (FPI), which is used when assessing the fee applied to a cross-border or domestic Asia Pacific financial transaction. Acquirers and issues retain and return the FPI value in chargeback and representments..</param>
+        public Ptsv2paymentsProcessorInformation(string PreApprovalToken = default(string), Ptsv2paymentsProcessorInformationAuthorizationOptions AuthorizationOptions = default(Ptsv2paymentsProcessorInformationAuthorizationOptions), Ptsv2paymentsProcessorInformationReversal Reversal = default(Ptsv2paymentsProcessorInformationReversal), Ptsv2paymentsProcessorInformationReversalNetwork Network = default(Ptsv2paymentsProcessorInformationReversalNetwork), string AuthApprovalToken = default(string), string SupplementaryTransactionData = default(string), string ResponseSourceCode = default(string), string CedpVerifiedIndicator = default(string), string FeeProgramIndicator = default(string))
         {
             this.PreApprovalToken = PreApprovalToken;
             this.AuthorizationOptions = AuthorizationOptions;
@@ -51,60 +52,77 @@ namespace CyberSource.Model
             this.SupplementaryTransactionData = SupplementaryTransactionData;
             this.ResponseSourceCode = ResponseSourceCode;
             this.CedpVerifiedIndicator = CedpVerifiedIndicator;
+            this.FeeProgramIndicator = FeeProgramIndicator;
         }
         
         /// <summary>
         /// Token received in original session service.
         /// </summary>
         /// <value>Token received in original session service.</value>
-        [DataMember(Name="preApprovalToken", EmitDefaultValue=false)]
+        [JsonPropertyName("preApprovalToken")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PreApprovalToken { get; set; }
 
         /// <summary>
         /// Gets or Sets AuthorizationOptions
         /// </summary>
-        [DataMember(Name="authorizationOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("authorizationOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessorInformationAuthorizationOptions AuthorizationOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets Reversal
         /// </summary>
-        [DataMember(Name="reversal", EmitDefaultValue=false)]
+        [JsonPropertyName("reversal")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessorInformationReversal Reversal { get; set; }
 
         /// <summary>
         /// Gets or Sets Network
         /// </summary>
-        [DataMember(Name="network", EmitDefaultValue=false)]
+        [JsonPropertyName("network")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessorInformationReversalNetwork Network { get; set; }
 
         /// <summary>
         /// Interoperability Token received by merchant for Authorization API. Field for merchant to send Klarna Advantage Plus authorization approval token for Auth API call. 
         /// </summary>
         /// <value>Interoperability Token received by merchant for Authorization API. Field for merchant to send Klarna Advantage Plus authorization approval token for Auth API call. </value>
-        [DataMember(Name="authApprovalToken", EmitDefaultValue=false)]
+        [JsonPropertyName("authApprovalToken")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthApprovalToken { get; set; }
 
         /// <summary>
         /// Supplementary transaction data for Klarna Advantage Plus. Fields to capture Interoperability Data from Merchant and transfer to Klarna for Authorization/Sale/Re-Auth/Capture APIs. 
         /// </summary>
         /// <value>Supplementary transaction data for Klarna Advantage Plus. Fields to capture Interoperability Data from Merchant and transfer to Klarna for Authorization/Sale/Re-Auth/Capture APIs. </value>
-        [DataMember(Name="supplementaryTransactionData", EmitDefaultValue=false)]
+        [JsonPropertyName("supplementaryTransactionData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SupplementaryTransactionData { get; set; }
 
         /// <summary>
         /// Field contains the response source code that identifies the source. 
         /// </summary>
         /// <value>Field contains the response source code that identifies the source. </value>
-        [DataMember(Name="responseSourceCode", EmitDefaultValue=false)]
+        [JsonPropertyName("responseSourceCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseSourceCode { get; set; }
 
         /// <summary>
         /// Merchant Commercial Enhanced Data Program (CEDP) verified indicator for capture/bill requests.  This field is used when the client is doing authorization with a different gateway and capture/settlement with CyberSource.  This field flows in ISO field 34, DSID 02 tag DA, in AN, EBCDIC format.  Possible values: - &#x60;Y&#x60;: Merchant CEDP verified  #### Used by **Capture Request** Request field for force capture/bill support when auth is done with a different gateway. 
         /// </summary>
         /// <value>Merchant Commercial Enhanced Data Program (CEDP) verified indicator for capture/bill requests.  This field is used when the client is doing authorization with a different gateway and capture/settlement with CyberSource.  This field flows in ISO field 34, DSID 02 tag DA, in AN, EBCDIC format.  Possible values: - &#x60;Y&#x60;: Merchant CEDP verified  #### Used by **Capture Request** Request field for force capture/bill support when auth is done with a different gateway. </value>
-        [DataMember(Name="cedpVerifiedIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("cedpVerifiedIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CedpVerifiedIndicator { get; set; }
+
+        /// <summary>
+        /// Interchange reimbursement fee program indicator (FPI), which is used when assessing the fee applied to a cross-border or domestic Asia Pacific financial transaction. Acquirers and issues retain and return the FPI value in chargeback and representments.
+        /// </summary>
+        /// <value>Interchange reimbursement fee program indicator (FPI), which is used when assessing the fee applied to a cross-border or domestic Asia Pacific financial transaction. Acquirers and issues retain and return the FPI value in chargeback and representments.</value>
+        [JsonPropertyName("feeProgramIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public string FeeProgramIndicator { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -114,14 +132,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsProcessorInformation {\n");
-            if (PreApprovalToken != null) sb.Append("  PreApprovalToken: ").Append(PreApprovalToken).Append("\n");
-            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(AuthorizationOptions).Append("\n");
-            if (Reversal != null) sb.Append("  Reversal: ").Append(Reversal).Append("\n");
-            if (Network != null) sb.Append("  Network: ").Append(Network).Append("\n");
-            if (AuthApprovalToken != null) sb.Append("  AuthApprovalToken: ").Append(AuthApprovalToken).Append("\n");
-            if (SupplementaryTransactionData != null) sb.Append("  SupplementaryTransactionData: ").Append(SupplementaryTransactionData).Append("\n");
-            if (ResponseSourceCode != null) sb.Append("  ResponseSourceCode: ").Append(ResponseSourceCode).Append("\n");
-            if (CedpVerifiedIndicator != null) sb.Append("  CedpVerifiedIndicator: ").Append(CedpVerifiedIndicator).Append("\n");
+            if (PreApprovalToken != null) sb.Append("  PreApprovalToken: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessorInformation", "preApprovalToken", PreApprovalToken.ToString())).Append("\n");
+            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessorInformation", "authorizationOptions", AuthorizationOptions.ToString())).Append("\n");
+            if (Reversal != null) sb.Append("  Reversal: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessorInformation", "reversal", Reversal.ToString())).Append("\n");
+            if (Network != null) sb.Append("  Network: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessorInformation", "network", Network.ToString())).Append("\n");
+            if (AuthApprovalToken != null) sb.Append("  AuthApprovalToken: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessorInformation", "authApprovalToken", AuthApprovalToken.ToString())).Append("\n");
+            if (SupplementaryTransactionData != null) sb.Append("  SupplementaryTransactionData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessorInformation", "supplementaryTransactionData", SupplementaryTransactionData.ToString())).Append("\n");
+            if (ResponseSourceCode != null) sb.Append("  ResponseSourceCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessorInformation", "responseSourceCode", ResponseSourceCode.ToString())).Append("\n");
+            if (CedpVerifiedIndicator != null) sb.Append("  CedpVerifiedIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessorInformation", "cedpVerifiedIndicator", CedpVerifiedIndicator.ToString())).Append("\n");
+            if (FeeProgramIndicator != null) sb.Append("  FeeProgramIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessorInformation", "feeProgramIndicator", FeeProgramIndicator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -132,7 +151,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsProcessorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>
@@ -197,6 +216,11 @@ namespace CyberSource.Model
                     this.CedpVerifiedIndicator == other.CedpVerifiedIndicator ||
                     this.CedpVerifiedIndicator != null &&
                     this.CedpVerifiedIndicator.Equals(other.CedpVerifiedIndicator)
+                ) && 
+                (
+                    this.FeeProgramIndicator == other.FeeProgramIndicator ||
+                    this.FeeProgramIndicator != null &&
+                    this.FeeProgramIndicator.Equals(other.FeeProgramIndicator)
                 );
         }
 
@@ -227,6 +251,8 @@ namespace CyberSource.Model
                     hash = hash * 59 + this.ResponseSourceCode.GetHashCode();
                 if (this.CedpVerifiedIndicator != null)
                     hash = hash * 59 + this.CedpVerifiedIndicator.GetHashCode();
+                if (this.FeeProgramIndicator != null)
+                    hash = hash * 59 + this.FeeProgramIndicator.GetHashCode();
                 return hash;
             }
         }

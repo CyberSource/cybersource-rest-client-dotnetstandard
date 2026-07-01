@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,27 +49,31 @@ namespace CyberSource.Model
         /// Use this field only if you are requesting payment with Payer Authentication serice together.  Your company&#39;s name as you want it to appear to the customer in the issuing bank&#39;s authentication form. This value overrides the value specified by your merchant bank. 
         /// </summary>
         /// <value>Use this field only if you are requesting payment with Payer Authentication serice together.  Your company&#39;s name as you want it to appear to the customer in the issuing bank&#39;s authentication form. This value overrides the value specified by your merchant bank. </value>
-        [DataMember(Name="merchantName", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantName { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantDescriptor
         /// </summary>
-        [DataMember(Name="merchantDescriptor", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDescriptor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseMerchantInformationMerchantDescriptor MerchantDescriptor { get; set; }
 
         /// <summary>
         /// The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. When you do not include this field in your request, Cybersource uses the value in your Cybersource account. Use this field only for clearing with your acquirer. 
         /// </summary>
         /// <value>The value for this field is a four-digit number that the payment card industry uses to classify merchants into market segments. A payment card company assigned one or more of these values to your business when you started accepting the payment card company&#39;s cards. When you do not include this field in your request, Cybersource uses the value in your Cybersource account. Use this field only for clearing with your acquirer. </value>
-        [DataMember(Name="categoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("categoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CategoryCode { get; set; }
 
         /// <summary>
         /// URL for displaying payment results to the consumer (notifications) after the transaction is processed. Usually this URL belongs to merchant and its behavior is defined by merchant 
         /// </summary>
         /// <value>URL for displaying payment results to the consumer (notifications) after the transaction is processed. Usually this URL belongs to merchant and its behavior is defined by merchant </value>
-        [DataMember(Name="returnUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("returnUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReturnUrl { get; set; }
 
         /// <summary>
@@ -80,10 +84,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseMerchantInformation {\n");
-            if (MerchantName != null) sb.Append("  MerchantName: ").Append(MerchantName).Append("\n");
-            if (MerchantDescriptor != null) sb.Append("  MerchantDescriptor: ").Append(MerchantDescriptor).Append("\n");
-            if (CategoryCode != null) sb.Append("  CategoryCode: ").Append(CategoryCode).Append("\n");
-            if (ReturnUrl != null) sb.Append("  ReturnUrl: ").Append(ReturnUrl).Append("\n");
+            if (MerchantName != null) sb.Append("  MerchantName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseMerchantInformation", "merchantName", MerchantName.ToString())).Append("\n");
+            if (MerchantDescriptor != null) sb.Append("  MerchantDescriptor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseMerchantInformation", "merchantDescriptor", MerchantDescriptor.ToString())).Append("\n");
+            if (CategoryCode != null) sb.Append("  CategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseMerchantInformation", "categoryCode", CategoryCode.ToString())).Append("\n");
+            if (ReturnUrl != null) sb.Append("  ReturnUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseMerchantInformation", "returnUrl", ReturnUrl.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -94,7 +98,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseMerchantInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

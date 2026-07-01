@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// This field contains the account funding source. Possible values:   - &#x60;CREDIT&#x60;   - &#x60;DEBIT&#x60;   - &#x60;PREPAID&#x60;   - &#x60;DEFERRED DEBIT&#x60;   - &#x60;CHARGE&#x60; 
         /// </summary>
         /// <value>This field contains the account funding source. Possible values:   - &#x60;CREDIT&#x60;   - &#x60;DEBIT&#x60;   - &#x60;PREPAID&#x60;   - &#x60;DEFERRED DEBIT&#x60;   - &#x60;CHARGE&#x60; </value>
-        [DataMember(Name="accountFundingSource", EmitDefaultValue=false)]
+        [JsonPropertyName("accountFundingSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountFundingSource { get; set; }
 
         /// <summary>
         /// This field contains the type of prepaid card. Possible values:   - &#x60;Reloadable&#x60;   - &#x60;Non-reloadable&#x60; 
         /// </summary>
         /// <value>This field contains the type of prepaid card. Possible values:   - &#x60;Reloadable&#x60;   - &#x60;Non-reloadable&#x60; </value>
-        [DataMember(Name="accountFundingSourceSubType", EmitDefaultValue=false)]
+        [JsonPropertyName("accountFundingSourceSubType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountFundingSourceSubType { get; set; }
 
         /// <summary>
         /// This field contains the type of issuer product. Example values:   - Visa Classic   - Visa Signature   - Visa Infinite 
         /// </summary>
         /// <value>This field contains the type of issuer product. Example values:   - Visa Classic   - Visa Signature   - Visa Infinite </value>
-        [DataMember(Name="cardProduct", EmitDefaultValue=false)]
+        [JsonPropertyName("cardProduct")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardProduct { get; set; }
 
         /// <summary>
         /// This field contains the type of BIN based authentication. Possible values:   - &#x60;S&#x60;: Single Message   - &#x60;D&#x60;: Dual Message 
         /// </summary>
         /// <value>This field contains the type of BIN based authentication. Possible values:   - &#x60;S&#x60;: Single Message   - &#x60;D&#x60;: Dual Message </value>
-        [DataMember(Name="messageType", EmitDefaultValue=false)]
+        [JsonPropertyName("messageType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MessageType { get; set; }
 
         /// <summary>
         /// This field contains the acceptance level of the PAN. Possible values:   - &#x60;0&#x60; : Normal   - &#x60;1&#x60; : Monitor   - &#x60;2&#x60; : Refuse   - &#x60;3&#x60; : Not Allowed   - &#x60;4&#x60; : Private   - &#x60;5&#x60; : Test 
         /// </summary>
         /// <value>This field contains the acceptance level of the PAN. Possible values:   - &#x60;0&#x60; : Normal   - &#x60;1&#x60; : Monitor   - &#x60;2&#x60; : Refuse   - &#x60;3&#x60; : Not Allowed   - &#x60;4&#x60; : Private   - &#x60;5&#x60; : Test </value>
-        [DataMember(Name="acceptanceLevel", EmitDefaultValue=false)]
+        [JsonPropertyName("acceptanceLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcceptanceLevel { get; set; }
 
         /// <summary>
         /// This field contains the type of card platform. Possible values:   - &#x60;BUSINESS&#x60;   - &#x60;CONSUMER&#x60;   - &#x60;COMMERCIAL&#x60;   - &#x60;GOVERNMENT&#x60; 
         /// </summary>
         /// <value>This field contains the type of card platform. Possible values:   - &#x60;BUSINESS&#x60;   - &#x60;CONSUMER&#x60;   - &#x60;COMMERCIAL&#x60;   - &#x60;GOVERNMENT&#x60; </value>
-        [DataMember(Name="cardPlatform", EmitDefaultValue=false)]
+        [JsonPropertyName("cardPlatform")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardPlatform { get; set; }
 
         /// <summary>
         /// This field indicates the type of combo card. Possible values:   - 0 (Not a combo card)   - 1 (Credit and Prepaid Combo card)   - 2 (Credit and Debit Combo card) 
         /// </summary>
         /// <value>This field indicates the type of combo card. Possible values:   - 0 (Not a combo card)   - 1 (Credit and Prepaid Combo card)   - 2 (Credit and Debit Combo card) </value>
-        [DataMember(Name="comboCard", EmitDefaultValue=false)]
+        [JsonPropertyName("comboCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ComboCard { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponsePaymentInformationFeatures {\n");
-            if (AccountFundingSource != null) sb.Append("  AccountFundingSource: ").Append(AccountFundingSource).Append("\n");
-            if (AccountFundingSourceSubType != null) sb.Append("  AccountFundingSourceSubType: ").Append(AccountFundingSourceSubType).Append("\n");
-            if (CardProduct != null) sb.Append("  CardProduct: ").Append(CardProduct).Append("\n");
-            if (MessageType != null) sb.Append("  MessageType: ").Append(MessageType).Append("\n");
-            if (AcceptanceLevel != null) sb.Append("  AcceptanceLevel: ").Append(AcceptanceLevel).Append("\n");
-            if (CardPlatform != null) sb.Append("  CardPlatform: ").Append(CardPlatform).Append("\n");
-            if (ComboCard != null) sb.Append("  ComboCard: ").Append(ComboCard).Append("\n");
+            if (AccountFundingSource != null) sb.Append("  AccountFundingSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationFeatures", "accountFundingSource", AccountFundingSource.ToString())).Append("\n");
+            if (AccountFundingSourceSubType != null) sb.Append("  AccountFundingSourceSubType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationFeatures", "accountFundingSourceSubType", AccountFundingSourceSubType.ToString())).Append("\n");
+            if (CardProduct != null) sb.Append("  CardProduct: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationFeatures", "cardProduct", CardProduct.ToString())).Append("\n");
+            if (MessageType != null) sb.Append("  MessageType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationFeatures", "messageType", MessageType.ToString())).Append("\n");
+            if (AcceptanceLevel != null) sb.Append("  AcceptanceLevel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationFeatures", "acceptanceLevel", AcceptanceLevel.ToString())).Append("\n");
+            if (CardPlatform != null) sb.Append("  CardPlatform: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationFeatures", "cardPlatform", CardPlatform.ToString())).Append("\n");
+            if (ComboCard != null) sb.Append("  ComboCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationFeatures", "comboCard", ComboCard.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponsePaymentInformationFeatures", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

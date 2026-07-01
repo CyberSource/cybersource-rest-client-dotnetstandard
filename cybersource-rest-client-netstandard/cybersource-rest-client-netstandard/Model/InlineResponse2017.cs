@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -59,62 +59,71 @@ namespace CyberSource.Model
         /// Date that the webhook was delivered
         /// </summary>
         /// <value>Date that the webhook was delivered</value>
-        [DataMember(Name="eventDate", EmitDefaultValue=false)]
+        [JsonPropertyName("eventDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EventDate { get; set; }
 
         /// <summary>
         /// The event name the webhook was delivered for
         /// </summary>
         /// <value>The event name the webhook was delivered for</value>
-        [DataMember(Name="eventType", EmitDefaultValue=false)]
+        [JsonPropertyName("eventType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EventType { get; set; }
 
         /// <summary>
         /// The Organization Identifier.
         /// </summary>
         /// <value>The Organization Identifier.</value>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// Gets or Sets Payloads
         /// </summary>
-        [DataMember(Name="payloads", EmitDefaultValue=false)]
+        [JsonPropertyName("payloads")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse2017Payloads Payloads { get; set; }
 
         /// <summary>
         /// The product the webhook was delivered for
         /// </summary>
         /// <value>The product the webhook was delivered for</value>
-        [DataMember(Name="productId", EmitDefaultValue=false)]
+        [JsonPropertyName("productId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductId { get; set; }
 
         /// <summary>
         /// Identifies the the type of request
         /// </summary>
         /// <value>Identifies the the type of request</value>
-        [DataMember(Name="requestType", EmitDefaultValue=false)]
+        [JsonPropertyName("requestType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestType { get; set; }
 
         /// <summary>
         /// The number of retry attempts for a given webhook
         /// </summary>
         /// <value>The number of retry attempts for a given webhook</value>
-        [DataMember(Name="retryNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("retryNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? RetryNumber { get; set; }
 
         /// <summary>
         /// The identifier for the webhook
         /// </summary>
         /// <value>The identifier for the webhook</value>
-        [DataMember(Name="transactionTraceId", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionTraceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionTraceId { get; set; }
 
         /// <summary>
         /// The identifier of the subscription
         /// </summary>
         /// <value>The identifier of the subscription</value>
-        [DataMember(Name="webhookId", EmitDefaultValue=false)]
+        [JsonPropertyName("webhookId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WebhookId { get; set; }
 
         /// <summary>
@@ -125,15 +134,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2017 {\n");
-            if (EventDate != null) sb.Append("  EventDate: ").Append(EventDate).Append("\n");
-            if (EventType != null) sb.Append("  EventType: ").Append(EventType).Append("\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (Payloads != null) sb.Append("  Payloads: ").Append(Payloads).Append("\n");
-            if (ProductId != null) sb.Append("  ProductId: ").Append(ProductId).Append("\n");
-            if (RequestType != null) sb.Append("  RequestType: ").Append(RequestType).Append("\n");
-            if (RetryNumber != null) sb.Append("  RetryNumber: ").Append(RetryNumber).Append("\n");
-            if (TransactionTraceId != null) sb.Append("  TransactionTraceId: ").Append(TransactionTraceId).Append("\n");
-            if (WebhookId != null) sb.Append("  WebhookId: ").Append(WebhookId).Append("\n");
+            if (EventDate != null) sb.Append("  EventDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2017", "eventDate", EventDate.ToString())).Append("\n");
+            if (EventType != null) sb.Append("  EventType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2017", "eventType", EventType.ToString())).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2017", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (Payloads != null) sb.Append("  Payloads: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2017", "payloads", Payloads.ToString())).Append("\n");
+            if (ProductId != null) sb.Append("  ProductId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2017", "productId", ProductId.ToString())).Append("\n");
+            if (RequestType != null) sb.Append("  RequestType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2017", "requestType", RequestType.ToString())).Append("\n");
+            if (RetryNumber != null) sb.Append("  RetryNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2017", "retryNumber", RetryNumber.ToString())).Append("\n");
+            if (TransactionTraceId != null) sb.Append("  TransactionTraceId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2017", "transactionTraceId", TransactionTraceId.ToString())).Append("\n");
+            if (WebhookId != null) sb.Append("  WebhookId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2017", "webhookId", WebhookId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -144,7 +153,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2017", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

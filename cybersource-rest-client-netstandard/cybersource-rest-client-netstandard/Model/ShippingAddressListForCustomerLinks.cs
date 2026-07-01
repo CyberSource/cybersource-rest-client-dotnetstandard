@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -50,31 +50,36 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Self
         /// </summary>
-        [DataMember(Name="self", EmitDefaultValue=false)]
+        [JsonPropertyName("self")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public ShippingAddressListForCustomerLinksSelf Self { get; set; }
 
         /// <summary>
         /// Gets or Sets First
         /// </summary>
-        [DataMember(Name="first", EmitDefaultValue=false)]
+        [JsonPropertyName("first")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public ShippingAddressListForCustomerLinksFirst First { get; set; }
 
         /// <summary>
         /// Gets or Sets Prev
         /// </summary>
-        [DataMember(Name="prev", EmitDefaultValue=false)]
+        [JsonPropertyName("prev")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public ShippingAddressListForCustomerLinksPrev Prev { get; set; }
 
         /// <summary>
         /// Gets or Sets Next
         /// </summary>
-        [DataMember(Name="next", EmitDefaultValue=false)]
+        [JsonPropertyName("next")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public ShippingAddressListForCustomerLinksNext Next { get; set; }
 
         /// <summary>
         /// Gets or Sets Last
         /// </summary>
-        [DataMember(Name="last", EmitDefaultValue=false)]
+        [JsonPropertyName("last")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public ShippingAddressListForCustomerLinksLast Last { get; set; }
 
         /// <summary>
@@ -85,11 +90,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ShippingAddressListForCustomerLinks {\n");
-            if (Self != null) sb.Append("  Self: ").Append(Self).Append("\n");
-            if (First != null) sb.Append("  First: ").Append(First).Append("\n");
-            if (Prev != null) sb.Append("  Prev: ").Append(Prev).Append("\n");
-            if (Next != null) sb.Append("  Next: ").Append(Next).Append("\n");
-            if (Last != null) sb.Append("  Last: ").Append(Last).Append("\n");
+            if (Self != null) sb.Append("  Self: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ShippingAddressListForCustomerLinks", "self", Self.ToString())).Append("\n");
+            if (First != null) sb.Append("  First: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ShippingAddressListForCustomerLinks", "first", First.ToString())).Append("\n");
+            if (Prev != null) sb.Append("  Prev: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ShippingAddressListForCustomerLinks", "prev", Prev.ToString())).Append("\n");
+            if (Next != null) sb.Append("  Next: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ShippingAddressListForCustomerLinks", "next", Next.ToString())).Append("\n");
+            if (Last != null) sb.Append("  Last: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ShippingAddressListForCustomerLinks", "last", Last.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -100,7 +105,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ShippingAddressListForCustomerLinks", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

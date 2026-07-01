@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -37,7 +37,7 @@ namespace CyberSource.Model
         /// <param name="Risk">Risk.</param>
         /// <param name="CommerceSolutions">CommerceSolutions.</param>
         /// <param name="ValueAddedServices">ValueAddedServices.</param>
-        public InlineResponse2014Setups(InlineResponse2014SetupsPayments Payments = default(InlineResponse2014SetupsPayments), InlineResponse2014SetupsRisk Risk = default(InlineResponse2014SetupsRisk), InlineResponse2014SetupsCommerceSolutions CommerceSolutions = default(InlineResponse2014SetupsCommerceSolutions), InlineResponse2014SetupsValueAddedServices ValueAddedServices = default(InlineResponse2014SetupsValueAddedServices))
+        public InlineResponse2014Setups(PaymentsConfigurationSetup Payments = default(PaymentsConfigurationSetup), InlineResponse2014SetupsRisk Risk = default(InlineResponse2014SetupsRisk), InlineResponse2014SetupsCommerceSolutions CommerceSolutions = default(InlineResponse2014SetupsCommerceSolutions), InlineResponse2014SetupsValueAddedServices ValueAddedServices = default(InlineResponse2014SetupsValueAddedServices))
         {
             this.Payments = Payments;
             this.Risk = Risk;
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Payments
         /// </summary>
-        [DataMember(Name="payments", EmitDefaultValue=false)]
-        public InlineResponse2014SetupsPayments Payments { get; set; }
+        [JsonPropertyName("payments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public PaymentsConfigurationSetup Payments { get; set; }
 
         /// <summary>
         /// Gets or Sets Risk
         /// </summary>
-        [DataMember(Name="risk", EmitDefaultValue=false)]
+        [JsonPropertyName("risk")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse2014SetupsRisk Risk { get; set; }
 
         /// <summary>
         /// Gets or Sets CommerceSolutions
         /// </summary>
-        [DataMember(Name="commerceSolutions", EmitDefaultValue=false)]
+        [JsonPropertyName("commerceSolutions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse2014SetupsCommerceSolutions CommerceSolutions { get; set; }
 
         /// <summary>
         /// Gets or Sets ValueAddedServices
         /// </summary>
-        [DataMember(Name="valueAddedServices", EmitDefaultValue=false)]
+        [JsonPropertyName("valueAddedServices")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse2014SetupsValueAddedServices ValueAddedServices { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2014Setups {\n");
-            if (Payments != null) sb.Append("  Payments: ").Append(Payments).Append("\n");
-            if (Risk != null) sb.Append("  Risk: ").Append(Risk).Append("\n");
-            if (CommerceSolutions != null) sb.Append("  CommerceSolutions: ").Append(CommerceSolutions).Append("\n");
-            if (ValueAddedServices != null) sb.Append("  ValueAddedServices: ").Append(ValueAddedServices).Append("\n");
+            if (Payments != null) sb.Append("  Payments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014Setups", "payments", Payments.ToString())).Append("\n");
+            if (Risk != null) sb.Append("  Risk: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014Setups", "risk", Risk.ToString())).Append("\n");
+            if (CommerceSolutions != null) sb.Append("  CommerceSolutions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014Setups", "commerceSolutions", CommerceSolutions.ToString())).Append("\n");
+            if (ValueAddedServices != null) sb.Append("  ValueAddedServices: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014Setups", "valueAddedServices", ValueAddedServices.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2014Setups", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

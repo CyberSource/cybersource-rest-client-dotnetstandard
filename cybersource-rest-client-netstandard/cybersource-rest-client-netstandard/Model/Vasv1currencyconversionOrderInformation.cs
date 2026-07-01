@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AmountDetails
         /// </summary>
-        [DataMember(Name="amountDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("amountDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Vasv1currencyconversionOrderInformationAmountDetails AmountDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets CurrencyConversion
         /// </summary>
-        [DataMember(Name="currencyConversion", EmitDefaultValue=false)]
+        [JsonPropertyName("currencyConversion")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Vasv1currencyconversionOrderInformationCurrencyConversion CurrencyConversion { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Vasv1currencyconversionOrderInformation {\n");
-            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(AmountDetails).Append("\n");
-            if (CurrencyConversion != null) sb.Append("  CurrencyConversion: ").Append(CurrencyConversion).Append("\n");
+            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv1currencyconversionOrderInformation", "amountDetails", AmountDetails.ToString())).Append("\n");
+            if (CurrencyConversion != null) sb.Append("  CurrencyConversion: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv1currencyconversionOrderInformation", "currencyConversion", CurrencyConversion.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Vasv1currencyconversionOrderInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Reportingv3ReportDownloadsGet400Response" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Reportingv3ReportDownloadsGet400Response() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Reportingv3ReportDownloadsGet400Response" /> class.
@@ -54,28 +54,32 @@ namespace CyberSource.Model
         /// Time of request in UTC.  
         /// </summary>
         /// <value>Time of request in UTC.  </value>
-        [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("submitTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? SubmitTimeUtc { get; set; }
 
         /// <summary>
         /// Documented reason code 
         /// </summary>
         /// <value>Documented reason code </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
         /// Short descriptive message to the user. 
         /// </summary>
         /// <value>Short descriptive message to the user. </value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
         /// Error field list 
         /// </summary>
         /// <value>Error field list </value>
-        [DataMember(Name="details", EmitDefaultValue=false)]
+        [JsonPropertyName("details")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Reportingv3ReportDownloadsGet400ResponseDetails> Details { get; set; }
 
         /// <summary>
@@ -86,10 +90,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Reportingv3ReportDownloadsGet400Response {\n");
-            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
-            if (Details != null) sb.Append("  Details: ").Append(Details).Append("\n");
+            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Reportingv3ReportDownloadsGet400Response", "submitTimeUtc", SubmitTimeUtc.ToString())).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Reportingv3ReportDownloadsGet400Response", "reason", Reason.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Reportingv3ReportDownloadsGet400Response", "message", Message.ToString())).Append("\n");
+            if (Details != null) sb.Append("  Details: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Reportingv3ReportDownloadsGet400Response", "details", Details.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -100,7 +104,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Reportingv3ReportDownloadsGet400Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

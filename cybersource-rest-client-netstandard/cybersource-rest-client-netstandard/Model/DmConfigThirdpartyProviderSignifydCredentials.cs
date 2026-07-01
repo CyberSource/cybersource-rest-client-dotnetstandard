@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets TeamId
         /// </summary>
-        [DataMember(Name="teamId", EmitDefaultValue=false)]
+        [JsonPropertyName("teamId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TeamId { get; set; }
 
         /// <summary>
         /// Gets or Sets ApiKey
         /// </summary>
-        [DataMember(Name="apiKey", EmitDefaultValue=false)]
+        [JsonPropertyName("apiKey")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApiKey { get; set; }
 
         /// <summary>
         /// Gets or Sets SecretKeyid
         /// </summary>
-        [DataMember(Name="secretKeyid", EmitDefaultValue=false)]
+        [JsonPropertyName("secretKeyid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecretKeyid { get; set; }
 
         /// <summary>
         /// Gets or Sets SecretKey
         /// </summary>
-        [DataMember(Name="secretKey", EmitDefaultValue=false)]
+        [JsonPropertyName("secretKey")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecretKey { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class DmConfigThirdpartyProviderSignifydCredentials {\n");
-            if (TeamId != null) sb.Append("  TeamId: ").Append(TeamId).Append("\n");
-            if (ApiKey != null) sb.Append("  ApiKey: ").Append(ApiKey).Append("\n");
-            if (SecretKeyid != null) sb.Append("  SecretKeyid: ").Append(SecretKeyid).Append("\n");
-            if (SecretKey != null) sb.Append("  SecretKey: ").Append(SecretKey).Append("\n");
+            if (TeamId != null) sb.Append("  TeamId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProviderSignifydCredentials", "teamId", TeamId.ToString())).Append("\n");
+            if (ApiKey != null) sb.Append("  ApiKey: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProviderSignifydCredentials", "apiKey", ApiKey.ToString())).Append("\n");
+            if (SecretKeyid != null) sb.Append("  SecretKeyid: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProviderSignifydCredentials", "secretKeyid", SecretKeyid.ToString())).Append("\n");
+            if (SecretKey != null) sb.Append("  SecretKey: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProviderSignifydCredentials", "secretKey", SecretKey.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("DmConfigThirdpartyProviderSignifydCredentials", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

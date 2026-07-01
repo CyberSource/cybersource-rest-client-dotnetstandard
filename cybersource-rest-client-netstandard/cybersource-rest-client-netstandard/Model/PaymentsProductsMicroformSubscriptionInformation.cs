@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -64,27 +64,31 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Enabled
         /// </summary>
-        [DataMember(Name="enabled", EmitDefaultValue=false)]
+        [JsonPropertyName("enabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Enabled { get; set; }
 
         /// <summary>
         /// Possible values: - PENDING - ENABLED_AND_USABLE - ENABLED_NOT_USABLE - DISABLED
         /// </summary>
         /// <value>Possible values: - PENDING - ENABLED_AND_USABLE - ENABLED_NOT_USABLE - DISABLED</value>
-        [DataMember(Name="enablementStatus", EmitDefaultValue=false)]
+        [JsonPropertyName("enablementStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EnablementStatus { get; set; }
 
         /// <summary>
         /// Indicates if the organization can enable this product using self service.  Possible values: - SELF_SERVICEABLE - NOT_SELF_SERVICEABLE - SELF_SERVICE_ONLY
         /// </summary>
         /// <value>Indicates if the organization can enable this product using self service.  Possible values: - SELF_SERVICEABLE - NOT_SELF_SERVICEABLE - SELF_SERVICE_ONLY</value>
-        [DataMember(Name="selfServiceability", EmitDefaultValue=false)]
+        [JsonPropertyName("selfServiceability")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SelfServiceability { get; set; }
 
         /// <summary>
         /// Gets or Sets Features
         /// </summary>
-        [DataMember(Name="features", EmitDefaultValue=false)]
+        [JsonPropertyName("features")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, PaymentsProductsCardProcessingSubscriptionInformationFeatures> Features { get; set; }
 
         /// <summary>
@@ -95,10 +99,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PaymentsProductsMicroformSubscriptionInformation {\n");
-            if (Enabled != null) sb.Append("  Enabled: ").Append(Enabled).Append("\n");
-            if (EnablementStatus != null) sb.Append("  EnablementStatus: ").Append(EnablementStatus).Append("\n");
-            if (SelfServiceability != null) sb.Append("  SelfServiceability: ").Append(SelfServiceability).Append("\n");
-            if (Features != null) sb.Append("  Features: ").Append(Features).Append("\n");
+            if (Enabled != null) sb.Append("  Enabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsMicroformSubscriptionInformation", "enabled", Enabled.ToString())).Append("\n");
+            if (EnablementStatus != null) sb.Append("  EnablementStatus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsMicroformSubscriptionInformation", "enablementStatus", EnablementStatus.ToString())).Append("\n");
+            if (SelfServiceability != null) sb.Append("  SelfServiceability: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsMicroformSubscriptionInformation", "selfServiceability", SelfServiceability.ToString())).Append("\n");
+            if (Features != null) sb.Append("  Features: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsMicroformSubscriptionInformation", "features", Features.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -109,7 +113,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PaymentsProductsMicroformSubscriptionInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

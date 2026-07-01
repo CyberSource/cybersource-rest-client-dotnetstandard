@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,20 +44,23 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets CardArt
         /// </summary>
-        [DataMember(Name="cardArt", EmitDefaultValue=false)]
+        [JsonPropertyName("cardArt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsCardArt CardArt { get; set; }
 
         /// <summary>
         /// Gets or Sets Issuer
         /// </summary>
-        [DataMember(Name="issuer", EmitDefaultValue=false)]
+        [JsonPropertyName("issuer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2TokenizedCardMetadataIssuer Issuer { get; set; }
 
         /// <summary>
         /// The creator of the Tokenized Card.
         /// </summary>
         /// <value>The creator of the Tokenized Card.</value>
-        [DataMember(Name="creator", EmitDefaultValue=false)]
+        [JsonPropertyName("creator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Creator { get; private set; }
 
         /// <summary>
@@ -68,9 +71,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2TokenizedCardMetadata {\n");
-            if (CardArt != null) sb.Append("  CardArt: ").Append(CardArt).Append("\n");
-            if (Issuer != null) sb.Append("  Issuer: ").Append(Issuer).Append("\n");
-            if (Creator != null) sb.Append("  Creator: ").Append(Creator).Append("\n");
+            if (CardArt != null) sb.Append("  CardArt: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadata", "cardArt", CardArt.ToString())).Append("\n");
+            if (Issuer != null) sb.Append("  Issuer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadata", "issuer", Issuer.ToString())).Append("\n");
+            if (Creator != null) sb.Append("  Creator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadata", "creator", Creator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -81,7 +84,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2TokenizedCardMetadata", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

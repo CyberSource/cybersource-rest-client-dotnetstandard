@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Enabled
         /// </summary>
-        [DataMember(Name="enabled", EmitDefaultValue=false)]
+        [JsonPropertyName("enabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Enabled { get; set; }
 
         /// <summary>
         /// Gets or Sets EnableRealTime
         /// </summary>
-        [DataMember(Name="enableRealTime", EmitDefaultValue=false)]
+        [JsonPropertyName("enableRealTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableRealTime { get; set; }
 
         /// <summary>
         /// Gets or Sets UseCybsCredentials
         /// </summary>
-        [DataMember(Name="useCybsCredentials", EmitDefaultValue=false)]
+        [JsonPropertyName("useCybsCredentials")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? UseCybsCredentials { get; set; }
 
         /// <summary>
         /// Gets or Sets Credentials
         /// </summary>
-        [DataMember(Name="credentials", EmitDefaultValue=false)]
+        [JsonPropertyName("credentials")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigThirdpartyProviderCredilinkCredentials Credentials { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class DmConfigThirdpartyProviderCredilink {\n");
-            if (Enabled != null) sb.Append("  Enabled: ").Append(Enabled).Append("\n");
-            if (EnableRealTime != null) sb.Append("  EnableRealTime: ").Append(EnableRealTime).Append("\n");
-            if (UseCybsCredentials != null) sb.Append("  UseCybsCredentials: ").Append(UseCybsCredentials).Append("\n");
-            if (Credentials != null) sb.Append("  Credentials: ").Append(Credentials).Append("\n");
+            if (Enabled != null) sb.Append("  Enabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProviderCredilink", "enabled", Enabled.ToString())).Append("\n");
+            if (EnableRealTime != null) sb.Append("  EnableRealTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProviderCredilink", "enableRealTime", EnableRealTime.ToString())).Append("\n");
+            if (UseCybsCredentials != null) sb.Append("  UseCybsCredentials: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProviderCredilink", "useCybsCredentials", UseCybsCredentials.ToString())).Append("\n");
+            if (Credentials != null) sb.Append("  Credentials: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProviderCredilink", "credentials", Credentials.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("DmConfigThirdpartyProviderCredilink", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

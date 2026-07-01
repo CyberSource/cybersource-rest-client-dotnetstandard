@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Acquirer ID; required unless both businessIdentificationType and businessIdentificationValue are provided. 
         /// </summary>
         /// <value>Acquirer ID; required unless both businessIdentificationType and businessIdentificationValue are provided. </value>
-        [DataMember(Name="acquirerId", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcquirerId { get; set; }
 
         /// <summary>
         /// Acquirer merchant ID; required unless both businessIdentificationType and businessIdentificationValue are provided. 
         /// </summary>
         /// <value>Acquirer merchant ID; required unless both businessIdentificationType and businessIdentificationValue are provided. </value>
-        [DataMember(Name="acquirerMerchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirerMerchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcquirerMerchantId { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsBusinessInformationAcquirer {\n");
-            if (AcquirerId != null) sb.Append("  AcquirerId: ").Append(AcquirerId).Append("\n");
-            if (AcquirerMerchantId != null) sb.Append("  AcquirerMerchantId: ").Append(AcquirerMerchantId).Append("\n");
+            if (AcquirerId != null) sb.Append("  AcquirerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBusinessInformationAcquirer", "acquirerId", AcquirerId.ToString())).Append("\n");
+            if (AcquirerMerchantId != null) sb.Append("  AcquirerMerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBusinessInformationAcquirer", "acquirerMerchantId", AcquirerMerchantId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsBusinessInformationAcquirer", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

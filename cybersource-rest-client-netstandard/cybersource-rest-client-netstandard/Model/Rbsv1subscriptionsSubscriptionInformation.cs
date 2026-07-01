@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Rbsv1subscriptionsSubscriptionInformation" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Rbsv1subscriptionsSubscriptionInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Rbsv1subscriptionsSubscriptionInformation" /> class.
@@ -58,42 +58,48 @@ namespace CyberSource.Model
         /// Subscription code is an optional field, If not provided system generates and assign one 
         /// </summary>
         /// <value>Subscription code is an optional field, If not provided system generates and assign one </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Plan Id. Use Plan Id from Create Plan Service. 
         /// </summary>
         /// <value>Plan Id. Use Plan Id from Create Plan Service. </value>
-        [DataMember(Name="planId", EmitDefaultValue=false)]
+        [JsonPropertyName("planId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PlanId { get; set; }
 
         /// <summary>
         /// Subscription Name 
         /// </summary>
         /// <value>Subscription Name </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Start date of the Subscription  Start date must be in UTC. Format: YYYY-MM-DDThh:mm:ssZ The T separates the date and the time. The Z indicates UTC.  Note: Subscription starts on the day provided in UTC.  **Example** 2022-08-11T22:47:57Z equals August 11, 2022, at 22:47:57 (10:47:57 p.m.). Subscription will start on August 11,2022. 
         /// </summary>
         /// <value>Start date of the Subscription  Start date must be in UTC. Format: YYYY-MM-DDThh:mm:ssZ The T separates the date and the time. The Z indicates UTC.  Note: Subscription starts on the day provided in UTC.  **Example** 2022-08-11T22:47:57Z equals August 11, 2022, at 22:47:57 (10:47:57 p.m.). Subscription will start on August 11,2022. </value>
-        [DataMember(Name="startDate", EmitDefaultValue=false)]
+        [JsonPropertyName("startDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StartDate { get; set; }
 
         /// <summary>
         /// Network transaction identifier that was returned in the payment response field _processorInformation.transactionId_ in the reply message for the original subscription-initializing payment. 
         /// </summary>
         /// <value>Network transaction identifier that was returned in the payment response field _processorInformation.transactionId_ in the reply message for the original subscription-initializing payment. </value>
-        [DataMember(Name="originalTransactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("originalTransactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalTransactionId { get; set; }
 
         /// <summary>
         /// Amount of the original subscription-initializing payment.  *Required when using a Diners or Discover card*. 
         /// </summary>
         /// <value>Amount of the original subscription-initializing payment.  *Required when using a Diners or Discover card*. </value>
-        [DataMember(Name="originalTransactionAuthorizedAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("originalTransactionAuthorizedAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalTransactionAuthorizedAmount { get; set; }
 
         /// <summary>
@@ -104,12 +110,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Rbsv1subscriptionsSubscriptionInformation {\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (PlanId != null) sb.Append("  PlanId: ").Append(PlanId).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (StartDate != null) sb.Append("  StartDate: ").Append(StartDate).Append("\n");
-            if (OriginalTransactionId != null) sb.Append("  OriginalTransactionId: ").Append(OriginalTransactionId).Append("\n");
-            if (OriginalTransactionAuthorizedAmount != null) sb.Append("  OriginalTransactionAuthorizedAmount: ").Append(OriginalTransactionAuthorizedAmount).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1subscriptionsSubscriptionInformation", "code", Code.ToString())).Append("\n");
+            if (PlanId != null) sb.Append("  PlanId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1subscriptionsSubscriptionInformation", "planId", PlanId.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1subscriptionsSubscriptionInformation", "name", Name.ToString())).Append("\n");
+            if (StartDate != null) sb.Append("  StartDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1subscriptionsSubscriptionInformation", "startDate", StartDate.ToString())).Append("\n");
+            if (OriginalTransactionId != null) sb.Append("  OriginalTransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1subscriptionsSubscriptionInformation", "originalTransactionId", OriginalTransactionId.ToString())).Append("\n");
+            if (OriginalTransactionAuthorizedAmount != null) sb.Append("  OriginalTransactionAuthorizedAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Rbsv1subscriptionsSubscriptionInformation", "originalTransactionAuthorizedAmount", OriginalTransactionAuthorizedAmount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -120,7 +126,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Rbsv1subscriptionsSubscriptionInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

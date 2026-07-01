@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,34 +51,39 @@ namespace CyberSource.Model
         /// Identifier for the mandate. #### SEPA/BACS Required for mandates services 
         /// </summary>
         /// <value>Identifier for the mandate. #### SEPA/BACS Required for mandates services </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets ESignIndicator
         /// </summary>
-        [DataMember(Name="eSignIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("eSignIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ESignIndicator { get; set; }
 
         /// <summary>
         /// Identifies the type of schedule as either recurring, one-off, split or usage.  Possible values: - recurring - oneoff - split - usage
         /// </summary>
         /// <value>Identifies the type of schedule as either recurring, one-off, split or usage.  Possible values: - recurring - oneoff - split - usage</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Regularity with which the event occurs.  Possible values: - annual - monthly - quarterly - semiannual - weekly - daily - adhoc - intraday - fortnightly
         /// </summary>
         /// <value>Regularity with which the event occurs.  Possible values: - annual - monthly - quarterly - semiannual - weekly - daily - adhoc - intraday - fortnightly</value>
-        [DataMember(Name="frequency", EmitDefaultValue=false)]
+        [JsonPropertyName("frequency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Frequency { get; set; }
 
         /// <summary>
         /// Date the agreement was revoked (YYYYMMDD) 
         /// </summary>
         /// <value>Date the agreement was revoked (YYYYMMDD) </value>
-        [DataMember(Name="dateRevoked", EmitDefaultValue=false)]
+        [JsonPropertyName("dateRevoked")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DateRevoked { get; set; }
 
         /// <summary>
@@ -89,11 +94,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2billingagreementsidAgreementInformation {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (ESignIndicator != null) sb.Append("  ESignIndicator: ").Append(ESignIndicator).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Frequency != null) sb.Append("  Frequency: ").Append(Frequency).Append("\n");
-            if (DateRevoked != null) sb.Append("  DateRevoked: ").Append(DateRevoked).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsidAgreementInformation", "id", Id.ToString())).Append("\n");
+            if (ESignIndicator != null) sb.Append("  ESignIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsidAgreementInformation", "eSignIndicator", ESignIndicator.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsidAgreementInformation", "type", Type.ToString())).Append("\n");
+            if (Frequency != null) sb.Append("  Frequency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsidAgreementInformation", "frequency", Frequency.ToString())).Append("\n");
+            if (DateRevoked != null) sb.Append("  DateRevoked: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsidAgreementInformation", "dateRevoked", DateRevoked.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,7 +109,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2billingagreementsidAgreementInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

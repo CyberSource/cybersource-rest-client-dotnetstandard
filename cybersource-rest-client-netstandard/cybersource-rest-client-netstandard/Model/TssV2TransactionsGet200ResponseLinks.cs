@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Self
         /// </summary>
-        [DataMember(Name="self", EmitDefaultValue=false)]
+        [JsonPropertyName("self")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseLinksSelf Self { get; set; }
 
         /// <summary>
         /// Gets or Sets RelatedTransactions
         /// </summary>
-        [DataMember(Name="relatedTransactions", EmitDefaultValue=false)]
+        [JsonPropertyName("relatedTransactions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<PtsV2PaymentsPost201ResponseLinksSelf> RelatedTransactions { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseLinks {\n");
-            if (Self != null) sb.Append("  Self: ").Append(Self).Append("\n");
-            if (RelatedTransactions != null) sb.Append("  RelatedTransactions: ").Append(RelatedTransactions).Append("\n");
+            if (Self != null) sb.Append("  Self: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseLinks", "self", Self.ToString())).Append("\n");
+            if (RelatedTransactions != null) sb.Append("  RelatedTransactions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseLinks", "relatedTransactions", RelatedTransactions.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseLinks", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,14 +44,16 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Account
         /// </summary>
-        [DataMember(Name="account", EmitDefaultValue=false)]
+        [JsonPropertyName("account")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponsePaymentInformationBankAccount Account { get; set; }
 
         /// <summary>
         /// Corrected account number from the ACH verification service. 
         /// </summary>
         /// <value>Corrected account number from the ACH verification service. </value>
-        [DataMember(Name="correctedRoutingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("correctedRoutingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CorrectedRoutingNumber { get; set; }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponsePaymentInformationBank {\n");
-            if (Account != null) sb.Append("  Account: ").Append(Account).Append("\n");
-            if (CorrectedRoutingNumber != null) sb.Append("  CorrectedRoutingNumber: ").Append(CorrectedRoutingNumber).Append("\n");
+            if (Account != null) sb.Append("  Account: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponsePaymentInformationBank", "account", Account.ToString())).Append("\n");
+            if (CorrectedRoutingNumber != null) sb.Append("  CorrectedRoutingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponsePaymentInformationBank", "correctedRoutingNumber", CorrectedRoutingNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,7 +76,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponsePaymentInformationBank", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

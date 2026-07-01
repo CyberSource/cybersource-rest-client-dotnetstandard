@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -69,98 +69,112 @@ namespace CyberSource.Model
         /// Title. 
         /// </summary>
         /// <value>Title. </value>
-        [DataMember(Name="title", EmitDefaultValue=false)]
+        [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Title { get; set; }
 
         /// <summary>
         /// Customer&#39;s first name. This name must be the same as the name on the card.  **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.  #### SEPA Required for Create Mandate and Import Mandate #### BACS Required for Import Mandate  #### CyberSource Latin American Processing **Important** For an authorization request, CyberSource Latin American Processing concatenates &#x60;orderInformation.billTo.firstName&#x60; and &#x60;orderInformation.billTo.lastName&#x60;. If the concatenated value exceeds 30 characters, CyberSource Latin American Processing declines the authorization request.\\ **Note** CyberSource Latin American Processing is the name of a specific processing connection that CyberSource supports. In the CyberSource API documentation, CyberSource Latin American Processing does not refer to the general topic of processing in Latin America. The information in this field description is for the specific processing connection called _CyberSource Latin American Processing_. It is not for any other Latin American processors that CyberSource supports.  #### CyberSource through VisaNet Credit card networks cannot process transactions that contain non-ASCII characters. CyberSource through VisaNet accepts and stores non-ASCII characters correctly and displays them correctly in reports. However, the limitations of the credit card networks prevent CyberSource through VisaNet from transmitting non-ASCII characters to the credit card networks. Therefore, CyberSource through VisaNet replaces non-ASCII characters with meaningless ASCII characters for transmission to the credit card networks.  #### For Payouts: This field may be sent only for FDC Compass.  #### Chase Paymentech Solutions Optional field.  ####  Credit Mutuel-CIC Optional field.  #### OmniPay Direct Optional field.  #### SIX Optional field.  #### TSYS Acquiring Solutions Required when &#x60;processingInformation.billPaymentOptions.billPayment&#x3D;true&#x60; and &#x60;pointOfSaleInformation.entryMode&#x3D;keyed&#x60;.  #### Worldpay VAP Optional field.  #### All other processors Not used. 
         /// </summary>
         /// <value>Customer&#39;s first name. This name must be the same as the name on the card.  **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.  #### SEPA Required for Create Mandate and Import Mandate #### BACS Required for Import Mandate  #### CyberSource Latin American Processing **Important** For an authorization request, CyberSource Latin American Processing concatenates &#x60;orderInformation.billTo.firstName&#x60; and &#x60;orderInformation.billTo.lastName&#x60;. If the concatenated value exceeds 30 characters, CyberSource Latin American Processing declines the authorization request.\\ **Note** CyberSource Latin American Processing is the name of a specific processing connection that CyberSource supports. In the CyberSource API documentation, CyberSource Latin American Processing does not refer to the general topic of processing in Latin America. The information in this field description is for the specific processing connection called _CyberSource Latin American Processing_. It is not for any other Latin American processors that CyberSource supports.  #### CyberSource through VisaNet Credit card networks cannot process transactions that contain non-ASCII characters. CyberSource through VisaNet accepts and stores non-ASCII characters correctly and displays them correctly in reports. However, the limitations of the credit card networks prevent CyberSource through VisaNet from transmitting non-ASCII characters to the credit card networks. Therefore, CyberSource through VisaNet replaces non-ASCII characters with meaningless ASCII characters for transmission to the credit card networks.  #### For Payouts: This field may be sent only for FDC Compass.  #### Chase Paymentech Solutions Optional field.  ####  Credit Mutuel-CIC Optional field.  #### OmniPay Direct Optional field.  #### SIX Optional field.  #### TSYS Acquiring Solutions Required when &#x60;processingInformation.billPaymentOptions.billPayment&#x3D;true&#x60; and &#x60;pointOfSaleInformation.entryMode&#x3D;keyed&#x60;.  #### Worldpay VAP Optional field.  #### All other processors Not used. </value>
-        [DataMember(Name="firstName", EmitDefaultValue=false)]
+        [JsonPropertyName("firstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Customer&#39;s middle name. 
         /// </summary>
         /// <value>Customer&#39;s middle name. </value>
-        [DataMember(Name="middleName", EmitDefaultValue=false)]
+        [JsonPropertyName("middleName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MiddleName { get; set; }
 
         /// <summary>
         /// Customer&#39;s last name. This name must be the same as the name on the card.  **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.  #### SEPA Required for Create Mandate and Import Mandate #### BACS Required for Import Mandate #### Chase Paymentech Solutions Optional field.  ####  Credit Mutuel-CIC Optional field.  #### CyberSource Latin American Processing **Important** For an authorization request, CyberSource Latin American Processing concatenates &#x60;orderInformation.billTo.firstName&#x60; and &#x60;orderInformation.billTo.lastName&#x60;. If the concatenated value exceeds 30 characters, CyberSource Latin American Processing declines the authorization request.\\ **Note** CyberSource Latin American Processing is the name of a specific processing connection that CyberSource supports. In the CyberSource API documentation, CyberSource Latin American Processing does not refer to the general topic of processing in Latin America. The information in this field description is for the specific processing connection called CyberSource Latin American Processing. It is not for any other Latin American processors that CyberSource supports.  #### CyberSource through VisaNet Credit card networks cannot process transactions that contain non-ASCII characters. CyberSource through VisaNet accepts and stores non-ASCII characters correctly and displays them correctly in reports. However, the limitations of the credit card networks prevent CyberSource through VisaNet from transmitting non-ASCII characters to the credit card networks. Therefore, CyberSource through VisaNet replaces non-ASCII characters with meaningless ASCII characters for transmission to the credit card networks.  #### For Payouts: This field may be sent only for FDC Compass.  #### OmniPay Direct Optional field.  #### RBS WorldPay Atlanta Optional field.  #### SIX Optional field.  #### TSYS Acquiring Solutions Required when &#x60;processingInformation.billPaymentOptions.billPayment&#x3D;true&#x60; and &#x60;pointOfSaleInformation.entryMode&#x3D;keyed&#x60;.  #### Worldpay VAP Optional field.  #### All other processors Not used. 
         /// </summary>
         /// <value>Customer&#39;s last name. This name must be the same as the name on the card.  **Important** It is your responsibility to determine whether a field is required for the transaction you are requesting.  #### SEPA Required for Create Mandate and Import Mandate #### BACS Required for Import Mandate #### Chase Paymentech Solutions Optional field.  ####  Credit Mutuel-CIC Optional field.  #### CyberSource Latin American Processing **Important** For an authorization request, CyberSource Latin American Processing concatenates &#x60;orderInformation.billTo.firstName&#x60; and &#x60;orderInformation.billTo.lastName&#x60;. If the concatenated value exceeds 30 characters, CyberSource Latin American Processing declines the authorization request.\\ **Note** CyberSource Latin American Processing is the name of a specific processing connection that CyberSource supports. In the CyberSource API documentation, CyberSource Latin American Processing does not refer to the general topic of processing in Latin America. The information in this field description is for the specific processing connection called CyberSource Latin American Processing. It is not for any other Latin American processors that CyberSource supports.  #### CyberSource through VisaNet Credit card networks cannot process transactions that contain non-ASCII characters. CyberSource through VisaNet accepts and stores non-ASCII characters correctly and displays them correctly in reports. However, the limitations of the credit card networks prevent CyberSource through VisaNet from transmitting non-ASCII characters to the credit card networks. Therefore, CyberSource through VisaNet replaces non-ASCII characters with meaningless ASCII characters for transmission to the credit card networks.  #### For Payouts: This field may be sent only for FDC Compass.  #### OmniPay Direct Optional field.  #### RBS WorldPay Atlanta Optional field.  #### SIX Optional field.  #### TSYS Acquiring Solutions Required when &#x60;processingInformation.billPaymentOptions.billPayment&#x3D;true&#x60; and &#x60;pointOfSaleInformation.entryMode&#x3D;keyed&#x60;.  #### Worldpay VAP Optional field.  #### All other processors Not used. </value>
-        [DataMember(Name="lastName", EmitDefaultValue=false)]
+        [JsonPropertyName("lastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastName { get; set; }
 
         /// <summary>
         /// Customer&#39;s name suffix. 
         /// </summary>
         /// <value>Customer&#39;s name suffix. </value>
-        [DataMember(Name="nameSuffix", EmitDefaultValue=false)]
+        [JsonPropertyName("nameSuffix")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NameSuffix { get; set; }
 
         /// <summary>
         /// First line of the billing street address. 
         /// </summary>
         /// <value>First line of the billing street address. </value>
-        [DataMember(Name="address1", EmitDefaultValue=false)]
+        [JsonPropertyName("address1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address1 { get; set; }
 
         /// <summary>
         /// Second line of the billing street address. 
         /// </summary>
         /// <value>Second line of the billing street address. </value>
-        [DataMember(Name="address2", EmitDefaultValue=false)]
+        [JsonPropertyName("address2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address2 { get; set; }
 
         /// <summary>
         /// City of the billing address. 
         /// </summary>
         /// <value>City of the billing address. </value>
-        [DataMember(Name="locality", EmitDefaultValue=false)]
+        [JsonPropertyName("locality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Locality { get; set; }
 
         /// <summary>
         /// Postal code for the billing address. The postal code must consist of 5 to 9 digits. When the billing country is the U.S., the 9-digit postal code must follow this format: [5 digits][dash][4 digits] Example: 12345-6789 When the billing country is Canada, the 6-digit postal code must follow this format: [alpha][numeric][alpha][space][numeric][alpha][numeric] Example: A1B 2C3 
         /// </summary>
         /// <value>Postal code for the billing address. The postal code must consist of 5 to 9 digits. When the billing country is the U.S., the 9-digit postal code must follow this format: [5 digits][dash][4 digits] Example: 12345-6789 When the billing country is Canada, the 6-digit postal code must follow this format: [alpha][numeric][alpha][space][numeric][alpha][numeric] Example: A1B 2C3 </value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// State or province of the billing address. Use the State, Province, and Territory Codes for the United States and Canada. 
         /// </summary>
         /// <value>State or province of the billing address. Use the State, Province, and Territory Codes for the United States and Canada. </value>
-        [DataMember(Name="administrativeArea", EmitDefaultValue=false)]
+        [JsonPropertyName("administrativeArea")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdministrativeArea { get; set; }
 
         /// <summary>
         /// Country of the billing address. Use the two-character ISO Standard Country Codes. 
         /// </summary>
         /// <value>Country of the billing address. Use the two-character ISO Standard Country Codes. </value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// Customer&#39;s email address. 
         /// </summary>
         /// <value>Customer&#39;s email address. </value>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Email { get; set; }
 
         /// <summary>
         /// Customer&#39;s phone number.  It is recommended that you include the country code when the order is from outside the U.S.  #### Chase Paymentech Solutions Optional field.  ####  Credit Mutuel-CIC Optional field.  #### CyberSource through VisaNet Credit card networks cannot process transactions that contain non-ASCII characters. CyberSource through VisaNet accepts and stores non-ASCII characters correctly and displays them correctly in reports. However, the limitations of the credit card networks prevent CyberSource through VisaNet from transmitting non-ASCII characters to the credit card networks. Therefore, CyberSource through VisaNet replaces non-ASCII characters with meaningless ASCII characters for transmission to the credit card networks.  #### For Payouts: This field may be sent only for FDC Compass.  #### OmniPay Direct Optional field.  #### SIX Optional field.  #### TSYS Acquiring Solutions Optional field.  #### Worldpay VAP Optional field.  #### All other processors Not used. 
         /// </summary>
         /// <value>Customer&#39;s phone number.  It is recommended that you include the country code when the order is from outside the U.S.  #### Chase Paymentech Solutions Optional field.  ####  Credit Mutuel-CIC Optional field.  #### CyberSource through VisaNet Credit card networks cannot process transactions that contain non-ASCII characters. CyberSource through VisaNet accepts and stores non-ASCII characters correctly and displays them correctly in reports. However, the limitations of the credit card networks prevent CyberSource through VisaNet from transmitting non-ASCII characters to the credit card networks. Therefore, CyberSource through VisaNet replaces non-ASCII characters with meaningless ASCII characters for transmission to the credit card networks.  #### For Payouts: This field may be sent only for FDC Compass.  #### OmniPay Direct Optional field.  #### SIX Optional field.  #### TSYS Acquiring Solutions Optional field.  #### Worldpay VAP Optional field.  #### All other processors Not used. </value>
-        [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Whether buyer has verified their identity. Used in case of PayPal transactions.  Possible Values: * VERIFIED * UNVERIFIED 
         /// </summary>
         /// <value>Whether buyer has verified their identity. Used in case of PayPal transactions.  Possible Values: * VERIFIED * UNVERIFIED </value>
-        [DataMember(Name="verificationStatus", EmitDefaultValue=false)]
+        [JsonPropertyName("verificationStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VerificationStatus { get; set; }
 
         /// <summary>
@@ -171,20 +185,20 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo {\n");
-            if (Title != null) sb.Append("  Title: ").Append(Title).Append("\n");
-            if (FirstName != null) sb.Append("  FirstName: ").Append(FirstName).Append("\n");
-            if (MiddleName != null) sb.Append("  MiddleName: ").Append(MiddleName).Append("\n");
-            if (LastName != null) sb.Append("  LastName: ").Append(LastName).Append("\n");
-            if (NameSuffix != null) sb.Append("  NameSuffix: ").Append(NameSuffix).Append("\n");
-            if (Address1 != null) sb.Append("  Address1: ").Append(Address1).Append("\n");
-            if (Address2 != null) sb.Append("  Address2: ").Append(Address2).Append("\n");
-            if (Locality != null) sb.Append("  Locality: ").Append(Locality).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
-            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(AdministrativeArea).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
-            if (VerificationStatus != null) sb.Append("  VerificationStatus: ").Append(VerificationStatus).Append("\n");
+            if (Title != null) sb.Append("  Title: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "title", Title.ToString())).Append("\n");
+            if (FirstName != null) sb.Append("  FirstName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "firstName", FirstName.ToString())).Append("\n");
+            if (MiddleName != null) sb.Append("  MiddleName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "middleName", MiddleName.ToString())).Append("\n");
+            if (LastName != null) sb.Append("  LastName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "lastName", LastName.ToString())).Append("\n");
+            if (NameSuffix != null) sb.Append("  NameSuffix: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "nameSuffix", NameSuffix.ToString())).Append("\n");
+            if (Address1 != null) sb.Append("  Address1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "address1", Address1.ToString())).Append("\n");
+            if (Address2 != null) sb.Append("  Address2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "address2", Address2.ToString())).Append("\n");
+            if (Locality != null) sb.Append("  Locality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "locality", Locality.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "postalCode", PostalCode.ToString())).Append("\n");
+            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "administrativeArea", AdministrativeArea.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "country", Country.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "email", Email.ToString())).Append("\n");
+            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "phoneNumber", PhoneNumber.ToString())).Append("\n");
+            if (VerificationStatus != null) sb.Append("  VerificationStatus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", "verificationStatus", VerificationStatus.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -195,7 +209,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsOrderPost201ResponseOrderInformationBillTo", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

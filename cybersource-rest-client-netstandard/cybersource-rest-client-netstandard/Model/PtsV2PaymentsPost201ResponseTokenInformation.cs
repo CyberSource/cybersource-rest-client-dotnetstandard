@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,37 +53,43 @@ namespace CyberSource.Model
         /// A value of true means the card number or bank account used to create an Instrument Identifier was new and did not already exist in the token vault. A value of false means the card number or bank account used to create an Instrument Identifier already existed in the token vault. 
         /// </summary>
         /// <value>A value of true means the card number or bank account used to create an Instrument Identifier was new and did not already exist in the token vault. A value of false means the card number or bank account used to create an Instrument Identifier already existed in the token vault. </value>
-        [DataMember(Name="instrumentidentifierNew", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentidentifierNew")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? InstrumentidentifierNew { get; set; }
 
         /// <summary>
         /// Gets or Sets Customer
         /// </summary>
-        [DataMember(Name="customer", EmitDefaultValue=false)]
+        [JsonPropertyName("customer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseTokenInformationCustomer Customer { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInstrument
         /// </summary>
-        [DataMember(Name="paymentInstrument", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInstrument")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseTokenInformationPaymentInstrument PaymentInstrument { get; set; }
 
         /// <summary>
         /// Gets or Sets ShippingAddress
         /// </summary>
-        [DataMember(Name="shippingAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseTokenInformationShippingAddress ShippingAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets InstrumentIdentifier
         /// </summary>
-        [DataMember(Name="instrumentIdentifier", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentIdentifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseTokenInformationInstrumentIdentifier InstrumentIdentifier { get; set; }
 
         /// <summary>
         /// Gets or Sets ThirdPartyToken
         /// </summary>
-        [DataMember(Name="thirdPartyToken", EmitDefaultValue=false)]
+        [JsonPropertyName("thirdPartyToken")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseTokenInformationThirdPartyToken ThirdPartyToken { get; set; }
 
         /// <summary>
@@ -94,12 +100,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseTokenInformation {\n");
-            if (InstrumentidentifierNew != null) sb.Append("  InstrumentidentifierNew: ").Append(InstrumentidentifierNew).Append("\n");
-            if (Customer != null) sb.Append("  Customer: ").Append(Customer).Append("\n");
-            if (PaymentInstrument != null) sb.Append("  PaymentInstrument: ").Append(PaymentInstrument).Append("\n");
-            if (ShippingAddress != null) sb.Append("  ShippingAddress: ").Append(ShippingAddress).Append("\n");
-            if (InstrumentIdentifier != null) sb.Append("  InstrumentIdentifier: ").Append(InstrumentIdentifier).Append("\n");
-            if (ThirdPartyToken != null) sb.Append("  ThirdPartyToken: ").Append(ThirdPartyToken).Append("\n");
+            if (InstrumentidentifierNew != null) sb.Append("  InstrumentidentifierNew: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseTokenInformation", "instrumentidentifierNew", InstrumentidentifierNew.ToString())).Append("\n");
+            if (Customer != null) sb.Append("  Customer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseTokenInformation", "customer", Customer.ToString())).Append("\n");
+            if (PaymentInstrument != null) sb.Append("  PaymentInstrument: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseTokenInformation", "paymentInstrument", PaymentInstrument.ToString())).Append("\n");
+            if (ShippingAddress != null) sb.Append("  ShippingAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseTokenInformation", "shippingAddress", ShippingAddress.ToString())).Append("\n");
+            if (InstrumentIdentifier != null) sb.Append("  InstrumentIdentifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseTokenInformation", "instrumentIdentifier", InstrumentIdentifier.ToString())).Append("\n");
+            if (ThirdPartyToken != null) sb.Append("  ThirdPartyToken: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseTokenInformation", "thirdPartyToken", ThirdPartyToken.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -110,7 +116,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseTokenInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

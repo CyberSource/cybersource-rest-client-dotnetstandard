@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -35,7 +35,7 @@ namespace CyberSource.Model
         /// </summary>
         /// <param name="TransactionResponseComplete">TransactionResponseComplete.</param>
         /// <param name="TransactionResponseWithPendingEvents">TransactionResponseWithPendingEvents.</param>
-        public AgenticRetrievePaymentCredentialsResponse200(AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete TransactionResponseComplete = default(AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete), AgenticRetrievePaymentCredentialsResponse200TransactionResponseWithPendingEvents TransactionResponseWithPendingEvents = default(AgenticRetrievePaymentCredentialsResponse200TransactionResponseWithPendingEvents))
+        public AgenticRetrievePaymentCredentialsResponse200(AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete TransactionResponseComplete = default(AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete), IccTransactionResponsePendingEvents TransactionResponseWithPendingEvents = default(IccTransactionResponsePendingEvents))
         {
             this.TransactionResponseComplete = TransactionResponseComplete;
             this.TransactionResponseWithPendingEvents = TransactionResponseWithPendingEvents;
@@ -44,14 +44,16 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets TransactionResponseComplete
         /// </summary>
-        [DataMember(Name="TransactionResponseComplete", EmitDefaultValue=false)]
+        [JsonPropertyName("TransactionResponseComplete")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public AgenticRetrievePaymentCredentialsResponse200TransactionResponseComplete TransactionResponseComplete { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionResponseWithPendingEvents
         /// </summary>
-        [DataMember(Name="TransactionResponseWithPendingEvents", EmitDefaultValue=false)]
-        public AgenticRetrievePaymentCredentialsResponse200TransactionResponseWithPendingEvents TransactionResponseWithPendingEvents { get; set; }
+        [JsonPropertyName("TransactionResponseWithPendingEvents")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public IccTransactionResponsePendingEvents TransactionResponseWithPendingEvents { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class AgenticRetrievePaymentCredentialsResponse200 {\n");
-            if (TransactionResponseComplete != null) sb.Append("  TransactionResponseComplete: ").Append(TransactionResponseComplete).Append("\n");
-            if (TransactionResponseWithPendingEvents != null) sb.Append("  TransactionResponseWithPendingEvents: ").Append(TransactionResponseWithPendingEvents).Append("\n");
+            if (TransactionResponseComplete != null) sb.Append("  TransactionResponseComplete: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticRetrievePaymentCredentialsResponse200", "TransactionResponseComplete", TransactionResponseComplete.ToString())).Append("\n");
+            if (TransactionResponseWithPendingEvents != null) sb.Append("  TransactionResponseWithPendingEvents: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticRetrievePaymentCredentialsResponse200", "TransactionResponseWithPendingEvents", TransactionResponseWithPendingEvents.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("AgenticRetrievePaymentCredentialsResponse200", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Account type.  Possible values:  - **C**: Checking.  - **G**: General ledger. This value is supported only on Wells Fargo ACH.  - **S**: Savings (U.S. dollars only).  - **X**: Corporate checking (U.S. dollars only). 
         /// </summary>
         /// <value>Account type.  Possible values:  - **C**: Checking.  - **G**: General ledger. This value is supported only on Wells Fargo ACH.  - **S**: Savings (U.S. dollars only).  - **X**: Corporate checking (U.S. dollars only). </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Account number.  When processing encoded account numbers, use this field for the encoded account number. 
         /// </summary>
         /// <value>Account number.  When processing encoded account numbers, use this field for the encoded account number. </value>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Number { get; set; }
 
         /// <summary>
         /// Identifier for the bank that provided the customer&#39;s encoded account number.  To obtain the bank identifier, contact your processor. 
         /// </summary>
         /// <value>Identifier for the bank that provided the customer&#39;s encoded account number.  To obtain the bank identifier, contact your processor. </value>
-        [DataMember(Name="encoderId", EmitDefaultValue=false)]
+        [JsonPropertyName("encoderId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EncoderId { get; set; }
 
         /// <summary>
         /// Check number.  Chase Paymentech Solutions - Optional. CyberSource ACH Service - Not used. RBS WorldPay Atlanta - Optional on debits. Required on credits. TeleCheck - Strongly recommended on debit requests. Optional on credits. 
         /// </summary>
         /// <value>Check number.  Chase Paymentech Solutions - Optional. CyberSource ACH Service - Not used. RBS WorldPay Atlanta - Optional on debits. Required on credits. TeleCheck - Strongly recommended on debit requests. Optional on credits. </value>
-        [DataMember(Name="checkNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("checkNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CheckNumber { get; set; }
 
         /// <summary>
         /// Image reference number associated with the check. You cannot include any special characters. 
         /// </summary>
         /// <value>Image reference number associated with the check. You cannot include any special characters. </value>
-        [DataMember(Name="checkImageReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("checkImageReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CheckImageReferenceNumber { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidrefundsPaymentInformationBankAccount {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
-            if (EncoderId != null) sb.Append("  EncoderId: ").Append(EncoderId).Append("\n");
-            if (CheckNumber != null) sb.Append("  CheckNumber: ").Append(CheckNumber).Append("\n");
-            if (CheckImageReferenceNumber != null) sb.Append("  CheckImageReferenceNumber: ").Append(CheckImageReferenceNumber).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformationBankAccount", "type", Type.ToString())).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformationBankAccount", "number", Number.ToString())).Append("\n");
+            if (EncoderId != null) sb.Append("  EncoderId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformationBankAccount", "encoderId", EncoderId.ToString())).Append("\n");
+            if (CheckNumber != null) sb.Append("  CheckNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformationBankAccount", "checkNumber", CheckNumber.ToString())).Append("\n");
+            if (CheckImageReferenceNumber != null) sb.Append("  CheckImageReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsPaymentInformationBankAccount", "checkImageReferenceNumber", CheckImageReferenceNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidrefundsPaymentInformationBankAccount", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

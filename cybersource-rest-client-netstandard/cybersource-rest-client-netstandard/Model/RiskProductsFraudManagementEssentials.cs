@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets SubscriptionInformation
         /// </summary>
-        [DataMember(Name="subscriptionInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("subscriptionInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsPayerAuthenticationSubscriptionInformation SubscriptionInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ConfigurationInformation
         /// </summary>
-        [DataMember(Name="configurationInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("configurationInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public RiskProductsFraudManagementEssentialsConfigurationInformation ConfigurationInformation { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class RiskProductsFraudManagementEssentials {\n");
-            if (SubscriptionInformation != null) sb.Append("  SubscriptionInformation: ").Append(SubscriptionInformation).Append("\n");
-            if (ConfigurationInformation != null) sb.Append("  ConfigurationInformation: ").Append(ConfigurationInformation).Append("\n");
+            if (SubscriptionInformation != null) sb.Append("  SubscriptionInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskProductsFraudManagementEssentials", "subscriptionInformation", SubscriptionInformation.ToString())).Append("\n");
+            if (ConfigurationInformation != null) sb.Append("  ConfigurationInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskProductsFraudManagementEssentials", "configurationInformation", ConfigurationInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("RiskProductsFraudManagementEssentials", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// Type of product. This value is used to determine the category that the product is in: electronic, handling, physical, service, or shipping. The default value is **default**.  For a payment, when you set this field to a value other than default or any of the values related to shipping and handling, below fields _quantity_, _productName_, and _productSKU_ are required. 
         /// </summary>
         /// <value>Type of product. This value is used to determine the category that the product is in: electronic, handling, physical, service, or shipping. The default value is **default**.  For a payment, when you set this field to a value other than default or any of the values related to shipping and handling, below fields _quantity_, _productName_, and _productSKU_ are required. </value>
-        [DataMember(Name="productCode", EmitDefaultValue=false)]
+        [JsonPropertyName("productCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductCode { get; set; }
 
         /// <summary>
         /// For PAYMENT and CAPTURE API, this field is required when above _productCode_ is not **default** or one of the values related to shipping and handling. 
         /// </summary>
         /// <value>For PAYMENT and CAPTURE API, this field is required when above _productCode_ is not **default** or one of the values related to shipping and handling. </value>
-        [DataMember(Name="productName", EmitDefaultValue=false)]
+        [JsonPropertyName("productName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductName { get; set; }
 
         /// <summary>
         /// Identification code for the product. For Payment and Capture APIs, this field is required when above &#x60;productCode&#x60; is not **default** or one of the values related to shipping and/or handling. 
         /// </summary>
         /// <value>Identification code for the product. For Payment and Capture APIs, this field is required when above &#x60;productCode&#x60; is not **default** or one of the values related to shipping and/or handling. </value>
-        [DataMember(Name="productSku", EmitDefaultValue=false)]
+        [JsonPropertyName("productSku")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductSku { get; set; }
 
         /// <summary>
         /// Total tax to apply to the product. This value cannot be negative. The tax amount and the offer amount must be in the same currency. The tax amount field is additive.  The following example uses a two-exponent currency such as USD:  1. You include each line item in your request.     - 1st line item has &#x60;amount&#x3D;10.00&#x60;, &#x60;quantity&#x3D;1&#x60;, and &#x60;taxAmount&#x3D;0.80&#x60;     - 2nd line item has &#x60;amount&#x3D;20.00&#x60;, &#x60;quantity&#x3D;1&#x60;, and &#x60;taxAmount&#x3D;1.60&#x60; 2. The total amount authorized will be 32.40, not 30.00 with 2.40 of tax included.  This field is frequently used for Level II and Level III transactions. 
         /// </summary>
         /// <value>Total tax to apply to the product. This value cannot be negative. The tax amount and the offer amount must be in the same currency. The tax amount field is additive.  The following example uses a two-exponent currency such as USD:  1. You include each line item in your request.     - 1st line item has &#x60;amount&#x3D;10.00&#x60;, &#x60;quantity&#x3D;1&#x60;, and &#x60;taxAmount&#x3D;0.80&#x60;     - 2nd line item has &#x60;amount&#x3D;20.00&#x60;, &#x60;quantity&#x3D;1&#x60;, and &#x60;taxAmount&#x3D;1.60&#x60; 2. The total amount authorized will be 32.40, not 30.00 with 2.40 of tax included.  This field is frequently used for Level II and Level III transactions. </value>
-        [DataMember(Name="taxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAmount { get; set; }
 
         /// <summary>
         /// For a payment or capture, this field is required when _productCode_ is not **default** or one of the values related to shipping and handling. 
         /// </summary>
         /// <value>For a payment or capture, this field is required when _productCode_ is not **default** or one of the values related to shipping and handling. </value>
-        [DataMember(Name="quantity", EmitDefaultValue=false)]
+        [JsonPropertyName("quantity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Quantity { get; set; }
 
         /// <summary>
         /// Per-item price of the product. This value cannot be negative. You can include a decimal point (.), but you cannot include any other special characters. CyberSource truncates the amount to the correct number of decimal places. 
         /// </summary>
         /// <value>Per-item price of the product. This value cannot be negative. You can include a decimal point (.), but you cannot include any other special characters. CyberSource truncates the amount to the correct number of decimal places. </value>
-        [DataMember(Name="unitPrice", EmitDefaultValue=false)]
+        [JsonPropertyName("unitPrice")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UnitPrice { get; set; }
 
         /// <summary>
         /// The description for this field is not available.
         /// </summary>
         /// <value>The description for this field is not available.</value>
-        [DataMember(Name="fulfillmentType", EmitDefaultValue=false)]
+        [JsonPropertyName("fulfillmentType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FulfillmentType { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseOrderInformationLineItems {\n");
-            if (ProductCode != null) sb.Append("  ProductCode: ").Append(ProductCode).Append("\n");
-            if (ProductName != null) sb.Append("  ProductName: ").Append(ProductName).Append("\n");
-            if (ProductSku != null) sb.Append("  ProductSku: ").Append(ProductSku).Append("\n");
-            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
-            if (Quantity != null) sb.Append("  Quantity: ").Append(Quantity).Append("\n");
-            if (UnitPrice != null) sb.Append("  UnitPrice: ").Append(UnitPrice).Append("\n");
-            if (FulfillmentType != null) sb.Append("  FulfillmentType: ").Append(FulfillmentType).Append("\n");
+            if (ProductCode != null) sb.Append("  ProductCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseOrderInformationLineItems", "productCode", ProductCode.ToString())).Append("\n");
+            if (ProductName != null) sb.Append("  ProductName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseOrderInformationLineItems", "productName", ProductName.ToString())).Append("\n");
+            if (ProductSku != null) sb.Append("  ProductSku: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseOrderInformationLineItems", "productSku", ProductSku.ToString())).Append("\n");
+            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseOrderInformationLineItems", "taxAmount", TaxAmount.ToString())).Append("\n");
+            if (Quantity != null) sb.Append("  Quantity: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseOrderInformationLineItems", "quantity", Quantity.ToString())).Append("\n");
+            if (UnitPrice != null) sb.Append("  UnitPrice: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseOrderInformationLineItems", "unitPrice", UnitPrice.ToString())).Append("\n");
+            if (FulfillmentType != null) sb.Append("  FulfillmentType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseOrderInformationLineItems", "fulfillmentType", FulfillmentType.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseOrderInformationLineItems", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

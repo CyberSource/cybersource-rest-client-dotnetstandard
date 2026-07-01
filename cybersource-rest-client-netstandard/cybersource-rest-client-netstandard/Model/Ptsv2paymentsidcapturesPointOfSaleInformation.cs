@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,21 +46,24 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Emv
         /// </summary>
-        [DataMember(Name="emv", EmitDefaultValue=false)]
+        [JsonPropertyName("emv")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidcapturesPointOfSaleInformationEmv Emv { get; set; }
 
         /// <summary>
         /// Point-of-sale details for the transaction. This value is returned only for **American Express Direct**. CyberSource generates this value, which consists of a series of codes that identify terminal capability, security data, and specific conditions present at the time the transaction occurred. To comply with the CAPN requirements, this value must be included in all subsequent follow-on requests, such as captures and follow-on credits.  When you perform authorizations, captures, and credits through CyberSource, CyberSource passes this value from the authorization service to the subsequent services for you. However, when you perform authorizations through CyberSource and perform subsequent services through other financial institutions, you must ensure that your requests for captures and credits include this value. 
         /// </summary>
         /// <value>Point-of-sale details for the transaction. This value is returned only for **American Express Direct**. CyberSource generates this value, which consists of a series of codes that identify terminal capability, security data, and specific conditions present at the time the transaction occurred. To comply with the CAPN requirements, this value must be included in all subsequent follow-on requests, such as captures and follow-on credits.  When you perform authorizations, captures, and credits through CyberSource, CyberSource passes this value from the authorization service to the subsequent services for you. However, when you perform authorizations through CyberSource and perform subsequent services through other financial institutions, you must ensure that your requests for captures and credits include this value. </value>
-        [DataMember(Name="amexCapnData", EmitDefaultValue=false)]
+        [JsonPropertyName("amexCapnData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AmexCapnData { get; set; }
 
         /// <summary>
         /// Identifies the Zone PIN Key (ZPK) used for Online PIN processing by providing the 10‑digit Key Set Identifier (KSI). This value indicates that the PIN block is encrypted under a ZPK and enables the Payment Security Service (PSS) to perform  the correct ZPK→ZPK PIN translation during card‑present EMV PIN transactions. 
         /// </summary>
         /// <value>Identifies the Zone PIN Key (ZPK) used for Online PIN processing by providing the 10‑digit Key Set Identifier (KSI). This value indicates that the PIN block is encrypted under a ZPK and enables the Payment Security Service (PSS) to perform  the correct ZPK→ZPK PIN translation during card‑present EMV PIN transactions. </value>
-        [DataMember(Name="encryptedKeyId", EmitDefaultValue=false)]
+        [JsonPropertyName("encryptedKeyId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EncryptedKeyId { get; set; }
 
         /// <summary>
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidcapturesPointOfSaleInformation {\n");
-            if (Emv != null) sb.Append("  Emv: ").Append(Emv).Append("\n");
-            if (AmexCapnData != null) sb.Append("  AmexCapnData: ").Append(AmexCapnData).Append("\n");
-            if (EncryptedKeyId != null) sb.Append("  EncryptedKeyId: ").Append(EncryptedKeyId).Append("\n");
+            if (Emv != null) sb.Append("  Emv: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesPointOfSaleInformation", "emv", Emv.ToString())).Append("\n");
+            if (AmexCapnData != null) sb.Append("  AmexCapnData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesPointOfSaleInformation", "amexCapnData", AmexCapnData.ToString())).Append("\n");
+            if (EncryptedKeyId != null) sb.Append("  EncryptedKeyId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesPointOfSaleInformation", "encryptedKeyId", EncryptedKeyId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidcapturesPointOfSaleInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

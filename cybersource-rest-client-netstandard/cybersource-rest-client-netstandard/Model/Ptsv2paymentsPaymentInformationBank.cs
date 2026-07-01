@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -52,41 +52,47 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Account
         /// </summary>
-        [DataMember(Name="account", EmitDefaultValue=false)]
+        [JsonPropertyName("account")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationBankAccount Account { get; set; }
 
         /// <summary>
         /// Bank routing number. This is also called the _transit number_. 
         /// </summary>
         /// <value>Bank routing number. This is also called the _transit number_. </value>
-        [DataMember(Name="routingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("routingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoutingNumber { get; set; }
 
         /// <summary>
         /// International Bank Account Number (IBAN) for the bank account. For some countries you can provide this number instead of the traditional bank account information. You can use this field only when scoring a direct debit transaction. 
         /// </summary>
         /// <value>International Bank Account Number (IBAN) for the bank account. For some countries you can provide this number instead of the traditional bank account information. You can use this field only when scoring a direct debit transaction. </value>
-        [DataMember(Name="iban", EmitDefaultValue=false)]
+        [JsonPropertyName("iban")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Iban { get; set; }
 
         /// <summary>
         /// Bank&#39;s SWIFT code. You can use this field only when scoring a direct debit transaction. Required only for crossborder transactions. 
         /// </summary>
         /// <value>Bank&#39;s SWIFT code. You can use this field only when scoring a direct debit transaction. Required only for crossborder transactions. </value>
-        [DataMember(Name="swiftCode", EmitDefaultValue=false)]
+        [JsonPropertyName("swiftCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SwiftCode { get; set; }
 
         /// <summary>
         /// Bank code of the consumer&#39;s account 
         /// </summary>
         /// <value>Bank code of the consumer&#39;s account </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Gets or Sets AccountAlias
         /// </summary>
-        [DataMember(Name="accountAlias", EmitDefaultValue=false)]
+        [JsonPropertyName("accountAlias")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationBankAccountAlias AccountAlias { get; set; }
 
         /// <summary>
@@ -97,12 +103,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsPaymentInformationBank {\n");
-            if (Account != null) sb.Append("  Account: ").Append(Account).Append("\n");
-            if (RoutingNumber != null) sb.Append("  RoutingNumber: ").Append(RoutingNumber).Append("\n");
-            if (Iban != null) sb.Append("  Iban: ").Append(Iban).Append("\n");
-            if (SwiftCode != null) sb.Append("  SwiftCode: ").Append(SwiftCode).Append("\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (AccountAlias != null) sb.Append("  AccountAlias: ").Append(AccountAlias).Append("\n");
+            if (Account != null) sb.Append("  Account: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPaymentInformationBank", "account", Account.ToString())).Append("\n");
+            if (RoutingNumber != null) sb.Append("  RoutingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPaymentInformationBank", "routingNumber", RoutingNumber.ToString())).Append("\n");
+            if (Iban != null) sb.Append("  Iban: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPaymentInformationBank", "iban", Iban.ToString())).Append("\n");
+            if (SwiftCode != null) sb.Append("  SwiftCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPaymentInformationBank", "swiftCode", SwiftCode.ToString())).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPaymentInformationBank", "code", Code.ToString())).Append("\n");
+            if (AccountAlias != null) sb.Append("  AccountAlias: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPaymentInformationBank", "accountAlias", AccountAlias.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -113,7 +119,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsPaymentInformationBank", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

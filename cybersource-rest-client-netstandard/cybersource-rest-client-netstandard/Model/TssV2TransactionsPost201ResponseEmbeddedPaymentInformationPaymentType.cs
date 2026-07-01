@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Indicates the payment type used in this payment transaction. Example: credit card, check
         /// </summary>
         /// <value>Indicates the payment type used in this payment transaction. Example: credit card, check</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Indicates the payment method used in this payment transaction.
         /// </summary>
         /// <value>Indicates the payment method used in this payment transaction.</value>
-        [DataMember(Name="method", EmitDefaultValue=false)]
+        [JsonPropertyName("method")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Method { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsPost201ResponseEmbeddedPaymentInformationPaymentType {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Method != null) sb.Append("  Method: ").Append(Method).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedPaymentInformationPaymentType", "type", Type.ToString())).Append("\n");
+            if (Method != null) sb.Append("  Method: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedPaymentInformationPaymentType", "method", Method.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsPost201ResponseEmbeddedPaymentInformationPaymentType", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

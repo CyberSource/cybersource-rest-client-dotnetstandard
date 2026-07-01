@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -60,61 +60,71 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantApplication
         /// </summary>
-        [DataMember(Name="merchantApplication", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantApplication")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationMerchantApplication MerchantApplication { get; set; }
 
         /// <summary>
         /// Gets or Sets Metadata
         /// </summary>
-        [DataMember(Name="metadata", EmitDefaultValue=false)]
+        [JsonPropertyName("metadata")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Object Metadata { get; set; }
 
         /// <summary>
         /// Gets or Sets MetadataExternal
         /// </summary>
-        [DataMember(Name="metadataExternal", EmitDefaultValue=false)]
+        [JsonPropertyName("metadataExternal")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Object MetadataExternal { get; set; }
 
         /// <summary>
         /// Gets or Sets OrganizationInformation
         /// </summary>
-        [DataMember(Name="organizationInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationOrganizationInformation OrganizationInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DeviceInformation
         /// </summary>
-        [DataMember(Name="deviceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationDeviceInformation DeviceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DepositInformation
         /// </summary>
-        [DataMember(Name="depositInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("depositInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationDepositInformation DepositInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets BillingInformation
         /// </summary>
-        [DataMember(Name="billingInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("billingInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationBillingInformation BillingInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets SaleRepresentativeInformation
         /// </summary>
-        [DataMember(Name="saleRepresentativeInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("saleRepresentativeInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationSaleRepresentativeInformation SaleRepresentativeInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets FileAttachmentInformation
         /// </summary>
-        [DataMember(Name="fileAttachmentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("fileAttachmentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfigurationFileAttachmentInformation FileAttachmentInformation { get; set; }
 
         /// <summary>
@@ -125,16 +135,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UnderwritingConfiguration {\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (MerchantApplication != null) sb.Append("  MerchantApplication: ").Append(MerchantApplication).Append("\n");
-            if (Metadata != null) sb.Append("  Metadata: ").Append(Metadata).Append("\n");
-            if (MetadataExternal != null) sb.Append("  MetadataExternal: ").Append(MetadataExternal).Append("\n");
-            if (OrganizationInformation != null) sb.Append("  OrganizationInformation: ").Append(OrganizationInformation).Append("\n");
-            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(DeviceInformation).Append("\n");
-            if (DepositInformation != null) sb.Append("  DepositInformation: ").Append(DepositInformation).Append("\n");
-            if (BillingInformation != null) sb.Append("  BillingInformation: ").Append(BillingInformation).Append("\n");
-            if (SaleRepresentativeInformation != null) sb.Append("  SaleRepresentativeInformation: ").Append(SaleRepresentativeInformation).Append("\n");
-            if (FileAttachmentInformation != null) sb.Append("  FileAttachmentInformation: ").Append(FileAttachmentInformation).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfiguration", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (MerchantApplication != null) sb.Append("  MerchantApplication: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfiguration", "merchantApplication", MerchantApplication.ToString())).Append("\n");
+            if (Metadata != null) sb.Append("  Metadata: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfiguration", "metadata", Metadata.ToString())).Append("\n");
+            if (MetadataExternal != null) sb.Append("  MetadataExternal: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfiguration", "metadataExternal", MetadataExternal.ToString())).Append("\n");
+            if (OrganizationInformation != null) sb.Append("  OrganizationInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfiguration", "organizationInformation", OrganizationInformation.ToString())).Append("\n");
+            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfiguration", "deviceInformation", DeviceInformation.ToString())).Append("\n");
+            if (DepositInformation != null) sb.Append("  DepositInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfiguration", "depositInformation", DepositInformation.ToString())).Append("\n");
+            if (BillingInformation != null) sb.Append("  BillingInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfiguration", "billingInformation", BillingInformation.ToString())).Append("\n");
+            if (SaleRepresentativeInformation != null) sb.Append("  SaleRepresentativeInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfiguration", "saleRepresentativeInformation", SaleRepresentativeInformation.ToString())).Append("\n");
+            if (FileAttachmentInformation != null) sb.Append("  FileAttachmentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfiguration", "fileAttachmentInformation", FileAttachmentInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -145,7 +155,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UnderwritingConfiguration", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

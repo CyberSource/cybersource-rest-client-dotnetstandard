@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Indicates if the service for network tokens for the Mastercard card association are enabled
         /// </summary>
         /// <value>Indicates if the service for network tokens for the Mastercard card association are enabled</value>
-        [DataMember(Name="enableService", EmitDefaultValue=false)]
+        [JsonPropertyName("enableService")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableService { get; set; }
 
         /// <summary>
         /// Indicates if network tokens for the Mastercard card association are enabled for transactions
         /// </summary>
         /// <value>Indicates if network tokens for the Mastercard card association are enabled for transactions</value>
-        [DataMember(Name="enableTransactionalTokens", EmitDefaultValue=false)]
+        [JsonPropertyName("enableTransactionalTokens")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableTransactionalTokens { get; set; }
 
         /// <summary>
         /// Token Requestor ID provided by Mastercard during the registration process for the Tokenization Service  Pattern: ^[0-9]{11}\\\\z$\&quot; Min Length: 11 Max Length: 11 Example:  \&quot;50162233570\&quot; 
         /// </summary>
         /// <value>Token Requestor ID provided by Mastercard during the registration process for the Tokenization Service  Pattern: ^[0-9]{11}\\\\z$\&quot; Min Length: 11 Max Length: 11 Example:  \&quot;50162233570\&quot; </value>
-        [DataMember(Name="tokenRequestorId", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenRequestorId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TokenRequestorId { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsNetworkTokenServicesMastercardDigitalEnablementService {\n");
-            if (EnableService != null) sb.Append("  EnableService: ").Append(EnableService).Append("\n");
-            if (EnableTransactionalTokens != null) sb.Append("  EnableTransactionalTokens: ").Append(EnableTransactionalTokens).Append("\n");
-            if (TokenRequestorId != null) sb.Append("  TokenRequestorId: ").Append(TokenRequestorId).Append("\n");
+            if (EnableService != null) sb.Append("  EnableService: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNetworkTokenServicesMastercardDigitalEnablementService", "enableService", EnableService.ToString())).Append("\n");
+            if (EnableTransactionalTokens != null) sb.Append("  EnableTransactionalTokens: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNetworkTokenServicesMastercardDigitalEnablementService", "enableTransactionalTokens", EnableTransactionalTokens.ToString())).Append("\n");
+            if (TokenRequestorId != null) sb.Append("  TokenRequestorId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsNetworkTokenServicesMastercardDigitalEnablementService", "tokenRequestorId", TokenRequestorId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsNetworkTokenServicesMastercardDigitalEnablementService", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

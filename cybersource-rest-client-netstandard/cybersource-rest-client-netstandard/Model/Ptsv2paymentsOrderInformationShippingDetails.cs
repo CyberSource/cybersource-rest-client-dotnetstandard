@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// Boolean that indicates whether the customer requested gift wrapping for this purchase. This field can contain one of the following values: - true: The customer requested gift wrapping. - false: The customer did not request gift wrapping. 
         /// </summary>
         /// <value>Boolean that indicates whether the customer requested gift wrapping for this purchase. This field can contain one of the following values: - true: The customer requested gift wrapping. - false: The customer did not request gift wrapping. </value>
-        [DataMember(Name="giftWrap", EmitDefaultValue=false)]
+        [JsonPropertyName("giftWrap")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? GiftWrap { get; set; }
 
         /// <summary>
         /// Shipping method for the product. Possible values:   - &#x60;lowcost&#x60;: Lowest-cost service  - &#x60;sameday&#x60;: Courier or same-day service  - &#x60;oneday&#x60;: Next-day or overnight service  - &#x60;twoday&#x60;: Two-day service  - &#x60;threeday&#x60;: Three-day service  - &#x60;pickup&#x60;: Store pick-up  - &#x60;other&#x60;: Other shipping method  - &#x60;none&#x60;: No shipping method because product is a service or subscription  Klarna Advantage Plus additional values:  - &#x60;TO_DOOR&#x60;: Delivery to door  - &#x60;TO_CURB&#x60;: Delivery to curb  - &#x60;TO_MAILBOX&#x60;: Delivery to mailbox  - &#x60;PICKUP_BOX&#x60;: Pickup from box  - &#x60;PICKUP_POINT&#x60;: Pickup from point  - &#x60;PICKUP_STORE&#x60;: Pickup from store  - &#x60;PICKUP_WAREHOUSE&#x60;: Pickup from warehouse  - &#x60;DIGITAL_EMAIL&#x60;: Digital delivery via email  - &#x60;DIGITAL_DOWNLOAD&#x60;: Digital download  - &#x60;DIGITAL_OTHER&#x60;: Other digital delivery  - &#x60;PHYSICAL_OTHER&#x60;: Other physical delivery 
         /// </summary>
         /// <value>Shipping method for the product. Possible values:   - &#x60;lowcost&#x60;: Lowest-cost service  - &#x60;sameday&#x60;: Courier or same-day service  - &#x60;oneday&#x60;: Next-day or overnight service  - &#x60;twoday&#x60;: Two-day service  - &#x60;threeday&#x60;: Three-day service  - &#x60;pickup&#x60;: Store pick-up  - &#x60;other&#x60;: Other shipping method  - &#x60;none&#x60;: No shipping method because product is a service or subscription  Klarna Advantage Plus additional values:  - &#x60;TO_DOOR&#x60;: Delivery to door  - &#x60;TO_CURB&#x60;: Delivery to curb  - &#x60;TO_MAILBOX&#x60;: Delivery to mailbox  - &#x60;PICKUP_BOX&#x60;: Pickup from box  - &#x60;PICKUP_POINT&#x60;: Pickup from point  - &#x60;PICKUP_STORE&#x60;: Pickup from store  - &#x60;PICKUP_WAREHOUSE&#x60;: Pickup from warehouse  - &#x60;DIGITAL_EMAIL&#x60;: Digital delivery via email  - &#x60;DIGITAL_DOWNLOAD&#x60;: Digital download  - &#x60;DIGITAL_OTHER&#x60;: Other digital delivery  - &#x60;PHYSICAL_OTHER&#x60;: Other physical delivery </value>
-        [DataMember(Name="shippingMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShippingMethod { get; set; }
 
         /// <summary>
         /// Postal code for the address from which the goods are shipped, which is used to establish nexus. The default is the postal code associated with your CyberSource account.  The postal code must consist of 5 to 9 digits. When the billing country is the U.S., the 9-digit postal code must follow this format:  &#x60;[5 digits][dash][4 digits]&#x60;  Example 12345-6789  When the billing country is Canada, the 6-digit postal code must follow this format:  &#x60;[alpha][numeric][alpha][space] [numeric][alpha][numeric]&#x60;  Example A1B 2C3  This field is frequently used for Level II and Level III transactions. 
         /// </summary>
         /// <value>Postal code for the address from which the goods are shipped, which is used to establish nexus. The default is the postal code associated with your CyberSource account.  The postal code must consist of 5 to 9 digits. When the billing country is the U.S., the 9-digit postal code must follow this format:  &#x60;[5 digits][dash][4 digits]&#x60;  Example 12345-6789  When the billing country is Canada, the 6-digit postal code must follow this format:  &#x60;[alpha][numeric][alpha][space] [numeric][alpha][numeric]&#x60;  Example A1B 2C3  This field is frequently used for Level II and Level III transactions. </value>
-        [DataMember(Name="shipFromPostalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("shipFromPostalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShipFromPostalCode { get; set; }
 
         /// <summary>
         /// Name of the shipping carrier/company handling the delivery. 
         /// </summary>
         /// <value>Name of the shipping carrier/company handling the delivery. </value>
-        [DataMember(Name="shippingCarrier", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingCarrier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShippingCarrier { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsOrderInformationShippingDetails {\n");
-            if (GiftWrap != null) sb.Append("  GiftWrap: ").Append(GiftWrap).Append("\n");
-            if (ShippingMethod != null) sb.Append("  ShippingMethod: ").Append(ShippingMethod).Append("\n");
-            if (ShipFromPostalCode != null) sb.Append("  ShipFromPostalCode: ").Append(ShipFromPostalCode).Append("\n");
-            if (ShippingCarrier != null) sb.Append("  ShippingCarrier: ").Append(ShippingCarrier).Append("\n");
+            if (GiftWrap != null) sb.Append("  GiftWrap: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationShippingDetails", "giftWrap", GiftWrap.ToString())).Append("\n");
+            if (ShippingMethod != null) sb.Append("  ShippingMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationShippingDetails", "shippingMethod", ShippingMethod.ToString())).Append("\n");
+            if (ShipFromPostalCode != null) sb.Append("  ShipFromPostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationShippingDetails", "shipFromPostalCode", ShipFromPostalCode.ToString())).Append("\n");
+            if (ShippingCarrier != null) sb.Append("  ShippingCarrier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationShippingDetails", "shippingCarrier", ShippingCarrier.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsOrderInformationShippingDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

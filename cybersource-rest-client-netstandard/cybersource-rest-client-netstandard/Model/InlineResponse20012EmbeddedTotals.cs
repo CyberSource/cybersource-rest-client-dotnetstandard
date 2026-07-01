@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -50,31 +50,36 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AcceptedRecords
         /// </summary>
-        [DataMember(Name="acceptedRecords", EmitDefaultValue=false)]
+        [JsonPropertyName("acceptedRecords")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? AcceptedRecords { get; set; }
 
         /// <summary>
         /// Gets or Sets RejectedRecords
         /// </summary>
-        [DataMember(Name="rejectedRecords", EmitDefaultValue=false)]
+        [JsonPropertyName("rejectedRecords")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? RejectedRecords { get; set; }
 
         /// <summary>
         /// Gets or Sets UpdatedRecords
         /// </summary>
-        [DataMember(Name="updatedRecords", EmitDefaultValue=false)]
+        [JsonPropertyName("updatedRecords")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? UpdatedRecords { get; set; }
 
         /// <summary>
         /// Gets or Sets CaResponses
         /// </summary>
-        [DataMember(Name="caResponses", EmitDefaultValue=false)]
+        [JsonPropertyName("caResponses")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? CaResponses { get; set; }
 
         /// <summary>
         /// Gets or Sets CaResponsesOmitted
         /// </summary>
-        [DataMember(Name="caResponsesOmitted", EmitDefaultValue=false)]
+        [JsonPropertyName("caResponsesOmitted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? CaResponsesOmitted { get; set; }
 
         /// <summary>
@@ -85,11 +90,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse20012EmbeddedTotals {\n");
-            if (AcceptedRecords != null) sb.Append("  AcceptedRecords: ").Append(AcceptedRecords).Append("\n");
-            if (RejectedRecords != null) sb.Append("  RejectedRecords: ").Append(RejectedRecords).Append("\n");
-            if (UpdatedRecords != null) sb.Append("  UpdatedRecords: ").Append(UpdatedRecords).Append("\n");
-            if (CaResponses != null) sb.Append("  CaResponses: ").Append(CaResponses).Append("\n");
-            if (CaResponsesOmitted != null) sb.Append("  CaResponsesOmitted: ").Append(CaResponsesOmitted).Append("\n");
+            if (AcceptedRecords != null) sb.Append("  AcceptedRecords: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedTotals", "acceptedRecords", AcceptedRecords.ToString())).Append("\n");
+            if (RejectedRecords != null) sb.Append("  RejectedRecords: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedTotals", "rejectedRecords", RejectedRecords.ToString())).Append("\n");
+            if (UpdatedRecords != null) sb.Append("  UpdatedRecords: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedTotals", "updatedRecords", UpdatedRecords.ToString())).Append("\n");
+            if (CaResponses != null) sb.Append("  CaResponses: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedTotals", "caResponses", CaResponses.ToString())).Append("\n");
+            if (CaResponsesOmitted != null) sb.Append("  CaResponsesOmitted: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012EmbeddedTotals", "caResponsesOmitted", CaResponsesOmitted.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -100,7 +105,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse20012EmbeddedTotals", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,56 +57,64 @@ namespace CyberSource.Model
         /// This field contains the code used by the acquirer to request CPS qualification.  If applicable, V.I.P. changes the code to reflect the results of its CPS evaluation.  Use this field only for clearing with your acquirer. 
         /// </summary>
         /// <value>This field contains the code used by the acquirer to request CPS qualification.  If applicable, V.I.P. changes the code to reflect the results of its CPS evaluation.  Use this field only for clearing with your acquirer. </value>
-        [DataMember(Name="authorizationCharacteristicsIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("authorizationCharacteristicsIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthorizationCharacteristicsIndicator { get; set; }
 
         /// <summary>
         /// This field contains the product account funding source value from Visa required for Clearing. Use this field only for clearing with your acquirer.  Possible values: - C (Credit) - D (Debit) - H (Charge) - P (Prepaid) - R (Deferred debit) 
         /// </summary>
         /// <value>This field contains the product account funding source value from Visa required for Clearing. Use this field only for clearing with your acquirer.  Possible values: - C (Credit) - D (Debit) - H (Charge) - P (Prepaid) - R (Deferred debit) </value>
-        [DataMember(Name="accountfundingSource", EmitDefaultValue=false)]
+        [JsonPropertyName("accountfundingSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountfundingSource { get; set; }
 
         /// <summary>
         /// This 1-digit code identifies the cardholder identification method used for a transaction. Use this field only for clearing with your acquirer.  Possible values: - 0 - Not specified - 1 - Signature - 2 - Online PIN - 3 - Unattended terminal, no PIN pad - 4 - Mail/Telephone/Electronic Commerce 
         /// </summary>
         /// <value>This 1-digit code identifies the cardholder identification method used for a transaction. Use this field only for clearing with your acquirer.  Possible values: - 0 - Not specified - 1 - Signature - 2 - Online PIN - 3 - Unattended terminal, no PIN pad - 4 - Mail/Telephone/Electronic Commerce </value>
-        [DataMember(Name="cardholderIdMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("cardholderIdMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardholderIdMethod { get; set; }
 
         /// <summary>
         /// This field contains the industry for which market-specific data has been provided. Use this field only for clearing with your acquirer.  Possible values: - A: Auto Rental - B: Bill Payment - E: Electronic commerce transaction aggregation - H: Hotel - J: B2B invoice payments - M: Healthcare (medical) - N: Failed Market-Specific Data edit, or not applicable - T: Transit (in healthcare transactions only) - X: Extended Authorization 
         /// </summary>
         /// <value>This field contains the industry for which market-specific data has been provided. Use this field only for clearing with your acquirer.  Possible values: - A: Auto Rental - B: Bill Payment - E: Electronic commerce transaction aggregation - H: Hotel - J: B2B invoice payments - M: Healthcare (medical) - N: Failed Market-Specific Data edit, or not applicable - T: Transit (in healthcare transactions only) - X: Extended Authorization </value>
-        [DataMember(Name="marketSpecificDataIdentifier", EmitDefaultValue=false)]
+        [JsonPropertyName("marketSpecificDataIdentifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MarketSpecificDataIdentifier { get; set; }
 
         /// <summary>
         /// This field contains a 4-digit code indicating the method used to enter the account number and card expiration date and, if an electronic terminal is used, the capability of the terminal to capture online PINs for  transactions processed through VisaNet. Use this field only for clearing with your acquirer.  Possible Values:  Positions 1-2: PAN and Date Entry Mode - 00 - Unknown or terminal not used. - 01 - Manual (key entry). - 02 - Visa: Magnetic stripe read; CVV checking may not be possible. PLUS: Track 2 contents read, but transaction not eligible for CVV checking. - 03 - Optical code - 04 - Reserved for future use. - 05 - Contact integrated circuit card read using VSDC chip data rules; Online CAM authentication method; iCVV checking possible. - 06 - Reserved for future use. - 07 - Contactless device-read-originated using qVSDC chip data rules; Online CAM authentication method; iCVV checking possible. - 10 - Credential on file: Transaction initiated using a credential that has previously been stored on file. - 90 - Magnetic stripe read and exact content of Track 1 or Track 2 included (CVV check possible). - 91 - Contactless device-read-originated using magnetic stripe data rules; dCVV checking is possible; Online CAM checking possible for MSD CVN 17 only. - 95 - Integrated circuit card read; CVV or iCVV checking may not be possible.  Position 3: PIN Entry Capability - 0 - Unknown. - 1 - Indicates terminal can accept and forward online PINs. - 2 - Indicates terminal cannot accept and forward online PINs. - 8 - Terminal PIN pad down. - 9 - Reserved for future use.  Position 4: Fill - 0 - Unused. 
         /// </summary>
         /// <value>This field contains a 4-digit code indicating the method used to enter the account number and card expiration date and, if an electronic terminal is used, the capability of the terminal to capture online PINs for  transactions processed through VisaNet. Use this field only for clearing with your acquirer.  Possible Values:  Positions 1-2: PAN and Date Entry Mode - 00 - Unknown or terminal not used. - 01 - Manual (key entry). - 02 - Visa: Magnetic stripe read; CVV checking may not be possible. PLUS: Track 2 contents read, but transaction not eligible for CVV checking. - 03 - Optical code - 04 - Reserved for future use. - 05 - Contact integrated circuit card read using VSDC chip data rules; Online CAM authentication method; iCVV checking possible. - 06 - Reserved for future use. - 07 - Contactless device-read-originated using qVSDC chip data rules; Online CAM authentication method; iCVV checking possible. - 10 - Credential on file: Transaction initiated using a credential that has previously been stored on file. - 90 - Magnetic stripe read and exact content of Track 1 or Track 2 included (CVV check possible). - 91 - Contactless device-read-originated using magnetic stripe data rules; dCVV checking is possible; Online CAM checking possible for MSD CVN 17 only. - 95 - Integrated circuit card read; CVV or iCVV checking may not be possible.  Position 3: PIN Entry Capability - 0 - Unknown. - 1 - Indicates terminal can accept and forward online PINs. - 2 - Indicates terminal cannot accept and forward online PINs. - 8 - Terminal PIN pad down. - 9 - Reserved for future use.  Position 4: Fill - 0 - Unused. </value>
-        [DataMember(Name="posEntryMode", EmitDefaultValue=false)]
+        [JsonPropertyName("posEntryMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PosEntryMode { get; set; }
 
         /// <summary>
         /// This field contains 2-digit code that identifies the level of  security used in an electronic commerce transaction over an open network (for example, the Internet) or the type of mail or telephone order. Use this field only for clearing with your acquirer.  Possible values: - 00 - Not applicable - 01 - Single transaction of a mail/phone order - 02 - Recurring transaction - 03 - Installment payment - 04 - Unknown classification - 05 - Secure electronic commerce transaction - 06 - Non-authenticated security transaction at a 3-D Secure-capable merchant, and merchant attempted to authenticate the cardholder using 3-D Secure - 07 - Non-authenticated Security Transaction - 08 - Non-secure transaction 
         /// </summary>
         /// <value>This field contains 2-digit code that identifies the level of  security used in an electronic commerce transaction over an open network (for example, the Internet) or the type of mail or telephone order. Use this field only for clearing with your acquirer.  Possible values: - 00 - Not applicable - 01 - Single transaction of a mail/phone order - 02 - Recurring transaction - 03 - Installment payment - 04 - Unknown classification - 05 - Secure electronic commerce transaction - 06 - Non-authenticated security transaction at a 3-D Secure-capable merchant, and merchant attempted to authenticate the cardholder using 3-D Secure - 07 - Non-authenticated Security Transaction - 08 - Non-secure transaction </value>
-        [DataMember(Name="electronicCommerceIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("electronicCommerceIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ElectronicCommerceIndicator { get; set; }
 
         /// <summary>
         /// This field is determined using the point-of-sale spend history and the defined  product-level spend requirement for the country of issuance. Use this field only for clearing with your acquirer.  Possible values: - Space - Spend-processing does not apply. - B - Base spend-assessment threshold defined by Visa has been met. - N - Spend-assessment threshold defined by Visa has not been met. - Q - Qualified spend-assessment threshold defined by Visa has been met. 
         /// </summary>
         /// <value>This field is determined using the point-of-sale spend history and the defined  product-level spend requirement for the country of issuance. Use this field only for clearing with your acquirer.  Possible values: - Space - Spend-processing does not apply. - B - Base spend-assessment threshold defined by Visa has been met. - N - Spend-assessment threshold defined by Visa has not been met. - Q - Qualified spend-assessment threshold defined by Visa has been met. </value>
-        [DataMember(Name="spendQualifiedIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("spendQualifiedIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SpendQualifiedIndicator { get; set; }
 
         /// <summary>
         /// This field ensures that key fields used in authorization messages match their respective fields in clearing transaction. Use this field only for clearing with your acquirer. 
         /// </summary>
         /// <value>This field ensures that key fields used in authorization messages match their respective fields in clearing transaction. Use this field only for clearing with your acquirer. </value>
-        [DataMember(Name="validationCode", EmitDefaultValue=false)]
+        [JsonPropertyName("validationCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ValidationCode { get; set; }
 
         /// <summary>
@@ -117,14 +125,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseClearingInformation {\n");
-            if (AuthorizationCharacteristicsIndicator != null) sb.Append("  AuthorizationCharacteristicsIndicator: ").Append(AuthorizationCharacteristicsIndicator).Append("\n");
-            if (AccountfundingSource != null) sb.Append("  AccountfundingSource: ").Append(AccountfundingSource).Append("\n");
-            if (CardholderIdMethod != null) sb.Append("  CardholderIdMethod: ").Append(CardholderIdMethod).Append("\n");
-            if (MarketSpecificDataIdentifier != null) sb.Append("  MarketSpecificDataIdentifier: ").Append(MarketSpecificDataIdentifier).Append("\n");
-            if (PosEntryMode != null) sb.Append("  PosEntryMode: ").Append(PosEntryMode).Append("\n");
-            if (ElectronicCommerceIndicator != null) sb.Append("  ElectronicCommerceIndicator: ").Append(ElectronicCommerceIndicator).Append("\n");
-            if (SpendQualifiedIndicator != null) sb.Append("  SpendQualifiedIndicator: ").Append(SpendQualifiedIndicator).Append("\n");
-            if (ValidationCode != null) sb.Append("  ValidationCode: ").Append(ValidationCode).Append("\n");
+            if (AuthorizationCharacteristicsIndicator != null) sb.Append("  AuthorizationCharacteristicsIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseClearingInformation", "authorizationCharacteristicsIndicator", AuthorizationCharacteristicsIndicator.ToString())).Append("\n");
+            if (AccountfundingSource != null) sb.Append("  AccountfundingSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseClearingInformation", "accountfundingSource", AccountfundingSource.ToString())).Append("\n");
+            if (CardholderIdMethod != null) sb.Append("  CardholderIdMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseClearingInformation", "cardholderIdMethod", CardholderIdMethod.ToString())).Append("\n");
+            if (MarketSpecificDataIdentifier != null) sb.Append("  MarketSpecificDataIdentifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseClearingInformation", "marketSpecificDataIdentifier", MarketSpecificDataIdentifier.ToString())).Append("\n");
+            if (PosEntryMode != null) sb.Append("  PosEntryMode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseClearingInformation", "posEntryMode", PosEntryMode.ToString())).Append("\n");
+            if (ElectronicCommerceIndicator != null) sb.Append("  ElectronicCommerceIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseClearingInformation", "electronicCommerceIndicator", ElectronicCommerceIndicator.ToString())).Append("\n");
+            if (SpendQualifiedIndicator != null) sb.Append("  SpendQualifiedIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseClearingInformation", "spendQualifiedIndicator", SpendQualifiedIndicator.ToString())).Append("\n");
+            if (ValidationCode != null) sb.Append("  ValidationCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseClearingInformation", "validationCode", ValidationCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -135,7 +143,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseClearingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

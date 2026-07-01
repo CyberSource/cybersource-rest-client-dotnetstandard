@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// An unique identification number assigned by CyberSource to identify the submitted request.
         /// </summary>
         /// <value>An unique identification number assigned by CyberSource to identify the submitted request.</value>
-        [DataMember(Name="requestId", EmitDefaultValue=false)]
+        [JsonPropertyName("requestId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestId { get; set; }
 
         /// <summary>
         /// Settlement Status
         /// </summary>
         /// <value>Settlement Status</value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Settlement Date
         /// </summary>
         /// <value>Settlement Date</value>
-        [DataMember(Name="settlementTime", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? SettlementTime { get; set; }
 
         /// <summary>
         /// ReasonCode
         /// </summary>
         /// <value>ReasonCode</value>
-        [DataMember(Name="reasonCode", EmitDefaultValue=false)]
+        [JsonPropertyName("reasonCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReasonCode { get; set; }
 
         /// <summary>
         /// errorText
         /// </summary>
         /// <value>errorText</value>
-        [DataMember(Name="errorText", EmitDefaultValue=false)]
+        [JsonPropertyName("errorText")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ErrorText { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3PurchaseRefundDetailsGet200ResponseSettlementStatuses {\n");
-            if (RequestId != null) sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (SettlementTime != null) sb.Append("  SettlementTime: ").Append(SettlementTime).Append("\n");
-            if (ReasonCode != null) sb.Append("  ReasonCode: ").Append(ReasonCode).Append("\n");
-            if (ErrorText != null) sb.Append("  ErrorText: ").Append(ErrorText).Append("\n");
+            if (RequestId != null) sb.Append("  RequestId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlementStatuses", "requestId", RequestId.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlementStatuses", "status", Status.ToString())).Append("\n");
+            if (SettlementTime != null) sb.Append("  SettlementTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlementStatuses", "settlementTime", SettlementTime.ToString())).Append("\n");
+            if (ReasonCode != null) sb.Append("  ReasonCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlementStatuses", "reasonCode", ReasonCode.ToString())).Append("\n");
+            if (ErrorText != null) sb.Append("  ErrorText: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseSettlementStatuses", "errorText", ErrorText.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3PurchaseRefundDetailsGet200ResponseSettlementStatuses", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

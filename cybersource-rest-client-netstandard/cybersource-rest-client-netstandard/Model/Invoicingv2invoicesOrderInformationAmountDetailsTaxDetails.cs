@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Indicates the type of tax data for the _taxDetails_ object.  Possible values:  - &#x60;alternate&#x60; - &#x60;local&#x60; - &#x60;national&#x60; - &#x60;vat&#x60; - &#x60;other&#x60; - &#x60;green&#x60; 
         /// </summary>
         /// <value>Indicates the type of tax data for the _taxDetails_ object.  Possible values:  - &#x60;alternate&#x60; - &#x60;local&#x60; - &#x60;national&#x60; - &#x60;vat&#x60; - &#x60;other&#x60; - &#x60;green&#x60; </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Indicates the amount of tax based on the &#x60;type&#x60; field as described in the table below:  | type      | type description | | - -- -- -- -- -- -- |:- -- -- -- -- -- --:| | &#x60;alternate&#x60; | Total amount of alternate tax for the order. | | &#x60;local&#x60;     | Sales tax for the order. | | &#x60;national&#x60;  | National tax for the order. | | &#x60;vat&#x60;       | Total amount of value added tax (VAT) included in the order. | | &#x60;other&#x60;     | Other tax. | | &#x60;green&#x60;     | Green tax amount for Korean Processing. | 
         /// </summary>
         /// <value>Indicates the amount of tax based on the &#x60;type&#x60; field as described in the table below:  | type      | type description | | - -- -- -- -- -- -- |:- -- -- -- -- -- --:| | &#x60;alternate&#x60; | Total amount of alternate tax for the order. | | &#x60;local&#x60;     | Sales tax for the order. | | &#x60;national&#x60;  | National tax for the order. | | &#x60;vat&#x60;       | Total amount of value added tax (VAT) included in the order. | | &#x60;other&#x60;     | Other tax. | | &#x60;green&#x60;     | Green tax amount for Korean Processing. | </value>
-        [DataMember(Name="amount", EmitDefaultValue=false)]
+        [JsonPropertyName("amount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Amount { get; set; }
 
         /// <summary>
         /// Rate of VAT or other tax for the order.  Example 0.040 (&#x3D;4%)  Valid range: 0.01 to 0.99 (1% to 99%, with only whole percentage values accepted; values with additional decimal places will be truncated) 
         /// </summary>
         /// <value>Rate of VAT or other tax for the order.  Example 0.040 (&#x3D;4%)  Valid range: 0.01 to 0.99 (1% to 99%, with only whole percentage values accepted; values with additional decimal places will be truncated) </value>
-        [DataMember(Name="rate", EmitDefaultValue=false)]
+        [JsonPropertyName("rate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Rate { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Invoicingv2invoicesOrderInformationAmountDetailsTaxDetails {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Amount != null) sb.Append("  Amount: ").Append(Amount).Append("\n");
-            if (Rate != null) sb.Append("  Rate: ").Append(Rate).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Invoicingv2invoicesOrderInformationAmountDetailsTaxDetails", "type", Type.ToString())).Append("\n");
+            if (Amount != null) sb.Append("  Amount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Invoicingv2invoicesOrderInformationAmountDetailsTaxDetails", "amount", Amount.ToString())).Append("\n");
+            if (Rate != null) sb.Append("  Rate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Invoicingv2invoicesOrderInformationAmountDetailsTaxDetails", "rate", Rate.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Invoicingv2invoicesOrderInformationAmountDetailsTaxDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

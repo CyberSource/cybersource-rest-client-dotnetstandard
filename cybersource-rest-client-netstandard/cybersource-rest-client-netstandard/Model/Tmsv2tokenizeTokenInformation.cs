@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -39,7 +39,7 @@ namespace CyberSource.Model
         /// <param name="ShippingAddress">ShippingAddress.</param>
         /// <param name="PaymentInstrument">PaymentInstrument.</param>
         /// <param name="InstrumentIdentifier">InstrumentIdentifier.</param>
-        public Tmsv2tokenizeTokenInformation(string Jti = default(string), string TransientTokenJwt = default(string), Tmsv2tokenizeTokenInformationCustomer Customer = default(Tmsv2tokenizeTokenInformationCustomer), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddress ShippingAddress = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddress), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrument PaymentInstrument = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrument), TmsEmbeddedInstrumentIdentifier InstrumentIdentifier = default(TmsEmbeddedInstrumentIdentifier))
+        public Tmsv2tokenizeTokenInformation(string Jti = default(string), string TransientTokenJwt = default(string), Tmsv2tokenizeTokenInformationCustomer Customer = default(Tmsv2tokenizeTokenInformationCustomer), DefaultShippingAddress ShippingAddress = default(DefaultShippingAddress), DefaultPaymentInstrument PaymentInstrument = default(DefaultPaymentInstrument), TmsEmbeddedInstrumentIdentifier InstrumentIdentifier = default(TmsEmbeddedInstrumentIdentifier))
         {
             this.Jti = Jti;
             this.TransientTokenJwt = TransientTokenJwt;
@@ -53,38 +53,44 @@ namespace CyberSource.Model
         /// TMS Transient Token, 64 hexadecimal id value representing captured payment credentials (including Sensitive Authentication Data, e.g. CVV). 
         /// </summary>
         /// <value>TMS Transient Token, 64 hexadecimal id value representing captured payment credentials (including Sensitive Authentication Data, e.g. CVV). </value>
-        [DataMember(Name="jti", EmitDefaultValue=false)]
+        [JsonPropertyName("jti")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Jti { get; set; }
 
         /// <summary>
         /// Flex API Transient Token encoded as JWT (JSON Web Token), e.g. Flex microform or Unified Payment checkout result. 
         /// </summary>
         /// <value>Flex API Transient Token encoded as JWT (JSON Web Token), e.g. Flex microform or Unified Payment checkout result. </value>
-        [DataMember(Name="transientTokenJwt", EmitDefaultValue=false)]
+        [JsonPropertyName("transientTokenJwt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransientTokenJwt { get; set; }
 
         /// <summary>
         /// Gets or Sets Customer
         /// </summary>
-        [DataMember(Name="customer", EmitDefaultValue=false)]
+        [JsonPropertyName("customer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizeTokenInformationCustomer Customer { get; set; }
 
         /// <summary>
         /// Gets or Sets ShippingAddress
         /// </summary>
-        [DataMember(Name="shippingAddress", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddress ShippingAddress { get; set; }
+        [JsonPropertyName("shippingAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultShippingAddress ShippingAddress { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInstrument
         /// </summary>
-        [DataMember(Name="paymentInstrument", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrument PaymentInstrument { get; set; }
+        [JsonPropertyName("paymentInstrument")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultPaymentInstrument PaymentInstrument { get; set; }
 
         /// <summary>
         /// Gets or Sets InstrumentIdentifier
         /// </summary>
-        [DataMember(Name="instrumentIdentifier", EmitDefaultValue=false)]
+        [JsonPropertyName("instrumentIdentifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsEmbeddedInstrumentIdentifier InstrumentIdentifier { get; set; }
 
         /// <summary>
@@ -95,12 +101,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2tokenizeTokenInformation {\n");
-            if (Jti != null) sb.Append("  Jti: ").Append(Jti).Append("\n");
-            if (TransientTokenJwt != null) sb.Append("  TransientTokenJwt: ").Append(TransientTokenJwt).Append("\n");
-            if (Customer != null) sb.Append("  Customer: ").Append(Customer).Append("\n");
-            if (ShippingAddress != null) sb.Append("  ShippingAddress: ").Append(ShippingAddress).Append("\n");
-            if (PaymentInstrument != null) sb.Append("  PaymentInstrument: ").Append(PaymentInstrument).Append("\n");
-            if (InstrumentIdentifier != null) sb.Append("  InstrumentIdentifier: ").Append(InstrumentIdentifier).Append("\n");
+            if (Jti != null) sb.Append("  Jti: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeTokenInformation", "jti", Jti.ToString())).Append("\n");
+            if (TransientTokenJwt != null) sb.Append("  TransientTokenJwt: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeTokenInformation", "transientTokenJwt", TransientTokenJwt.ToString())).Append("\n");
+            if (Customer != null) sb.Append("  Customer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeTokenInformation", "customer", Customer.ToString())).Append("\n");
+            if (ShippingAddress != null) sb.Append("  ShippingAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeTokenInformation", "shippingAddress", ShippingAddress.ToString())).Append("\n");
+            if (PaymentInstrument != null) sb.Append("  PaymentInstrument: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeTokenInformation", "paymentInstrument", PaymentInstrument.ToString())).Append("\n");
+            if (InstrumentIdentifier != null) sb.Append("  InstrumentIdentifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeTokenInformation", "instrumentIdentifier", InstrumentIdentifier.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -111,7 +117,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2tokenizeTokenInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// Category code for the ancillary service that is provided. Obtain the codes from the International Air Transport Association (IATA). **Note** &#x60;#&#x60; is either 0, 1, 2, or 3. **Important** This field is required in the U.S. in order for you to qualify for either the custom payment service (CPS) or the electronic interchange reimbursement fee (EIRF)program. Format: English characters only. Optional request field for ancillary services. 
         /// </summary>
         /// <value>Category code for the ancillary service that is provided. Obtain the codes from the International Air Transport Association (IATA). **Note** &#x60;#&#x60; is either 0, 1, 2, or 3. **Important** This field is required in the U.S. in order for you to qualify for either the custom payment service (CPS) or the electronic interchange reimbursement fee (EIRF)program. Format: English characters only. Optional request field for ancillary services. </value>
-        [DataMember(Name="categoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("categoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CategoryCode { get; set; }
 
         /// <summary>
         /// Subcategory code for the ancillary service category. Obtain the codes from the International Air Transport Association (IATA). **Note** &#x60;#&#x60; is either 0, 1, 2, or 3. Format  English characters only. Optional request field for ancillary services. 
         /// </summary>
         /// <value>Subcategory code for the ancillary service category. Obtain the codes from the International Air Transport Association (IATA). **Note** &#x60;#&#x60; is either 0, 1, 2, or 3. Format  English characters only. Optional request field for ancillary services. </value>
-        [DataMember(Name="subCategoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("subCategoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubCategoryCode { get; set; }
 
         /// <summary>
         /// This field contains the fee amount. This value cannot be negative.  You can include a decimal point (.), but no other special characters. Format: String, 15 characters maximum. Optional field for ancillary services. 
         /// </summary>
         /// <value>This field contains the fee amount. This value cannot be negative.  You can include a decimal point (.), but no other special characters. Format: String, 15 characters maximum. Optional field for ancillary services. </value>
-        [DataMember(Name="feeAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("feeAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FeeAmount { get; set; }
 
         /// <summary>
         /// This field contains the ancillary fee code. Format: Alphanumeric, 4 characters maximum. Optional field for ancillary services. 
         /// </summary>
         /// <value>This field contains the ancillary fee code. Format: Alphanumeric, 4 characters maximum. Optional field for ancillary services. </value>
-        [DataMember(Name="feeCode", EmitDefaultValue=false)]
+        [JsonPropertyName("feeCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FeeCode { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsTravelInformationTransitAirlineAncillaryInformationService {\n");
-            if (CategoryCode != null) sb.Append("  CategoryCode: ").Append(CategoryCode).Append("\n");
-            if (SubCategoryCode != null) sb.Append("  SubCategoryCode: ").Append(SubCategoryCode).Append("\n");
-            if (FeeAmount != null) sb.Append("  FeeAmount: ").Append(FeeAmount).Append("\n");
-            if (FeeCode != null) sb.Append("  FeeCode: ").Append(FeeCode).Append("\n");
+            if (CategoryCode != null) sb.Append("  CategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineAncillaryInformationService", "categoryCode", CategoryCode.ToString())).Append("\n");
+            if (SubCategoryCode != null) sb.Append("  SubCategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineAncillaryInformationService", "subCategoryCode", SubCategoryCode.ToString())).Append("\n");
+            if (FeeAmount != null) sb.Append("  FeeAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineAncillaryInformationService", "feeAmount", FeeAmount.ToString())).Append("\n");
+            if (FeeCode != null) sb.Append("  FeeCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationTransitAirlineAncillaryInformationService", "feeCode", FeeCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsTravelInformationTransitAirlineAncillaryInformationService", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

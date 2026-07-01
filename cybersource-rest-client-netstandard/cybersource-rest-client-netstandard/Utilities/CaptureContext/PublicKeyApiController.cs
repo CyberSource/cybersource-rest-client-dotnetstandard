@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using RestSharp;
 
@@ -6,6 +7,9 @@ namespace CyberSource.Utilities.CaptureContext
 {
     public static class PublicKeyApiController
     {
+        // Only allow alphanumeric characters, hyphens, underscores, and periods in kid values
+        private static readonly Regex SafeKidPattern = new Regex(@"^[a-zA-Z0-9._\-]+$", RegexOptions.Compiled);
+
         /// <summary>
         /// Fetches the public key JSON from the specified endpoint using RestSharp.
         /// </summary>
@@ -17,6 +21,11 @@ namespace CyberSource.Utilities.CaptureContext
             if (string.IsNullOrWhiteSpace(kid))
             {
                 throw new ArgumentException("Key ID (kid) must not be null or empty.", nameof(kid));
+            }
+
+            if (!SafeKidPattern.IsMatch(kid))
+            {
+                throw new ArgumentException("Key ID (kid) contains invalid characters. Only alphanumeric characters, hyphens, underscores, and periods are allowed.", nameof(kid));
             }
 
             if (string.IsNullOrWhiteSpace(runEnvironment))

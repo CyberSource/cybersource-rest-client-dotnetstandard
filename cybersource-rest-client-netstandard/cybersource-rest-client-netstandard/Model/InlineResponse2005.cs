@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -54,43 +54,50 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets RegistrationInformation
         /// </summary>
-        [DataMember(Name="registrationInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("registrationInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Boardingv1registrationsRegistrationInformation RegistrationInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets IntegrationInformation
         /// </summary>
-        [DataMember(Name="integrationInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("integrationInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse2005IntegrationInformation IntegrationInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets OrganizationInformation
         /// </summary>
-        [DataMember(Name="organizationInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Boardingv1registrationsOrganizationInformation OrganizationInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProductInformation
         /// </summary>
-        [DataMember(Name="productInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("productInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Boardingv1registrationsProductInformation ProductInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProductInformationSetups
         /// </summary>
-        [DataMember(Name="productInformationSetups", EmitDefaultValue=false)]
+        [JsonPropertyName("productInformationSetups")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<InlineResponse2014ProductInformationSetups> ProductInformationSetups { get; set; }
 
         /// <summary>
         /// Gets or Sets DocumentInformation
         /// </summary>
-        [DataMember(Name="documentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("documentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Boardingv1registrationsDocumentInformation DocumentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets Details
         /// </summary>
-        [DataMember(Name="details", EmitDefaultValue=false)]
+        [JsonPropertyName("details")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, List<Object>> Details { get; set; }
 
         /// <summary>
@@ -101,13 +108,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2005 {\n");
-            if (RegistrationInformation != null) sb.Append("  RegistrationInformation: ").Append(RegistrationInformation).Append("\n");
-            if (IntegrationInformation != null) sb.Append("  IntegrationInformation: ").Append(IntegrationInformation).Append("\n");
-            if (OrganizationInformation != null) sb.Append("  OrganizationInformation: ").Append(OrganizationInformation).Append("\n");
-            if (ProductInformation != null) sb.Append("  ProductInformation: ").Append(ProductInformation).Append("\n");
-            if (ProductInformationSetups != null) sb.Append("  ProductInformationSetups: ").Append(ProductInformationSetups).Append("\n");
-            if (DocumentInformation != null) sb.Append("  DocumentInformation: ").Append(DocumentInformation).Append("\n");
-            if (Details != null) sb.Append("  Details: ").Append(Details).Append("\n");
+            if (RegistrationInformation != null) sb.Append("  RegistrationInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2005", "registrationInformation", RegistrationInformation.ToString())).Append("\n");
+            if (IntegrationInformation != null) sb.Append("  IntegrationInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2005", "integrationInformation", IntegrationInformation.ToString())).Append("\n");
+            if (OrganizationInformation != null) sb.Append("  OrganizationInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2005", "organizationInformation", OrganizationInformation.ToString())).Append("\n");
+            if (ProductInformation != null) sb.Append("  ProductInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2005", "productInformation", ProductInformation.ToString())).Append("\n");
+            if (ProductInformationSetups != null) sb.Append("  ProductInformationSetups: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2005", "productInformationSetups", ProductInformationSetups.ToString())).Append("\n");
+            if (DocumentInformation != null) sb.Append("  DocumentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2005", "documentInformation", DocumentInformation.ToString())).Append("\n");
+            if (Details != null) sb.Append("  Details: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2005", "details", Details.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -118,7 +125,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2005", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

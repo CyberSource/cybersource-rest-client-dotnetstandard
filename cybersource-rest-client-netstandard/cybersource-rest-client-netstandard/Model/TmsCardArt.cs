@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,45 +49,52 @@ namespace CyberSource.Model
         /// Card foreground color. 
         /// </summary>
         /// <value>Card foreground color. </value>
-        [DataMember(Name="foregroundColor", EmitDefaultValue=false)]
+        [JsonPropertyName("foregroundColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ForegroundColor { get; private set; }
 
         /// <summary>
         /// Card background color. 
         /// </summary>
         /// <value>Card background color. </value>
-        [DataMember(Name="backgroundColor", EmitDefaultValue=false)]
+        [JsonPropertyName("backgroundColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BackgroundColor { get; private set; }
 
         /// <summary>
         /// Card label color. 
         /// </summary>
         /// <value>Card label color. </value>
-        [DataMember(Name="labelColor", EmitDefaultValue=false)]
+        [JsonPropertyName("labelColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LabelColor { get; private set; }
 
         /// <summary>
         /// Gets or Sets CombinedAsset
         /// </summary>
-        [DataMember(Name="combinedAsset", EmitDefaultValue=false)]
+        [JsonPropertyName("combinedAsset")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsCardArtCombinedAsset CombinedAsset { get; set; }
 
         /// <summary>
         /// Gets or Sets BrandLogoAsset
         /// </summary>
-        [DataMember(Name="brandLogoAsset", EmitDefaultValue=false)]
+        [JsonPropertyName("brandLogoAsset")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsCardArtBrandLogoAsset BrandLogoAsset { get; set; }
 
         /// <summary>
         /// Gets or Sets IssuerLogoAsset
         /// </summary>
-        [DataMember(Name="issuerLogoAsset", EmitDefaultValue=false)]
+        [JsonPropertyName("issuerLogoAsset")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsCardArtIssuerLogoAsset IssuerLogoAsset { get; set; }
 
         /// <summary>
         /// Gets or Sets IconAsset
         /// </summary>
-        [DataMember(Name="iconAsset", EmitDefaultValue=false)]
+        [JsonPropertyName("iconAsset")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsCardArtIconAsset IconAsset { get; set; }
 
         /// <summary>
@@ -98,13 +105,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsCardArt {\n");
-            if (ForegroundColor != null) sb.Append("  ForegroundColor: ").Append(ForegroundColor).Append("\n");
-            if (BackgroundColor != null) sb.Append("  BackgroundColor: ").Append(BackgroundColor).Append("\n");
-            if (LabelColor != null) sb.Append("  LabelColor: ").Append(LabelColor).Append("\n");
-            if (CombinedAsset != null) sb.Append("  CombinedAsset: ").Append(CombinedAsset).Append("\n");
-            if (BrandLogoAsset != null) sb.Append("  BrandLogoAsset: ").Append(BrandLogoAsset).Append("\n");
-            if (IssuerLogoAsset != null) sb.Append("  IssuerLogoAsset: ").Append(IssuerLogoAsset).Append("\n");
-            if (IconAsset != null) sb.Append("  IconAsset: ").Append(IconAsset).Append("\n");
+            if (ForegroundColor != null) sb.Append("  ForegroundColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsCardArt", "foregroundColor", ForegroundColor.ToString())).Append("\n");
+            if (BackgroundColor != null) sb.Append("  BackgroundColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsCardArt", "backgroundColor", BackgroundColor.ToString())).Append("\n");
+            if (LabelColor != null) sb.Append("  LabelColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsCardArt", "labelColor", LabelColor.ToString())).Append("\n");
+            if (CombinedAsset != null) sb.Append("  CombinedAsset: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsCardArt", "combinedAsset", CombinedAsset.ToString())).Append("\n");
+            if (BrandLogoAsset != null) sb.Append("  BrandLogoAsset: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsCardArt", "brandLogoAsset", BrandLogoAsset.ToString())).Append("\n");
+            if (IssuerLogoAsset != null) sb.Append("  IssuerLogoAsset: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsCardArt", "issuerLogoAsset", IssuerLogoAsset.ToString())).Append("\n");
+            if (IconAsset != null) sb.Append("  IconAsset: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsCardArt", "iconAsset", IconAsset.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,7 +122,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsCardArt", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

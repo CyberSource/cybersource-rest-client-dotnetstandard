@@ -92,10 +92,7 @@ namespace AuthenticationSdk.core
                 else if (_merchantRequestSettings.RequestType.Equals("POST", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PUT", StringComparison.InvariantCultureIgnoreCase) || _merchantRequestSettings.RequestType.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
                 {
                     _logger.Debug("Content-Type: application/hal+json");
-                    logUtility.LogDebugMessage(_logger, $"digest: {signatureObject.Digest}");
                 }
-
-                logUtility.LogDebugMessage(_logger, $"Signature : {signatureObject.SignatureParam}");
 
                 return signatureObject;
             }

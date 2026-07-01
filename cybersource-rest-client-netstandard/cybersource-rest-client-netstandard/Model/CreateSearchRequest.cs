@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// Indicates whether or not you want to save this search request for future use. The options are:  * &#x60;true&#x60; * &#x60;false&#x60; (default value)  If set to &#x60;true&#x60;, this field returns &#x60;searchID&#x60; in the response. You can use this value to retrieve the details of the saved search. 
         /// </summary>
         /// <value>Indicates whether or not you want to save this search request for future use. The options are:  * &#x60;true&#x60; * &#x60;false&#x60; (default value)  If set to &#x60;true&#x60;, this field returns &#x60;searchID&#x60; in the response. You can use this value to retrieve the details of the saved search. </value>
-        [DataMember(Name="save", EmitDefaultValue=false)]
+        [JsonPropertyName("save")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Save { get; set; }
 
         /// <summary>
         /// Name of this search. When &#x60;save&#x60; is set to &#x60;true&#x60;, this search is saved with this name. 
         /// </summary>
         /// <value>Name of this search. When &#x60;save&#x60; is set to &#x60;true&#x60;, this search is saved with this name. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Merchant&#39;s time zone in ISO standard, using the TZ database format. For example: &#x60;America/Chicago&#x60; 
         /// </summary>
         /// <value>Merchant&#39;s time zone in ISO standard, using the TZ database format. For example: &#x60;America/Chicago&#x60; </value>
-        [DataMember(Name="timezone", EmitDefaultValue=false)]
+        [JsonPropertyName("timezone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Timezone { get; set; }
 
         /// <summary>
         /// String that contains the filters and variables for which you want to search. For information about supported field-filters and operators, see the [Query Filters]( https://developer.cybersource.com/api/developer-guides/dita-txn-search-details-rest-api-dev-guide-102718/txn-search-intro/txn-filtering.html) section of the Transaction Search Developer Guide. 
         /// </summary>
         /// <value>String that contains the filters and variables for which you want to search. For information about supported field-filters and operators, see the [Query Filters]( https://developer.cybersource.com/api/developer-guides/dita-txn-search-details-rest-api-dev-guide-102718/txn-search-intro/txn-filtering.html) section of the Transaction Search Developer Guide. </value>
-        [DataMember(Name="query", EmitDefaultValue=false)]
+        [JsonPropertyName("query")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Query { get; set; }
 
         /// <summary>
         /// Controls the starting point within the collection of results, which defaults to 0. The first item in the collection is retrieved by setting a zero offset.  For example, if you have a collection of 15 items to be retrieved from a resource and you specify limit&#x3D;5, you can retrieve the entire set of results in 3 successive requests by varying the offset value like this:  &#x60;offset&#x3D;0&#x60; &#x60;offset&#x3D;5&#x60; &#x60;offset&#x3D;10&#x60;  **Note:** If an offset larger than the number of results is provided, this will result in no embedded object being returned. 
         /// </summary>
         /// <value>Controls the starting point within the collection of results, which defaults to 0. The first item in the collection is retrieved by setting a zero offset.  For example, if you have a collection of 15 items to be retrieved from a resource and you specify limit&#x3D;5, you can retrieve the entire set of results in 3 successive requests by varying the offset value like this:  &#x60;offset&#x3D;0&#x60; &#x60;offset&#x3D;5&#x60; &#x60;offset&#x3D;10&#x60;  **Note:** If an offset larger than the number of results is provided, this will result in no embedded object being returned. </value>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        [JsonPropertyName("offset")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Offset { get; set; }
 
         /// <summary>
         /// Controls the maximum number of items that may be returned for a single request. The default is 20, the maximum is 2500. 
         /// </summary>
         /// <value>Controls the maximum number of items that may be returned for a single request. The default is 20, the maximum is 2500. </value>
-        [DataMember(Name="limit", EmitDefaultValue=false)]
+        [JsonPropertyName("limit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Limit { get; set; }
 
         /// <summary>
         /// A comma separated list of the following form:  &#x60;submitTimeUtc:desc&#x60; 
         /// </summary>
         /// <value>A comma separated list of the following form:  &#x60;submitTimeUtc:desc&#x60; </value>
-        [DataMember(Name="sort", EmitDefaultValue=false)]
+        [JsonPropertyName("sort")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Sort { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CreateSearchRequest {\n");
-            if (Save != null) sb.Append("  Save: ").Append(Save).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Timezone != null) sb.Append("  Timezone: ").Append(Timezone).Append("\n");
-            if (Query != null) sb.Append("  Query: ").Append(Query).Append("\n");
-            if (Offset != null) sb.Append("  Offset: ").Append(Offset).Append("\n");
-            if (Limit != null) sb.Append("  Limit: ").Append(Limit).Append("\n");
-            if (Sort != null) sb.Append("  Sort: ").Append(Sort).Append("\n");
+            if (Save != null) sb.Append("  Save: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSearchRequest", "save", Save.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSearchRequest", "name", Name.ToString())).Append("\n");
+            if (Timezone != null) sb.Append("  Timezone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSearchRequest", "timezone", Timezone.ToString())).Append("\n");
+            if (Query != null) sb.Append("  Query: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSearchRequest", "query", Query.ToString())).Append("\n");
+            if (Offset != null) sb.Append("  Offset: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSearchRequest", "offset", Offset.ToString())).Append("\n");
+            if (Limit != null) sb.Append("  Limit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSearchRequest", "limit", Limit.ToString())).Append("\n");
+            if (Sort != null) sb.Append("  Sort: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSearchRequest", "sort", Sort.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CreateSearchRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

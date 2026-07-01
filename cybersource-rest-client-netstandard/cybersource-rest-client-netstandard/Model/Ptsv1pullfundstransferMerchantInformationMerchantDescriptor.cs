@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -61,70 +61,80 @@ namespace CyberSource.Model
         /// First line of merchant&#39;s address. 
         /// </summary>
         /// <value>First line of merchant&#39;s address. </value>
-        [DataMember(Name="address1", EmitDefaultValue=false)]
+        [JsonPropertyName("address1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address1 { get; set; }
 
         /// <summary>
         /// The state where the merchant is located. 
         /// </summary>
         /// <value>The state where the merchant is located. </value>
-        [DataMember(Name="administrativeArea", EmitDefaultValue=false)]
+        [JsonPropertyName("administrativeArea")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdministrativeArea { get; set; }
 
         /// <summary>
         /// Contact information for the merchant. This field contains additional information for contacting the merchant, such as an additional phone number or a contact name. 
         /// </summary>
         /// <value>Contact information for the merchant. This field contains additional information for contacting the merchant, such as an additional phone number or a contact name. </value>
-        [DataMember(Name="contact", EmitDefaultValue=false)]
+        [JsonPropertyName("contact")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Contact { get; set; }
 
         /// <summary>
         /// Merchant&#39;s country. 
         /// </summary>
         /// <value>Merchant&#39;s country. </value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// Merchant&#39;s county. Used for US Merchants only.  Send a 3-digit numeric FIPS county code. https://www2.census.gov/programs-surveys/decennial/2010/partners/pdf/FIPS_StateCounty_Code.pdf 
         /// </summary>
         /// <value>Merchant&#39;s county. Used for US Merchants only.  Send a 3-digit numeric FIPS county code. https://www2.census.gov/programs-surveys/decennial/2010/partners/pdf/FIPS_StateCounty_Code.pdf </value>
-        [DataMember(Name="county", EmitDefaultValue=false)]
+        [JsonPropertyName("county")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string County { get; set; }
 
         /// <summary>
         /// Indicates customer service phone number of Merchant. 
         /// </summary>
         /// <value>Indicates customer service phone number of Merchant. </value>
-        [DataMember(Name="customerServicePhoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("customerServicePhoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerServicePhoneNumber { get; set; }
 
         /// <summary>
         /// Merchant&#39;s City. 
         /// </summary>
         /// <value>Merchant&#39;s City. </value>
-        [DataMember(Name="locality", EmitDefaultValue=false)]
+        [JsonPropertyName("locality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Locality { get; set; }
 
         /// <summary>
         /// Merchant&#39;s name. 
         /// </summary>
         /// <value>Merchant&#39;s name. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Merchant&#39;s phone. 
         /// </summary>
         /// <value>Merchant&#39;s phone. </value>
-        [DataMember(Name="phone", EmitDefaultValue=false)]
+        [JsonPropertyName("phone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Phone { get; set; }
 
         /// <summary>
         /// Merchant&#39;s postal code. 
         /// </summary>
         /// <value>Merchant&#39;s postal code. </value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
@@ -135,16 +145,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferMerchantInformationMerchantDescriptor {\n");
-            if (Address1 != null) sb.Append("  Address1: ").Append(Address1).Append("\n");
-            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(AdministrativeArea).Append("\n");
-            if (Contact != null) sb.Append("  Contact: ").Append(Contact).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (County != null) sb.Append("  County: ").Append(County).Append("\n");
-            if (CustomerServicePhoneNumber != null) sb.Append("  CustomerServicePhoneNumber: ").Append(CustomerServicePhoneNumber).Append("\n");
-            if (Locality != null) sb.Append("  Locality: ").Append(Locality).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Phone != null) sb.Append("  Phone: ").Append(Phone).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
+            if (Address1 != null) sb.Append("  Address1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferMerchantInformationMerchantDescriptor", "address1", Address1.ToString())).Append("\n");
+            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferMerchantInformationMerchantDescriptor", "administrativeArea", AdministrativeArea.ToString())).Append("\n");
+            if (Contact != null) sb.Append("  Contact: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferMerchantInformationMerchantDescriptor", "contact", Contact.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferMerchantInformationMerchantDescriptor", "country", Country.ToString())).Append("\n");
+            if (County != null) sb.Append("  County: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferMerchantInformationMerchantDescriptor", "county", County.ToString())).Append("\n");
+            if (CustomerServicePhoneNumber != null) sb.Append("  CustomerServicePhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferMerchantInformationMerchantDescriptor", "customerServicePhoneNumber", CustomerServicePhoneNumber.ToString())).Append("\n");
+            if (Locality != null) sb.Append("  Locality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferMerchantInformationMerchantDescriptor", "locality", Locality.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferMerchantInformationMerchantDescriptor", "name", Name.ToString())).Append("\n");
+            if (Phone != null) sb.Append("  Phone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferMerchantInformationMerchantDescriptor", "phone", Phone.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferMerchantInformationMerchantDescriptor", "postalCode", PostalCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -155,7 +165,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferMerchantInformationMerchantDescriptor", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

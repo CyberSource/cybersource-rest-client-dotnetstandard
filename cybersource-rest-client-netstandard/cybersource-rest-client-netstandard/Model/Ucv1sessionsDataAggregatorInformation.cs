@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -59,62 +59,71 @@ namespace CyberSource.Model
         /// Value that identifies you as a payment aggregator. Get this value from the processor.    #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR6 - Position: 95-105 - Field: Payment Facilitator ID    This field is supported for Visa, Mastercard and Discover Transactions.    **FDC Compass**\\ This value must consist of uppercase characters. 
         /// </summary>
         /// <value>Value that identifies you as a payment aggregator. Get this value from the processor.    #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file5: - Record: CP01 TCR6 - Position: 95-105 - Field: Payment Facilitator ID    This field is supported for Visa, Mastercard and Discover Transactions.    **FDC Compass**\\ This value must consist of uppercase characters. </value>
-        [DataMember(Name="aggregatorId", EmitDefaultValue=false)]
+        [JsonPropertyName("aggregatorId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AggregatorId { get; set; }
 
         /// <summary>
         /// Your payment aggregator business name.    **American Express Direct**\\ The maximum length of the aggregator name depends on the length of the sub-merchant name. The combined length for both values must not exceed 36 characters.\\    #### CyberSource through VisaNet With American Express, the maximum length of the aggregator name depends on the length of the sub-merchant name. The combined length for both values must not exceed 36 characters. The value for this field does not map to the TC 33 capture file5.    **FDC Compass**\\ This value must consist of uppercase characters. 
         /// </summary>
         /// <value>Your payment aggregator business name.    **American Express Direct**\\ The maximum length of the aggregator name depends on the length of the sub-merchant name. The combined length for both values must not exceed 36 characters.\\    #### CyberSource through VisaNet With American Express, the maximum length of the aggregator name depends on the length of the sub-merchant name. The combined length for both values must not exceed 36 characters. The value for this field does not map to the TC 33 capture file5.    **FDC Compass**\\ This value must consist of uppercase characters. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets SubMerchant
         /// </summary>
-        [DataMember(Name="subMerchant", EmitDefaultValue=false)]
+        [JsonPropertyName("subMerchant")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataAggregatorInformationSubMerchant SubMerchant { get; set; }
 
         /// <summary>
         /// Acquirer street name.
         /// </summary>
         /// <value>Acquirer street name.</value>
-        [DataMember(Name="streetAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("streetAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StreetAddress { get; set; }
 
         /// <summary>
         /// Acquirer city.
         /// </summary>
         /// <value>Acquirer city.</value>
-        [DataMember(Name="city", EmitDefaultValue=false)]
+        [JsonPropertyName("city")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string City { get; set; }
 
         /// <summary>
         /// Acquirer state.
         /// </summary>
         /// <value>Acquirer state.</value>
-        [DataMember(Name="state", EmitDefaultValue=false)]
+        [JsonPropertyName("state")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string State { get; set; }
 
         /// <summary>
         /// Acquirer postal code.
         /// </summary>
         /// <value>Acquirer postal code.</value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// Acquirer country.
         /// </summary>
         /// <value>Acquirer country.</value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// Contains transfer service provider name.
         /// </summary>
         /// <value>Contains transfer service provider name.</value>
-        [DataMember(Name="serviceProvidername", EmitDefaultValue=false)]
+        [JsonPropertyName("serviceProvidername")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ServiceProvidername { get; set; }
 
         /// <summary>
@@ -125,15 +134,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataAggregatorInformation {\n");
-            if (AggregatorId != null) sb.Append("  AggregatorId: ").Append(AggregatorId).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (SubMerchant != null) sb.Append("  SubMerchant: ").Append(SubMerchant).Append("\n");
-            if (StreetAddress != null) sb.Append("  StreetAddress: ").Append(StreetAddress).Append("\n");
-            if (City != null) sb.Append("  City: ").Append(City).Append("\n");
-            if (State != null) sb.Append("  State: ").Append(State).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (ServiceProvidername != null) sb.Append("  ServiceProvidername: ").Append(ServiceProvidername).Append("\n");
+            if (AggregatorId != null) sb.Append("  AggregatorId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataAggregatorInformation", "aggregatorId", AggregatorId.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataAggregatorInformation", "name", Name.ToString())).Append("\n");
+            if (SubMerchant != null) sb.Append("  SubMerchant: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataAggregatorInformation", "subMerchant", SubMerchant.ToString())).Append("\n");
+            if (StreetAddress != null) sb.Append("  StreetAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataAggregatorInformation", "streetAddress", StreetAddress.ToString())).Append("\n");
+            if (City != null) sb.Append("  City: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataAggregatorInformation", "city", City.ToString())).Append("\n");
+            if (State != null) sb.Append("  State: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataAggregatorInformation", "state", State.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataAggregatorInformation", "postalCode", PostalCode.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataAggregatorInformation", "country", Country.ToString())).Append("\n");
+            if (ServiceProvidername != null) sb.Append("  ServiceProvidername: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataAggregatorInformation", "serviceProvidername", ServiceProvidername.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -144,7 +153,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataAggregatorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

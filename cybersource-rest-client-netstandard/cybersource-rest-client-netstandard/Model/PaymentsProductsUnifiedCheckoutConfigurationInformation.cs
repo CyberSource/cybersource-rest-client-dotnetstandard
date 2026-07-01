@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -34,7 +34,7 @@ namespace CyberSource.Model
         /// Initializes a new instance of the <see cref="PaymentsProductsUnifiedCheckoutConfigurationInformation" /> class.
         /// </summary>
         /// <param name="Configurations">Configurations.</param>
-        public PaymentsProductsUnifiedCheckoutConfigurationInformation(PaymentsProductsUnifiedCheckoutConfigurationInformationConfigurations Configurations = default(PaymentsProductsUnifiedCheckoutConfigurationInformationConfigurations))
+        public PaymentsProductsUnifiedCheckoutConfigurationInformation(UcConfigurations Configurations = default(UcConfigurations))
         {
             this.Configurations = Configurations;
         }
@@ -42,8 +42,9 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Configurations
         /// </summary>
-        [DataMember(Name="configurations", EmitDefaultValue=false)]
-        public PaymentsProductsUnifiedCheckoutConfigurationInformationConfigurations Configurations { get; set; }
+        [JsonPropertyName("configurations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public UcConfigurations Configurations { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -53,7 +54,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PaymentsProductsUnifiedCheckoutConfigurationInformation {\n");
-            if (Configurations != null) sb.Append("  Configurations: ").Append(Configurations).Append("\n");
+            if (Configurations != null) sb.Append("  Configurations: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsUnifiedCheckoutConfigurationInformation", "configurations", Configurations.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -64,7 +65,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PaymentsProductsUnifiedCheckoutConfigurationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

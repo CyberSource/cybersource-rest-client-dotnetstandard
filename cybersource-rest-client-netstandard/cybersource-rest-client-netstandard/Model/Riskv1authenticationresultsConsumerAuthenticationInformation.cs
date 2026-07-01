@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Riskv1authenticationresultsConsumerAuthenticationInformation" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Riskv1authenticationresultsConsumerAuthenticationInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Riskv1authenticationresultsConsumerAuthenticationInformation" /> class.
@@ -62,56 +62,64 @@ namespace CyberSource.Model
         /// Payer authentication transaction identifier passed to link the check enrollment and validate authentication messages.For Rupay,this is passed only in Re-Send OTP usecase. **Note**: Required for Standard integration, Rupay Seamless server to server integration for enroll service. Required for Hybrid integration for validate service. 
         /// </summary>
         /// <value>Payer authentication transaction identifier passed to link the check enrollment and validate authentication messages.For Rupay,this is passed only in Re-Send OTP usecase. **Note**: Required for Standard integration, Rupay Seamless server to server integration for enroll service. Required for Hybrid integration for validate service. </value>
-        [DataMember(Name="authenticationTransactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("authenticationTransactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthenticationTransactionId { get; set; }
 
         /// <summary>
         /// Authentication transaction context is used as a unique identifier to link enroll and validate call. 
         /// </summary>
         /// <value>Authentication transaction context is used as a unique identifier to link enroll and validate call. </value>
-        [DataMember(Name="authenticationTransactionContext", EmitDefaultValue=false)]
+        [JsonPropertyName("authenticationTransactionContext")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthenticationTransactionContext { get; set; }
 
         /// <summary>
         /// OTP entered by the card holder. 
         /// </summary>
         /// <value>OTP entered by the card holder. </value>
-        [DataMember(Name="otpToken", EmitDefaultValue=false)]
+        [JsonPropertyName("otpToken")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OtpToken { get; set; }
 
         /// <summary>
         /// JWT returned by the 3D Secure provider when the authentication is complete. Required for Hybrid integration if you use the Cybersource-generated access token. Note: Max. length of this field is 2048 characters. 
         /// </summary>
         /// <value>JWT returned by the 3D Secure provider when the authentication is complete. Required for Hybrid integration if you use the Cybersource-generated access token. Note: Max. length of this field is 2048 characters. </value>
-        [DataMember(Name="responseAccessToken", EmitDefaultValue=false)]
+        [JsonPropertyName("responseAccessToken")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseAccessToken { get; set; }
 
         /// <summary>
         /// Provides additional information as to why the PAResStatus has a specific value. 
         /// </summary>
         /// <value>Provides additional information as to why the PAResStatus has a specific value. </value>
-        [DataMember(Name="signedParesStatusReason", EmitDefaultValue=false)]
+        [JsonPropertyName("signedParesStatusReason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SignedParesStatusReason { get; set; }
 
         /// <summary>
         /// Payer authentication result (PARes) message returned by the card-issuing bank. If you need to show proof of enrollment checking, you may need to decrypt and parse the string for the information required by the payment card company. For more information, see \&quot;Storing Payer Authentication Data,\&quot; page 160. Important The value is in base64. You must remove all carriage returns and line feeds before adding the PARes to the request. 
         /// </summary>
         /// <value>Payer authentication result (PARes) message returned by the card-issuing bank. If you need to show proof of enrollment checking, you may need to decrypt and parse the string for the information required by the payment card company. For more information, see \&quot;Storing Payer Authentication Data,\&quot; page 160. Important The value is in base64. You must remove all carriage returns and line feeds before adding the PARes to the request. </value>
-        [DataMember(Name="signedPares", EmitDefaultValue=false)]
+        [JsonPropertyName("signedPares")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SignedPares { get; set; }
 
         /// <summary>
         /// Enables the communication of trusted beneficiary/whitelist status between the ACS, the DS and the 3DS Requestor.  Possible Values:  Y - 3DS Requestor is whitelisted by cardholder  N - 3DS Requestor is not whitelisted by cardholder 
         /// </summary>
         /// <value>Enables the communication of trusted beneficiary/whitelist status between the ACS, the DS and the 3DS Requestor.  Possible Values:  Y - 3DS Requestor is whitelisted by cardholder  N - 3DS Requestor is not whitelisted by cardholder </value>
-        [DataMember(Name="whiteListStatus", EmitDefaultValue=false)]
+        [JsonPropertyName("whiteListStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string WhiteListStatus { get; set; }
 
         /// <summary>
         /// A flag to indicate if the passed credential has been encrypted by the Merchant.
         /// </summary>
         /// <value>A flag to indicate if the passed credential has been encrypted by the Merchant.</value>
-        [DataMember(Name="credentialEncrypted", EmitDefaultValue=false)]
+        [JsonPropertyName("credentialEncrypted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CredentialEncrypted { get; set; }
 
         /// <summary>
@@ -122,14 +130,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1authenticationresultsConsumerAuthenticationInformation {\n");
-            if (AuthenticationTransactionId != null) sb.Append("  AuthenticationTransactionId: ").Append(AuthenticationTransactionId).Append("\n");
-            if (AuthenticationTransactionContext != null) sb.Append("  AuthenticationTransactionContext: ").Append(AuthenticationTransactionContext).Append("\n");
-            if (OtpToken != null) sb.Append("  OtpToken: ").Append(OtpToken).Append("\n");
-            if (ResponseAccessToken != null) sb.Append("  ResponseAccessToken: ").Append(ResponseAccessToken).Append("\n");
-            if (SignedParesStatusReason != null) sb.Append("  SignedParesStatusReason: ").Append(SignedParesStatusReason).Append("\n");
-            if (SignedPares != null) sb.Append("  SignedPares: ").Append(SignedPares).Append("\n");
-            if (WhiteListStatus != null) sb.Append("  WhiteListStatus: ").Append(WhiteListStatus).Append("\n");
-            if (CredentialEncrypted != null) sb.Append("  CredentialEncrypted: ").Append(CredentialEncrypted).Append("\n");
+            if (AuthenticationTransactionId != null) sb.Append("  AuthenticationTransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationresultsConsumerAuthenticationInformation", "authenticationTransactionId", AuthenticationTransactionId.ToString())).Append("\n");
+            if (AuthenticationTransactionContext != null) sb.Append("  AuthenticationTransactionContext: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationresultsConsumerAuthenticationInformation", "authenticationTransactionContext", AuthenticationTransactionContext.ToString())).Append("\n");
+            if (OtpToken != null) sb.Append("  OtpToken: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationresultsConsumerAuthenticationInformation", "otpToken", OtpToken.ToString())).Append("\n");
+            if (ResponseAccessToken != null) sb.Append("  ResponseAccessToken: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationresultsConsumerAuthenticationInformation", "responseAccessToken", ResponseAccessToken.ToString())).Append("\n");
+            if (SignedParesStatusReason != null) sb.Append("  SignedParesStatusReason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationresultsConsumerAuthenticationInformation", "signedParesStatusReason", SignedParesStatusReason.ToString())).Append("\n");
+            if (SignedPares != null) sb.Append("  SignedPares: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationresultsConsumerAuthenticationInformation", "signedPares", SignedPares.ToString())).Append("\n");
+            if (WhiteListStatus != null) sb.Append("  WhiteListStatus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationresultsConsumerAuthenticationInformation", "whiteListStatus", WhiteListStatus.ToString())).Append("\n");
+            if (CredentialEncrypted != null) sb.Append("  CredentialEncrypted: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationresultsConsumerAuthenticationInformation", "credentialEncrypted", CredentialEncrypted.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -140,7 +148,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1authenticationresultsConsumerAuthenticationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

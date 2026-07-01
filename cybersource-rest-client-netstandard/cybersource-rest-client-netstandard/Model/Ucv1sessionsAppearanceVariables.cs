@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -171,455 +171,520 @@ namespace CyberSource.Model
         /// Main background color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request.
         /// </summary>
         /// <value>Main background color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request.</value>
-        [DataMember(Name="backgroundColor", EmitDefaultValue=false)]
+        [JsonPropertyName("backgroundColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BackgroundColor { get; set; }
 
         /// <summary>
         /// Main text color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request.
         /// </summary>
         /// <value>Main text color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request.</value>
-        [DataMember(Name="textColor", EmitDefaultValue=false)]
+        [JsonPropertyName("textColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TextColor { get; set; }
 
         /// <summary>
         /// Header background color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request.
         /// </summary>
         /// <value>Header background color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request.</value>
-        [DataMember(Name="headerBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("headerBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HeaderBackground { get; set; }
 
         /// <summary>
         /// Header text/icon color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request.
         /// </summary>
         /// <value>Header text/icon color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis in the uc/v1/sessions API request.</value>
-        [DataMember(Name="headerForeground", EmitDefaultValue=false)]
+        [JsonPropertyName("headerForeground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HeaderForeground { get; set; }
 
         /// <summary>
         /// Avatar background in header&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request.
         /// </summary>
         /// <value>Avatar background in header&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request.</value>
-        [DataMember(Name="headerAvatarBackgroundColor", EmitDefaultValue=false)]
+        [JsonPropertyName("headerAvatarBackgroundColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HeaderAvatarBackgroundColor { get; set; }
 
         /// <summary>
         /// Avatar text/icon color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request.
         /// </summary>
         /// <value>Avatar text/icon color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request.</value>
-        [DataMember(Name="headerAvatarForegroundColor", EmitDefaultValue=false)]
+        [JsonPropertyName("headerAvatarForegroundColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HeaderAvatarForegroundColor { get; set; }
 
         /// <summary>
         /// Input field background&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request.
         /// </summary>
         /// <value>Input field background&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request.</value>
-        [DataMember(Name="inputBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("inputBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputBackground { get; set; }
 
         /// <summary>
         /// Input text color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request.
         /// </summary>
         /// <value>Input text color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request.</value>
-        [DataMember(Name="inputColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputColor { get; set; }
 
         /// <summary>
         /// Placeholder text color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request.
         /// </summary>
         /// <value>Placeholder text color&lt;br&gt;&lt;br&gt; Optional field::&lt;br&gt; This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request.</value>
-        [DataMember(Name="inputPlaceholderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputPlaceholderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputPlaceholderColor { get; set; }
 
         /// <summary>
         /// Input border color&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Input border color&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputBorderColor { get; set; }
 
         /// <summary>
         /// Border style (solid, dashed, dotted)&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border style (solid, dashed, dotted)&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputBorderStyle", EmitDefaultValue=false)]
+        [JsonPropertyName("inputBorderStyle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputBorderStyle { get; set; }
 
         /// <summary>
         /// Border radius with CSS unit&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border radius with CSS unit&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputBorderRadius", EmitDefaultValue=false)]
+        [JsonPropertyName("inputBorderRadius")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputBorderRadius { get; set; }
 
         /// <summary>
         /// Background on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Background on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputHoverBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("inputHoverBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputHoverBackground { get; set; }
 
         /// <summary>
         /// Text color on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Text color on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputHoverColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputHoverColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputHoverColor { get; set; }
 
         /// <summary>
         /// Placeholder color on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Placeholder color on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputHoverPlaceholderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputHoverPlaceholderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputHoverPlaceholderColor { get; set; }
 
         /// <summary>
         /// Border color on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border color on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputHoverBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputHoverBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputHoverBorderColor { get; set; }
 
         /// <summary>
         /// Border style on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border style on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputHoverBorderStyle", EmitDefaultValue=false)]
+        [JsonPropertyName("inputHoverBorderStyle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputHoverBorderStyle { get; set; }
 
         /// <summary>
         /// Background when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Background when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputFocusedBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("inputFocusedBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputFocusedBackground { get; set; }
 
         /// <summary>
         /// Text color when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Text color when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputFocusedColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputFocusedColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputFocusedColor { get; set; }
 
         /// <summary>
         /// Placeholder color when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Placeholder color when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputFocusedPlaceholderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputFocusedPlaceholderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputFocusedPlaceholderColor { get; set; }
 
         /// <summary>
         /// Border color when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border color when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputFocusedBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputFocusedBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputFocusedBorderColor { get; set; }
 
         /// <summary>
         /// Border style when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border style when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputFocusedBorderStyle", EmitDefaultValue=false)]
+        [JsonPropertyName("inputFocusedBorderStyle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputFocusedBorderStyle { get; set; }
 
         /// <summary>
         /// Background when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Background when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputActiveBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("inputActiveBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputActiveBackground { get; set; }
 
         /// <summary>
         /// Text color when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Text color when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputActiveColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputActiveColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputActiveColor { get; set; }
 
         /// <summary>
         /// Placeholder color when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Placeholder color when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputActivePlaceholderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputActivePlaceholderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputActivePlaceholderColor { get; set; }
 
         /// <summary>
         /// Border color when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border color when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputActiveBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputActiveBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputActiveBorderColor { get; set; }
 
         /// <summary>
         /// Border style when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border style when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputActiveBorderStyle", EmitDefaultValue=false)]
+        [JsonPropertyName("inputActiveBorderStyle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputActiveBorderStyle { get; set; }
 
         /// <summary>
         /// Background when pressed&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Background when pressed&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputPressedBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("inputPressedBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputPressedBackground { get; set; }
 
         /// <summary>
         /// Text color when pressed&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Text color when pressed&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputPressedColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputPressedColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputPressedColor { get; set; }
 
         /// <summary>
         /// Placeholder color when pressed&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Placeholder color when pressed&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputPressedPlaceholderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputPressedPlaceholderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputPressedPlaceholderColor { get; set; }
 
         /// <summary>
         /// Border color when pressed&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border color when pressed&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputPressedBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputPressedBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputPressedBorderColor { get; set; }
 
         /// <summary>
         /// Border style when pressed&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border style when pressed&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputPressedBorderStyle", EmitDefaultValue=false)]
+        [JsonPropertyName("inputPressedBorderStyle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputPressedBorderStyle { get; set; }
 
         /// <summary>
         /// Background on error&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Background on error&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputErrorBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("inputErrorBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputErrorBackground { get; set; }
 
         /// <summary>
         /// Text color on error&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Text color on error&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputErrorColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputErrorColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputErrorColor { get; set; }
 
         /// <summary>
         /// Placeholder color on error&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Placeholder color on error&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputErrorPlaceholderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputErrorPlaceholderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputErrorPlaceholderColor { get; set; }
 
         /// <summary>
         /// Border color on error&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border color on error&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputErrorBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputErrorBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputErrorBorderColor { get; set; }
 
         /// <summary>
         /// Border style on error&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border style on error&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputErrorBorderStyle", EmitDefaultValue=false)]
+        [JsonPropertyName("inputErrorBorderStyle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputErrorBorderStyle { get; set; }
 
         /// <summary>
         /// Background when valid&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Background when valid&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputValidBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("inputValidBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputValidBackground { get; set; }
 
         /// <summary>
         /// Text color when valid&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Text color when valid&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputValidColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputValidColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputValidColor { get; set; }
 
         /// <summary>
         /// Placeholder color when valid&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Placeholder color when valid&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputValidPlaceholderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputValidPlaceholderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputValidPlaceholderColor { get; set; }
 
         /// <summary>
         /// Border color when valid&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border color when valid&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputValidBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("inputValidBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputValidBorderColor { get; set; }
 
         /// <summary>
         /// Border style when valid&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border style when valid&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="inputValidBorderStyle", EmitDefaultValue=false)]
+        [JsonPropertyName("inputValidBorderStyle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InputValidBorderStyle { get; set; }
 
         /// <summary>
         /// Button background&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Button background&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonBackground { get; set; }
 
         /// <summary>
         /// Button text/icon color&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Button text/icon color&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonForeground", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonForeground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonForeground { get; set; }
 
         /// <summary>
         /// Button shape&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Button shape&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonShape", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonShape")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonShape { get; set; }
 
         /// <summary>
         /// Button border color&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Button border color&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonBorderColor { get; set; }
 
         /// <summary>
         /// Border Style&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border Style&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonBorderStyle", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonBorderStyle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonBorderStyle { get; set; }
 
         /// <summary>
         /// Border radius with unit&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border radius with unit&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonBorderRadius", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonBorderRadius")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonBorderRadius { get; set; }
 
         /// <summary>
         /// Background on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Background on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonHoverBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonHoverBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonHoverBackground { get; set; }
 
         /// <summary>
         /// Text color on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Text color on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonHoverForeground", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonHoverForeground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonHoverForeground { get; set; }
 
         /// <summary>
         /// Border color on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border color on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonHoverBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonHoverBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonHoverBorderColor { get; set; }
 
         /// <summary>
         /// Border style on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border style on hover&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonHoverBorderStyle", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonHoverBorderStyle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonHoverBorderStyle { get; set; }
 
         /// <summary>
         /// Background when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Background when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonFocusBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonFocusBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonFocusBackground { get; set; }
 
         /// <summary>
         /// Text color when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Text color when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonFocusForeground", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonFocusForeground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonFocusForeground { get; set; }
 
         /// <summary>
         /// Border color when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border color when focused&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonFocusBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonFocusBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonFocusBorderColor { get; set; }
 
         /// <summary>
         /// Background when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Background when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonActiveBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonActiveBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonActiveBackground { get; set; }
 
         /// <summary>
         /// Text color when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Text color when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonActiveForeground", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonActiveForeground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonActiveForeground { get; set; }
 
         /// <summary>
         /// Border color when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border color when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonActiveBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonActiveBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonActiveBorderColor { get; set; }
 
         /// <summary>
         /// Border style when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border style when active&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonActiveBorderStyle", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonActiveBorderStyle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonActiveBorderStyle { get; set; }
 
         /// <summary>
         /// Background color when disabled&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Background color when disabled&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonDisabledBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonDisabledBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonDisabledBackground { get; set; }
 
         /// <summary>
         /// Text color when disabled&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Text color when disabled&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonDisabledForeground", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonDisabledForeground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonDisabledForeground { get; set; }
 
         /// <summary>
         /// Border color when disabled&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Border color when disabled&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="buttonDisabledBorderColor", EmitDefaultValue=false)]
+        [JsonPropertyName("buttonDisabledBorderColor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ButtonDisabledBorderColor { get; set; }
 
         /// <summary>
         /// Font Family&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Font Family&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. </value>
-        [DataMember(Name="fontFamily", EmitDefaultValue=false)]
+        [JsonPropertyName("fontFamily")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FontFamily { get; set; }
 
         /// <summary>
         /// Global border radius&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Global border radius&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center.  If required, should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="borderRadius", EmitDefaultValue=false)]
+        [JsonPropertyName("borderRadius")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BorderRadius { get; set; }
 
         /// <summary>
         /// Background for payment method list&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Background for payment method list&lt;br&gt;&lt;br&gt;  Optional field: This field can be configured through the Merchant Experience screens in the Business Center. The configured value may be overridden on a per‑transaction basis by passing a value in the uc/v1/sessions API request. </value>
-        [DataMember(Name="paymentSelectionBackground", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentSelectionBackground")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentSelectionBackground { get; set; }
 
         /// <summary>
@@ -630,71 +695,71 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsAppearanceVariables {\n");
-            if (BackgroundColor != null) sb.Append("  BackgroundColor: ").Append(BackgroundColor).Append("\n");
-            if (TextColor != null) sb.Append("  TextColor: ").Append(TextColor).Append("\n");
-            if (HeaderBackground != null) sb.Append("  HeaderBackground: ").Append(HeaderBackground).Append("\n");
-            if (HeaderForeground != null) sb.Append("  HeaderForeground: ").Append(HeaderForeground).Append("\n");
-            if (HeaderAvatarBackgroundColor != null) sb.Append("  HeaderAvatarBackgroundColor: ").Append(HeaderAvatarBackgroundColor).Append("\n");
-            if (HeaderAvatarForegroundColor != null) sb.Append("  HeaderAvatarForegroundColor: ").Append(HeaderAvatarForegroundColor).Append("\n");
-            if (InputBackground != null) sb.Append("  InputBackground: ").Append(InputBackground).Append("\n");
-            if (InputColor != null) sb.Append("  InputColor: ").Append(InputColor).Append("\n");
-            if (InputPlaceholderColor != null) sb.Append("  InputPlaceholderColor: ").Append(InputPlaceholderColor).Append("\n");
-            if (InputBorderColor != null) sb.Append("  InputBorderColor: ").Append(InputBorderColor).Append("\n");
-            if (InputBorderStyle != null) sb.Append("  InputBorderStyle: ").Append(InputBorderStyle).Append("\n");
-            if (InputBorderRadius != null) sb.Append("  InputBorderRadius: ").Append(InputBorderRadius).Append("\n");
-            if (InputHoverBackground != null) sb.Append("  InputHoverBackground: ").Append(InputHoverBackground).Append("\n");
-            if (InputHoverColor != null) sb.Append("  InputHoverColor: ").Append(InputHoverColor).Append("\n");
-            if (InputHoverPlaceholderColor != null) sb.Append("  InputHoverPlaceholderColor: ").Append(InputHoverPlaceholderColor).Append("\n");
-            if (InputHoverBorderColor != null) sb.Append("  InputHoverBorderColor: ").Append(InputHoverBorderColor).Append("\n");
-            if (InputHoverBorderStyle != null) sb.Append("  InputHoverBorderStyle: ").Append(InputHoverBorderStyle).Append("\n");
-            if (InputFocusedBackground != null) sb.Append("  InputFocusedBackground: ").Append(InputFocusedBackground).Append("\n");
-            if (InputFocusedColor != null) sb.Append("  InputFocusedColor: ").Append(InputFocusedColor).Append("\n");
-            if (InputFocusedPlaceholderColor != null) sb.Append("  InputFocusedPlaceholderColor: ").Append(InputFocusedPlaceholderColor).Append("\n");
-            if (InputFocusedBorderColor != null) sb.Append("  InputFocusedBorderColor: ").Append(InputFocusedBorderColor).Append("\n");
-            if (InputFocusedBorderStyle != null) sb.Append("  InputFocusedBorderStyle: ").Append(InputFocusedBorderStyle).Append("\n");
-            if (InputActiveBackground != null) sb.Append("  InputActiveBackground: ").Append(InputActiveBackground).Append("\n");
-            if (InputActiveColor != null) sb.Append("  InputActiveColor: ").Append(InputActiveColor).Append("\n");
-            if (InputActivePlaceholderColor != null) sb.Append("  InputActivePlaceholderColor: ").Append(InputActivePlaceholderColor).Append("\n");
-            if (InputActiveBorderColor != null) sb.Append("  InputActiveBorderColor: ").Append(InputActiveBorderColor).Append("\n");
-            if (InputActiveBorderStyle != null) sb.Append("  InputActiveBorderStyle: ").Append(InputActiveBorderStyle).Append("\n");
-            if (InputPressedBackground != null) sb.Append("  InputPressedBackground: ").Append(InputPressedBackground).Append("\n");
-            if (InputPressedColor != null) sb.Append("  InputPressedColor: ").Append(InputPressedColor).Append("\n");
-            if (InputPressedPlaceholderColor != null) sb.Append("  InputPressedPlaceholderColor: ").Append(InputPressedPlaceholderColor).Append("\n");
-            if (InputPressedBorderColor != null) sb.Append("  InputPressedBorderColor: ").Append(InputPressedBorderColor).Append("\n");
-            if (InputPressedBorderStyle != null) sb.Append("  InputPressedBorderStyle: ").Append(InputPressedBorderStyle).Append("\n");
-            if (InputErrorBackground != null) sb.Append("  InputErrorBackground: ").Append(InputErrorBackground).Append("\n");
-            if (InputErrorColor != null) sb.Append("  InputErrorColor: ").Append(InputErrorColor).Append("\n");
-            if (InputErrorPlaceholderColor != null) sb.Append("  InputErrorPlaceholderColor: ").Append(InputErrorPlaceholderColor).Append("\n");
-            if (InputErrorBorderColor != null) sb.Append("  InputErrorBorderColor: ").Append(InputErrorBorderColor).Append("\n");
-            if (InputErrorBorderStyle != null) sb.Append("  InputErrorBorderStyle: ").Append(InputErrorBorderStyle).Append("\n");
-            if (InputValidBackground != null) sb.Append("  InputValidBackground: ").Append(InputValidBackground).Append("\n");
-            if (InputValidColor != null) sb.Append("  InputValidColor: ").Append(InputValidColor).Append("\n");
-            if (InputValidPlaceholderColor != null) sb.Append("  InputValidPlaceholderColor: ").Append(InputValidPlaceholderColor).Append("\n");
-            if (InputValidBorderColor != null) sb.Append("  InputValidBorderColor: ").Append(InputValidBorderColor).Append("\n");
-            if (InputValidBorderStyle != null) sb.Append("  InputValidBorderStyle: ").Append(InputValidBorderStyle).Append("\n");
-            if (ButtonBackground != null) sb.Append("  ButtonBackground: ").Append(ButtonBackground).Append("\n");
-            if (ButtonForeground != null) sb.Append("  ButtonForeground: ").Append(ButtonForeground).Append("\n");
-            if (ButtonShape != null) sb.Append("  ButtonShape: ").Append(ButtonShape).Append("\n");
-            if (ButtonBorderColor != null) sb.Append("  ButtonBorderColor: ").Append(ButtonBorderColor).Append("\n");
-            if (ButtonBorderStyle != null) sb.Append("  ButtonBorderStyle: ").Append(ButtonBorderStyle).Append("\n");
-            if (ButtonBorderRadius != null) sb.Append("  ButtonBorderRadius: ").Append(ButtonBorderRadius).Append("\n");
-            if (ButtonHoverBackground != null) sb.Append("  ButtonHoverBackground: ").Append(ButtonHoverBackground).Append("\n");
-            if (ButtonHoverForeground != null) sb.Append("  ButtonHoverForeground: ").Append(ButtonHoverForeground).Append("\n");
-            if (ButtonHoverBorderColor != null) sb.Append("  ButtonHoverBorderColor: ").Append(ButtonHoverBorderColor).Append("\n");
-            if (ButtonHoverBorderStyle != null) sb.Append("  ButtonHoverBorderStyle: ").Append(ButtonHoverBorderStyle).Append("\n");
-            if (ButtonFocusBackground != null) sb.Append("  ButtonFocusBackground: ").Append(ButtonFocusBackground).Append("\n");
-            if (ButtonFocusForeground != null) sb.Append("  ButtonFocusForeground: ").Append(ButtonFocusForeground).Append("\n");
-            if (ButtonFocusBorderColor != null) sb.Append("  ButtonFocusBorderColor: ").Append(ButtonFocusBorderColor).Append("\n");
-            if (ButtonActiveBackground != null) sb.Append("  ButtonActiveBackground: ").Append(ButtonActiveBackground).Append("\n");
-            if (ButtonActiveForeground != null) sb.Append("  ButtonActiveForeground: ").Append(ButtonActiveForeground).Append("\n");
-            if (ButtonActiveBorderColor != null) sb.Append("  ButtonActiveBorderColor: ").Append(ButtonActiveBorderColor).Append("\n");
-            if (ButtonActiveBorderStyle != null) sb.Append("  ButtonActiveBorderStyle: ").Append(ButtonActiveBorderStyle).Append("\n");
-            if (ButtonDisabledBackground != null) sb.Append("  ButtonDisabledBackground: ").Append(ButtonDisabledBackground).Append("\n");
-            if (ButtonDisabledForeground != null) sb.Append("  ButtonDisabledForeground: ").Append(ButtonDisabledForeground).Append("\n");
-            if (ButtonDisabledBorderColor != null) sb.Append("  ButtonDisabledBorderColor: ").Append(ButtonDisabledBorderColor).Append("\n");
-            if (FontFamily != null) sb.Append("  FontFamily: ").Append(FontFamily).Append("\n");
-            if (BorderRadius != null) sb.Append("  BorderRadius: ").Append(BorderRadius).Append("\n");
-            if (PaymentSelectionBackground != null) sb.Append("  PaymentSelectionBackground: ").Append(PaymentSelectionBackground).Append("\n");
+            if (BackgroundColor != null) sb.Append("  BackgroundColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "backgroundColor", BackgroundColor.ToString())).Append("\n");
+            if (TextColor != null) sb.Append("  TextColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "textColor", TextColor.ToString())).Append("\n");
+            if (HeaderBackground != null) sb.Append("  HeaderBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "headerBackground", HeaderBackground.ToString())).Append("\n");
+            if (HeaderForeground != null) sb.Append("  HeaderForeground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "headerForeground", HeaderForeground.ToString())).Append("\n");
+            if (HeaderAvatarBackgroundColor != null) sb.Append("  HeaderAvatarBackgroundColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "headerAvatarBackgroundColor", HeaderAvatarBackgroundColor.ToString())).Append("\n");
+            if (HeaderAvatarForegroundColor != null) sb.Append("  HeaderAvatarForegroundColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "headerAvatarForegroundColor", HeaderAvatarForegroundColor.ToString())).Append("\n");
+            if (InputBackground != null) sb.Append("  InputBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputBackground", InputBackground.ToString())).Append("\n");
+            if (InputColor != null) sb.Append("  InputColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputColor", InputColor.ToString())).Append("\n");
+            if (InputPlaceholderColor != null) sb.Append("  InputPlaceholderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputPlaceholderColor", InputPlaceholderColor.ToString())).Append("\n");
+            if (InputBorderColor != null) sb.Append("  InputBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputBorderColor", InputBorderColor.ToString())).Append("\n");
+            if (InputBorderStyle != null) sb.Append("  InputBorderStyle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputBorderStyle", InputBorderStyle.ToString())).Append("\n");
+            if (InputBorderRadius != null) sb.Append("  InputBorderRadius: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputBorderRadius", InputBorderRadius.ToString())).Append("\n");
+            if (InputHoverBackground != null) sb.Append("  InputHoverBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputHoverBackground", InputHoverBackground.ToString())).Append("\n");
+            if (InputHoverColor != null) sb.Append("  InputHoverColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputHoverColor", InputHoverColor.ToString())).Append("\n");
+            if (InputHoverPlaceholderColor != null) sb.Append("  InputHoverPlaceholderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputHoverPlaceholderColor", InputHoverPlaceholderColor.ToString())).Append("\n");
+            if (InputHoverBorderColor != null) sb.Append("  InputHoverBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputHoverBorderColor", InputHoverBorderColor.ToString())).Append("\n");
+            if (InputHoverBorderStyle != null) sb.Append("  InputHoverBorderStyle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputHoverBorderStyle", InputHoverBorderStyle.ToString())).Append("\n");
+            if (InputFocusedBackground != null) sb.Append("  InputFocusedBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputFocusedBackground", InputFocusedBackground.ToString())).Append("\n");
+            if (InputFocusedColor != null) sb.Append("  InputFocusedColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputFocusedColor", InputFocusedColor.ToString())).Append("\n");
+            if (InputFocusedPlaceholderColor != null) sb.Append("  InputFocusedPlaceholderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputFocusedPlaceholderColor", InputFocusedPlaceholderColor.ToString())).Append("\n");
+            if (InputFocusedBorderColor != null) sb.Append("  InputFocusedBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputFocusedBorderColor", InputFocusedBorderColor.ToString())).Append("\n");
+            if (InputFocusedBorderStyle != null) sb.Append("  InputFocusedBorderStyle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputFocusedBorderStyle", InputFocusedBorderStyle.ToString())).Append("\n");
+            if (InputActiveBackground != null) sb.Append("  InputActiveBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputActiveBackground", InputActiveBackground.ToString())).Append("\n");
+            if (InputActiveColor != null) sb.Append("  InputActiveColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputActiveColor", InputActiveColor.ToString())).Append("\n");
+            if (InputActivePlaceholderColor != null) sb.Append("  InputActivePlaceholderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputActivePlaceholderColor", InputActivePlaceholderColor.ToString())).Append("\n");
+            if (InputActiveBorderColor != null) sb.Append("  InputActiveBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputActiveBorderColor", InputActiveBorderColor.ToString())).Append("\n");
+            if (InputActiveBorderStyle != null) sb.Append("  InputActiveBorderStyle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputActiveBorderStyle", InputActiveBorderStyle.ToString())).Append("\n");
+            if (InputPressedBackground != null) sb.Append("  InputPressedBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputPressedBackground", InputPressedBackground.ToString())).Append("\n");
+            if (InputPressedColor != null) sb.Append("  InputPressedColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputPressedColor", InputPressedColor.ToString())).Append("\n");
+            if (InputPressedPlaceholderColor != null) sb.Append("  InputPressedPlaceholderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputPressedPlaceholderColor", InputPressedPlaceholderColor.ToString())).Append("\n");
+            if (InputPressedBorderColor != null) sb.Append("  InputPressedBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputPressedBorderColor", InputPressedBorderColor.ToString())).Append("\n");
+            if (InputPressedBorderStyle != null) sb.Append("  InputPressedBorderStyle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputPressedBorderStyle", InputPressedBorderStyle.ToString())).Append("\n");
+            if (InputErrorBackground != null) sb.Append("  InputErrorBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputErrorBackground", InputErrorBackground.ToString())).Append("\n");
+            if (InputErrorColor != null) sb.Append("  InputErrorColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputErrorColor", InputErrorColor.ToString())).Append("\n");
+            if (InputErrorPlaceholderColor != null) sb.Append("  InputErrorPlaceholderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputErrorPlaceholderColor", InputErrorPlaceholderColor.ToString())).Append("\n");
+            if (InputErrorBorderColor != null) sb.Append("  InputErrorBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputErrorBorderColor", InputErrorBorderColor.ToString())).Append("\n");
+            if (InputErrorBorderStyle != null) sb.Append("  InputErrorBorderStyle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputErrorBorderStyle", InputErrorBorderStyle.ToString())).Append("\n");
+            if (InputValidBackground != null) sb.Append("  InputValidBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputValidBackground", InputValidBackground.ToString())).Append("\n");
+            if (InputValidColor != null) sb.Append("  InputValidColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputValidColor", InputValidColor.ToString())).Append("\n");
+            if (InputValidPlaceholderColor != null) sb.Append("  InputValidPlaceholderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputValidPlaceholderColor", InputValidPlaceholderColor.ToString())).Append("\n");
+            if (InputValidBorderColor != null) sb.Append("  InputValidBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputValidBorderColor", InputValidBorderColor.ToString())).Append("\n");
+            if (InputValidBorderStyle != null) sb.Append("  InputValidBorderStyle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "inputValidBorderStyle", InputValidBorderStyle.ToString())).Append("\n");
+            if (ButtonBackground != null) sb.Append("  ButtonBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonBackground", ButtonBackground.ToString())).Append("\n");
+            if (ButtonForeground != null) sb.Append("  ButtonForeground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonForeground", ButtonForeground.ToString())).Append("\n");
+            if (ButtonShape != null) sb.Append("  ButtonShape: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonShape", ButtonShape.ToString())).Append("\n");
+            if (ButtonBorderColor != null) sb.Append("  ButtonBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonBorderColor", ButtonBorderColor.ToString())).Append("\n");
+            if (ButtonBorderStyle != null) sb.Append("  ButtonBorderStyle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonBorderStyle", ButtonBorderStyle.ToString())).Append("\n");
+            if (ButtonBorderRadius != null) sb.Append("  ButtonBorderRadius: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonBorderRadius", ButtonBorderRadius.ToString())).Append("\n");
+            if (ButtonHoverBackground != null) sb.Append("  ButtonHoverBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonHoverBackground", ButtonHoverBackground.ToString())).Append("\n");
+            if (ButtonHoverForeground != null) sb.Append("  ButtonHoverForeground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonHoverForeground", ButtonHoverForeground.ToString())).Append("\n");
+            if (ButtonHoverBorderColor != null) sb.Append("  ButtonHoverBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonHoverBorderColor", ButtonHoverBorderColor.ToString())).Append("\n");
+            if (ButtonHoverBorderStyle != null) sb.Append("  ButtonHoverBorderStyle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonHoverBorderStyle", ButtonHoverBorderStyle.ToString())).Append("\n");
+            if (ButtonFocusBackground != null) sb.Append("  ButtonFocusBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonFocusBackground", ButtonFocusBackground.ToString())).Append("\n");
+            if (ButtonFocusForeground != null) sb.Append("  ButtonFocusForeground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonFocusForeground", ButtonFocusForeground.ToString())).Append("\n");
+            if (ButtonFocusBorderColor != null) sb.Append("  ButtonFocusBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonFocusBorderColor", ButtonFocusBorderColor.ToString())).Append("\n");
+            if (ButtonActiveBackground != null) sb.Append("  ButtonActiveBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonActiveBackground", ButtonActiveBackground.ToString())).Append("\n");
+            if (ButtonActiveForeground != null) sb.Append("  ButtonActiveForeground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonActiveForeground", ButtonActiveForeground.ToString())).Append("\n");
+            if (ButtonActiveBorderColor != null) sb.Append("  ButtonActiveBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonActiveBorderColor", ButtonActiveBorderColor.ToString())).Append("\n");
+            if (ButtonActiveBorderStyle != null) sb.Append("  ButtonActiveBorderStyle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonActiveBorderStyle", ButtonActiveBorderStyle.ToString())).Append("\n");
+            if (ButtonDisabledBackground != null) sb.Append("  ButtonDisabledBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonDisabledBackground", ButtonDisabledBackground.ToString())).Append("\n");
+            if (ButtonDisabledForeground != null) sb.Append("  ButtonDisabledForeground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonDisabledForeground", ButtonDisabledForeground.ToString())).Append("\n");
+            if (ButtonDisabledBorderColor != null) sb.Append("  ButtonDisabledBorderColor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "buttonDisabledBorderColor", ButtonDisabledBorderColor.ToString())).Append("\n");
+            if (FontFamily != null) sb.Append("  FontFamily: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "fontFamily", FontFamily.ToString())).Append("\n");
+            if (BorderRadius != null) sb.Append("  BorderRadius: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "borderRadius", BorderRadius.ToString())).Append("\n");
+            if (PaymentSelectionBackground != null) sb.Append("  PaymentSelectionBackground: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsAppearanceVariables", "paymentSelectionBackground", PaymentSelectionBackground.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -705,7 +770,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsAppearanceVariables", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

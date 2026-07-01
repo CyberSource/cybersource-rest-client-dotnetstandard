@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// Payment related information.  This information is included on the customer&#39;s statement. 
         /// </summary>
         /// <value>Payment related information.  This information is included on the customer&#39;s statement. </value>
-        [DataMember(Name="customerMemo", EmitDefaultValue=false)]
+        [JsonPropertyName("customerMemo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerMemo { get; set; }
 
         /// <summary>
         /// Specifies the authorization method for the transaction.  #### TeleCheck Accepts only the following values: - &#x60;ARC&#x60;: account receivable conversion - &#x60;CCD&#x60;: corporate cash disbursement - &#x60;POP&#x60;: point of purchase conversion - &#x60;PPD&#x60;: prearranged payment and deposit entry - &#x60;TEL&#x60;: telephone-initiated entry - &#x60;WEB&#x60;: internet-initiated entry 
         /// </summary>
         /// <value>Specifies the authorization method for the transaction.  #### TeleCheck Accepts only the following values: - &#x60;ARC&#x60;: account receivable conversion - &#x60;CCD&#x60;: corporate cash disbursement - &#x60;POP&#x60;: point of purchase conversion - &#x60;PPD&#x60;: prearranged payment and deposit entry - &#x60;TEL&#x60;: telephone-initiated entry - &#x60;WEB&#x60;: internet-initiated entry </value>
-        [DataMember(Name="secCode", EmitDefaultValue=false)]
+        [JsonPropertyName("secCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecCode { get; set; }
 
         /// <summary>
         /// City in which the terminal is located. If more than four alphanumeric characters are submitted, the transaction will be declined.  You cannot include any special characters. 
         /// </summary>
         /// <value>City in which the terminal is located. If more than four alphanumeric characters are submitted, the transaction will be declined.  You cannot include any special characters. </value>
-        [DataMember(Name="terminalCity", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalCity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalCity { get; set; }
 
         /// <summary>
         /// State in which the terminal is located. If more than two alphanumeric characters are submitted, the transaction will be declined.  You cannot include any special characters. 
         /// </summary>
         /// <value>State in which the terminal is located. If more than two alphanumeric characters are submitted, the transaction will be declined.  You cannot include any special characters. </value>
-        [DataMember(Name="terminalState", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalState")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalState { get; set; }
 
         /// <summary>
         /// Effective date for the transaction. The effective date must be within 45 days of the current day. If you do not include this value, CyberSource sets the effective date to the next business day.  Format: &#x60;MMDDYYYY&#x60;  Supported only for the CyberSource ACH Service. 
         /// </summary>
         /// <value>Effective date for the transaction. The effective date must be within 45 days of the current day. If you do not include this value, CyberSource sets the effective date to the next business day.  Format: &#x60;MMDDYYYY&#x60;  Supported only for the CyberSource ACH Service. </value>
-        [DataMember(Name="effectiveDate", EmitDefaultValue=false)]
+        [JsonPropertyName("effectiveDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EffectiveDate { get; set; }
 
         /// <summary>
         /// Identifier for a partial payment or partial credit.  The value for each debit request or credit request must be unique within the scope of the order. 
         /// </summary>
         /// <value>Identifier for a partial payment or partial credit.  The value for each debit request or credit request must be unique within the scope of the order. </value>
-        [DataMember(Name="partialPaymentId", EmitDefaultValue=false)]
+        [JsonPropertyName("partialPaymentId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PartialPaymentId { get; set; }
 
         /// <summary>
         /// Method used for settlement.  Possible values: - &#x60;A&#x60;: Automated Clearing House (default for credits and for transactions using Canadian dollars) - &#x60;F&#x60;: Facsimile draft (U.S. dollars only) - &#x60;B&#x60;: Best possible (U.S. dollars only) (default if the field has not already been configured for your merchant ID) 
         /// </summary>
         /// <value>Method used for settlement.  Possible values: - &#x60;A&#x60;: Automated Clearing House (default for credits and for transactions using Canadian dollars) - &#x60;F&#x60;: Facsimile draft (U.S. dollars only) - &#x60;B&#x60;: Best possible (U.S. dollars only) (default if the field has not already been configured for your merchant ID) </value>
-        [DataMember(Name="settlementMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementMethod { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2creditsProcessingInformationBankTransferOptions {\n");
-            if (CustomerMemo != null) sb.Append("  CustomerMemo: ").Append(CustomerMemo).Append("\n");
-            if (SecCode != null) sb.Append("  SecCode: ").Append(SecCode).Append("\n");
-            if (TerminalCity != null) sb.Append("  TerminalCity: ").Append(TerminalCity).Append("\n");
-            if (TerminalState != null) sb.Append("  TerminalState: ").Append(TerminalState).Append("\n");
-            if (EffectiveDate != null) sb.Append("  EffectiveDate: ").Append(EffectiveDate).Append("\n");
-            if (PartialPaymentId != null) sb.Append("  PartialPaymentId: ").Append(PartialPaymentId).Append("\n");
-            if (SettlementMethod != null) sb.Append("  SettlementMethod: ").Append(SettlementMethod).Append("\n");
+            if (CustomerMemo != null) sb.Append("  CustomerMemo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsProcessingInformationBankTransferOptions", "customerMemo", CustomerMemo.ToString())).Append("\n");
+            if (SecCode != null) sb.Append("  SecCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsProcessingInformationBankTransferOptions", "secCode", SecCode.ToString())).Append("\n");
+            if (TerminalCity != null) sb.Append("  TerminalCity: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsProcessingInformationBankTransferOptions", "terminalCity", TerminalCity.ToString())).Append("\n");
+            if (TerminalState != null) sb.Append("  TerminalState: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsProcessingInformationBankTransferOptions", "terminalState", TerminalState.ToString())).Append("\n");
+            if (EffectiveDate != null) sb.Append("  EffectiveDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsProcessingInformationBankTransferOptions", "effectiveDate", EffectiveDate.ToString())).Append("\n");
+            if (PartialPaymentId != null) sb.Append("  PartialPaymentId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsProcessingInformationBankTransferOptions", "partialPaymentId", PartialPaymentId.ToString())).Append("\n");
+            if (SettlementMethod != null) sb.Append("  SettlementMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2creditsProcessingInformationBankTransferOptions", "settlementMethod", SettlementMethod.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2creditsProcessingInformationBankTransferOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

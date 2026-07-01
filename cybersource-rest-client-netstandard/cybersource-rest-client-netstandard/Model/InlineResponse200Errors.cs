@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,20 +45,23 @@ namespace CyberSource.Model
         /// The type of error.  Possible Values:   - invalidHeaders   - missingHeaders   - invalidFields   - missingFields   - unsupportedPaymentMethodModification   - invalidCombination   - forbidden   - notFound   - instrumentIdentifierDeletionError   - tokenIdConflict   - conflict   - notAvailable   - serverError   - notAttempted  A \&quot;notAttempted\&quot; error type is returned when the request cannot be processed because it depends on the existence of another token that does not exist. For example, creating a shipping address token is not attempted if the required customer token is missing. 
         /// </summary>
         /// <value>The type of error.  Possible Values:   - invalidHeaders   - missingHeaders   - invalidFields   - missingFields   - unsupportedPaymentMethodModification   - invalidCombination   - forbidden   - notFound   - instrumentIdentifierDeletionError   - tokenIdConflict   - conflict   - notAvailable   - serverError   - notAttempted  A \&quot;notAttempted\&quot; error type is returned when the request cannot be processed because it depends on the existence of another token that does not exist. For example, creating a shipping address token is not attempted if the required customer token is missing. </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// The detailed message related to the type.
         /// </summary>
         /// <value>The detailed message related to the type.</value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
         /// Gets or Sets Details
         /// </summary>
-        [DataMember(Name="details", EmitDefaultValue=false)]
+        [JsonPropertyName("details")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<InlineResponse200Details> Details { get; private set; }
 
         /// <summary>
@@ -69,9 +72,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse200Errors {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
-            if (Details != null) sb.Append("  Details: ").Append(Details).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse200Errors", "type", Type.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse200Errors", "message", Message.ToString())).Append("\n");
+            if (Details != null) sb.Append("  Details: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse200Errors", "details", Details.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +85,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse200Errors", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,47 +55,54 @@ namespace CyberSource.Model
         /// Bank routing number. This is also called the transit number. 
         /// </summary>
         /// <value>Bank routing number. This is also called the transit number. </value>
-        [DataMember(Name="routingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("routingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoutingNumber { get; set; }
 
         /// <summary>
         /// Code used to identify the branch of the customer&#39;s bank. Required for some countries if you do not or are not allowed to provide the IBAN. Use this field only when scoring a direct debit transaction. 
         /// </summary>
         /// <value>Code used to identify the branch of the customer&#39;s bank. Required for some countries if you do not or are not allowed to provide the IBAN. Use this field only when scoring a direct debit transaction. </value>
-        [DataMember(Name="branchCode", EmitDefaultValue=false)]
+        [JsonPropertyName("branchCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BranchCode { get; set; }
 
         /// <summary>
         /// Bank&#39;s SWIFT code. You can use this field only when scoring a direct debit transaction. Required only for crossborder transactions. 
         /// </summary>
         /// <value>Bank&#39;s SWIFT code. You can use this field only when scoring a direct debit transaction. Required only for crossborder transactions. </value>
-        [DataMember(Name="swiftCode", EmitDefaultValue=false)]
+        [JsonPropertyName("swiftCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SwiftCode { get; set; }
 
         /// <summary>
         /// Country-specific code used to identify the customer&#39;s bank. Required for some countries if you do not or are not allowed to provide the IBAN instead. You can use this field only when scoring a direct debit transaction. 
         /// </summary>
         /// <value>Country-specific code used to identify the customer&#39;s bank. Required for some countries if you do not or are not allowed to provide the IBAN instead. You can use this field only when scoring a direct debit transaction. </value>
-        [DataMember(Name="bankCode", EmitDefaultValue=false)]
+        [JsonPropertyName("bankCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BankCode { get; set; }
 
         /// <summary>
         /// International Bank Account Number (IBAN) for the bank account. For some countries you can provide this number instead of the traditional bank account information. You can use this field only when scoring a direct debit transaction. 
         /// </summary>
         /// <value>International Bank Account Number (IBAN) for the bank account. For some countries you can provide this number instead of the traditional bank account information. You can use this field only when scoring a direct debit transaction. </value>
-        [DataMember(Name="iban", EmitDefaultValue=false)]
+        [JsonPropertyName("iban")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Iban { get; set; }
 
         /// <summary>
         /// Gets or Sets Account
         /// </summary>
-        [DataMember(Name="account", EmitDefaultValue=false)]
+        [JsonPropertyName("account")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsGet200ResponsePaymentInformationBankAccount Account { get; set; }
 
         /// <summary>
         /// Gets or Sets Mandate
         /// </summary>
-        [DataMember(Name="mandate", EmitDefaultValue=false)]
+        [JsonPropertyName("mandate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsGet200ResponsePaymentInformationBankMandate Mandate { get; set; }
 
         /// <summary>
@@ -106,13 +113,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponsePaymentInformationBank {\n");
-            if (RoutingNumber != null) sb.Append("  RoutingNumber: ").Append(RoutingNumber).Append("\n");
-            if (BranchCode != null) sb.Append("  BranchCode: ").Append(BranchCode).Append("\n");
-            if (SwiftCode != null) sb.Append("  SwiftCode: ").Append(SwiftCode).Append("\n");
-            if (BankCode != null) sb.Append("  BankCode: ").Append(BankCode).Append("\n");
-            if (Iban != null) sb.Append("  Iban: ").Append(Iban).Append("\n");
-            if (Account != null) sb.Append("  Account: ").Append(Account).Append("\n");
-            if (Mandate != null) sb.Append("  Mandate: ").Append(Mandate).Append("\n");
+            if (RoutingNumber != null) sb.Append("  RoutingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBank", "routingNumber", RoutingNumber.ToString())).Append("\n");
+            if (BranchCode != null) sb.Append("  BranchCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBank", "branchCode", BranchCode.ToString())).Append("\n");
+            if (SwiftCode != null) sb.Append("  SwiftCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBank", "swiftCode", SwiftCode.ToString())).Append("\n");
+            if (BankCode != null) sb.Append("  BankCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBank", "bankCode", BankCode.ToString())).Append("\n");
+            if (Iban != null) sb.Append("  Iban: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBank", "iban", Iban.ToString())).Append("\n");
+            if (Account != null) sb.Append("  Account: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBank", "account", Account.ToString())).Append("\n");
+            if (Mandate != null) sb.Append("  Mandate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationBank", "mandate", Mandate.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -123,7 +130,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponsePaymentInformationBank", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

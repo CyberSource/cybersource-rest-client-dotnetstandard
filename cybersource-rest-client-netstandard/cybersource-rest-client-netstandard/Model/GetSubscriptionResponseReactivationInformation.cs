@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Number of payments that should have occurred while the subscription was in a suspended status. 
         /// </summary>
         /// <value>Number of payments that should have occurred while the subscription was in a suspended status. </value>
-        [DataMember(Name="missedPaymentsCount", EmitDefaultValue=false)]
+        [JsonPropertyName("missedPaymentsCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MissedPaymentsCount { get; set; }
 
         /// <summary>
         /// Total amount that will be charged upon reactivation if &#x60;processMissedPayments&#x60; is set to &#x60;true&#x60;. 
         /// </summary>
         /// <value>Total amount that will be charged upon reactivation if &#x60;processMissedPayments&#x60; is set to &#x60;true&#x60;. </value>
-        [DataMember(Name="missedPaymentsTotalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("missedPaymentsTotalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MissedPaymentsTotalAmount { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class GetSubscriptionResponseReactivationInformation {\n");
-            if (MissedPaymentsCount != null) sb.Append("  MissedPaymentsCount: ").Append(MissedPaymentsCount).Append("\n");
-            if (MissedPaymentsTotalAmount != null) sb.Append("  MissedPaymentsTotalAmount: ").Append(MissedPaymentsTotalAmount).Append("\n");
+            if (MissedPaymentsCount != null) sb.Append("  MissedPaymentsCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionResponseReactivationInformation", "missedPaymentsCount", MissedPaymentsCount.ToString())).Append("\n");
+            if (MissedPaymentsTotalAmount != null) sb.Append("  MissedPaymentsTotalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionResponseReactivationInformation", "missedPaymentsTotalAmount", MissedPaymentsTotalAmount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("GetSubscriptionResponseReactivationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

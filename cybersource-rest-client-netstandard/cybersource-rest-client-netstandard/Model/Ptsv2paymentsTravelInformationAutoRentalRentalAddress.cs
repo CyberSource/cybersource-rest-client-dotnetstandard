@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,56 +57,64 @@ namespace CyberSource.Model
         /// City in which the auto was rented.  For authorizations, this field is supported for Visa, MasterCard, and American Express.  For captures, this field is supported only for American Express.  For all other card types, this field is ignored. 
         /// </summary>
         /// <value>City in which the auto was rented.  For authorizations, this field is supported for Visa, MasterCard, and American Express.  For captures, this field is supported only for American Express.  For all other card types, this field is ignored. </value>
-        [DataMember(Name="city", EmitDefaultValue=false)]
+        [JsonPropertyName("city")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string City { get; set; }
 
         /// <summary>
         /// State in which the auto was rented. Use the [State, Province, and Territory Codes for the United States and Canada](https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf). 
         /// </summary>
         /// <value>State in which the auto was rented. Use the [State, Province, and Territory Codes for the United States and Canada](https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf). </value>
-        [DataMember(Name="state", EmitDefaultValue=false)]
+        [JsonPropertyName("state")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string State { get; set; }
 
         /// <summary>
         /// Country where the auto was rented. Use the [ISO Standard Country Codes.](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf) This field is supported only for American Express. 
         /// </summary>
         /// <value>Country where the auto was rented. Use the [ISO Standard Country Codes.](https://developer.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf) This field is supported only for American Express. </value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// The agency code, address, phone number, etc., used to identify the location where the vehicle was rented. 
         /// </summary>
         /// <value>The agency code, address, phone number, etc., used to identify the location where the vehicle was rented. </value>
-        [DataMember(Name="locationId", EmitDefaultValue=false)]
+        [JsonPropertyName("locationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LocationId { get; set; }
 
         /// <summary>
         /// Address from where the vehicle was rented. 
         /// </summary>
         /// <value>Address from where the vehicle was rented. </value>
-        [DataMember(Name="address1", EmitDefaultValue=false)]
+        [JsonPropertyName("address1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address1 { get; set; }
 
         /// <summary>
         /// Address from where the vehicle was rented. 
         /// </summary>
         /// <value>Address from where the vehicle was rented. </value>
-        [DataMember(Name="address2", EmitDefaultValue=false)]
+        [JsonPropertyName("address2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address2 { get; set; }
 
         /// <summary>
         /// When merchant wants to send the rental address&#39;s postal code. 
         /// </summary>
         /// <value>When merchant wants to send the rental address&#39;s postal code. </value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// This field contains the location where a taxi passenger was picked up or where an auto rental vehicle was picked up. In most cases, this is the rental agency&#39;s business name that appears on the storefront and/or customer receipts, commonly referred to as the DBA (Doing Business As) name. However, if the vehicle was picked up at another location (e.g., a hotel,auto dealership, repair shop, etc.), the name of that location should be used. This entry must be easily recognized by the Cardmember to avoid unnecessary inquiries. If the name is more than 38  characters, use proper and meaningful abbreviation, when possible. 
         /// </summary>
         /// <value>This field contains the location where a taxi passenger was picked up or where an auto rental vehicle was picked up. In most cases, this is the rental agency&#39;s business name that appears on the storefront and/or customer receipts, commonly referred to as the DBA (Doing Business As) name. However, if the vehicle was picked up at another location (e.g., a hotel,auto dealership, repair shop, etc.), the name of that location should be used. This entry must be easily recognized by the Cardmember to avoid unnecessary inquiries. If the name is more than 38  characters, use proper and meaningful abbreviation, when possible. </value>
-        [DataMember(Name="location", EmitDefaultValue=false)]
+        [JsonPropertyName("location")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Location { get; set; }
 
         /// <summary>
@@ -117,14 +125,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsTravelInformationAutoRentalRentalAddress {\n");
-            if (City != null) sb.Append("  City: ").Append(City).Append("\n");
-            if (State != null) sb.Append("  State: ").Append(State).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (LocationId != null) sb.Append("  LocationId: ").Append(LocationId).Append("\n");
-            if (Address1 != null) sb.Append("  Address1: ").Append(Address1).Append("\n");
-            if (Address2 != null) sb.Append("  Address2: ").Append(Address2).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
-            if (Location != null) sb.Append("  Location: ").Append(Location).Append("\n");
+            if (City != null) sb.Append("  City: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalRentalAddress", "city", City.ToString())).Append("\n");
+            if (State != null) sb.Append("  State: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalRentalAddress", "state", State.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalRentalAddress", "country", Country.ToString())).Append("\n");
+            if (LocationId != null) sb.Append("  LocationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalRentalAddress", "locationId", LocationId.ToString())).Append("\n");
+            if (Address1 != null) sb.Append("  Address1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalRentalAddress", "address1", Address1.ToString())).Append("\n");
+            if (Address2 != null) sb.Append("  Address2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalRentalAddress", "address2", Address2.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalRentalAddress", "postalCode", PostalCode.ToString())).Append("\n");
+            if (Location != null) sb.Append("  Location: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTravelInformationAutoRentalRentalAddress", "location", Location.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -135,7 +143,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsTravelInformationAutoRentalRentalAddress", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

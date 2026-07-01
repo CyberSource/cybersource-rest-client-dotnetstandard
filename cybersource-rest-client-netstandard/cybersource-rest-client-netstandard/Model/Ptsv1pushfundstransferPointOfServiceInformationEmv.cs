@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Number assigned to a specific card when two or more cards are associated with the same primary account number.  This value enables issuers to distinguish among multiple cards that are linked to the same account.  This value can also act as a tracking tool when reissuing cards.  When this value is available, it is provided by the chip reader.  When the chip reader does not provide this value, do not include this field in your request.  When sequence number is not provided via this API field, the value is extracted from EMV tag 5F34 for Mastercard transactions. To enable this feature please call support.  Note Card present information about EMV applies only to credit card processing and PIN debit processing.  All other card present information applies only to credit card processing. 
         /// </summary>
         /// <value>Number assigned to a specific card when two or more cards are associated with the same primary account number.  This value enables issuers to distinguish among multiple cards that are linked to the same account.  This value can also act as a tracking tool when reissuing cards.  When this value is available, it is provided by the chip reader.  When the chip reader does not provide this value, do not include this field in your request.  When sequence number is not provided via this API field, the value is extracted from EMV tag 5F34 for Mastercard transactions. To enable this feature please call support.  Note Card present information about EMV applies only to credit card processing and PIN debit processing.  All other card present information applies only to credit card processing. </value>
-        [DataMember(Name="cardSequenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("cardSequenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardSequenceNumber { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pushfundstransferPointOfServiceInformationEmv {\n");
-            if (CardSequenceNumber != null) sb.Append("  CardSequenceNumber: ").Append(CardSequenceNumber).Append("\n");
+            if (CardSequenceNumber != null) sb.Append("  CardSequenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pushfundstransferPointOfServiceInformationEmv", "cardSequenceNumber", CardSequenceNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pushfundstransferPointOfServiceInformationEmv", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

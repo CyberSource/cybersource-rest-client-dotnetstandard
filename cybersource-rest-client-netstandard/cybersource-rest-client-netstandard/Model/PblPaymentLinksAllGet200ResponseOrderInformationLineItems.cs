@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// For an authorization or capture transaction (&#x60;processingOptions.capture&#x60; is &#x60;true&#x60; or &#x60;false&#x60;), this field is required when &#x60;orderInformation.lineItems[].productCode&#x60; is not &#x60;default&#x60; or one of the other values that are related to shipping and/or handling.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes. 
         /// </summary>
         /// <value>For an authorization or capture transaction (&#x60;processingOptions.capture&#x60; is &#x60;true&#x60; or &#x60;false&#x60;), this field is required when &#x60;orderInformation.lineItems[].productCode&#x60; is not &#x60;default&#x60; or one of the other values that are related to shipping and/or handling.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes. </value>
-        [DataMember(Name="productName", EmitDefaultValue=false)]
+        [JsonPropertyName("productName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductName { get; set; }
 
         /// <summary>
         /// Per-item price of the product. This value for this field cannot be negative.  You must include either this field or the request-level field &#x60;orderInformation.amountDetails.totalAmount&#x60; in your request.  You can include a decimal point (.), but you cannot include any other special characters. The value is truncated to the correct number of decimal places.  #### DCC with a Third-Party Provider Set this field to the converted amount that was returned by the DCC provider. You must include either the 1st line item in the order and this field, or the request-level field &#x60;orderInformation.amountDetails.totalAmount&#x60; in your request.  #### Tax Calculation Required field for U.S., Canadian, international and value added taxes.  #### Zero Amount Authorizations If your processor supports zero amount authorizations, you can set this field to 0 for the authorization to check if the card is lost or stolen.  #### Maximum Field Lengths For GPN and JCN Gateway: Decimal (10) All other processors: Decimal (15) 
         /// </summary>
         /// <value>Per-item price of the product. This value for this field cannot be negative.  You must include either this field or the request-level field &#x60;orderInformation.amountDetails.totalAmount&#x60; in your request.  You can include a decimal point (.), but you cannot include any other special characters. The value is truncated to the correct number of decimal places.  #### DCC with a Third-Party Provider Set this field to the converted amount that was returned by the DCC provider. You must include either the 1st line item in the order and this field, or the request-level field &#x60;orderInformation.amountDetails.totalAmount&#x60; in your request.  #### Tax Calculation Required field for U.S., Canadian, international and value added taxes.  #### Zero Amount Authorizations If your processor supports zero amount authorizations, you can set this field to 0 for the authorization to check if the card is lost or stolen.  #### Maximum Field Lengths For GPN and JCN Gateway: Decimal (10) All other processors: Decimal (15) </value>
-        [DataMember(Name="unitPrice", EmitDefaultValue=false)]
+        [JsonPropertyName("unitPrice")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UnitPrice { get; set; }
 
         /// <summary>
         /// Brief description of item.
         /// </summary>
         /// <value>Brief description of item.</value>
-        [DataMember(Name="productDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("productDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductDescription { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PblPaymentLinksAllGet200ResponseOrderInformationLineItems {\n");
-            if (ProductName != null) sb.Append("  ProductName: ").Append(ProductName).Append("\n");
-            if (UnitPrice != null) sb.Append("  UnitPrice: ").Append(UnitPrice).Append("\n");
-            if (ProductDescription != null) sb.Append("  ProductDescription: ").Append(ProductDescription).Append("\n");
+            if (ProductName != null) sb.Append("  ProductName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PblPaymentLinksAllGet200ResponseOrderInformationLineItems", "productName", ProductName.ToString())).Append("\n");
+            if (UnitPrice != null) sb.Append("  UnitPrice: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PblPaymentLinksAllGet200ResponseOrderInformationLineItems", "unitPrice", UnitPrice.ToString())).Append("\n");
+            if (ProductDescription != null) sb.Append("  ProductDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PblPaymentLinksAllGet200ResponseOrderInformationLineItems", "productDescription", ProductDescription.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PblPaymentLinksAllGet200ResponseOrderInformationLineItems", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

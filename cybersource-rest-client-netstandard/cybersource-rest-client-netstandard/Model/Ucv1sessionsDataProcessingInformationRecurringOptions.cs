@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,7 +51,8 @@ namespace CyberSource.Model
         /// Flag that indicates whether this transaction is the first in a series of recurring payments.  This field is supported only for **Atos**, **FDC Nashville Global**, and **OmniPay Direct**.  Possible values:  - &#x60;true&#x60; Indicates this is the first payment in a series of recurring payments  - &#x60;false&#x60; (default) Indicates this is not the first payment in a series of recurring payments. 
         /// </summary>
         /// <value>Flag that indicates whether this transaction is the first in a series of recurring payments.  This field is supported only for **Atos**, **FDC Nashville Global**, and **OmniPay Direct**.  Possible values:  - &#x60;true&#x60; Indicates this is the first payment in a series of recurring payments  - &#x60;false&#x60; (default) Indicates this is not the first payment in a series of recurring payments. </value>
-        [DataMember(Name="firstRecurringPayment", EmitDefaultValue=false)]
+        [JsonPropertyName("firstRecurringPayment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? FirstRecurringPayment { get; set; }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataProcessingInformationRecurringOptions {\n");
-            if (FirstRecurringPayment != null) sb.Append("  FirstRecurringPayment: ").Append(FirstRecurringPayment).Append("\n");
+            if (FirstRecurringPayment != null) sb.Append("  FirstRecurringPayment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformationRecurringOptions", "firstRecurringPayment", FirstRecurringPayment.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +74,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataProcessingInformationRecurringOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

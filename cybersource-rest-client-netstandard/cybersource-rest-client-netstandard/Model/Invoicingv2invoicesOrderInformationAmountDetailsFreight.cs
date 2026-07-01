@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Total freight or shipping and handling charges for the order. When you include this field in your request, you must also include the **totalAmount** field. 
         /// </summary>
         /// <value>Total freight or shipping and handling charges for the order. When you include this field in your request, you must also include the **totalAmount** field. </value>
-        [DataMember(Name="amount", EmitDefaultValue=false)]
+        [JsonPropertyName("amount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Amount { get; set; }
 
         /// <summary>
         /// Flag that indicates whether an order is taxable. This value must be true if the sum of all _lineItems[].taxAmount_ values &gt; 0.  If you do not include any &#x60;lineItems[].taxAmount&#x60; values in your request, CyberSource does not include &#x60;invoiceDetails.taxable&#x60; in the data it sends to the processor.  Possible values:  - **true**  - **false** 
         /// </summary>
         /// <value>Flag that indicates whether an order is taxable. This value must be true if the sum of all _lineItems[].taxAmount_ values &gt; 0.  If you do not include any &#x60;lineItems[].taxAmount&#x60; values in your request, CyberSource does not include &#x60;invoiceDetails.taxable&#x60; in the data it sends to the processor.  Possible values:  - **true**  - **false** </value>
-        [DataMember(Name="taxable", EmitDefaultValue=false)]
+        [JsonPropertyName("taxable")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Taxable { get; set; }
 
         /// <summary>
         /// Shipping Tax rate applied to the freight amount.  **Visa**: Valid range is 0.01 to 0.99 (1% to 99%, with only whole percentage values accepted; values with additional decimal places will be truncated).  **Mastercard**: Valid range is 0.00001 to 0.99999 (0.001% to 99.999%). 
         /// </summary>
         /// <value>Shipping Tax rate applied to the freight amount.  **Visa**: Valid range is 0.01 to 0.99 (1% to 99%, with only whole percentage values accepted; values with additional decimal places will be truncated).  **Mastercard**: Valid range is 0.00001 to 0.99999 (0.001% to 99.999%). </value>
-        [DataMember(Name="taxRate", EmitDefaultValue=false)]
+        [JsonPropertyName("taxRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxRate { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Invoicingv2invoicesOrderInformationAmountDetailsFreight {\n");
-            if (Amount != null) sb.Append("  Amount: ").Append(Amount).Append("\n");
-            if (Taxable != null) sb.Append("  Taxable: ").Append(Taxable).Append("\n");
-            if (TaxRate != null) sb.Append("  TaxRate: ").Append(TaxRate).Append("\n");
+            if (Amount != null) sb.Append("  Amount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Invoicingv2invoicesOrderInformationAmountDetailsFreight", "amount", Amount.ToString())).Append("\n");
+            if (Taxable != null) sb.Append("  Taxable: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Invoicingv2invoicesOrderInformationAmountDetailsFreight", "taxable", Taxable.ToString())).Append("\n");
+            if (TaxRate != null) sb.Append("  TaxRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Invoicingv2invoicesOrderInformationAmountDetailsFreight", "taxRate", TaxRate.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Invoicingv2invoicesOrderInformationAmountDetailsFreight", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

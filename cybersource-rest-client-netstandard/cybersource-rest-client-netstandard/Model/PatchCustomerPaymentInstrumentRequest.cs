@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,7 +45,7 @@ namespace CyberSource.Model
         /// <param name="InstrumentIdentifier">InstrumentIdentifier.</param>
         /// <param name="Metadata">Metadata.</param>
         /// <param name="Embedded">Embedded.</param>
-        public PatchCustomerPaymentInstrumentRequest(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentLinks Links = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentLinks), string Id = default(string), bool? Default = default(bool?), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBankAccount BankAccount = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBankAccount), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentCard Card = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentCard), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBuyerInformation BuyerInformation = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBuyerInformation), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBillTo BillTo = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBillTo), TmsPaymentInstrumentProcessingInfo ProcessingInformation = default(TmsPaymentInstrumentProcessingInfo), TmsMerchantInformation MerchantInformation = default(TmsMerchantInformation), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentInstrumentIdentifier InstrumentIdentifier = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentInstrumentIdentifier), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentMetadata Metadata = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentMetadata), Tmsv1paymentinstrumentsEmbedded Embedded = default(Tmsv1paymentinstrumentsEmbedded))
+        public PatchCustomerPaymentInstrumentRequest(DefaultPaymentInstrumentLinks Links = default(DefaultPaymentInstrumentLinks), string Id = default(string), bool? Default = default(bool?), DefaultPaymentInstrumentBankAccount BankAccount = default(DefaultPaymentInstrumentBankAccount), DefaultPaymentInstrumentCard Card = default(DefaultPaymentInstrumentCard), DefaultPaymentInstrumentBuyerInformation BuyerInformation = default(DefaultPaymentInstrumentBuyerInformation), DefaultPaymentInstrumentBillTo BillTo = default(DefaultPaymentInstrumentBillTo), TmsPaymentInstrumentProcessingInfo ProcessingInformation = default(TmsPaymentInstrumentProcessingInfo), TmsMerchantInformation MerchantInformation = default(TmsMerchantInformation), DefaultPaymentInstrumentInstrumentIdentifier InstrumentIdentifier = default(DefaultPaymentInstrumentInstrumentIdentifier), DefaultPaymentInstrumentMetadata Metadata = default(DefaultPaymentInstrumentMetadata), Tmsv1paymentinstrumentsEmbedded Embedded = default(Tmsv1paymentinstrumentsEmbedded))
         {
             this.Links = Links;
             this.Id = Id;
@@ -64,96 +64,111 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentLinks Links { get; set; }
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultPaymentInstrumentLinks Links { get; set; }
 
         /// <summary>
         /// The Id of the Payment Instrument Token.
         /// </summary>
         /// <value>The Id of the Payment Instrument Token.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// The type.  Possible Values: - paymentInstrument 
         /// </summary>
         /// <value>The type.  Possible Values: - paymentInstrument </value>
-        [DataMember(Name="object", EmitDefaultValue=false)]
+        [JsonPropertyName("object")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Object { get; private set; }
 
         /// <summary>
         /// Flag that indicates whether customer payment instrument is the dafault. Possible Values:  - &#x60;true&#x60;: Payment instrument is customer&#39;s default.  - &#x60;false&#x60;: Payment instrument is not customer&#39;s default. 
         /// </summary>
         /// <value>Flag that indicates whether customer payment instrument is the dafault. Possible Values:  - &#x60;true&#x60;: Payment instrument is customer&#39;s default.  - &#x60;false&#x60;: Payment instrument is not customer&#39;s default. </value>
-        [DataMember(Name="default", EmitDefaultValue=false)]
+        [JsonPropertyName("default")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Default { get; set; }
 
         /// <summary>
         /// Issuers state for the card number. Possible Values: - ACTIVE - CLOSED : The account has been closed. 
         /// </summary>
         /// <value>Issuers state for the card number. Possible Values: - ACTIVE - CLOSED : The account has been closed. </value>
-        [DataMember(Name="state", EmitDefaultValue=false)]
+        [JsonPropertyName("state")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string State { get; private set; }
 
         /// <summary>
         /// The type of Payment Instrument. Possible Values: - cardHash 
         /// </summary>
         /// <value>The type of Payment Instrument. Possible Values: - cardHash </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; private set; }
 
         /// <summary>
         /// Gets or Sets BankAccount
         /// </summary>
-        [DataMember(Name="bankAccount", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBankAccount BankAccount { get; set; }
+        [JsonPropertyName("bankAccount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultPaymentInstrumentBankAccount BankAccount { get; set; }
 
         /// <summary>
         /// Gets or Sets Card
         /// </summary>
-        [DataMember(Name="card", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentCard Card { get; set; }
+        [JsonPropertyName("card")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultPaymentInstrumentCard Card { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerInformation
         /// </summary>
-        [DataMember(Name="buyerInformation", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBuyerInformation BuyerInformation { get; set; }
+        [JsonPropertyName("buyerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultPaymentInstrumentBuyerInformation BuyerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets BillTo
         /// </summary>
-        [DataMember(Name="billTo", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBillTo BillTo { get; set; }
+        [JsonPropertyName("billTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultPaymentInstrumentBillTo BillTo { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessingInformation
         /// </summary>
-        [DataMember(Name="processingInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsPaymentInstrumentProcessingInfo ProcessingInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInformation
         /// </summary>
-        [DataMember(Name="merchantInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TmsMerchantInformation MerchantInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets InstrumentIdentifier
         /// </summary>
-        [DataMember(Name="instrumentIdentifier", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentInstrumentIdentifier InstrumentIdentifier { get; set; }
+        [JsonPropertyName("instrumentIdentifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultPaymentInstrumentInstrumentIdentifier InstrumentIdentifier { get; set; }
 
         /// <summary>
         /// Gets or Sets Metadata
         /// </summary>
-        [DataMember(Name="metadata", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentMetadata Metadata { get; set; }
+        [JsonPropertyName("metadata")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultPaymentInstrumentMetadata Metadata { get; set; }
 
         /// <summary>
         /// Gets or Sets Embedded
         /// </summary>
-        [DataMember(Name="_embedded", EmitDefaultValue=false)]
+        [JsonPropertyName("_embedded")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv1paymentinstrumentsEmbedded Embedded { get; set; }
 
         /// <summary>
@@ -164,21 +179,21 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PatchCustomerPaymentInstrumentRequest {\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (Object != null) sb.Append("  Object: ").Append(Object).Append("\n");
-            if (Default != null) sb.Append("  Default: ").Append(Default).Append("\n");
-            if (State != null) sb.Append("  State: ").Append(State).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (BankAccount != null) sb.Append("  BankAccount: ").Append(BankAccount).Append("\n");
-            if (Card != null) sb.Append("  Card: ").Append(Card).Append("\n");
-            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(BuyerInformation).Append("\n");
-            if (BillTo != null) sb.Append("  BillTo: ").Append(BillTo).Append("\n");
-            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(ProcessingInformation).Append("\n");
-            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(MerchantInformation).Append("\n");
-            if (InstrumentIdentifier != null) sb.Append("  InstrumentIdentifier: ").Append(InstrumentIdentifier).Append("\n");
-            if (Metadata != null) sb.Append("  Metadata: ").Append(Metadata).Append("\n");
-            if (Embedded != null) sb.Append("  Embedded: ").Append(Embedded).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "_links", Links.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "id", Id.ToString())).Append("\n");
+            if (Object != null) sb.Append("  Object: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "object", Object.ToString())).Append("\n");
+            if (Default != null) sb.Append("  Default: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "default", Default.ToString())).Append("\n");
+            if (State != null) sb.Append("  State: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "state", State.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "type", Type.ToString())).Append("\n");
+            if (BankAccount != null) sb.Append("  BankAccount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "bankAccount", BankAccount.ToString())).Append("\n");
+            if (Card != null) sb.Append("  Card: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "card", Card.ToString())).Append("\n");
+            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "buyerInformation", BuyerInformation.ToString())).Append("\n");
+            if (BillTo != null) sb.Append("  BillTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "billTo", BillTo.ToString())).Append("\n");
+            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "processingInformation", ProcessingInformation.ToString())).Append("\n");
+            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "merchantInformation", MerchantInformation.ToString())).Append("\n");
+            if (InstrumentIdentifier != null) sb.Append("  InstrumentIdentifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "instrumentIdentifier", InstrumentIdentifier.ToString())).Append("\n");
+            if (Metadata != null) sb.Append("  Metadata: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "metadata", Metadata.ToString())).Append("\n");
+            if (Embedded != null) sb.Append("  Embedded: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PatchCustomerPaymentInstrumentRequest", "_embedded", Embedded.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -189,7 +204,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PatchCustomerPaymentInstrumentRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

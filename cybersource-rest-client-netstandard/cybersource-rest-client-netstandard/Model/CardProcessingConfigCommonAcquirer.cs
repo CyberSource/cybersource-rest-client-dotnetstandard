@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// Identifier of the acquirer. This number is usually assigned by Visa. Applicable for VPC, GPX (gpx), CMCIC (cmcic), EFTPOS, CB2A, CUP, American Express Direct (amexdirect) and Six (six) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;13&lt;/td&gt;&lt;td&gt;^[0-9]+$&lt;/td&gt;&lt;td&gt;1111&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Identifier of the acquirer. This number is usually assigned by Visa. Applicable for VPC, GPX (gpx), CMCIC (cmcic), EFTPOS, CB2A, CUP, American Express Direct (amexdirect) and Six (six) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;13&lt;/td&gt;&lt;td&gt;^[0-9]+$&lt;/td&gt;&lt;td&gt;1111&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="institutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("institutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InstitutionId { get; set; }
 
         /// <summary>
         /// Number assigned by MasterCard to banks to identify the member in transactions. Applicable for VPC and GPX (gpx) processors.
         /// </summary>
         /// <value>Number assigned by MasterCard to banks to identify the member in transactions. Applicable for VPC and GPX (gpx) processors.</value>
-        [DataMember(Name="interbankCardAssociationId", EmitDefaultValue=false)]
+        [JsonPropertyName("interbankCardAssociationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InterbankCardAssociationId { get; set; }
 
         /// <summary>
         /// Assigned by Discover to identify the acquirer. Applicable for VPC and GPX (gpx) processors.
         /// </summary>
         /// <value>Assigned by Discover to identify the acquirer. Applicable for VPC and GPX (gpx) processors.</value>
-        [DataMember(Name="discoverInstitutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("discoverInstitutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscoverInstitutionId { get; set; }
 
         /// <summary>
         /// Assigned by China Union Pay to identify the acquirer. Applicable for VPC processors.
         /// </summary>
         /// <value>Assigned by China Union Pay to identify the acquirer. Applicable for VPC processors.</value>
-        [DataMember(Name="unionPayInstitutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("unionPayInstitutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UnionPayInstitutionId { get; set; }
 
         /// <summary>
         /// Assigned by Diners Club to identify the acquirer. Applicable for VPC processors.
         /// </summary>
         /// <value>Assigned by Diners Club to identify the acquirer. Applicable for VPC processors.</value>
-        [DataMember(Name="dinersClubInstitutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("dinersClubInstitutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DinersClubInstitutionId { get; set; }
 
         /// <summary>
         /// ISO 4217 format. Applicable for VPC, GPX (gpx), EFTPOS, RUPAY, Prisma (prisma) and CUP processors.
         /// </summary>
         /// <value>ISO 4217 format. Applicable for VPC, GPX (gpx), EFTPOS, RUPAY, Prisma (prisma) and CUP processors.</value>
-        [DataMember(Name="countryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("countryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CountryCode { get; set; }
 
         /// <summary>
         /// The BIN to which this capturefile is sent. This field must contain a valid BIN. Applicable for VPC and GPX (gpx) processors.
         /// </summary>
         /// <value>The BIN to which this capturefile is sent. This field must contain a valid BIN. Applicable for VPC and GPX (gpx) processors.</value>
-        [DataMember(Name="fileDestinationBin", EmitDefaultValue=false)]
+        [JsonPropertyName("fileDestinationBin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FileDestinationBin { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CardProcessingConfigCommonAcquirer {\n");
-            if (InstitutionId != null) sb.Append("  InstitutionId: ").Append(InstitutionId).Append("\n");
-            if (InterbankCardAssociationId != null) sb.Append("  InterbankCardAssociationId: ").Append(InterbankCardAssociationId).Append("\n");
-            if (DiscoverInstitutionId != null) sb.Append("  DiscoverInstitutionId: ").Append(DiscoverInstitutionId).Append("\n");
-            if (UnionPayInstitutionId != null) sb.Append("  UnionPayInstitutionId: ").Append(UnionPayInstitutionId).Append("\n");
-            if (DinersClubInstitutionId != null) sb.Append("  DinersClubInstitutionId: ").Append(DinersClubInstitutionId).Append("\n");
-            if (CountryCode != null) sb.Append("  CountryCode: ").Append(CountryCode).Append("\n");
-            if (FileDestinationBin != null) sb.Append("  FileDestinationBin: ").Append(FileDestinationBin).Append("\n");
+            if (InstitutionId != null) sb.Append("  InstitutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirer", "institutionId", InstitutionId.ToString())).Append("\n");
+            if (InterbankCardAssociationId != null) sb.Append("  InterbankCardAssociationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirer", "interbankCardAssociationId", InterbankCardAssociationId.ToString())).Append("\n");
+            if (DiscoverInstitutionId != null) sb.Append("  DiscoverInstitutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirer", "discoverInstitutionId", DiscoverInstitutionId.ToString())).Append("\n");
+            if (UnionPayInstitutionId != null) sb.Append("  UnionPayInstitutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirer", "unionPayInstitutionId", UnionPayInstitutionId.ToString())).Append("\n");
+            if (DinersClubInstitutionId != null) sb.Append("  DinersClubInstitutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirer", "dinersClubInstitutionId", DinersClubInstitutionId.ToString())).Append("\n");
+            if (CountryCode != null) sb.Append("  CountryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirer", "countryCode", CountryCode.ToString())).Append("\n");
+            if (FileDestinationBin != null) sb.Append("  FileDestinationBin: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirer", "fileDestinationBin", FileDestinationBin.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CardProcessingConfigCommonAcquirer", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

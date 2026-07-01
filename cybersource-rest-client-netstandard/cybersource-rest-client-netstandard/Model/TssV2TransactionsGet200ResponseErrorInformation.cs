@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,20 +47,23 @@ namespace CyberSource.Model
         /// 1-word description of why a request succeeded or failed. 
         /// </summary>
         /// <value>1-word description of why a request succeeded or failed. </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
         /// The user-facing description for why a request succeeded or failed. 
         /// </summary>
         /// <value>The user-facing description for why a request succeeded or failed. </value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
         /// Gets or Sets Details
         /// </summary>
-        [DataMember(Name="details", EmitDefaultValue=false)]
+        [JsonPropertyName("details")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<PtsV2PaymentsPost201ResponseErrorInformationDetails> Details { get; set; }
 
         /// <summary>
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseErrorInformation {\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
-            if (Details != null) sb.Append("  Details: ").Append(Details).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseErrorInformation", "reason", Reason.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseErrorInformation", "message", Message.ToString())).Append("\n");
+            if (Details != null) sb.Append("  Details: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseErrorInformation", "details", Details.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseErrorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -50,31 +50,36 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Reporting
         /// </summary>
-        [DataMember(Name="reporting", EmitDefaultValue=false)]
+        [JsonPropertyName("reporting")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax Reporting { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionSearch
         /// </summary>
-        [DataMember(Name="transactionSearch", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionSearch")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax TransactionSearch { get; set; }
 
         /// <summary>
         /// Gets or Sets BankAccountValidation
         /// </summary>
-        [DataMember(Name="bankAccountValidation", EmitDefaultValue=false)]
+        [JsonPropertyName("bankAccountValidation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax BankAccountValidation { get; set; }
 
         /// <summary>
         /// Gets or Sets Flexapi
         /// </summary>
-        [DataMember(Name="flexapi", EmitDefaultValue=false)]
+        [JsonPropertyName("flexapi")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax Flexapi { get; set; }
 
         /// <summary>
         /// Gets or Sets Webhooks
         /// </summary>
-        [DataMember(Name="webhooks", EmitDefaultValue=false)]
+        [JsonPropertyName("webhooks")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax Webhooks { get; set; }
 
         /// <summary>
@@ -85,11 +90,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ValueAddedServicesProducts {\n");
-            if (Reporting != null) sb.Append("  Reporting: ").Append(Reporting).Append("\n");
-            if (TransactionSearch != null) sb.Append("  TransactionSearch: ").Append(TransactionSearch).Append("\n");
-            if (BankAccountValidation != null) sb.Append("  BankAccountValidation: ").Append(BankAccountValidation).Append("\n");
-            if (Flexapi != null) sb.Append("  Flexapi: ").Append(Flexapi).Append("\n");
-            if (Webhooks != null) sb.Append("  Webhooks: ").Append(Webhooks).Append("\n");
+            if (Reporting != null) sb.Append("  Reporting: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ValueAddedServicesProducts", "reporting", Reporting.ToString())).Append("\n");
+            if (TransactionSearch != null) sb.Append("  TransactionSearch: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ValueAddedServicesProducts", "transactionSearch", TransactionSearch.ToString())).Append("\n");
+            if (BankAccountValidation != null) sb.Append("  BankAccountValidation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ValueAddedServicesProducts", "bankAccountValidation", BankAccountValidation.ToString())).Append("\n");
+            if (Flexapi != null) sb.Append("  Flexapi: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ValueAddedServicesProducts", "flexapi", Flexapi.ToString())).Append("\n");
+            if (Webhooks != null) sb.Append("  Webhooks: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ValueAddedServicesProducts", "webhooks", Webhooks.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -100,7 +105,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ValueAddedServicesProducts", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

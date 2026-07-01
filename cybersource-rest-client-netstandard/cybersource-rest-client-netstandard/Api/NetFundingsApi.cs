@@ -184,25 +184,25 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("startTime", ApiClient.ParameterToString(startTime)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (endTime != null)
             {
                 localVarQueryParams.Add("endTime", ApiClient.ParameterToString(endTime)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (organizationId != null)
             {
                 localVarQueryParams.Add("organizationId", ApiClient.ParameterToString(organizationId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (groupName != null)
             {
                 localVarQueryParams.Add("groupName", ApiClient.ParameterToString(groupName)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -335,25 +335,25 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("startTime", ApiClient.ParameterToString(startTime)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (endTime != null)
             {
                 localVarQueryParams.Add("endTime", ApiClient.ParameterToString(endTime)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (organizationId != null)
             {
                 localVarQueryParams.Add("organizationId", ApiClient.ParameterToString(organizationId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (groupName != null)
             {
                 localVarQueryParams.Add("groupName", ApiClient.ParameterToString(groupName)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (Method.Get == Method.Post)
             {

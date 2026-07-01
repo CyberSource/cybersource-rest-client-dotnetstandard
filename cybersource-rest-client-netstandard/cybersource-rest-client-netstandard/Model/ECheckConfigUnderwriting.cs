@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ECheckConfigUnderwriting" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected ECheckConfigUnderwriting() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ECheckConfigUnderwriting" /> class.
@@ -82,70 +82,80 @@ namespace CyberSource.Model
         /// Mandatory  Free-text (csv)  Possible values (combination):  CCD — Cash Concentration or Disbursement, or CCD, is a charge or refund against a business checking account. One-time or recurring CCD transactions are fund transfers to or from a corporate entity. A standing authorization is required for recurring transactions. PPD — Prearranged Payment and Deposit Entry, or PPD, is a charge or refund against a customer&#39;s checking or savings account. PPD entries can only be originated when payment and deposit terms between the merchant and the customer are prearranged. A written authorization from the customer is required for one-time transactions and a written standing authorization is required for recurring transactions. TEL — Telephone-Initiated Entry, or TEL, is a one-time charge against a customer&#39;s checking or savings account. TEL transactions can only be originated when a business relationship between the merchant and the customer already exists; or if a relationship does not exist, then only when the customer initiates the telephone call to the merchant. Payment authorization is obtained from the customer by telephone. WEB — Internet-Initiated Entry or WEB is a charge against a customer&#39;s checking or savings account. One-time or recurring WEB transactions are originated through the Internet. Payment authorization is also obtained from the customer through the Internet. 
         /// </summary>
         /// <value>Mandatory  Free-text (csv)  Possible values (combination):  CCD — Cash Concentration or Disbursement, or CCD, is a charge or refund against a business checking account. One-time or recurring CCD transactions are fund transfers to or from a corporate entity. A standing authorization is required for recurring transactions. PPD — Prearranged Payment and Deposit Entry, or PPD, is a charge or refund against a customer&#39;s checking or savings account. PPD entries can only be originated when payment and deposit terms between the merchant and the customer are prearranged. A written authorization from the customer is required for one-time transactions and a written standing authorization is required for recurring transactions. TEL — Telephone-Initiated Entry, or TEL, is a one-time charge against a customer&#39;s checking or savings account. TEL transactions can only be originated when a business relationship between the merchant and the customer already exists; or if a relationship does not exist, then only when the customer initiates the telephone call to the merchant. Payment authorization is obtained from the customer by telephone. WEB — Internet-Initiated Entry or WEB is a charge against a customer&#39;s checking or savings account. One-time or recurring WEB transactions are originated through the Internet. Payment authorization is also obtained from the customer through the Internet. </value>
-        [DataMember(Name="standardEntryClassCodes", EmitDefaultValue=false)]
+        [JsonPropertyName("standardEntryClassCodes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StandardEntryClassCodes { get; set; }
 
         /// <summary>
         /// Mandatory  Determines whether CYBS has placed the merchant on a funding hold This will often be set to True for new merchants until the risk team has completed additional verification of their first transaction. It will be switched to \&quot;false\&quot; once underwriting review is completed and we are ready to start funding the merchant. 
         /// </summary>
         /// <value>Mandatory  Determines whether CYBS has placed the merchant on a funding hold This will often be set to True for new merchants until the risk team has completed additional verification of their first transaction. It will be switched to \&quot;false\&quot; once underwriting review is completed and we are ready to start funding the merchant. </value>
-        [DataMember(Name="enableHold", EmitDefaultValue=false)]
+        [JsonPropertyName("enableHold")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableHold { get; set; }
 
         /// <summary>
         /// Mandatory  Monthly Maximum total Transaction Amount 12 digit including decimal 
         /// </summary>
         /// <value>Mandatory  Monthly Maximum total Transaction Amount 12 digit including decimal </value>
-        [DataMember(Name="monthlyTotalTransactionAmountLimit", EmitDefaultValue=false)]
+        [JsonPropertyName("monthlyTotalTransactionAmountLimit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? MonthlyTotalTransactionAmountLimit { get; set; }
 
         /// <summary>
         /// Mandatory  Funds Hold Days (Number of days funds will be held before it will be deposited into merchant account) 3 digits 
         /// </summary>
         /// <value>Mandatory  Funds Hold Days (Number of days funds will be held before it will be deposited into merchant account) 3 digits </value>
-        [DataMember(Name="holdingDays", EmitDefaultValue=false)]
+        [JsonPropertyName("holdingDays")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? HoldingDays { get; set; }
 
         /// <summary>
         /// Optional  Allow Credits (True/False) 
         /// </summary>
         /// <value>Optional  Allow Credits (True/False) </value>
-        [DataMember(Name="enableCredits", EmitDefaultValue=false)]
+        [JsonPropertyName("enableCredits")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableCredits { get; set; }
 
         /// <summary>
         /// Mandatory  Maximum total Transaction Amount This is a per transaction limit. For example, the merchant is limited to processing transactions under $100 12 digits (including decimal - USD only) 
         /// </summary>
         /// <value>Mandatory  Maximum total Transaction Amount This is a per transaction limit. For example, the merchant is limited to processing transactions under $100 12 digits (including decimal - USD only) </value>
-        [DataMember(Name="transactionAmountLimit", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionAmountLimit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? TransactionAmountLimit { get; set; }
 
         /// <summary>
         /// Mandatory Reserve Method  Possible value: - fixed - none Most merchants do not have a reserve attached to their account so the default value would be \&quot;none.\&quot;   For a Fixed Reserve, the reserve balance is established by either, (1) a receipt of a lump sum deposit from a merchant, or (2) withholding funds at a Reserve Rate established for the account from each batch settlement until the reserve balance is equal to a set Reserve Target. A Fixed Reserve may also be established by a combination of lump sum deposit and withholding of settlement funds.  A Rolling Reserve balance is established by withholding from a merchant&#39;s available settlement funds at a Reserve Rate (percentage) and no Reserve Target is specified. Rather, each amount withheld is retained for a specified number of Reserve Holding Days and then released back to the merchant. 
         /// </summary>
         /// <value>Mandatory Reserve Method  Possible value: - fixed - none Most merchants do not have a reserve attached to their account so the default value would be \&quot;none.\&quot;   For a Fixed Reserve, the reserve balance is established by either, (1) a receipt of a lump sum deposit from a merchant, or (2) withholding funds at a Reserve Rate established for the account from each batch settlement until the reserve balance is equal to a set Reserve Target. A Fixed Reserve may also be established by a combination of lump sum deposit and withholding of settlement funds.  A Rolling Reserve balance is established by withholding from a merchant&#39;s available settlement funds at a Reserve Rate (percentage) and no Reserve Target is specified. Rather, each amount withheld is retained for a specified number of Reserve Holding Days and then released back to the merchant. </value>
-        [DataMember(Name="riskReserveMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("riskReserveMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RiskReserveMethod { get; set; }
 
         /// <summary>
         /// Mandatory  Reserve Rate (% of TPV)&#x3D;&gt; Relevant for Rolling Reserve and Fixed Reserve The percentage rate at which risk funds are withheld from each eCheck.Net batch settlement. 
         /// </summary>
         /// <value>Mandatory  Reserve Rate (% of TPV)&#x3D;&gt; Relevant for Rolling Reserve and Fixed Reserve The percentage rate at which risk funds are withheld from each eCheck.Net batch settlement. </value>
-        [DataMember(Name="riskReserveRate", EmitDefaultValue=false)]
+        [JsonPropertyName("riskReserveRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? RiskReserveRate { get; set; }
 
         /// <summary>
         /// Mandatory  Reserve Target (fixed $ amount)&#x3D;&gt; Relevant for Fixed Reserve ONLY  The maximum dollar amount that can be held in Risk Reserve for a fixed reserve. Once risk withholdings reach the Reserve Target established for the eCheck.Net account, a portion of available funds will be deposited to the merchant&#39;s bank account 12 digit including decimal 
         /// </summary>
         /// <value>Mandatory  Reserve Target (fixed $ amount)&#x3D;&gt; Relevant for Fixed Reserve ONLY  The maximum dollar amount that can be held in Risk Reserve for a fixed reserve. Once risk withholdings reach the Reserve Target established for the eCheck.Net account, a portion of available funds will be deposited to the merchant&#39;s bank account 12 digit including decimal </value>
-        [DataMember(Name="riskReserveTargetAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("riskReserveTargetAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? RiskReserveTargetAmount { get; set; }
 
         /// <summary>
         /// Solution organization id
         /// </summary>
         /// <value>Solution organization id</value>
-        [DataMember(Name="solutionOrganizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("solutionOrganizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SolutionOrganizationId { get; set; }
 
         /// <summary>
@@ -156,16 +166,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ECheckConfigUnderwriting {\n");
-            if (StandardEntryClassCodes != null) sb.Append("  StandardEntryClassCodes: ").Append(StandardEntryClassCodes).Append("\n");
-            if (EnableHold != null) sb.Append("  EnableHold: ").Append(EnableHold).Append("\n");
-            if (MonthlyTotalTransactionAmountLimit != null) sb.Append("  MonthlyTotalTransactionAmountLimit: ").Append(MonthlyTotalTransactionAmountLimit).Append("\n");
-            if (HoldingDays != null) sb.Append("  HoldingDays: ").Append(HoldingDays).Append("\n");
-            if (EnableCredits != null) sb.Append("  EnableCredits: ").Append(EnableCredits).Append("\n");
-            if (TransactionAmountLimit != null) sb.Append("  TransactionAmountLimit: ").Append(TransactionAmountLimit).Append("\n");
-            if (RiskReserveMethod != null) sb.Append("  RiskReserveMethod: ").Append(RiskReserveMethod).Append("\n");
-            if (RiskReserveRate != null) sb.Append("  RiskReserveRate: ").Append(RiskReserveRate).Append("\n");
-            if (RiskReserveTargetAmount != null) sb.Append("  RiskReserveTargetAmount: ").Append(RiskReserveTargetAmount).Append("\n");
-            if (SolutionOrganizationId != null) sb.Append("  SolutionOrganizationId: ").Append(SolutionOrganizationId).Append("\n");
+            if (StandardEntryClassCodes != null) sb.Append("  StandardEntryClassCodes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigUnderwriting", "standardEntryClassCodes", StandardEntryClassCodes.ToString())).Append("\n");
+            if (EnableHold != null) sb.Append("  EnableHold: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigUnderwriting", "enableHold", EnableHold.ToString())).Append("\n");
+            if (MonthlyTotalTransactionAmountLimit != null) sb.Append("  MonthlyTotalTransactionAmountLimit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigUnderwriting", "monthlyTotalTransactionAmountLimit", MonthlyTotalTransactionAmountLimit.ToString())).Append("\n");
+            if (HoldingDays != null) sb.Append("  HoldingDays: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigUnderwriting", "holdingDays", HoldingDays.ToString())).Append("\n");
+            if (EnableCredits != null) sb.Append("  EnableCredits: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigUnderwriting", "enableCredits", EnableCredits.ToString())).Append("\n");
+            if (TransactionAmountLimit != null) sb.Append("  TransactionAmountLimit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigUnderwriting", "transactionAmountLimit", TransactionAmountLimit.ToString())).Append("\n");
+            if (RiskReserveMethod != null) sb.Append("  RiskReserveMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigUnderwriting", "riskReserveMethod", RiskReserveMethod.ToString())).Append("\n");
+            if (RiskReserveRate != null) sb.Append("  RiskReserveRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigUnderwriting", "riskReserveRate", RiskReserveRate.ToString())).Append("\n");
+            if (RiskReserveTargetAmount != null) sb.Append("  RiskReserveTargetAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigUnderwriting", "riskReserveTargetAmount", RiskReserveTargetAmount.ToString())).Append("\n");
+            if (SolutionOrganizationId != null) sb.Append("  SolutionOrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigUnderwriting", "solutionOrganizationId", SolutionOrganizationId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -176,7 +186,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ECheckConfigUnderwriting", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// The customer&#39;s payment card number, also known as the Primary Account Number (PAN). You can also use this field for encoded account numbers. 
         /// </summary>
         /// <value>The customer&#39;s payment card number, also known as the Primary Account Number (PAN). You can also use this field for encoded account numbers. </value>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Number { get; set; }
 
         /// <summary>
         /// Two-digit month in which the payment card expires. Format: &#x60;MM&#x60;. Possible Values: &#x60;01&#x60; through &#x60;12&#x60;. 
         /// </summary>
         /// <value>Two-digit month in which the payment card expires. Format: &#x60;MM&#x60;. Possible Values: &#x60;01&#x60; through &#x60;12&#x60;. </value>
-        [DataMember(Name="expirationMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationMonth { get; set; }
 
         /// <summary>
         /// Four-digit year in which the credit card expires. Format: &#x60;YYYY&#x60;. 
         /// </summary>
         /// <value>Four-digit year in which the credit card expires. Format: &#x60;YYYY&#x60;. </value>
-        [DataMember(Name="expirationYear", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationYear")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationYear { get; set; }
 
         /// <summary>
         /// The type of card (Card Network). Possible Values: - 001: visa **Required when source is ISSUER.** 
         /// </summary>
         /// <value>The type of card (Card Network). Possible Values: - 001: visa **Required when source is ISSUER.** </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2tokenizedcardsCard {\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
-            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(ExpirationMonth).Append("\n");
-            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(ExpirationYear).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizedcardsCard", "number", Number.ToString())).Append("\n");
+            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizedcardsCard", "expirationMonth", ExpirationMonth.ToString())).Append("\n");
+            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizedcardsCard", "expirationYear", ExpirationYear.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizedcardsCard", "type", Type.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2tokenizedcardsCard", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

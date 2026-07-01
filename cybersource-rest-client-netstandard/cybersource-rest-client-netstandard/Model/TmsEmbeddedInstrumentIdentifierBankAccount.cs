@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Account number.  When processing encoded account numbers, use this field for the encoded account number. 
         /// </summary>
         /// <value>Account number.  When processing encoded account numbers, use this field for the encoded account number. </value>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Number { get; set; }
 
         /// <summary>
         /// Bank routing number. This is also called the transit number.  # For details, see &#x60;ecp_rdfi&#x60; field description in the [Electronic Check Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/EChecks_SCMP_API/html/) 
         /// </summary>
         /// <value>Bank routing number. This is also called the transit number.  # For details, see &#x60;ecp_rdfi&#x60; field description in the [Electronic Check Services Using the SCMP API Guide.](https://apps.cybersource.com/library/documentation/dev_guides/EChecks_SCMP_API/html/) </value>
-        [DataMember(Name="routingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("routingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoutingNumber { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsEmbeddedInstrumentIdentifierBankAccount {\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
-            if (RoutingNumber != null) sb.Append("  RoutingNumber: ").Append(RoutingNumber).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsEmbeddedInstrumentIdentifierBankAccount", "number", Number.ToString())).Append("\n");
+            if (RoutingNumber != null) sb.Append("  RoutingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsEmbeddedInstrumentIdentifierBankAccount", "routingNumber", RoutingNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsEmbeddedInstrumentIdentifierBankAccount", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

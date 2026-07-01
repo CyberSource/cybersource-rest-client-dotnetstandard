@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -131,312 +131,357 @@ namespace CyberSource.Model
         /// Specifies if the flight is: Domestic (01) International (02) If Y then 01 else 02 
         /// </summary>
         /// <value>Specifies if the flight is: Domestic (01) International (02) If Y then 01 else 02 </value>
-        [DataMember(Name="isDomestic", EmitDefaultValue=false)]
+        [JsonPropertyName("isDomestic")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IsDomestic { get; set; }
 
         /// <summary>
         /// Reference number for the airline booking. Required if ticket numbers are not issued. 
         /// </summary>
         /// <value>Reference number for the airline booking. Required if ticket numbers are not issued. </value>
-        [DataMember(Name="bookingReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("bookingReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BookingReferenceNumber { get; set; }
 
         /// <summary>
         /// Airline that generated the ticket. Format: English characters only. Optional request field. 
         /// </summary>
         /// <value>Airline that generated the ticket. Format: English characters only. Optional request field. </value>
-        [DataMember(Name="carrierName", EmitDefaultValue=false)]
+        [JsonPropertyName("carrierName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CarrierName { get; set; }
 
         /// <summary>
         /// Gets or Sets TicketIssuer
         /// </summary>
-        [DataMember(Name="ticketIssuer", EmitDefaultValue=false)]
+        [JsonPropertyName("ticketIssuer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsTravelInformationTransitAirlineTicketIssuer TicketIssuer { get; set; }
 
         /// <summary>
         /// Ticket number. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field. 
         /// </summary>
         /// <value>Ticket number. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field. </value>
-        [DataMember(Name="ticketNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("ticketNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TicketNumber { get; set; }
 
         /// <summary>
         /// Check digit for the ticket number. CyberSource recommends that you validate the check digit. With Discover and Diners Club, a valid ticket number has these characteristics: - The value is numeric. - The first three digits are a valid IATA2 license plate carrier code. - The last digit is a check digit or zero (0). - All remaining digits are nonzero. 
         /// </summary>
         /// <value>Check digit for the ticket number. CyberSource recommends that you validate the check digit. With Discover and Diners Club, a valid ticket number has these characteristics: - The value is numeric. - The first three digits are a valid IATA2 license plate carrier code. - The last digit is a check digit or zero (0). - All remaining digits are nonzero. </value>
-        [DataMember(Name="checkDigit", EmitDefaultValue=false)]
+        [JsonPropertyName("checkDigit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CheckDigit { get; set; }
 
         /// <summary>
         /// Flag that indicates whether or not the ticket is restricted (nonrefundable). Possible values: - 0: No restriction (refundable) - 1: Restricted (nonrefundable) Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field. 
         /// </summary>
         /// <value>Flag that indicates whether or not the ticket is restricted (nonrefundable). Possible values: - 0: No restriction (refundable) - 1: Restricted (nonrefundable) Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field. </value>
-        [DataMember(Name="restrictedTicketIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("restrictedTicketIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? RestrictedTicketIndicator { get; set; }
 
         /// <summary>
         /// Type of charge. Possible values: - 01: Charge is for an airline ticket - 02: Charge is for an item that is not an airline ticket 
         /// </summary>
         /// <value>Type of charge. Possible values: - 01: Charge is for an airline ticket - 02: Charge is for an item that is not an airline ticket </value>
-        [DataMember(Name="transactionType", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? TransactionType { get; set; }
 
         /// <summary>
         /// The field is not currently supported. 
         /// </summary>
         /// <value>The field is not currently supported. </value>
-        [DataMember(Name="extendedPaymentCode", EmitDefaultValue=false)]
+        [JsonPropertyName("extendedPaymentCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExtendedPaymentCode { get; set; }
 
         /// <summary>
         /// Name of the passenger to whom the ticket was issued.  This will always be a single passenger&#39;s name. If there are more than one passengers, provide only the primary passenger&#39;s name. Do not include special characters such as commas, hyphens, or apostrophes. Only ASCII characters are supported. Format: English characters only. Optional request field. 
         /// </summary>
         /// <value>Name of the passenger to whom the ticket was issued.  This will always be a single passenger&#39;s name. If there are more than one passengers, provide only the primary passenger&#39;s name. Do not include special characters such as commas, hyphens, or apostrophes. Only ASCII characters are supported. Format: English characters only. Optional request field. </value>
-        [DataMember(Name="passengerName", EmitDefaultValue=false)]
+        [JsonPropertyName("passengerName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PassengerName { get; set; }
 
         /// <summary>
         /// Reference number or code that identifies the cardholder. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field. 
         /// </summary>
         /// <value>Reference number or code that identifies the cardholder. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field. </value>
-        [DataMember(Name="customerCode", EmitDefaultValue=false)]
+        [JsonPropertyName("customerCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerCode { get; set; }
 
         /// <summary>
         /// Airline document type code that specifies the purpose of the transaction. Format: English characters only. Optional request field.  | Code | Description | | - -- | - -- | | 01 | Passenger ticket | | 02 | Additional collection | | 03 | Excess baggage | | 04 | Miscellaneous charge order (MCO) or prepaid ticket authorization | | 05 | Special service ticket | | 06 | Supported refund | | 07 | Unsupported refund | | 08 | Lost ticket application | | 09 | Tour order voucher | | 10 | Ticket by mail | | 11 | Undercharge adjustment | | 12 | Group ticket | | 13 | Exchange adjustment | | 14 | SPD or air freight | | 15 | In-flight adjustment | | 16 | Agency passenger ticket | | 17 | Agency tour order or voucher | | 18 | Agency miscellaneous charge order (MCO) | | 19 | Agency exchange order | | 20 | Agency group ticket | | 21 | Debit adjustment for duplicate refund or use | | 22 | In-flight merchandise order | | 23 | Catalogue merchandise order | | 24 | In-flight phone charges | | 25 | Frequent flyer fee or purchase | | 26 | Kennel charge | | 27 | Animal transportation charge | | 28 | Firearms case | | 29 | Upgrade charge | | 30 | Credit for unused transportation | | 31 | Credit for class of service adjustment | | 32 | Credit for denied boarding | | 33 | Credit for miscellaneous refund | | 34 | Credit for lost ticket refund | | 35 | Credit for exchange refund | | 36 | Credit for overcharge adjustment | | 37 | Credit for multiple Unused tickets | | 38 | Exchange order | | 39 | Self-service ticket | | 41 | In-flight duty-free purchase | | 42 | Senior citizen discount booklets | | 43 | Club membership fee | | 44 | Coupon book | | 45 | In-flight charges | | 46 | Tour deposit | | 47 | Frequent flyer overnight delivery charge | | 48 | Frequent flyer fulfillment | | 49 | Small package delivery | | 50 | Vendor sale | | 51 | Miscellaneous taxes or fees | | 52 | Travel agency fee | | 60 | Vendor refund or credit | | 64 | Duty free sale | | 65 | Preferred seat upgrade | | 66 | Cabin upgrade | | 67 | Lounge or club access or day pass | | 68 | Agent assisted reservation or ticketing fee | | 69 | Ticket change or cancel fee | | 70 | Trip insurance | | 71 | Unaccompanied minor | | 72 | Standby fee | | 73 | Curbside baggage | | 74 | In-flight medical equipment | | 75 | Ticket or pass print fee | | 76 | Checked sporting or special equipment | | 77 | Dry ice fee | | 78 | Mail or postage fee | | 79 | Club membership fee or temporary trial | | 80 | Frequent flyer activation or reinstatement | | 81 | Gift certificate | | 82 | Onboard or in-flight prepaid voucher | | 83 | Optional services fee | | 84 | Advance purchase for excess baggage | | 85 | Advance purchase for preferred seat upgrade | | 86 | Advance purchase for cabin upgrade | | 87 | Advance purchase for optional services | | 88 | WiFi | | 89 | Packages | | 90 | In-flight entertainment or internet access | | 91 | Overweight bag fee | | 92 | Sleep sets | | 93 | Special purchase fee | 
         /// </summary>
         /// <value>Airline document type code that specifies the purpose of the transaction. Format: English characters only. Optional request field.  | Code | Description | | - -- | - -- | | 01 | Passenger ticket | | 02 | Additional collection | | 03 | Excess baggage | | 04 | Miscellaneous charge order (MCO) or prepaid ticket authorization | | 05 | Special service ticket | | 06 | Supported refund | | 07 | Unsupported refund | | 08 | Lost ticket application | | 09 | Tour order voucher | | 10 | Ticket by mail | | 11 | Undercharge adjustment | | 12 | Group ticket | | 13 | Exchange adjustment | | 14 | SPD or air freight | | 15 | In-flight adjustment | | 16 | Agency passenger ticket | | 17 | Agency tour order or voucher | | 18 | Agency miscellaneous charge order (MCO) | | 19 | Agency exchange order | | 20 | Agency group ticket | | 21 | Debit adjustment for duplicate refund or use | | 22 | In-flight merchandise order | | 23 | Catalogue merchandise order | | 24 | In-flight phone charges | | 25 | Frequent flyer fee or purchase | | 26 | Kennel charge | | 27 | Animal transportation charge | | 28 | Firearms case | | 29 | Upgrade charge | | 30 | Credit for unused transportation | | 31 | Credit for class of service adjustment | | 32 | Credit for denied boarding | | 33 | Credit for miscellaneous refund | | 34 | Credit for lost ticket refund | | 35 | Credit for exchange refund | | 36 | Credit for overcharge adjustment | | 37 | Credit for multiple Unused tickets | | 38 | Exchange order | | 39 | Self-service ticket | | 41 | In-flight duty-free purchase | | 42 | Senior citizen discount booklets | | 43 | Club membership fee | | 44 | Coupon book | | 45 | In-flight charges | | 46 | Tour deposit | | 47 | Frequent flyer overnight delivery charge | | 48 | Frequent flyer fulfillment | | 49 | Small package delivery | | 50 | Vendor sale | | 51 | Miscellaneous taxes or fees | | 52 | Travel agency fee | | 60 | Vendor refund or credit | | 64 | Duty free sale | | 65 | Preferred seat upgrade | | 66 | Cabin upgrade | | 67 | Lounge or club access or day pass | | 68 | Agent assisted reservation or ticketing fee | | 69 | Ticket change or cancel fee | | 70 | Trip insurance | | 71 | Unaccompanied minor | | 72 | Standby fee | | 73 | Curbside baggage | | 74 | In-flight medical equipment | | 75 | Ticket or pass print fee | | 76 | Checked sporting or special equipment | | 77 | Dry ice fee | | 78 | Mail or postage fee | | 79 | Club membership fee or temporary trial | | 80 | Frequent flyer activation or reinstatement | | 81 | Gift certificate | | 82 | Onboard or in-flight prepaid voucher | | 83 | Optional services fee | | 84 | Advance purchase for excess baggage | | 85 | Advance purchase for preferred seat upgrade | | 86 | Advance purchase for cabin upgrade | | 87 | Advance purchase for optional services | | 88 | WiFi | | 89 | Packages | | 90 | In-flight entertainment or internet access | | 91 | Overweight bag fee | | 92 | Sleep sets | | 93 | Special purchase fee | </value>
-        [DataMember(Name="documentType", EmitDefaultValue=false)]
+        [JsonPropertyName("documentType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DocumentType { get; set; }
 
         /// <summary>
         /// The field is not currently supported. 
         /// </summary>
         /// <value>The field is not currently supported. </value>
-        [DataMember(Name="documentNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("documentNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DocumentNumber { get; set; }
 
         /// <summary>
         /// The field is not currently supported. 
         /// </summary>
         /// <value>The field is not currently supported. </value>
-        [DataMember(Name="documentNumberOfParts", EmitDefaultValue=false)]
+        [JsonPropertyName("documentNumberOfParts")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? DocumentNumberOfParts { get; set; }
 
         /// <summary>
         /// Invoice number for the airline transaction. 
         /// </summary>
         /// <value>Invoice number for the airline transaction. </value>
-        [DataMember(Name="invoiceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InvoiceNumber { get; set; }
 
         /// <summary>
         /// Invoice date. The format is YYYYMMDD. If this value is included in the request, it is used in the creation of the invoice number. See \&quot;Invoice Number,\&quot; 
         /// </summary>
         /// <value>Invoice date. The format is YYYYMMDD. If this value is included in the request, it is used in the creation of the invoice number. See \&quot;Invoice Number,\&quot; </value>
-        [DataMember(Name="invoiceDate", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? InvoiceDate { get; set; }
 
         /// <summary>
         /// Description of the charge if the charge does not involve an airline ticket. For example: Excess baggage. 
         /// </summary>
         /// <value>Description of the charge if the charge does not involve an airline ticket. For example: Excess baggage. </value>
-        [DataMember(Name="additionalCharges", EmitDefaultValue=false)]
+        [JsonPropertyName("additionalCharges")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdditionalCharges { get; set; }
 
         /// <summary>
         /// Total fee for the ticket. This value cannot exceed &#x60;99999999999999999999&#x60; (twenty 9s). Format: English characters only. Optional request field. 
         /// </summary>
         /// <value>Total fee for the ticket. This value cannot exceed &#x60;99999999999999999999&#x60; (twenty 9s). Format: English characters only. Optional request field. </value>
-        [DataMember(Name="totalFeeAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalFeeAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalFeeAmount { get; set; }
 
         /// <summary>
         /// Number that identifies the clearing message when multiple clearing messages are allowed per authorized transaction. Each clearing message linked to one authorization request must include a unique clearing sequence number between 1 and the total number of clearing records. Format: English characters only. Optional request field. 
         /// </summary>
         /// <value>Number that identifies the clearing message when multiple clearing messages are allowed per authorized transaction. Each clearing message linked to one authorization request must include a unique clearing sequence number between 1 and the total number of clearing records. Format: English characters only. Optional request field. </value>
-        [DataMember(Name="clearingSequence", EmitDefaultValue=false)]
+        [JsonPropertyName("clearingSequence")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClearingSequence { get; set; }
 
         /// <summary>
         /// Total number of clearing messages associated with the authorization request. Format: English characters only. Optional request field. 
         /// </summary>
         /// <value>Total number of clearing messages associated with the authorization request. Format: English characters only. Optional request field. </value>
-        [DataMember(Name="clearingCount", EmitDefaultValue=false)]
+        [JsonPropertyName("clearingCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClearingCount { get; set; }
 
         /// <summary>
         /// Total clearing amount for all transactions in the clearing count set. This value cannot exceed &#x60;99999999999999999999&#x60; (twenty 9s). Format: English characters only. If this field is not set and if the total amount from the original authorization is not NULL, the total clearing amount is set to the total amount from the original authorization. 
         /// </summary>
         /// <value>Total clearing amount for all transactions in the clearing count set. This value cannot exceed &#x60;99999999999999999999&#x60; (twenty 9s). Format: English characters only. If this field is not set and if the total amount from the original authorization is not NULL, the total clearing amount is set to the total amount from the original authorization. </value>
-        [DataMember(Name="totalClearingAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalClearingAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalClearingAmount { get; set; }
 
         /// <summary>
         /// Number of passengers for whom the ticket was issued. Format: English characters only. Optional request field. 
         /// </summary>
         /// <value>Number of passengers for whom the ticket was issued. Format: English characters only. Optional request field. </value>
-        [DataMember(Name="numberOfPassengers", EmitDefaultValue=false)]
+        [JsonPropertyName("numberOfPassengers")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? NumberOfPassengers { get; set; }
 
         /// <summary>
         /// Code that specifies the computerized reservation system used to make the reservation and purchase the ticket. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field. 
         /// </summary>
         /// <value>Code that specifies the computerized reservation system used to make the reservation and purchase the ticket. Format: English characters only. Restricted string data type that indicates a sequence of letters, numbers, and spaces; special characters are not included. Optional request field. </value>
-        [DataMember(Name="reservationSystemCode", EmitDefaultValue=false)]
+        [JsonPropertyName("reservationSystemCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReservationSystemCode { get; set; }
 
         /// <summary>
         /// Airline process identifier. This value is the airline&#39;s three-digit IATA1 code which is used to process extended payment airline tickets. 
         /// </summary>
         /// <value>Airline process identifier. This value is the airline&#39;s three-digit IATA1 code which is used to process extended payment airline tickets. </value>
-        [DataMember(Name="processIdentifier", EmitDefaultValue=false)]
+        [JsonPropertyName("processIdentifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessIdentifier { get; set; }
 
         /// <summary>
         /// Date on which the transaction occurred. Format: &#x60;YYYYMMDD&#x60; Format: English characters only. Optional request field. 
         /// </summary>
         /// <value>Date on which the transaction occurred. Format: &#x60;YYYYMMDD&#x60; Format: English characters only. Optional request field. </value>
-        [DataMember(Name="ticketIssueDate", EmitDefaultValue=false)]
+        [JsonPropertyName("ticketIssueDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TicketIssueDate { get; set; }
 
         /// <summary>
         /// Flag that indicates whether an electronic ticket was issued. Possible values: - &#x60;true&#x60; - &#x60;false&#x60; Optional request field. 
         /// </summary>
         /// <value>Flag that indicates whether an electronic ticket was issued. Possible values: - &#x60;true&#x60; - &#x60;false&#x60; Optional request field. </value>
-        [DataMember(Name="electronicTicketIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("electronicTicketIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ElectronicTicketIndicator { get; set; }
 
         /// <summary>
         /// Original ticket number when the transaction is for a replacement ticket. 
         /// </summary>
         /// <value>Original ticket number when the transaction is for a replacement ticket. </value>
-        [DataMember(Name="originalTicketNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("originalTicketNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalTicketNumber { get; set; }
 
         /// <summary>
         /// Type of purchase. Possible values: - &#x60;EXC&#x60;: Exchange ticket - &#x60;MSC&#x60;: Miscellaneous (not a ticket purchase and not a transaction related to an exchange ticket) - &#x60;REF&#x60;: Refund - &#x60;TKT&#x60;: Ticket Format: English characters only. Optional request field. 
         /// </summary>
         /// <value>Type of purchase. Possible values: - &#x60;EXC&#x60;: Exchange ticket - &#x60;MSC&#x60;: Miscellaneous (not a ticket purchase and not a transaction related to an exchange ticket) - &#x60;REF&#x60;: Refund - &#x60;TKT&#x60;: Ticket Format: English characters only. Optional request field. </value>
-        [DataMember(Name="purchaseType", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurchaseType { get; set; }
 
         /// <summary>
         /// Reason for the credit. Possible values: - &#x60;A&#x60;: Cancellation of the ancillary passenger transport purchase. - &#x60;B&#x60;: Cancellation of the airline ticket and the passenger transport ancillary purchase. - &#x60;C&#x60;: Cancellation of the airline ticket. - &#x60;O&#x60;: Other. - &#x60;P&#x60;: Partial refund of the airline ticket. Format: English characters only.  Optional request field. 
         /// </summary>
         /// <value>Reason for the credit. Possible values: - &#x60;A&#x60;: Cancellation of the ancillary passenger transport purchase. - &#x60;B&#x60;: Cancellation of the airline ticket and the passenger transport ancillary purchase. - &#x60;C&#x60;: Cancellation of the airline ticket. - &#x60;O&#x60;: Other. - &#x60;P&#x60;: Partial refund of the airline ticket. Format: English characters only.  Optional request field. </value>
-        [DataMember(Name="creditReasonIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("creditReasonIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CreditReasonIndicator { get; set; }
 
         /// <summary>
         /// Type of update. Possible values: - &#x60;C&#x60;: Change to the existing ticket. - &#x60;N&#x60;: New ticket. Format: English characters only Optional request field. 
         /// </summary>
         /// <value>Type of update. Possible values: - &#x60;C&#x60;: Change to the existing ticket. - &#x60;N&#x60;: New ticket. Format: English characters only Optional request field. </value>
-        [DataMember(Name="ticketChangeIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("ticketChangeIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TicketChangeIndicator { get; set; }
 
         /// <summary>
         /// Plan number based on the fare. This value is provided by the airline. Format: English characters only. Optional request field. 
         /// </summary>
         /// <value>Plan number based on the fare. This value is provided by the airline. Format: English characters only. Optional request field. </value>
-        [DataMember(Name="planNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("planNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PlanNumber { get; set; }
 
         /// <summary>
         /// Date of arrival for the last leg of the trip. Format: &#x60;MMDDYYYY&#x60; English characters only. Optional request field. 
         /// </summary>
         /// <value>Date of arrival for the last leg of the trip. Format: &#x60;MMDDYYYY&#x60; English characters only. Optional request field. </value>
-        [DataMember(Name="arrivalDate", EmitDefaultValue=false)]
+        [JsonPropertyName("arrivalDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ArrivalDate { get; set; }
 
         /// <summary>
         /// Text that describes the ticket limitations, such as _nonrefundable_. Format: English characters only. Optional request field. 
         /// </summary>
         /// <value>Text that describes the ticket limitations, such as _nonrefundable_. Format: English characters only. Optional request field. </value>
-        [DataMember(Name="restrictedTicketDesciption", EmitDefaultValue=false)]
+        [JsonPropertyName("restrictedTicketDesciption")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RestrictedTicketDesciption { get; set; }
 
         /// <summary>
         /// Amount of the exchanged ticket. Format: English characters only. 
         /// </summary>
         /// <value>Amount of the exchanged ticket. Format: English characters only. </value>
-        [DataMember(Name="exchangeTicketAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("exchangeTicketAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExchangeTicketAmount { get; set; }
 
         /// <summary>
         /// Fee for exchanging the ticket. Format: English characters only. Optional request field. 
         /// </summary>
         /// <value>Fee for exchanging the ticket. Format: English characters only. Optional request field. </value>
-        [DataMember(Name="exchangeTicketFeeAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("exchangeTicketFeeAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExchangeTicketFeeAmount { get; set; }
 
         /// <summary>
         /// The field is not currently supported. 
         /// </summary>
         /// <value>The field is not currently supported. </value>
-        [DataMember(Name="reservationType", EmitDefaultValue=false)]
+        [JsonPropertyName("reservationType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReservationType { get; set; }
 
         /// <summary>
         /// Boarding fee. 
         /// </summary>
         /// <value>Boarding fee. </value>
-        [DataMember(Name="boardingFeeAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("boardingFeeAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BoardingFeeAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets Legs
         /// </summary>
-        [DataMember(Name="legs", EmitDefaultValue=false)]
+        [JsonPropertyName("legs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsTravelInformationTransitAirlineLegs> Legs { get; set; }
 
         /// <summary>
         /// Gets or Sets AncillaryInformation
         /// </summary>
-        [DataMember(Name="ancillaryInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("ancillaryInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidrefundsTravelInformationTransitAirlineAncillaryInformation AncillaryInformation { get; set; }
 
         /// <summary>
         /// Specifies the type of flight. One way (0) Return (1) Transit (2) Transit &amp; Return (3) Multi-City (4) 
         /// </summary>
         /// <value>Specifies the type of flight. One way (0) Return (1) Transit (2) Transit &amp; Return (3) Multi-City (4) </value>
-        [DataMember(Name="flightType", EmitDefaultValue=false)]
+        [JsonPropertyName("flightType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FlightType { get; set; }
 
         /// <summary>
         /// The total cost of the flight insurance. Example: 10000.00 
         /// </summary>
         /// <value>The total cost of the flight insurance. Example: 10000.00 </value>
-        [DataMember(Name="insuranceAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("insuranceAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InsuranceAmount { get; set; }
 
         /// <summary>
         /// The consumer&#39;s frequent flyer number. Leave 0 if there is no frequent flyer number 
         /// </summary>
         /// <value>The consumer&#39;s frequent flyer number. Leave 0 if there is no frequent flyer number </value>
-        [DataMember(Name="frequentFlyerNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("frequentFlyerNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FrequentFlyerNumber { get; set; }
 
         /// <summary>
         /// Specifies if the travel agent joins the flight (0) or not (1) 
         /// </summary>
         /// <value>Specifies if the travel agent joins the flight (0) or not (1) </value>
-        [DataMember(Name="thirdPartyStatus", EmitDefaultValue=false)]
+        [JsonPropertyName("thirdPartyStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ThirdPartyStatus { get; set; }
 
         /// <summary>
         /// List of passenger types in a booking code: A (Adult) C (Child) Comma separated values for total number of passenger 
         /// </summary>
         /// <value>List of passenger types in a booking code: A (Adult) C (Child) Comma separated values for total number of passenger </value>
-        [DataMember(Name="passengerType", EmitDefaultValue=false)]
+        [JsonPropertyName("passengerType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PassengerType { get; set; }
 
         /// <summary>
         /// Total insurance amount. We have per leg and not total 
         /// </summary>
         /// <value>Total insurance amount. We have per leg and not total </value>
-        [DataMember(Name="totalInsuranceAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalInsuranceAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalInsuranceAmount { get; set; }
 
         /// <summary>
@@ -447,51 +492,51 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidrefundsTravelInformationTransitAirline {\n");
-            if (IsDomestic != null) sb.Append("  IsDomestic: ").Append(IsDomestic).Append("\n");
-            if (BookingReferenceNumber != null) sb.Append("  BookingReferenceNumber: ").Append(BookingReferenceNumber).Append("\n");
-            if (CarrierName != null) sb.Append("  CarrierName: ").Append(CarrierName).Append("\n");
-            if (TicketIssuer != null) sb.Append("  TicketIssuer: ").Append(TicketIssuer).Append("\n");
-            if (TicketNumber != null) sb.Append("  TicketNumber: ").Append(TicketNumber).Append("\n");
-            if (CheckDigit != null) sb.Append("  CheckDigit: ").Append(CheckDigit).Append("\n");
-            if (RestrictedTicketIndicator != null) sb.Append("  RestrictedTicketIndicator: ").Append(RestrictedTicketIndicator).Append("\n");
-            if (TransactionType != null) sb.Append("  TransactionType: ").Append(TransactionType).Append("\n");
-            if (ExtendedPaymentCode != null) sb.Append("  ExtendedPaymentCode: ").Append(ExtendedPaymentCode).Append("\n");
-            if (PassengerName != null) sb.Append("  PassengerName: ").Append(PassengerName).Append("\n");
-            if (CustomerCode != null) sb.Append("  CustomerCode: ").Append(CustomerCode).Append("\n");
-            if (DocumentType != null) sb.Append("  DocumentType: ").Append(DocumentType).Append("\n");
-            if (DocumentNumber != null) sb.Append("  DocumentNumber: ").Append(DocumentNumber).Append("\n");
-            if (DocumentNumberOfParts != null) sb.Append("  DocumentNumberOfParts: ").Append(DocumentNumberOfParts).Append("\n");
-            if (InvoiceNumber != null) sb.Append("  InvoiceNumber: ").Append(InvoiceNumber).Append("\n");
-            if (InvoiceDate != null) sb.Append("  InvoiceDate: ").Append(InvoiceDate).Append("\n");
-            if (AdditionalCharges != null) sb.Append("  AdditionalCharges: ").Append(AdditionalCharges).Append("\n");
-            if (TotalFeeAmount != null) sb.Append("  TotalFeeAmount: ").Append(TotalFeeAmount).Append("\n");
-            if (ClearingSequence != null) sb.Append("  ClearingSequence: ").Append(ClearingSequence).Append("\n");
-            if (ClearingCount != null) sb.Append("  ClearingCount: ").Append(ClearingCount).Append("\n");
-            if (TotalClearingAmount != null) sb.Append("  TotalClearingAmount: ").Append(TotalClearingAmount).Append("\n");
-            if (NumberOfPassengers != null) sb.Append("  NumberOfPassengers: ").Append(NumberOfPassengers).Append("\n");
-            if (ReservationSystemCode != null) sb.Append("  ReservationSystemCode: ").Append(ReservationSystemCode).Append("\n");
-            if (ProcessIdentifier != null) sb.Append("  ProcessIdentifier: ").Append(ProcessIdentifier).Append("\n");
-            if (TicketIssueDate != null) sb.Append("  TicketIssueDate: ").Append(TicketIssueDate).Append("\n");
-            if (ElectronicTicketIndicator != null) sb.Append("  ElectronicTicketIndicator: ").Append(ElectronicTicketIndicator).Append("\n");
-            if (OriginalTicketNumber != null) sb.Append("  OriginalTicketNumber: ").Append(OriginalTicketNumber).Append("\n");
-            if (PurchaseType != null) sb.Append("  PurchaseType: ").Append(PurchaseType).Append("\n");
-            if (CreditReasonIndicator != null) sb.Append("  CreditReasonIndicator: ").Append(CreditReasonIndicator).Append("\n");
-            if (TicketChangeIndicator != null) sb.Append("  TicketChangeIndicator: ").Append(TicketChangeIndicator).Append("\n");
-            if (PlanNumber != null) sb.Append("  PlanNumber: ").Append(PlanNumber).Append("\n");
-            if (ArrivalDate != null) sb.Append("  ArrivalDate: ").Append(ArrivalDate).Append("\n");
-            if (RestrictedTicketDesciption != null) sb.Append("  RestrictedTicketDesciption: ").Append(RestrictedTicketDesciption).Append("\n");
-            if (ExchangeTicketAmount != null) sb.Append("  ExchangeTicketAmount: ").Append(ExchangeTicketAmount).Append("\n");
-            if (ExchangeTicketFeeAmount != null) sb.Append("  ExchangeTicketFeeAmount: ").Append(ExchangeTicketFeeAmount).Append("\n");
-            if (ReservationType != null) sb.Append("  ReservationType: ").Append(ReservationType).Append("\n");
-            if (BoardingFeeAmount != null) sb.Append("  BoardingFeeAmount: ").Append(BoardingFeeAmount).Append("\n");
-            if (Legs != null) sb.Append("  Legs: ").Append(Legs).Append("\n");
-            if (AncillaryInformation != null) sb.Append("  AncillaryInformation: ").Append(AncillaryInformation).Append("\n");
-            if (FlightType != null) sb.Append("  FlightType: ").Append(FlightType).Append("\n");
-            if (InsuranceAmount != null) sb.Append("  InsuranceAmount: ").Append(InsuranceAmount).Append("\n");
-            if (FrequentFlyerNumber != null) sb.Append("  FrequentFlyerNumber: ").Append(FrequentFlyerNumber).Append("\n");
-            if (ThirdPartyStatus != null) sb.Append("  ThirdPartyStatus: ").Append(ThirdPartyStatus).Append("\n");
-            if (PassengerType != null) sb.Append("  PassengerType: ").Append(PassengerType).Append("\n");
-            if (TotalInsuranceAmount != null) sb.Append("  TotalInsuranceAmount: ").Append(TotalInsuranceAmount).Append("\n");
+            if (IsDomestic != null) sb.Append("  IsDomestic: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "isDomestic", IsDomestic.ToString())).Append("\n");
+            if (BookingReferenceNumber != null) sb.Append("  BookingReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "bookingReferenceNumber", BookingReferenceNumber.ToString())).Append("\n");
+            if (CarrierName != null) sb.Append("  CarrierName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "carrierName", CarrierName.ToString())).Append("\n");
+            if (TicketIssuer != null) sb.Append("  TicketIssuer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "ticketIssuer", TicketIssuer.ToString())).Append("\n");
+            if (TicketNumber != null) sb.Append("  TicketNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "ticketNumber", TicketNumber.ToString())).Append("\n");
+            if (CheckDigit != null) sb.Append("  CheckDigit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "checkDigit", CheckDigit.ToString())).Append("\n");
+            if (RestrictedTicketIndicator != null) sb.Append("  RestrictedTicketIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "restrictedTicketIndicator", RestrictedTicketIndicator.ToString())).Append("\n");
+            if (TransactionType != null) sb.Append("  TransactionType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "transactionType", TransactionType.ToString())).Append("\n");
+            if (ExtendedPaymentCode != null) sb.Append("  ExtendedPaymentCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "extendedPaymentCode", ExtendedPaymentCode.ToString())).Append("\n");
+            if (PassengerName != null) sb.Append("  PassengerName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "passengerName", PassengerName.ToString())).Append("\n");
+            if (CustomerCode != null) sb.Append("  CustomerCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "customerCode", CustomerCode.ToString())).Append("\n");
+            if (DocumentType != null) sb.Append("  DocumentType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "documentType", DocumentType.ToString())).Append("\n");
+            if (DocumentNumber != null) sb.Append("  DocumentNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "documentNumber", DocumentNumber.ToString())).Append("\n");
+            if (DocumentNumberOfParts != null) sb.Append("  DocumentNumberOfParts: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "documentNumberOfParts", DocumentNumberOfParts.ToString())).Append("\n");
+            if (InvoiceNumber != null) sb.Append("  InvoiceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "invoiceNumber", InvoiceNumber.ToString())).Append("\n");
+            if (InvoiceDate != null) sb.Append("  InvoiceDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "invoiceDate", InvoiceDate.ToString())).Append("\n");
+            if (AdditionalCharges != null) sb.Append("  AdditionalCharges: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "additionalCharges", AdditionalCharges.ToString())).Append("\n");
+            if (TotalFeeAmount != null) sb.Append("  TotalFeeAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "totalFeeAmount", TotalFeeAmount.ToString())).Append("\n");
+            if (ClearingSequence != null) sb.Append("  ClearingSequence: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "clearingSequence", ClearingSequence.ToString())).Append("\n");
+            if (ClearingCount != null) sb.Append("  ClearingCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "clearingCount", ClearingCount.ToString())).Append("\n");
+            if (TotalClearingAmount != null) sb.Append("  TotalClearingAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "totalClearingAmount", TotalClearingAmount.ToString())).Append("\n");
+            if (NumberOfPassengers != null) sb.Append("  NumberOfPassengers: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "numberOfPassengers", NumberOfPassengers.ToString())).Append("\n");
+            if (ReservationSystemCode != null) sb.Append("  ReservationSystemCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "reservationSystemCode", ReservationSystemCode.ToString())).Append("\n");
+            if (ProcessIdentifier != null) sb.Append("  ProcessIdentifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "processIdentifier", ProcessIdentifier.ToString())).Append("\n");
+            if (TicketIssueDate != null) sb.Append("  TicketIssueDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "ticketIssueDate", TicketIssueDate.ToString())).Append("\n");
+            if (ElectronicTicketIndicator != null) sb.Append("  ElectronicTicketIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "electronicTicketIndicator", ElectronicTicketIndicator.ToString())).Append("\n");
+            if (OriginalTicketNumber != null) sb.Append("  OriginalTicketNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "originalTicketNumber", OriginalTicketNumber.ToString())).Append("\n");
+            if (PurchaseType != null) sb.Append("  PurchaseType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "purchaseType", PurchaseType.ToString())).Append("\n");
+            if (CreditReasonIndicator != null) sb.Append("  CreditReasonIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "creditReasonIndicator", CreditReasonIndicator.ToString())).Append("\n");
+            if (TicketChangeIndicator != null) sb.Append("  TicketChangeIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "ticketChangeIndicator", TicketChangeIndicator.ToString())).Append("\n");
+            if (PlanNumber != null) sb.Append("  PlanNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "planNumber", PlanNumber.ToString())).Append("\n");
+            if (ArrivalDate != null) sb.Append("  ArrivalDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "arrivalDate", ArrivalDate.ToString())).Append("\n");
+            if (RestrictedTicketDesciption != null) sb.Append("  RestrictedTicketDesciption: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "restrictedTicketDesciption", RestrictedTicketDesciption.ToString())).Append("\n");
+            if (ExchangeTicketAmount != null) sb.Append("  ExchangeTicketAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "exchangeTicketAmount", ExchangeTicketAmount.ToString())).Append("\n");
+            if (ExchangeTicketFeeAmount != null) sb.Append("  ExchangeTicketFeeAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "exchangeTicketFeeAmount", ExchangeTicketFeeAmount.ToString())).Append("\n");
+            if (ReservationType != null) sb.Append("  ReservationType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "reservationType", ReservationType.ToString())).Append("\n");
+            if (BoardingFeeAmount != null) sb.Append("  BoardingFeeAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "boardingFeeAmount", BoardingFeeAmount.ToString())).Append("\n");
+            if (Legs != null) sb.Append("  Legs: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "legs", Legs.ToString())).Append("\n");
+            if (AncillaryInformation != null) sb.Append("  AncillaryInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "ancillaryInformation", AncillaryInformation.ToString())).Append("\n");
+            if (FlightType != null) sb.Append("  FlightType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "flightType", FlightType.ToString())).Append("\n");
+            if (InsuranceAmount != null) sb.Append("  InsuranceAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "insuranceAmount", InsuranceAmount.ToString())).Append("\n");
+            if (FrequentFlyerNumber != null) sb.Append("  FrequentFlyerNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "frequentFlyerNumber", FrequentFlyerNumber.ToString())).Append("\n");
+            if (ThirdPartyStatus != null) sb.Append("  ThirdPartyStatus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "thirdPartyStatus", ThirdPartyStatus.ToString())).Append("\n");
+            if (PassengerType != null) sb.Append("  PassengerType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "passengerType", PassengerType.ToString())).Append("\n");
+            if (TotalInsuranceAmount != null) sb.Append("  TotalInsuranceAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidrefundsTravelInformationTransitAirline", "totalInsuranceAmount", TotalInsuranceAmount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -502,7 +547,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidrefundsTravelInformationTransitAirline", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

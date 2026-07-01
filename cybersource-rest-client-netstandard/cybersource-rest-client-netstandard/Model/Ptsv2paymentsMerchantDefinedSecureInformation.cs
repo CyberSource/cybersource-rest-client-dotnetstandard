@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// The value you assign for your merchant-secure data field 1. 
         /// </summary>
         /// <value>The value you assign for your merchant-secure data field 1. </value>
-        [DataMember(Name="secure1", EmitDefaultValue=false)]
+        [JsonPropertyName("secure1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Secure1 { get; set; }
 
         /// <summary>
         /// The value you assign for your merchant-secure data field 2. 
         /// </summary>
         /// <value>The value you assign for your merchant-secure data field 2. </value>
-        [DataMember(Name="secure2", EmitDefaultValue=false)]
+        [JsonPropertyName("secure2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Secure2 { get; set; }
 
         /// <summary>
         /// The value you assign for your merchant-secure data field 3. 
         /// </summary>
         /// <value>The value you assign for your merchant-secure data field 3. </value>
-        [DataMember(Name="secure3", EmitDefaultValue=false)]
+        [JsonPropertyName("secure3")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Secure3 { get; set; }
 
         /// <summary>
         /// The value you assign for your merchant-secure data field 4. 
         /// </summary>
         /// <value>The value you assign for your merchant-secure data field 4. </value>
-        [DataMember(Name="secure4", EmitDefaultValue=false)]
+        [JsonPropertyName("secure4")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Secure4 { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsMerchantDefinedSecureInformation {\n");
-            if (Secure1 != null) sb.Append("  Secure1: ").Append(Secure1).Append("\n");
-            if (Secure2 != null) sb.Append("  Secure2: ").Append(Secure2).Append("\n");
-            if (Secure3 != null) sb.Append("  Secure3: ").Append(Secure3).Append("\n");
-            if (Secure4 != null) sb.Append("  Secure4: ").Append(Secure4).Append("\n");
+            if (Secure1 != null) sb.Append("  Secure1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantDefinedSecureInformation", "secure1", Secure1.ToString())).Append("\n");
+            if (Secure2 != null) sb.Append("  Secure2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantDefinedSecureInformation", "secure2", Secure2.ToString())).Append("\n");
+            if (Secure3 != null) sb.Append("  Secure3: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantDefinedSecureInformation", "secure3", Secure3.ToString())).Append("\n");
+            if (Secure4 != null) sb.Append("  Secure4: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantDefinedSecureInformation", "secure4", Secure4.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsMerchantDefinedSecureInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

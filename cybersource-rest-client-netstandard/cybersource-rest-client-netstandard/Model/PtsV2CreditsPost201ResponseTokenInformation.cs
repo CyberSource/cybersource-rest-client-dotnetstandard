@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -42,7 +42,8 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ThirdPartyToken
         /// </summary>
-        [DataMember(Name="thirdPartyToken", EmitDefaultValue=false)]
+        [JsonPropertyName("thirdPartyToken")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseTokenInformationThirdPartyToken ThirdPartyToken { get; set; }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2CreditsPost201ResponseTokenInformation {\n");
-            if (ThirdPartyToken != null) sb.Append("  ThirdPartyToken: ").Append(ThirdPartyToken).Append("\n");
+            if (ThirdPartyToken != null) sb.Append("  ThirdPartyToken: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2CreditsPost201ResponseTokenInformation", "thirdPartyToken", ThirdPartyToken.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -64,7 +65,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2CreditsPost201ResponseTokenInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

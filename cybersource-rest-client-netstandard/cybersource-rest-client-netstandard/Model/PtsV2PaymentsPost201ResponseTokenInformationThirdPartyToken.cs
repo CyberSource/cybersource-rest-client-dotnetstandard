@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// This field identifies the third party that provided the Third Party Token identification value. 
         /// </summary>
         /// <value>This field identifies the third party that provided the Third Party Token identification value. </value>
-        [DataMember(Name="source", EmitDefaultValue=false)]
+        [JsonPropertyName("source")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Source { get; set; }
 
         /// <summary>
         /// When a third party is being used for tokenization, this field contains the token ID. See tokenInformation.thirdPartyToken.source to identify the provider. 
         /// </summary>
         /// <value>When a third party is being used for tokenization, this field contains the token ID. See tokenInformation.thirdPartyToken.source to identify the provider. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseTokenInformationThirdPartyToken {\n");
-            if (Source != null) sb.Append("  Source: ").Append(Source).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
+            if (Source != null) sb.Append("  Source: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseTokenInformationThirdPartyToken", "source", Source.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseTokenInformationThirdPartyToken", "id", Id.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseTokenInformationThirdPartyToken", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

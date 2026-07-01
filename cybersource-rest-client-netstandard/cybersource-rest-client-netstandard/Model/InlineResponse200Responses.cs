@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,27 +49,31 @@ namespace CyberSource.Model
         /// TMS token type associated with the response.  Possible Values: - customer - paymentInstrument - instrumentIdentifier - shippingAddress - tokenizedCard 
         /// </summary>
         /// <value>TMS token type associated with the response.  Possible Values: - customer - paymentInstrument - instrumentIdentifier - shippingAddress - tokenizedCard </value>
-        [DataMember(Name="resource", EmitDefaultValue=false)]
+        [JsonPropertyName("resource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Resource { get; set; }
 
         /// <summary>
         /// Http status associated with the response. 
         /// </summary>
         /// <value>Http status associated with the response. </value>
-        [DataMember(Name="httpStatus", EmitDefaultValue=false)]
+        [JsonPropertyName("httpStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? HttpStatus { get; set; }
 
         /// <summary>
         /// TMS token id associated with the response. 
         /// </summary>
         /// <value>TMS token id associated with the response. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Errors
         /// </summary>
-        [DataMember(Name="errors", EmitDefaultValue=false)]
+        [JsonPropertyName("errors")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<InlineResponse200Errors> Errors { get; set; }
 
         /// <summary>
@@ -80,10 +84,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse200Responses {\n");
-            if (Resource != null) sb.Append("  Resource: ").Append(Resource).Append("\n");
-            if (HttpStatus != null) sb.Append("  HttpStatus: ").Append(HttpStatus).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (Errors != null) sb.Append("  Errors: ").Append(Errors).Append("\n");
+            if (Resource != null) sb.Append("  Resource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse200Responses", "resource", Resource.ToString())).Append("\n");
+            if (HttpStatus != null) sb.Append("  HttpStatus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse200Responses", "httpStatus", HttpStatus.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse200Responses", "id", Id.ToString())).Append("\n");
+            if (Errors != null) sb.Append("  Errors: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse200Responses", "errors", Errors.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -94,7 +98,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse200Responses", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

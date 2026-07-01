@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// A list of billing cycles that are marked to be skipped. The payment cannot be added to the list if it is a retry attempt. The payment cannot be added to or removed from the list if it is on the same day as its scheduled processing time. 
         /// </summary>
         /// <value>A list of billing cycles that are marked to be skipped. The payment cannot be added to the list if it is a retry attempt. The payment cannot be added to or removed from the list if it is on the same day as its scheduled processing time. </value>
-        [DataMember(Name="billingCyclesToSkip", EmitDefaultValue=false)]
+        [JsonPropertyName("billingCyclesToSkip")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<int?> BillingCyclesToSkip { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UpdatePayments {\n");
-            if (BillingCyclesToSkip != null) sb.Append("  BillingCyclesToSkip: ").Append(BillingCyclesToSkip).Append("\n");
+            if (BillingCyclesToSkip != null) sb.Append("  BillingCyclesToSkip: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UpdatePayments", "billingCyclesToSkip", BillingCyclesToSkip.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UpdatePayments", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

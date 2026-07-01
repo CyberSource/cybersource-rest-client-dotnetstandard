@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// client-generated request reference or tracking number. It is recommended that you send a unique value for each request so that you can perform meaningful searches for the request. 
         /// </summary>
         /// <value>client-generated request reference or tracking number. It is recommended that you send a unique value for each request so that you can perform meaningful searches for the request. </value>
-        [DataMember(Name="clientRequestId", EmitDefaultValue=false)]
+        [JsonPropertyName("clientRequestId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientRequestId { get; set; }
 
         /// <summary>
         /// The name of the application (such as Boarding Workflow or Anet Boarding) that the client uses to send a request to merchant evaluation service.       
         /// </summary>
         /// <value>The name of the application (such as Boarding Workflow or Anet Boarding) that the client uses to send a request to merchant evaluation service.       </value>
-        [DataMember(Name="applicationName", EmitDefaultValue=false)]
+        [JsonPropertyName("applicationName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApplicationName { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UnderwritingConfigurationClientReferenceInformation {\n");
-            if (ClientRequestId != null) sb.Append("  ClientRequestId: ").Append(ClientRequestId).Append("\n");
-            if (ApplicationName != null) sb.Append("  ApplicationName: ").Append(ApplicationName).Append("\n");
+            if (ClientRequestId != null) sb.Append("  ClientRequestId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationClientReferenceInformation", "clientRequestId", ClientRequestId.ToString())).Append("\n");
+            if (ApplicationName != null) sb.Append("  ApplicationName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationClientReferenceInformation", "applicationName", ApplicationName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UnderwritingConfigurationClientReferenceInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

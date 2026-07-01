@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Will have 2 values, &#39;U&#39; (Update) , &#39;N&#39; (New). Any other values will be rejected. Default will be &#39;N&#39; 
         /// </summary>
         /// <value>Will have 2 values, &#39;U&#39; (Update) , &#39;N&#39; (New). Any other values will be rejected. Default will be &#39;N&#39; </value>
-        [DataMember(Name="sessionType", EmitDefaultValue=false)]
+        [JsonPropertyName("sessionType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SessionType { get; set; }
 
         /// <summary>
         /// Whether merchant wants to pass the flow Inline or want to invoke Klarna Hosted Page 
         /// </summary>
         /// <value>Whether merchant wants to pass the flow Inline or want to invoke Klarna Hosted Page </value>
-        [DataMember(Name="paymentFlowMode", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentFlowMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentFlowMode { get; set; }
 
         /// <summary>
         /// Possible values are one or more of follows:   - &#x60;AP_SESSIONS&#x60;: Use this when Alternative Payment Sessions service is requested. 
         /// </summary>
         /// <value>Possible values are one or more of follows:   - &#x60;AP_SESSIONS&#x60;: Use this when Alternative Payment Sessions service is requested. </value>
-        [DataMember(Name="actionList", EmitDefaultValue=false)]
+        [JsonPropertyName("actionList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ActionList { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentreferencesProcessingInformation {\n");
-            if (SessionType != null) sb.Append("  SessionType: ").Append(SessionType).Append("\n");
-            if (PaymentFlowMode != null) sb.Append("  PaymentFlowMode: ").Append(PaymentFlowMode).Append("\n");
-            if (ActionList != null) sb.Append("  ActionList: ").Append(ActionList).Append("\n");
+            if (SessionType != null) sb.Append("  SessionType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesProcessingInformation", "sessionType", SessionType.ToString())).Append("\n");
+            if (PaymentFlowMode != null) sb.Append("  PaymentFlowMode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesProcessingInformation", "paymentFlowMode", PaymentFlowMode.ToString())).Append("\n");
+            if (ActionList != null) sb.Append("  ActionList: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesProcessingInformation", "actionList", ActionList.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentreferencesProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

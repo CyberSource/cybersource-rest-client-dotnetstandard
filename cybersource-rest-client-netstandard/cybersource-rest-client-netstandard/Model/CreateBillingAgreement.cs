@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -62,67 +62,78 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AgreementInformation
         /// </summary>
-        [DataMember(Name="agreementInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("agreementInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsAgreementInformation AgreementInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets AggregatorInformation
         /// </summary>
-        [DataMember(Name="aggregatorInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("aggregatorInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsAggregatorInformation AggregatorInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ConsumerAuthenticationInformation
         /// </summary>
-        [DataMember(Name="consumerAuthenticationInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("consumerAuthenticationInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsConsumerAuthenticationInformation ConsumerAuthenticationInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DeviceInformation
         /// </summary>
-        [DataMember(Name="deviceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsDeviceInformation DeviceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets InstallmentInformation
         /// </summary>
-        [DataMember(Name="installmentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("installmentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsInstallmentInformation InstallmentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInformation
         /// </summary>
-        [DataMember(Name="merchantInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsMerchantInformation MerchantInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsOrderInformation OrderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInformation
         /// </summary>
-        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessingInformation
         /// </summary>
-        [DataMember(Name="processingInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsProcessingInformation ProcessingInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerInformation
         /// </summary>
-        [DataMember(Name="buyerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("buyerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsBuyerInformation BuyerInformation { get; set; }
 
         /// <summary>
@@ -133,17 +144,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CreateBillingAgreement {\n");
-            if (AgreementInformation != null) sb.Append("  AgreementInformation: ").Append(AgreementInformation).Append("\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (AggregatorInformation != null) sb.Append("  AggregatorInformation: ").Append(AggregatorInformation).Append("\n");
-            if (ConsumerAuthenticationInformation != null) sb.Append("  ConsumerAuthenticationInformation: ").Append(ConsumerAuthenticationInformation).Append("\n");
-            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(DeviceInformation).Append("\n");
-            if (InstallmentInformation != null) sb.Append("  InstallmentInformation: ").Append(InstallmentInformation).Append("\n");
-            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(MerchantInformation).Append("\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
-            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
-            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(ProcessingInformation).Append("\n");
-            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(BuyerInformation).Append("\n");
+            if (AgreementInformation != null) sb.Append("  AgreementInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateBillingAgreement", "agreementInformation", AgreementInformation.ToString())).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateBillingAgreement", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (AggregatorInformation != null) sb.Append("  AggregatorInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateBillingAgreement", "aggregatorInformation", AggregatorInformation.ToString())).Append("\n");
+            if (ConsumerAuthenticationInformation != null) sb.Append("  ConsumerAuthenticationInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateBillingAgreement", "consumerAuthenticationInformation", ConsumerAuthenticationInformation.ToString())).Append("\n");
+            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateBillingAgreement", "deviceInformation", DeviceInformation.ToString())).Append("\n");
+            if (InstallmentInformation != null) sb.Append("  InstallmentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateBillingAgreement", "installmentInformation", InstallmentInformation.ToString())).Append("\n");
+            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateBillingAgreement", "merchantInformation", MerchantInformation.ToString())).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateBillingAgreement", "orderInformation", OrderInformation.ToString())).Append("\n");
+            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateBillingAgreement", "paymentInformation", PaymentInformation.ToString())).Append("\n");
+            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateBillingAgreement", "processingInformation", ProcessingInformation.ToString())).Append("\n");
+            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateBillingAgreement", "buyerInformation", BuyerInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -154,7 +165,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CreateBillingAgreement", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

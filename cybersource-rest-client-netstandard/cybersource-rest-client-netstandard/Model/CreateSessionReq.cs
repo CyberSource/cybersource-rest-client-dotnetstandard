@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -62,68 +62,79 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2refreshpaymentstatusidClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessingInformation
         /// </summary>
-        [DataMember(Name="processingInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentreferencesProcessingInformation ProcessingInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInformation
         /// </summary>
-        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentreferencesPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentreferencesOrderInformation OrderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerInformation
         /// </summary>
-        [DataMember(Name="buyerInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("buyerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentreferencesBuyerInformation BuyerInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DeviceInformation
         /// </summary>
-        [DataMember(Name="deviceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentreferencesDeviceInformation DeviceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInformation
         /// </summary>
-        [DataMember(Name="merchantInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentreferencesMerchantInformation MerchantInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets UserInterface
         /// </summary>
-        [DataMember(Name="userInterface", EmitDefaultValue=false)]
+        [JsonPropertyName("userInterface")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentreferencesUserInterface UserInterface { get; set; }
 
         /// <summary>
         /// The object containing the custom data that the merchant defines. 
         /// </summary>
         /// <value>The object containing the custom data that the merchant defines. </value>
-        [DataMember(Name="merchantDefinedInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDefinedInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsMerchantDefinedInformation> MerchantDefinedInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets AgreementInformation
         /// </summary>
-        [DataMember(Name="agreementInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("agreementInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentreferencesAgreementInformation AgreementInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets TravelInformation
         /// </summary>
-        [DataMember(Name="travelInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("travelInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentreferencesTravelInformation TravelInformation { get; set; }
 
         /// <summary>
@@ -134,17 +145,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CreateSessionReq {\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(ProcessingInformation).Append("\n");
-            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
-            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(BuyerInformation).Append("\n");
-            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(DeviceInformation).Append("\n");
-            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(MerchantInformation).Append("\n");
-            if (UserInterface != null) sb.Append("  UserInterface: ").Append(UserInterface).Append("\n");
-            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(MerchantDefinedInformation).Append("\n");
-            if (AgreementInformation != null) sb.Append("  AgreementInformation: ").Append(AgreementInformation).Append("\n");
-            if (TravelInformation != null) sb.Append("  TravelInformation: ").Append(TravelInformation).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSessionReq", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (ProcessingInformation != null) sb.Append("  ProcessingInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSessionReq", "processingInformation", ProcessingInformation.ToString())).Append("\n");
+            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSessionReq", "paymentInformation", PaymentInformation.ToString())).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSessionReq", "orderInformation", OrderInformation.ToString())).Append("\n");
+            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSessionReq", "buyerInformation", BuyerInformation.ToString())).Append("\n");
+            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSessionReq", "deviceInformation", DeviceInformation.ToString())).Append("\n");
+            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSessionReq", "merchantInformation", MerchantInformation.ToString())).Append("\n");
+            if (UserInterface != null) sb.Append("  UserInterface: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSessionReq", "userInterface", UserInterface.ToString())).Append("\n");
+            if (MerchantDefinedInformation != null) sb.Append("  MerchantDefinedInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSessionReq", "merchantDefinedInformation", MerchantDefinedInformation.ToString())).Append("\n");
+            if (AgreementInformation != null) sb.Append("  AgreementInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSessionReq", "agreementInformation", AgreementInformation.ToString())).Append("\n");
+            if (TravelInformation != null) sb.Append("  TravelInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSessionReq", "travelInformation", TravelInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -155,7 +166,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CreateSessionReq", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

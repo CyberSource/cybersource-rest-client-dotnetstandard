@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -58,63 +58,72 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Account
         /// </summary>
-        [DataMember(Name="account", EmitDefaultValue=false)]
+        [JsonPropertyName("account")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2intentsSenderInformationAccount Account { get; set; }
 
         /// <summary>
         /// The first name of the sender. 
         /// </summary>
         /// <value>The first name of the sender. </value>
-        [DataMember(Name="firstName", EmitDefaultValue=false)]
+        [JsonPropertyName("firstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// The last name of the sender. 
         /// </summary>
         /// <value>The last name of the sender. </value>
-        [DataMember(Name="lastName", EmitDefaultValue=false)]
+        [JsonPropertyName("lastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastName { get; set; }
 
         /// <summary>
         /// The email address of the sender. 
         /// </summary>
         /// <value>The email address of the sender. </value>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Email { get; set; }
 
         /// <summary>
         /// The phone number of the sender. 
         /// </summary>
         /// <value>The phone number of the sender. </value>
-        [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// The country code of the sender. 
         /// </summary>
         /// <value>The country code of the sender. </value>
-        [DataMember(Name="countryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("countryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CountryCode { get; set; }
 
         /// <summary>
         /// The date when the sender&#39;s account was created. 
         /// </summary>
         /// <value>The date when the sender&#39;s account was created. </value>
-        [DataMember(Name="createDate", EmitDefaultValue=false)]
+        [JsonPropertyName("createDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CreateDate { get; set; }
 
         /// <summary>
         /// The postal code of the sender. 
         /// </summary>
         /// <value>The postal code of the sender. </value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// The risk popularity score of the sender. 
         /// </summary>
         /// <value>The risk popularity score of the sender. </value>
-        [DataMember(Name="riskPopularityScore", EmitDefaultValue=false)]
+        [JsonPropertyName("riskPopularityScore")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RiskPopularityScore { get; set; }
 
         /// <summary>
@@ -125,15 +134,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2intentsSenderInformation {\n");
-            if (Account != null) sb.Append("  Account: ").Append(Account).Append("\n");
-            if (FirstName != null) sb.Append("  FirstName: ").Append(FirstName).Append("\n");
-            if (LastName != null) sb.Append("  LastName: ").Append(LastName).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
-            if (CountryCode != null) sb.Append("  CountryCode: ").Append(CountryCode).Append("\n");
-            if (CreateDate != null) sb.Append("  CreateDate: ").Append(CreateDate).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
-            if (RiskPopularityScore != null) sb.Append("  RiskPopularityScore: ").Append(RiskPopularityScore).Append("\n");
+            if (Account != null) sb.Append("  Account: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsSenderInformation", "account", Account.ToString())).Append("\n");
+            if (FirstName != null) sb.Append("  FirstName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsSenderInformation", "firstName", FirstName.ToString())).Append("\n");
+            if (LastName != null) sb.Append("  LastName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsSenderInformation", "lastName", LastName.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsSenderInformation", "email", Email.ToString())).Append("\n");
+            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsSenderInformation", "phoneNumber", PhoneNumber.ToString())).Append("\n");
+            if (CountryCode != null) sb.Append("  CountryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsSenderInformation", "countryCode", CountryCode.ToString())).Append("\n");
+            if (CreateDate != null) sb.Append("  CreateDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsSenderInformation", "createDate", CreateDate.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsSenderInformation", "postalCode", PostalCode.ToString())).Append("\n");
+            if (RiskPopularityScore != null) sb.Append("  RiskPopularityScore: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsSenderInformation", "riskPopularityScore", RiskPopularityScore.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -144,7 +153,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2intentsSenderInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

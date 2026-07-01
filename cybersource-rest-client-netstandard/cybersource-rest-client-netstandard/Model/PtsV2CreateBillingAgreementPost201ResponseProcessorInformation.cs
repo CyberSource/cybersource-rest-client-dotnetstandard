@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Authorization code. Returned only when the processor returns this value.  The length of this value depends on your processor.  Returned by authorization service.  #### PIN debit Authorization code that is returned by the processor.  Returned by PIN debit credit.  #### Elavon Encrypted Account Number Program The returned value is OFFLINE.  #### TSYS Acquiring Solutions The returned value for a successful zero amount authorization is 000000. 
         /// </summary>
         /// <value>Authorization code. Returned only when the processor returns this value.  The length of this value depends on your processor.  Returned by authorization service.  #### PIN debit Authorization code that is returned by the processor.  Returned by PIN debit credit.  #### Elavon Encrypted Account Number Program The returned value is OFFLINE.  #### TSYS Acquiring Solutions The returned value for a successful zero amount authorization is 000000. </value>
-        [DataMember(Name="approvalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("approvalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApprovalCode { get; set; }
 
         /// <summary>
         /// For most processors, this is the error message sent directly from the bank. Returned only when the processor returns this value.  **Important** Do not use this field to evaluate the result of the authorization. #### SEPA/BACS Response code from the processor. Possible values: 00000–99999. See Appendix C, \&quot;Reason Codes and Processor Response Codes,\&quot; on page 42.  #### PIN debit Response value that is returned by the processor or bank. **Important** Do not use this field to evaluate the results of the transaction request.  Returned by PIN debit credit, PIN debit purchase, and PIN debit reversal.  #### AIBMS If this value is &#x60;08&#x60;, you can accept the transaction if the customer provides you with identification.  #### Atos This value is the response code sent from Atos and it might also include the response code from the bank. Format: &#x60;aa,bb&#x60; with the two values separated by a comma and where: - &#x60;aa&#x60; is the two-digit error message from Atos. - &#x60;bb&#x60; is the optional two-digit error message from the bank.  #### Comercio Latino This value is the status code and the error or response code received from the processor separated by a colon. Format: [status code]:E[error code] or [status code]:R[response code] Example &#x60;2:R06&#x60;  #### JCN Gateway Processor-defined detail error code. The associated response category code is in the &#x60;processorInformation.responseCategoryCode&#x60; field. String (3) 
         /// </summary>
         /// <value>For most processors, this is the error message sent directly from the bank. Returned only when the processor returns this value.  **Important** Do not use this field to evaluate the result of the authorization. #### SEPA/BACS Response code from the processor. Possible values: 00000–99999. See Appendix C, \&quot;Reason Codes and Processor Response Codes,\&quot; on page 42.  #### PIN debit Response value that is returned by the processor or bank. **Important** Do not use this field to evaluate the results of the transaction request.  Returned by PIN debit credit, PIN debit purchase, and PIN debit reversal.  #### AIBMS If this value is &#x60;08&#x60;, you can accept the transaction if the customer provides you with identification.  #### Atos This value is the response code sent from Atos and it might also include the response code from the bank. Format: &#x60;aa,bb&#x60; with the two values separated by a comma and where: - &#x60;aa&#x60; is the two-digit error message from Atos. - &#x60;bb&#x60; is the optional two-digit error message from the bank.  #### Comercio Latino This value is the status code and the error or response code received from the processor separated by a colon. Format: [status code]:E[error code] or [status code]:R[response code] Example &#x60;2:R06&#x60;  #### JCN Gateway Processor-defined detail error code. The associated response category code is in the &#x60;processorInformation.responseCategoryCode&#x60; field. String (3) </value>
-        [DataMember(Name="responseCode", EmitDefaultValue=false)]
+        [JsonPropertyName("responseCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseCode { get; set; }
 
         /// <summary>
         /// Transaction ID assigned by the processor. 
         /// </summary>
         /// <value>Transaction ID assigned by the processor. </value>
-        [DataMember(Name="transactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionId { get; set; }
 
         /// <summary>
         /// Response code indicating that creating the agreement failed 
         /// </summary>
         /// <value>Response code indicating that creating the agreement failed </value>
-        [DataMember(Name="responseDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("responseDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseDetails { get; set; }
 
         /// <summary>
         /// Numeric value corresponding to the result of the request. 
         /// </summary>
         /// <value>Numeric value corresponding to the result of the request. </value>
-        [DataMember(Name="reasonCode", EmitDefaultValue=false)]
+        [JsonPropertyName("reasonCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReasonCode { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2CreateBillingAgreementPost201ResponseProcessorInformation {\n");
-            if (ApprovalCode != null) sb.Append("  ApprovalCode: ").Append(ApprovalCode).Append("\n");
-            if (ResponseCode != null) sb.Append("  ResponseCode: ").Append(ResponseCode).Append("\n");
-            if (TransactionId != null) sb.Append("  TransactionId: ").Append(TransactionId).Append("\n");
-            if (ResponseDetails != null) sb.Append("  ResponseDetails: ").Append(ResponseDetails).Append("\n");
-            if (ReasonCode != null) sb.Append("  ReasonCode: ").Append(ReasonCode).Append("\n");
+            if (ApprovalCode != null) sb.Append("  ApprovalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2CreateBillingAgreementPost201ResponseProcessorInformation", "approvalCode", ApprovalCode.ToString())).Append("\n");
+            if (ResponseCode != null) sb.Append("  ResponseCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2CreateBillingAgreementPost201ResponseProcessorInformation", "responseCode", ResponseCode.ToString())).Append("\n");
+            if (TransactionId != null) sb.Append("  TransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2CreateBillingAgreementPost201ResponseProcessorInformation", "transactionId", TransactionId.ToString())).Append("\n");
+            if (ResponseDetails != null) sb.Append("  ResponseDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2CreateBillingAgreementPost201ResponseProcessorInformation", "responseDetails", ResponseDetails.ToString())).Append("\n");
+            if (ReasonCode != null) sb.Append("  ReasonCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2CreateBillingAgreementPost201ResponseProcessorInformation", "reasonCode", ReasonCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2CreateBillingAgreementPost201ResponseProcessorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

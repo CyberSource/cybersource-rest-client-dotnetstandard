@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Use a 3-character alpha currency code for source currency of the funds transfer.  Required if sending processingInformation.payoutsOptions.sourceAmount.  ISO standard currencies: http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf 
         /// </summary>
         /// <value>Use a 3-character alpha currency code for source currency of the funds transfer.  Required if sending processingInformation.payoutsOptions.sourceAmount.  ISO standard currencies: http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf </value>
-        [DataMember(Name="sourceCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("sourceCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SourceCurrency { get; set; }
 
         /// <summary>
         /// Use a 3-character alpha currency code for destination currency of the funds transfer.  Yellow Pepper  Supported for cross border funds transfers.  ISO standard currencies: http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf 
         /// </summary>
         /// <value>Use a 3-character alpha currency code for destination currency of the funds transfer.  Yellow Pepper  Supported for cross border funds transfers.  ISO standard currencies: http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf </value>
-        [DataMember(Name="destinationCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("destinationCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DestinationCurrency { get; set; }
 
         /// <summary>
         /// Source Amount is required in certain markets to identify the transaction amount entered in the sender&#39;s currency code prior to FX conversion by the originating entity.  Format:  Minimum Value: 0  Maximum value: 999999999.99  Allowed fractional digits: 2 
         /// </summary>
         /// <value>Source Amount is required in certain markets to identify the transaction amount entered in the sender&#39;s currency code prior to FX conversion by the originating entity.  Format:  Minimum Value: 0  Maximum value: 999999999.99  Allowed fractional digits: 2 </value>
-        [DataMember(Name="sourceAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("sourceAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SourceAmount { get; set; }
 
         /// <summary>
         /// Unique reference number returned by the processor that identifies the transaction at the network. 
         /// </summary>
         /// <value>Unique reference number returned by the processor that identifies the transaction at the network. </value>
-        [DataMember(Name="retrievalReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("retrievalReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RetrievalReferenceNumber { get; set; }
 
         /// <summary>
         /// Visa (maxLength of 15) or MasterCard (maxLength of 40) generated transaction identifier (TID) that is unique for each original authorization and financial request. 
         /// </summary>
         /// <value>Visa (maxLength of 15) or MasterCard (maxLength of 40) generated transaction identifier (TID) that is unique for each original authorization and financial request. </value>
-        [DataMember(Name="accountFundingReferenceId", EmitDefaultValue=false)]
+        [JsonPropertyName("accountFundingReferenceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountFundingReferenceId { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pushfundstransferProcessingInformationPayoutsOptions {\n");
-            if (SourceCurrency != null) sb.Append("  SourceCurrency: ").Append(SourceCurrency).Append("\n");
-            if (DestinationCurrency != null) sb.Append("  DestinationCurrency: ").Append(DestinationCurrency).Append("\n");
-            if (SourceAmount != null) sb.Append("  SourceAmount: ").Append(SourceAmount).Append("\n");
-            if (RetrievalReferenceNumber != null) sb.Append("  RetrievalReferenceNumber: ").Append(RetrievalReferenceNumber).Append("\n");
-            if (AccountFundingReferenceId != null) sb.Append("  AccountFundingReferenceId: ").Append(AccountFundingReferenceId).Append("\n");
+            if (SourceCurrency != null) sb.Append("  SourceCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pushfundstransferProcessingInformationPayoutsOptions", "sourceCurrency", SourceCurrency.ToString())).Append("\n");
+            if (DestinationCurrency != null) sb.Append("  DestinationCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pushfundstransferProcessingInformationPayoutsOptions", "destinationCurrency", DestinationCurrency.ToString())).Append("\n");
+            if (SourceAmount != null) sb.Append("  SourceAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pushfundstransferProcessingInformationPayoutsOptions", "sourceAmount", SourceAmount.ToString())).Append("\n");
+            if (RetrievalReferenceNumber != null) sb.Append("  RetrievalReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pushfundstransferProcessingInformationPayoutsOptions", "retrievalReferenceNumber", RetrievalReferenceNumber.ToString())).Append("\n");
+            if (AccountFundingReferenceId != null) sb.Append("  AccountFundingReferenceId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pushfundstransferProcessingInformationPayoutsOptions", "accountFundingReferenceId", AccountFundingReferenceId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pushfundstransferProcessingInformationPayoutsOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

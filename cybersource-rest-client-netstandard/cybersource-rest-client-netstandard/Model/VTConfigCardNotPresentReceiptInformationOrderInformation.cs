@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets EmailAliasName
         /// </summary>
-        [DataMember(Name="emailAliasName", EmitDefaultValue=false)]
+        [JsonPropertyName("emailAliasName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EmailAliasName { get; set; }
 
         /// <summary>
         /// Gets or Sets CustomReplyToEmailAddress
         /// </summary>
-        [DataMember(Name="customReplyToEmailAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("customReplyToEmailAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomReplyToEmailAddress { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class VTConfigCardNotPresentReceiptInformationOrderInformation {\n");
-            if (EmailAliasName != null) sb.Append("  EmailAliasName: ").Append(EmailAliasName).Append("\n");
-            if (CustomReplyToEmailAddress != null) sb.Append("  CustomReplyToEmailAddress: ").Append(CustomReplyToEmailAddress).Append("\n");
+            if (EmailAliasName != null) sb.Append("  EmailAliasName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VTConfigCardNotPresentReceiptInformationOrderInformation", "emailAliasName", EmailAliasName.ToString())).Append("\n");
+            if (CustomReplyToEmailAddress != null) sb.Append("  CustomReplyToEmailAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VTConfigCardNotPresentReceiptInformationOrderInformation", "customReplyToEmailAddress", CustomReplyToEmailAddress.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("VTConfigCardNotPresentReceiptInformationOrderInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderwritingConfigurationOrganizationInformationBusinessInformationAddress" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected UnderwritingConfigurationOrganizationInformationBusinessInformationAddress() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderwritingConfigurationOrganizationInformationBusinessInformationAddress" /> class.
@@ -60,49 +60,56 @@ namespace CyberSource.Model
         /// Country where the business is located. Two character country code, ISO 3166-1 alpha-2.
         /// </summary>
         /// <value>Country where the business is located. Two character country code, ISO 3166-1 alpha-2.</value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// Business street address
         /// </summary>
         /// <value>Business street address</value>
-        [DataMember(Name="address1", EmitDefaultValue=false)]
+        [JsonPropertyName("address1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address1 { get; set; }
 
         /// <summary>
         /// Business street address continued
         /// </summary>
         /// <value>Business street address continued</value>
-        [DataMember(Name="address2", EmitDefaultValue=false)]
+        [JsonPropertyName("address2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address2 { get; set; }
 
         /// <summary>
         /// Building Name
         /// </summary>
         /// <value>Building Name</value>
-        [DataMember(Name="buildingName", EmitDefaultValue=false)]
+        [JsonPropertyName("buildingName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BuildingName { get; set; }
 
         /// <summary>
         /// City of the billing address
         /// </summary>
         /// <value>City of the billing address</value>
-        [DataMember(Name="locality", EmitDefaultValue=false)]
+        [JsonPropertyName("locality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Locality { get; set; }
 
         /// <summary>
         /// Business state (US) or province (Canada, others). Required for US and Canada.
         /// </summary>
         /// <value>Business state (US) or province (Canada, others). Required for US and Canada.</value>
-        [DataMember(Name="administrativeArea", EmitDefaultValue=false)]
+        [JsonPropertyName("administrativeArea")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdministrativeArea { get; set; }
 
         /// <summary>
         /// Business zip code (US) or postal code (Canada). The postal code must consist of 5 to 9 digits. Required for United States and Canada.
         /// </summary>
         /// <value>Business zip code (US) or postal code (Canada). The postal code must consist of 5 to 9 digits. Required for United States and Canada.</value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
@@ -113,13 +120,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UnderwritingConfigurationOrganizationInformationBusinessInformationAddress {\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (Address1 != null) sb.Append("  Address1: ").Append(Address1).Append("\n");
-            if (Address2 != null) sb.Append("  Address2: ").Append(Address2).Append("\n");
-            if (BuildingName != null) sb.Append("  BuildingName: ").Append(BuildingName).Append("\n");
-            if (Locality != null) sb.Append("  Locality: ").Append(Locality).Append("\n");
-            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(AdministrativeArea).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationAddress", "country", Country.ToString())).Append("\n");
+            if (Address1 != null) sb.Append("  Address1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationAddress", "address1", Address1.ToString())).Append("\n");
+            if (Address2 != null) sb.Append("  Address2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationAddress", "address2", Address2.ToString())).Append("\n");
+            if (BuildingName != null) sb.Append("  BuildingName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationAddress", "buildingName", BuildingName.ToString())).Append("\n");
+            if (Locality != null) sb.Append("  Locality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationAddress", "locality", Locality.ToString())).Append("\n");
+            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationAddress", "administrativeArea", AdministrativeArea.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationOrganizationInformationBusinessInformationAddress", "postalCode", PostalCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -130,7 +137,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UnderwritingConfigurationOrganizationInformationBusinessInformationAddress", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

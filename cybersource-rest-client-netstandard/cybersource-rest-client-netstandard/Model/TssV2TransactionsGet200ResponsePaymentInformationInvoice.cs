@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Invoice Number.
         /// </summary>
         /// <value>Invoice Number.</value>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Number { get; set; }
 
         /// <summary>
         /// Barcode Number.
         /// </summary>
         /// <value>Barcode Number.</value>
-        [DataMember(Name="barcodeNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("barcodeNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BarcodeNumber { get; set; }
 
         /// <summary>
         /// Expiration Date.
         /// </summary>
         /// <value>Expiration Date.</value>
-        [DataMember(Name="expirationDate", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationDate { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponsePaymentInformationInvoice {\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
-            if (BarcodeNumber != null) sb.Append("  BarcodeNumber: ").Append(BarcodeNumber).Append("\n");
-            if (ExpirationDate != null) sb.Append("  ExpirationDate: ").Append(ExpirationDate).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationInvoice", "number", Number.ToString())).Append("\n");
+            if (BarcodeNumber != null) sb.Append("  BarcodeNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationInvoice", "barcodeNumber", BarcodeNumber.ToString())).Append("\n");
+            if (ExpirationDate != null) sb.Append("  ExpirationDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponsePaymentInformationInvoice", "expirationDate", ExpirationDate.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponsePaymentInformationInvoice", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

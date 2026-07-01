@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Payer authentication exemption indicator for Carte Bancaire exemptions.  This is used with unbundled authentication and authorizations calls, for example: \&quot;low fraud merchant program\&quot;. The value for this field maps to the value returned in the payer authentication API response field - &#x60;consumerAuthenticationInformation.exemptionDataRaw&#x60;. 
         /// </summary>
         /// <value>Payer authentication exemption indicator for Carte Bancaire exemptions.  This is used with unbundled authentication and authorizations calls, for example: \&quot;low fraud merchant program\&quot;. The value for this field maps to the value returned in the payer authentication API response field - &#x60;consumerAuthenticationInformation.exemptionDataRaw&#x60;. </value>
-        [DataMember(Name="exemptionDataRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("exemptionDataRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExemptionDataRaw { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsConsumerAuthenticationInformationStrongAuthenticationIssuerInformation {\n");
-            if (ExemptionDataRaw != null) sb.Append("  ExemptionDataRaw: ").Append(ExemptionDataRaw).Append("\n");
+            if (ExemptionDataRaw != null) sb.Append("  ExemptionDataRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsConsumerAuthenticationInformationStrongAuthenticationIssuerInformation", "exemptionDataRaw", ExemptionDataRaw.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsConsumerAuthenticationInformationStrongAuthenticationIssuerInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

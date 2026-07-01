@@ -149,7 +149,7 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>PtsV2PaymentsPost201Response2</returns>
-        PtsV2PaymentsPost201Response2 UpdateSessionReq(CreateSessionRequest createSessionRequest, string id);
+        PtsV2PaymentsPost201Response2 UpdateSessionRequest(CreateSessionRequest createSessionRequest, string id);
 
         /// <summary>
         /// Update Alternative Payments Sessions Request
@@ -161,7 +161,7 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsPost201Response2</returns>
-        ApiResponse<PtsV2PaymentsPost201Response2> UpdateSessionReqWithHttpInfo(CreateSessionRequest createSessionRequest, string id);
+        ApiResponse<PtsV2PaymentsPost201Response2> UpdateSessionRequestWithHttpInfo(CreateSessionRequest createSessionRequest, string id);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -285,7 +285,7 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>Task of PtsV2PaymentsPost201Response2</returns>
-        System.Threading.Tasks.Task<PtsV2PaymentsPost201Response2> UpdateSessionReqAsync(CreateSessionRequest createSessionRequest, string id);
+        System.Threading.Tasks.Task<PtsV2PaymentsPost201Response2> UpdateSessionRequestAsync(CreateSessionRequest createSessionRequest, string id);
 
         /// <summary>
         /// Update Alternative Payments Sessions Request
@@ -297,7 +297,7 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response2)</returns>
-        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response2>> UpdateSessionReqAsyncWithHttpInfo(CreateSessionRequest createSessionRequest, string id);
+        System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsPost201Response2>> UpdateSessionRequestAsyncWithHttpInfo(CreateSessionRequest createSessionRequest, string id);
         #endregion Asynchronous Operations
     }
 
@@ -375,13 +375,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -393,7 +394,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (orderPaymentRequest != null && orderPaymentRequest.GetType() != typeof(byte[]))
             {
@@ -500,13 +501,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -518,7 +520,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (orderPaymentRequest != null && orderPaymentRequest.GetType() != typeof(byte[]))
             {
@@ -615,13 +617,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -726,13 +729,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -835,13 +839,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -946,13 +951,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1063,13 +1069,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1081,7 +1088,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (incrementAuthRequest != null && incrementAuthRequest.GetType() != typeof(byte[]))
             {
@@ -1188,13 +1195,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1206,7 +1214,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (incrementAuthRequest != null && incrementAuthRequest.GetType() != typeof(byte[]))
             {
@@ -1311,13 +1319,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1329,7 +1338,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (refreshPaymentStatusRequest != null && refreshPaymentStatusRequest.GetType() != typeof(byte[]))
             {
@@ -1436,13 +1445,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1454,7 +1464,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (refreshPaymentStatusRequest != null && refreshPaymentStatusRequest.GetType() != typeof(byte[]))
             {
@@ -1515,12 +1525,12 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>PtsV2PaymentsPost201Response2</returns>
-        public PtsV2PaymentsPost201Response2 UpdateSessionReq(CreateSessionRequest createSessionRequest, string id)
+        public PtsV2PaymentsPost201Response2 UpdateSessionRequest(CreateSessionRequest createSessionRequest, string id)
         {
-            logger.Debug("CALLING API \"UpdateSessionReq\" STARTED");
+            logger.Debug("CALLING API \"UpdateSessionRequest\" STARTED");
             this.SetStatusCode(null);
-            ApiResponse<PtsV2PaymentsPost201Response2> localVarResponse = UpdateSessionReqWithHttpInfo(createSessionRequest, id);
-            logger.Debug("CALLING API \"UpdateSessionReq\" ENDED");
+            ApiResponse<PtsV2PaymentsPost201Response2> localVarResponse = UpdateSessionRequestWithHttpInfo(createSessionRequest, id);
+            logger.Debug("CALLING API \"UpdateSessionRequest\" ENDED");
             this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
         }
@@ -1532,21 +1542,21 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>ApiResponse of PtsV2PaymentsPost201Response2</returns>
-        public ApiResponse< PtsV2PaymentsPost201Response2 > UpdateSessionReqWithHttpInfo(CreateSessionRequest createSessionRequest, string id)
+        public ApiResponse< PtsV2PaymentsPost201Response2 > UpdateSessionRequestWithHttpInfo(CreateSessionRequest createSessionRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
             // verify the required parameter 'createSessionRequest' is set
             if (createSessionRequest == null)
             {
-                logger.Error("ApiException : Missing required parameter 'createSessionRequest' when calling PaymentsApi->UpdateSessionReq");
-                throw new ApiException(400, "Missing required parameter 'createSessionRequest' when calling PaymentsApi->UpdateSessionReq");
+                logger.Error("ApiException : Missing required parameter 'createSessionRequest' when calling PaymentsApi->UpdateSessionRequest");
+                throw new ApiException(400, "Missing required parameter 'createSessionRequest' when calling PaymentsApi->UpdateSessionRequest");
             }
             // verify the required parameter 'id' is set
             if (id == null)
             {
-                logger.Error("ApiException : Missing required parameter 'id' when calling PaymentsApi->UpdateSessionReq");
-                throw new ApiException(400, "Missing required parameter 'id' when calling PaymentsApi->UpdateSessionReq");
+                logger.Error("ApiException : Missing required parameter 'id' when calling PaymentsApi->UpdateSessionRequest");
+                throw new ApiException(400, "Missing required parameter 'id' when calling PaymentsApi->UpdateSessionRequest");
             }
 
             var localVarPath = $"/pts/v2/payment-references/{id}";
@@ -1559,13 +1569,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1577,7 +1588,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (createSessionRequest != null && createSessionRequest.GetType() != typeof(byte[]))
             {
@@ -1592,7 +1603,7 @@ namespace CyberSource.Api
 
 
             string inboundMLEStatus = "optional";
-            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo"))
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateSessionRequest,UpdateSessionRequestAsync,UpdateSessionRequestWithHttpInfo,UpdateSessionRequestAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -1605,7 +1616,7 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdateSessionRequest,UpdateSessionRequestAsync,UpdateSessionRequestWithHttpInfo,UpdateSessionRequestAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
@@ -1619,7 +1630,7 @@ namespace CyberSource.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UpdateSessionReq", localVarResponse);
+                Exception exception = ExceptionFactory("UpdateSessionRequest", localVarResponse);
                 if (exception != null)
                 {
                     logger.Error($"Exception : {exception.Message}");
@@ -1639,12 +1650,12 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>Task of PtsV2PaymentsPost201Response2</returns>
-        public async Task<PtsV2PaymentsPost201Response2> UpdateSessionReqAsync(CreateSessionRequest createSessionRequest, string id)
+        public async Task<PtsV2PaymentsPost201Response2> UpdateSessionRequestAsync(CreateSessionRequest createSessionRequest, string id)
         {
-            logger.Debug("CALLING API \"UpdateSessionReqAsync\" STARTED");
+            logger.Debug("CALLING API \"UpdateSessionRequestAsync\" STARTED");
             this.SetStatusCode(null);
-            ApiResponse<PtsV2PaymentsPost201Response2> localVarResponse = await UpdateSessionReqAsyncWithHttpInfo(createSessionRequest, id);
-            logger.Debug("CALLING API \"UpdateSessionReqAsync\" ENDED");
+            ApiResponse<PtsV2PaymentsPost201Response2> localVarResponse = await UpdateSessionRequestAsyncWithHttpInfo(createSessionRequest, id);
+            logger.Debug("CALLING API \"UpdateSessionRequestAsync\" ENDED");
             this.SetStatusCode(localVarResponse.StatusCode);
             return localVarResponse.Data;
 
@@ -1657,21 +1668,21 @@ namespace CyberSource.Api
         /// <param name="createSessionRequest"></param>
         /// <param name="id">The payment ID. This ID is returned from a previous payment request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsPost201Response2)</returns>
-        public async Task<ApiResponse<PtsV2PaymentsPost201Response2>> UpdateSessionReqAsyncWithHttpInfo(CreateSessionRequest createSessionRequest, string id)
+        public async Task<ApiResponse<PtsV2PaymentsPost201Response2>> UpdateSessionRequestAsyncWithHttpInfo(CreateSessionRequest createSessionRequest, string id)
         {
             LogUtility logUtility = new LogUtility();
 
             // verify the required parameter 'createSessionRequest' is set
             if (createSessionRequest == null)
             {
-                logger.Error("ApiException : Missing required parameter 'createSessionRequest' when calling PaymentsApi->UpdateSessionReq");
-                throw new ApiException(400, "Missing required parameter 'createSessionRequest' when calling PaymentsApi->UpdateSessionReq");
+                logger.Error("ApiException : Missing required parameter 'createSessionRequest' when calling PaymentsApi->UpdateSessionRequest");
+                throw new ApiException(400, "Missing required parameter 'createSessionRequest' when calling PaymentsApi->UpdateSessionRequest");
             }
             // verify the required parameter 'id' is set
             if (id == null)
             {
-                logger.Error("ApiException : Missing required parameter 'id' when calling PaymentsApi->UpdateSessionReq");
-                throw new ApiException(400, "Missing required parameter 'id' when calling PaymentsApi->UpdateSessionReq");
+                logger.Error("ApiException : Missing required parameter 'id' when calling PaymentsApi->UpdateSessionRequest");
+                throw new ApiException(400, "Missing required parameter 'id' when calling PaymentsApi->UpdateSessionRequest");
             }
 
             var localVarPath = $"/pts/v2/payment-references/{id}";
@@ -1684,13 +1695,14 @@ namespace CyberSource.Api
 
             // to determine the Content-Type header
             string[] localVarHttpContentTypes = new string[] {
-                "application/json;charset=utf-8"
+                "application/json", 
+                "application/json; charset=utf-8"
             };
             string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
             string[] localVarHttpHeaderAccepts = new string[] {
-                "application/hal+json;charset=utf-8"
+                "application/hal+json"
             };
             string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -1702,7 +1714,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (createSessionRequest != null && createSessionRequest.GetType() != typeof(byte[]))
             {
@@ -1717,7 +1729,7 @@ namespace CyberSource.Api
 
 
             string inboundMLEStatus = "optional";
-            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo"))
+            if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdateSessionRequest,UpdateSessionRequestAsync,UpdateSessionRequestWithHttpInfo,UpdateSessionRequestAsyncWithHttpInfo"))
             {
                 try
                 {
@@ -1730,7 +1742,7 @@ namespace CyberSource.Api
                 }
             }
 
-            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdateSessionReq,UpdateSessionReqAsync,UpdateSessionReqWithHttpInfo,UpdateSessionReqAsyncWithHttpInfo");
+            bool isResponseMLEForApi = MLEUtility.CheckIsResponseMLEForAPI(Configuration.MerchantMLESettings, "UpdateSessionRequest,UpdateSessionRequestAsync,UpdateSessionRequestWithHttpInfo,UpdateSessionRequestAsyncWithHttpInfo");
 
             logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
@@ -1744,7 +1756,7 @@ namespace CyberSource.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("UpdateSessionReq", localVarResponse);
+                Exception exception = ExceptionFactory("UpdateSessionRequest", localVarResponse);
                 if (exception != null)
                 {
                     logger.Error($"Exception : {exception.Message}");

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// The type of document issued that identifies the account owner/authorized signer 
         /// </summary>
         /// <value>The type of document issued that identifies the account owner/authorized signer </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// CPF Number (Brazil).  Must be 11 digits in length. 
         /// </summary>
         /// <value>CPF Number (Brazil).  Must be 11 digits in length. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Indicates the identity of the issuing authority, usually a state or country code 
         /// </summary>
         /// <value>Indicates the identity of the issuing authority, usually a state or country code </value>
-        [DataMember(Name="issuedBy", EmitDefaultValue=false)]
+        [JsonPropertyName("issuedBy")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IssuedBy { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataBuyerInformationPersonalIdentification {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (IssuedBy != null) sb.Append("  IssuedBy: ").Append(IssuedBy).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataBuyerInformationPersonalIdentification", "type", Type.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataBuyerInformationPersonalIdentification", "id", Id.ToString())).Append("\n");
+            if (IssuedBy != null) sb.Append("  IssuedBy: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataBuyerInformationPersonalIdentification", "issuedBy", IssuedBy.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataBuyerInformationPersonalIdentification", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

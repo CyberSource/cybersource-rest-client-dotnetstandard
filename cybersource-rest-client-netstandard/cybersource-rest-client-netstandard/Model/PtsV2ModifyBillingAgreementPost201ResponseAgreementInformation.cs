@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -61,70 +61,80 @@ namespace CyberSource.Model
         /// Identifier for the mandate. 
         /// </summary>
         /// <value>Identifier for the mandate. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Date the mandate has been signed.  Format YYYYMMdd
         /// </summary>
         /// <value>Date the mandate has been signed.  Format YYYYMMdd</value>
-        [DataMember(Name="dateSigned", EmitDefaultValue=false)]
+        [JsonPropertyName("dateSigned")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DateSigned { get; set; }
 
         /// <summary>
         /// Date the mandate has been created.  Format YYYYMMdd
         /// </summary>
         /// <value>Date the mandate has been created.  Format YYYYMMdd</value>
-        [DataMember(Name="dateCreated", EmitDefaultValue=false)]
+        [JsonPropertyName("dateCreated")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DateCreated { get; set; }
 
         /// <summary>
         /// Date the mandate has been revoked.  Format YYYYMMdd
         /// </summary>
         /// <value>Date the mandate has been revoked.  Format YYYYMMdd</value>
-        [DataMember(Name="dateRevoked", EmitDefaultValue=false)]
+        [JsonPropertyName("dateRevoked")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DateRevoked { get; set; }
 
         /// <summary>
         /// Identifies the type of schedule as either recurring, one-off, split or usage.  Possible values: - recurring - oneoff - split - usage
         /// </summary>
         /// <value>Identifies the type of schedule as either recurring, one-off, split or usage.  Possible values: - recurring - oneoff - split - usage</value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Regularity with which the event occurs.  Possible values: - annual - monthly - quarterly - semiannual - weekly - daily - adhoc - intraday - fortnightly
         /// </summary>
         /// <value>Regularity with which the event occurs.  Possible values: - annual - monthly - quarterly - semiannual - weekly - daily - adhoc - intraday - fortnightly</value>
-        [DataMember(Name="frequency", EmitDefaultValue=false)]
+        [JsonPropertyName("frequency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Frequency { get; set; }
 
         /// <summary>
         /// Base64 encoded html string
         /// </summary>
         /// <value>Base64 encoded html string</value>
-        [DataMember(Name="encodedHtml", EmitDefaultValue=false)]
+        [JsonPropertyName("encodedHtml")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EncodedHtml { get; set; }
 
         /// <summary>
         /// Base64 encoded popup html string
         /// </summary>
         /// <value>Base64 encoded popup html string</value>
-        [DataMember(Name="encodedHtmlPopup", EmitDefaultValue=false)]
+        [JsonPropertyName("encodedHtmlPopup")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EncodedHtmlPopup { get; set; }
 
         /// <summary>
         /// URL for redirecting the customer for creating the mandate. 
         /// </summary>
         /// <value>URL for redirecting the customer for creating the mandate. </value>
-        [DataMember(Name="url", EmitDefaultValue=false)]
+        [JsonPropertyName("url")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Url { get; set; }
 
         /// <summary>
         /// The Billing Agreement ID returned by processor (PayPal). 
         /// </summary>
         /// <value>The Billing Agreement ID returned by processor (PayPal). </value>
-        [DataMember(Name="transactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionId { get; set; }
 
         /// <summary>
@@ -135,16 +145,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (DateSigned != null) sb.Append("  DateSigned: ").Append(DateSigned).Append("\n");
-            if (DateCreated != null) sb.Append("  DateCreated: ").Append(DateCreated).Append("\n");
-            if (DateRevoked != null) sb.Append("  DateRevoked: ").Append(DateRevoked).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Frequency != null) sb.Append("  Frequency: ").Append(Frequency).Append("\n");
-            if (EncodedHtml != null) sb.Append("  EncodedHtml: ").Append(EncodedHtml).Append("\n");
-            if (EncodedHtmlPopup != null) sb.Append("  EncodedHtmlPopup: ").Append(EncodedHtmlPopup).Append("\n");
-            if (Url != null) sb.Append("  Url: ").Append(Url).Append("\n");
-            if (TransactionId != null) sb.Append("  TransactionId: ").Append(TransactionId).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation", "id", Id.ToString())).Append("\n");
+            if (DateSigned != null) sb.Append("  DateSigned: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation", "dateSigned", DateSigned.ToString())).Append("\n");
+            if (DateCreated != null) sb.Append("  DateCreated: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation", "dateCreated", DateCreated.ToString())).Append("\n");
+            if (DateRevoked != null) sb.Append("  DateRevoked: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation", "dateRevoked", DateRevoked.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation", "type", Type.ToString())).Append("\n");
+            if (Frequency != null) sb.Append("  Frequency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation", "frequency", Frequency.ToString())).Append("\n");
+            if (EncodedHtml != null) sb.Append("  EncodedHtml: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation", "encodedHtml", EncodedHtml.ToString())).Append("\n");
+            if (EncodedHtmlPopup != null) sb.Append("  EncodedHtmlPopup: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation", "encodedHtmlPopup", EncodedHtmlPopup.ToString())).Append("\n");
+            if (Url != null) sb.Append("  Url: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation", "url", Url.ToString())).Append("\n");
+            if (TransactionId != null) sb.Append("  TransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation", "transactionId", TransactionId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -155,7 +165,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2ModifyBillingAgreementPost201ResponseAgreementInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

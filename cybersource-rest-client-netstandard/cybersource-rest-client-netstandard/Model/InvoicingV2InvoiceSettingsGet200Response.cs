@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,19 +47,22 @@ namespace CyberSource.Model
         /// Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC.  Returned by Cybersource for all services. 
         /// </summary>
         /// <value>Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC.  Returned by Cybersource for all services. </value>
-        [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("submitTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubmitTimeUtc { get; set; }
 
         /// <summary>
         /// Gets or Sets InvoiceSettingsInformation
         /// </summary>
-        [DataMember(Name="invoiceSettingsInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceSettingsInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation InvoiceSettingsInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInformation
         /// </summary>
-        [DataMember(Name="merchantInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InvoicingV2InvoiceSettingsGet200ResponseMerchantInformation MerchantInformation { get; set; }
 
         /// <summary>
@@ -70,9 +73,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InvoicingV2InvoiceSettingsGet200Response {\n");
-            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
-            if (InvoiceSettingsInformation != null) sb.Append("  InvoiceSettingsInformation: ").Append(InvoiceSettingsInformation).Append("\n");
-            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(MerchantInformation).Append("\n");
+            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200Response", "submitTimeUtc", SubmitTimeUtc.ToString())).Append("\n");
+            if (InvoiceSettingsInformation != null) sb.Append("  InvoiceSettingsInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200Response", "invoiceSettingsInformation", InvoiceSettingsInformation.ToString())).Append("\n");
+            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200Response", "merchantInformation", MerchantInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,7 +86,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InvoicingV2InvoiceSettingsGet200Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

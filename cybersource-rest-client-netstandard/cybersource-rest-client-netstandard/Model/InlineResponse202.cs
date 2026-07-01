@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,20 +46,23 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse202Links Links { get; set; }
 
         /// <summary>
         /// Unique identification number assigned to the submitted request.
         /// </summary>
         /// <value>Unique identification number assigned to the submitted request.</value>
-        [DataMember(Name="batchId", EmitDefaultValue=false)]
+        [JsonPropertyName("batchId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BatchId { get; set; }
 
         /// <summary>
         /// Gets or Sets BatchItemCount
         /// </summary>
-        [DataMember(Name="batchItemCount", EmitDefaultValue=false)]
+        [JsonPropertyName("batchItemCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? BatchItemCount { get; set; }
 
         /// <summary>
@@ -70,9 +73,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse202 {\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
-            if (BatchId != null) sb.Append("  BatchId: ").Append(BatchId).Append("\n");
-            if (BatchItemCount != null) sb.Append("  BatchItemCount: ").Append(BatchItemCount).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse202", "_links", Links.ToString())).Append("\n");
+            if (BatchId != null) sb.Append("  BatchId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse202", "batchId", BatchId.ToString())).Append("\n");
+            if (BatchItemCount != null) sb.Append("  BatchItemCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse202", "batchItemCount", BatchItemCount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,7 +86,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse202", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

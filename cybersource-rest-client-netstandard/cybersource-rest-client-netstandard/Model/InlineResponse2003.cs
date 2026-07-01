@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,27 +49,31 @@ namespace CyberSource.Model
         /// UUID uniquely generated for this comments. 
         /// </summary>
         /// <value>UUID uniquely generated for this comments. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC.  Returned by Cybersource for all services. 
         /// </summary>
         /// <value>Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC.  Returned by Cybersource for all services. </value>
-        [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("submitTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubmitTimeUtc { get; set; }
 
         /// <summary>
         /// The status of the submitted transaction. Possible values are: - &#x60;ACCEPTED&#x60; - &#x60;REJECTED&#x60; 
         /// </summary>
         /// <value>The status of the submitted transaction. Possible values are: - &#x60;ACCEPTED&#x60; - &#x60;REJECTED&#x60; </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets Embedded
         /// </summary>
-        [DataMember(Name="_embedded", EmitDefaultValue=false)]
+        [JsonPropertyName("_embedded")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse2003Embedded Embedded { get; set; }
 
         /// <summary>
@@ -80,10 +84,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2003 {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (Embedded != null) sb.Append("  Embedded: ").Append(Embedded).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2003", "id", Id.ToString())).Append("\n");
+            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2003", "submitTimeUtc", SubmitTimeUtc.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2003", "status", Status.ToString())).Append("\n");
+            if (Embedded != null) sb.Append("  Embedded: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2003", "_embedded", Embedded.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -94,7 +98,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2003", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

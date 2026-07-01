@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets TokenManagement
         /// </summary>
-        [DataMember(Name="tokenManagement", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenManagement")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public CommerceSolutionsProductsTokenManagement TokenManagement { get; set; }
 
         /// <summary>
         /// Gets or Sets AccountUpdater
         /// </summary>
-        [DataMember(Name="accountUpdater", EmitDefaultValue=false)]
+        [JsonPropertyName("accountUpdater")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public CommerceSolutionsProductsAccountUpdater AccountUpdater { get; set; }
 
         /// <summary>
         /// Gets or Sets BinLookup
         /// </summary>
-        [DataMember(Name="binLookup", EmitDefaultValue=false)]
+        [JsonPropertyName("binLookup")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public CommerceSolutionsProductsBinLookup BinLookup { get; set; }
 
         /// <summary>
         /// Gets or Sets AgenticCommerce
         /// </summary>
-        [DataMember(Name="agenticCommerce", EmitDefaultValue=false)]
+        [JsonPropertyName("agenticCommerce")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax AgenticCommerce { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CommerceSolutionsProducts {\n");
-            if (TokenManagement != null) sb.Append("  TokenManagement: ").Append(TokenManagement).Append("\n");
-            if (AccountUpdater != null) sb.Append("  AccountUpdater: ").Append(AccountUpdater).Append("\n");
-            if (BinLookup != null) sb.Append("  BinLookup: ").Append(BinLookup).Append("\n");
-            if (AgenticCommerce != null) sb.Append("  AgenticCommerce: ").Append(AgenticCommerce).Append("\n");
+            if (TokenManagement != null) sb.Append("  TokenManagement: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProducts", "tokenManagement", TokenManagement.ToString())).Append("\n");
+            if (AccountUpdater != null) sb.Append("  AccountUpdater: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProducts", "accountUpdater", AccountUpdater.ToString())).Append("\n");
+            if (BinLookup != null) sb.Append("  BinLookup: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProducts", "binLookup", BinLookup.ToString())).Append("\n");
+            if (AgenticCommerce != null) sb.Append("  AgenticCommerce: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CommerceSolutionsProducts", "agenticCommerce", AgenticCommerce.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CommerceSolutionsProducts", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

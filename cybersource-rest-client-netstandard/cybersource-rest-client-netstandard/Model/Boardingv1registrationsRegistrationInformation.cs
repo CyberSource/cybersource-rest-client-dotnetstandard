@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,47 +48,54 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets BoardingRegistrationId
         /// </summary>
-        [DataMember(Name="boardingRegistrationId", EmitDefaultValue=false)]
+        [JsonPropertyName("boardingRegistrationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BoardingRegistrationId { get; private set; }
 
         /// <summary>
         /// Time of request in UTC. &#x60;Format: YYYY-MM-DDThh:mm:ssZ&#x60;  Example 2016-08-11T22:47:57Z equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The T separates the date and the time. The Z indicates UTC. 
         /// </summary>
         /// <value>Time of request in UTC. &#x60;Format: YYYY-MM-DDThh:mm:ssZ&#x60;  Example 2016-08-11T22:47:57Z equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The T separates the date and the time. The Z indicates UTC. </value>
-        [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("submitTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? SubmitTimeUtc { get; private set; }
 
         /// <summary>
         /// The status of Registration request Possible Values:   - &#39;PROCESSING&#39;: This status is for Registrations that are still in Progress, you can get the latest status by calling the GET endpoint using the Registration Id   - &#39;SUCCESS&#39;: This status is for Registrations that were successfull on every step of the on boarding process.   - &#39;FAILURE&#39;: This status is for Registrations that fail before the Organization was created; please refer to the details section in the reponse for more information.   - &#39;PARTIAL&#39;: This status is for Registrations that created the Organization successfully but fail in at least on step while configuring it; please refer to the details section in the response for more information. 
         /// </summary>
         /// <value>The status of Registration request Possible Values:   - &#39;PROCESSING&#39;: This status is for Registrations that are still in Progress, you can get the latest status by calling the GET endpoint using the Registration Id   - &#39;SUCCESS&#39;: This status is for Registrations that were successfull on every step of the on boarding process.   - &#39;FAILURE&#39;: This status is for Registrations that fail before the Organization was created; please refer to the details section in the reponse for more information.   - &#39;PARTIAL&#39;: This status is for Registrations that created the Organization successfully but fail in at least on step while configuring it; please refer to the details section in the response for more information. </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; private set; }
 
         /// <summary>
         /// Gets or Sets BoardingPackageId
         /// </summary>
-        [DataMember(Name="boardingPackageId", EmitDefaultValue=false)]
+        [JsonPropertyName("boardingPackageId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BoardingPackageId { get; set; }
 
         /// <summary>
         /// Determines the boarding flow for this registration. Possible Values:   - &#39;ENTERPRISE&#39;   - &#39;SMB&#39;   - &#39;ADDPRODUCT&#39; 
         /// </summary>
         /// <value>Determines the boarding flow for this registration. Possible Values:   - &#39;ENTERPRISE&#39;   - &#39;SMB&#39;   - &#39;ADDPRODUCT&#39; </value>
-        [DataMember(Name="boardingFlow", EmitDefaultValue=false)]
+        [JsonPropertyName("boardingFlow")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BoardingFlow { get; set; }
 
         /// <summary>
         /// In case mode is not provided the API will use COMPLETE as default Possible Values:   - &#39;COMPLETE&#39;   - &#39;PARTIAL&#39; 
         /// </summary>
         /// <value>In case mode is not provided the API will use COMPLETE as default Possible Values:   - &#39;COMPLETE&#39;   - &#39;PARTIAL&#39; </value>
-        [DataMember(Name="mode", EmitDefaultValue=false)]
+        [JsonPropertyName("mode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Mode { get; set; }
 
         /// <summary>
         /// Gets or Sets SalesRepId
         /// </summary>
-        [DataMember(Name="salesRepId", EmitDefaultValue=false)]
+        [JsonPropertyName("salesRepId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SalesRepId { get; set; }
 
         /// <summary>
@@ -99,13 +106,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Boardingv1registrationsRegistrationInformation {\n");
-            if (BoardingRegistrationId != null) sb.Append("  BoardingRegistrationId: ").Append(BoardingRegistrationId).Append("\n");
-            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (BoardingPackageId != null) sb.Append("  BoardingPackageId: ").Append(BoardingPackageId).Append("\n");
-            if (BoardingFlow != null) sb.Append("  BoardingFlow: ").Append(BoardingFlow).Append("\n");
-            if (Mode != null) sb.Append("  Mode: ").Append(Mode).Append("\n");
-            if (SalesRepId != null) sb.Append("  SalesRepId: ").Append(SalesRepId).Append("\n");
+            if (BoardingRegistrationId != null) sb.Append("  BoardingRegistrationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsRegistrationInformation", "boardingRegistrationId", BoardingRegistrationId.ToString())).Append("\n");
+            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsRegistrationInformation", "submitTimeUtc", SubmitTimeUtc.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsRegistrationInformation", "status", Status.ToString())).Append("\n");
+            if (BoardingPackageId != null) sb.Append("  BoardingPackageId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsRegistrationInformation", "boardingPackageId", BoardingPackageId.ToString())).Append("\n");
+            if (BoardingFlow != null) sb.Append("  BoardingFlow: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsRegistrationInformation", "boardingFlow", BoardingFlow.ToString())).Append("\n");
+            if (Mode != null) sb.Append("  Mode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsRegistrationInformation", "mode", Mode.ToString())).Append("\n");
+            if (SalesRepId != null) sb.Append("  SalesRepId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsRegistrationInformation", "salesRepId", SalesRepId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -116,7 +123,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Boardingv1registrationsRegistrationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

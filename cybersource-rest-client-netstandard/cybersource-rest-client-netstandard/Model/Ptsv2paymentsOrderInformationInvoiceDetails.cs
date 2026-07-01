@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -77,125 +77,143 @@ namespace CyberSource.Model
         /// Invoice Number.
         /// </summary>
         /// <value>Invoice Number.</value>
-        [DataMember(Name="invoiceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InvoiceNumber { get; set; }
 
         /// <summary>
         /// Barcode Number.
         /// </summary>
         /// <value>Barcode Number.</value>
-        [DataMember(Name="barcodeNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("barcodeNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BarcodeNumber { get; set; }
 
         /// <summary>
         /// Expiration Date.
         /// </summary>
         /// <value>Expiration Date.</value>
-        [DataMember(Name="expirationDate", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationDate { get; set; }
 
         /// <summary>
         /// Value used by your customer to identify the order. This value is typically a purchase order number. CyberSource recommends that you do not populate the field with all zeros or nines. 
         /// </summary>
         /// <value>Value used by your customer to identify the order. This value is typically a purchase order number. CyberSource recommends that you do not populate the field with all zeros or nines. </value>
-        [DataMember(Name="purchaseOrderNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseOrderNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurchaseOrderNumber { get; set; }
 
         /// <summary>
         /// Date the order was processed. &#x60;Format: YYYY-MM-DD&#x60;. 
         /// </summary>
         /// <value>Date the order was processed. &#x60;Format: YYYY-MM-DD&#x60;. </value>
-        [DataMember(Name="purchaseOrderDate", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseOrderDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurchaseOrderDate { get; set; }
 
         /// <summary>
         /// The name of the individual or the company contacted for company authorized purchases. 
         /// </summary>
         /// <value>The name of the individual or the company contacted for company authorized purchases. </value>
-        [DataMember(Name="purchaseContactName", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseContactName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurchaseContactName { get; set; }
 
         /// <summary>
         /// Flag that indicates whether an order is taxable. This value must be true if the sum of all _lineItems[].taxAmount_ values &gt; 0.  If you do not include any &#x60;lineItems[].taxAmount&#x60; values in your request, CyberSource does not include &#x60;invoiceDetails.taxable&#x60; in the data it sends to the processor.  Possible values:  - **true**  - **false** 
         /// </summary>
         /// <value>Flag that indicates whether an order is taxable. This value must be true if the sum of all _lineItems[].taxAmount_ values &gt; 0.  If you do not include any &#x60;lineItems[].taxAmount&#x60; values in your request, CyberSource does not include &#x60;invoiceDetails.taxable&#x60; in the data it sends to the processor.  Possible values:  - **true**  - **false** </value>
-        [DataMember(Name="taxable", EmitDefaultValue=false)]
+        [JsonPropertyName("taxable")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Taxable { get; set; }
 
         /// <summary>
         /// VAT invoice number associated with the transaction. 
         /// </summary>
         /// <value>VAT invoice number associated with the transaction. </value>
-        [DataMember(Name="vatInvoiceReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("vatInvoiceReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VatInvoiceReferenceNumber { get; set; }
 
         /// <summary>
         /// International description code of the overall order&#39;s goods or services or the Categorizes purchases for VAT reporting. Contact your acquirer for a list of codes. 
         /// </summary>
         /// <value>International description code of the overall order&#39;s goods or services or the Categorizes purchases for VAT reporting. Contact your acquirer for a list of codes. </value>
-        [DataMember(Name="commodityCode", EmitDefaultValue=false)]
+        [JsonPropertyName("commodityCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommodityCode { get; set; }
 
         /// <summary>
         /// Identifier for the merchandise. This field is supported only on the processors listed in this field description.  #### American Express Direct Possible value: - 1000: Gift card  #### CyberSource through VisaNet This value must be right justified. In Japan, this value is called a _goods code_.  #### JCN Gateway This value must be right justified. In Japan, this value is called a _goods code_. 
         /// </summary>
         /// <value>Identifier for the merchandise. This field is supported only on the processors listed in this field description.  #### American Express Direct Possible value: - 1000: Gift card  #### CyberSource through VisaNet This value must be right justified. In Japan, this value is called a _goods code_.  #### JCN Gateway This value must be right justified. In Japan, this value is called a _goods code_. </value>
-        [DataMember(Name="merchandiseCode", EmitDefaultValue=false)]
+        [JsonPropertyName("merchandiseCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? MerchandiseCode { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionAdviceAddendum
         /// </summary>
-        [DataMember(Name="transactionAdviceAddendum", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionAdviceAddendum")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsOrderInformationInvoiceDetailsTransactionAdviceAddendum> TransactionAdviceAddendum { get; set; }
 
         /// <summary>
         /// Code that identifies the value of the &#x60;referenceDataNumber&#x60; field.  This field is a pass-through, which means that CyberSource does not verify the value or modify it in any way before sending it to the processor. 
         /// </summary>
         /// <value>Code that identifies the value of the &#x60;referenceDataNumber&#x60; field.  This field is a pass-through, which means that CyberSource does not verify the value or modify it in any way before sending it to the processor. </value>
-        [DataMember(Name="referenceDataCode", EmitDefaultValue=false)]
+        [JsonPropertyName("referenceDataCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReferenceDataCode { get; set; }
 
         /// <summary>
         /// Reference number. The meaning of this value is identified by the value of the &#x60;referenceDataCode&#x60; field.  This field is a pass-through, which means that CyberSource does not verify the value or modify it in any way before sending it to the processor. 
         /// </summary>
         /// <value>Reference number. The meaning of this value is identified by the value of the &#x60;referenceDataCode&#x60; field.  This field is a pass-through, which means that CyberSource does not verify the value or modify it in any way before sending it to the processor. </value>
-        [DataMember(Name="referenceDataNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("referenceDataNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReferenceDataNumber { get; set; }
 
         /// <summary>
         /// Transaction identifier that is generated. You have the option of printing the sales slip number on the receipt. This field is supported only on Cybersource through Visanet and JCN gateway.  Optional field.  #### Card Present processing message If you included this field in the request, the returned value is the value that you sent in the request. If you did not include this field in the request, the system generated this value for you.  The difference between this reply field and the &#x60;processorInformation.systemTraceAuditNumber&#x60; field is that the system generates the system trace audit number (STAN), and you must print the receipt number on the receipt; whereas you can generate the sales slip number, and you can choose to print the sales slip number on the receipt. 
         /// </summary>
         /// <value>Transaction identifier that is generated. You have the option of printing the sales slip number on the receipt. This field is supported only on Cybersource through Visanet and JCN gateway.  Optional field.  #### Card Present processing message If you included this field in the request, the returned value is the value that you sent in the request. If you did not include this field in the request, the system generated this value for you.  The difference between this reply field and the &#x60;processorInformation.systemTraceAuditNumber&#x60; field is that the system generates the system trace audit number (STAN), and you must print the receipt number on the receipt; whereas you can generate the sales slip number, and you can choose to print the sales slip number on the receipt. </value>
-        [DataMember(Name="salesSlipNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("salesSlipNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? SalesSlipNumber { get; set; }
 
         /// <summary>
         /// Date of the tax calculation. Use format YYYYMMDD. You can provide a date in the past if you are calculating tax for a refund and want to know what the tax was on the date the order was placed. You can provide a date in the future if you are calculating the tax for a future date, such as an upcoming tax holiday.  The default is the date, in Pacific time, that the bank receives the request. Keep this in mind if you are in a different time zone and want the tax calculated with the rates that are applicable on a specific date.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes. 
         /// </summary>
         /// <value>Date of the tax calculation. Use format YYYYMMDD. You can provide a date in the past if you are calculating tax for a refund and want to know what the tax was on the date the order was placed. You can provide a date in the future if you are calculating the tax for a future date, such as an upcoming tax holiday.  The default is the date, in Pacific time, that the bank receives the request. Keep this in mind if you are in a different time zone and want the tax calculated with the rates that are applicable on a specific date.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes. </value>
-        [DataMember(Name="invoiceDate", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InvoiceDate { get; set; }
 
         /// <summary>
         /// Cost centre of the merchant
         /// </summary>
         /// <value>Cost centre of the merchant</value>
-        [DataMember(Name="costCenter", EmitDefaultValue=false)]
+        [JsonPropertyName("costCenter")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CostCenter { get; set; }
 
         /// <summary>
         /// Text message from the issuer. If you give the customer a receipt, display this value on the receipt.
         /// </summary>
         /// <value>Text message from the issuer. If you give the customer a receipt, display this value on the receipt.</value>
-        [DataMember(Name="issuerMessage", EmitDefaultValue=false)]
+        [JsonPropertyName("issuerMessage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IssuerMessage { get; set; }
 
         /// <summary>
         /// Brief description of item.
         /// </summary>
         /// <value>Brief description of item.</value>
-        [DataMember(Name="productDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("productDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductDescription { get; set; }
 
         /// <summary>
@@ -206,24 +224,24 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsOrderInformationInvoiceDetails {\n");
-            if (InvoiceNumber != null) sb.Append("  InvoiceNumber: ").Append(InvoiceNumber).Append("\n");
-            if (BarcodeNumber != null) sb.Append("  BarcodeNumber: ").Append(BarcodeNumber).Append("\n");
-            if (ExpirationDate != null) sb.Append("  ExpirationDate: ").Append(ExpirationDate).Append("\n");
-            if (PurchaseOrderNumber != null) sb.Append("  PurchaseOrderNumber: ").Append(PurchaseOrderNumber).Append("\n");
-            if (PurchaseOrderDate != null) sb.Append("  PurchaseOrderDate: ").Append(PurchaseOrderDate).Append("\n");
-            if (PurchaseContactName != null) sb.Append("  PurchaseContactName: ").Append(PurchaseContactName).Append("\n");
-            if (Taxable != null) sb.Append("  Taxable: ").Append(Taxable).Append("\n");
-            if (VatInvoiceReferenceNumber != null) sb.Append("  VatInvoiceReferenceNumber: ").Append(VatInvoiceReferenceNumber).Append("\n");
-            if (CommodityCode != null) sb.Append("  CommodityCode: ").Append(CommodityCode).Append("\n");
-            if (MerchandiseCode != null) sb.Append("  MerchandiseCode: ").Append(MerchandiseCode).Append("\n");
-            if (TransactionAdviceAddendum != null) sb.Append("  TransactionAdviceAddendum: ").Append(TransactionAdviceAddendum).Append("\n");
-            if (ReferenceDataCode != null) sb.Append("  ReferenceDataCode: ").Append(ReferenceDataCode).Append("\n");
-            if (ReferenceDataNumber != null) sb.Append("  ReferenceDataNumber: ").Append(ReferenceDataNumber).Append("\n");
-            if (SalesSlipNumber != null) sb.Append("  SalesSlipNumber: ").Append(SalesSlipNumber).Append("\n");
-            if (InvoiceDate != null) sb.Append("  InvoiceDate: ").Append(InvoiceDate).Append("\n");
-            if (CostCenter != null) sb.Append("  CostCenter: ").Append(CostCenter).Append("\n");
-            if (IssuerMessage != null) sb.Append("  IssuerMessage: ").Append(IssuerMessage).Append("\n");
-            if (ProductDescription != null) sb.Append("  ProductDescription: ").Append(ProductDescription).Append("\n");
+            if (InvoiceNumber != null) sb.Append("  InvoiceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "invoiceNumber", InvoiceNumber.ToString())).Append("\n");
+            if (BarcodeNumber != null) sb.Append("  BarcodeNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "barcodeNumber", BarcodeNumber.ToString())).Append("\n");
+            if (ExpirationDate != null) sb.Append("  ExpirationDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "expirationDate", ExpirationDate.ToString())).Append("\n");
+            if (PurchaseOrderNumber != null) sb.Append("  PurchaseOrderNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "purchaseOrderNumber", PurchaseOrderNumber.ToString())).Append("\n");
+            if (PurchaseOrderDate != null) sb.Append("  PurchaseOrderDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "purchaseOrderDate", PurchaseOrderDate.ToString())).Append("\n");
+            if (PurchaseContactName != null) sb.Append("  PurchaseContactName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "purchaseContactName", PurchaseContactName.ToString())).Append("\n");
+            if (Taxable != null) sb.Append("  Taxable: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "taxable", Taxable.ToString())).Append("\n");
+            if (VatInvoiceReferenceNumber != null) sb.Append("  VatInvoiceReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "vatInvoiceReferenceNumber", VatInvoiceReferenceNumber.ToString())).Append("\n");
+            if (CommodityCode != null) sb.Append("  CommodityCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "commodityCode", CommodityCode.ToString())).Append("\n");
+            if (MerchandiseCode != null) sb.Append("  MerchandiseCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "merchandiseCode", MerchandiseCode.ToString())).Append("\n");
+            if (TransactionAdviceAddendum != null) sb.Append("  TransactionAdviceAddendum: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "transactionAdviceAddendum", TransactionAdviceAddendum.ToString())).Append("\n");
+            if (ReferenceDataCode != null) sb.Append("  ReferenceDataCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "referenceDataCode", ReferenceDataCode.ToString())).Append("\n");
+            if (ReferenceDataNumber != null) sb.Append("  ReferenceDataNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "referenceDataNumber", ReferenceDataNumber.ToString())).Append("\n");
+            if (SalesSlipNumber != null) sb.Append("  SalesSlipNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "salesSlipNumber", SalesSlipNumber.ToString())).Append("\n");
+            if (InvoiceDate != null) sb.Append("  InvoiceDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "invoiceDate", InvoiceDate.ToString())).Append("\n");
+            if (CostCenter != null) sb.Append("  CostCenter: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "costCenter", CostCenter.ToString())).Append("\n");
+            if (IssuerMessage != null) sb.Append("  IssuerMessage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "issuerMessage", IssuerMessage.ToString())).Append("\n");
+            if (ProductDescription != null) sb.Append("  ProductDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsOrderInformationInvoiceDetails", "productDescription", ProductDescription.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -234,7 +252,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsOrderInformationInvoiceDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

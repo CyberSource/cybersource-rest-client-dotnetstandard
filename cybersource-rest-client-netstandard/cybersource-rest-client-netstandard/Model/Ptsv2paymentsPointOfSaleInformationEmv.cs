@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,42 +53,48 @@ namespace CyberSource.Model
         /// EMV data that is transmitted from the chip card to the issuer, and from the issuer to the chip card. The EMV data is in the tag-length-value format and includes chip card tags, terminal tags, and transaction detail tags.  For information about the individual tags, see the \&quot;Application Specification\&quot; section in the EMV 4.3 Specifications: http://emvco.com  **Note** Card present information about EMV applies only to credit card processing and PIN debit processing. All other card present information applies only to credit card processing. PIN debit processing is available only on FDC Nashville Global.  **Important** The following tags contain sensitive information and **must not** be included in this field:   - &#x60;56&#x60;: Track 1 equivalent data  - &#x60;57&#x60;: Track 2 equivalent data  - &#x60;5A&#x60;: Application PAN  - &#x60;5F20&#x60;: Cardholder name  - &#x60;5F24&#x60;: Application expiration date (This sensitivity has been relaxed for Credit Mutuel-CIC, American Express Direct, FDC Nashville Global, First Data Merchant Solutions, and SIX)  - &#x60;99&#x60;: Transaction PIN  - &#x60;9F0B&#x60;: Cardholder name (extended)  - &#x60;9F1F&#x60;: Track 1 discretionary data  - &#x60;9F20&#x60;: Track 2 discretionary data  For captures, this field is required for contact EMV transactions. Otherwise, it is optional.  For credits, this field is required for contact EMV stand-alone credits and contactless EMV stand-alone credits. Otherwise, it is optional.  **Important** For contact EMV captures, contact EMV stand-alone credits, and contactless EMV stand-alone credits, you must include the following tags in this field. For all other types of EMV transactions, the following tags are optional.   - &#x60;95&#x60;: Terminal verification results  - &#x60;9F10&#x60;: Issuer application data  - &#x60;9F26&#x60;: Application cryptogram   #### CyberSource through VisaNet - In Japan: 199 bytes - In other countries: String (252)  For Mastercard Transactions, Optionally Tag 9F60 (Authenticated Application Data) and  Tag 96 (Kernel Identifier - Terminal) can be included in the Field.  #### GPX This field only supports transactions from the following card types: - Visa - Mastercard - AMEX - Discover - Diners - JCB - Union Pay International  #### JCN Gateway The following tags must be included: - &#x60;4F&#x60;: Application identifier - &#x60;84&#x60;: Dedicated file name  Data length: 199 bytes  #### All other processors: String (999)  #### Used by Authorization: Optional Authorization Reversal: Optional Credit: Optional PIN Debit processing (purchase, credit and reversal): Optional 
         /// </summary>
         /// <value>EMV data that is transmitted from the chip card to the issuer, and from the issuer to the chip card. The EMV data is in the tag-length-value format and includes chip card tags, terminal tags, and transaction detail tags.  For information about the individual tags, see the \&quot;Application Specification\&quot; section in the EMV 4.3 Specifications: http://emvco.com  **Note** Card present information about EMV applies only to credit card processing and PIN debit processing. All other card present information applies only to credit card processing. PIN debit processing is available only on FDC Nashville Global.  **Important** The following tags contain sensitive information and **must not** be included in this field:   - &#x60;56&#x60;: Track 1 equivalent data  - &#x60;57&#x60;: Track 2 equivalent data  - &#x60;5A&#x60;: Application PAN  - &#x60;5F20&#x60;: Cardholder name  - &#x60;5F24&#x60;: Application expiration date (This sensitivity has been relaxed for Credit Mutuel-CIC, American Express Direct, FDC Nashville Global, First Data Merchant Solutions, and SIX)  - &#x60;99&#x60;: Transaction PIN  - &#x60;9F0B&#x60;: Cardholder name (extended)  - &#x60;9F1F&#x60;: Track 1 discretionary data  - &#x60;9F20&#x60;: Track 2 discretionary data  For captures, this field is required for contact EMV transactions. Otherwise, it is optional.  For credits, this field is required for contact EMV stand-alone credits and contactless EMV stand-alone credits. Otherwise, it is optional.  **Important** For contact EMV captures, contact EMV stand-alone credits, and contactless EMV stand-alone credits, you must include the following tags in this field. For all other types of EMV transactions, the following tags are optional.   - &#x60;95&#x60;: Terminal verification results  - &#x60;9F10&#x60;: Issuer application data  - &#x60;9F26&#x60;: Application cryptogram   #### CyberSource through VisaNet - In Japan: 199 bytes - In other countries: String (252)  For Mastercard Transactions, Optionally Tag 9F60 (Authenticated Application Data) and  Tag 96 (Kernel Identifier - Terminal) can be included in the Field.  #### GPX This field only supports transactions from the following card types: - Visa - Mastercard - AMEX - Discover - Diners - JCB - Union Pay International  #### JCN Gateway The following tags must be included: - &#x60;4F&#x60;: Application identifier - &#x60;84&#x60;: Dedicated file name  Data length: 199 bytes  #### All other processors: String (999)  #### Used by Authorization: Optional Authorization Reversal: Optional Credit: Optional PIN Debit processing (purchase, credit and reversal): Optional </value>
-        [DataMember(Name="tags", EmitDefaultValue=false)]
+        [JsonPropertyName("tags")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Tags { get; set; }
 
         /// <summary>
         /// Method that was used to verify the cardholder&#39;s identity.  Possible values:  - &#x60;0&#x60;: No verification  - &#x60;1&#x60;: Signature  This field is supported only on **American Express Direct**. 
         /// </summary>
         /// <value>Method that was used to verify the cardholder&#39;s identity.  Possible values:  - &#x60;0&#x60;: No verification  - &#x60;1&#x60;: Signature  This field is supported only on **American Express Direct**. </value>
-        [DataMember(Name="cardholderVerificationMethodUsed", EmitDefaultValue=false)]
+        [JsonPropertyName("cardholderVerificationMethodUsed")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? CardholderVerificationMethodUsed { get; set; }
 
         /// <summary>
         /// Number assigned to a specific card when two or more cards are associated with the same primary account number.  This value enables issuers to distinguish among multiple cards that are linked to the same account.  This value can also act as a tracking tool when reissuing cards.   When this value is available, it is provided by the chip reader.   When the chip reader does not provide this value, do not include this field in your request.  When sequence number is not provided via this API field, the value is extracted from EMV tag 5F34 for Visa and Mastercard transactions. To enable this feature please call support.  **Note** Card present information about EMV applies only to credit card processing and PIN debit processing.  All other card present information applies only to credit card processing.   PIN debit processing is available only on CyberSource through VisaNet and FDC Nashville Global.  #### Used by Authorization: Optional PIN Debit processing: Optional  #### GPX  This field only supports transactions from the following card types: - Visa - Mastercard - AMEX - Discover - Diners - JCB - Union Pay International 
         /// </summary>
         /// <value>Number assigned to a specific card when two or more cards are associated with the same primary account number.  This value enables issuers to distinguish among multiple cards that are linked to the same account.  This value can also act as a tracking tool when reissuing cards.   When this value is available, it is provided by the chip reader.   When the chip reader does not provide this value, do not include this field in your request.  When sequence number is not provided via this API field, the value is extracted from EMV tag 5F34 for Visa and Mastercard transactions. To enable this feature please call support.  **Note** Card present information about EMV applies only to credit card processing and PIN debit processing.  All other card present information applies only to credit card processing.   PIN debit processing is available only on CyberSource through VisaNet and FDC Nashville Global.  #### Used by Authorization: Optional PIN Debit processing: Optional  #### GPX  This field only supports transactions from the following card types: - Visa - Mastercard - AMEX - Discover - Diners - JCB - Union Pay International </value>
-        [DataMember(Name="cardSequenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("cardSequenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardSequenceNumber { get; set; }
 
         /// <summary>
         /// Indicates whether a fallback method was used to enter credit card information into the POS terminal. When a technical problem prevents a successful exchange of information between a chip card and a chip-capable terminal:   1. Swipe the card or key the credit card information into the POS terminal.  2. Use the pointOfSaleInformation.entryMode field to indicate whether the information was swiped or keyed.   Possible values: - &#x60;true&#x60;: Fallback method was used. - &#x60;false&#x60; (default): Fallback method was not used.  This field is supported only on American Express Direct, Chase Paymentech Solutions, CyberSource through VisaNet, FDC Nashville Global, GPN, JCN Gateway, OmniPay Direct, and SIX. 
         /// </summary>
         /// <value>Indicates whether a fallback method was used to enter credit card information into the POS terminal. When a technical problem prevents a successful exchange of information between a chip card and a chip-capable terminal:   1. Swipe the card or key the credit card information into the POS terminal.  2. Use the pointOfSaleInformation.entryMode field to indicate whether the information was swiped or keyed.   Possible values: - &#x60;true&#x60;: Fallback method was used. - &#x60;false&#x60; (default): Fallback method was not used.  This field is supported only on American Express Direct, Chase Paymentech Solutions, CyberSource through VisaNet, FDC Nashville Global, GPN, JCN Gateway, OmniPay Direct, and SIX. </value>
-        [DataMember(Name="fallback", EmitDefaultValue=false)]
+        [JsonPropertyName("fallback")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Fallback { get; set; }
 
         /// <summary>
         /// Reason for the EMV fallback transaction. An EMV fallback transaction occurs when an EMV transaction fails for one of these reasons:   - Technical failure: the EMV terminal or EMV card cannot read and process chip data.  - Empty candidate list failure: the EMV terminal does not have any applications in common with the EMV card.    EMV terminals are coded to determine whether the terminal and EMV card have any applications in common.    EMV terminals provide this information to you.  Possible values:   - &#x60;1&#x60;: Transaction was initiated with information from a magnetic stripe, and the previous transaction at the     EMV terminal either used information from a successful chip read or it was not a chip transaction.  - &#x60;2&#x60;: Transaction was initiated with information from a magnetic stripe, and the previous transaction at the     EMV terminal was an EMV fallback transaction because the attempted chip read was unsuccessful.  This field is supported only on **GPN** and **JCN Gateway**. **NOTE**: This field is required when an EMV transaction fails for a technical reason. Do not include this field when the EMV terminal does not have any applications in common with the EMV card. 
         /// </summary>
         /// <value>Reason for the EMV fallback transaction. An EMV fallback transaction occurs when an EMV transaction fails for one of these reasons:   - Technical failure: the EMV terminal or EMV card cannot read and process chip data.  - Empty candidate list failure: the EMV terminal does not have any applications in common with the EMV card.    EMV terminals are coded to determine whether the terminal and EMV card have any applications in common.    EMV terminals provide this information to you.  Possible values:   - &#x60;1&#x60;: Transaction was initiated with information from a magnetic stripe, and the previous transaction at the     EMV terminal either used information from a successful chip read or it was not a chip transaction.  - &#x60;2&#x60;: Transaction was initiated with information from a magnetic stripe, and the previous transaction at the     EMV terminal was an EMV fallback transaction because the attempted chip read was unsuccessful.  This field is supported only on **GPN** and **JCN Gateway**. **NOTE**: This field is required when an EMV transaction fails for a technical reason. Do not include this field when the EMV terminal does not have any applications in common with the EMV card. </value>
-        [DataMember(Name="fallbackCondition", EmitDefaultValue=false)]
+        [JsonPropertyName("fallbackCondition")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? FallbackCondition { get; set; }
 
         /// <summary>
         /// #### Visa Platform Connect Value \&quot;true\&quot; indicates this transaction is intentionally duplicated . The field contains value \&quot;true\&quot; which indicates that merchant has intentionally duplicated single tap transaction. Merchant is intentionally sending a duplicate auth request for a single tap txn because the issuer requested a PIN. 
         /// </summary>
         /// <value>#### Visa Platform Connect Value \&quot;true\&quot; indicates this transaction is intentionally duplicated . The field contains value \&quot;true\&quot; which indicates that merchant has intentionally duplicated single tap transaction. Merchant is intentionally sending a duplicate auth request for a single tap txn because the issuer requested a PIN. </value>
-        [DataMember(Name="isRepeat", EmitDefaultValue=false)]
+        [JsonPropertyName("isRepeat")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IsRepeat { get; set; }
 
         /// <summary>
@@ -99,12 +105,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsPointOfSaleInformationEmv {\n");
-            if (Tags != null) sb.Append("  Tags: ").Append(Tags).Append("\n");
-            if (CardholderVerificationMethodUsed != null) sb.Append("  CardholderVerificationMethodUsed: ").Append(CardholderVerificationMethodUsed).Append("\n");
-            if (CardSequenceNumber != null) sb.Append("  CardSequenceNumber: ").Append(CardSequenceNumber).Append("\n");
-            if (Fallback != null) sb.Append("  Fallback: ").Append(Fallback).Append("\n");
-            if (FallbackCondition != null) sb.Append("  FallbackCondition: ").Append(FallbackCondition).Append("\n");
-            if (IsRepeat != null) sb.Append("  IsRepeat: ").Append(IsRepeat).Append("\n");
+            if (Tags != null) sb.Append("  Tags: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPointOfSaleInformationEmv", "tags", Tags.ToString())).Append("\n");
+            if (CardholderVerificationMethodUsed != null) sb.Append("  CardholderVerificationMethodUsed: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPointOfSaleInformationEmv", "cardholderVerificationMethodUsed", CardholderVerificationMethodUsed.ToString())).Append("\n");
+            if (CardSequenceNumber != null) sb.Append("  CardSequenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPointOfSaleInformationEmv", "cardSequenceNumber", CardSequenceNumber.ToString())).Append("\n");
+            if (Fallback != null) sb.Append("  Fallback: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPointOfSaleInformationEmv", "fallback", Fallback.ToString())).Append("\n");
+            if (FallbackCondition != null) sb.Append("  FallbackCondition: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPointOfSaleInformationEmv", "fallbackCondition", FallbackCondition.ToString())).Append("\n");
+            if (IsRepeat != null) sb.Append("  IsRepeat: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsPointOfSaleInformationEmv", "isRepeat", IsRepeat.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,7 +121,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsPointOfSaleInformationEmv", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

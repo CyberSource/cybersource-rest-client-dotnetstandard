@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -66,31 +66,36 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets EventName
         /// </summary>
-        [DataMember(Name="eventName", EmitDefaultValue=false)]
+        [JsonPropertyName("eventName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EventName { get; set; }
 
         /// <summary>
         /// Gets or Sets DisplayName
         /// </summary>
-        [DataMember(Name="displayName", EmitDefaultValue=false)]
+        [JsonPropertyName("displayName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DisplayName { get; set; }
 
         /// <summary>
         /// Gets or Sets Frequency
         /// </summary>
-        [DataMember(Name="frequency", EmitDefaultValue=false)]
+        [JsonPropertyName("frequency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Frequency { get; set; }
 
         /// <summary>
         /// Gets or Sets TimeSensitivity
         /// </summary>
-        [DataMember(Name="timeSensitivity", EmitDefaultValue=false)]
+        [JsonPropertyName("timeSensitivity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? TimeSensitivity { get; set; }
 
         /// <summary>
         /// Gets or Sets PayloadEncryption
         /// </summary>
-        [DataMember(Name="payloadEncryption", EmitDefaultValue=false)]
+        [JsonPropertyName("payloadEncryption")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PayloadEncryption { get; set; }
 
         /// <summary>
@@ -101,11 +106,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Notificationsubscriptionsv2productsorganizationIdEventTypes {\n");
-            if (EventName != null) sb.Append("  EventName: ").Append(EventName).Append("\n");
-            if (DisplayName != null) sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
-            if (Frequency != null) sb.Append("  Frequency: ").Append(Frequency).Append("\n");
-            if (TimeSensitivity != null) sb.Append("  TimeSensitivity: ").Append(TimeSensitivity).Append("\n");
-            if (PayloadEncryption != null) sb.Append("  PayloadEncryption: ").Append(PayloadEncryption).Append("\n");
+            if (EventName != null) sb.Append("  EventName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2productsorganizationIdEventTypes", "eventName", EventName.ToString())).Append("\n");
+            if (DisplayName != null) sb.Append("  DisplayName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2productsorganizationIdEventTypes", "displayName", DisplayName.ToString())).Append("\n");
+            if (Frequency != null) sb.Append("  Frequency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2productsorganizationIdEventTypes", "frequency", Frequency.ToString())).Append("\n");
+            if (TimeSensitivity != null) sb.Append("  TimeSensitivity: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2productsorganizationIdEventTypes", "timeSensitivity", TimeSensitivity.ToString())).Append("\n");
+            if (PayloadEncryption != null) sb.Append("  PayloadEncryption: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Notificationsubscriptionsv2productsorganizationIdEventTypes", "payloadEncryption", PayloadEncryption.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -116,7 +121,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Notificationsubscriptionsv2productsorganizationIdEventTypes", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

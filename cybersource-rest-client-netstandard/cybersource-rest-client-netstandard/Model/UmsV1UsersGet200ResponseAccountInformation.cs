@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -56,50 +56,58 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets UserName
         /// </summary>
-        [DataMember(Name="userName", EmitDefaultValue=false)]
+        [JsonPropertyName("userName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UserName { get; set; }
 
         /// <summary>
         /// Gets or Sets RoleId
         /// </summary>
-        [DataMember(Name="roleId", EmitDefaultValue=false)]
+        [JsonPropertyName("roleId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoleId { get; set; }
 
         /// <summary>
         /// Gets or Sets Permissions
         /// </summary>
-        [DataMember(Name="permissions", EmitDefaultValue=false)]
+        [JsonPropertyName("permissions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> Permissions { get; set; }
 
         /// <summary>
         /// Valid values: - active - inactive - locked - disabled - forgotpassword - deleted 
         /// </summary>
         /// <value>Valid values: - active - inactive - locked - disabled - forgotpassword - deleted </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedTime
         /// </summary>
-        [DataMember(Name="createdTime", EmitDefaultValue=false)]
+        [JsonPropertyName("createdTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? CreatedTime { get; set; }
 
         /// <summary>
         /// Gets or Sets LastAccessTime
         /// </summary>
-        [DataMember(Name="lastAccessTime", EmitDefaultValue=false)]
+        [JsonPropertyName("lastAccessTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? LastAccessTime { get; set; }
 
         /// <summary>
         /// Gets or Sets LanguagePreference
         /// </summary>
-        [DataMember(Name="languagePreference", EmitDefaultValue=false)]
+        [JsonPropertyName("languagePreference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LanguagePreference { get; set; }
 
         /// <summary>
         /// Gets or Sets Timezone
         /// </summary>
-        [DataMember(Name="timezone", EmitDefaultValue=false)]
+        [JsonPropertyName("timezone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Timezone { get; set; }
 
         /// <summary>
@@ -110,14 +118,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UmsV1UsersGet200ResponseAccountInformation {\n");
-            if (UserName != null) sb.Append("  UserName: ").Append(UserName).Append("\n");
-            if (RoleId != null) sb.Append("  RoleId: ").Append(RoleId).Append("\n");
-            if (Permissions != null) sb.Append("  Permissions: ").Append(Permissions).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (CreatedTime != null) sb.Append("  CreatedTime: ").Append(CreatedTime).Append("\n");
-            if (LastAccessTime != null) sb.Append("  LastAccessTime: ").Append(LastAccessTime).Append("\n");
-            if (LanguagePreference != null) sb.Append("  LanguagePreference: ").Append(LanguagePreference).Append("\n");
-            if (Timezone != null) sb.Append("  Timezone: ").Append(Timezone).Append("\n");
+            if (UserName != null) sb.Append("  UserName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseAccountInformation", "userName", UserName.ToString())).Append("\n");
+            if (RoleId != null) sb.Append("  RoleId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseAccountInformation", "roleId", RoleId.ToString())).Append("\n");
+            if (Permissions != null) sb.Append("  Permissions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseAccountInformation", "permissions", Permissions.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseAccountInformation", "status", Status.ToString())).Append("\n");
+            if (CreatedTime != null) sb.Append("  CreatedTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseAccountInformation", "createdTime", CreatedTime.ToString())).Append("\n");
+            if (LastAccessTime != null) sb.Append("  LastAccessTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseAccountInformation", "lastAccessTime", LastAccessTime.ToString())).Append("\n");
+            if (LanguagePreference != null) sb.Append("  LanguagePreference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseAccountInformation", "languagePreference", LanguagePreference.ToString())).Append("\n");
+            if (Timezone != null) sb.Append("  Timezone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UmsV1UsersGet200ResponseAccountInformation", "timezone", Timezone.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -128,7 +136,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UmsV1UsersGet200ResponseAccountInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

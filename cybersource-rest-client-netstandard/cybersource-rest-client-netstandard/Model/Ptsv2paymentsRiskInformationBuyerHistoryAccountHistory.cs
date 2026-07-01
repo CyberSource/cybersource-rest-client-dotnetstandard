@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Applicable when this is not a guest account. 
         /// </summary>
         /// <value>Applicable when this is not a guest account. </value>
-        [DataMember(Name="firstUseOfShippingAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("firstUseOfShippingAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? FirstUseOfShippingAddress { get; set; }
 
         /// <summary>
         /// Date when the shipping address for this transaction was first used. Recommended for Discover ProtectBuy. If &#x60;firstUseOfShippingAddress&#x60; is false and not a guest account, then this date is entered. 
         /// </summary>
         /// <value>Date when the shipping address for this transaction was first used. Recommended for Discover ProtectBuy. If &#x60;firstUseOfShippingAddress&#x60; is false and not a guest account, then this date is entered. </value>
-        [DataMember(Name="shippingAddressUsageDate", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingAddressUsageDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShippingAddressUsageDate { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsRiskInformationBuyerHistoryAccountHistory {\n");
-            if (FirstUseOfShippingAddress != null) sb.Append("  FirstUseOfShippingAddress: ").Append(FirstUseOfShippingAddress).Append("\n");
-            if (ShippingAddressUsageDate != null) sb.Append("  ShippingAddressUsageDate: ").Append(ShippingAddressUsageDate).Append("\n");
+            if (FirstUseOfShippingAddress != null) sb.Append("  FirstUseOfShippingAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistoryAccountHistory", "firstUseOfShippingAddress", FirstUseOfShippingAddress.ToString())).Append("\n");
+            if (ShippingAddressUsageDate != null) sb.Append("  ShippingAddressUsageDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformationBuyerHistoryAccountHistory", "shippingAddressUsageDate", ShippingAddressUsageDate.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsRiskInformationBuyerHistoryAccountHistory", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

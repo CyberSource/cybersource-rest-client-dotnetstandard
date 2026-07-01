@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,27 +48,31 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Bavsv1accountvalidationsClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Request Id sent as part of the request.
         /// </summary>
         /// <value>Request Id sent as part of the request.</value>
-        [DataMember(Name="requestId", EmitDefaultValue=false)]
+        [JsonPropertyName("requestId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestId { get; set; }
 
         /// <summary>
         /// Time of request in UTC.  Format: &#x60;YYYY-MM-DDThhmmssZ&#x60;, where: - &#x60;T&#x60;:  Separates the date and the time - &#x60;Z&#x60;:  Indicates Coordinated Universal Time (UTC), also known as Greenwich Mean Time (GMT)  Example:  &#x60;2020-01-11T224757Z&#x60; equals January 11, 2020, at 22:47:57 (10:47:57 p.m.) 
         /// </summary>
         /// <value>Time of request in UTC.  Format: &#x60;YYYY-MM-DDThhmmssZ&#x60;, where: - &#x60;T&#x60;:  Separates the date and the time - &#x60;Z&#x60;:  Indicates Coordinated Universal Time (UTC), also known as Greenwich Mean Time (GMT)  Example:  &#x60;2020-01-11T224757Z&#x60; equals January 11, 2020, at 22:47:57 (10:47:57 p.m.) </value>
-        [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("submitTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubmitTimeUtc { get; set; }
 
         /// <summary>
         /// Gets or Sets BankAccountValidation
         /// </summary>
-        [DataMember(Name="bankAccountValidation", EmitDefaultValue=false)]
+        [JsonPropertyName("bankAccountValidation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsGet200ResponseBankAccountValidation BankAccountValidation { get; set; }
 
         /// <summary>
@@ -79,10 +83,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse20015 {\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (RequestId != null) sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
-            if (BankAccountValidation != null) sb.Append("  BankAccountValidation: ").Append(BankAccountValidation).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20015", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (RequestId != null) sb.Append("  RequestId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20015", "requestId", RequestId.ToString())).Append("\n");
+            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20015", "submitTimeUtc", SubmitTimeUtc.ToString())).Append("\n");
+            if (BankAccountValidation != null) sb.Append("  BankAccountValidation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20015", "bankAccountValidation", BankAccountValidation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -93,7 +97,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse20015", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

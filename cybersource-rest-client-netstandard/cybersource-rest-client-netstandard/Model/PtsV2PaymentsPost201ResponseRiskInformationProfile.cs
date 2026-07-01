@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Name of the active profile chosen by the profile selector. If no profile selector exists, the default active profile is chosen.  **Note** By default, your default profile is the active profile, or the Profile Selector chooses the active profile. Use this field only if you want to specify the name of a different profile. The passed-in profile will then become the active profile. 
         /// </summary>
         /// <value>Name of the active profile chosen by the profile selector. If no profile selector exists, the default active profile is chosen.  **Note** By default, your default profile is the active profile, or the Profile Selector chooses the active profile. Use this field only if you want to specify the name of a different profile. The passed-in profile will then become the active profile. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Name of the queue where orders that are not automatically accepted are sent. 
         /// </summary>
         /// <value>Name of the queue where orders that are not automatically accepted are sent. </value>
-        [DataMember(Name="desinationQueue", EmitDefaultValue=false)]
+        [JsonPropertyName("desinationQueue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DesinationQueue { get; set; }
 
         /// <summary>
         /// Name of the profile selector rule that chooses the profile to use for the transaction. If no profile selector exists, the value is Default Active Profile. 
         /// </summary>
         /// <value>Name of the profile selector rule that chooses the profile to use for the transaction. If no profile selector exists, the value is Default Active Profile. </value>
-        [DataMember(Name="selectorRule", EmitDefaultValue=false)]
+        [JsonPropertyName("selectorRule")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SelectorRule { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseRiskInformationProfile {\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (DesinationQueue != null) sb.Append("  DesinationQueue: ").Append(DesinationQueue).Append("\n");
-            if (SelectorRule != null) sb.Append("  SelectorRule: ").Append(SelectorRule).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationProfile", "name", Name.ToString())).Append("\n");
+            if (DesinationQueue != null) sb.Append("  DesinationQueue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationProfile", "desinationQueue", DesinationQueue.ToString())).Append("\n");
+            if (SelectorRule != null) sb.Append("  SelectorRule: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationProfile", "selectorRule", SelectorRule.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseRiskInformationProfile", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

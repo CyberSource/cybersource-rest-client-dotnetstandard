@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// This is the orgId of the organization which the user belongs to.
         /// </summary>
         /// <value>This is the orgId of the organization which the user belongs to.</value>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// User ID of the user you want to get details on.
         /// </summary>
         /// <value>User ID of the user you want to get details on.</value>
-        [DataMember(Name="userName", EmitDefaultValue=false)]
+        [JsonPropertyName("userName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UserName { get; set; }
 
         /// <summary>
         /// role of the user you are trying to search on.
         /// </summary>
         /// <value>role of the user you are trying to search on.</value>
-        [DataMember(Name="roleId", EmitDefaultValue=false)]
+        [JsonPropertyName("roleId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RoleId { get; set; }
 
         /// <summary>
         /// permission that you are trying to search user on.
         /// </summary>
         /// <value>permission that you are trying to search user on.</value>
-        [DataMember(Name="permissionId", EmitDefaultValue=false)]
+        [JsonPropertyName("permissionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PermissionId { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class SearchRequest {\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (UserName != null) sb.Append("  UserName: ").Append(UserName).Append("\n");
-            if (RoleId != null) sb.Append("  RoleId: ").Append(RoleId).Append("\n");
-            if (PermissionId != null) sb.Append("  PermissionId: ").Append(PermissionId).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SearchRequest", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (UserName != null) sb.Append("  UserName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SearchRequest", "userName", UserName.ToString())).Append("\n");
+            if (RoleId != null) sb.Append("  RoleId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SearchRequest", "roleId", RoleId.ToString())).Append("\n");
+            if (PermissionId != null) sb.Append("  PermissionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SearchRequest", "permissionId", PermissionId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("SearchRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -1,15 +1,40 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using NLog;
 
 namespace AuthenticationSdk.util
 {
     public static class Utility
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
+        /// Determines the <see cref="X509KeyStorageFlags"/> to use when importing a PKCS#12 keystore.
+        /// Uses <see cref="X509KeyStorageFlags.EphemeralKeySet"/> (key kept in memory only, never written
+        /// to the on-disk key store) on platforms that support it, so the SDK works in sandboxed
+        /// environments such as .NET MAUI on Windows, iOS and Android. macOS does not support
+        /// EphemeralKeySet, so it falls back to <see cref="X509KeyStorageFlags.Exportable"/>.
+        /// PersistKeySet is intentionally not used: it is a Windows key-container concept, and the
+        /// only flow that reads the private key (JWT RS256 signing) requires the key to be exportable
+        /// for BouncyCastle interop, not persisted. Cached certificates keep their in-memory key alive
+        /// on Unix platforms for the duration they remain in MemoryCache.
+        /// </summary>
+        /// <remarks>
+        /// EphemeralKeySet and PersistKeySet are mutually exclusive and must not be combined.
+        /// </remarks>
+        internal static X509KeyStorageFlags GetP12KeyStorageFlags()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                return X509KeyStorageFlags.Exportable;
+            }
+
+            return X509KeyStorageFlags.Exportable | X509KeyStorageFlags.EphemeralKeySet;
+        }
 
         /// <summary>
         /// Validates that a configuration value is a positive integer.
@@ -59,9 +84,7 @@ namespace AuthenticationSdk.util
                 // Load the certificate (including private key) from the P12 file
                 var cert = new X509Certificate2(
                     p12FilePath,
-                    password == null ? string.Empty : new System.Net.NetworkCredential(string.Empty, password).Password,
-                    X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet
-                );
+                    password == null ? string.Empty : new System.Net.NetworkCredential(string.Empty, password).Password, GetP12KeyStorageFlags());
 
                 // Check if private key exists
                 if (!cert.HasPrivateKey)

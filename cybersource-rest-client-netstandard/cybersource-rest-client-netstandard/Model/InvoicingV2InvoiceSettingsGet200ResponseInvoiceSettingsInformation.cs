@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -121,110 +121,126 @@ namespace CyberSource.Model
         /// The image file, which must be encoded in Base64 format. Supported file formats are &#x60;png&#x60;, &#x60;jpg&#x60;, and &#x60;gif&#x60;. The image file size restriction is 1 MB.
         /// </summary>
         /// <value>The image file, which must be encoded in Base64 format. Supported file formats are &#x60;png&#x60;, &#x60;jpg&#x60;, and &#x60;gif&#x60;. The image file size restriction is 1 MB.</value>
-        [DataMember(Name="merchantLogo", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantLogo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantLogo { get; set; }
 
         /// <summary>
         /// The merchant&#39;s display name shown on the invoice.
         /// </summary>
         /// <value>The merchant&#39;s display name shown on the invoice.</value>
-        [DataMember(Name="merchantDisplayName", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDisplayName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantDisplayName { get; set; }
 
         /// <summary>
         /// The content of the email message that we send to your customers.
         /// </summary>
         /// <value>The content of the email message that we send to your customers.</value>
-        [DataMember(Name="customEmailMessage", EmitDefaultValue=false)]
+        [JsonPropertyName("customEmailMessage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomEmailMessage { get; set; }
 
         /// <summary>
         /// Whether you would like us to send an auto-generated reminder email to your invoice recipients. Currently, this reminder email is sent five days before the invoice is due and one day after it is past due.
         /// </summary>
         /// <value>Whether you would like us to send an auto-generated reminder email to your invoice recipients. Currently, this reminder email is sent five days before the invoice is due and one day after it is past due.</value>
-        [DataMember(Name="enableReminders", EmitDefaultValue=false)]
+        [JsonPropertyName("enableReminders")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableReminders { get; set; }
 
         /// <summary>
         /// Gets or Sets HeaderStyle
         /// </summary>
-        [DataMember(Name="headerStyle", EmitDefaultValue=false)]
+        [JsonPropertyName("headerStyle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformationHeaderStyle HeaderStyle { get; set; }
 
         /// <summary>
         /// The language of the email that we send to your customers. Possible values are &#x60;zh-CN&#x60;, &#x60;zh-TW&#x60;, &#x60;en-US&#x60;, &#x60;fr-FR&#x60;, &#x60;de-DE&#x60;, &#x60;ja-JP&#x60;, &#x60;pt-BR&#x60;, &#x60;ru-RU&#x60; and &#x60;es-419&#x60;.
         /// </summary>
         /// <value>The language of the email that we send to your customers. Possible values are &#x60;zh-CN&#x60;, &#x60;zh-TW&#x60;, &#x60;en-US&#x60;, &#x60;fr-FR&#x60;, &#x60;de-DE&#x60;, &#x60;ja-JP&#x60;, &#x60;pt-BR&#x60;, &#x60;ru-RU&#x60; and &#x60;es-419&#x60;.</value>
-        [DataMember(Name="deliveryLanguage", EmitDefaultValue=false)]
+        [JsonPropertyName("deliveryLanguage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeliveryLanguage { get; set; }
 
         /// <summary>
         /// Currency used for the order. Use the three-character [ISO Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)  #### Used by **Authorization** Required field.  **Authorization Reversal** For an authorization reversal (&#x60;reversalInformation&#x60;) or a capture (&#x60;processingOptions.capture&#x60; is set to &#x60;true&#x60;), you must use the same currency that you used in your payment authorization request.  #### PIN Debit Currency for the amount you requested for the PIN debit purchase. This value is returned for partial authorizations. The issuing bank can approve a partial amount if the balance on the debit card is less than the requested transaction amount. For the possible values, see the [ISO Standard Currency Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/currencies.pdf). Returned by PIN debit purchase.  For PIN debit reversal requests, you must use the same currency that was used for the PIN debit purchase or PIN debit credit that you are reversing. For the possible values, see the [ISO Standard Currency Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/currencies.pdf).  Required field for PIN Debit purchase and PIN Debit credit requests. Optional field for PIN Debit reversal requests.  #### GPX This field is optional for reversing an authorization or credit.  #### DCC for First Data Your local currency.  #### Tax Calculation Required for international tax and value added tax only. Optional for U.S. and Canadian taxes. Your local currency. 
         /// </summary>
         /// <value>Currency used for the order. Use the three-character [ISO Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)  #### Used by **Authorization** Required field.  **Authorization Reversal** For an authorization reversal (&#x60;reversalInformation&#x60;) or a capture (&#x60;processingOptions.capture&#x60; is set to &#x60;true&#x60;), you must use the same currency that you used in your payment authorization request.  #### PIN Debit Currency for the amount you requested for the PIN debit purchase. This value is returned for partial authorizations. The issuing bank can approve a partial amount if the balance on the debit card is less than the requested transaction amount. For the possible values, see the [ISO Standard Currency Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/currencies.pdf). Returned by PIN debit purchase.  For PIN debit reversal requests, you must use the same currency that was used for the PIN debit purchase or PIN debit credit that you are reversing. For the possible values, see the [ISO Standard Currency Codes](https://developer.cybersource.com/library/documentation/sbc/quickref/currencies.pdf).  Required field for PIN Debit purchase and PIN Debit credit requests. Optional field for PIN Debit reversal requests.  #### GPX This field is optional for reversing an authorization or credit.  #### DCC for First Data Your local currency.  #### Tax Calculation Required for international tax and value added tax only. Optional for U.S. and Canadian taxes. Your local currency. </value>
-        [DataMember(Name="defaultCurrencyCode", EmitDefaultValue=false)]
+        [JsonPropertyName("defaultCurrencyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DefaultCurrencyCode { get; set; }
 
         /// <summary>
         /// The 3D Secure payer authentication status for a merchant&#39;s invoice payments.
         /// </summary>
         /// <value>The 3D Secure payer authentication status for a merchant&#39;s invoice payments.</value>
-        [DataMember(Name="payerAuthentication3DSVersion", EmitDefaultValue=false)]
+        [JsonPropertyName("payerAuthentication3DSVersion")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PayerAuthentication3DSVersion { get; set; }
 
         /// <summary>
         /// Display VAT number on Invoice.
         /// </summary>
         /// <value>Display VAT number on Invoice.</value>
-        [DataMember(Name="showVatNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("showVatNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ShowVatNumber { get; set; }
 
         /// <summary>
         /// Your government-assigned tax identification number.  #### Tax Calculation Required field for value added tax only. Not applicable to U.S. and Canadian taxes.  
         /// </summary>
         /// <value>Your government-assigned tax identification number.  #### Tax Calculation Required field for value added tax only. Not applicable to U.S. and Canadian taxes.  </value>
-        [DataMember(Name="vatRegistrationNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("vatRegistrationNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VatRegistrationNumber { get; set; }
 
         /// <summary>
         /// Collect the payers shipping address.
         /// </summary>
         /// <value>Collect the payers shipping address.</value>
-        [DataMember(Name="shipTo", EmitDefaultValue=false)]
+        [JsonPropertyName("shipTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ShipTo { get; set; }
 
         /// <summary>
         /// Collect the payers phone number.
         /// </summary>
         /// <value>Collect the payers phone number.</value>
-        [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PhoneNumber { get; set; }
 
         /// <summary>
         /// Collect the payers email address when the email address is not known or confirm it if it is known at the time of invoice creation.
         /// </summary>
         /// <value>Collect the payers email address when the email address is not known or confirm it if it is known at the time of invoice creation.</value>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Email { get; set; }
 
         /// <summary>
         /// Whether you would like to receive payment notification for successful transaction
         /// </summary>
         /// <value>Whether you would like to receive payment notification for successful transaction</value>
-        [DataMember(Name="enableMerchantEmailNotifications", EmitDefaultValue=false)]
+        [JsonPropertyName("enableMerchantEmailNotifications")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableMerchantEmailNotifications { get; set; }
 
         /// <summary>
         /// A list of custom labels that allows you to override (rename) default field names and control the visibility of specific fields on invoices and items. If the list is empty, the labels will not be overwritten. 
         /// </summary>
         /// <value>A list of custom labels that allows you to override (rename) default field names and control the visibility of specific fields on invoices and items. If the list is empty, the labels will not be overwritten. </value>
-        [DataMember(Name="customLabels", EmitDefaultValue=false)]
+        [JsonPropertyName("customLabels")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<InvoicingV2InvoicesPost201ResponseInvoiceInformationCustomLabels> CustomLabels { get; set; }
 
         /// <summary>
         /// Gets or Sets CustomRedirectUrls
         /// </summary>
-        [DataMember(Name="customRedirectUrls", EmitDefaultValue=false)]
+        [JsonPropertyName("customRedirectUrls")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformationCustomRedirectUrls CustomRedirectUrls { get; set; }
 
         /// <summary>
@@ -235,22 +251,22 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation {\n");
-            if (MerchantLogo != null) sb.Append("  MerchantLogo: ").Append(MerchantLogo).Append("\n");
-            if (MerchantDisplayName != null) sb.Append("  MerchantDisplayName: ").Append(MerchantDisplayName).Append("\n");
-            if (CustomEmailMessage != null) sb.Append("  CustomEmailMessage: ").Append(CustomEmailMessage).Append("\n");
-            if (EnableReminders != null) sb.Append("  EnableReminders: ").Append(EnableReminders).Append("\n");
-            if (HeaderStyle != null) sb.Append("  HeaderStyle: ").Append(HeaderStyle).Append("\n");
-            if (DeliveryLanguage != null) sb.Append("  DeliveryLanguage: ").Append(DeliveryLanguage).Append("\n");
-            if (DefaultCurrencyCode != null) sb.Append("  DefaultCurrencyCode: ").Append(DefaultCurrencyCode).Append("\n");
-            if (PayerAuthentication3DSVersion != null) sb.Append("  PayerAuthentication3DSVersion: ").Append(PayerAuthentication3DSVersion).Append("\n");
-            if (ShowVatNumber != null) sb.Append("  ShowVatNumber: ").Append(ShowVatNumber).Append("\n");
-            if (VatRegistrationNumber != null) sb.Append("  VatRegistrationNumber: ").Append(VatRegistrationNumber).Append("\n");
-            if (ShipTo != null) sb.Append("  ShipTo: ").Append(ShipTo).Append("\n");
-            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (EnableMerchantEmailNotifications != null) sb.Append("  EnableMerchantEmailNotifications: ").Append(EnableMerchantEmailNotifications).Append("\n");
-            if (CustomLabels != null) sb.Append("  CustomLabels: ").Append(CustomLabels).Append("\n");
-            if (CustomRedirectUrls != null) sb.Append("  CustomRedirectUrls: ").Append(CustomRedirectUrls).Append("\n");
+            if (MerchantLogo != null) sb.Append("  MerchantLogo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "merchantLogo", MerchantLogo.ToString())).Append("\n");
+            if (MerchantDisplayName != null) sb.Append("  MerchantDisplayName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "merchantDisplayName", MerchantDisplayName.ToString())).Append("\n");
+            if (CustomEmailMessage != null) sb.Append("  CustomEmailMessage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "customEmailMessage", CustomEmailMessage.ToString())).Append("\n");
+            if (EnableReminders != null) sb.Append("  EnableReminders: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "enableReminders", EnableReminders.ToString())).Append("\n");
+            if (HeaderStyle != null) sb.Append("  HeaderStyle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "headerStyle", HeaderStyle.ToString())).Append("\n");
+            if (DeliveryLanguage != null) sb.Append("  DeliveryLanguage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "deliveryLanguage", DeliveryLanguage.ToString())).Append("\n");
+            if (DefaultCurrencyCode != null) sb.Append("  DefaultCurrencyCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "defaultCurrencyCode", DefaultCurrencyCode.ToString())).Append("\n");
+            if (PayerAuthentication3DSVersion != null) sb.Append("  PayerAuthentication3DSVersion: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "payerAuthentication3DSVersion", PayerAuthentication3DSVersion.ToString())).Append("\n");
+            if (ShowVatNumber != null) sb.Append("  ShowVatNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "showVatNumber", ShowVatNumber.ToString())).Append("\n");
+            if (VatRegistrationNumber != null) sb.Append("  VatRegistrationNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "vatRegistrationNumber", VatRegistrationNumber.ToString())).Append("\n");
+            if (ShipTo != null) sb.Append("  ShipTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "shipTo", ShipTo.ToString())).Append("\n");
+            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "phoneNumber", PhoneNumber.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "email", Email.ToString())).Append("\n");
+            if (EnableMerchantEmailNotifications != null) sb.Append("  EnableMerchantEmailNotifications: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "enableMerchantEmailNotifications", EnableMerchantEmailNotifications.ToString())).Append("\n");
+            if (CustomLabels != null) sb.Append("  CustomLabels: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "customLabels", CustomLabels.ToString())).Append("\n");
+            if (CustomRedirectUrls != null) sb.Append("  CustomRedirectUrls: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", "customRedirectUrls", CustomRedirectUrls.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -261,7 +277,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

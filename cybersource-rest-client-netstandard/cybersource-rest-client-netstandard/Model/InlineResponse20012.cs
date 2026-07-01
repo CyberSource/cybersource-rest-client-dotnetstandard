@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -54,43 +54,50 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<InlineResponse20012Links> Links { get; set; }
 
         /// <summary>
         /// Gets or Sets Object
         /// </summary>
-        [DataMember(Name="object", EmitDefaultValue=false)]
+        [JsonPropertyName("object")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Object { get; set; }
 
         /// <summary>
         /// Gets or Sets Offset
         /// </summary>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        [JsonPropertyName("offset")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Offset { get; set; }
 
         /// <summary>
         /// Gets or Sets Limit
         /// </summary>
-        [DataMember(Name="limit", EmitDefaultValue=false)]
+        [JsonPropertyName("limit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Limit { get; set; }
 
         /// <summary>
         /// Gets or Sets Count
         /// </summary>
-        [DataMember(Name="count", EmitDefaultValue=false)]
+        [JsonPropertyName("count")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Count { get; set; }
 
         /// <summary>
         /// Gets or Sets Total
         /// </summary>
-        [DataMember(Name="total", EmitDefaultValue=false)]
+        [JsonPropertyName("total")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Total { get; set; }
 
         /// <summary>
         /// Gets or Sets Embedded
         /// </summary>
-        [DataMember(Name="_embedded", EmitDefaultValue=false)]
+        [JsonPropertyName("_embedded")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse20012Embedded Embedded { get; set; }
 
         /// <summary>
@@ -101,13 +108,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse20012 {\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
-            if (Object != null) sb.Append("  Object: ").Append(Object).Append("\n");
-            if (Offset != null) sb.Append("  Offset: ").Append(Offset).Append("\n");
-            if (Limit != null) sb.Append("  Limit: ").Append(Limit).Append("\n");
-            if (Count != null) sb.Append("  Count: ").Append(Count).Append("\n");
-            if (Total != null) sb.Append("  Total: ").Append(Total).Append("\n");
-            if (Embedded != null) sb.Append("  Embedded: ").Append(Embedded).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012", "_links", Links.ToString())).Append("\n");
+            if (Object != null) sb.Append("  Object: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012", "object", Object.ToString())).Append("\n");
+            if (Offset != null) sb.Append("  Offset: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012", "offset", Offset.ToString())).Append("\n");
+            if (Limit != null) sb.Append("  Limit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012", "limit", Limit.ToString())).Append("\n");
+            if (Count != null) sb.Append("  Count: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012", "count", Count.ToString())).Append("\n");
+            if (Total != null) sb.Append("  Total: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012", "total", Total.ToString())).Append("\n");
+            if (Embedded != null) sb.Append("  Embedded: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20012", "_embedded", Embedded.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -118,7 +125,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse20012", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,42 +53,48 @@ namespace CyberSource.Model
         /// The start date of the agency&#39;s service. 
         /// </summary>
         /// <value>The start date of the agency&#39;s service. </value>
-        [DataMember(Name="startDate", EmitDefaultValue=false)]
+        [JsonPropertyName("startDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StartDate { get; set; }
 
         /// <summary>
         /// The end date of the agency&#39;s service. 
         /// </summary>
         /// <value>The end date of the agency&#39;s service. </value>
-        [DataMember(Name="endDate", EmitDefaultValue=false)]
+        [JsonPropertyName("endDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EndDate { get; set; }
 
         /// <summary>
         /// Indicates if there is a change of guest. 
         /// </summary>
         /// <value>Indicates if there is a change of guest. </value>
-        [DataMember(Name="changeOfGuest", EmitDefaultValue=false)]
+        [JsonPropertyName("changeOfGuest")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ChangeOfGuest { get; set; }
 
         /// <summary>
         /// The country code of the agency. 
         /// </summary>
         /// <value>The country code of the agency. </value>
-        [DataMember(Name="countryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("countryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CountryCode { get; set; }
 
         /// <summary>
         /// The locality of the agency. 
         /// </summary>
         /// <value>The locality of the agency. </value>
-        [DataMember(Name="locality", EmitDefaultValue=false)]
+        [JsonPropertyName("locality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Locality { get; set; }
 
         /// <summary>
         /// The postal code of the agency. 
         /// </summary>
         /// <value>The postal code of the agency. </value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
@@ -99,12 +105,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2intentsTravelInformationAgency {\n");
-            if (StartDate != null) sb.Append("  StartDate: ").Append(StartDate).Append("\n");
-            if (EndDate != null) sb.Append("  EndDate: ").Append(EndDate).Append("\n");
-            if (ChangeOfGuest != null) sb.Append("  ChangeOfGuest: ").Append(ChangeOfGuest).Append("\n");
-            if (CountryCode != null) sb.Append("  CountryCode: ").Append(CountryCode).Append("\n");
-            if (Locality != null) sb.Append("  Locality: ").Append(Locality).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
+            if (StartDate != null) sb.Append("  StartDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsTravelInformationAgency", "startDate", StartDate.ToString())).Append("\n");
+            if (EndDate != null) sb.Append("  EndDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsTravelInformationAgency", "endDate", EndDate.ToString())).Append("\n");
+            if (ChangeOfGuest != null) sb.Append("  ChangeOfGuest: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsTravelInformationAgency", "changeOfGuest", ChangeOfGuest.ToString())).Append("\n");
+            if (CountryCode != null) sb.Append("  CountryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsTravelInformationAgency", "countryCode", CountryCode.ToString())).Append("\n");
+            if (Locality != null) sb.Append("  Locality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsTravelInformationAgency", "locality", Locality.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsTravelInformationAgency", "postalCode", PostalCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,7 +121,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2intentsTravelInformationAgency", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

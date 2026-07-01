@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Example: - If length&#x3D;1 &amp; unit&#x3D;month then charge every month - If length&#x3D;7 &amp; unit&#x3D;day then charge every 7th day 
         /// </summary>
         /// <value>Example: - If length&#x3D;1 &amp; unit&#x3D;month then charge every month - If length&#x3D;7 &amp; unit&#x3D;day then charge every 7th day </value>
-        [DataMember(Name="length", EmitDefaultValue=false)]
+        [JsonPropertyName("length")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Length { get; set; }
 
         /// <summary>
         /// Calendar unit values.   possible values:   - &#x60;D&#x60; - day   - &#x60;M&#x60; - month   - &#x60;W&#x60; - week   - &#x60;Y&#x60; - year 
         /// </summary>
         /// <value>Calendar unit values.   possible values:   - &#x60;D&#x60; - day   - &#x60;M&#x60; - month   - &#x60;W&#x60; - week   - &#x60;Y&#x60; - year </value>
-        [DataMember(Name="unit", EmitDefaultValue=false)]
+        [JsonPropertyName("unit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Unit { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class GetAllPlansResponsePlanInformationBillingPeriod {\n");
-            if (Length != null) sb.Append("  Length: ").Append(Length).Append("\n");
-            if (Unit != null) sb.Append("  Unit: ").Append(Unit).Append("\n");
+            if (Length != null) sb.Append("  Length: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetAllPlansResponsePlanInformationBillingPeriod", "length", Length.ToString())).Append("\n");
+            if (Unit != null) sb.Append("  Unit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetAllPlansResponsePlanInformationBillingPeriod", "unit", Unit.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("GetAllPlansResponsePlanInformationBillingPeriod", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

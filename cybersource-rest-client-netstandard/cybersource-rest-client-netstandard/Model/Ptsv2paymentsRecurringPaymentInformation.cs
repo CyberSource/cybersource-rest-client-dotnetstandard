@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Ptsv2paymentsRecurringPaymentInformation" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Ptsv2paymentsRecurringPaymentInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Ptsv2paymentsRecurringPaymentInformation" /> class.
@@ -68,77 +68,88 @@ namespace CyberSource.Model
         /// The date after which no further recurring authorizations should be performed. Format: &#x60;YYYY-MM-DD&#x60; **Note** This field is required for recurring transactions. 
         /// </summary>
         /// <value>The date after which no further recurring authorizations should be performed. Format: &#x60;YYYY-MM-DD&#x60; **Note** This field is required for recurring transactions. </value>
-        [DataMember(Name="endDate", EmitDefaultValue=false)]
+        [JsonPropertyName("endDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EndDate { get; set; }
 
         /// <summary>
         /// Integer value indicating the minimum number of days between recurring authorizations. A frequency of monthly is indicated by the value 28. Multiple of 28 days will be used to indicate months.  Example: 6 months &#x3D; 168  Example values accepted (31 days): - 31 - 031 - 0031  **Note** This field is required for recurring transactions. 
         /// </summary>
         /// <value>Integer value indicating the minimum number of days between recurring authorizations. A frequency of monthly is indicated by the value 28. Multiple of 28 days will be used to indicate months.  Example: 6 months &#x3D; 168  Example values accepted (31 days): - 31 - 031 - 0031  **Note** This field is required for recurring transactions. </value>
-        [DataMember(Name="frequency", EmitDefaultValue=false)]
+        [JsonPropertyName("frequency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Frequency { get; set; }
 
         /// <summary>
         /// Total number of payments for the duration of the recurring subscription. 
         /// </summary>
         /// <value>Total number of payments for the duration of the recurring subscription. </value>
-        [DataMember(Name="numberOfPayments", EmitDefaultValue=false)]
+        [JsonPropertyName("numberOfPayments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? NumberOfPayments { get; set; }
 
         /// <summary>
         /// Date of original purchase. Required for recurring transactions. Format: &#x60;YYYY-MM-DDTHH:MM:SSZ&#x60; **Note**: If this field is empty, the current date is used. 
         /// </summary>
         /// <value>Date of original purchase. Required for recurring transactions. Format: &#x60;YYYY-MM-DDTHH:MM:SSZ&#x60; **Note**: If this field is empty, the current date is used. </value>
-        [DataMember(Name="originalPurchaseDate", EmitDefaultValue=false)]
+        [JsonPropertyName("originalPurchaseDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalPurchaseDate { get; set; }
 
         /// <summary>
         /// This field is mandatory for Cartes Bancaires recurring transactions on Credit Mutuel-CIC.       This field records recurring sequence, e.g. 1st for initial,  2 for subsequent, 3 etc 
         /// </summary>
         /// <value>This field is mandatory for Cartes Bancaires recurring transactions on Credit Mutuel-CIC.       This field records recurring sequence, e.g. 1st for initial,  2 for subsequent, 3 etc </value>
-        [DataMember(Name="sequenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("sequenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? SequenceNumber { get; set; }
 
         /// <summary>
         /// This contains the type of recurring payment. Valid Values : 1 - Registration/First transaction 2 - Subsequent transaction 3 - Modification 4 - Cancellation 
         /// </summary>
         /// <value>This contains the type of recurring payment. Valid Values : 1 - Registration/First transaction 2 - Subsequent transaction 3 - Modification 4 - Cancellation </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// This value indicates how often a recurring payment occurs. Valid Values : • 01 (Daily) • 02 (Twice weekly) • 03 (Weekly) • 04 (Ten days) • 05 (Fortnightly) • 06 (Monthly) • 07 (Every two months) • 08 (Trimester) • 09 (Quarterly) • 10 (Twice yearly) • 11 (Annually) • 12 (Unscheduled) 
         /// </summary>
         /// <value>This value indicates how often a recurring payment occurs. Valid Values : • 01 (Daily) • 02 (Twice weekly) • 03 (Weekly) • 04 (Ten days) • 05 (Fortnightly) • 06 (Monthly) • 07 (Every two months) • 08 (Trimester) • 09 (Quarterly) • 10 (Twice yearly) • 11 (Annually) • 12 (Unscheduled) </value>
-        [DataMember(Name="occurrence", EmitDefaultValue=false)]
+        [JsonPropertyName("occurrence")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Occurrence { get; set; }
 
         /// <summary>
         /// This tag will contain a value that indicates whether or not the recurring payment transaction has been validated. Valid values : 0- Not validated 1- Validated 
         /// </summary>
         /// <value>This tag will contain a value that indicates whether or not the recurring payment transaction has been validated. Valid values : 0- Not validated 1- Validated </value>
-        [DataMember(Name="validationIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("validationIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ValidationIndicator { get; set; }
 
         /// <summary>
         /// Indicates recurring amount type agreed by the cardholder Valid Values : 1- Fixed amount recurring payment 2- Recurring payment with maximum amount 
         /// </summary>
         /// <value>Indicates recurring amount type agreed by the cardholder Valid Values : 1- Fixed amount recurring payment 2- Recurring payment with maximum amount </value>
-        [DataMember(Name="amountType", EmitDefaultValue=false)]
+        [JsonPropertyName("amountType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AmountType { get; set; }
 
         /// <summary>
         /// This API field will contain the maximum amount agreed to by the cardholder. The currency of this amount will be specified in Field 49—Currency Code,Transaction. 
         /// </summary>
         /// <value>This API field will contain the maximum amount agreed to by the cardholder. The currency of this amount will be specified in Field 49—Currency Code,Transaction. </value>
-        [DataMember(Name="maximumAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("maximumAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MaximumAmount { get; set; }
 
         /// <summary>
         /// This will contain a unique reference number for the recurring payment transaction. 
         /// </summary>
         /// <value>This will contain a unique reference number for the recurring payment transaction. </value>
-        [DataMember(Name="referenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("referenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReferenceNumber { get; set; }
 
         /// <summary>
@@ -149,17 +160,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsRecurringPaymentInformation {\n");
-            if (EndDate != null) sb.Append("  EndDate: ").Append(EndDate).Append("\n");
-            if (Frequency != null) sb.Append("  Frequency: ").Append(Frequency).Append("\n");
-            if (NumberOfPayments != null) sb.Append("  NumberOfPayments: ").Append(NumberOfPayments).Append("\n");
-            if (OriginalPurchaseDate != null) sb.Append("  OriginalPurchaseDate: ").Append(OriginalPurchaseDate).Append("\n");
-            if (SequenceNumber != null) sb.Append("  SequenceNumber: ").Append(SequenceNumber).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Occurrence != null) sb.Append("  Occurrence: ").Append(Occurrence).Append("\n");
-            if (ValidationIndicator != null) sb.Append("  ValidationIndicator: ").Append(ValidationIndicator).Append("\n");
-            if (AmountType != null) sb.Append("  AmountType: ").Append(AmountType).Append("\n");
-            if (MaximumAmount != null) sb.Append("  MaximumAmount: ").Append(MaximumAmount).Append("\n");
-            if (ReferenceNumber != null) sb.Append("  ReferenceNumber: ").Append(ReferenceNumber).Append("\n");
+            if (EndDate != null) sb.Append("  EndDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRecurringPaymentInformation", "endDate", EndDate.ToString())).Append("\n");
+            if (Frequency != null) sb.Append("  Frequency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRecurringPaymentInformation", "frequency", Frequency.ToString())).Append("\n");
+            if (NumberOfPayments != null) sb.Append("  NumberOfPayments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRecurringPaymentInformation", "numberOfPayments", NumberOfPayments.ToString())).Append("\n");
+            if (OriginalPurchaseDate != null) sb.Append("  OriginalPurchaseDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRecurringPaymentInformation", "originalPurchaseDate", OriginalPurchaseDate.ToString())).Append("\n");
+            if (SequenceNumber != null) sb.Append("  SequenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRecurringPaymentInformation", "sequenceNumber", SequenceNumber.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRecurringPaymentInformation", "type", Type.ToString())).Append("\n");
+            if (Occurrence != null) sb.Append("  Occurrence: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRecurringPaymentInformation", "occurrence", Occurrence.ToString())).Append("\n");
+            if (ValidationIndicator != null) sb.Append("  ValidationIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRecurringPaymentInformation", "validationIndicator", ValidationIndicator.ToString())).Append("\n");
+            if (AmountType != null) sb.Append("  AmountType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRecurringPaymentInformation", "amountType", AmountType.ToString())).Append("\n");
+            if (MaximumAmount != null) sb.Append("  MaximumAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRecurringPaymentInformation", "maximumAmount", MaximumAmount.ToString())).Append("\n");
+            if (ReferenceNumber != null) sb.Append("  ReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRecurringPaymentInformation", "referenceNumber", ReferenceNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -170,7 +181,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsRecurringPaymentInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

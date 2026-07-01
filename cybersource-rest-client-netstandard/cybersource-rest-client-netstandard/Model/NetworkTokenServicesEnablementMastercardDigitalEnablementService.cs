@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Indicates if an enrollment to create a TRID for the MasterCard card association should be attempted
         /// </summary>
         /// <value>Indicates if an enrollment to create a TRID for the MasterCard card association should be attempted</value>
-        [DataMember(Name="enrollment", EmitDefaultValue=false)]
+        [JsonPropertyName("enrollment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Enrollment { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class NetworkTokenServicesEnablementMastercardDigitalEnablementService {\n");
-            if (Enrollment != null) sb.Append("  Enrollment: ").Append(Enrollment).Append("\n");
+            if (Enrollment != null) sb.Append("  Enrollment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("NetworkTokenServicesEnablementMastercardDigitalEnablementService", "enrollment", Enrollment.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("NetworkTokenServicesEnablementMastercardDigitalEnablementService", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

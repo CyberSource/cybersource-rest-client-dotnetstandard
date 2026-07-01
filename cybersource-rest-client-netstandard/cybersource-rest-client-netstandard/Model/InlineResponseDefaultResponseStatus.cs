@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,34 +51,39 @@ namespace CyberSource.Model
         /// HTTP Status code.
         /// </summary>
         /// <value>HTTP Status code.</value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? Status { get; set; }
 
         /// <summary>
         /// Error Reason Code.
         /// </summary>
         /// <value>Error Reason Code.</value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
         /// Error Message.
         /// </summary>
         /// <value>Error Message.</value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
         /// API correlation ID.
         /// </summary>
         /// <value>API correlation ID.</value>
-        [DataMember(Name="correlationId", EmitDefaultValue=false)]
+        [JsonPropertyName("correlationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CorrelationId { get; set; }
 
         /// <summary>
         /// Gets or Sets Details
         /// </summary>
-        [DataMember(Name="details", EmitDefaultValue=false)]
+        [JsonPropertyName("details")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<InlineResponseDefaultResponseStatusDetails> Details { get; set; }
 
         /// <summary>
@@ -89,11 +94,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponseDefaultResponseStatus {\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
-            if (CorrelationId != null) sb.Append("  CorrelationId: ").Append(CorrelationId).Append("\n");
-            if (Details != null) sb.Append("  Details: ").Append(Details).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponseDefaultResponseStatus", "status", Status.ToString())).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponseDefaultResponseStatus", "reason", Reason.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponseDefaultResponseStatus", "message", Message.ToString())).Append("\n");
+            if (CorrelationId != null) sb.Append("  CorrelationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponseDefaultResponseStatus", "correlationId", CorrelationId.ToString())).Append("\n");
+            if (Details != null) sb.Append("  Details: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponseDefaultResponseStatus", "details", Details.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,7 +109,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponseDefaultResponseStatus", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

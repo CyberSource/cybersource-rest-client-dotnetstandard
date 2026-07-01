@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -59,63 +59,72 @@ namespace CyberSource.Model
         /// Applicable only for SI. Required in case the authentication is initiated for SI registration. Valid Values: - &#x60;SMS&#x60; - &#x60;EMAIL&#x60; - &#x60;BOTH&#x60; 
         /// </summary>
         /// <value>Applicable only for SI. Required in case the authentication is initiated for SI registration. Valid Values: - &#x60;SMS&#x60; - &#x60;EMAIL&#x60; - &#x60;BOTH&#x60; </value>
-        [DataMember(Name="alertPreference", EmitDefaultValue=false)]
+        [JsonPropertyName("alertPreference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AlertPreference { get; set; }
 
         /// <summary>
         /// Date of the first installment payment. Format: YYMMDD. When you do not include this field, CyberSource sends a string of six zeros (000000) to the processor.  This field is supported only for Crediario installment payments in Brazil on CyberSource through VisaNet.  The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR9 - Position: 42-47 - Field: Date of First Installment 
         /// </summary>
         /// <value>Date of the first installment payment. Format: YYMMDD. When you do not include this field, CyberSource sends a string of six zeros (000000) to the processor.  This field is supported only for Crediario installment payments in Brazil on CyberSource through VisaNet.  The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR9 - Position: 42-47 - Field: Date of First Installment </value>
-        [DataMember(Name="firstInstallmentDate", EmitDefaultValue=false)]
+        [JsonPropertyName("firstInstallmentDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstInstallmentDate { get; set; }
 
         /// <summary>
         /// Standing Instruction/Installment identifier. 
         /// </summary>
         /// <value>Standing Instruction/Installment identifier. </value>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
+        [JsonPropertyName("identifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Identifier { get; set; }
 
         /// <summary>
         /// End date of the SI transactions. Cannot be later than card expiry date. Ideally this can be set to expiry date. Required in case the authentication is initiated for SI registration. 
         /// </summary>
         /// <value>End date of the SI transactions. Cannot be later than card expiry date. Ideally this can be set to expiry date. Required in case the authentication is initiated for SI registration. </value>
-        [DataMember(Name="lastInstallmentDate", EmitDefaultValue=false)]
+        [JsonPropertyName("lastInstallmentDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastInstallmentDate { get; set; }
 
         /// <summary>
         /// Maximum Amount for which SI can be initiated. Required in case the authentication is initiated for SI registration. 
         /// </summary>
         /// <value>Maximum Amount for which SI can be initiated. Required in case the authentication is initiated for SI registration. </value>
-        [DataMember(Name="maxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("maxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MaxAmount { get; set; }
 
         /// <summary>
         /// Minimum Amount for which SI can be initiated. Required in case the authentication is initiated for SI registration. 
         /// </summary>
         /// <value>Minimum Amount for which SI can be initiated. Required in case the authentication is initiated for SI registration. </value>
-        [DataMember(Name="minAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("minAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MinAmount { get; set; }
 
         /// <summary>
         /// Payment plan for the installments. This field is supported only for installment payments on Visa Platform Connect, RuPay and SPG-KSA seamless flow.  Possible values for a standing-instruction (SI) merchant-initiated transaction (MIT) with Diners Club or Mastercard in India or with an India-issued card: - 1: SI with a fixed amount. - 2: SI with a maximum amount. - 3: Other kind of SI.  Possible values for a type of Installment transaction for on-soil transaction in Kingdom of Saudi Arabia - 1: Registration or first transaction. - 2: Subsequent transaction.  Possible values for other kinds of installment payments: - 0 (default): Regular installment. This value is not allowed for airline transactions. - 1: Installment payment with down payment. - 2: Installment payment without down payment. This value is supported only for airline transactions. - 3: Installment payment; down payment and boarding fee will follow. This value is supported only for airline transactions. - 4: Down payment only; regular installment payment will follow. - 5: Boarding fee only. This value is supported only for airline transactions. - 6: SI de-registration on RuPay for the payer authentication seamless flow. 
         /// </summary>
         /// <value>Payment plan for the installments. This field is supported only for installment payments on Visa Platform Connect, RuPay and SPG-KSA seamless flow.  Possible values for a standing-instruction (SI) merchant-initiated transaction (MIT) with Diners Club or Mastercard in India or with an India-issued card: - 1: SI with a fixed amount. - 2: SI with a maximum amount. - 3: Other kind of SI.  Possible values for a type of Installment transaction for on-soil transaction in Kingdom of Saudi Arabia - 1: Registration or first transaction. - 2: Subsequent transaction.  Possible values for other kinds of installment payments: - 0 (default): Regular installment. This value is not allowed for airline transactions. - 1: Installment payment with down payment. - 2: Installment payment without down payment. This value is supported only for airline transactions. - 3: Installment payment; down payment and boarding fee will follow. This value is supported only for airline transactions. - 4: Down payment only; regular installment payment will follow. - 5: Boarding fee only. This value is supported only for airline transactions. - 6: SI de-registration on RuPay for the payer authentication seamless flow. </value>
-        [DataMember(Name="paymentType", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentType { get; set; }
 
         /// <summary>
         /// Preferred date for initiating the SI transaction every month. This field need not be sent in case the SI has to be initiated as and when required, e.g., topping up the wallet, etc. 
         /// </summary>
         /// <value>Preferred date for initiating the SI transaction every month. This field need not be sent in case the SI has to be initiated as and when required, e.g., topping up the wallet, etc. </value>
-        [DataMember(Name="preferredDay", EmitDefaultValue=false)]
+        [JsonPropertyName("preferredDay")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PreferredDay { get; set; }
 
         /// <summary>
         /// Installment number when making payments in installments. Used along with &#x60;totalCount&#x60; to track which payment is being processed.  For example, the second of 5 payments would be passed to CyberSource as &#x60;sequence&#x60; &#x3D; 2 and &#x60;totalCount&#x60; &#x3D; 5.  #### Chase Paymentech Solutions and FDC Compass This field is optional because this value is required in the merchant descriptors.  #### CyberSource through VisaNet When you do not include this field in a request for a Crediario installment payment, CyberSource sends a value of 0 to the processor.  For Crediario installment payments, the value for this field corresponds to the following data in the TC 33 capture file*: - Record: CP01 TCR9 - Position: 38-40 - Field: Installment Payment Number  * The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies. 
         /// </summary>
         /// <value>Installment number when making payments in installments. Used along with &#x60;totalCount&#x60; to track which payment is being processed.  For example, the second of 5 payments would be passed to CyberSource as &#x60;sequence&#x60; &#x3D; 2 and &#x60;totalCount&#x60; &#x3D; 5.  #### Chase Paymentech Solutions and FDC Compass This field is optional because this value is required in the merchant descriptors.  #### CyberSource through VisaNet When you do not include this field in a request for a Crediario installment payment, CyberSource sends a value of 0 to the processor.  For Crediario installment payments, the value for this field corresponds to the following data in the TC 33 capture file*: - Record: CP01 TCR9 - Position: 38-40 - Field: Installment Payment Number  * The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment card companies. </value>
-        [DataMember(Name="sequence", EmitDefaultValue=false)]
+        [JsonPropertyName("sequence")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Sequence { get; set; }
 
         /// <summary>
@@ -126,15 +135,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2billingagreementsInstallmentInformation {\n");
-            if (AlertPreference != null) sb.Append("  AlertPreference: ").Append(AlertPreference).Append("\n");
-            if (FirstInstallmentDate != null) sb.Append("  FirstInstallmentDate: ").Append(FirstInstallmentDate).Append("\n");
-            if (Identifier != null) sb.Append("  Identifier: ").Append(Identifier).Append("\n");
-            if (LastInstallmentDate != null) sb.Append("  LastInstallmentDate: ").Append(LastInstallmentDate).Append("\n");
-            if (MaxAmount != null) sb.Append("  MaxAmount: ").Append(MaxAmount).Append("\n");
-            if (MinAmount != null) sb.Append("  MinAmount: ").Append(MinAmount).Append("\n");
-            if (PaymentType != null) sb.Append("  PaymentType: ").Append(PaymentType).Append("\n");
-            if (PreferredDay != null) sb.Append("  PreferredDay: ").Append(PreferredDay).Append("\n");
-            if (Sequence != null) sb.Append("  Sequence: ").Append(Sequence).Append("\n");
+            if (AlertPreference != null) sb.Append("  AlertPreference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsInstallmentInformation", "alertPreference", AlertPreference.ToString())).Append("\n");
+            if (FirstInstallmentDate != null) sb.Append("  FirstInstallmentDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsInstallmentInformation", "firstInstallmentDate", FirstInstallmentDate.ToString())).Append("\n");
+            if (Identifier != null) sb.Append("  Identifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsInstallmentInformation", "identifier", Identifier.ToString())).Append("\n");
+            if (LastInstallmentDate != null) sb.Append("  LastInstallmentDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsInstallmentInformation", "lastInstallmentDate", LastInstallmentDate.ToString())).Append("\n");
+            if (MaxAmount != null) sb.Append("  MaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsInstallmentInformation", "maxAmount", MaxAmount.ToString())).Append("\n");
+            if (MinAmount != null) sb.Append("  MinAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsInstallmentInformation", "minAmount", MinAmount.ToString())).Append("\n");
+            if (PaymentType != null) sb.Append("  PaymentType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsInstallmentInformation", "paymentType", PaymentType.ToString())).Append("\n");
+            if (PreferredDay != null) sb.Append("  PreferredDay: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsInstallmentInformation", "preferredDay", PreferredDay.ToString())).Append("\n");
+            if (Sequence != null) sb.Append("  Sequence: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsInstallmentInformation", "sequence", Sequence.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -145,7 +154,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2billingagreementsInstallmentInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

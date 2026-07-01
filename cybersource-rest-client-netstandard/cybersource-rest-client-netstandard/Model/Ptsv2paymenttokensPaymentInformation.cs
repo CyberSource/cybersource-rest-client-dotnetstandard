@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets PaymentType
         /// </summary>
-        [DataMember(Name="paymentType", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2refreshpaymentstatusidPaymentInformationPaymentType PaymentType { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenizedPaymentMethod
         /// </summary>
-        [DataMember(Name="tokenizedPaymentMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenizedPaymentMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsPaymentInformationTokenizedPaymentMethod TokenizedPaymentMethod { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymenttokensPaymentInformation {\n");
-            if (PaymentType != null) sb.Append("  PaymentType: ").Append(PaymentType).Append("\n");
-            if (TokenizedPaymentMethod != null) sb.Append("  TokenizedPaymentMethod: ").Append(TokenizedPaymentMethod).Append("\n");
+            if (PaymentType != null) sb.Append("  PaymentType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymenttokensPaymentInformation", "paymentType", PaymentType.ToString())).Append("\n");
+            if (TokenizedPaymentMethod != null) sb.Append("  TokenizedPaymentMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymenttokensPaymentInformation", "tokenizedPaymentMethod", TokenizedPaymentMethod.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymenttokensPaymentInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

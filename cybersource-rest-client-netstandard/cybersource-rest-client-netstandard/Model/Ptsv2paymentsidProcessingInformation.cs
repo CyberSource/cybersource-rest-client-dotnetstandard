@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AuthorizationOptions
         /// </summary>
-        [DataMember(Name="authorizationOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("authorizationOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidProcessingInformationAuthorizationOptions AuthorizationOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets Network
         /// </summary>
-        [DataMember(Name="network", EmitDefaultValue=false)]
+        [JsonPropertyName("network")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessorInformationReversalNetwork Network { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidProcessingInformation {\n");
-            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(AuthorizationOptions).Append("\n");
-            if (Network != null) sb.Append("  Network: ").Append(Network).Append("\n");
+            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidProcessingInformation", "authorizationOptions", AuthorizationOptions.ToString())).Append("\n");
+            if (Network != null) sb.Append("  Network: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidProcessingInformation", "network", Network.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

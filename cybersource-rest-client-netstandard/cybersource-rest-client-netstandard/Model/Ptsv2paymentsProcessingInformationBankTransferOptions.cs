@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -63,77 +63,88 @@ namespace CyberSource.Model
         /// Space-separated list of AVS flags that cause the request to be declined for AVS reasons.  **Important** To receive declines for the AVS code &#x60;N&#x60;, you must include the value &#x60;N&#x60; in the space-separated list.  ### AVS Codes for Cielo 3.0 and CyberSource Latin American Processing  **Note** CyberSource Latin American Processing is the name of a specific processing connection that CyberSource supports. In the CyberSource API documentation, CyberSource Latin American Processing does not refer to the general topic of processing in Latin America. The information in this section is for the specific processing connection called CyberSource Latin American Processing. It is not for any other Latin American processors that CyberSource supports.  |AVS Code|Description| |- -- |- -- | |D|Partial match: postal code and address match.| |E|Not supported: AVS is not supported for this card type. _or_ Invalid: the acquirer returned an unrecognized value for the AVS response.| |F|Partial match: postal code matches, but CPF and address do not match.*| |G|Not supported: AVS not supported or not verified.| |I|No match: AVS information is not available.| |K|Partial match: CPF matches, but postal code and address do not match.*| |L|Partial match: postal code and CPF match, but address does not match.*| |N|No match: postal code, CPF, and address do not match.*| |O|Partial match: CPF and address match, but postal code does not match.*| |R|Not supported: your implementation does not support AVS _or_ System unavailable.| |T|Partial match: address matches, but postal code and CPF do not match.*| |V|Match: postal code, CPF, and address match.*| |* CPF (Cadastro de Pessoas Fisicas) is required only for Redecard in Brazil.||  ### AVS Codes for All Other Processors  **Note** The list of AVS codes for all other processors follows these descriptions of the processor-specific information for these codes.  #### American Express Cards For American Express cards only, you can receive Visa and CyberSource AVS codes in addition to the American Express AVS codes.  **Note** For CyberSource through VisaNet, the American Express AVS codes are converted to Visa AVS codes before they are returned to you. As a result, you will not receive American Express AVS codes for the American Express card type.  _American Express Card codes_: &#x60;F&#x60;, &#x60;H&#x60;, &#x60;K&#x60;, &#x60;L&#x60;, &#x60;O&#x60;, &#x60;T&#x60;, &#x60;V&#x60;  #### Domestic and International Visa Cards The international and domestic alphabetic AVS codes are the Visa standard AVS codes. CyberSource maps the standard AVS return codes for other types of payment cards, including American Express cards, to the Visa standard AVS codes.  AVS is considered either domestic or international, depending on the location of the bank that issued the customer&#39;s payment card: - When the bank is in the U.S., the AVS is domestic. - When the bank is outside the U.S., the AVS is international.  You should be prepared to handle both domestic and international AVS result codes: - For international cards, you can receive domestic AVS codes in addition to the international AVS codes. - For domestic cards, you can receive international AVS codes in addition to the domestic AVS codes.  _International Visa Codes_: &#x60;B&#x60;, &#x60;C&#x60;, &#x60;D&#x60;, &#x60;G&#x60;, &#x60;I&#x60;, &#x60;M&#x60;, &#x60;P&#x60;  _Domestic Visa Codes_: &#x60;A&#x60;, &#x60;E&#x60;,&#x60;N&#x60;, &#x60;R&#x60;, &#x60;S&#x60;, &#x60;U&#x60;, &#x60;W&#x60;, &#x60;X&#x60;, &#x60;Y&#x60;, &#x60;Z&#x60;  #### CyberSource Codes The numeric AVS codes are created by CyberSource and are not standard Visa codes. These AVS codes can be returned for any card type.  _CyberSource Codes_: &#x60;1&#x60;, &#x60;2&#x60;, &#x60;3&#x60;, &#x60;4&#x60;  ### Table of AVS Codes for All Other Processors  |AVS Code|Description| |- -- |- -- | |A|Partial match: street address matches, but 5-digit and 9-digit postal codes do not match.| |B|Partial match: street address matches, but postal code is not verified. Returned only for Visa cards not issued in the U.S.| |C|No match: street address and postal code do not match. Returned only for Visa cards not issued in the U.S.| |D &amp; M|Match: street address and postal code match. Returned only for Visa cards not issued in the U.S.| |E|Invalid: AVS data is invalid or AVS is not allowed for this card type.| |F|Partial match: card member&#39;s name does not match, but billing postal code matches.| |G|Not supported: issuing bank outside the U.S. does not support AVS.| |H|Partial match: card member&#39;s name does not match, but street address and postal code match. Returned only for the American Express card type.| |I|No match: address not verified. Returned only for Visa cards not issued in the U.S.| |K|Partial match: card member&#39;s name matches, but billing address and billing postal code do not match. Returned only for the American Express card type.| |L|Partial match: card member&#39;s name and billing postal code match, but billing address does not match. Returned only for the American Express card type.| |M|See the entry for D &amp; M.| |N|No match: one of the following: street address and postal code do not match _or_ (American Express card type only) card member&#39;s name, street address, and postal code do not match.| |O|Partial match: card member&#39;s name and billing address match, but billing postal code does not match. Returned only for the American Express card type.| |P|Partial match: postal code matches, but street address not verified. Returned only for Visa cards not issued in the U.S.| |R|System unavailable.| |S|Not supported: issuing bank in the U.S. does not support AVS.| |T|Partial match: card member&#39;s name does not match, but street address matches. Returned only for the American Express card type.| |U|System unavailable: address information unavailable for one of these reasons: The U.S. bank does not support AVS outside the U.S. _or_ The AVS in a U.S. bank is not functioning properly.| |V|Match: card member&#39;s name, billing address, and billing postal code match. Returned only for the American Express card type.| |W|Partial match: street address does not match, but 9-digit postal code matches.| |X|Match: street address and 9-digit postal code match.| |Y|Match: street address and 5-digit postal code match.| |Z|Partial match: street address does not match, but 5-digit postal code matches.| |1|Not supported: one of the following: AVS is not supported for this processor or card type _or_ AVS is disabled for your CyberSource account. To enable AVS, contact CyberSource Customer Support.| |2|Unrecognized: the processor returned an unrecognized value for the AVS response.| |3|Match: address is confirmed. Returned only for PayPal Express Checkout.| |4|No match: address is not confirmed. Returned only for PayPal Express Checkout.| |5|No match: no AVS code was returned by the processor.| 
         /// </summary>
         /// <value>Space-separated list of AVS flags that cause the request to be declined for AVS reasons.  **Important** To receive declines for the AVS code &#x60;N&#x60;, you must include the value &#x60;N&#x60; in the space-separated list.  ### AVS Codes for Cielo 3.0 and CyberSource Latin American Processing  **Note** CyberSource Latin American Processing is the name of a specific processing connection that CyberSource supports. In the CyberSource API documentation, CyberSource Latin American Processing does not refer to the general topic of processing in Latin America. The information in this section is for the specific processing connection called CyberSource Latin American Processing. It is not for any other Latin American processors that CyberSource supports.  |AVS Code|Description| |- -- |- -- | |D|Partial match: postal code and address match.| |E|Not supported: AVS is not supported for this card type. _or_ Invalid: the acquirer returned an unrecognized value for the AVS response.| |F|Partial match: postal code matches, but CPF and address do not match.*| |G|Not supported: AVS not supported or not verified.| |I|No match: AVS information is not available.| |K|Partial match: CPF matches, but postal code and address do not match.*| |L|Partial match: postal code and CPF match, but address does not match.*| |N|No match: postal code, CPF, and address do not match.*| |O|Partial match: CPF and address match, but postal code does not match.*| |R|Not supported: your implementation does not support AVS _or_ System unavailable.| |T|Partial match: address matches, but postal code and CPF do not match.*| |V|Match: postal code, CPF, and address match.*| |* CPF (Cadastro de Pessoas Fisicas) is required only for Redecard in Brazil.||  ### AVS Codes for All Other Processors  **Note** The list of AVS codes for all other processors follows these descriptions of the processor-specific information for these codes.  #### American Express Cards For American Express cards only, you can receive Visa and CyberSource AVS codes in addition to the American Express AVS codes.  **Note** For CyberSource through VisaNet, the American Express AVS codes are converted to Visa AVS codes before they are returned to you. As a result, you will not receive American Express AVS codes for the American Express card type.  _American Express Card codes_: &#x60;F&#x60;, &#x60;H&#x60;, &#x60;K&#x60;, &#x60;L&#x60;, &#x60;O&#x60;, &#x60;T&#x60;, &#x60;V&#x60;  #### Domestic and International Visa Cards The international and domestic alphabetic AVS codes are the Visa standard AVS codes. CyberSource maps the standard AVS return codes for other types of payment cards, including American Express cards, to the Visa standard AVS codes.  AVS is considered either domestic or international, depending on the location of the bank that issued the customer&#39;s payment card: - When the bank is in the U.S., the AVS is domestic. - When the bank is outside the U.S., the AVS is international.  You should be prepared to handle both domestic and international AVS result codes: - For international cards, you can receive domestic AVS codes in addition to the international AVS codes. - For domestic cards, you can receive international AVS codes in addition to the domestic AVS codes.  _International Visa Codes_: &#x60;B&#x60;, &#x60;C&#x60;, &#x60;D&#x60;, &#x60;G&#x60;, &#x60;I&#x60;, &#x60;M&#x60;, &#x60;P&#x60;  _Domestic Visa Codes_: &#x60;A&#x60;, &#x60;E&#x60;,&#x60;N&#x60;, &#x60;R&#x60;, &#x60;S&#x60;, &#x60;U&#x60;, &#x60;W&#x60;, &#x60;X&#x60;, &#x60;Y&#x60;, &#x60;Z&#x60;  #### CyberSource Codes The numeric AVS codes are created by CyberSource and are not standard Visa codes. These AVS codes can be returned for any card type.  _CyberSource Codes_: &#x60;1&#x60;, &#x60;2&#x60;, &#x60;3&#x60;, &#x60;4&#x60;  ### Table of AVS Codes for All Other Processors  |AVS Code|Description| |- -- |- -- | |A|Partial match: street address matches, but 5-digit and 9-digit postal codes do not match.| |B|Partial match: street address matches, but postal code is not verified. Returned only for Visa cards not issued in the U.S.| |C|No match: street address and postal code do not match. Returned only for Visa cards not issued in the U.S.| |D &amp; M|Match: street address and postal code match. Returned only for Visa cards not issued in the U.S.| |E|Invalid: AVS data is invalid or AVS is not allowed for this card type.| |F|Partial match: card member&#39;s name does not match, but billing postal code matches.| |G|Not supported: issuing bank outside the U.S. does not support AVS.| |H|Partial match: card member&#39;s name does not match, but street address and postal code match. Returned only for the American Express card type.| |I|No match: address not verified. Returned only for Visa cards not issued in the U.S.| |K|Partial match: card member&#39;s name matches, but billing address and billing postal code do not match. Returned only for the American Express card type.| |L|Partial match: card member&#39;s name and billing postal code match, but billing address does not match. Returned only for the American Express card type.| |M|See the entry for D &amp; M.| |N|No match: one of the following: street address and postal code do not match _or_ (American Express card type only) card member&#39;s name, street address, and postal code do not match.| |O|Partial match: card member&#39;s name and billing address match, but billing postal code does not match. Returned only for the American Express card type.| |P|Partial match: postal code matches, but street address not verified. Returned only for Visa cards not issued in the U.S.| |R|System unavailable.| |S|Not supported: issuing bank in the U.S. does not support AVS.| |T|Partial match: card member&#39;s name does not match, but street address matches. Returned only for the American Express card type.| |U|System unavailable: address information unavailable for one of these reasons: The U.S. bank does not support AVS outside the U.S. _or_ The AVS in a U.S. bank is not functioning properly.| |V|Match: card member&#39;s name, billing address, and billing postal code match. Returned only for the American Express card type.| |W|Partial match: street address does not match, but 9-digit postal code matches.| |X|Match: street address and 9-digit postal code match.| |Y|Match: street address and 5-digit postal code match.| |Z|Partial match: street address does not match, but 5-digit postal code matches.| |1|Not supported: one of the following: AVS is not supported for this processor or card type _or_ AVS is disabled for your CyberSource account. To enable AVS, contact CyberSource Customer Support.| |2|Unrecognized: the processor returned an unrecognized value for the AVS response.| |3|Match: address is confirmed. Returned only for PayPal Express Checkout.| |4|No match: address is not confirmed. Returned only for PayPal Express Checkout.| |5|No match: no AVS code was returned by the processor.| </value>
-        [DataMember(Name="declineAvsFlags", EmitDefaultValue=false)]
+        [JsonPropertyName("declineAvsFlags")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeclineAvsFlags { get; set; }
 
         /// <summary>
         /// Specifies the authorization method for the transaction.  #### TeleCheck Accepts only the following values: - &#x60;ARC&#x60;: account receivable conversion - &#x60;CCD&#x60;: corporate cash disbursement - &#x60;POP&#x60;: point of purchase conversion - &#x60;PPD&#x60;: prearranged payment and deposit entry - &#x60;TEL&#x60;: telephone-initiated entry - &#x60;WEB&#x60;: internet-initiated entry 
         /// </summary>
         /// <value>Specifies the authorization method for the transaction.  #### TeleCheck Accepts only the following values: - &#x60;ARC&#x60;: account receivable conversion - &#x60;CCD&#x60;: corporate cash disbursement - &#x60;POP&#x60;: point of purchase conversion - &#x60;PPD&#x60;: prearranged payment and deposit entry - &#x60;TEL&#x60;: telephone-initiated entry - &#x60;WEB&#x60;: internet-initiated entry </value>
-        [DataMember(Name="secCode", EmitDefaultValue=false)]
+        [JsonPropertyName("secCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecCode { get; set; }
 
         /// <summary>
         /// City in which the terminal is located. If more than four alphanumeric characters are submitted, the transaction will be declined.  You cannot include any special characters. 
         /// </summary>
         /// <value>City in which the terminal is located. If more than four alphanumeric characters are submitted, the transaction will be declined.  You cannot include any special characters. </value>
-        [DataMember(Name="terminalCity", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalCity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalCity { get; set; }
 
         /// <summary>
         /// State in which the terminal is located. If more than two alphanumeric characters are submitted, the transaction will be declined.  You cannot include any special characters. 
         /// </summary>
         /// <value>State in which the terminal is located. If more than two alphanumeric characters are submitted, the transaction will be declined.  You cannot include any special characters. </value>
-        [DataMember(Name="terminalState", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalState")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalState { get; set; }
 
         /// <summary>
         /// Effective date for the transaction. The effective date must be within 45 days of the current day. If you do not include this value, CyberSource sets the effective date to the next business day.  Format: &#x60;MMDDYYYY&#x60;  Supported only for the CyberSource ACH Service. 
         /// </summary>
         /// <value>Effective date for the transaction. The effective date must be within 45 days of the current day. If you do not include this value, CyberSource sets the effective date to the next business day.  Format: &#x60;MMDDYYYY&#x60;  Supported only for the CyberSource ACH Service. </value>
-        [DataMember(Name="effectiveDate", EmitDefaultValue=false)]
+        [JsonPropertyName("effectiveDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EffectiveDate { get; set; }
 
         /// <summary>
         /// Identifier for a partial payment or partial credit.  The value for each debit request or credit request must be unique within the scope of the order. 
         /// </summary>
         /// <value>Identifier for a partial payment or partial credit.  The value for each debit request or credit request must be unique within the scope of the order. </value>
-        [DataMember(Name="partialPaymentId", EmitDefaultValue=false)]
+        [JsonPropertyName("partialPaymentId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PartialPaymentId { get; set; }
 
         /// <summary>
         /// Payment related information.  This information is included on the customer&#39;s statement. 
         /// </summary>
         /// <value>Payment related information.  This information is included on the customer&#39;s statement. </value>
-        [DataMember(Name="customerMemo", EmitDefaultValue=false)]
+        [JsonPropertyName("customerMemo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerMemo { get; set; }
 
         /// <summary>
         /// Flag that indicates whether to process the payment.  Use with deferred payments.  Possible values: - &#x60;0&#x60;: Standard debit with immediate payment (default). - &#x60;1&#x60;: For deferred payments, indicates that this is a deferred payment and that you will send a debit request with &#x60;paymentCategoryCode &#x3D; 2&#x60; in the future. - &#x60;2&#x60;: For deferred payments, indicates notification to initiate payment.  #### Chase Paymentech Solutions and TeleCheck Use for deferred and partial payments.  #### CyberSource ACH Service Not used.  #### RBS WorldPay Atlanta Not used. 
         /// </summary>
         /// <value>Flag that indicates whether to process the payment.  Use with deferred payments.  Possible values: - &#x60;0&#x60;: Standard debit with immediate payment (default). - &#x60;1&#x60;: For deferred payments, indicates that this is a deferred payment and that you will send a debit request with &#x60;paymentCategoryCode &#x3D; 2&#x60; in the future. - &#x60;2&#x60;: For deferred payments, indicates notification to initiate payment.  #### Chase Paymentech Solutions and TeleCheck Use for deferred and partial payments.  #### CyberSource ACH Service Not used.  #### RBS WorldPay Atlanta Not used. </value>
-        [DataMember(Name="paymentCategoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentCategoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentCategoryCode { get; set; }
 
         /// <summary>
         /// Method used for settlement.  Possible values: - &#x60;A&#x60;: Automated Clearing House (default for credits and for transactions using Canadian dollars) - &#x60;F&#x60;: Facsimile draft (U.S. dollars only) - &#x60;B&#x60;: Best possible (U.S. dollars only) (default if the field has not already been configured for your merchant ID) 
         /// </summary>
         /// <value>Method used for settlement.  Possible values: - &#x60;A&#x60;: Automated Clearing House (default for credits and for transactions using Canadian dollars) - &#x60;F&#x60;: Facsimile draft (U.S. dollars only) - &#x60;B&#x60;: Best possible (U.S. dollars only) (default if the field has not already been configured for your merchant ID) </value>
-        [DataMember(Name="settlementMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementMethod { get; set; }
 
         /// <summary>
         /// Level of fraud screening.  Possible values: - &#x60;1&#x60;: Validation — default if the field has not already been configured for your merchant ID - &#x60;2&#x60;: Verification 
         /// </summary>
         /// <value>Level of fraud screening.  Possible values: - &#x60;1&#x60;: Validation — default if the field has not already been configured for your merchant ID - &#x60;2&#x60;: Verification </value>
-        [DataMember(Name="fraudScreeningLevel", EmitDefaultValue=false)]
+        [JsonPropertyName("fraudScreeningLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FraudScreeningLevel { get; set; }
 
         /// <summary>
         /// Indicates whether a customer is physically present and whether the customer is enrolling in CyberSource Recurring Billing.  Possible values: - &#x60;1&#x60;: Customer is present and not enrolling. - &#x60;2&#x60;: Customer is not present and not enrolling. - &#x60;3&#x60;: Customer is present and enrolling. - &#x60;4&#x60;: Customer is not present and enrolling. 
         /// </summary>
         /// <value>Indicates whether a customer is physically present and whether the customer is enrolling in CyberSource Recurring Billing.  Possible values: - &#x60;1&#x60;: Customer is present and not enrolling. - &#x60;2&#x60;: Customer is not present and not enrolling. - &#x60;3&#x60;: Customer is present and enrolling. - &#x60;4&#x60;: Customer is not present and enrolling. </value>
-        [DataMember(Name="customerPresent", EmitDefaultValue=false)]
+        [JsonPropertyName("customerPresent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomerPresent { get; set; }
 
         /// <summary>
@@ -144,17 +155,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsProcessingInformationBankTransferOptions {\n");
-            if (DeclineAvsFlags != null) sb.Append("  DeclineAvsFlags: ").Append(DeclineAvsFlags).Append("\n");
-            if (SecCode != null) sb.Append("  SecCode: ").Append(SecCode).Append("\n");
-            if (TerminalCity != null) sb.Append("  TerminalCity: ").Append(TerminalCity).Append("\n");
-            if (TerminalState != null) sb.Append("  TerminalState: ").Append(TerminalState).Append("\n");
-            if (EffectiveDate != null) sb.Append("  EffectiveDate: ").Append(EffectiveDate).Append("\n");
-            if (PartialPaymentId != null) sb.Append("  PartialPaymentId: ").Append(PartialPaymentId).Append("\n");
-            if (CustomerMemo != null) sb.Append("  CustomerMemo: ").Append(CustomerMemo).Append("\n");
-            if (PaymentCategoryCode != null) sb.Append("  PaymentCategoryCode: ").Append(PaymentCategoryCode).Append("\n");
-            if (SettlementMethod != null) sb.Append("  SettlementMethod: ").Append(SettlementMethod).Append("\n");
-            if (FraudScreeningLevel != null) sb.Append("  FraudScreeningLevel: ").Append(FraudScreeningLevel).Append("\n");
-            if (CustomerPresent != null) sb.Append("  CustomerPresent: ").Append(CustomerPresent).Append("\n");
+            if (DeclineAvsFlags != null) sb.Append("  DeclineAvsFlags: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationBankTransferOptions", "declineAvsFlags", DeclineAvsFlags.ToString())).Append("\n");
+            if (SecCode != null) sb.Append("  SecCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationBankTransferOptions", "secCode", SecCode.ToString())).Append("\n");
+            if (TerminalCity != null) sb.Append("  TerminalCity: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationBankTransferOptions", "terminalCity", TerminalCity.ToString())).Append("\n");
+            if (TerminalState != null) sb.Append("  TerminalState: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationBankTransferOptions", "terminalState", TerminalState.ToString())).Append("\n");
+            if (EffectiveDate != null) sb.Append("  EffectiveDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationBankTransferOptions", "effectiveDate", EffectiveDate.ToString())).Append("\n");
+            if (PartialPaymentId != null) sb.Append("  PartialPaymentId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationBankTransferOptions", "partialPaymentId", PartialPaymentId.ToString())).Append("\n");
+            if (CustomerMemo != null) sb.Append("  CustomerMemo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationBankTransferOptions", "customerMemo", CustomerMemo.ToString())).Append("\n");
+            if (PaymentCategoryCode != null) sb.Append("  PaymentCategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationBankTransferOptions", "paymentCategoryCode", PaymentCategoryCode.ToString())).Append("\n");
+            if (SettlementMethod != null) sb.Append("  SettlementMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationBankTransferOptions", "settlementMethod", SettlementMethod.ToString())).Append("\n");
+            if (FraudScreeningLevel != null) sb.Append("  FraudScreeningLevel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationBankTransferOptions", "fraudScreeningLevel", FraudScreeningLevel.ToString())).Append("\n");
+            if (CustomerPresent != null) sb.Append("  CustomerPresent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationBankTransferOptions", "customerPresent", CustomerPresent.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -165,7 +176,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsProcessingInformationBankTransferOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

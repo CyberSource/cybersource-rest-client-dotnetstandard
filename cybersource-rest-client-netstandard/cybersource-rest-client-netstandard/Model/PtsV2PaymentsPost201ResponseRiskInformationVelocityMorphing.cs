@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Morphing count specified by the number #.  **Note** The count is not returned for the initial transaction. 
         /// </summary>
         /// <value>Morphing count specified by the number #.  **Note** The count is not returned for the initial transaction. </value>
-        [DataMember(Name="count", EmitDefaultValue=false)]
+        [JsonPropertyName("count")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Count { get; set; }
 
         /// <summary>
         /// Field name of the morphing element. specified by the setting that you chose in the Velocity Editor.  For all possible values, see the &#x60;decisionReply_morphingElement_#_fieldName&#x60; field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) Click **Decision Manager** &gt; **Documentation** &gt; **Guides** &gt; _Decision Manager Using the SCMP API Developer Guide_ (PDF link). 
         /// </summary>
         /// <value>Field name of the morphing element. specified by the setting that you chose in the Velocity Editor.  For all possible values, see the &#x60;decisionReply_morphingElement_#_fieldName&#x60; field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) Click **Decision Manager** &gt; **Documentation** &gt; **Guides** &gt; _Decision Manager Using the SCMP API Developer Guide_ (PDF link). </value>
-        [DataMember(Name="fieldName", EmitDefaultValue=false)]
+        [JsonPropertyName("fieldName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FieldName { get; set; }
 
         /// <summary>
         /// Identifier that CyberSource assigned to the velocity rule specified by the number #.  For all possible values, see the &#x60;decision_velocity_morphing_#_info_code&#x60; field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) Click **Decision Manager** &gt;  
         /// </summary>
         /// <value>Identifier that CyberSource assigned to the velocity rule specified by the number #.  For all possible values, see the &#x60;decision_velocity_morphing_#_info_code&#x60; field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) Click **Decision Manager** &gt;  </value>
-        [DataMember(Name="informationCode", EmitDefaultValue=false)]
+        [JsonPropertyName("informationCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InformationCode { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseRiskInformationVelocityMorphing {\n");
-            if (Count != null) sb.Append("  Count: ").Append(Count).Append("\n");
-            if (FieldName != null) sb.Append("  FieldName: ").Append(FieldName).Append("\n");
-            if (InformationCode != null) sb.Append("  InformationCode: ").Append(InformationCode).Append("\n");
+            if (Count != null) sb.Append("  Count: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationVelocityMorphing", "count", Count.ToString())).Append("\n");
+            if (FieldName != null) sb.Append("  FieldName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationVelocityMorphing", "fieldName", FieldName.ToString())).Append("\n");
+            if (InformationCode != null) sb.Append("  InformationCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationVelocityMorphing", "informationCode", InformationCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseRiskInformationVelocityMorphing", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

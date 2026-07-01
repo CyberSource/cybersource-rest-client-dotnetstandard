@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -65,84 +65,96 @@ namespace CyberSource.Model
         /// Identifier of the acquirer. This number is usually assigned by Visa.
         /// </summary>
         /// <value>Identifier of the acquirer. This number is usually assigned by Visa.</value>
-        [DataMember(Name="institutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("institutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InstitutionId { get; set; }
 
         /// <summary>
         /// Number assigned by MasterCard to banks to identify the member in transactions.
         /// </summary>
         /// <value>Number assigned by MasterCard to banks to identify the member in transactions.</value>
-        [DataMember(Name="interbankCardAssociationId", EmitDefaultValue=false)]
+        [JsonPropertyName("interbankCardAssociationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InterbankCardAssociationId { get; set; }
 
         /// <summary>
         /// Assigned by Discover to identify the acquirer.
         /// </summary>
         /// <value>Assigned by Discover to identify the acquirer.</value>
-        [DataMember(Name="discoverInstitutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("discoverInstitutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscoverInstitutionId { get; set; }
 
         /// <summary>
         /// ISO 4217 format.
         /// </summary>
         /// <value>ISO 4217 format.</value>
-        [DataMember(Name="countryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("countryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CountryCode { get; set; }
 
         /// <summary>
         /// The BIN to which this capturefile is sent. This field must contain a valid BIN.
         /// </summary>
         /// <value>The BIN to which this capturefile is sent. This field must contain a valid BIN.</value>
-        [DataMember(Name="fileDestinationBin", EmitDefaultValue=false)]
+        [JsonPropertyName("fileDestinationBin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FileDestinationBin { get; set; }
 
         /// <summary>
         /// Identify merchants that participate in Select Merchant Fee (SMF) programs. Unique to the merchant.
         /// </summary>
         /// <value>Identify merchants that participate in Select Merchant Fee (SMF) programs. Unique to the merchant.</value>
-        [DataMember(Name="merchantVerificationValue", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantVerificationValue")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantVerificationValue { get; set; }
 
         /// <summary>
         /// Merchant ID assigned by an acquirer or a processor. Should not be overriden by any other party.
         /// </summary>
         /// <value>Merchant ID assigned by an acquirer or a processor. Should not be overriden by any other party.</value>
-        [DataMember(Name="merchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantId { get; set; }
 
         /// <summary>
         /// The &#39;Terminal Id&#39; aka TID, is an identifier used for with your payments processor. Depending on the processor and payment acceptance type this may also be the default Terminal ID used for Card Present and Virtual Terminal transactions. 
         /// </summary>
         /// <value>The &#39;Terminal Id&#39; aka TID, is an identifier used for with your payments processor. Depending on the processor and payment acceptance type this may also be the default Terminal ID used for Card Present and Virtual Terminal transactions. </value>
-        [DataMember(Name="terminalId", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalId { get; set; }
 
         /// <summary>
         /// Allows multiple captures for a single authorization transaction. 
         /// </summary>
         /// <value>Allows multiple captures for a single authorization transaction. </value>
-        [DataMember(Name="allowMultipleBills", EmitDefaultValue=false)]
+        [JsonPropertyName("allowMultipleBills")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AllowMultipleBills { get; set; }
 
         /// <summary>
         /// To enable merchant to send in transaction reference number (unique reconciliation ID).
         /// </summary>
         /// <value>To enable merchant to send in transaction reference number (unique reconciliation ID).</value>
-        [DataMember(Name="enableTransactionReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("enableTransactionReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableTransactionReferenceNumber { get; set; }
 
         /// <summary>
         /// Valid values are: * VISA * MASTERCARD * AMERICAN_EXPRESS * CUP * EFTPOS * DINERS_CLUB * DISCOVER * JCB 
         /// </summary>
         /// <value>Valid values are: * VISA * MASTERCARD * AMERICAN_EXPRESS * CUP * EFTPOS * DINERS_CLUB * DISCOVER * JCB </value>
-        [DataMember(Name="paymentTypes", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentTypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, CardProcessingConfigCommonPaymentTypes> PaymentTypes { get; set; }
 
         /// <summary>
         /// Three-character [ISO 4217 ALPHA-3 Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)
         /// </summary>
         /// <value>Three-character [ISO 4217 ALPHA-3 Standard Currency Codes.](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)</value>
-        [DataMember(Name="currencies", EmitDefaultValue=false)]
+        [JsonPropertyName("currencies")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, CardProcessingConfigCommonCurrencies> Currencies { get; set; }
 
         /// <summary>
@@ -153,18 +165,18 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CardProcessingConfigCommonAcquirers {\n");
-            if (InstitutionId != null) sb.Append("  InstitutionId: ").Append(InstitutionId).Append("\n");
-            if (InterbankCardAssociationId != null) sb.Append("  InterbankCardAssociationId: ").Append(InterbankCardAssociationId).Append("\n");
-            if (DiscoverInstitutionId != null) sb.Append("  DiscoverInstitutionId: ").Append(DiscoverInstitutionId).Append("\n");
-            if (CountryCode != null) sb.Append("  CountryCode: ").Append(CountryCode).Append("\n");
-            if (FileDestinationBin != null) sb.Append("  FileDestinationBin: ").Append(FileDestinationBin).Append("\n");
-            if (MerchantVerificationValue != null) sb.Append("  MerchantVerificationValue: ").Append(MerchantVerificationValue).Append("\n");
-            if (MerchantId != null) sb.Append("  MerchantId: ").Append(MerchantId).Append("\n");
-            if (TerminalId != null) sb.Append("  TerminalId: ").Append(TerminalId).Append("\n");
-            if (AllowMultipleBills != null) sb.Append("  AllowMultipleBills: ").Append(AllowMultipleBills).Append("\n");
-            if (EnableTransactionReferenceNumber != null) sb.Append("  EnableTransactionReferenceNumber: ").Append(EnableTransactionReferenceNumber).Append("\n");
-            if (PaymentTypes != null) sb.Append("  PaymentTypes: ").Append(PaymentTypes).Append("\n");
-            if (Currencies != null) sb.Append("  Currencies: ").Append(Currencies).Append("\n");
+            if (InstitutionId != null) sb.Append("  InstitutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "institutionId", InstitutionId.ToString())).Append("\n");
+            if (InterbankCardAssociationId != null) sb.Append("  InterbankCardAssociationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "interbankCardAssociationId", InterbankCardAssociationId.ToString())).Append("\n");
+            if (DiscoverInstitutionId != null) sb.Append("  DiscoverInstitutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "discoverInstitutionId", DiscoverInstitutionId.ToString())).Append("\n");
+            if (CountryCode != null) sb.Append("  CountryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "countryCode", CountryCode.ToString())).Append("\n");
+            if (FileDestinationBin != null) sb.Append("  FileDestinationBin: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "fileDestinationBin", FileDestinationBin.ToString())).Append("\n");
+            if (MerchantVerificationValue != null) sb.Append("  MerchantVerificationValue: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "merchantVerificationValue", MerchantVerificationValue.ToString())).Append("\n");
+            if (MerchantId != null) sb.Append("  MerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "merchantId", MerchantId.ToString())).Append("\n");
+            if (TerminalId != null) sb.Append("  TerminalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "terminalId", TerminalId.ToString())).Append("\n");
+            if (AllowMultipleBills != null) sb.Append("  AllowMultipleBills: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "allowMultipleBills", AllowMultipleBills.ToString())).Append("\n");
+            if (EnableTransactionReferenceNumber != null) sb.Append("  EnableTransactionReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "enableTransactionReferenceNumber", EnableTransactionReferenceNumber.ToString())).Append("\n");
+            if (PaymentTypes != null) sb.Append("  PaymentTypes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "paymentTypes", PaymentTypes.ToString())).Append("\n");
+            if (Currencies != null) sb.Append("  Currencies: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommonAcquirers", "currencies", Currencies.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -175,7 +187,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CardProcessingConfigCommonAcquirers", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

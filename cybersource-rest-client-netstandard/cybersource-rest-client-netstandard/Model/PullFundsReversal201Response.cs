@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,39 +53,45 @@ namespace CyberSource.Model
         /// A unique identification number to identify the submitted request. It is also appended to the endpoint of the resource. 
         /// </summary>
         /// <value>A unique identification number to identify the submitted request. It is also appended to the endpoint of the resource. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60;  **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC. 
         /// </summary>
         /// <value>Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60;  **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC. </value>
-        [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("submitTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubmitTimeUtc { get; set; }
 
         /// <summary>
         /// The status of the submitted transaction.  Possible values: - REVERSED - DECLINED - INVALID_REQUEST 
         /// </summary>
         /// <value>The status of the submitted transaction.  Possible values: - REVERSED - DECLINED - INVALID_REQUEST </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Gets or Sets ErrorInformation
         /// </summary>
-        [DataMember(Name="errorInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("errorInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PullFundsReversal201ResponseErrorInformation ErrorInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessorInformation
         /// </summary>
-        [DataMember(Name="processorInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("processorInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PullFundsReversal201ResponseProcessorInformation ProcessorInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PullFundsReversal201ResponseLinks Links { get; set; }
 
         /// <summary>
@@ -96,12 +102,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PullFundsReversal201Response {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (ErrorInformation != null) sb.Append("  ErrorInformation: ").Append(ErrorInformation).Append("\n");
-            if (ProcessorInformation != null) sb.Append("  ProcessorInformation: ").Append(ProcessorInformation).Append("\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201Response", "id", Id.ToString())).Append("\n");
+            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201Response", "submitTimeUtc", SubmitTimeUtc.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201Response", "status", Status.ToString())).Append("\n");
+            if (ErrorInformation != null) sb.Append("  ErrorInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201Response", "errorInformation", ErrorInformation.ToString())).Append("\n");
+            if (ProcessorInformation != null) sb.Append("  ProcessorInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201Response", "processorInformation", ProcessorInformation.ToString())).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PullFundsReversal201Response", "_links", Links.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -112,7 +118,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PullFundsReversal201Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

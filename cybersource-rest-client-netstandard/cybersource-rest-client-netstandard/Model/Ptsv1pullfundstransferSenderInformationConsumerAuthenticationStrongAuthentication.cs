@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// This field will contain the low value exemption indicator with one of the following values:   Possible values: - &#x60;0&#x60; ( low value exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it to be a low value payment)  Only applicable for SCA participants. Only one of the SCA flags (&#x60;senderInformation.consumerAuthentication.strongAuthentication.*&#x60;) may be supplied at once. 
         /// </summary>
         /// <value>This field will contain the low value exemption indicator with one of the following values:   Possible values: - &#x60;0&#x60; ( low value exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it to be a low value payment)  Only applicable for SCA participants. Only one of the SCA flags (&#x60;senderInformation.consumerAuthentication.strongAuthentication.*&#x60;) may be supplied at once. </value>
-        [DataMember(Name="lowValueExemptionIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("lowValueExemptionIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LowValueExemptionIndicator { get; set; }
 
         /// <summary>
         /// This field will contain the transaction risk analysis exemption indicator with one of the following values:   Possible values: - &#x60;0&#x60; (TRA exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it to be low risk in accordance with the criteria defined by PSD2/RTS)  Only applicable for SCA participants. Only one of the SCA flags (&#x60;senderInformation.consumerAuthentication.strongAuthentication.*&#x60;) may be supplied at once. 
         /// </summary>
         /// <value>This field will contain the transaction risk analysis exemption indicator with one of the following values:   Possible values: - &#x60;0&#x60; (TRA exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it to be low risk in accordance with the criteria defined by PSD2/RTS)  Only applicable for SCA participants. Only one of the SCA flags (&#x60;senderInformation.consumerAuthentication.strongAuthentication.*&#x60;) may be supplied at once. </value>
-        [DataMember(Name="riskAnalysisExemptionIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("riskAnalysisExemptionIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RiskAnalysisExemptionIndicator { get; set; }
 
         /// <summary>
         /// Possible values: - &#x60;0&#x60; (Trusted merchant exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as it originated at a merchant trusted by the cardholder)  Only applicable for SCA participants. Only one of the SCA flags (&#x60;senderInformation.consumerAuthentication.strongAuthentication.*&#x60;) may be supplied at once. 
         /// </summary>
         /// <value>Possible values: - &#x60;0&#x60; (Trusted merchant exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as it originated at a merchant trusted by the cardholder)  Only applicable for SCA participants. Only one of the SCA flags (&#x60;senderInformation.consumerAuthentication.strongAuthentication.*&#x60;) may be supplied at once. </value>
-        [DataMember(Name="trustedMerchantExemptionIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("trustedMerchantExemptionIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TrustedMerchantExemptionIndicator { get; set; }
 
         /// <summary>
         /// This field will contain the secure corporate payment exemption indicator with one of the following values:   Possible values: - &#x60;0&#x60; (SCA exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it as a secure corporate payment)  Only applicable for SCA participants. Only one of the SCA flags (&#x60;senderInformation.consumerAuthentication.strongAuthentication.*&#x60;) may be supplied at once. 
         /// </summary>
         /// <value>This field will contain the secure corporate payment exemption indicator with one of the following values:   Possible values: - &#x60;0&#x60; (SCA exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as the merchant/acquirer has determined it as a secure corporate payment)  Only applicable for SCA participants. Only one of the SCA flags (&#x60;senderInformation.consumerAuthentication.strongAuthentication.*&#x60;) may be supplied at once. </value>
-        [DataMember(Name="secureCorporatePaymentIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("secureCorporatePaymentIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecureCorporatePaymentIndicator { get; set; }
 
         /// <summary>
         /// This field will contain the delegated authentication exemption indicator with one of the following values:   Possible values: - &#x60;0&#x60; (delegated Authentication exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as authentication has been delegated to other provider (PSP,Acquirer))  Only applicable for SCA participants. Only one of the SCA flags (&#x60;senderInformation.consumerAuthentication.strongAuthentication.*&#x60;) may be supplied at once. 
         /// </summary>
         /// <value>This field will contain the delegated authentication exemption indicator with one of the following values:   Possible values: - &#x60;0&#x60; (delegated Authentication exemption does not apply to the transaction) - &#x60;1&#x60; (Transaction exempt from SCA as authentication has been delegated to other provider (PSP,Acquirer))  Only applicable for SCA participants. Only one of the SCA flags (&#x60;senderInformation.consumerAuthentication.strongAuthentication.*&#x60;) may be supplied at once. </value>
-        [DataMember(Name="delegatedAuthenticationExemptionIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("delegatedAuthenticationExemptionIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DelegatedAuthenticationExemptionIndicator { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferSenderInformationConsumerAuthenticationStrongAuthentication {\n");
-            if (LowValueExemptionIndicator != null) sb.Append("  LowValueExemptionIndicator: ").Append(LowValueExemptionIndicator).Append("\n");
-            if (RiskAnalysisExemptionIndicator != null) sb.Append("  RiskAnalysisExemptionIndicator: ").Append(RiskAnalysisExemptionIndicator).Append("\n");
-            if (TrustedMerchantExemptionIndicator != null) sb.Append("  TrustedMerchantExemptionIndicator: ").Append(TrustedMerchantExemptionIndicator).Append("\n");
-            if (SecureCorporatePaymentIndicator != null) sb.Append("  SecureCorporatePaymentIndicator: ").Append(SecureCorporatePaymentIndicator).Append("\n");
-            if (DelegatedAuthenticationExemptionIndicator != null) sb.Append("  DelegatedAuthenticationExemptionIndicator: ").Append(DelegatedAuthenticationExemptionIndicator).Append("\n");
+            if (LowValueExemptionIndicator != null) sb.Append("  LowValueExemptionIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationConsumerAuthenticationStrongAuthentication", "lowValueExemptionIndicator", LowValueExemptionIndicator.ToString())).Append("\n");
+            if (RiskAnalysisExemptionIndicator != null) sb.Append("  RiskAnalysisExemptionIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationConsumerAuthenticationStrongAuthentication", "riskAnalysisExemptionIndicator", RiskAnalysisExemptionIndicator.ToString())).Append("\n");
+            if (TrustedMerchantExemptionIndicator != null) sb.Append("  TrustedMerchantExemptionIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationConsumerAuthenticationStrongAuthentication", "trustedMerchantExemptionIndicator", TrustedMerchantExemptionIndicator.ToString())).Append("\n");
+            if (SecureCorporatePaymentIndicator != null) sb.Append("  SecureCorporatePaymentIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationConsumerAuthenticationStrongAuthentication", "secureCorporatePaymentIndicator", SecureCorporatePaymentIndicator.ToString())).Append("\n");
+            if (DelegatedAuthenticationExemptionIndicator != null) sb.Append("  DelegatedAuthenticationExemptionIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationConsumerAuthenticationStrongAuthentication", "delegatedAuthenticationExemptionIndicator", DelegatedAuthenticationExemptionIndicator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferSenderInformationConsumerAuthenticationStrongAuthentication", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

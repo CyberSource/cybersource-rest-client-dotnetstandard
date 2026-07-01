@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Data related to the authenticated identity. Contains verification payload from the identity provider. 
         /// </summary>
         /// <value>Data related to the authenticated identity. Contains verification payload from the identity provider. </value>
-        [DataMember(Name="data", EmitDefaultValue=false)]
+        [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Data { get; set; }
 
         /// <summary>
         /// Provider of the authenticated identity. Identifies the authentication service or identity provider.   Possible values: - CLIENT_DEVICE_CERT_JWS - VISA_PAYMENT_PASSKEY
         /// </summary>
         /// <value>Provider of the authenticated identity. Identifies the authentication service or identity provider.   Possible values: - CLIENT_DEVICE_CERT_JWS - VISA_PAYMENT_PASSKEY</value>
-        [DataMember(Name="provider", EmitDefaultValue=false)]
+        [JsonPropertyName("provider")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Provider { get; set; }
 
         /// <summary>
         /// Unique identifier for the authenticated identity. A distinctive and non-transparent identifier for correlation purposes. 
         /// </summary>
         /// <value>Unique identifier for the authenticated identity. A distinctive and non-transparent identifier for correlation purposes. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Identifier of the relying party that requested the authentication. 
         /// </summary>
         /// <value>Identifier of the relying party that requested the authentication. </value>
-        [DataMember(Name="relyingPartyId", EmitDefaultValue=false)]
+        [JsonPropertyName("relyingPartyId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RelyingPartyId { get; set; }
 
         /// <summary>
         /// The method used to authenticate the user.   Possible values: - USERNAME_PASSWORD - PASSCODE_PASSWORD - PASSCODE - PASSWORD - PATTERN - BIOMETRIC_FINGERPRINT - BIOMETRIC_FACIAL - BIOMETRIC_IRIS - BIOMETRIC_VOICE - BIOMETRIC_BEHAVIORAL - DEVICE_UNLOCKED_METHOD_UNKNOWN - OTP_SMS - OTP_EMAIL - OTP_SMS_KNOWLEDGE - KNOWLEDGE_BASED_AUTHENTICATION - USER_UNVERIFIED - BIOMETRIC
         /// </summary>
         /// <value>The method used to authenticate the user.   Possible values: - USERNAME_PASSWORD - PASSCODE_PASSWORD - PASSCODE - PASSWORD - PATTERN - BIOMETRIC_FINGERPRINT - BIOMETRIC_FACIAL - BIOMETRIC_IRIS - BIOMETRIC_VOICE - BIOMETRIC_BEHAVIORAL - DEVICE_UNLOCKED_METHOD_UNKNOWN - OTP_SMS - OTP_EMAIL - OTP_SMS_KNOWLEDGE - KNOWLEDGE_BASED_AUTHENTICATION - USER_UNVERIFIED - BIOMETRIC</value>
-        [DataMember(Name="userAuthenticationMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("userAuthenticationMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UserAuthenticationMethod { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsTokenInformationTokenAuthenticationInformationAuthenticatedIdentities {\n");
-            if (Data != null) sb.Append("  Data: ").Append(Data).Append("\n");
-            if (Provider != null) sb.Append("  Provider: ").Append(Provider).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (RelyingPartyId != null) sb.Append("  RelyingPartyId: ").Append(RelyingPartyId).Append("\n");
-            if (UserAuthenticationMethod != null) sb.Append("  UserAuthenticationMethod: ").Append(UserAuthenticationMethod).Append("\n");
+            if (Data != null) sb.Append("  Data: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTokenInformationTokenAuthenticationInformationAuthenticatedIdentities", "data", Data.ToString())).Append("\n");
+            if (Provider != null) sb.Append("  Provider: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTokenInformationTokenAuthenticationInformationAuthenticatedIdentities", "provider", Provider.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTokenInformationTokenAuthenticationInformationAuthenticatedIdentities", "id", Id.ToString())).Append("\n");
+            if (RelyingPartyId != null) sb.Append("  RelyingPartyId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTokenInformationTokenAuthenticationInformationAuthenticatedIdentities", "relyingPartyId", RelyingPartyId.ToString())).Append("\n");
+            if (UserAuthenticationMethod != null) sb.Append("  UserAuthenticationMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTokenInformationTokenAuthenticationInformationAuthenticatedIdentities", "userAuthenticationMethod", UserAuthenticationMethod.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsTokenInformationTokenAuthenticationInformationAuthenticatedIdentities", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

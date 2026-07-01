@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -35,7 +35,7 @@ namespace CyberSource.Model
         /// </summary>
         /// <param name="CredentialStoredOnFile">Store the credential on file&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. .</param>
         /// <param name="MerchantInitiatedTransaction">MerchantInitiatedTransaction.</param>
-        public Ucv1sessionsDataProcessingInformationAuthorizationOptionsInitiator(bool? CredentialStoredOnFile = default(bool?), Upv1capturecontextsDataProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction MerchantInitiatedTransaction = default(Upv1capturecontextsDataProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction))
+        public Ucv1sessionsDataProcessingInformationAuthorizationOptionsInitiator(bool? CredentialStoredOnFile = default(bool?), UnifiedCheckoutMerchantInitiatedTransaction MerchantInitiatedTransaction = default(UnifiedCheckoutMerchantInitiatedTransaction))
         {
             this.CredentialStoredOnFile = CredentialStoredOnFile;
             this.MerchantInitiatedTransaction = MerchantInitiatedTransaction;
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Store the credential on file&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>Store the credential on file&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="credentialStoredOnFile", EmitDefaultValue=false)]
+        [JsonPropertyName("credentialStoredOnFile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CredentialStoredOnFile { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInitiatedTransaction
         /// </summary>
-        [DataMember(Name="merchantInitiatedTransaction", EmitDefaultValue=false)]
-        public Upv1capturecontextsDataProcessingInformationAuthorizationOptionsInitiatorMerchantInitiatedTransaction MerchantInitiatedTransaction { get; set; }
+        [JsonPropertyName("merchantInitiatedTransaction")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public UnifiedCheckoutMerchantInitiatedTransaction MerchantInitiatedTransaction { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -62,8 +64,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataProcessingInformationAuthorizationOptionsInitiator {\n");
-            if (CredentialStoredOnFile != null) sb.Append("  CredentialStoredOnFile: ").Append(CredentialStoredOnFile).Append("\n");
-            if (MerchantInitiatedTransaction != null) sb.Append("  MerchantInitiatedTransaction: ").Append(MerchantInitiatedTransaction).Append("\n");
+            if (CredentialStoredOnFile != null) sb.Append("  CredentialStoredOnFile: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformationAuthorizationOptionsInitiator", "credentialStoredOnFile", CredentialStoredOnFile.ToString())).Append("\n");
+            if (MerchantInitiatedTransaction != null) sb.Append("  MerchantInitiatedTransaction: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformationAuthorizationOptionsInitiator", "merchantInitiatedTransaction", MerchantInitiatedTransaction.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,7 +76,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataProcessingInformationAuthorizationOptionsInitiator", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

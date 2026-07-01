@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// Issuing country of the identification. The field format should be a 2 character ISO 3166-1 alpha-2 country code. 
         /// </summary>
         /// <value>Issuing country of the identification. The field format should be a 2 character ISO 3166-1 alpha-2 country code. </value>
-        [DataMember(Name="issuingCountry", EmitDefaultValue=false)]
+        [JsonPropertyName("issuingCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IssuingCountry { get; set; }
 
         /// <summary>
         /// This tag will contain an acquirer-populated id value associated with the API. 
         /// </summary>
         /// <value>This tag will contain an acquirer-populated id value associated with the API. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// This tag will contain the type of recipient identification. The valid values are:  - &#x60;BTHD&#x60;: (Date of birth) - &#x60;CUID&#x60;: (Customer identification (unspecified)) - &#x60;NTID&#x60;: (National identification) - &#x60;PASN&#x60;: (Passport number) - &#x60;DRLN&#x60;: (Driver license) - &#x60;TXIN&#x60;: (Tax identification) - &#x60;CPNY&#x60;: (Company registration number) - &#x60;PRXY&#x60;: (Proxy identification) - &#x60;SSNB&#x60;: (Social security number) - &#x60;ARNB&#x60;: (Alien registration number) - &#x60;LAWE&#x60;: (Law enforcement identification) - &#x60;MILI&#x60;: (Military identification) - &#x60;TRVL&#x60;: (Travel identification (non-passport)) - &#x60;EMAL&#x60;: (Email) - &#x60;PHON&#x60;: (Phone number) 
         /// </summary>
         /// <value>This tag will contain the type of recipient identification. The valid values are:  - &#x60;BTHD&#x60;: (Date of birth) - &#x60;CUID&#x60;: (Customer identification (unspecified)) - &#x60;NTID&#x60;: (National identification) - &#x60;PASN&#x60;: (Passport number) - &#x60;DRLN&#x60;: (Driver license) - &#x60;TXIN&#x60;: (Tax identification) - &#x60;CPNY&#x60;: (Company registration number) - &#x60;PRXY&#x60;: (Proxy identification) - &#x60;SSNB&#x60;: (Social security number) - &#x60;ARNB&#x60;: (Alien registration number) - &#x60;LAWE&#x60;: (Law enforcement identification) - &#x60;MILI&#x60;: (Military identification) - &#x60;TRVL&#x60;: (Travel identification (non-passport)) - &#x60;EMAL&#x60;: (Email) - &#x60;PHON&#x60;: (Phone number) </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// This field denotes whether the Tax ID is a business or individual&#39;s Tax ID when idType contains the value of TXIN (Tax identification).  The valid values are: B (Business) I (Individual) 
         /// </summary>
         /// <value>This field denotes whether the Tax ID is a business or individual&#39;s Tax ID when idType contains the value of TXIN (Tax identification).  The valid values are: B (Business) I (Individual) </value>
-        [DataMember(Name="personalIdType", EmitDefaultValue=false)]
+        [JsonPropertyName("personalIdType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PersonalIdType { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferRecipientInformationPersonalIdentification {\n");
-            if (IssuingCountry != null) sb.Append("  IssuingCountry: ").Append(IssuingCountry).Append("\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (PersonalIdType != null) sb.Append("  PersonalIdType: ").Append(PersonalIdType).Append("\n");
+            if (IssuingCountry != null) sb.Append("  IssuingCountry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformationPersonalIdentification", "issuingCountry", IssuingCountry.ToString())).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformationPersonalIdentification", "id", Id.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformationPersonalIdentification", "type", Type.ToString())).Append("\n");
+            if (PersonalIdType != null) sb.Append("  PersonalIdType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformationPersonalIdentification", "personalIdType", PersonalIdType.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferRecipientInformationPersonalIdentification", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

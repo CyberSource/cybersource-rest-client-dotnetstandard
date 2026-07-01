@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// AVS result code.  Code Description - &#39;Y&#39; Full Match - &#39;A&#39; Partial Match (street address only) - &#39;Z&#39; Partial Match (postal/zip only) - &#39;N&#39; Non-Match - &#39;U&#39; Unable to Verify - &#39;R&#39; Indeterminate Outcome (Retry) 
         /// </summary>
         /// <value>AVS result code.  Code Description - &#39;Y&#39; Full Match - &#39;A&#39; Partial Match (street address only) - &#39;Z&#39; Partial Match (postal/zip only) - &#39;N&#39; Non-Match - &#39;U&#39; Unable to Verify - &#39;R&#39; Indeterminate Outcome (Retry) </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PayoutsPost201ResponseProcessorInformationAvs {\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PayoutsPost201ResponseProcessorInformationAvs", "code", Code.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PayoutsPost201ResponseProcessorInformationAvs", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

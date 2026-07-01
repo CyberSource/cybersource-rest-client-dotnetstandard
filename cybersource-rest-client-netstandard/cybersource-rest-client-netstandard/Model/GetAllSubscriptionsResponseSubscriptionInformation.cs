@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Subscription code. 
         /// </summary>
         /// <value>Subscription code. </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Plan Id. 
         /// </summary>
         /// <value>Plan Id. </value>
-        [DataMember(Name="planId", EmitDefaultValue=false)]
+        [JsonPropertyName("planId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PlanId { get; set; }
 
         /// <summary>
         /// Subscription Name 
         /// </summary>
         /// <value>Subscription Name </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Start date of the Subscription  Start date will be in UTC. Format: YYYY-MM-DDThh:mm:ssZ The T separates the date and the time. The Z indicates UTC.  **Example** 2022-08-11T22:47:57Z equals August 11, 2022, at 22:47:57 (10:47:57 p.m.). 
         /// </summary>
         /// <value>Start date of the Subscription  Start date will be in UTC. Format: YYYY-MM-DDThh:mm:ssZ The T separates the date and the time. The Z indicates UTC.  **Example** 2022-08-11T22:47:57Z equals August 11, 2022, at 22:47:57 (10:47:57 p.m.). </value>
-        [DataMember(Name="startDate", EmitDefaultValue=false)]
+        [JsonPropertyName("startDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StartDate { get; set; }
 
         /// <summary>
         /// Subscription Status: - &#x60;PENDING&#x60; - &#x60;ACTIVE&#x60; - &#x60;FAILED&#x60; - &#x60;COMPLETED&#x60; - &#x60;DELINQUENT&#x60; - &#x60;SUSPENDED&#x60; - &#x60;CANCELLED&#x60; 
         /// </summary>
         /// <value>Subscription Status: - &#x60;PENDING&#x60; - &#x60;ACTIVE&#x60; - &#x60;FAILED&#x60; - &#x60;COMPLETED&#x60; - &#x60;DELINQUENT&#x60; - &#x60;SUSPENDED&#x60; - &#x60;CANCELLED&#x60; </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class GetAllSubscriptionsResponseSubscriptionInformation {\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (PlanId != null) sb.Append("  PlanId: ").Append(PlanId).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (StartDate != null) sb.Append("  StartDate: ").Append(StartDate).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetAllSubscriptionsResponseSubscriptionInformation", "code", Code.ToString())).Append("\n");
+            if (PlanId != null) sb.Append("  PlanId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetAllSubscriptionsResponseSubscriptionInformation", "planId", PlanId.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetAllSubscriptionsResponseSubscriptionInformation", "name", Name.ToString())).Append("\n");
+            if (StartDate != null) sb.Append("  StartDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetAllSubscriptionsResponseSubscriptionInformation", "startDate", StartDate.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetAllSubscriptionsResponseSubscriptionInformation", "status", Status.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("GetAllSubscriptionsResponseSubscriptionInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

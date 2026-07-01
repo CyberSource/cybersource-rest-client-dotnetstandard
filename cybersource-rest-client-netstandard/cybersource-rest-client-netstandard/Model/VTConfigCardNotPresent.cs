@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -35,7 +35,7 @@ namespace CyberSource.Model
         /// </summary>
         /// <param name="GlobalPaymentInformation">GlobalPaymentInformation.</param>
         /// <param name="ReceiptInformation">ReceiptInformation.</param>
-        public VTConfigCardNotPresent(VTConfigCardNotPresentGlobalPaymentInformation GlobalPaymentInformation = default(VTConfigCardNotPresentGlobalPaymentInformation), VTConfigCardNotPresentReceiptInformation ReceiptInformation = default(VTConfigCardNotPresentReceiptInformation))
+        public VTConfigCardNotPresent(VirtualTerminalGlobalPaymentSettings GlobalPaymentInformation = default(VirtualTerminalGlobalPaymentSettings), VTConfigCardNotPresentReceiptInformation ReceiptInformation = default(VTConfigCardNotPresentReceiptInformation))
         {
             this.GlobalPaymentInformation = GlobalPaymentInformation;
             this.ReceiptInformation = ReceiptInformation;
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets GlobalPaymentInformation
         /// </summary>
-        [DataMember(Name="globalPaymentInformation", EmitDefaultValue=false)]
-        public VTConfigCardNotPresentGlobalPaymentInformation GlobalPaymentInformation { get; set; }
+        [JsonPropertyName("globalPaymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public VirtualTerminalGlobalPaymentSettings GlobalPaymentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ReceiptInformation
         /// </summary>
-        [DataMember(Name="receiptInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("receiptInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public VTConfigCardNotPresentReceiptInformation ReceiptInformation { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class VTConfigCardNotPresent {\n");
-            if (GlobalPaymentInformation != null) sb.Append("  GlobalPaymentInformation: ").Append(GlobalPaymentInformation).Append("\n");
-            if (ReceiptInformation != null) sb.Append("  ReceiptInformation: ").Append(ReceiptInformation).Append("\n");
+            if (GlobalPaymentInformation != null) sb.Append("  GlobalPaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VTConfigCardNotPresent", "globalPaymentInformation", GlobalPaymentInformation.ToString())).Append("\n");
+            if (ReceiptInformation != null) sb.Append("  ReceiptInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("VTConfigCardNotPresent", "receiptInformation", ReceiptInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("VTConfigCardNotPresent", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

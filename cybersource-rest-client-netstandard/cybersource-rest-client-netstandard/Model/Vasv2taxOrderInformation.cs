@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -56,49 +56,57 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AmountDetails
         /// </summary>
-        [DataMember(Name="amountDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("amountDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public RiskV1DecisionsPost201ResponseOrderInformationAmountDetails AmountDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets BillTo
         /// </summary>
-        [DataMember(Name="billTo", EmitDefaultValue=false)]
+        [JsonPropertyName("billTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Vasv2taxOrderInformationBillTo BillTo { get; set; }
 
         /// <summary>
         /// Gets or Sets ShippingDetails
         /// </summary>
-        [DataMember(Name="shippingDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Vasv2taxOrderInformationShippingDetails ShippingDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets ShipTo
         /// </summary>
-        [DataMember(Name="shipTo", EmitDefaultValue=false)]
+        [JsonPropertyName("shipTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Vasv2taxOrderInformationShipTo ShipTo { get; set; }
 
         /// <summary>
         /// Gets or Sets LineItems
         /// </summary>
-        [DataMember(Name="lineItems", EmitDefaultValue=false)]
+        [JsonPropertyName("lineItems")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Vasv2taxOrderInformationLineItems> LineItems { get; set; }
 
         /// <summary>
         /// Gets or Sets InvoiceDetails
         /// </summary>
-        [DataMember(Name="invoiceDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Vasv2taxOrderInformationInvoiceDetails InvoiceDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderAcceptance
         /// </summary>
-        [DataMember(Name="orderAcceptance", EmitDefaultValue=false)]
+        [JsonPropertyName("orderAcceptance")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Vasv2taxOrderInformationOrderAcceptance OrderAcceptance { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderOrigin
         /// </summary>
-        [DataMember(Name="orderOrigin", EmitDefaultValue=false)]
+        [JsonPropertyName("orderOrigin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Vasv2taxOrderInformationOrderOrigin OrderOrigin { get; set; }
 
         /// <summary>
@@ -109,14 +117,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Vasv2taxOrderInformation {\n");
-            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(AmountDetails).Append("\n");
-            if (BillTo != null) sb.Append("  BillTo: ").Append(BillTo).Append("\n");
-            if (ShippingDetails != null) sb.Append("  ShippingDetails: ").Append(ShippingDetails).Append("\n");
-            if (ShipTo != null) sb.Append("  ShipTo: ").Append(ShipTo).Append("\n");
-            if (LineItems != null) sb.Append("  LineItems: ").Append(LineItems).Append("\n");
-            if (InvoiceDetails != null) sb.Append("  InvoiceDetails: ").Append(InvoiceDetails).Append("\n");
-            if (OrderAcceptance != null) sb.Append("  OrderAcceptance: ").Append(OrderAcceptance).Append("\n");
-            if (OrderOrigin != null) sb.Append("  OrderOrigin: ").Append(OrderOrigin).Append("\n");
+            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformation", "amountDetails", AmountDetails.ToString())).Append("\n");
+            if (BillTo != null) sb.Append("  BillTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformation", "billTo", BillTo.ToString())).Append("\n");
+            if (ShippingDetails != null) sb.Append("  ShippingDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformation", "shippingDetails", ShippingDetails.ToString())).Append("\n");
+            if (ShipTo != null) sb.Append("  ShipTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformation", "shipTo", ShipTo.ToString())).Append("\n");
+            if (LineItems != null) sb.Append("  LineItems: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformation", "lineItems", LineItems.ToString())).Append("\n");
+            if (InvoiceDetails != null) sb.Append("  InvoiceDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformation", "invoiceDetails", InvoiceDetails.ToString())).Append("\n");
+            if (OrderAcceptance != null) sb.Append("  OrderAcceptance: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformation", "orderAcceptance", OrderAcceptance.ToString())).Append("\n");
+            if (OrderOrigin != null) sb.Append("  OrderOrigin: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformation", "orderOrigin", OrderOrigin.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -127,7 +135,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Vasv2taxOrderInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

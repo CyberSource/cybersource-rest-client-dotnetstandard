@@ -171,25 +171,25 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("organizationId", ApiClient.ParameterToString(organizationId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (userName != null)
             {
                 localVarQueryParams.Add("userName", ApiClient.ParameterToString(userName)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (permissionId != null)
             {
                 localVarQueryParams.Add("permissionId", ApiClient.ParameterToString(permissionId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (roleId != null)
             {
                 localVarQueryParams.Add("roleId", ApiClient.ParameterToString(roleId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -309,25 +309,25 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("organizationId", ApiClient.ParameterToString(organizationId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (userName != null)
             {
                 localVarQueryParams.Add("userName", ApiClient.ParameterToString(userName)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (permissionId != null)
             {
                 localVarQueryParams.Add("permissionId", ApiClient.ParameterToString(permissionId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (roleId != null)
             {
                 localVarQueryParams.Add("roleId", ApiClient.ParameterToString(roleId)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (Method.Get == Method.Post)
             {

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// The challenge code&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>The challenge code&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="challengeCode", EmitDefaultValue=false)]
+        [JsonPropertyName("challengeCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ChallengeCode { get; set; }
 
         /// <summary>
         /// The message category&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>The message category&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="messageCategory", EmitDefaultValue=false)]
+        [JsonPropertyName("messageCategory")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MessageCategory { get; set; }
 
         /// <summary>
         /// The acs window size&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>The acs window size&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="acsWindowSize", EmitDefaultValue=false)]
+        [JsonPropertyName("acsWindowSize")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcsWindowSize { get; set; }
 
         /// <summary>
         /// Specifies the product code, which designates the type of transaction.&lt;br&gt;&lt;br&gt;  Specify one of the following values for this field:  - AIR: Airline purchase  Important Required for American Express SafeKey (U.S.).  - ACC: Accommodation Rental  - ACF: Account funding  - CHA: Check acceptance  - DIG: Digital Goods  - DSP: Cash Dispensing  - GAS: Fuel  - GEN: General Retail  - LUX: Luxury Retail  - PAL: Prepaid activation and load  - PHY: Goods or services purchase  - QCT: Quasi-cash transaction  - REN: Car Rental  - RES: Restaurant  - SVC: Services  - TBD: Other  - TRA: Travel&lt;br&gt;  **Important** Required for Visa Secure transactions in Brazil. Do not use this request field for any other types of transactions. 
         /// </summary>
         /// <value>Specifies the product code, which designates the type of transaction.&lt;br&gt;&lt;br&gt;  Specify one of the following values for this field:  - AIR: Airline purchase  Important Required for American Express SafeKey (U.S.).  - ACC: Accommodation Rental  - ACF: Account funding  - CHA: Check acceptance  - DIG: Digital Goods  - DSP: Cash Dispensing  - GAS: Fuel  - GEN: General Retail  - LUX: Luxury Retail  - PAL: Prepaid activation and load  - PHY: Goods or services purchase  - QCT: Quasi-cash transaction  - REN: Car Rental  - RES: Restaurant  - SVC: Services  - TBD: Other  - TRA: Travel&lt;br&gt;  **Important** Required for Visa Secure transactions in Brazil. Do not use this request field for any other types of transactions. </value>
-        [DataMember(Name="productCode", EmitDefaultValue=false)]
+        [JsonPropertyName("productCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductCode { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataConsumerAuthenticationInformation {\n");
-            if (ChallengeCode != null) sb.Append("  ChallengeCode: ").Append(ChallengeCode).Append("\n");
-            if (MessageCategory != null) sb.Append("  MessageCategory: ").Append(MessageCategory).Append("\n");
-            if (AcsWindowSize != null) sb.Append("  AcsWindowSize: ").Append(AcsWindowSize).Append("\n");
-            if (ProductCode != null) sb.Append("  ProductCode: ").Append(ProductCode).Append("\n");
+            if (ChallengeCode != null) sb.Append("  ChallengeCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataConsumerAuthenticationInformation", "challengeCode", ChallengeCode.ToString())).Append("\n");
+            if (MessageCategory != null) sb.Append("  MessageCategory: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataConsumerAuthenticationInformation", "messageCategory", MessageCategory.ToString())).Append("\n");
+            if (AcsWindowSize != null) sb.Append("  AcsWindowSize: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataConsumerAuthenticationInformation", "acsWindowSize", AcsWindowSize.ToString())).Append("\n");
+            if (ProductCode != null) sb.Append("  ProductCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataConsumerAuthenticationInformation", "productCode", ProductCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataConsumerAuthenticationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderwritingConfigurationSaleRepresentativeInformation" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected UnderwritingConfigurationSaleRepresentativeInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="UnderwritingConfigurationSaleRepresentativeInformation" /> class.
@@ -58,42 +58,48 @@ namespace CyberSource.Model
         /// Sales rep Identifier
         /// </summary>
         /// <value>Sales rep Identifier</value>
-        [DataMember(Name="salesRepId", EmitDefaultValue=false)]
+        [JsonPropertyName("salesRepId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SalesRepId { get; set; }
 
         /// <summary>
         /// Sales rep First Name
         /// </summary>
         /// <value>Sales rep First Name</value>
-        [DataMember(Name="salesRepFirstName", EmitDefaultValue=false)]
+        [JsonPropertyName("salesRepFirstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SalesRepFirstName { get; set; }
 
         /// <summary>
         /// Sales Rep Last Name
         /// </summary>
         /// <value>Sales Rep Last Name</value>
-        [DataMember(Name="salesRepLastName", EmitDefaultValue=false)]
+        [JsonPropertyName("salesRepLastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SalesRepLastName { get; set; }
 
         /// <summary>
         /// Sales Rep eMail
         /// </summary>
         /// <value>Sales Rep eMail</value>
-        [DataMember(Name="salesRepEmail", EmitDefaultValue=false)]
+        [JsonPropertyName("salesRepEmail")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SalesRepEmail { get; set; }
 
         /// <summary>
         /// Sales Rep Phone Number Country. Two character country code, ISO 3166-1 alpha-2.
         /// </summary>
         /// <value>Sales Rep Phone Number Country. Two character country code, ISO 3166-1 alpha-2.</value>
-        [DataMember(Name="salesRepNumericPhoneNumberCountryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("salesRepNumericPhoneNumberCountryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SalesRepNumericPhoneNumberCountryCode { get; set; }
 
         /// <summary>
         /// Sales Rep Phone
         /// </summary>
         /// <value>Sales Rep Phone</value>
-        [DataMember(Name="salesRepPhoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("salesRepPhoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SalesRepPhoneNumber { get; set; }
 
         /// <summary>
@@ -104,12 +110,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class UnderwritingConfigurationSaleRepresentativeInformation {\n");
-            if (SalesRepId != null) sb.Append("  SalesRepId: ").Append(SalesRepId).Append("\n");
-            if (SalesRepFirstName != null) sb.Append("  SalesRepFirstName: ").Append(SalesRepFirstName).Append("\n");
-            if (SalesRepLastName != null) sb.Append("  SalesRepLastName: ").Append(SalesRepLastName).Append("\n");
-            if (SalesRepEmail != null) sb.Append("  SalesRepEmail: ").Append(SalesRepEmail).Append("\n");
-            if (SalesRepNumericPhoneNumberCountryCode != null) sb.Append("  SalesRepNumericPhoneNumberCountryCode: ").Append(SalesRepNumericPhoneNumberCountryCode).Append("\n");
-            if (SalesRepPhoneNumber != null) sb.Append("  SalesRepPhoneNumber: ").Append(SalesRepPhoneNumber).Append("\n");
+            if (SalesRepId != null) sb.Append("  SalesRepId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationSaleRepresentativeInformation", "salesRepId", SalesRepId.ToString())).Append("\n");
+            if (SalesRepFirstName != null) sb.Append("  SalesRepFirstName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationSaleRepresentativeInformation", "salesRepFirstName", SalesRepFirstName.ToString())).Append("\n");
+            if (SalesRepLastName != null) sb.Append("  SalesRepLastName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationSaleRepresentativeInformation", "salesRepLastName", SalesRepLastName.ToString())).Append("\n");
+            if (SalesRepEmail != null) sb.Append("  SalesRepEmail: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationSaleRepresentativeInformation", "salesRepEmail", SalesRepEmail.ToString())).Append("\n");
+            if (SalesRepNumericPhoneNumberCountryCode != null) sb.Append("  SalesRepNumericPhoneNumberCountryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationSaleRepresentativeInformation", "salesRepNumericPhoneNumberCountryCode", SalesRepNumericPhoneNumberCountryCode.ToString())).Append("\n");
+            if (SalesRepPhoneNumber != null) sb.Append("  SalesRepPhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("UnderwritingConfigurationSaleRepresentativeInformation", "salesRepPhoneNumber", SalesRepPhoneNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -120,7 +126,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("UnderwritingConfigurationSaleRepresentativeInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,34 +51,39 @@ namespace CyberSource.Model
         /// Raw electronic commerce indicator (ECI). 
         /// </summary>
         /// <value>Raw electronic commerce indicator (ECI). </value>
-        [DataMember(Name="eciRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("eciRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EciRaw { get; set; }
 
         /// <summary>
         /// Cardholder authentication verification value (CAVV).
         /// </summary>
         /// <value>Cardholder authentication verification value (CAVV).</value>
-        [DataMember(Name="cavv", EmitDefaultValue=false)]
+        [JsonPropertyName("cavv")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Cavv { get; set; }
 
         /// <summary>
         /// Transaction identifier. 
         /// </summary>
         /// <value>Transaction identifier. </value>
-        [DataMember(Name="xid", EmitDefaultValue=false)]
+        [JsonPropertyName("xid")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Xid { get; set; }
 
         /// <summary>
         /// Payer auth Transaction identifier.
         /// </summary>
         /// <value>Payer auth Transaction identifier.</value>
-        [DataMember(Name="transactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionId { get; set; }
 
         /// <summary>
         /// Gets or Sets StrongAuthentication
         /// </summary>
-        [DataMember(Name="strongAuthentication", EmitDefaultValue=false)]
+        [JsonPropertyName("strongAuthentication")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsGet200ResponseConsumerAuthenticationInformationStrongAuthentication StrongAuthentication { get; set; }
 
         /// <summary>
@@ -89,11 +94,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseConsumerAuthenticationInformation {\n");
-            if (EciRaw != null) sb.Append("  EciRaw: ").Append(EciRaw).Append("\n");
-            if (Cavv != null) sb.Append("  Cavv: ").Append(Cavv).Append("\n");
-            if (Xid != null) sb.Append("  Xid: ").Append(Xid).Append("\n");
-            if (TransactionId != null) sb.Append("  TransactionId: ").Append(TransactionId).Append("\n");
-            if (StrongAuthentication != null) sb.Append("  StrongAuthentication: ").Append(StrongAuthentication).Append("\n");
+            if (EciRaw != null) sb.Append("  EciRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseConsumerAuthenticationInformation", "eciRaw", EciRaw.ToString())).Append("\n");
+            if (Cavv != null) sb.Append("  Cavv: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseConsumerAuthenticationInformation", "cavv", Cavv.ToString())).Append("\n");
+            if (Xid != null) sb.Append("  Xid: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseConsumerAuthenticationInformation", "xid", Xid.ToString())).Append("\n");
+            if (TransactionId != null) sb.Append("  TransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseConsumerAuthenticationInformation", "transactionId", TransactionId.ToString())).Append("\n");
+            if (StrongAuthentication != null) sb.Append("  StrongAuthentication: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseConsumerAuthenticationInformation", "strongAuthentication", StrongAuthentication.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,7 +109,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseConsumerAuthenticationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// First name of the passenger to whom the ticket was issued. If there are multiple passengers, include all listed on the ticket. Do not include special characters such as commas, hyphens, or apostrophes. Only ASCII characters are supported. Required for American Express SafeKey (U.S.) for travel-related requests. 
         /// </summary>
         /// <value>First name of the passenger to whom the ticket was issued. If there are multiple passengers, include all listed on the ticket. Do not include special characters such as commas, hyphens, or apostrophes. Only ASCII characters are supported. Required for American Express SafeKey (U.S.) for travel-related requests. </value>
-        [DataMember(Name="firstName", EmitDefaultValue=false)]
+        [JsonPropertyName("firstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Last name of the passenger to whom the ticket was issued. If there are multiple passengers, include all listed on the ticket. Do not include special characters such as commas, hyphens, or apostrophes. Only ASCII characters are supported. Required for American Express SafeKey (U.S.) for travel-related requests. 
         /// </summary>
         /// <value>Last name of the passenger to whom the ticket was issued. If there are multiple passengers, include all listed on the ticket. Do not include special characters such as commas, hyphens, or apostrophes. Only ASCII characters are supported. Required for American Express SafeKey (U.S.) for travel-related requests. </value>
-        [DataMember(Name="lastName", EmitDefaultValue=false)]
+        [JsonPropertyName("lastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastName { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1decisionsTravelInformationPassengers {\n");
-            if (FirstName != null) sb.Append("  FirstName: ").Append(FirstName).Append("\n");
-            if (LastName != null) sb.Append("  LastName: ").Append(LastName).Append("\n");
+            if (FirstName != null) sb.Append("  FirstName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsTravelInformationPassengers", "firstName", FirstName.ToString())).Append("\n");
+            if (LastName != null) sb.Append("  LastName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1decisionsTravelInformationPassengers", "lastName", LastName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1decisionsTravelInformationPassengers", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Array of actions (one or more) to be included in the tokenize request.  Possible Values:  - &#x60;TOKEN_CREATE&#x60;: Use this when you want to create a token from the card/bank data in your tokenize request. 
         /// </summary>
         /// <value>Array of actions (one or more) to be included in the tokenize request.  Possible Values:  - &#x60;TOKEN_CREATE&#x60;: Use this when you want to create a token from the card/bank data in your tokenize request. </value>
-        [DataMember(Name="actionList", EmitDefaultValue=false)]
+        [JsonPropertyName("actionList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ActionList { get; set; }
 
         /// <summary>
         /// TMS tokens types you want to perform the action on.  Possible Values: - customer - paymentInstrument - instrumentIdentifier - shippingAddress - tokenizedCard 
         /// </summary>
         /// <value>TMS tokens types you want to perform the action on.  Possible Values: - customer - paymentInstrument - instrumentIdentifier - shippingAddress - tokenizedCard </value>
-        [DataMember(Name="actionTokenTypes", EmitDefaultValue=false)]
+        [JsonPropertyName("actionTokenTypes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ActionTokenTypes { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2tokenizeProcessingInformation {\n");
-            if (ActionList != null) sb.Append("  ActionList: ").Append(ActionList).Append("\n");
-            if (ActionTokenTypes != null) sb.Append("  ActionTokenTypes: ").Append(ActionTokenTypes).Append("\n");
+            if (ActionList != null) sb.Append("  ActionList: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeProcessingInformation", "actionList", ActionList.ToString())).Append("\n");
+            if (ActionTokenTypes != null) sb.Append("  ActionTokenTypes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeProcessingInformation", "actionTokenTypes", ActionTokenTypes.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2tokenizeProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

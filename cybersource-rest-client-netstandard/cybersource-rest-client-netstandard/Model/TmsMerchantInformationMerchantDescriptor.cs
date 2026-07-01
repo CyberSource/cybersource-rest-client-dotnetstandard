@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Alternate contact information for your business,such as an email address or URL. This value might be displayed on the cardholder&#39;s statement. When you do not include this value in your capture or credit request, the merchant URL from your CyberSource account is used. Important This value must consist of English characters 
         /// </summary>
         /// <value>Alternate contact information for your business,such as an email address or URL. This value might be displayed on the cardholder&#39;s statement. When you do not include this value in your capture or credit request, the merchant URL from your CyberSource account is used. Important This value must consist of English characters </value>
-        [DataMember(Name="alternateName", EmitDefaultValue=false)]
+        [JsonPropertyName("alternateName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AlternateName { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsMerchantInformationMerchantDescriptor {\n");
-            if (AlternateName != null) sb.Append("  AlternateName: ").Append(AlternateName).Append("\n");
+            if (AlternateName != null) sb.Append("  AlternateName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsMerchantInformationMerchantDescriptor", "alternateName", AlternateName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsMerchantInformationMerchantDescriptor", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

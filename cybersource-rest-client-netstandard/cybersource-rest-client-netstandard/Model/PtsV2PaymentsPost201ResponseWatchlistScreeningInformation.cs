@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -36,7 +36,7 @@ namespace CyberSource.Model
         /// <param name="IpCountryConfidence">Likelihood that the country associated with the customer&#39;s IP address was identified correctly. Returns a value from 1–100, where 100 indicates the highest likelihood. If the country cannot be determined, the value is –1. .</param>
         /// <param name="InfoCodes">Returned when the Denied Parties List check (first two codes) or the export service (all others) would have declined the transaction. This field can contain one or more of these values: - &#x60;MATCH-DPC&#x60;: Denied Parties List match. - &#x60;UNV-DPC&#x60;: Denied Parties List unavailable. - &#x60;MATCH-BCO&#x60;: Billing country restricted. - &#x60;MATCH-EMCO&#x60;: Email country restricted. - &#x60;MATCH-HCO&#x60;: Host name country restricted. - &#x60;MATCH-IPCO&#x60;: IP country restricted. - &#x60;MATCH-SCO&#x60;: Shipping country restricted. .</param>
         /// <param name="WatchList">WatchList.</param>
-        public PtsV2PaymentsPost201ResponseWatchlistScreeningInformation(int? IpCountryConfidence = default(int?), List<string> InfoCodes = default(List<string>), PtsV2PaymentsPost201ResponseWatchlistScreeningInformationWatchList WatchList = default(PtsV2PaymentsPost201ResponseWatchlistScreeningInformationWatchList))
+        public PtsV2PaymentsPost201ResponseWatchlistScreeningInformation(int? IpCountryConfidence = default(int?), List<string> InfoCodes = default(List<string>), ExportComplianceWatchList WatchList = default(ExportComplianceWatchList))
         {
             this.IpCountryConfidence = IpCountryConfidence;
             this.InfoCodes = InfoCodes;
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Likelihood that the country associated with the customer&#39;s IP address was identified correctly. Returns a value from 1–100, where 100 indicates the highest likelihood. If the country cannot be determined, the value is –1. 
         /// </summary>
         /// <value>Likelihood that the country associated with the customer&#39;s IP address was identified correctly. Returns a value from 1–100, where 100 indicates the highest likelihood. If the country cannot be determined, the value is –1. </value>
-        [DataMember(Name="ipCountryConfidence", EmitDefaultValue=false)]
+        [JsonPropertyName("ipCountryConfidence")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? IpCountryConfidence { get; set; }
 
         /// <summary>
         /// Returned when the Denied Parties List check (first two codes) or the export service (all others) would have declined the transaction. This field can contain one or more of these values: - &#x60;MATCH-DPC&#x60;: Denied Parties List match. - &#x60;UNV-DPC&#x60;: Denied Parties List unavailable. - &#x60;MATCH-BCO&#x60;: Billing country restricted. - &#x60;MATCH-EMCO&#x60;: Email country restricted. - &#x60;MATCH-HCO&#x60;: Host name country restricted. - &#x60;MATCH-IPCO&#x60;: IP country restricted. - &#x60;MATCH-SCO&#x60;: Shipping country restricted. 
         /// </summary>
         /// <value>Returned when the Denied Parties List check (first two codes) or the export service (all others) would have declined the transaction. This field can contain one or more of these values: - &#x60;MATCH-DPC&#x60;: Denied Parties List match. - &#x60;UNV-DPC&#x60;: Denied Parties List unavailable. - &#x60;MATCH-BCO&#x60;: Billing country restricted. - &#x60;MATCH-EMCO&#x60;: Email country restricted. - &#x60;MATCH-HCO&#x60;: Host name country restricted. - &#x60;MATCH-IPCO&#x60;: IP country restricted. - &#x60;MATCH-SCO&#x60;: Shipping country restricted. </value>
-        [DataMember(Name="infoCodes", EmitDefaultValue=false)]
+        [JsonPropertyName("infoCodes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> InfoCodes { get; set; }
 
         /// <summary>
         /// Gets or Sets WatchList
         /// </summary>
-        [DataMember(Name="watchList", EmitDefaultValue=false)]
-        public PtsV2PaymentsPost201ResponseWatchlistScreeningInformationWatchList WatchList { get; set; }
+        [JsonPropertyName("watchList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public ExportComplianceWatchList WatchList { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseWatchlistScreeningInformation {\n");
-            if (IpCountryConfidence != null) sb.Append("  IpCountryConfidence: ").Append(IpCountryConfidence).Append("\n");
-            if (InfoCodes != null) sb.Append("  InfoCodes: ").Append(InfoCodes).Append("\n");
-            if (WatchList != null) sb.Append("  WatchList: ").Append(WatchList).Append("\n");
+            if (IpCountryConfidence != null) sb.Append("  IpCountryConfidence: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseWatchlistScreeningInformation", "ipCountryConfidence", IpCountryConfidence.ToString())).Append("\n");
+            if (InfoCodes != null) sb.Append("  InfoCodes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseWatchlistScreeningInformation", "infoCodes", InfoCodes.ToString())).Append("\n");
+            if (WatchList != null) sb.Append("  WatchList: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseWatchlistScreeningInformation", "watchList", WatchList.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseWatchlistScreeningInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

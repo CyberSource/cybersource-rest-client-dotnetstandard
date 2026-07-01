@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// This field defines the total order amount. 
         /// </summary>
         /// <value>This field defines the total order amount. </value>
-        [DataMember(Name="totalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalAmount { get; set; }
 
         /// <summary>
         /// This field defines the currency applicable to the order. 
         /// </summary>
         /// <value>This field defines the currency applicable to the order. </value>
-        [DataMember(Name="currency", EmitDefaultValue=false)]
+        [JsonPropertyName("currency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Currency { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Upv1capturecontextsOrderInformationAmountDetails {\n");
-            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(TotalAmount).Append("\n");
-            if (Currency != null) sb.Append("  Currency: ").Append(Currency).Append("\n");
+            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsOrderInformationAmountDetails", "totalAmount", TotalAmount.ToString())).Append("\n");
+            if (Currency != null) sb.Append("  Currency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsOrderInformationAmountDetails", "currency", Currency.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Upv1capturecontextsOrderInformationAmountDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

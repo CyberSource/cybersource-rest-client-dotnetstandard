@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Ptsv1pullfundstransferOrderInformationAmountDetails" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Ptsv1pullfundstransferOrderInformationAmountDetails() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Ptsv1pullfundstransferOrderInformationAmountDetails" /> class.
@@ -56,34 +56,39 @@ namespace CyberSource.Model
         /// The total amount of the funds transfer including all fees.  This value cannot be negative.   You can include a decimal point (.), but no other special characters. 
         /// </summary>
         /// <value>The total amount of the funds transfer including all fees.  This value cannot be negative.   You can include a decimal point (.), but no other special characters. </value>
-        [DataMember(Name="totalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalAmount { get; set; }
 
         /// <summary>
         /// Use a 3-character alpha currency code for currency of the sender.  ISO standard currencies: [http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)    Currency must be supported by the processor. 
         /// </summary>
         /// <value>Use a 3-character alpha currency code for currency of the sender.  ISO standard currencies: [http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf](http://apps.cybersource.com/library/documentation/sbc/quickref/currencies.pdf)    Currency must be supported by the processor. </value>
-        [DataMember(Name="currency", EmitDefaultValue=false)]
+        [JsonPropertyName("currency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Currency { get; set; }
 
         /// <summary>
         /// When present, this field contains the sender&#39;s surcharge as assessed by the originator. Values in this field must be in the same currency and format as defined in the amount field. 
         /// </summary>
         /// <value>When present, this field contains the sender&#39;s surcharge as assessed by the originator. Values in this field must be in the same currency and format as defined in the amount field. </value>
-        [DataMember(Name="serviceFee", EmitDefaultValue=false)]
+        [JsonPropertyName("serviceFee")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ServiceFee { get; set; }
 
         /// <summary>
         /// When present, this field contains the sender&#39;s foreign exchange markup fee (markup above the wholesale or VisaNet exchange rate as assessed by the originator). Values in this field must be in the same currency and format as defined in the amount field. 
         /// </summary>
         /// <value>When present, this field contains the sender&#39;s foreign exchange markup fee (markup above the wholesale or VisaNet exchange rate as assessed by the originator). Values in this field must be in the same currency and format as defined in the amount field. </value>
-        [DataMember(Name="foreignExchangeFee", EmitDefaultValue=false)]
+        [JsonPropertyName("foreignExchangeFee")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ForeignExchangeFee { get; set; }
 
         /// <summary>
         /// Gets or Sets Surcharge
         /// </summary>
-        [DataMember(Name="surcharge", EmitDefaultValue=false)]
+        [JsonPropertyName("surcharge")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsOrderInformationAmountDetailsOctsurcharge Surcharge { get; set; }
 
         /// <summary>
@@ -94,11 +99,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferOrderInformationAmountDetails {\n");
-            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(TotalAmount).Append("\n");
-            if (Currency != null) sb.Append("  Currency: ").Append(Currency).Append("\n");
-            if (ServiceFee != null) sb.Append("  ServiceFee: ").Append(ServiceFee).Append("\n");
-            if (ForeignExchangeFee != null) sb.Append("  ForeignExchangeFee: ").Append(ForeignExchangeFee).Append("\n");
-            if (Surcharge != null) sb.Append("  Surcharge: ").Append(Surcharge).Append("\n");
+            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferOrderInformationAmountDetails", "totalAmount", TotalAmount.ToString())).Append("\n");
+            if (Currency != null) sb.Append("  Currency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferOrderInformationAmountDetails", "currency", Currency.ToString())).Append("\n");
+            if (ServiceFee != null) sb.Append("  ServiceFee: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferOrderInformationAmountDetails", "serviceFee", ServiceFee.ToString())).Append("\n");
+            if (ForeignExchangeFee != null) sb.Append("  ForeignExchangeFee: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferOrderInformationAmountDetails", "foreignExchangeFee", ForeignExchangeFee.ToString())).Append("\n");
+            if (Surcharge != null) sb.Append("  Surcharge: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferOrderInformationAmountDetails", "surcharge", Surcharge.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -109,7 +114,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferOrderInformationAmountDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

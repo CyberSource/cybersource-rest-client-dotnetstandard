@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsOrganizationInformationOwners" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Boardingv1registrationsOrganizationInformationOwners() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsOrganizationInformationOwners" /> class.
@@ -52,7 +52,7 @@ namespace CyberSource.Model
         /// <param name="PhoneNumber">PhoneNumber (required).</param>
         /// <param name="Email">Email (required).</param>
         /// <param name="Address">Address (required).</param>
-        public Boardingv1registrationsOrganizationInformationOwners(string FirstName = default(string), string MiddleName = default(string), string LastName = default(string), DateTime? BirthDate = default(DateTime?), bool? IsPrimary = default(bool?), string Ssn = default(string), string PassportNumber = default(string), string PassportCountry = default(string), string JobTitle = default(string), bool? HasSignificantResponsability = default(bool?), decimal? OwnershipPercentage = default(decimal?), string PhoneNumber = default(string), string Email = default(string), Boardingv1registrationsOrganizationInformationBusinessInformationAddress Address = default(Boardingv1registrationsOrganizationInformationBusinessInformationAddress))
+        public Boardingv1registrationsOrganizationInformationOwners(string FirstName = default(string), string MiddleName = default(string), string LastName = default(string), DateTime? BirthDate = default(DateTime?), bool? IsPrimary = default(bool?), string Ssn = default(string), string PassportNumber = default(string), string PassportCountry = default(string), string JobTitle = default(string), bool? HasSignificantResponsability = default(bool?), decimal? OwnershipPercentage = default(decimal?), string PhoneNumber = default(string), string Email = default(string), BoardingBusinessInformationAddress Address = default(BoardingBusinessInformationAddress))
         {
             this.FirstName = FirstName;
             this.MiddleName = MiddleName;
@@ -73,26 +73,30 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets FirstName
         /// </summary>
-        [DataMember(Name="firstName", EmitDefaultValue=false)]
+        [JsonPropertyName("firstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Gets or Sets MiddleName
         /// </summary>
-        [DataMember(Name="middleName", EmitDefaultValue=false)]
+        [JsonPropertyName("middleName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MiddleName { get; set; }
 
         /// <summary>
         /// Gets or Sets LastName
         /// </summary>
-        [DataMember(Name="lastName", EmitDefaultValue=false)]
+        [JsonPropertyName("lastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastName { get; set; }
 
         /// <summary>
         /// &#x60;Format: YYYY-MM-DD&#x60; Example 2016-08-11 equals August 11, 2016 
         /// </summary>
         /// <value>&#x60;Format: YYYY-MM-DD&#x60; Example 2016-08-11 equals August 11, 2016 </value>
-        [DataMember(Name="birthDate", EmitDefaultValue=false)]
+        [JsonPropertyName("birthDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [JsonConverter(typeof(SwaggerDateConverter))]
         public DateTime? BirthDate { get; set; }
 
@@ -100,66 +104,76 @@ namespace CyberSource.Model
         /// Determines whether the owner is the Primary owner of the organization
         /// </summary>
         /// <value>Determines whether the owner is the Primary owner of the organization</value>
-        [DataMember(Name="isPrimary", EmitDefaultValue=false)]
+        [JsonPropertyName("isPrimary")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IsPrimary { get; set; }
 
         /// <summary>
         /// Social Security Number
         /// </summary>
         /// <value>Social Security Number</value>
-        [DataMember(Name="ssn", EmitDefaultValue=false)]
+        [JsonPropertyName("ssn")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Ssn { get; set; }
 
         /// <summary>
         /// Passport number
         /// </summary>
         /// <value>Passport number</value>
-        [DataMember(Name="passportNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("passportNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PassportNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets PassportCountry
         /// </summary>
-        [DataMember(Name="passportCountry", EmitDefaultValue=false)]
+        [JsonPropertyName("passportCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PassportCountry { get; set; }
 
         /// <summary>
         /// Gets or Sets JobTitle
         /// </summary>
-        [DataMember(Name="jobTitle", EmitDefaultValue=false)]
+        [JsonPropertyName("jobTitle")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string JobTitle { get; set; }
 
         /// <summary>
         /// Determines whether owner has significant responsibility to control, manage or direct the company
         /// </summary>
         /// <value>Determines whether owner has significant responsibility to control, manage or direct the company</value>
-        [DataMember(Name="hasSignificantResponsability", EmitDefaultValue=false)]
+        [JsonPropertyName("hasSignificantResponsability")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? HasSignificantResponsability { get; set; }
 
         /// <summary>
         /// Determines the percentage of ownership this owner has. For the primary owner the percentage can be from 0-100; for other owners the percentage can be from 25-100 and the sum of ownership accross owners cannot exceed 100
         /// </summary>
         /// <value>Determines the percentage of ownership this owner has. For the primary owner the percentage can be from 0-100; for other owners the percentage can be from 25-100 and the sum of ownership accross owners cannot exceed 100</value>
-        [DataMember(Name="ownershipPercentage", EmitDefaultValue=false)]
+        [JsonPropertyName("ownershipPercentage")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public decimal? OwnershipPercentage { get; set; }
 
         /// <summary>
         /// Gets or Sets PhoneNumber
         /// </summary>
-        [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets Email
         /// </summary>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Email { get; set; }
 
         /// <summary>
         /// Gets or Sets Address
         /// </summary>
-        [DataMember(Name="address", EmitDefaultValue=false)]
-        public Boardingv1registrationsOrganizationInformationBusinessInformationAddress Address { get; set; }
+        [JsonPropertyName("address")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public BoardingBusinessInformationAddress Address { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -169,20 +183,20 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Boardingv1registrationsOrganizationInformationOwners {\n");
-            if (FirstName != null) sb.Append("  FirstName: ").Append(FirstName).Append("\n");
-            if (MiddleName != null) sb.Append("  MiddleName: ").Append(MiddleName).Append("\n");
-            if (LastName != null) sb.Append("  LastName: ").Append(LastName).Append("\n");
-            if (BirthDate != null) sb.Append("  BirthDate: ").Append(BirthDate).Append("\n");
-            if (IsPrimary != null) sb.Append("  IsPrimary: ").Append(IsPrimary).Append("\n");
-            if (Ssn != null) sb.Append("  Ssn: ").Append(Ssn).Append("\n");
-            if (PassportNumber != null) sb.Append("  PassportNumber: ").Append(PassportNumber).Append("\n");
-            if (PassportCountry != null) sb.Append("  PassportCountry: ").Append(PassportCountry).Append("\n");
-            if (JobTitle != null) sb.Append("  JobTitle: ").Append(JobTitle).Append("\n");
-            if (HasSignificantResponsability != null) sb.Append("  HasSignificantResponsability: ").Append(HasSignificantResponsability).Append("\n");
-            if (OwnershipPercentage != null) sb.Append("  OwnershipPercentage: ").Append(OwnershipPercentage).Append("\n");
-            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (Address != null) sb.Append("  Address: ").Append(Address).Append("\n");
+            if (FirstName != null) sb.Append("  FirstName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "firstName", FirstName.ToString())).Append("\n");
+            if (MiddleName != null) sb.Append("  MiddleName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "middleName", MiddleName.ToString())).Append("\n");
+            if (LastName != null) sb.Append("  LastName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "lastName", LastName.ToString())).Append("\n");
+            if (BirthDate != null) sb.Append("  BirthDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "birthDate", BirthDate.ToString())).Append("\n");
+            if (IsPrimary != null) sb.Append("  IsPrimary: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "isPrimary", IsPrimary.ToString())).Append("\n");
+            if (Ssn != null) sb.Append("  Ssn: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "ssn", Ssn.ToString())).Append("\n");
+            if (PassportNumber != null) sb.Append("  PassportNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "passportNumber", PassportNumber.ToString())).Append("\n");
+            if (PassportCountry != null) sb.Append("  PassportCountry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "passportCountry", PassportCountry.ToString())).Append("\n");
+            if (JobTitle != null) sb.Append("  JobTitle: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "jobTitle", JobTitle.ToString())).Append("\n");
+            if (HasSignificantResponsability != null) sb.Append("  HasSignificantResponsability: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "hasSignificantResponsability", HasSignificantResponsability.ToString())).Append("\n");
+            if (OwnershipPercentage != null) sb.Append("  OwnershipPercentage: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "ownershipPercentage", OwnershipPercentage.ToString())).Append("\n");
+            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "phoneNumber", PhoneNumber.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "email", Email.ToString())).Append("\n");
+            if (Address != null) sb.Append("  Address: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationOwners", "address", Address.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -193,7 +207,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Boardingv1registrationsOrganizationInformationOwners", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

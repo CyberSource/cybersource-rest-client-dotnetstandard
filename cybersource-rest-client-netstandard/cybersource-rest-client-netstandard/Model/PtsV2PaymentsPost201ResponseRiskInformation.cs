@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -62,70 +62,81 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Profile
         /// </summary>
-        [DataMember(Name="profile", EmitDefaultValue=false)]
+        [JsonPropertyName("profile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseRiskInformationProfile Profile { get; set; }
 
         /// <summary>
         /// Gets or Sets Rules
         /// </summary>
-        [DataMember(Name="rules", EmitDefaultValue=false)]
+        [JsonPropertyName("rules")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<PtsV2PaymentsPost201ResponseRiskInformationRules> Rules { get; set; }
 
         /// <summary>
         /// Gets or Sets InfoCodes
         /// </summary>
-        [DataMember(Name="infoCodes", EmitDefaultValue=false)]
+        [JsonPropertyName("infoCodes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseRiskInformationInfoCodes InfoCodes { get; set; }
 
         /// <summary>
         /// Gets or Sets Velocity
         /// </summary>
-        [DataMember(Name="velocity", EmitDefaultValue=false)]
+        [JsonPropertyName("velocity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseRiskInformationVelocity Velocity { get; set; }
 
         /// <summary>
         /// You receive this field only if you subscribe to the Enhanced Case Management service. The priority level ranges from 1 (highest) to 5 (lowest); the default value is 3. If you do not assign a priority to your rules or to your profiles, the default value is given to the order.  For all possible values, see the &#x60;decision_case_priority&#x60; field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) Click **Decision Manager** &gt; **Documentation** &gt; **Guides** &gt; _Decision Manager Using the SCMP API Developer Guide_ (PDF link). 
         /// </summary>
         /// <value>You receive this field only if you subscribe to the Enhanced Case Management service. The priority level ranges from 1 (highest) to 5 (lowest); the default value is 3. If you do not assign a priority to your rules or to your profiles, the default value is given to the order.  For all possible values, see the &#x60;decision_case_priority&#x60; field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) Click **Decision Manager** &gt; **Documentation** &gt; **Guides** &gt; _Decision Manager Using the SCMP API Developer Guide_ (PDF link). </value>
-        [DataMember(Name="casePriority", EmitDefaultValue=false)]
+        [JsonPropertyName("casePriority")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? CasePriority { get; set; }
 
         /// <summary>
         /// The customer&#39;s local time (&#x60;hh:mm:ss&#x60;), which is calculated from the transaction request time and the customer&#39;s billing address.  For details, see the &#x60;score_time_local&#x60; field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) 
         /// </summary>
         /// <value>The customer&#39;s local time (&#x60;hh:mm:ss&#x60;), which is calculated from the transaction request time and the customer&#39;s billing address.  For details, see the &#x60;score_time_local&#x60; field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) </value>
-        [DataMember(Name="localTime", EmitDefaultValue=false)]
+        [JsonPropertyName("localTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LocalTime { get; set; }
 
         /// <summary>
         /// Gets or Sets Score
         /// </summary>
-        [DataMember(Name="score", EmitDefaultValue=false)]
+        [JsonPropertyName("score")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseRiskInformationScore Score { get; set; }
 
         /// <summary>
         /// Gets or Sets IpAddress
         /// </summary>
-        [DataMember(Name="ipAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("ipAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseRiskInformationIpAddress IpAddress { get; set; }
 
         /// <summary>
         /// Name of the 3rd party provider, for example, Emailage. For all possible values, see the &#x60;decision_provider_#_name&#x60; field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) Click **Decision Manager** &gt; **Documentation** &gt; **Guides** &gt; _Decision Manager Using the SCMP API Developer Guide_ (PDF link).
         /// </summary>
         /// <value>Name of the 3rd party provider, for example, Emailage. For all possible values, see the &#x60;decision_provider_#_name&#x60; field description in the _Decision Manager Using the SCMP API Developer Guide_ on the [CyberSource Business Center.](https://ebc2.cybersource.com/ebc2/) Click **Decision Manager** &gt; **Documentation** &gt; **Guides** &gt; _Decision Manager Using the SCMP API Developer Guide_ (PDF link).</value>
-        [DataMember(Name="providers", EmitDefaultValue=false)]
+        [JsonPropertyName("providers")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, Dictionary<string, string>> Providers { get; set; }
 
         /// <summary>
         /// Gets or Sets Travel
         /// </summary>
-        [DataMember(Name="travel", EmitDefaultValue=false)]
+        [JsonPropertyName("travel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseRiskInformationTravel Travel { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessorResults
         /// </summary>
-        [DataMember(Name="processorResults", EmitDefaultValue=false)]
+        [JsonPropertyName("processorResults")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseRiskInformationProcessorResults ProcessorResults { get; set; }
 
         /// <summary>
@@ -136,17 +147,17 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseRiskInformation {\n");
-            if (Profile != null) sb.Append("  Profile: ").Append(Profile).Append("\n");
-            if (Rules != null) sb.Append("  Rules: ").Append(Rules).Append("\n");
-            if (InfoCodes != null) sb.Append("  InfoCodes: ").Append(InfoCodes).Append("\n");
-            if (Velocity != null) sb.Append("  Velocity: ").Append(Velocity).Append("\n");
-            if (CasePriority != null) sb.Append("  CasePriority: ").Append(CasePriority).Append("\n");
-            if (LocalTime != null) sb.Append("  LocalTime: ").Append(LocalTime).Append("\n");
-            if (Score != null) sb.Append("  Score: ").Append(Score).Append("\n");
-            if (IpAddress != null) sb.Append("  IpAddress: ").Append(IpAddress).Append("\n");
-            if (Providers != null) sb.Append("  Providers: ").Append(Providers).Append("\n");
-            if (Travel != null) sb.Append("  Travel: ").Append(Travel).Append("\n");
-            if (ProcessorResults != null) sb.Append("  ProcessorResults: ").Append(ProcessorResults).Append("\n");
+            if (Profile != null) sb.Append("  Profile: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformation", "profile", Profile.ToString())).Append("\n");
+            if (Rules != null) sb.Append("  Rules: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformation", "rules", Rules.ToString())).Append("\n");
+            if (InfoCodes != null) sb.Append("  InfoCodes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformation", "infoCodes", InfoCodes.ToString())).Append("\n");
+            if (Velocity != null) sb.Append("  Velocity: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformation", "velocity", Velocity.ToString())).Append("\n");
+            if (CasePriority != null) sb.Append("  CasePriority: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformation", "casePriority", CasePriority.ToString())).Append("\n");
+            if (LocalTime != null) sb.Append("  LocalTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformation", "localTime", LocalTime.ToString())).Append("\n");
+            if (Score != null) sb.Append("  Score: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformation", "score", Score.ToString())).Append("\n");
+            if (IpAddress != null) sb.Append("  IpAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformation", "ipAddress", IpAddress.ToString())).Append("\n");
+            if (Providers != null) sb.Append("  Providers: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformation", "providers", Providers.ToString())).Append("\n");
+            if (Travel != null) sb.Append("  Travel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformation", "travel", Travel.ToString())).Append("\n");
+            if (ProcessorResults != null) sb.Append("  ProcessorResults: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformation", "processorResults", ProcessorResults.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -157,7 +168,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseRiskInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

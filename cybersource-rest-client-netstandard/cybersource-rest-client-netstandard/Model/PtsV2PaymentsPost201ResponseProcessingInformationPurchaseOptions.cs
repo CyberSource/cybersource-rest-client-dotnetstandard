@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// This field contains installment data defined by MasterCard. Possible values:   - Y &#x3D; eligible   - N &#x3D; not eligile 
         /// </summary>
         /// <value>This field contains installment data defined by MasterCard. Possible values:   - Y &#x3D; eligible   - N &#x3D; not eligile </value>
-        [DataMember(Name="eligibilityIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("eligibilityIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EligibilityIndicator { get; set; }
 
         /// <summary>
         /// Data mapped received in response from MasterCard. Possible values: - 01 &#x3D; Meal Voucher - Employee Nutrition Program - 02 &#x3D; Food Voucher - Employee Nutrition Program - 03 &#x3D; Culture Voucher - Worker&#39;s Culture Program - 04 &#x3D; Meal Voucher - Consolidation of Labor Laws - 05 &#x3D; Food Voucher - Consolidation of Labor Laws 
         /// </summary>
         /// <value>Data mapped received in response from MasterCard. Possible values: - 01 &#x3D; Meal Voucher - Employee Nutrition Program - 02 &#x3D; Food Voucher - Employee Nutrition Program - 03 &#x3D; Culture Voucher - Worker&#39;s Culture Program - 04 &#x3D; Meal Voucher - Consolidation of Labor Laws - 05 &#x3D; Food Voucher - Consolidation of Labor Laws </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Workplace benefit amount.
         /// </summary>
         /// <value>Workplace benefit amount.</value>
-        [DataMember(Name="benefitAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("benefitAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BenefitAmount { get; set; }
 
         /// <summary>
         /// Workplace benefit type. Possible values: - 70 &#x3D; employee benefit - 4T &#x3D; transportation / transit - 52 &#x3D; general benefit - 53 &#x3D; meal voucher - 54 &#x3D; fuel - 55 &#x3D; ecological / sustainability - 58 &#x3D; philanthropy / patronage / consumption - 59 &#x3D; gift - 5S &#x3D; sport / culture - 5T &#x3D; book / education 
         /// </summary>
         /// <value>Workplace benefit type. Possible values: - 70 &#x3D; employee benefit - 4T &#x3D; transportation / transit - 52 &#x3D; general benefit - 53 &#x3D; meal voucher - 54 &#x3D; fuel - 55 &#x3D; ecological / sustainability - 58 &#x3D; philanthropy / patronage / consumption - 59 &#x3D; gift - 5S &#x3D; sport / culture - 5T &#x3D; book / education </value>
-        [DataMember(Name="benefitType", EmitDefaultValue=false)]
+        [JsonPropertyName("benefitType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BenefitType { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseProcessingInformationPurchaseOptions {\n");
-            if (EligibilityIndicator != null) sb.Append("  EligibilityIndicator: ").Append(EligibilityIndicator).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (BenefitAmount != null) sb.Append("  BenefitAmount: ").Append(BenefitAmount).Append("\n");
-            if (BenefitType != null) sb.Append("  BenefitType: ").Append(BenefitType).Append("\n");
+            if (EligibilityIndicator != null) sb.Append("  EligibilityIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessingInformationPurchaseOptions", "eligibilityIndicator", EligibilityIndicator.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessingInformationPurchaseOptions", "type", Type.ToString())).Append("\n");
+            if (BenefitAmount != null) sb.Append("  BenefitAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessingInformationPurchaseOptions", "benefitAmount", BenefitAmount.ToString())).Append("\n");
+            if (BenefitType != null) sb.Append("  BenefitType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessingInformationPurchaseOptions", "benefitType", BenefitType.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseProcessingInformationPurchaseOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

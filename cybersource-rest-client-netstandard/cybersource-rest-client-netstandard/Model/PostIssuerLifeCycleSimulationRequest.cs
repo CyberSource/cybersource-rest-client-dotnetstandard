@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -36,7 +36,7 @@ namespace CyberSource.Model
         /// <param name="State">The new state of the Tokenized Card. Possible Values: - ACTIVE - SUSPENDED - DELETED .</param>
         /// <param name="Card">Card.</param>
         /// <param name="Metadata">Metadata.</param>
-        public PostIssuerLifeCycleSimulationRequest(string State = default(string), Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard Card = default(Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard), Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata Metadata = default(Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata))
+        public PostIssuerLifeCycleSimulationRequest(string State = default(string), Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard Card = default(Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard), TmsIssuerLifeCycleEventSimulationMetadata Metadata = default(TmsIssuerLifeCycleEventSimulationMetadata))
         {
             this.State = State;
             this.Card = Card;
@@ -47,20 +47,23 @@ namespace CyberSource.Model
         /// The new state of the Tokenized Card. Possible Values: - ACTIVE - SUSPENDED - DELETED 
         /// </summary>
         /// <value>The new state of the Tokenized Card. Possible Values: - ACTIVE - SUSPENDED - DELETED </value>
-        [DataMember(Name="state", EmitDefaultValue=false)]
+        [JsonPropertyName("state")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string State { get; set; }
 
         /// <summary>
         /// Gets or Sets Card
         /// </summary>
-        [DataMember(Name="card", EmitDefaultValue=false)]
+        [JsonPropertyName("card")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsCard Card { get; set; }
 
         /// <summary>
         /// Gets or Sets Metadata
         /// </summary>
-        [DataMember(Name="metadata", EmitDefaultValue=false)]
-        public Tmsv2tokenizedcardstokenizedCardIdissuerlifecycleeventsimulationsMetadata Metadata { get; set; }
+        [JsonPropertyName("metadata")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public TmsIssuerLifeCycleEventSimulationMetadata Metadata { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -70,9 +73,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PostIssuerLifeCycleSimulationRequest {\n");
-            if (State != null) sb.Append("  State: ").Append(State).Append("\n");
-            if (Card != null) sb.Append("  Card: ").Append(Card).Append("\n");
-            if (Metadata != null) sb.Append("  Metadata: ").Append(Metadata).Append("\n");
+            if (State != null) sb.Append("  State: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostIssuerLifeCycleSimulationRequest", "state", State.ToString())).Append("\n");
+            if (Card != null) sb.Append("  Card: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostIssuerLifeCycleSimulationRequest", "card", Card.ToString())).Append("\n");
+            if (Metadata != null) sb.Append("  Metadata: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostIssuerLifeCycleSimulationRequest", "metadata", Metadata.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,7 +86,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PostIssuerLifeCycleSimulationRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

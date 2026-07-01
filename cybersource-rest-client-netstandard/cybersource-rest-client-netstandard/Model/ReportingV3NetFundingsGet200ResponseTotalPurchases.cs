@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportingV3NetFundingsGet200ResponseTotalPurchases" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected ReportingV3NetFundingsGet200ResponseTotalPurchases() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ReportingV3NetFundingsGet200ResponseTotalPurchases" /> class.
@@ -50,13 +50,15 @@ namespace CyberSource.Model
         /// Valid ISO 4217 ALPHA-3 currency code
         /// </summary>
         /// <value>Valid ISO 4217 ALPHA-3 currency code</value>
-        [DataMember(Name="currency", EmitDefaultValue=false)]
+        [JsonPropertyName("currency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Currency { get; set; }
 
         /// <summary>
         /// Gets or Sets Value
         /// </summary>
-        [DataMember(Name="value", EmitDefaultValue=false)]
+        [JsonPropertyName("value")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Value { get; set; }
 
         /// <summary>
@@ -67,8 +69,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3NetFundingsGet200ResponseTotalPurchases {\n");
-            if (Currency != null) sb.Append("  Currency: ").Append(Currency).Append("\n");
-            if (Value != null) sb.Append("  Value: ").Append(Value).Append("\n");
+            if (Currency != null) sb.Append("  Currency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200ResponseTotalPurchases", "currency", Currency.ToString())).Append("\n");
+            if (Value != null) sb.Append("  Value: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200ResponseTotalPurchases", "value", Value.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -79,7 +81,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3NetFundingsGet200ResponseTotalPurchases", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

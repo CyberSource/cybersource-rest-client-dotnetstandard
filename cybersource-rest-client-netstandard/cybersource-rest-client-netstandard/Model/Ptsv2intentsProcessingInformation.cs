@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -71,104 +71,119 @@ namespace CyberSource.Model
         /// The instruction to process an order. - default value: &#39;NO_INSTRUCTION&#39; - &#39;ORDER_SAVED_EXPLICITLY&#39; 
         /// </summary>
         /// <value>The instruction to process an order. - default value: &#39;NO_INSTRUCTION&#39; - &#39;ORDER_SAVED_EXPLICITLY&#39; </value>
-        [DataMember(Name="processingInstruction", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInstruction")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessingInstruction { get; set; }
 
         /// <summary>
         /// Gets or Sets AuthorizationOptions
         /// </summary>
-        [DataMember(Name="authorizationOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("authorizationOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2intentsProcessingInformationAuthorizationOptions AuthorizationOptions { get; set; }
 
         /// <summary>
         /// Array of actions (one or more) to be included in the order to invoke bundled services along with order. Possible values: - &#x60;AP_ORDER&#x60;: Use this when Alternative Payment Order service is requested. 
         /// </summary>
         /// <value>Array of actions (one or more) to be included in the order to invoke bundled services along with order. Possible values: - &#x60;AP_ORDER&#x60;: Use this when Alternative Payment Order service is requested. </value>
-        [DataMember(Name="actionList", EmitDefaultValue=false)]
+        [JsonPropertyName("actionList")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ActionList { get; set; }
 
         /// <summary>
         /// Indicates if the transaction is flagged as high risk. 
         /// </summary>
         /// <value>Indicates if the transaction is flagged as high risk. </value>
-        [DataMember(Name="highRiskTransactionFlag", EmitDefaultValue=false)]
+        [JsonPropertyName("highRiskTransactionFlag")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HighRiskTransactionFlag { get; set; }
 
         /// <summary>
         /// Indicates if the transaction is a retry. 
         /// </summary>
         /// <value>Indicates if the transaction is a retry. </value>
-        [DataMember(Name="transactionRetry", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionRetry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionRetry { get; set; }
 
         /// <summary>
         /// The number of transactions in the last one hour. 
         /// </summary>
         /// <value>The number of transactions in the last one hour. </value>
-        [DataMember(Name="lastOneHrTransactionCount", EmitDefaultValue=false)]
+        [JsonPropertyName("lastOneHrTransactionCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastOneHrTransactionCount { get; set; }
 
         /// <summary>
         /// The number of transactions in the last one day. 
         /// </summary>
         /// <value>The number of transactions in the last one day. </value>
-        [DataMember(Name="lastOneDayTransactionCount", EmitDefaultValue=false)]
+        [JsonPropertyName("lastOneDayTransactionCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastOneDayTransactionCount { get; set; }
 
         /// <summary>
         /// The number of transactions in the last three months. 
         /// </summary>
         /// <value>The number of transactions in the last three months. </value>
-        [DataMember(Name="lastThreeMonthsTxnCount", EmitDefaultValue=false)]
+        [JsonPropertyName("lastThreeMonthsTxnCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastThreeMonthsTxnCount { get; set; }
 
         /// <summary>
         /// The total number of transactions. 
         /// </summary>
         /// <value>The total number of transactions. </value>
-        [DataMember(Name="totalTransactionCount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalTransactionCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalTransactionCount { get; set; }
 
         /// <summary>
         /// Indicates if PIN verification is required. 
         /// </summary>
         /// <value>Indicates if PIN verification is required. </value>
-        [DataMember(Name="pinVerification", EmitDefaultValue=false)]
+        [JsonPropertyName("pinVerification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PinVerification { get; set; }
 
         /// <summary>
         /// Indicates if face ID verification is required. 
         /// </summary>
         /// <value>Indicates if face ID verification is required. </value>
-        [DataMember(Name="faceIdVerification", EmitDefaultValue=false)]
+        [JsonPropertyName("faceIdVerification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FaceIdVerification { get; set; }
 
         /// <summary>
         /// Indicates if the user passed verification. 
         /// </summary>
         /// <value>Indicates if the user passed verification. </value>
-        [DataMember(Name="userPassedVerification", EmitDefaultValue=false)]
+        [JsonPropertyName("userPassedVerification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UserPassedVerification { get; set; }
 
         /// <summary>
         /// The IP address of the user. 
         /// </summary>
         /// <value>The IP address of the user. </value>
-        [DataMember(Name="ipAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("ipAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IpAddress { get; set; }
 
         /// <summary>
         /// The date of the transaction. 
         /// </summary>
         /// <value>The date of the transaction. </value>
-        [DataMember(Name="transactionDate", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionDate { get; set; }
 
         /// <summary>
         /// Indicates if the transaction involves tangible goods. 
         /// </summary>
         /// <value>Indicates if the transaction involves tangible goods. </value>
-        [DataMember(Name="tangible", EmitDefaultValue=false)]
+        [JsonPropertyName("tangible")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Tangible { get; set; }
 
         /// <summary>
@@ -179,21 +194,21 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2intentsProcessingInformation {\n");
-            if (ProcessingInstruction != null) sb.Append("  ProcessingInstruction: ").Append(ProcessingInstruction).Append("\n");
-            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(AuthorizationOptions).Append("\n");
-            if (ActionList != null) sb.Append("  ActionList: ").Append(ActionList).Append("\n");
-            if (HighRiskTransactionFlag != null) sb.Append("  HighRiskTransactionFlag: ").Append(HighRiskTransactionFlag).Append("\n");
-            if (TransactionRetry != null) sb.Append("  TransactionRetry: ").Append(TransactionRetry).Append("\n");
-            if (LastOneHrTransactionCount != null) sb.Append("  LastOneHrTransactionCount: ").Append(LastOneHrTransactionCount).Append("\n");
-            if (LastOneDayTransactionCount != null) sb.Append("  LastOneDayTransactionCount: ").Append(LastOneDayTransactionCount).Append("\n");
-            if (LastThreeMonthsTxnCount != null) sb.Append("  LastThreeMonthsTxnCount: ").Append(LastThreeMonthsTxnCount).Append("\n");
-            if (TotalTransactionCount != null) sb.Append("  TotalTransactionCount: ").Append(TotalTransactionCount).Append("\n");
-            if (PinVerification != null) sb.Append("  PinVerification: ").Append(PinVerification).Append("\n");
-            if (FaceIdVerification != null) sb.Append("  FaceIdVerification: ").Append(FaceIdVerification).Append("\n");
-            if (UserPassedVerification != null) sb.Append("  UserPassedVerification: ").Append(UserPassedVerification).Append("\n");
-            if (IpAddress != null) sb.Append("  IpAddress: ").Append(IpAddress).Append("\n");
-            if (TransactionDate != null) sb.Append("  TransactionDate: ").Append(TransactionDate).Append("\n");
-            if (Tangible != null) sb.Append("  Tangible: ").Append(Tangible).Append("\n");
+            if (ProcessingInstruction != null) sb.Append("  ProcessingInstruction: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "processingInstruction", ProcessingInstruction.ToString())).Append("\n");
+            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "authorizationOptions", AuthorizationOptions.ToString())).Append("\n");
+            if (ActionList != null) sb.Append("  ActionList: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "actionList", ActionList.ToString())).Append("\n");
+            if (HighRiskTransactionFlag != null) sb.Append("  HighRiskTransactionFlag: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "highRiskTransactionFlag", HighRiskTransactionFlag.ToString())).Append("\n");
+            if (TransactionRetry != null) sb.Append("  TransactionRetry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "transactionRetry", TransactionRetry.ToString())).Append("\n");
+            if (LastOneHrTransactionCount != null) sb.Append("  LastOneHrTransactionCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "lastOneHrTransactionCount", LastOneHrTransactionCount.ToString())).Append("\n");
+            if (LastOneDayTransactionCount != null) sb.Append("  LastOneDayTransactionCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "lastOneDayTransactionCount", LastOneDayTransactionCount.ToString())).Append("\n");
+            if (LastThreeMonthsTxnCount != null) sb.Append("  LastThreeMonthsTxnCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "lastThreeMonthsTxnCount", LastThreeMonthsTxnCount.ToString())).Append("\n");
+            if (TotalTransactionCount != null) sb.Append("  TotalTransactionCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "totalTransactionCount", TotalTransactionCount.ToString())).Append("\n");
+            if (PinVerification != null) sb.Append("  PinVerification: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "pinVerification", PinVerification.ToString())).Append("\n");
+            if (FaceIdVerification != null) sb.Append("  FaceIdVerification: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "faceIdVerification", FaceIdVerification.ToString())).Append("\n");
+            if (UserPassedVerification != null) sb.Append("  UserPassedVerification: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "userPassedVerification", UserPassedVerification.ToString())).Append("\n");
+            if (IpAddress != null) sb.Append("  IpAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "ipAddress", IpAddress.ToString())).Append("\n");
+            if (TransactionDate != null) sb.Append("  TransactionDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "transactionDate", TransactionDate.ToString())).Append("\n");
+            if (Tangible != null) sb.Append("  Tangible: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2intentsProcessingInformation", "tangible", Tangible.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -204,7 +219,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2intentsProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

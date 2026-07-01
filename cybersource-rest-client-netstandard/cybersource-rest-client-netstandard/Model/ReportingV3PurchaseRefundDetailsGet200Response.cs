@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -58,61 +58,70 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Offset
         /// </summary>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        [JsonPropertyName("offset")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Offset { get; set; }
 
         /// <summary>
         /// Gets or Sets Limit
         /// </summary>
-        [DataMember(Name="limit", EmitDefaultValue=false)]
+        [JsonPropertyName("limit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Limit { get; set; }
 
         /// <summary>
         /// Gets or Sets PageResults
         /// </summary>
-        [DataMember(Name="pageResults", EmitDefaultValue=false)]
+        [JsonPropertyName("pageResults")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? PageResults { get; set; }
 
         /// <summary>
         /// List of Request Info values
         /// </summary>
         /// <value>List of Request Info values</value>
-        [DataMember(Name="requestDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("requestDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails> RequestDetails { get; set; }
 
         /// <summary>
         /// List of Settlement Info values
         /// </summary>
         /// <value>List of Settlement Info values</value>
-        [DataMember(Name="settlements", EmitDefaultValue=false)]
+        [JsonPropertyName("settlements")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3PurchaseRefundDetailsGet200ResponseSettlements> Settlements { get; set; }
 
         /// <summary>
         /// List of Authorization Info values
         /// </summary>
         /// <value>List of Authorization Info values</value>
-        [DataMember(Name="authorizations", EmitDefaultValue=false)]
+        [JsonPropertyName("authorizations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3PurchaseRefundDetailsGet200ResponseAuthorizations> Authorizations { get; set; }
 
         /// <summary>
         /// List of Fee Funding Info values
         /// </summary>
         /// <value>List of Fee Funding Info values</value>
-        [DataMember(Name="feeAndFundingDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("feeAndFundingDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails> FeeAndFundingDetails { get; set; }
 
         /// <summary>
         /// List of Other Info values
         /// </summary>
         /// <value>List of Other Info values</value>
-        [DataMember(Name="others", EmitDefaultValue=false)]
+        [JsonPropertyName("others")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3PurchaseRefundDetailsGet200ResponseOthers> Others { get; set; }
 
         /// <summary>
         /// List of Settlement Status Info values
         /// </summary>
         /// <value>List of Settlement Status Info values</value>
-        [DataMember(Name="settlementStatuses", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementStatuses")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3PurchaseRefundDetailsGet200ResponseSettlementStatuses> SettlementStatuses { get; set; }
 
         /// <summary>
@@ -123,15 +132,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3PurchaseRefundDetailsGet200Response {\n");
-            if (Offset != null) sb.Append("  Offset: ").Append(Offset).Append("\n");
-            if (Limit != null) sb.Append("  Limit: ").Append(Limit).Append("\n");
-            if (PageResults != null) sb.Append("  PageResults: ").Append(PageResults).Append("\n");
-            if (RequestDetails != null) sb.Append("  RequestDetails: ").Append(RequestDetails).Append("\n");
-            if (Settlements != null) sb.Append("  Settlements: ").Append(Settlements).Append("\n");
-            if (Authorizations != null) sb.Append("  Authorizations: ").Append(Authorizations).Append("\n");
-            if (FeeAndFundingDetails != null) sb.Append("  FeeAndFundingDetails: ").Append(FeeAndFundingDetails).Append("\n");
-            if (Others != null) sb.Append("  Others: ").Append(Others).Append("\n");
-            if (SettlementStatuses != null) sb.Append("  SettlementStatuses: ").Append(SettlementStatuses).Append("\n");
+            if (Offset != null) sb.Append("  Offset: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200Response", "offset", Offset.ToString())).Append("\n");
+            if (Limit != null) sb.Append("  Limit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200Response", "limit", Limit.ToString())).Append("\n");
+            if (PageResults != null) sb.Append("  PageResults: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200Response", "pageResults", PageResults.ToString())).Append("\n");
+            if (RequestDetails != null) sb.Append("  RequestDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200Response", "requestDetails", RequestDetails.ToString())).Append("\n");
+            if (Settlements != null) sb.Append("  Settlements: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200Response", "settlements", Settlements.ToString())).Append("\n");
+            if (Authorizations != null) sb.Append("  Authorizations: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200Response", "authorizations", Authorizations.ToString())).Append("\n");
+            if (FeeAndFundingDetails != null) sb.Append("  FeeAndFundingDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200Response", "feeAndFundingDetails", FeeAndFundingDetails.ToString())).Append("\n");
+            if (Others != null) sb.Append("  Others: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200Response", "others", Others.ToString())).Append("\n");
+            if (SettlementStatuses != null) sb.Append("  SettlementStatuses: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200Response", "settlementStatuses", SettlementStatuses.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -142,7 +151,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3PurchaseRefundDetailsGet200Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

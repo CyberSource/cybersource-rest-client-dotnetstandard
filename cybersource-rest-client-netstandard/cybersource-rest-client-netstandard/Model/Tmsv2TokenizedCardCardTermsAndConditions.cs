@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Tmsv2TokenizedCardCardTermsAndConditions" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         public Tmsv2TokenizedCardCardTermsAndConditions()
         {
         }
@@ -42,7 +42,8 @@ namespace CyberSource.Model
         /// Issuer Card Terms and Conditions url.
         /// </summary>
         /// <value>Issuer Card Terms and Conditions url.</value>
-        [DataMember(Name="url", EmitDefaultValue=false)]
+        [JsonPropertyName("url")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Url { get; private set; }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2TokenizedCardCardTermsAndConditions {\n");
-            if (Url != null) sb.Append("  Url: ").Append(Url).Append("\n");
+            if (Url != null) sb.Append("  Url: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardCardTermsAndConditions", "url", Url.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -64,7 +65,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2TokenizedCardCardTermsAndConditions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

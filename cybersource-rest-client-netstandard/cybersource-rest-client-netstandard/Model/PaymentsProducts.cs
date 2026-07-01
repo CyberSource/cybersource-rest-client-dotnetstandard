@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -86,139 +86,162 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets CardProcessing
         /// </summary>
-        [DataMember(Name="cardProcessing", EmitDefaultValue=false)]
+        [JsonPropertyName("cardProcessing")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsCardProcessing CardProcessing { get; set; }
 
         /// <summary>
         /// Gets or Sets AlternativePaymentMethods
         /// </summary>
-        [DataMember(Name="alternativePaymentMethods", EmitDefaultValue=false)]
+        [JsonPropertyName("alternativePaymentMethods")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsAlternativePaymentMethods AlternativePaymentMethods { get; set; }
 
         /// <summary>
         /// Gets or Sets CardPresentConnect
         /// </summary>
-        [DataMember(Name="cardPresentConnect", EmitDefaultValue=false)]
+        [JsonPropertyName("cardPresentConnect")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsCardPresentConnect CardPresentConnect { get; set; }
 
         /// <summary>
         /// Gets or Sets CybsReadyTerminal
         /// </summary>
-        [DataMember(Name="cybsReadyTerminal", EmitDefaultValue=false)]
+        [JsonPropertyName("cybsReadyTerminal")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsCybsReadyTerminal CybsReadyTerminal { get; set; }
 
         /// <summary>
         /// Gets or Sets ECheck
         /// </summary>
-        [DataMember(Name="eCheck", EmitDefaultValue=false)]
+        [JsonPropertyName("eCheck")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsECheck ECheck { get; set; }
 
         /// <summary>
         /// Gets or Sets PayerAuthentication
         /// </summary>
-        [DataMember(Name="payerAuthentication", EmitDefaultValue=false)]
+        [JsonPropertyName("payerAuthentication")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsPayerAuthentication PayerAuthentication { get; set; }
 
         /// <summary>
         /// Gets or Sets DigitalPayments
         /// </summary>
-        [DataMember(Name="digitalPayments", EmitDefaultValue=false)]
+        [JsonPropertyName("digitalPayments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsDigitalPayments DigitalPayments { get; set; }
 
         /// <summary>
         /// Gets or Sets SecureAcceptance
         /// </summary>
-        [DataMember(Name="secureAcceptance", EmitDefaultValue=false)]
+        [JsonPropertyName("secureAcceptance")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsSecureAcceptance SecureAcceptance { get; set; }
 
         /// <summary>
         /// Gets or Sets VirtualTerminal
         /// </summary>
-        [DataMember(Name="virtualTerminal", EmitDefaultValue=false)]
+        [JsonPropertyName("virtualTerminal")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsVirtualTerminal VirtualTerminal { get; set; }
 
         /// <summary>
         /// Gets or Sets CurrencyConversion
         /// </summary>
-        [DataMember(Name="currencyConversion", EmitDefaultValue=false)]
+        [JsonPropertyName("currencyConversion")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsCurrencyConversion CurrencyConversion { get; set; }
 
         /// <summary>
         /// Gets or Sets Tax
         /// </summary>
-        [DataMember(Name="tax", EmitDefaultValue=false)]
+        [JsonPropertyName("tax")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax Tax { get; set; }
 
         /// <summary>
         /// Gets or Sets CustomerInvoicing
         /// </summary>
-        [DataMember(Name="customerInvoicing", EmitDefaultValue=false)]
+        [JsonPropertyName("customerInvoicing")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax CustomerInvoicing { get; set; }
 
         /// <summary>
         /// Gets or Sets RecurringBilling
         /// </summary>
-        [DataMember(Name="recurringBilling", EmitDefaultValue=false)]
+        [JsonPropertyName("recurringBilling")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax RecurringBilling { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentOrchestration
         /// </summary>
-        [DataMember(Name="paymentOrchestration", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentOrchestration")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax PaymentOrchestration { get; set; }
 
         /// <summary>
         /// Gets or Sets Payouts
         /// </summary>
-        [DataMember(Name="payouts", EmitDefaultValue=false)]
+        [JsonPropertyName("payouts")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsPayouts Payouts { get; set; }
 
         /// <summary>
         /// Gets or Sets DifferentialFee
         /// </summary>
-        [DataMember(Name="differentialFee", EmitDefaultValue=false)]
+        [JsonPropertyName("differentialFee")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsDifferentialFee DifferentialFee { get; set; }
 
         /// <summary>
         /// Gets or Sets PayByLink
         /// </summary>
-        [DataMember(Name="payByLink", EmitDefaultValue=false)]
+        [JsonPropertyName("payByLink")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax PayByLink { get; set; }
 
         /// <summary>
         /// Gets or Sets UnifiedCheckout
         /// </summary>
-        [DataMember(Name="unifiedCheckout", EmitDefaultValue=false)]
+        [JsonPropertyName("unifiedCheckout")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsUnifiedCheckout UnifiedCheckout { get; set; }
 
         /// <summary>
         /// Gets or Sets ReceivablesManager
         /// </summary>
-        [DataMember(Name="receivablesManager", EmitDefaultValue=false)]
+        [JsonPropertyName("receivablesManager")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax ReceivablesManager { get; set; }
 
         /// <summary>
         /// Gets or Sets ServiceFee
         /// </summary>
-        [DataMember(Name="serviceFee", EmitDefaultValue=false)]
+        [JsonPropertyName("serviceFee")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsServiceFee ServiceFee { get; set; }
 
         /// <summary>
         /// Gets or Sets BatchUpload
         /// </summary>
-        [DataMember(Name="batchUpload", EmitDefaultValue=false)]
+        [JsonPropertyName("batchUpload")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax BatchUpload { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactGuard
         /// </summary>
-        [DataMember(Name="transactGuard", EmitDefaultValue=false)]
+        [JsonPropertyName("transactGuard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsTax TransactGuard { get; set; }
 
         /// <summary>
         /// Gets or Sets Microform
         /// </summary>
-        [DataMember(Name="microform", EmitDefaultValue=false)]
+        [JsonPropertyName("microform")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProductsMicroform Microform { get; set; }
 
         /// <summary>
@@ -229,29 +252,29 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PaymentsProducts {\n");
-            if (CardProcessing != null) sb.Append("  CardProcessing: ").Append(CardProcessing).Append("\n");
-            if (AlternativePaymentMethods != null) sb.Append("  AlternativePaymentMethods: ").Append(AlternativePaymentMethods).Append("\n");
-            if (CardPresentConnect != null) sb.Append("  CardPresentConnect: ").Append(CardPresentConnect).Append("\n");
-            if (CybsReadyTerminal != null) sb.Append("  CybsReadyTerminal: ").Append(CybsReadyTerminal).Append("\n");
-            if (ECheck != null) sb.Append("  ECheck: ").Append(ECheck).Append("\n");
-            if (PayerAuthentication != null) sb.Append("  PayerAuthentication: ").Append(PayerAuthentication).Append("\n");
-            if (DigitalPayments != null) sb.Append("  DigitalPayments: ").Append(DigitalPayments).Append("\n");
-            if (SecureAcceptance != null) sb.Append("  SecureAcceptance: ").Append(SecureAcceptance).Append("\n");
-            if (VirtualTerminal != null) sb.Append("  VirtualTerminal: ").Append(VirtualTerminal).Append("\n");
-            if (CurrencyConversion != null) sb.Append("  CurrencyConversion: ").Append(CurrencyConversion).Append("\n");
-            if (Tax != null) sb.Append("  Tax: ").Append(Tax).Append("\n");
-            if (CustomerInvoicing != null) sb.Append("  CustomerInvoicing: ").Append(CustomerInvoicing).Append("\n");
-            if (RecurringBilling != null) sb.Append("  RecurringBilling: ").Append(RecurringBilling).Append("\n");
-            if (PaymentOrchestration != null) sb.Append("  PaymentOrchestration: ").Append(PaymentOrchestration).Append("\n");
-            if (Payouts != null) sb.Append("  Payouts: ").Append(Payouts).Append("\n");
-            if (DifferentialFee != null) sb.Append("  DifferentialFee: ").Append(DifferentialFee).Append("\n");
-            if (PayByLink != null) sb.Append("  PayByLink: ").Append(PayByLink).Append("\n");
-            if (UnifiedCheckout != null) sb.Append("  UnifiedCheckout: ").Append(UnifiedCheckout).Append("\n");
-            if (ReceivablesManager != null) sb.Append("  ReceivablesManager: ").Append(ReceivablesManager).Append("\n");
-            if (ServiceFee != null) sb.Append("  ServiceFee: ").Append(ServiceFee).Append("\n");
-            if (BatchUpload != null) sb.Append("  BatchUpload: ").Append(BatchUpload).Append("\n");
-            if (TransactGuard != null) sb.Append("  TransactGuard: ").Append(TransactGuard).Append("\n");
-            if (Microform != null) sb.Append("  Microform: ").Append(Microform).Append("\n");
+            if (CardProcessing != null) sb.Append("  CardProcessing: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "cardProcessing", CardProcessing.ToString())).Append("\n");
+            if (AlternativePaymentMethods != null) sb.Append("  AlternativePaymentMethods: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "alternativePaymentMethods", AlternativePaymentMethods.ToString())).Append("\n");
+            if (CardPresentConnect != null) sb.Append("  CardPresentConnect: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "cardPresentConnect", CardPresentConnect.ToString())).Append("\n");
+            if (CybsReadyTerminal != null) sb.Append("  CybsReadyTerminal: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "cybsReadyTerminal", CybsReadyTerminal.ToString())).Append("\n");
+            if (ECheck != null) sb.Append("  ECheck: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "eCheck", ECheck.ToString())).Append("\n");
+            if (PayerAuthentication != null) sb.Append("  PayerAuthentication: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "payerAuthentication", PayerAuthentication.ToString())).Append("\n");
+            if (DigitalPayments != null) sb.Append("  DigitalPayments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "digitalPayments", DigitalPayments.ToString())).Append("\n");
+            if (SecureAcceptance != null) sb.Append("  SecureAcceptance: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "secureAcceptance", SecureAcceptance.ToString())).Append("\n");
+            if (VirtualTerminal != null) sb.Append("  VirtualTerminal: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "virtualTerminal", VirtualTerminal.ToString())).Append("\n");
+            if (CurrencyConversion != null) sb.Append("  CurrencyConversion: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "currencyConversion", CurrencyConversion.ToString())).Append("\n");
+            if (Tax != null) sb.Append("  Tax: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "tax", Tax.ToString())).Append("\n");
+            if (CustomerInvoicing != null) sb.Append("  CustomerInvoicing: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "customerInvoicing", CustomerInvoicing.ToString())).Append("\n");
+            if (RecurringBilling != null) sb.Append("  RecurringBilling: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "recurringBilling", RecurringBilling.ToString())).Append("\n");
+            if (PaymentOrchestration != null) sb.Append("  PaymentOrchestration: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "paymentOrchestration", PaymentOrchestration.ToString())).Append("\n");
+            if (Payouts != null) sb.Append("  Payouts: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "payouts", Payouts.ToString())).Append("\n");
+            if (DifferentialFee != null) sb.Append("  DifferentialFee: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "differentialFee", DifferentialFee.ToString())).Append("\n");
+            if (PayByLink != null) sb.Append("  PayByLink: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "payByLink", PayByLink.ToString())).Append("\n");
+            if (UnifiedCheckout != null) sb.Append("  UnifiedCheckout: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "unifiedCheckout", UnifiedCheckout.ToString())).Append("\n");
+            if (ReceivablesManager != null) sb.Append("  ReceivablesManager: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "receivablesManager", ReceivablesManager.ToString())).Append("\n");
+            if (ServiceFee != null) sb.Append("  ServiceFee: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "serviceFee", ServiceFee.ToString())).Append("\n");
+            if (BatchUpload != null) sb.Append("  BatchUpload: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "batchUpload", BatchUpload.ToString())).Append("\n");
+            if (TransactGuard != null) sb.Append("  TransactGuard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "transactGuard", TransactGuard.ToString())).Append("\n");
+            if (Microform != null) sb.Append("  Microform: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProducts", "microform", Microform.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -262,7 +285,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PaymentsProducts", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

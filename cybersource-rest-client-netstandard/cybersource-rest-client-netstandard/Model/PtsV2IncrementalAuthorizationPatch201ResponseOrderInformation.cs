@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,13 +44,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AmountDetails
         /// </summary>
-        [DataMember(Name="amountDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("amountDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseOrderInformationAmountDetails AmountDetails { get; set; }
 
         /// <summary>
         /// Gets or Sets InvoiceDetails
         /// </summary>
-        [DataMember(Name="invoiceDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("invoiceDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2IncrementalAuthorizationPatch201ResponseOrderInformationInvoiceDetails InvoiceDetails { get; set; }
 
         /// <summary>
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2IncrementalAuthorizationPatch201ResponseOrderInformation {\n");
-            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(AmountDetails).Append("\n");
-            if (InvoiceDetails != null) sb.Append("  InvoiceDetails: ").Append(InvoiceDetails).Append("\n");
+            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2IncrementalAuthorizationPatch201ResponseOrderInformation", "amountDetails", AmountDetails.ToString())).Append("\n");
+            if (InvoiceDetails != null) sb.Append("  InvoiceDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2IncrementalAuthorizationPatch201ResponseOrderInformation", "invoiceDetails", InvoiceDetails.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2IncrementalAuthorizationPatch201ResponseOrderInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

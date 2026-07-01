@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -50,31 +50,36 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Self
         /// </summary>
-        [DataMember(Name="self", EmitDefaultValue=false)]
+        [JsonPropertyName("self")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseLinksSelf Self { get; set; }
 
         /// <summary>
         /// Gets or Sets Update
         /// </summary>
-        [DataMember(Name="update", EmitDefaultValue=false)]
+        [JsonPropertyName("update")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseLinksSelf Update { get; set; }
 
         /// <summary>
         /// Gets or Sets Cancel
         /// </summary>
-        [DataMember(Name="cancel", EmitDefaultValue=false)]
+        [JsonPropertyName("cancel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseLinksSelf Cancel { get; set; }
 
         /// <summary>
         /// Gets or Sets Suspend
         /// </summary>
-        [DataMember(Name="suspend", EmitDefaultValue=false)]
+        [JsonPropertyName("suspend")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseLinksSelf Suspend { get; set; }
 
         /// <summary>
         /// Gets or Sets Activate
         /// </summary>
-        [DataMember(Name="activate", EmitDefaultValue=false)]
+        [JsonPropertyName("activate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseLinksSelf Activate { get; set; }
 
         /// <summary>
@@ -85,11 +90,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CreateSubscriptionResponseLinks {\n");
-            if (Self != null) sb.Append("  Self: ").Append(Self).Append("\n");
-            if (Update != null) sb.Append("  Update: ").Append(Update).Append("\n");
-            if (Cancel != null) sb.Append("  Cancel: ").Append(Cancel).Append("\n");
-            if (Suspend != null) sb.Append("  Suspend: ").Append(Suspend).Append("\n");
-            if (Activate != null) sb.Append("  Activate: ").Append(Activate).Append("\n");
+            if (Self != null) sb.Append("  Self: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSubscriptionResponseLinks", "self", Self.ToString())).Append("\n");
+            if (Update != null) sb.Append("  Update: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSubscriptionResponseLinks", "update", Update.ToString())).Append("\n");
+            if (Cancel != null) sb.Append("  Cancel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSubscriptionResponseLinks", "cancel", Cancel.ToString())).Append("\n");
+            if (Suspend != null) sb.Append("  Suspend: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSubscriptionResponseLinks", "suspend", Suspend.ToString())).Append("\n");
+            if (Activate != null) sb.Append("  Activate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CreateSubscriptionResponseLinks", "activate", Activate.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -100,7 +105,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CreateSubscriptionResponseLinks", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -42,7 +42,8 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ProfileId
         /// </summary>
-        [DataMember(Name="profileId", EmitDefaultValue=false)]
+        [JsonPropertyName("profileId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProfileId { get; set; }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class RiskProductsPortfolioRiskControlsConfigurationInformationConfigurations {\n");
-            if (ProfileId != null) sb.Append("  ProfileId: ").Append(ProfileId).Append("\n");
+            if (ProfileId != null) sb.Append("  ProfileId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskProductsPortfolioRiskControlsConfigurationInformationConfigurations", "profileId", ProfileId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -64,7 +65,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("RiskProductsPortfolioRiskControlsConfigurationInformationConfigurations", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

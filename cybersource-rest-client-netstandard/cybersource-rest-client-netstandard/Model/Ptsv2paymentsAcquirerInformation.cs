@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Acquirer bank ID number that  corresponds to a certificate that Cybersource already has.This ID has this format. 4XXXXX for Visa and 5XXXXX for Mastercard. 
         /// </summary>
         /// <value>Acquirer bank ID number that  corresponds to a certificate that Cybersource already has.This ID has this format. 4XXXXX for Visa and 5XXXXX for Mastercard. </value>
-        [DataMember(Name="acquirerBin", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirerBin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcquirerBin { get; set; }
 
         /// <summary>
         /// Issuers need to be aware of the Acquirer&#39;s Country Code when the Acquirer country differs from the Merchant country and the Acquirer is in the EEA (European Economic Area). 
         /// </summary>
         /// <value>Issuers need to be aware of the Acquirer&#39;s Country Code when the Acquirer country differs from the Merchant country and the Acquirer is in the EEA (European Economic Area). </value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// Registered password for the Visa directory server. 
         /// </summary>
         /// <value>Registered password for the Visa directory server. </value>
-        [DataMember(Name="password", EmitDefaultValue=false)]
+        [JsonPropertyName("password")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Password { get; set; }
 
         /// <summary>
         /// Username for the visa directory server that is created when your acquirer sets up your account. This ID might be the same as your merchant ID. the username can be 15 or 23 characters. 
         /// </summary>
         /// <value>Username for the visa directory server that is created when your acquirer sets up your account. This ID might be the same as your merchant ID. the username can be 15 or 23 characters. </value>
-        [DataMember(Name="merchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantId { get; set; }
 
         /// <summary>
         /// Acquirer assigned merchant id. Check if your processor supports this field. 
         /// </summary>
         /// <value>Acquirer assigned merchant id. Check if your processor supports this field. </value>
-        [DataMember(Name="acquirerMerchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirerMerchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AcquirerMerchantId { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsAcquirerInformation {\n");
-            if (AcquirerBin != null) sb.Append("  AcquirerBin: ").Append(AcquirerBin).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (Password != null) sb.Append("  Password: ").Append(Password).Append("\n");
-            if (MerchantId != null) sb.Append("  MerchantId: ").Append(MerchantId).Append("\n");
-            if (AcquirerMerchantId != null) sb.Append("  AcquirerMerchantId: ").Append(AcquirerMerchantId).Append("\n");
+            if (AcquirerBin != null) sb.Append("  AcquirerBin: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAcquirerInformation", "acquirerBin", AcquirerBin.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAcquirerInformation", "country", Country.ToString())).Append("\n");
+            if (Password != null) sb.Append("  Password: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAcquirerInformation", "password", Password.ToString())).Append("\n");
+            if (MerchantId != null) sb.Append("  MerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAcquirerInformation", "merchantId", MerchantId.ToString())).Append("\n");
+            if (AcquirerMerchantId != null) sb.Append("  AcquirerMerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsAcquirerInformation", "acquirerMerchantId", AcquirerMerchantId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsAcquirerInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

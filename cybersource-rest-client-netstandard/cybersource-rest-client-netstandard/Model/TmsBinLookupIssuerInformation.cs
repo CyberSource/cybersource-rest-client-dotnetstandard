@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// This field contains the issuer name. 
         /// </summary>
         /// <value>This field contains the issuer name. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// This field contains [2-character ISO Country Codes](http://apps.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf) for the issuer. 
         /// </summary>
         /// <value>This field contains [2-character ISO Country Codes](http://apps.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf) for the issuer. </value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// This field contains the length of the BIN. In some cases, this field may be absent if we do not receive accurate information from the network source. 
         /// </summary>
         /// <value>This field contains the length of the BIN. In some cases, this field may be absent if we do not receive accurate information from the network source. </value>
-        [DataMember(Name="binLength", EmitDefaultValue=false)]
+        [JsonPropertyName("binLength")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BinLength { get; set; }
 
         /// <summary>
         /// This field contains the first 6 to 8 digits of a primary account number (PAN). The length of the field is determined by [PCI-DSS standards for truncation](https://pcissc.secure.force.com/faq/articles/Frequently_Asked_Question/What-are-acceptable-formats-for-truncation-of-primary-account-numbers).In case the input is not the full intrument (PAN or TOKEN), this field may be truncated. 
         /// </summary>
         /// <value>This field contains the first 6 to 8 digits of a primary account number (PAN). The length of the field is determined by [PCI-DSS standards for truncation](https://pcissc.secure.force.com/faq/articles/Frequently_Asked_Question/What-are-acceptable-formats-for-truncation-of-primary-account-numbers).In case the input is not the full intrument (PAN or TOKEN), this field may be truncated. </value>
-        [DataMember(Name="accountPrefix", EmitDefaultValue=false)]
+        [JsonPropertyName("accountPrefix")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountPrefix { get; set; }
 
         /// <summary>
         /// This field contains the customer service phone number for the issuer. 
         /// </summary>
         /// <value>This field contains the customer service phone number for the issuer. </value>
-        [DataMember(Name="phoneNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("phoneNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PhoneNumber { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsBinLookupIssuerInformation {\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (BinLength != null) sb.Append("  BinLength: ").Append(BinLength).Append("\n");
-            if (AccountPrefix != null) sb.Append("  AccountPrefix: ").Append(AccountPrefix).Append("\n");
-            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupIssuerInformation", "name", Name.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupIssuerInformation", "country", Country.ToString())).Append("\n");
+            if (BinLength != null) sb.Append("  BinLength: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupIssuerInformation", "binLength", BinLength.ToString())).Append("\n");
+            if (AccountPrefix != null) sb.Append("  AccountPrefix: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupIssuerInformation", "accountPrefix", AccountPrefix.ToString())).Append("\n");
+            if (PhoneNumber != null) sb.Append("  PhoneNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsBinLookupIssuerInformation", "phoneNumber", PhoneNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsBinLookupIssuerInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

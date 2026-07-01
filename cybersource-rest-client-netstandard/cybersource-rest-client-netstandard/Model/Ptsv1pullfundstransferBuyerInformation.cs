@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Customer&#39;s VAT registration number for the individual sender tax identification.  This field flows in ISO field 104, DSID 63 tag 06.  Visa is recommending the use of the following business application identifier (BAI) values  and merchant category code (MCC) combinations to process domestic bill payments, toll payments,  and business-to-business funding transactions as AFTs in Brazil: - BB (Business-to-business) - BP (Non-card bill payment) - FT (Funds transfer) - WT (Wallet transfer)  MCC: 4784  #### Mapping - SCMP API Field: purchaser_vat_registration_number - Simple Order API Field: invoiceHeader_purchaserVATRegistrationNumber - CCS: customer.vatRegistrationNumber  Optional field. 
         /// </summary>
         /// <value>Customer&#39;s VAT registration number for the individual sender tax identification.  This field flows in ISO field 104, DSID 63 tag 06.  Visa is recommending the use of the following business application identifier (BAI) values  and merchant category code (MCC) combinations to process domestic bill payments, toll payments,  and business-to-business funding transactions as AFTs in Brazil: - BB (Business-to-business) - BP (Non-card bill payment) - FT (Funds transfer) - WT (Wallet transfer)  MCC: 4784  #### Mapping - SCMP API Field: purchaser_vat_registration_number - Simple Order API Field: invoiceHeader_purchaserVATRegistrationNumber - CCS: customer.vatRegistrationNumber  Optional field. </value>
-        [DataMember(Name="vatRegistrationNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("vatRegistrationNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VatRegistrationNumber { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferBuyerInformation {\n");
-            if (VatRegistrationNumber != null) sb.Append("  VatRegistrationNumber: ").Append(VatRegistrationNumber).Append("\n");
+            if (VatRegistrationNumber != null) sb.Append("  VatRegistrationNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferBuyerInformation", "vatRegistrationNumber", VatRegistrationNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferBuyerInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

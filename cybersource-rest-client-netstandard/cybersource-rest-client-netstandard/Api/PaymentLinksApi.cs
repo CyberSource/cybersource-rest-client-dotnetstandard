@@ -308,7 +308,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreatePaymentLink,CreatePaymentLinkAsync,CreatePaymentLinkWithHttpInfo,CreatePaymentLinkAsyncWithHttpInfo"))
             {
                 try
@@ -422,7 +422,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "CreatePaymentLink,CreatePaymentLinkAsync,CreatePaymentLinkWithHttpInfo,CreatePaymentLinkAsyncWithHttpInfo"))
             {
                 try
@@ -536,19 +536,19 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (limit != null)
             {
                 localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (status != null)
             {
                 localVarQueryParams.Add("status", ApiClient.ParameterToString(status)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -567,7 +567,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetAllPaymentLinks,GetAllPaymentLinksAsync,GetAllPaymentLinksWithHttpInfo,GetAllPaymentLinksAsyncWithHttpInfo"))
             {
                 try
@@ -681,19 +681,19 @@ namespace CyberSource.Api
             {
                 localVarQueryParams.Add("offset", ApiClient.ParameterToString(offset)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (limit != null)
             {
                 localVarQueryParams.Add("limit", ApiClient.ParameterToString(limit)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (status != null)
             {
                 localVarQueryParams.Add("status", ApiClient.ParameterToString(status)); // query parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarQueryParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarQueryParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -711,7 +711,7 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetAllPaymentLinks,GetAllPaymentLinksAsync,GetAllPaymentLinksWithHttpInfo,GetAllPaymentLinksAsyncWithHttpInfo"))
             {
                 try
@@ -813,7 +813,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -832,7 +832,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetPaymentLink,GetPaymentLinkAsync,GetPaymentLinkWithHttpInfo,GetPaymentLinkAsyncWithHttpInfo"))
             {
                 try
@@ -936,7 +936,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (Method.Get == Method.Post)
             {
@@ -954,7 +954,7 @@ namespace CyberSource.Api
                 localVarHttpContentType = "multipart/form-data; boundary=" + filePostBodyAndDelimiter[1];
             }
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "GetPaymentLink,GetPaymentLinkAsync,GetPaymentLinkWithHttpInfo,GetPaymentLinkAsyncWithHttpInfo"))
             {
                 try
@@ -1064,7 +1064,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (updatePaymentLinkRequest != null && updatePaymentLinkRequest.GetType() != typeof(byte[]))
             {
@@ -1078,7 +1078,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdatePaymentLink,UpdatePaymentLinkAsync,UpdatePaymentLinkWithHttpInfo,UpdatePaymentLinkAsyncWithHttpInfo"))
             {
                 try
@@ -1192,7 +1192,7 @@ namespace CyberSource.Api
             {
                 localVarPathParams.Add("id", ApiClient.ParameterToString(id)); // path parameter
             }
-            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToString(localVarPathParams)}");
+            logger.Debug($"HTTP Request Body :\n{logUtility.ConvertDictionaryToStringWithMasking(localVarPathParams)}");
 
             if (updatePaymentLinkRequest != null && updatePaymentLinkRequest.GetType() != typeof(byte[]))
             {
@@ -1206,7 +1206,7 @@ namespace CyberSource.Api
             }
 
 
-            string inboundMLEStatus = "false";
+            string inboundMLEStatus = "optional";
             if (MLEUtility.CheckIsMLEForAPI(Configuration.MerchantMLESettings, inboundMLEStatus, "UpdatePaymentLink,UpdatePaymentLinkAsync,UpdatePaymentLinkWithHttpInfo,UpdatePaymentLinkAsyncWithHttpInfo"))
             {
                 try

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,53 +57,61 @@ namespace CyberSource.Model
         /// The reconciliation ID
         /// </summary>
         /// <value>The reconciliation ID</value>
-        [DataMember(Name="reconciliationId", EmitDefaultValue=false)]
+        [JsonPropertyName("reconciliationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReconciliationId { get; set; }
 
         /// <summary>
         /// This field is applicable for AFT and OCT transactions.  For list of supported values, please refer to Developer Guide. 
         /// </summary>
         /// <value>This field is applicable for AFT and OCT transactions.  For list of supported values, please refer to Developer Guide. </value>
-        [DataMember(Name="purposeOfPayment", EmitDefaultValue=false)]
+        [JsonPropertyName("purposeOfPayment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurposeOfPayment { get; set; }
 
         /// <summary>
         /// Gets or Sets AuthorizationOptions
         /// </summary>
-        [DataMember(Name="authorizationOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("authorizationOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataProcessingInformationAuthorizationOptions AuthorizationOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets RecurringOptions
         /// </summary>
-        [DataMember(Name="recurringOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("recurringOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataProcessingInformationRecurringOptions RecurringOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets BankTransferOptions
         /// </summary>
-        [DataMember(Name="bankTransferOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("bankTransferOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataProcessingInformationBankTransferOptions BankTransferOptions { get; set; }
 
         /// <summary>
         /// The business application Id&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>The business application Id&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="businessApplicationId", EmitDefaultValue=false)]
+        [JsonPropertyName("businessApplicationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessApplicationId { get; set; }
 
         /// <summary>
         /// The commerce indicator&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>The commerce indicator&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="commerceIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("commerceIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommerceIndicator { get; set; }
 
         /// <summary>
         /// The processing instruction&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. 
         /// </summary>
         /// <value>The processing instruction&lt;br&gt;&lt;br&gt;  Optional field: This field cannot be configured through the Merchant Experience screens in the Business Center, but if required should be provided on a per‑transaction basis in the uc/v1/sessions API request. </value>
-        [DataMember(Name="processingInstruction", EmitDefaultValue=false)]
+        [JsonPropertyName("processingInstruction")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessingInstruction { get; set; }
 
         /// <summary>
@@ -114,14 +122,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataProcessingInformation {\n");
-            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(ReconciliationId).Append("\n");
-            if (PurposeOfPayment != null) sb.Append("  PurposeOfPayment: ").Append(PurposeOfPayment).Append("\n");
-            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(AuthorizationOptions).Append("\n");
-            if (RecurringOptions != null) sb.Append("  RecurringOptions: ").Append(RecurringOptions).Append("\n");
-            if (BankTransferOptions != null) sb.Append("  BankTransferOptions: ").Append(BankTransferOptions).Append("\n");
-            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(BusinessApplicationId).Append("\n");
-            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CommerceIndicator).Append("\n");
-            if (ProcessingInstruction != null) sb.Append("  ProcessingInstruction: ").Append(ProcessingInstruction).Append("\n");
+            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformation", "reconciliationId", ReconciliationId.ToString())).Append("\n");
+            if (PurposeOfPayment != null) sb.Append("  PurposeOfPayment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformation", "purposeOfPayment", PurposeOfPayment.ToString())).Append("\n");
+            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformation", "authorizationOptions", AuthorizationOptions.ToString())).Append("\n");
+            if (RecurringOptions != null) sb.Append("  RecurringOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformation", "recurringOptions", RecurringOptions.ToString())).Append("\n");
+            if (BankTransferOptions != null) sb.Append("  BankTransferOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformation", "bankTransferOptions", BankTransferOptions.ToString())).Append("\n");
+            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformation", "businessApplicationId", BusinessApplicationId.ToString())).Append("\n");
+            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformation", "commerceIndicator", CommerceIndicator.ToString())).Append("\n");
+            if (ProcessingInstruction != null) sb.Append("  ProcessingInstruction: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataProcessingInformation", "processingInstruction", ProcessingInstruction.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -132,7 +140,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

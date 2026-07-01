@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsOrganizationInformationKYCDepositBankAccount" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Boardingv1registrationsOrganizationInformationKYCDepositBankAccount() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsOrganizationInformationKYCDepositBankAccount" /> class.
@@ -53,26 +53,30 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AccountHolderName
         /// </summary>
-        [DataMember(Name="accountHolderName", EmitDefaultValue=false)]
+        [JsonPropertyName("accountHolderName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountHolderName { get; set; }
 
         /// <summary>
         /// Possible values: - checking - savings - corporatechecking - corporatesavings
         /// </summary>
         /// <value>Possible values: - checking - savings - corporatechecking - corporatesavings</value>
-        [DataMember(Name="accountType", EmitDefaultValue=false)]
+        [JsonPropertyName("accountType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountType { get; set; }
 
         /// <summary>
         /// Gets or Sets AccountRoutingNumber
         /// </summary>
-        [DataMember(Name="accountRoutingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("accountRoutingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountRoutingNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets AccountNumber
         /// </summary>
-        [DataMember(Name="accountNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("accountNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountNumber { get; set; }
 
         /// <summary>
@@ -83,10 +87,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Boardingv1registrationsOrganizationInformationKYCDepositBankAccount {\n");
-            if (AccountHolderName != null) sb.Append("  AccountHolderName: ").Append(AccountHolderName).Append("\n");
-            if (AccountType != null) sb.Append("  AccountType: ").Append(AccountType).Append("\n");
-            if (AccountRoutingNumber != null) sb.Append("  AccountRoutingNumber: ").Append(AccountRoutingNumber).Append("\n");
-            if (AccountNumber != null) sb.Append("  AccountNumber: ").Append(AccountNumber).Append("\n");
+            if (AccountHolderName != null) sb.Append("  AccountHolderName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYCDepositBankAccount", "accountHolderName", AccountHolderName.ToString())).Append("\n");
+            if (AccountType != null) sb.Append("  AccountType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYCDepositBankAccount", "accountType", AccountType.ToString())).Append("\n");
+            if (AccountRoutingNumber != null) sb.Append("  AccountRoutingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYCDepositBankAccount", "accountRoutingNumber", AccountRoutingNumber.ToString())).Append("\n");
+            if (AccountNumber != null) sb.Append("  AccountNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformationKYCDepositBankAccount", "accountNumber", AccountNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -97,7 +101,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Boardingv1registrationsOrganizationInformationKYCDepositBankAccount", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

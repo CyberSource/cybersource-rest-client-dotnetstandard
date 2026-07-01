@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,137 +51,157 @@ namespace CyberSource.Model
         /// The Id of the Tokenized Card. 
         /// </summary>
         /// <value>The Id of the Tokenized Card. </value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; private set; }
 
         /// <summary>
         /// The type. Possible Values: - tokenizedCard 
         /// </summary>
         /// <value>The type. Possible Values: - tokenizedCard </value>
-        [DataMember(Name="object", EmitDefaultValue=false)]
+        [JsonPropertyName("object")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Object { get; private set; }
 
         /// <summary>
         /// Source of the card details. Possible Values: - ONFILE - TOKEN - ISSUER 
         /// </summary>
         /// <value>Source of the card details. Possible Values: - ONFILE - TOKEN - ISSUER </value>
-        [DataMember(Name="source", EmitDefaultValue=false)]
+        [JsonPropertyName("source")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Source { get; set; }
 
         /// <summary>
         /// State of the network token or network token provision. Possible Values:   - ACTIVE : Network token is active.   - SUSPENDED : Network token is suspended. This state can change back to ACTIVE.   - DELETED : This is a final state for a network token instance.   - UNPROVISIONED : A previous network token. 
         /// </summary>
         /// <value>State of the network token or network token provision. Possible Values:   - ACTIVE : Network token is active.   - SUSPENDED : Network token is suspended. This state can change back to ACTIVE.   - DELETED : This is a final state for a network token instance.   - UNPROVISIONED : A previous network token. </value>
-        [DataMember(Name="state", EmitDefaultValue=false)]
+        [JsonPropertyName("state")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string State { get; private set; }
 
         /// <summary>
         /// Unique id to identify this PAN/ enrollment. 
         /// </summary>
         /// <value>Unique id to identify this PAN/ enrollment. </value>
-        [DataMember(Name="enrollmentId", EmitDefaultValue=false)]
+        [JsonPropertyName("enrollmentId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EnrollmentId { get; private set; }
 
         /// <summary>
         /// Unique ID for netwrok token. 
         /// </summary>
         /// <value>Unique ID for netwrok token. </value>
-        [DataMember(Name="tokenReferenceId", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenReferenceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TokenReferenceId { get; private set; }
 
         /// <summary>
         /// The token requestor&#39;s network token for the provided PAN and consumer Id, if available. 
         /// </summary>
         /// <value>The token requestor&#39;s network token for the provided PAN and consumer Id, if available. </value>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Number { get; private set; }
 
         /// <summary>
         /// Two-digit month in which the network token expires. Format: &#x60;MM&#x60;. Possible Values: &#x60;01&#x60; through &#x60;12&#x60;. 
         /// </summary>
         /// <value>Two-digit month in which the network token expires. Format: &#x60;MM&#x60;. Possible Values: &#x60;01&#x60; through &#x60;12&#x60;. </value>
-        [DataMember(Name="expirationMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationMonth { get; private set; }
 
         /// <summary>
         /// Four-digit year in which the network token expires. Format: &#x60;YYYY&#x60;. 
         /// </summary>
         /// <value>Four-digit year in which the network token expires. Format: &#x60;YYYY&#x60;. </value>
-        [DataMember(Name="expirationYear", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationYear")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationYear { get; private set; }
 
         /// <summary>
         /// The type of card (Card Network). Possible Values: - visa - mastercard - americanexpress 
         /// </summary>
         /// <value>The type of card (Card Network). Possible Values: - visa - mastercard - americanexpress </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Indicates the reason why the network token provision request failed. Possible Values: - INVALID_REQUEST : The network token provision request contained invalid data. - CARD_VERIFICATION_FAILED : The network token provision request contained data that could not be verified. - CARD_NOT_ELIGIBLE : Card can currently not be used with issuer for tokenization. - CARD_NOT_ALLOWED : Card can currently not be used with card association for tokenization. - DECLINED : Card can currently not be used with issuer for tokenization. - SERVICE_UNAVAILABLE : The network token service was unavailable or timed out. - SYSTEM_ERROR : An unexpected error occurred with network token service, check configuration. 
         /// </summary>
         /// <value>Indicates the reason why the network token provision request failed. Possible Values: - INVALID_REQUEST : The network token provision request contained invalid data. - CARD_VERIFICATION_FAILED : The network token provision request contained data that could not be verified. - CARD_NOT_ELIGIBLE : Card can currently not be used with issuer for tokenization. - CARD_NOT_ALLOWED : Card can currently not be used with card association for tokenization. - DECLINED : Card can currently not be used with issuer for tokenization. - SERVICE_UNAVAILABLE : The network token service was unavailable or timed out. - SYSTEM_ERROR : An unexpected error occurred with network token service, check configuration. </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; private set; }
 
         /// <summary>
         /// Value generated by the card association to be used alongside the network token for processing a payment. This field is returned by default for Visa and Mastercard network tokens. It can also be explicitly requested using paymentCredentialType: CRYPTOGRAM. 
         /// </summary>
         /// <value>Value generated by the card association to be used alongside the network token for processing a payment. This field is returned by default for Visa and Mastercard network tokens. It can also be explicitly requested using paymentCredentialType: CRYPTOGRAM. </value>
-        [DataMember(Name="cryptogram", EmitDefaultValue=false)]
+        [JsonPropertyName("cryptogram")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Cryptogram { get; private set; }
 
         /// <summary>
         /// Dynamic number generated by the card association to be used alongside the network token for processing a payment. - For American Express: Dynamic Card Secure Code (DCSC) returned by default. - For Visa: DTVV cryptogram when explicitly requested using paymentCredentialType: SECURITY_CODE. It can also be explicitly requested using paymentCredentialType: SECURITY_CODE. 
         /// </summary>
         /// <value>Dynamic number generated by the card association to be used alongside the network token for processing a payment. - For American Express: Dynamic Card Secure Code (DCSC) returned by default. - For Visa: DTVV cryptogram when explicitly requested using paymentCredentialType: SECURITY_CODE. It can also be explicitly requested using paymentCredentialType: SECURITY_CODE. </value>
-        [DataMember(Name="securityCode", EmitDefaultValue=false)]
+        [JsonPropertyName("securityCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecurityCode { get; private set; }
 
         /// <summary>
         /// Raw Electronic Commerce Indicator provided by the card association with the result of the cardholder authentication. 
         /// </summary>
         /// <value>Raw Electronic Commerce Indicator provided by the card association with the result of the cardholder authentication. </value>
-        [DataMember(Name="eci", EmitDefaultValue=false)]
+        [JsonPropertyName("eci")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Eci { get; private set; }
 
         /// <summary>
         /// 11-digit identifier that uniquely identifies the Token Requestor. 
         /// </summary>
         /// <value>11-digit identifier that uniquely identifies the Token Requestor. </value>
-        [DataMember(Name="requestorId", EmitDefaultValue=false)]
+        [JsonPropertyName("requestorId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestorId { get; private set; }
 
         /// <summary>
         /// Payment account reference. 
         /// </summary>
         /// <value>Payment account reference. </value>
-        [DataMember(Name="paymentAccountReference", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentAccountReference")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentAccountReference { get; private set; }
 
         /// <summary>
         /// A sequence counter used as part of the input to the TAVV cryptogram and it is incremented for each cryptogram generation. This field is only returned for Visa network tokens. 
         /// </summary>
         /// <value>A sequence counter used as part of the input to the TAVV cryptogram and it is incremented for each cryptogram generation. This field is only returned for Visa network tokens. </value>
-        [DataMember(Name="applicationTransactionCounter", EmitDefaultValue=false)]
+        [JsonPropertyName("applicationTransactionCounter")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApplicationTransactionCounter { get; private set; }
 
         /// <summary>
         /// Gets or Sets Card
         /// </summary>
-        [DataMember(Name="card", EmitDefaultValue=false)]
+        [JsonPropertyName("card")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2TokenizedCardCard Card { get; set; }
 
         /// <summary>
         /// Gets or Sets VerificationResults
         /// </summary>
-        [DataMember(Name="verificationResults", EmitDefaultValue=false)]
+        [JsonPropertyName("verificationResults")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2TokenizedCardVerificationResults VerificationResults { get; set; }
 
         /// <summary>
         /// Gets or Sets Metadata
         /// </summary>
-        [DataMember(Name="metadata", EmitDefaultValue=false)]
+        [JsonPropertyName("metadata")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2TokenizedCardMetadata Metadata { get; set; }
 
         /// <summary>
@@ -192,26 +212,26 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2TokenizedCard {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (Object != null) sb.Append("  Object: ").Append(Object).Append("\n");
-            if (Source != null) sb.Append("  Source: ").Append(Source).Append("\n");
-            if (State != null) sb.Append("  State: ").Append(State).Append("\n");
-            if (EnrollmentId != null) sb.Append("  EnrollmentId: ").Append(EnrollmentId).Append("\n");
-            if (TokenReferenceId != null) sb.Append("  TokenReferenceId: ").Append(TokenReferenceId).Append("\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
-            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(ExpirationMonth).Append("\n");
-            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(ExpirationYear).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Cryptogram != null) sb.Append("  Cryptogram: ").Append(Cryptogram).Append("\n");
-            if (SecurityCode != null) sb.Append("  SecurityCode: ").Append(SecurityCode).Append("\n");
-            if (Eci != null) sb.Append("  Eci: ").Append(Eci).Append("\n");
-            if (RequestorId != null) sb.Append("  RequestorId: ").Append(RequestorId).Append("\n");
-            if (PaymentAccountReference != null) sb.Append("  PaymentAccountReference: ").Append(PaymentAccountReference).Append("\n");
-            if (ApplicationTransactionCounter != null) sb.Append("  ApplicationTransactionCounter: ").Append(ApplicationTransactionCounter).Append("\n");
-            if (Card != null) sb.Append("  Card: ").Append(Card).Append("\n");
-            if (VerificationResults != null) sb.Append("  VerificationResults: ").Append(VerificationResults).Append("\n");
-            if (Metadata != null) sb.Append("  Metadata: ").Append(Metadata).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "id", Id.ToString())).Append("\n");
+            if (Object != null) sb.Append("  Object: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "object", Object.ToString())).Append("\n");
+            if (Source != null) sb.Append("  Source: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "source", Source.ToString())).Append("\n");
+            if (State != null) sb.Append("  State: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "state", State.ToString())).Append("\n");
+            if (EnrollmentId != null) sb.Append("  EnrollmentId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "enrollmentId", EnrollmentId.ToString())).Append("\n");
+            if (TokenReferenceId != null) sb.Append("  TokenReferenceId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "tokenReferenceId", TokenReferenceId.ToString())).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "number", Number.ToString())).Append("\n");
+            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "expirationMonth", ExpirationMonth.ToString())).Append("\n");
+            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "expirationYear", ExpirationYear.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "type", Type.ToString())).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "reason", Reason.ToString())).Append("\n");
+            if (Cryptogram != null) sb.Append("  Cryptogram: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "cryptogram", Cryptogram.ToString())).Append("\n");
+            if (SecurityCode != null) sb.Append("  SecurityCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "securityCode", SecurityCode.ToString())).Append("\n");
+            if (Eci != null) sb.Append("  Eci: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "eci", Eci.ToString())).Append("\n");
+            if (RequestorId != null) sb.Append("  RequestorId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "requestorId", RequestorId.ToString())).Append("\n");
+            if (PaymentAccountReference != null) sb.Append("  PaymentAccountReference: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "paymentAccountReference", PaymentAccountReference.ToString())).Append("\n");
+            if (ApplicationTransactionCounter != null) sb.Append("  ApplicationTransactionCounter: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "applicationTransactionCounter", ApplicationTransactionCounter.ToString())).Append("\n");
+            if (Card != null) sb.Append("  Card: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "card", Card.ToString())).Append("\n");
+            if (VerificationResults != null) sb.Append("  VerificationResults: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "verificationResults", VerificationResults.ToString())).Append("\n");
+            if (Metadata != null) sb.Append("  Metadata: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCard", "metadata", Metadata.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -222,7 +242,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2TokenizedCard", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

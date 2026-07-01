@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// IP address of the customer.  #### Used by **Authorization, Capture, and Credit** Optional field. 
         /// </summary>
         /// <value>IP address of the customer.  #### Used by **Authorization, Capture, and Credit** Optional field. </value>
-        [DataMember(Name="ipAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("ipAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IpAddress { get; set; }
 
         /// <summary>
         /// DNS resolved hostname from &#x60;ipAddress&#x60;.
         /// </summary>
         /// <value>DNS resolved hostname from &#x60;ipAddress&#x60;.</value>
-        [DataMember(Name="hostName", EmitDefaultValue=false)]
+        [JsonPropertyName("hostName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HostName { get; set; }
 
         /// <summary>
         /// Whether the customer&#39;s browser accepts cookies. This field can contain one of the following values: - &#x60;yes&#x60;: The customer&#39;s browser accepts cookies. - &#x60;no&#x60;: The customer&#39;s browser does not accept cookies. 
         /// </summary>
         /// <value>Whether the customer&#39;s browser accepts cookies. This field can contain one of the following values: - &#x60;yes&#x60;: The customer&#39;s browser accepts cookies. - &#x60;no&#x60;: The customer&#39;s browser does not accept cookies. </value>
-        [DataMember(Name="cookiesAccepted", EmitDefaultValue=false)]
+        [JsonPropertyName("cookiesAccepted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CookiesAccepted { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseDeviceInformation {\n");
-            if (IpAddress != null) sb.Append("  IpAddress: ").Append(IpAddress).Append("\n");
-            if (HostName != null) sb.Append("  HostName: ").Append(HostName).Append("\n");
-            if (CookiesAccepted != null) sb.Append("  CookiesAccepted: ").Append(CookiesAccepted).Append("\n");
+            if (IpAddress != null) sb.Append("  IpAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseDeviceInformation", "ipAddress", IpAddress.ToString())).Append("\n");
+            if (HostName != null) sb.Append("  HostName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseDeviceInformation", "hostName", HostName.ToString())).Append("\n");
+            if (CookiesAccepted != null) sb.Append("  CookiesAccepted: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseDeviceInformation", "cookiesAccepted", CookiesAccepted.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseDeviceInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

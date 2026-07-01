@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Tmsv2TokenizedCardMetadataIssuerCapabilities" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         public Tmsv2TokenizedCardMetadataIssuerCapabilities()
         {
         }
@@ -42,49 +42,56 @@ namespace CyberSource.Model
         /// Indicates if the issuer supports device binding. 
         /// </summary>
         /// <value>Indicates if the issuer supports device binding. </value>
-        [DataMember(Name="deviceBindingSupported", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceBindingSupported")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DeviceBindingSupported { get; private set; }
 
         /// <summary>
         /// Indicates if the issuer participates in step-up authentication that requires cardholder verification. 
         /// </summary>
         /// <value>Indicates if the issuer participates in step-up authentication that requires cardholder verification. </value>
-        [DataMember(Name="cardholderVerificationSupported", EmitDefaultValue=false)]
+        [JsonPropertyName("cardholderVerificationSupported")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CardholderVerificationSupported { get; private set; }
 
         /// <summary>
         /// Indicates if the issuer supports trusted beneficiary enrollment. e.g allowing cardholders to designate trusted merchants or payment recipients that can be exempt from step-up authentication. 
         /// </summary>
         /// <value>Indicates if the issuer supports trusted beneficiary enrollment. e.g allowing cardholders to designate trusted merchants or payment recipients that can be exempt from step-up authentication. </value>
-        [DataMember(Name="trustedBeneficiaryEnrollmentSupported", EmitDefaultValue=false)]
+        [JsonPropertyName("trustedBeneficiaryEnrollmentSupported")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? TrustedBeneficiaryEnrollmentSupported { get; private set; }
 
         /// <summary>
         /// Indicates if the issuer supports delegated authentication. e.g allowing approved thrird parties to perform authentication on behalf of the issuer. 
         /// </summary>
         /// <value>Indicates if the issuer supports delegated authentication. e.g allowing approved thrird parties to perform authentication on behalf of the issuer. </value>
-        [DataMember(Name="delegatedAuthenticationSupported", EmitDefaultValue=false)]
+        [JsonPropertyName("delegatedAuthenticationSupported")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DelegatedAuthenticationSupported { get; private set; }
 
         /// <summary>
         /// Indicates if the issuer supports on-behalf-of device binding. e.g allowing approved third parties to perform device binding on behalf of the issuer. 
         /// </summary>
         /// <value>Indicates if the issuer supports on-behalf-of device binding. e.g allowing approved third parties to perform device binding on behalf of the issuer. </value>
-        [DataMember(Name="oboDeviceBindingSupported", EmitDefaultValue=false)]
+        [JsonPropertyName("oboDeviceBindingSupported")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? OboDeviceBindingSupported { get; private set; }
 
         /// <summary>
         /// Indicates if the issuer supports receiving token lifecycle management notifications. e.g receiving updates on changes to the token&#39;s status or attributes. 
         /// </summary>
         /// <value>Indicates if the issuer supports receiving token lifecycle management notifications. e.g receiving updates on changes to the token&#39;s status or attributes. </value>
-        [DataMember(Name="tokenLcmNotificationsSupported", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenLcmNotificationsSupported")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? TokenLcmNotificationsSupported { get; private set; }
 
         /// <summary>
         /// Indicates if the issuer supports receiving PAN lifecycle management notifications. e.g receiving updates on changes to the underlying card&#39;s status or attributes. 
         /// </summary>
         /// <value>Indicates if the issuer supports receiving PAN lifecycle management notifications. e.g receiving updates on changes to the underlying card&#39;s status or attributes. </value>
-        [DataMember(Name="fpanLcmNotificationsSupported", EmitDefaultValue=false)]
+        [JsonPropertyName("fpanLcmNotificationsSupported")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? FpanLcmNotificationsSupported { get; private set; }
 
         /// <summary>
@@ -95,13 +102,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2TokenizedCardMetadataIssuerCapabilities {\n");
-            if (DeviceBindingSupported != null) sb.Append("  DeviceBindingSupported: ").Append(DeviceBindingSupported).Append("\n");
-            if (CardholderVerificationSupported != null) sb.Append("  CardholderVerificationSupported: ").Append(CardholderVerificationSupported).Append("\n");
-            if (TrustedBeneficiaryEnrollmentSupported != null) sb.Append("  TrustedBeneficiaryEnrollmentSupported: ").Append(TrustedBeneficiaryEnrollmentSupported).Append("\n");
-            if (DelegatedAuthenticationSupported != null) sb.Append("  DelegatedAuthenticationSupported: ").Append(DelegatedAuthenticationSupported).Append("\n");
-            if (OboDeviceBindingSupported != null) sb.Append("  OboDeviceBindingSupported: ").Append(OboDeviceBindingSupported).Append("\n");
-            if (TokenLcmNotificationsSupported != null) sb.Append("  TokenLcmNotificationsSupported: ").Append(TokenLcmNotificationsSupported).Append("\n");
-            if (FpanLcmNotificationsSupported != null) sb.Append("  FpanLcmNotificationsSupported: ").Append(FpanLcmNotificationsSupported).Append("\n");
+            if (DeviceBindingSupported != null) sb.Append("  DeviceBindingSupported: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuerCapabilities", "deviceBindingSupported", DeviceBindingSupported.ToString())).Append("\n");
+            if (CardholderVerificationSupported != null) sb.Append("  CardholderVerificationSupported: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuerCapabilities", "cardholderVerificationSupported", CardholderVerificationSupported.ToString())).Append("\n");
+            if (TrustedBeneficiaryEnrollmentSupported != null) sb.Append("  TrustedBeneficiaryEnrollmentSupported: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuerCapabilities", "trustedBeneficiaryEnrollmentSupported", TrustedBeneficiaryEnrollmentSupported.ToString())).Append("\n");
+            if (DelegatedAuthenticationSupported != null) sb.Append("  DelegatedAuthenticationSupported: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuerCapabilities", "delegatedAuthenticationSupported", DelegatedAuthenticationSupported.ToString())).Append("\n");
+            if (OboDeviceBindingSupported != null) sb.Append("  OboDeviceBindingSupported: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuerCapabilities", "oboDeviceBindingSupported", OboDeviceBindingSupported.ToString())).Append("\n");
+            if (TokenLcmNotificationsSupported != null) sb.Append("  TokenLcmNotificationsSupported: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuerCapabilities", "tokenLcmNotificationsSupported", TokenLcmNotificationsSupported.ToString())).Append("\n");
+            if (FpanLcmNotificationsSupported != null) sb.Append("  FpanLcmNotificationsSupported: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardMetadataIssuerCapabilities", "fpanLcmNotificationsSupported", FpanLcmNotificationsSupported.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -112,7 +119,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2TokenizedCardMetadataIssuerCapabilities", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

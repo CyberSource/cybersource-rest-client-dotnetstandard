@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -69,96 +69,110 @@ namespace CyberSource.Model
         /// Product identifier code. Also known as the Stock Keeping Unit (SKU) code for the product.  For an authorization or capture transaction (&#x60;processingOptions.capture&#x60; is set to &#x60;true&#x60; or &#x60;false&#x60;), this field is required when &#x60;orderInformation.lineItems[].productCode&#x60; is not set to **default** or one of the other values that are related to shipping and/or handling.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. For an authorization or capture transaction (&#x60;processingOptions.capture&#x60; is set to &#x60;true&#x60; or &#x60;false&#x60;), this field is required when &#x60;orderInformation.lineItems[].productCode&#x60; is not &#x60;default&#x60; or one of the values related to shipping and/or handling. 
         /// </summary>
         /// <value>Product identifier code. Also known as the Stock Keeping Unit (SKU) code for the product.  For an authorization or capture transaction (&#x60;processingOptions.capture&#x60; is set to &#x60;true&#x60; or &#x60;false&#x60;), this field is required when &#x60;orderInformation.lineItems[].productCode&#x60; is not set to **default** or one of the other values that are related to shipping and/or handling.  #### Tax Calculation Optional field for U.S. and Canadian taxes. Not applicable to international and value added taxes. For an authorization or capture transaction (&#x60;processingOptions.capture&#x60; is set to &#x60;true&#x60; or &#x60;false&#x60;), this field is required when &#x60;orderInformation.lineItems[].productCode&#x60; is not &#x60;default&#x60; or one of the values related to shipping and/or handling. </value>
-        [DataMember(Name="productSKU", EmitDefaultValue=false)]
+        [JsonPropertyName("productSKU")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductSKU { get; set; }
 
         /// <summary>
         /// Type of product. The value for this field is used to identify the product category (electronic, handling, physical, service, or shipping). The default value is &#x60;default&#x60;.  If you are performing an authorization transaction (&#x60;processingOptions.capture&#x60; is set to &#x60;false&#x60;), and you set this field to a value other than &#x60;default&#x60; or one of the values related to shipping and/or handling, then &#x60;orderInformation.lineItems[].quantity&#x60;, &#x60;orderInformation.lineItems[].productName&#x60;, and &#x60;orderInformation.lineItems[].productSku&#x60; fields are required.  Optional field.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes.  The Product Codes for the tax service are located in the Cybersource Tax Codes guide. Contact Customer Support to request the guide. If you don&#39;t send a tax service Product Code in your tax request, product-based rules or exemptions will not be applied and the transaction will default to fully taxable in the locations where you&#39;ve indicated you need to collect tax [by way of nexus, no nexus, or seller registration number fields]. 
         /// </summary>
         /// <value>Type of product. The value for this field is used to identify the product category (electronic, handling, physical, service, or shipping). The default value is &#x60;default&#x60;.  If you are performing an authorization transaction (&#x60;processingOptions.capture&#x60; is set to &#x60;false&#x60;), and you set this field to a value other than &#x60;default&#x60; or one of the values related to shipping and/or handling, then &#x60;orderInformation.lineItems[].quantity&#x60;, &#x60;orderInformation.lineItems[].productName&#x60;, and &#x60;orderInformation.lineItems[].productSku&#x60; fields are required.  Optional field.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes.  The Product Codes for the tax service are located in the Cybersource Tax Codes guide. Contact Customer Support to request the guide. If you don&#39;t send a tax service Product Code in your tax request, product-based rules or exemptions will not be applied and the transaction will default to fully taxable in the locations where you&#39;ve indicated you need to collect tax [by way of nexus, no nexus, or seller registration number fields]. </value>
-        [DataMember(Name="productCode", EmitDefaultValue=false)]
+        [JsonPropertyName("productCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductCode { get; set; }
 
         /// <summary>
         /// Number of units for this order. Must be a non-negative integer.  The default is &#x60;1&#x60;. For an authorization or capture transaction (&#x60;processingOptions.capture&#x60; is set to &#x60;true&#x60; or &#x60;false&#x60;), this field is required when &#x60;orderInformation.lineItems[].productCode&#x60; is not &#x60;default&#x60; or one of the other values related to shipping and/or handling.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes. 
         /// </summary>
         /// <value>Number of units for this order. Must be a non-negative integer.  The default is &#x60;1&#x60;. For an authorization or capture transaction (&#x60;processingOptions.capture&#x60; is set to &#x60;true&#x60; or &#x60;false&#x60;), this field is required when &#x60;orderInformation.lineItems[].productCode&#x60; is not &#x60;default&#x60; or one of the other values related to shipping and/or handling.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes. </value>
-        [DataMember(Name="quantity", EmitDefaultValue=false)]
+        [JsonPropertyName("quantity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Quantity { get; set; }
 
         /// <summary>
         /// For an authorization or capture transaction (&#x60;processingOptions.capture&#x60; is &#x60;true&#x60; or &#x60;false&#x60;), this field is required when &#x60;orderInformation.lineItems[].productCode&#x60; is not &#x60;default&#x60; or one of the other values that are related to shipping and/or handling.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes. 
         /// </summary>
         /// <value>For an authorization or capture transaction (&#x60;processingOptions.capture&#x60; is &#x60;true&#x60; or &#x60;false&#x60;), this field is required when &#x60;orderInformation.lineItems[].productCode&#x60; is not &#x60;default&#x60; or one of the other values that are related to shipping and/or handling.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes. </value>
-        [DataMember(Name="productName", EmitDefaultValue=false)]
+        [JsonPropertyName("productName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProductName { get; set; }
 
         /// <summary>
         /// Per-item price of the product. This value for this field cannot be negative.  You must include either this field or the request-level field &#x60;orderInformation.amountDetails.totalAmount&#x60; in your request.  You can include a decimal point (.), but you cannot include any other special characters. The value is truncated to the correct number of decimal places.  #### DCC with a Third-Party Provider Set this field to the converted amount that was returned by the DCC provider. You must include either the 1st line item in the order and this field, or the request-level field &#x60;orderInformation.amountDetails.totalAmount&#x60; in your request.  #### Tax Calculation Required field for U.S., Canadian, international and value added taxes.  #### Zero Amount Authorizations If your processor supports zero amount authorizations, you can set this field to 0 for the authorization to check if the card is lost or stolen.  #### Maximum Field Lengths For GPN and JCN Gateway: Decimal (10) All other processors: Decimal (15) 
         /// </summary>
         /// <value>Per-item price of the product. This value for this field cannot be negative.  You must include either this field or the request-level field &#x60;orderInformation.amountDetails.totalAmount&#x60; in your request.  You can include a decimal point (.), but you cannot include any other special characters. The value is truncated to the correct number of decimal places.  #### DCC with a Third-Party Provider Set this field to the converted amount that was returned by the DCC provider. You must include either the 1st line item in the order and this field, or the request-level field &#x60;orderInformation.amountDetails.totalAmount&#x60; in your request.  #### Tax Calculation Required field for U.S., Canadian, international and value added taxes.  #### Zero Amount Authorizations If your processor supports zero amount authorizations, you can set this field to 0 for the authorization to check if the card is lost or stolen.  #### Maximum Field Lengths For GPN and JCN Gateway: Decimal (10) All other processors: Decimal (15) </value>
-        [DataMember(Name="unitPrice", EmitDefaultValue=false)]
+        [JsonPropertyName("unitPrice")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UnitPrice { get; set; }
 
         /// <summary>
         /// Total tax to apply to the product. This value cannot be negative. The tax amount and the offer amount must be in the same currency. The tax amount field is additive.  The following example uses a two-exponent currency such as USD:   1. You include each line item in your request.  ..- 1st line item has amount&#x3D;10.00, quantity&#x3D;1, and taxAmount&#x3D;0.80  ..- 2nd line item has amount&#x3D;20.00, quantity&#x3D;1, and taxAmount&#x3D;1.60  2. The total amount authorized will be 32.40, not 30.00 with 2.40 of tax included.  Optional field.  #### Airlines processing Tax portion of the order amount. This value cannot exceed 99999999999999 (fourteen 9s). Format: English characters only. Optional request field for a line item.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes.  Note if you send this field in your tax request, the value in the field will override the tax engine 
         /// </summary>
         /// <value>Total tax to apply to the product. This value cannot be negative. The tax amount and the offer amount must be in the same currency. The tax amount field is additive.  The following example uses a two-exponent currency such as USD:   1. You include each line item in your request.  ..- 1st line item has amount&#x3D;10.00, quantity&#x3D;1, and taxAmount&#x3D;0.80  ..- 2nd line item has amount&#x3D;20.00, quantity&#x3D;1, and taxAmount&#x3D;1.60  2. The total amount authorized will be 32.40, not 30.00 with 2.40 of tax included.  Optional field.  #### Airlines processing Tax portion of the order amount. This value cannot exceed 99999999999999 (fourteen 9s). Format: English characters only. Optional request field for a line item.  #### Tax Calculation Optional field for U.S., Canadian, international tax, and value added taxes.  Note if you send this field in your tax request, the value in the field will override the tax engine </value>
-        [DataMember(Name="taxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("taxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TaxAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderAcceptance
         /// </summary>
-        [DataMember(Name="orderAcceptance", EmitDefaultValue=false)]
+        [JsonPropertyName("orderAcceptance")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Vasv2taxOrderInformationOrderAcceptance OrderAcceptance { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderOrigin
         /// </summary>
-        [DataMember(Name="orderOrigin", EmitDefaultValue=false)]
+        [JsonPropertyName("orderOrigin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Vasv2taxOrderInformationOrderOrigin OrderOrigin { get; set; }
 
         /// <summary>
         /// Country from which the order is shipped. This field is used only when &#x60;orderInformation.shippingDetails.shipFromLocality&#x60; and &#x60;orderInformation.shippingDetails.shipFromAdministrativeArea&#x60; are present. Use the [ISO Standard Country Codes](http://apps.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/ or rates applied to the transaction based on sourcing.  Optional for U.S., Canadian, international tax, and value added taxes. 
         /// </summary>
         /// <value>Country from which the order is shipped. This field is used only when &#x60;orderInformation.shippingDetails.shipFromLocality&#x60; and &#x60;orderInformation.shippingDetails.shipFromAdministrativeArea&#x60; are present. Use the [ISO Standard Country Codes](http://apps.cybersource.com/library/documentation/sbc/quickref/countries_alpha_list.pdf).  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/ or rates applied to the transaction based on sourcing.  Optional for U.S., Canadian, international tax, and value added taxes. </value>
-        [DataMember(Name="shipFromCountry", EmitDefaultValue=false)]
+        [JsonPropertyName("shipFromCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShipFromCountry { get; set; }
 
         /// <summary>
         /// State from which the order is shipped. This field is used only when &#x60;orderInformation.shippingDetails.shipFromLocality&#x60; and &#x60;orderInformation.shippingDetails.shipFromCountry&#x60; are present. Use the [State, Province, and Territory Codes for the United States and Canada](http://apps.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf).  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. 
         /// </summary>
         /// <value>State from which the order is shipped. This field is used only when &#x60;orderInformation.shippingDetails.shipFromLocality&#x60; and &#x60;orderInformation.shippingDetails.shipFromCountry&#x60; are present. Use the [State, Province, and Territory Codes for the United States and Canada](http://apps.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf).  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. </value>
-        [DataMember(Name="shipFromAdministrativeArea", EmitDefaultValue=false)]
+        [JsonPropertyName("shipFromAdministrativeArea")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShipFromAdministrativeArea { get; set; }
 
         /// <summary>
         /// City where the product is shipped from. This field is used only when the &#x60;orderInformation.shipTo.administrativeArea&#x60; and &#x60;orderInformation.shipTo.country&#x60; fields are present.  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. 
         /// </summary>
         /// <value>City where the product is shipped from. This field is used only when the &#x60;orderInformation.shipTo.administrativeArea&#x60; and &#x60;orderInformation.shipTo.country&#x60; fields are present.  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. </value>
-        [DataMember(Name="shipFromLocality", EmitDefaultValue=false)]
+        [JsonPropertyName("shipFromLocality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShipFromLocality { get; set; }
 
         /// <summary>
         /// Postal code where the product is shipped from.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. 
         /// </summary>
         /// <value>Postal code where the product is shipped from.  #### Tax Calculation This field is used to determine tax rules and/or rates applied to the transaction based on sourcing.  Optional for U.S. and Canadian taxes. Not applicable to international and value added taxes. </value>
-        [DataMember(Name="shipFromPostalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("shipFromPostalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ShipFromPostalCode { get; set; }
 
         /// <summary>
         /// Buyer&#39;s VAT registration number.  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation Optional field for international and value added taxes only. Not applicable to U.S. and Canadian taxes. 
         /// </summary>
         /// <value>Buyer&#39;s VAT registration number.  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation Optional field for international and value added taxes only. Not applicable to U.S. and Canadian taxes. </value>
-        [DataMember(Name="buyerVatRegistrationNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("buyerVatRegistrationNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BuyerVatRegistrationNumber { get; set; }
 
         /// <summary>
         /// VAT seller registration number.  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation Optional field for international and value added taxes only. Not applicable to U.S. and Canadian taxes. 
         /// </summary>
         /// <value>VAT seller registration number.  **NOTE** If this field appears in a &#x60;lineItems&#x60; object, then the value of this field in the &#x60;lineItems&#x60; object overrides the value of the corresponding field at the request-level or order-level object.  #### Tax Calculation Optional field for international and value added taxes only. Not applicable to U.S. and Canadian taxes. </value>
-        [DataMember(Name="sellerVatRegistrationNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("sellerVatRegistrationNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SellerVatRegistrationNumber { get; set; }
 
         /// <summary>
@@ -169,20 +183,20 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Vasv2taxOrderInformationLineItems {\n");
-            if (ProductSKU != null) sb.Append("  ProductSKU: ").Append(ProductSKU).Append("\n");
-            if (ProductCode != null) sb.Append("  ProductCode: ").Append(ProductCode).Append("\n");
-            if (Quantity != null) sb.Append("  Quantity: ").Append(Quantity).Append("\n");
-            if (ProductName != null) sb.Append("  ProductName: ").Append(ProductName).Append("\n");
-            if (UnitPrice != null) sb.Append("  UnitPrice: ").Append(UnitPrice).Append("\n");
-            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
-            if (OrderAcceptance != null) sb.Append("  OrderAcceptance: ").Append(OrderAcceptance).Append("\n");
-            if (OrderOrigin != null) sb.Append("  OrderOrigin: ").Append(OrderOrigin).Append("\n");
-            if (ShipFromCountry != null) sb.Append("  ShipFromCountry: ").Append(ShipFromCountry).Append("\n");
-            if (ShipFromAdministrativeArea != null) sb.Append("  ShipFromAdministrativeArea: ").Append(ShipFromAdministrativeArea).Append("\n");
-            if (ShipFromLocality != null) sb.Append("  ShipFromLocality: ").Append(ShipFromLocality).Append("\n");
-            if (ShipFromPostalCode != null) sb.Append("  ShipFromPostalCode: ").Append(ShipFromPostalCode).Append("\n");
-            if (BuyerVatRegistrationNumber != null) sb.Append("  BuyerVatRegistrationNumber: ").Append(BuyerVatRegistrationNumber).Append("\n");
-            if (SellerVatRegistrationNumber != null) sb.Append("  SellerVatRegistrationNumber: ").Append(SellerVatRegistrationNumber).Append("\n");
+            if (ProductSKU != null) sb.Append("  ProductSKU: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "productSKU", ProductSKU.ToString())).Append("\n");
+            if (ProductCode != null) sb.Append("  ProductCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "productCode", ProductCode.ToString())).Append("\n");
+            if (Quantity != null) sb.Append("  Quantity: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "quantity", Quantity.ToString())).Append("\n");
+            if (ProductName != null) sb.Append("  ProductName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "productName", ProductName.ToString())).Append("\n");
+            if (UnitPrice != null) sb.Append("  UnitPrice: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "unitPrice", UnitPrice.ToString())).Append("\n");
+            if (TaxAmount != null) sb.Append("  TaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "taxAmount", TaxAmount.ToString())).Append("\n");
+            if (OrderAcceptance != null) sb.Append("  OrderAcceptance: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "orderAcceptance", OrderAcceptance.ToString())).Append("\n");
+            if (OrderOrigin != null) sb.Append("  OrderOrigin: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "orderOrigin", OrderOrigin.ToString())).Append("\n");
+            if (ShipFromCountry != null) sb.Append("  ShipFromCountry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "shipFromCountry", ShipFromCountry.ToString())).Append("\n");
+            if (ShipFromAdministrativeArea != null) sb.Append("  ShipFromAdministrativeArea: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "shipFromAdministrativeArea", ShipFromAdministrativeArea.ToString())).Append("\n");
+            if (ShipFromLocality != null) sb.Append("  ShipFromLocality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "shipFromLocality", ShipFromLocality.ToString())).Append("\n");
+            if (ShipFromPostalCode != null) sb.Append("  ShipFromPostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "shipFromPostalCode", ShipFromPostalCode.ToString())).Append("\n");
+            if (BuyerVatRegistrationNumber != null) sb.Append("  BuyerVatRegistrationNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "buyerVatRegistrationNumber", BuyerVatRegistrationNumber.ToString())).Append("\n");
+            if (SellerVatRegistrationNumber != null) sb.Append("  SellerVatRegistrationNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Vasv2taxOrderInformationLineItems", "sellerVatRegistrationNumber", SellerVatRegistrationNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -193,7 +207,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Vasv2taxOrderInformationLineItems", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

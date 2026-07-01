@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Card
         /// </summary>
-        [DataMember(Name="card", EmitDefaultValue=false)]
+        [JsonPropertyName("card")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsetupsPaymentInformationCard Card { get; set; }
 
         /// <summary>
         /// Gets or Sets TokenizedCard
         /// </summary>
-        [DataMember(Name="tokenizedCard", EmitDefaultValue=false)]
+        [JsonPropertyName("tokenizedCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsPaymentInformationTokenizedCard TokenizedCard { get; set; }
 
         /// <summary>
         /// Gets or Sets FluidData
         /// </summary>
-        [DataMember(Name="fluidData", EmitDefaultValue=false)]
+        [JsonPropertyName("fluidData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsetupsPaymentInformationFluidData FluidData { get; set; }
 
         /// <summary>
         /// Gets or Sets Customer
         /// </summary>
-        [DataMember(Name="customer", EmitDefaultValue=false)]
+        [JsonPropertyName("customer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsPaymentInformationCustomer Customer { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1authenticationsPaymentInformation {\n");
-            if (Card != null) sb.Append("  Card: ").Append(Card).Append("\n");
-            if (TokenizedCard != null) sb.Append("  TokenizedCard: ").Append(TokenizedCard).Append("\n");
-            if (FluidData != null) sb.Append("  FluidData: ").Append(FluidData).Append("\n");
-            if (Customer != null) sb.Append("  Customer: ").Append(Customer).Append("\n");
+            if (Card != null) sb.Append("  Card: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsPaymentInformation", "card", Card.ToString())).Append("\n");
+            if (TokenizedCard != null) sb.Append("  TokenizedCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsPaymentInformation", "tokenizedCard", TokenizedCard.ToString())).Append("\n");
+            if (FluidData != null) sb.Append("  FluidData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsPaymentInformation", "fluidData", FluidData.ToString())).Append("\n");
+            if (Customer != null) sb.Append("  Customer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsPaymentInformation", "customer", Customer.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1authenticationsPaymentInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

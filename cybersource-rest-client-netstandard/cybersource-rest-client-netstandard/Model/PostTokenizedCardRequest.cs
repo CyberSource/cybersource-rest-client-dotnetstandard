@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PostTokenizedCardRequest" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected PostTokenizedCardRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PostTokenizedCardRequest" /> class.
@@ -60,46 +60,53 @@ namespace CyberSource.Model
         /// An identifier provided by the issuer for the account. **Required when source is ISSUER.** 
         /// </summary>
         /// <value>An identifier provided by the issuer for the account. **Required when source is ISSUER.** </value>
-        [DataMember(Name="accountReferenceId", EmitDefaultValue=false)]
+        [JsonPropertyName("accountReferenceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountReferenceId { get; set; }
 
         /// <summary>
         /// Identifier of the consumer within the wallet. Maximum 24 characters for VTS.
         /// </summary>
         /// <value>Identifier of the consumer within the wallet. Maximum 24 characters for VTS.</value>
-        [DataMember(Name="consumerId", EmitDefaultValue=false)]
+        [JsonPropertyName("consumerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ConsumerId { get; set; }
 
         /// <summary>
         /// Specifies whether the Instrument Identifier should be created (true) or not (false) with the PAN provided for the Network Token Provision request. Possible Values: - &#x60;true&#x60;: The InstrumentIdentifier should be created. - &#x60;false&#x60;: The InstrumentIdentifier should not be created. 
         /// </summary>
         /// <value>Specifies whether the Instrument Identifier should be created (true) or not (false) with the PAN provided for the Network Token Provision request. Possible Values: - &#x60;true&#x60;: The InstrumentIdentifier should be created. - &#x60;false&#x60;: The InstrumentIdentifier should not be created. </value>
-        [DataMember(Name="createPanInstrumentIdentifier", EmitDefaultValue=false)]
+        [JsonPropertyName("createPanInstrumentIdentifier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? CreatePanInstrumentIdentifier { get; set; }
 
         /// <summary>
         /// Source of the card details. Possible Values: - ONFILE - TOKEN - ISSUER 
         /// </summary>
         /// <value>Source of the card details. Possible Values: - ONFILE - TOKEN - ISSUER </value>
-        [DataMember(Name="source", EmitDefaultValue=false)]
+        [JsonPropertyName("source")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Source { get; set; }
 
         /// <summary>
         /// Gets or Sets Card
         /// </summary>
-        [DataMember(Name="card", EmitDefaultValue=false)]
+        [JsonPropertyName("card")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizedcardsCard Card { get; set; }
 
         /// <summary>
         /// Gets or Sets Passcode
         /// </summary>
-        [DataMember(Name="passcode", EmitDefaultValue=false)]
+        [JsonPropertyName("passcode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizedcardsPasscode Passcode { get; set; }
 
         /// <summary>
         /// Gets or Sets BillTo
         /// </summary>
-        [DataMember(Name="billTo", EmitDefaultValue=false)]
+        [JsonPropertyName("billTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizedcardsBillTo BillTo { get; set; }
 
         /// <summary>
@@ -110,13 +117,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PostTokenizedCardRequest {\n");
-            if (AccountReferenceId != null) sb.Append("  AccountReferenceId: ").Append(AccountReferenceId).Append("\n");
-            if (ConsumerId != null) sb.Append("  ConsumerId: ").Append(ConsumerId).Append("\n");
-            if (CreatePanInstrumentIdentifier != null) sb.Append("  CreatePanInstrumentIdentifier: ").Append(CreatePanInstrumentIdentifier).Append("\n");
-            if (Source != null) sb.Append("  Source: ").Append(Source).Append("\n");
-            if (Card != null) sb.Append("  Card: ").Append(Card).Append("\n");
-            if (Passcode != null) sb.Append("  Passcode: ").Append(Passcode).Append("\n");
-            if (BillTo != null) sb.Append("  BillTo: ").Append(BillTo).Append("\n");
+            if (AccountReferenceId != null) sb.Append("  AccountReferenceId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostTokenizedCardRequest", "accountReferenceId", AccountReferenceId.ToString())).Append("\n");
+            if (ConsumerId != null) sb.Append("  ConsumerId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostTokenizedCardRequest", "consumerId", ConsumerId.ToString())).Append("\n");
+            if (CreatePanInstrumentIdentifier != null) sb.Append("  CreatePanInstrumentIdentifier: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostTokenizedCardRequest", "createPanInstrumentIdentifier", CreatePanInstrumentIdentifier.ToString())).Append("\n");
+            if (Source != null) sb.Append("  Source: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostTokenizedCardRequest", "source", Source.ToString())).Append("\n");
+            if (Card != null) sb.Append("  Card: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostTokenizedCardRequest", "card", Card.ToString())).Append("\n");
+            if (Passcode != null) sb.Append("  Passcode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostTokenizedCardRequest", "passcode", Passcode.ToString())).Append("\n");
+            if (BillTo != null) sb.Append("  BillTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostTokenizedCardRequest", "billTo", BillTo.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -127,7 +134,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PostTokenizedCardRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

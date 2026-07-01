@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Identifier for the developer that integrated a partner solution with Cybersource. Send this value with all requests that are sent through a partner solution built by that developer. Cybersource assigns the ID to the developer.  **Note** A developerId set to 999 means the submitted developer ID is incorrect. 
         /// </summary>
         /// <value>Identifier for the developer that integrated a partner solution with Cybersource. Send this value with all requests that are sent through a partner solution built by that developer. Cybersource assigns the ID to the developer.  **Note** A developerId set to 999 means the submitted developer ID is incorrect. </value>
-        [DataMember(Name="developerId", EmitDefaultValue=false)]
+        [JsonPropertyName("developerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeveloperId { get; set; }
 
         /// <summary>
         /// Identifier for the partner that integrated with Cybersource. Send this value with all requests sent through the partner solution. Cybersource assigns the ID to the partner.  **Note** A solutionId set to 999 means the submitted solutionId is incorrect. 
         /// </summary>
         /// <value>Identifier for the partner that integrated with Cybersource. Send this value with all requests sent through the partner solution. Cybersource assigns the ID to the partner.  **Note** A solutionId set to 999 means the submitted solutionId is incorrect. </value>
-        [DataMember(Name="solutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("solutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SolutionId { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Invoicingv2invoicesClientReferenceInformationPartner {\n");
-            if (DeveloperId != null) sb.Append("  DeveloperId: ").Append(DeveloperId).Append("\n");
-            if (SolutionId != null) sb.Append("  SolutionId: ").Append(SolutionId).Append("\n");
+            if (DeveloperId != null) sb.Append("  DeveloperId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Invoicingv2invoicesClientReferenceInformationPartner", "developerId", DeveloperId.ToString())).Append("\n");
+            if (SolutionId != null) sb.Append("  SolutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Invoicingv2invoicesClientReferenceInformationPartner", "solutionId", SolutionId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Invoicingv2invoicesClientReferenceInformationPartner", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

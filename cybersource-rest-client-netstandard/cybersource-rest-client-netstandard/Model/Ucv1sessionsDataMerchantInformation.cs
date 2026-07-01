@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,14 +44,16 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets MerchantDescriptor
         /// </summary>
-        [DataMember(Name="merchantDescriptor", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDescriptor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ucv1sessionsDataMerchantInformationMerchantDescriptor MerchantDescriptor { get; set; }
 
         /// <summary>
         /// Your government-assigned tax identification number.  #### Tax Calculation Required field for value added tax only. Not applicable to U.S. and Canadian taxes.  #### CyberSource through VisaNet For CtV processors, the maximum length is 20. 
         /// </summary>
         /// <value>Your government-assigned tax identification number.  #### Tax Calculation Required field for value added tax only. Not applicable to U.S. and Canadian taxes.  #### CyberSource through VisaNet For CtV processors, the maximum length is 20. </value>
-        [DataMember(Name="vatRegistrationNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("vatRegistrationNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VatRegistrationNumber { get; set; }
 
         /// <summary>
@@ -62,8 +64,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataMerchantInformation {\n");
-            if (MerchantDescriptor != null) sb.Append("  MerchantDescriptor: ").Append(MerchantDescriptor).Append("\n");
-            if (VatRegistrationNumber != null) sb.Append("  VatRegistrationNumber: ").Append(VatRegistrationNumber).Append("\n");
+            if (MerchantDescriptor != null) sb.Append("  MerchantDescriptor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataMerchantInformation", "merchantDescriptor", MerchantDescriptor.ToString())).Append("\n");
+            if (VatRegistrationNumber != null) sb.Append("  VatRegistrationNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataMerchantInformation", "vatRegistrationNumber", VatRegistrationNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -74,7 +76,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataMerchantInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Valid Values: - CreditCard - BankTransfer - MobileTransfer - KakaoMoney - NaverPayPoint 
         /// </summary>
         /// <value>Valid Values: - CreditCard - BankTransfer - MobileTransfer - KakaoMoney - NaverPayPoint </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Valid Values: - PAYCO - Kakaopay - NaverPay - SSG Pay - L.Pay - Apple Pay - TOSS Pay - Samsung Pay 
         /// </summary>
         /// <value>Valid Values: - PAYCO - Kakaopay - NaverPay - SSG Pay - L.Pay - Apple Pay - TOSS Pay - Samsung Pay </value>
-        [DataMember(Name="fundingSource", EmitDefaultValue=false)]
+        [JsonPropertyName("fundingSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FundingSource { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201Response1PaymentInformationEWallet {\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (FundingSource != null) sb.Append("  FundingSource: ").Append(FundingSource).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201Response1PaymentInformationEWallet", "name", Name.ToString())).Append("\n");
+            if (FundingSource != null) sb.Append("  FundingSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201Response1PaymentInformationEWallet", "fundingSource", FundingSource.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201Response1PaymentInformationEWallet", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

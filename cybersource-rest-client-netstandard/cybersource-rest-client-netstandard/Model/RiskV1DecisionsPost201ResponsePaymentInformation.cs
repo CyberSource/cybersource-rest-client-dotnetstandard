@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Country (two-digit country code) associated with the BIN of the customer&#39;s card used for the payment. Returned if the information is available. Use this field for additional information when reviewing orders. This information is also displayed in the details page of the CyberSource Business Center. 
         /// </summary>
         /// <value>Country (two-digit country code) associated with the BIN of the customer&#39;s card used for the payment. Returned if the information is available. Use this field for additional information when reviewing orders. This information is also displayed in the details page of the CyberSource Business Center. </value>
-        [DataMember(Name="binCountry", EmitDefaultValue=false)]
+        [JsonPropertyName("binCountry")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BinCountry { get; set; }
 
         /// <summary>
         /// Type of payment card account. This field can refer to a credit card, debit card, or prepaid card account type. 
         /// </summary>
         /// <value>Type of payment card account. This field can refer to a credit card, debit card, or prepaid card account type. </value>
-        [DataMember(Name="accountType", EmitDefaultValue=false)]
+        [JsonPropertyName("accountType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountType { get; set; }
 
         /// <summary>
         /// Name of the bank or entity that issued the card account. 
         /// </summary>
         /// <value>Name of the bank or entity that issued the card account. </value>
-        [DataMember(Name="issuer", EmitDefaultValue=false)]
+        [JsonPropertyName("issuer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Issuer { get; set; }
 
         /// <summary>
         /// Subtype of card account. This field can contain one of the following values: - Maestro International - Maestro UK Domestic - MasterCard Credit - MasterCard Debit - Visa Credit - Visa Debit - Visa Electron  **Note** Additional values may be present. 
         /// </summary>
         /// <value>Subtype of card account. This field can contain one of the following values: - Maestro International - Maestro UK Domestic - MasterCard Credit - MasterCard Debit - Visa Credit - Visa Debit - Visa Electron  **Note** Additional values may be present. </value>
-        [DataMember(Name="scheme", EmitDefaultValue=false)]
+        [JsonPropertyName("scheme")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Scheme { get; set; }
 
         /// <summary>
         /// Credit card BIN (the first six digits of the credit card).Derived either from the &#x60;cc_bin&#x60; request field or from the first six characters of the &#x60;customer_cc_num&#x60; field. 
         /// </summary>
         /// <value>Credit card BIN (the first six digits of the credit card).Derived either from the &#x60;cc_bin&#x60; request field or from the first six characters of the &#x60;customer_cc_num&#x60; field. </value>
-        [DataMember(Name="bin", EmitDefaultValue=false)]
+        [JsonPropertyName("bin")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Bin { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class RiskV1DecisionsPost201ResponsePaymentInformation {\n");
-            if (BinCountry != null) sb.Append("  BinCountry: ").Append(BinCountry).Append("\n");
-            if (AccountType != null) sb.Append("  AccountType: ").Append(AccountType).Append("\n");
-            if (Issuer != null) sb.Append("  Issuer: ").Append(Issuer).Append("\n");
-            if (Scheme != null) sb.Append("  Scheme: ").Append(Scheme).Append("\n");
-            if (Bin != null) sb.Append("  Bin: ").Append(Bin).Append("\n");
+            if (BinCountry != null) sb.Append("  BinCountry: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponsePaymentInformation", "binCountry", BinCountry.ToString())).Append("\n");
+            if (AccountType != null) sb.Append("  AccountType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponsePaymentInformation", "accountType", AccountType.ToString())).Append("\n");
+            if (Issuer != null) sb.Append("  Issuer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponsePaymentInformation", "issuer", Issuer.ToString())).Append("\n");
+            if (Scheme != null) sb.Append("  Scheme: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponsePaymentInformation", "scheme", Scheme.ToString())).Append("\n");
+            if (Bin != null) sb.Append("  Bin: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("RiskV1DecisionsPost201ResponsePaymentInformation", "bin", Bin.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("RiskV1DecisionsPost201ResponsePaymentInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

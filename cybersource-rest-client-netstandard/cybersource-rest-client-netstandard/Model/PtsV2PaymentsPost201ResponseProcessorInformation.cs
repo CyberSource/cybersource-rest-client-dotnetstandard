@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -81,7 +81,7 @@ namespace CyberSource.Model
         /// <param name="MerchantRiskPrediction">Mastercard is introducing the Merchant Risk Predict Service in the middle East/Africa Region. A newly launched service comprised of seven independent artificial intelligence (AI)-powered scores intended to augment existing merchant risk management practices. .</param>
         /// <param name="Network">Network.</param>
         /// <param name="CedpVerifiedIndicator">Merchant Commercial Enhanced Data Program (CEDP) verified indicator received in authorization response messages for U.S. domestic transactions containing a credential for the commercial credit products.  This field flows in ISO field 34, DSID 02 tag DA, in AN, EBCDIC format.  Possible values: - &#x60;Y&#x60;: Merchant CEDP verified  This field is for internal processing only (TC33A usage) and is not sent back to the merchant.  #### Used by **Authorization Response** Response field only. .</param>
-        public PtsV2PaymentsPost201ResponseProcessorInformation(string AuthIndicator = default(string), string ApprovalCode = default(string), string CardReferenceData = default(string), string TransactionId = default(string), string NetworkTransactionId = default(string), string ResponseCode = default(string), string ResponseCodeSource = default(string), string ResponseDetails = default(string), string ResponseCategoryCode = default(string), string ResponseSourceCode = default(string), string ForwardedAcquirerCode = default(string), string SettlementDate = default(string), string SequenceNumber = default(string), PtsV2PaymentsPost201ResponseProcessorInformationAvs Avs = default(PtsV2PaymentsPost201ResponseProcessorInformationAvs), PtsV2PaymentsPost201ResponseProcessorInformationCardVerification CardVerification = default(PtsV2PaymentsPost201ResponseProcessorInformationCardVerification), PtsV2PaymentsPost201ResponseProcessorInformationMerchantAdvice MerchantAdvice = default(PtsV2PaymentsPost201ResponseProcessorInformationMerchantAdvice), PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults ElectronicVerificationResults = default(PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults), PtsV2PaymentsPost201ResponseProcessorInformationAchVerification AchVerification = default(PtsV2PaymentsPost201ResponseProcessorInformationAchVerification), PtsV2PaymentsPost201ResponseProcessorInformationCustomer Customer = default(PtsV2PaymentsPost201ResponseProcessorInformationCustomer), PtsV2PaymentsPost201ResponseProcessorInformationConsumerAuthenticationResponse ConsumerAuthenticationResponse = default(PtsV2PaymentsPost201ResponseProcessorInformationConsumerAuthenticationResponse), string SystemTraceAuditNumber = default(string), string PaymentAccountReferenceNumber = default(string), string TransactionIntegrityCode = default(string), string AmexVerbalAuthReferenceNumber = default(string), string MasterCardServiceCode = default(string), string MasterCardServiceReplyCode = default(string), string MasterCardAuthenticationType = default(string), string Name = default(string), PtsV2PaymentsPost201ResponseProcessorInformationRouting Routing = default(PtsV2PaymentsPost201ResponseProcessorInformationRouting), string MerchantNumber = default(string), string RetrievalReferenceNumber = default(string), string PaymentUrl = default(string), string CompleteUrl = default(string), string Signature = default(string), string PublicKey = default(string), PtsV2PaymentsPost201ResponseProcessorInformationSellerProtection SellerProtection = default(PtsV2PaymentsPost201ResponseProcessorInformationSellerProtection), string TransactionExpiryDate = default(string), string CustomUrl = default(string), string SchemeAssignedId = default(string), string DeviceUrl = default(string), string DisbursementMode = default(string), string UpdateTimeUtc = default(string), string ExpirationTimeUtc = default(string), string OrderId = default(string), string OrderStatus = default(string), string MerchantRiskPrediction = default(string), Ptsv2paymentsProcessorInformationReversalNetwork Network = default(Ptsv2paymentsProcessorInformationReversalNetwork), string CedpVerifiedIndicator = default(string))
+        public PtsV2PaymentsPost201ResponseProcessorInformation(string AuthIndicator = default(string), string ApprovalCode = default(string), string CardReferenceData = default(string), string TransactionId = default(string), string NetworkTransactionId = default(string), string ResponseCode = default(string), string ResponseCodeSource = default(string), string ResponseDetails = default(string), string ResponseCategoryCode = default(string), string ResponseSourceCode = default(string), string ForwardedAcquirerCode = default(string), string SettlementDate = default(string), string SequenceNumber = default(string), PtsV2PaymentsPost201ResponseProcessorInformationAvs Avs = default(PtsV2PaymentsPost201ResponseProcessorInformationAvs), PtsV2PaymentsPost201ResponseProcessorInformationCardVerification CardVerification = default(PtsV2PaymentsPost201ResponseProcessorInformationCardVerification), PtsV2PaymentsPost201ResponseProcessorInformationMerchantAdvice MerchantAdvice = default(PtsV2PaymentsPost201ResponseProcessorInformationMerchantAdvice), PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults ElectronicVerificationResults = default(PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults), PtsV2PaymentsPost201ResponseProcessorInformationAchVerification AchVerification = default(PtsV2PaymentsPost201ResponseProcessorInformationAchVerification), PtsV2PaymentsPost201ResponseProcessorInformationCustomer Customer = default(PtsV2PaymentsPost201ResponseProcessorInformationCustomer), PtsV2PaymentsPost201ResponseProcessorInformationConsumerAuthenticationResponse ConsumerAuthenticationResponse = default(PtsV2PaymentsPost201ResponseProcessorInformationConsumerAuthenticationResponse), string SystemTraceAuditNumber = default(string), string PaymentAccountReferenceNumber = default(string), string TransactionIntegrityCode = default(string), string AmexVerbalAuthReferenceNumber = default(string), string MasterCardServiceCode = default(string), string MasterCardServiceReplyCode = default(string), string MasterCardAuthenticationType = default(string), string Name = default(string), PtsV2PaymentsPost201ResponseProcessorInformationRouting Routing = default(PtsV2PaymentsPost201ResponseProcessorInformationRouting), string MerchantNumber = default(string), string RetrievalReferenceNumber = default(string), string PaymentUrl = default(string), string CompleteUrl = default(string), string Signature = default(string), string PublicKey = default(string), ProcessorInformationSellerProtection SellerProtection = default(ProcessorInformationSellerProtection), string TransactionExpiryDate = default(string), string CustomUrl = default(string), string SchemeAssignedId = default(string), string DeviceUrl = default(string), string DisbursementMode = default(string), string UpdateTimeUtc = default(string), string ExpirationTimeUtc = default(string), string OrderId = default(string), string OrderStatus = default(string), string MerchantRiskPrediction = default(string), Ptsv2paymentsProcessorInformationReversalNetwork Network = default(Ptsv2paymentsProcessorInformationReversalNetwork), string CedpVerifiedIndicator = default(string))
         {
             this.AuthIndicator = AuthIndicator;
             this.ApprovalCode = ApprovalCode;
@@ -137,324 +137,372 @@ namespace CyberSource.Model
         /// Flag that specifies the purpose of the authorization.  Possible values:  - &#x60;0&#x60;: Preauthorization  - &#x60;1&#x60;: Final authorization 
         /// </summary>
         /// <value>Flag that specifies the purpose of the authorization.  Possible values:  - &#x60;0&#x60;: Preauthorization  - &#x60;1&#x60;: Final authorization </value>
-        [DataMember(Name="authIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("authIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthIndicator { get; set; }
 
         /// <summary>
         /// Authorization code. Returned only when the processor returns this value.  The length of this value depends on your processor.  Returned by authorization service.  #### PIN debit Authorization code that is returned by the processor.  Returned by PIN debit credit.  #### Elavon Encrypted Account Number Program The returned value is OFFLINE.  #### TSYS Acquiring Solutions The returned value for a successful zero amount authorization is 000000. 
         /// </summary>
         /// <value>Authorization code. Returned only when the processor returns this value.  The length of this value depends on your processor.  Returned by authorization service.  #### PIN debit Authorization code that is returned by the processor.  Returned by PIN debit credit.  #### Elavon Encrypted Account Number Program The returned value is OFFLINE.  #### TSYS Acquiring Solutions The returned value for a successful zero amount authorization is 000000. </value>
-        [DataMember(Name="approvalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("approvalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApprovalCode { get; set; }
 
         /// <summary>
         /// The Scheme reference data is a variable length data element up to a maximum of 56 characters. It may be sent by the acquirer in the authorisation response message, and by the terminal (unchanged) in subsequent authorisation request messages associated with the same transaction. This field is used by Streamline and HSBC UK only, at present. 
         /// </summary>
         /// <value>The Scheme reference data is a variable length data element up to a maximum of 56 characters. It may be sent by the acquirer in the authorisation response message, and by the terminal (unchanged) in subsequent authorisation request messages associated with the same transaction. This field is used by Streamline and HSBC UK only, at present. </value>
-        [DataMember(Name="cardReferenceData", EmitDefaultValue=false)]
+        [JsonPropertyName("cardReferenceData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardReferenceData { get; set; }
 
         /// <summary>
         /// Network transaction identifier (TID). You can use this value to identify a specific transaction when you are discussing the transaction with your processor. Not all processors provide this value.  Returned by the authorization service.  #### PIN debit Transaction identifier generated by the processor.  Returned by PIN debit credit.  #### GPX Processor transaction ID.  #### Cielo For Cielo, this value is the non-sequential unit (NSU) and is supported for all transactions. The value is generated by Cielo or the issuing bank.  #### Comercio Latino For Comercio Latino, this value is the proof of sale or non-sequential unit (NSU) number generated by the acquirers Cielo and Rede, or the issuing bank.  #### CyberSource through VisaNet and GPN For details about this value for CyberSource through VisaNet and GPN, see \&quot;processorInformation.networkTransactionId\&quot; in [REST API Fields](https://developer.cybersource.com/content/dam/docs/cybs/en-us/apifields/reference/all/rest/api-fields.pdf)  #### Moneris This value identifies the transaction on a host system. It contains the following information: - Terminal used to process the transaction - Shift during which the transaction took place - Batch number - Transaction number within the batch You must store this value. If you give the customer a receipt, display this value on the receipt.  **Example** For the value 66012345001069003: - Terminal ID &#x3D; 66012345 - Shift number &#x3D; 001 - Batch number &#x3D; 069 - Transaction number &#x3D; 003 
         /// </summary>
         /// <value>Network transaction identifier (TID). You can use this value to identify a specific transaction when you are discussing the transaction with your processor. Not all processors provide this value.  Returned by the authorization service.  #### PIN debit Transaction identifier generated by the processor.  Returned by PIN debit credit.  #### GPX Processor transaction ID.  #### Cielo For Cielo, this value is the non-sequential unit (NSU) and is supported for all transactions. The value is generated by Cielo or the issuing bank.  #### Comercio Latino For Comercio Latino, this value is the proof of sale or non-sequential unit (NSU) number generated by the acquirers Cielo and Rede, or the issuing bank.  #### CyberSource through VisaNet and GPN For details about this value for CyberSource through VisaNet and GPN, see \&quot;processorInformation.networkTransactionId\&quot; in [REST API Fields](https://developer.cybersource.com/content/dam/docs/cybs/en-us/apifields/reference/all/rest/api-fields.pdf)  #### Moneris This value identifies the transaction on a host system. It contains the following information: - Terminal used to process the transaction - Shift during which the transaction took place - Batch number - Transaction number within the batch You must store this value. If you give the customer a receipt, display this value on the receipt.  **Example** For the value 66012345001069003: - Terminal ID &#x3D; 66012345 - Shift number &#x3D; 001 - Batch number &#x3D; 069 - Transaction number &#x3D; 003 </value>
-        [DataMember(Name="transactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionId { get; set; }
 
         /// <summary>
         /// Same value as &#x60;processorInformation.transactionId&#x60;
         /// </summary>
         /// <value>Same value as &#x60;processorInformation.transactionId&#x60;</value>
-        [DataMember(Name="networkTransactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("networkTransactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NetworkTransactionId { get; set; }
 
         /// <summary>
         /// For most processors, this is the error message sent directly from the bank. Returned only when the processor returns this value.  **Important** Do not use this field to evaluate the result of the authorization.  #### PIN debit Response value that is returned by the processor or bank. **Important** Do not use this field to evaluate the results of the transaction request.  Returned by PIN debit credit, PIN debit purchase, and PIN debit reversal.  #### AIBMS If this value is &#x60;08&#x60;, you can accept the transaction if the customer provides you with identification.  #### Atos This value is the response code sent from Atos and it might also include the response code from the bank. Format: &#x60;aa,bb&#x60; with the two values separated by a comma and where: - &#x60;aa&#x60; is the two-digit error message from Atos. - &#x60;bb&#x60; is the optional two-digit error message from the bank.  #### Comercio Latino This value is the status code and the error or response code received from the processor separated by a colon. Format: [status code]:E[error code] or [status code]:R[response code] Example &#x60;2:R06&#x60;  #### JCN Gateway Processor-defined detail error code. The associated response category code is in the &#x60;processorInformation.responseCategoryCode&#x60; field. String (3)  #### paypalgateway Processor generated ID for the itemized detail. 
         /// </summary>
         /// <value>For most processors, this is the error message sent directly from the bank. Returned only when the processor returns this value.  **Important** Do not use this field to evaluate the result of the authorization.  #### PIN debit Response value that is returned by the processor or bank. **Important** Do not use this field to evaluate the results of the transaction request.  Returned by PIN debit credit, PIN debit purchase, and PIN debit reversal.  #### AIBMS If this value is &#x60;08&#x60;, you can accept the transaction if the customer provides you with identification.  #### Atos This value is the response code sent from Atos and it might also include the response code from the bank. Format: &#x60;aa,bb&#x60; with the two values separated by a comma and where: - &#x60;aa&#x60; is the two-digit error message from Atos. - &#x60;bb&#x60; is the optional two-digit error message from the bank.  #### Comercio Latino This value is the status code and the error or response code received from the processor separated by a colon. Format: [status code]:E[error code] or [status code]:R[response code] Example &#x60;2:R06&#x60;  #### JCN Gateway Processor-defined detail error code. The associated response category code is in the &#x60;processorInformation.responseCategoryCode&#x60; field. String (3)  #### paypalgateway Processor generated ID for the itemized detail. </value>
-        [DataMember(Name="responseCode", EmitDefaultValue=false)]
+        [JsonPropertyName("responseCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseCode { get; set; }
 
         /// <summary>
         /// Used by Visa only and contains the response source/reason code that identifies the source of the response decision. 
         /// </summary>
         /// <value>Used by Visa only and contains the response source/reason code that identifies the source of the response decision. </value>
-        [DataMember(Name="responseCodeSource", EmitDefaultValue=false)]
+        [JsonPropertyName("responseCodeSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseCodeSource { get; set; }
 
         /// <summary>
         /// This field might contain information about a decline. 
         /// </summary>
         /// <value>This field might contain information about a decline. </value>
-        [DataMember(Name="responseDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("responseDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseDetails { get; set; }
 
         /// <summary>
         /// Processor-defined response category code. The associated detail error code is in the &#x60;processorInformation.responseCode&#x60; or &#x60;issuerInformation.responseCode&#x60; field of the service you requested.  This field is supported only for:   - Japanese issuers  - Domestic transactions in Japan  - Comercio Latino—processor transaction ID required for troubleshooting  #### Maximum length for processors   - Comercio Latino: 36  - All other processors: 3 
         /// </summary>
         /// <value>Processor-defined response category code. The associated detail error code is in the &#x60;processorInformation.responseCode&#x60; or &#x60;issuerInformation.responseCode&#x60; field of the service you requested.  This field is supported only for:   - Japanese issuers  - Domestic transactions in Japan  - Comercio Latino—processor transaction ID required for troubleshooting  #### Maximum length for processors   - Comercio Latino: 36  - All other processors: 3 </value>
-        [DataMember(Name="responseCategoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("responseCategoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseCategoryCode { get; set; }
 
         /// <summary>
         /// This field is used by Visa only and contains the response source/reason code that identifies the source of the response decision. Use this field only for clearing with your acquirer. 
         /// </summary>
         /// <value>This field is used by Visa only and contains the response source/reason code that identifies the source of the response decision. Use this field only for clearing with your acquirer. </value>
-        [DataMember(Name="responseSourceCode", EmitDefaultValue=false)]
+        [JsonPropertyName("responseSourceCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ResponseSourceCode { get; set; }
 
         /// <summary>
         /// Name of the Japanese acquirer that processed the transaction. Returned only for JCN Gateway. Please contact the CyberSource Japan Support Group for more information. 
         /// </summary>
         /// <value>Name of the Japanese acquirer that processed the transaction. Returned only for JCN Gateway. Please contact the CyberSource Japan Support Group for more information. </value>
-        [DataMember(Name="forwardedAcquirerCode", EmitDefaultValue=false)]
+        [JsonPropertyName("forwardedAcquirerCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ForwardedAcquirerCode { get; set; }
 
         /// <summary>
         /// Field contains a settlement date. The date is in mmdd format, where: mm &#x3D; month and dd &#x3D; day. 
         /// </summary>
         /// <value>Field contains a settlement date. The date is in mmdd format, where: mm &#x3D; month and dd &#x3D; day. </value>
-        [DataMember(Name="settlementDate", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementDate { get; set; }
 
         /// <summary>
         /// This field serves as a unique identifier for initial and subsequent recurring transactions, specific to the payment brand, and is crucial for transaction tracking and recurrence management. Not all processors provide this value. Returned by the authorization service. 
         /// </summary>
         /// <value>This field serves as a unique identifier for initial and subsequent recurring transactions, specific to the payment brand, and is crucial for transaction tracking and recurrence management. Not all processors provide this value. Returned by the authorization service. </value>
-        [DataMember(Name="sequenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("sequenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SequenceNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets Avs
         /// </summary>
-        [DataMember(Name="avs", EmitDefaultValue=false)]
+        [JsonPropertyName("avs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessorInformationAvs Avs { get; set; }
 
         /// <summary>
         /// Gets or Sets CardVerification
         /// </summary>
-        [DataMember(Name="cardVerification", EmitDefaultValue=false)]
+        [JsonPropertyName("cardVerification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessorInformationCardVerification CardVerification { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantAdvice
         /// </summary>
-        [DataMember(Name="merchantAdvice", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantAdvice")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessorInformationMerchantAdvice MerchantAdvice { get; set; }
 
         /// <summary>
         /// Gets or Sets ElectronicVerificationResults
         /// </summary>
-        [DataMember(Name="electronicVerificationResults", EmitDefaultValue=false)]
+        [JsonPropertyName("electronicVerificationResults")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessorInformationElectronicVerificationResults ElectronicVerificationResults { get; set; }
 
         /// <summary>
         /// Gets or Sets AchVerification
         /// </summary>
-        [DataMember(Name="achVerification", EmitDefaultValue=false)]
+        [JsonPropertyName("achVerification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessorInformationAchVerification AchVerification { get; set; }
 
         /// <summary>
         /// Gets or Sets Customer
         /// </summary>
-        [DataMember(Name="customer", EmitDefaultValue=false)]
+        [JsonPropertyName("customer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessorInformationCustomer Customer { get; set; }
 
         /// <summary>
         /// Gets or Sets ConsumerAuthenticationResponse
         /// </summary>
-        [DataMember(Name="consumerAuthenticationResponse", EmitDefaultValue=false)]
+        [JsonPropertyName("consumerAuthenticationResponse")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessorInformationConsumerAuthenticationResponse ConsumerAuthenticationResponse { get; set; }
 
         /// <summary>
         /// This field is returned only for **American Express Direct** and **CyberSource through VisaNet**. Returned by authorization and incremental authorization services.  #### American Express Direct  System trace audit number (STAN). This value identifies the transaction and is useful when investigating a chargeback dispute.  #### CyberSource through VisaNet  System trace number that must be printed on the customer&#39;s receipt. 
         /// </summary>
         /// <value>This field is returned only for **American Express Direct** and **CyberSource through VisaNet**. Returned by authorization and incremental authorization services.  #### American Express Direct  System trace audit number (STAN). This value identifies the transaction and is useful when investigating a chargeback dispute.  #### CyberSource through VisaNet  System trace number that must be printed on the customer&#39;s receipt. </value>
-        [DataMember(Name="systemTraceAuditNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("systemTraceAuditNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SystemTraceAuditNumber { get; set; }
 
         /// <summary>
         /// Payment Account Reference (PAR) is a non-financial reference assigned to each unique payment account and used to link a payment account to associated network tokens, i.e. the same PAR is returned for PAN-based and tokenized transactions, such as from digital wallets. PAR can be returned in authorisation responses for requests initiated with both real PANs and tokenized PANs. PAR can be used by merchants for fraud detection and regulatory compliance across different channels and digital wallets. PAR allows all participants in the payments chain to have a single, non-sensitive value assigned to a consumer. This value can be used in place of sensitive card holder identification fields, and transmitted across the payments ecosystem to facilitate card holder identification.  **Note** On CyberSource through VisaNet, the value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR8 - Position: 79-110 - Field: Payment Account Reference  The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment networks. 
         /// </summary>
         /// <value>Payment Account Reference (PAR) is a non-financial reference assigned to each unique payment account and used to link a payment account to associated network tokens, i.e. the same PAR is returned for PAN-based and tokenized transactions, such as from digital wallets. PAR can be returned in authorisation responses for requests initiated with both real PANs and tokenized PANs. PAR can be used by merchants for fraud detection and regulatory compliance across different channels and digital wallets. PAR allows all participants in the payments chain to have a single, non-sensitive value assigned to a consumer. This value can be used in place of sensitive card holder identification fields, and transmitted across the payments ecosystem to facilitate card holder identification.  **Note** On CyberSource through VisaNet, the value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR8 - Position: 79-110 - Field: Payment Account Reference  The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment networks. </value>
-        [DataMember(Name="paymentAccountReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentAccountReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentAccountReferenceNumber { get; set; }
 
         /// <summary>
         /// Transaction integrity classification provided by Mastercard. This value specifies Mastercard&#39;s evaluation of the transaction&#39;s safety and security. This field is returned only for **CyberSource through VisaNet**.  For card-present transactions, possible values:   - &#x60;A1&#x60;: EMV or token in a secure, trusted environment  - &#x60;B1&#x60;: EMV or chip equivalent  - &#x60;C1&#x60;: Magnetic stripe  - &#x60;E1&#x60;: Key entered  - &#x60;U0&#x60;: Unclassified  For card-not-present transactions, possible values:   - &#x60;A2&#x60;: Digital transactions  - &#x60;B2&#x60;: Authenticated checkout  - &#x60;C2&#x60;: Transaction validation  - &#x60;D2&#x60;: Enhanced data  - &#x60;E2&#x60;: Generic messaging  - &#x60;U0&#x60;: Unclassified  For information about these values, contact Mastercard or your acquirer.  #### CyberSource through VisaNet  The value for this field corresponds to the following data in the TC 33 capture file,&lt;sup&gt;1&lt;/sup&gt;: - Record: CP01 TCR6 - Position: 136-137 - Field: Mastercard Transaction Integrity Classification  &lt;sup&gt;1&lt;/sup&gt; The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment networks. 
         /// </summary>
         /// <value>Transaction integrity classification provided by Mastercard. This value specifies Mastercard&#39;s evaluation of the transaction&#39;s safety and security. This field is returned only for **CyberSource through VisaNet**.  For card-present transactions, possible values:   - &#x60;A1&#x60;: EMV or token in a secure, trusted environment  - &#x60;B1&#x60;: EMV or chip equivalent  - &#x60;C1&#x60;: Magnetic stripe  - &#x60;E1&#x60;: Key entered  - &#x60;U0&#x60;: Unclassified  For card-not-present transactions, possible values:   - &#x60;A2&#x60;: Digital transactions  - &#x60;B2&#x60;: Authenticated checkout  - &#x60;C2&#x60;: Transaction validation  - &#x60;D2&#x60;: Enhanced data  - &#x60;E2&#x60;: Generic messaging  - &#x60;U0&#x60;: Unclassified  For information about these values, contact Mastercard or your acquirer.  #### CyberSource through VisaNet  The value for this field corresponds to the following data in the TC 33 capture file,&lt;sup&gt;1&lt;/sup&gt;: - Record: CP01 TCR6 - Position: 136-137 - Field: Mastercard Transaction Integrity Classification  &lt;sup&gt;1&lt;/sup&gt; The TC 33 Capture file contains information about the purchases and refunds that a merchant submits to CyberSource. CyberSource through VisaNet creates the TC 33 Capture file at the end of the day and sends it to the merchant&#39;s acquirer, who uses this information to facilitate end-of-day clearing processing with payment networks. </value>
-        [DataMember(Name="transactionIntegrityCode", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionIntegrityCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionIntegrityCode { get; set; }
 
         /// <summary>
         /// Referral response number for a verbal authorization with FDMS Nashville when using an American Express card. Give this number to American Express when you call them for the verbal authorization. 
         /// </summary>
         /// <value>Referral response number for a verbal authorization with FDMS Nashville when using an American Express card. Give this number to American Express when you call them for the verbal authorization. </value>
-        [DataMember(Name="amexVerbalAuthReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("amexVerbalAuthReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AmexVerbalAuthReferenceNumber { get; set; }
 
         /// <summary>
         /// Mastercard service that was used for the transaction. Mastercard provides this value to CyberSource.  Possible value:  - 53: Mastercard card-on-file token service  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 133-134 - Field: Mastercard Merchant on-behalf service. **Note** This field is returned only for CyberSource through VisaNet. 
         /// </summary>
         /// <value>Mastercard service that was used for the transaction. Mastercard provides this value to CyberSource.  Possible value:  - 53: Mastercard card-on-file token service  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 133-134 - Field: Mastercard Merchant on-behalf service. **Note** This field is returned only for CyberSource through VisaNet. </value>
-        [DataMember(Name="masterCardServiceCode", EmitDefaultValue=false)]
+        [JsonPropertyName("masterCardServiceCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MasterCardServiceCode { get; set; }
 
         /// <summary>
         /// Result of the Mastercard card-on-file token service. Mastercard provides this value to CyberSource.  Possible values:   - &#x60;C&#x60;: Service completed successfully.  - &#x60;F&#x60;: One of the following:    - Incorrect Mastercard POS entry mode. The Mastercard POS entry mode should be 81 for an authorization or      authorization reversal.    - Incorrect Mastercard POS entry mode. The Mastercard POS entry mode should be 01 for a tokenized request.    - Token requestor ID is missing or formatted incorrectly.  - &#x60;I&#x60;: One of the following:    - Invalid token requestor ID.    - Suspended or deactivated token.    - Invalid token (not in mapping table).  - &#x60;T&#x60;: Invalid combination of token requestor ID and token.  - &#x60;U&#x60;: Expired token.  - &#x60;W&#x60;: Primary account number (PAN) listed in electronic warning bulletin.  **Note** This field is returned only for **CyberSource through VisaNet**. 
         /// </summary>
         /// <value>Result of the Mastercard card-on-file token service. Mastercard provides this value to CyberSource.  Possible values:   - &#x60;C&#x60;: Service completed successfully.  - &#x60;F&#x60;: One of the following:    - Incorrect Mastercard POS entry mode. The Mastercard POS entry mode should be 81 for an authorization or      authorization reversal.    - Incorrect Mastercard POS entry mode. The Mastercard POS entry mode should be 01 for a tokenized request.    - Token requestor ID is missing or formatted incorrectly.  - &#x60;I&#x60;: One of the following:    - Invalid token requestor ID.    - Suspended or deactivated token.    - Invalid token (not in mapping table).  - &#x60;T&#x60;: Invalid combination of token requestor ID and token.  - &#x60;U&#x60;: Expired token.  - &#x60;W&#x60;: Primary account number (PAN) listed in electronic warning bulletin.  **Note** This field is returned only for **CyberSource through VisaNet**. </value>
-        [DataMember(Name="masterCardServiceReplyCode", EmitDefaultValue=false)]
+        [JsonPropertyName("masterCardServiceReplyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MasterCardServiceReplyCode { get; set; }
 
         /// <summary>
         /// Type of authentication for which the transaction qualifies as determined by the Mastercard authentication service, which confirms the identity of the cardholder. Mastercard provides this value to CyberSource.  Possible values:   - &#x60;1&#x60;: Transaction qualifies for Mastercard authentication type 1.  - &#x60;2&#x60;: Transaction qualifies for Mastercard authentication type 2.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 132 - Field: Mastercard Member Defined service. **Note** This field is returned only for CyberSource through VisaNet. 
         /// </summary>
         /// <value>Type of authentication for which the transaction qualifies as determined by the Mastercard authentication service, which confirms the identity of the cardholder. Mastercard provides this value to CyberSource.  Possible values:   - &#x60;1&#x60;: Transaction qualifies for Mastercard authentication type 1.  - &#x60;2&#x60;: Transaction qualifies for Mastercard authentication type 2.  #### CyberSource through VisaNet The value for this field corresponds to the following data in the TC 33 capture file: - Record: CP01 TCR6 - Position: 132 - Field: Mastercard Member Defined service. **Note** This field is returned only for CyberSource through VisaNet. </value>
-        [DataMember(Name="masterCardAuthenticationType", EmitDefaultValue=false)]
+        [JsonPropertyName("masterCardAuthenticationType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MasterCardAuthenticationType { get; set; }
 
         /// <summary>
         /// Name of the Processor. 
         /// </summary>
         /// <value>Name of the Processor. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Routing
         /// </summary>
-        [DataMember(Name="routing", EmitDefaultValue=false)]
+        [JsonPropertyName("routing")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessorInformationRouting Routing { get; set; }
 
         /// <summary>
         /// Identifier that was assigned to you by your acquirer. This value must be printed on the receipt.  #### Returned by Authorizations and Credits.  This reply field is only supported by merchants who have installed client software on their POS terminals and use these processors: - American Express Direct - Credit Mutuel-CIC - FDC Nashville Global - OmniPay Direct - SIX 
         /// </summary>
         /// <value>Identifier that was assigned to you by your acquirer. This value must be printed on the receipt.  #### Returned by Authorizations and Credits.  This reply field is only supported by merchants who have installed client software on their POS terminals and use these processors: - American Express Direct - Credit Mutuel-CIC - FDC Nashville Global - OmniPay Direct - SIX </value>
-        [DataMember(Name="merchantNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantNumber { get; set; }
 
         /// <summary>
         /// #### Ingenico ePayments Unique number that CyberSource generates to identify the transaction. You can use this value to identify transactions in the Ingenico ePayments Collections Report, which provides settlement information. Contact customer support for information about the report.  ### CyberSource through VisaNet Retrieval request number. 
         /// </summary>
         /// <value>#### Ingenico ePayments Unique number that CyberSource generates to identify the transaction. You can use this value to identify transactions in the Ingenico ePayments Collections Report, which provides settlement information. Contact customer support for information about the report.  ### CyberSource through VisaNet Retrieval request number. </value>
-        [DataMember(Name="retrievalReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("retrievalReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RetrievalReferenceNumber { get; set; }
 
         /// <summary>
         /// Direct the customer to this URL to complete the payment.
         /// </summary>
         /// <value>Direct the customer to this URL to complete the payment.</value>
-        [DataMember(Name="paymentUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentUrl { get; set; }
 
         /// <summary>
         /// The redirect URL for forwarding the consumer to complete page.  This redirect needed by PSP to track browser information of consumer. PSP then redirect consumer to merchant success URL. 
         /// </summary>
         /// <value>The redirect URL for forwarding the consumer to complete page.  This redirect needed by PSP to track browser information of consumer. PSP then redirect consumer to merchant success URL. </value>
-        [DataMember(Name="completeUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("completeUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CompleteUrl { get; set; }
 
         /// <summary>
         /// Gets or Sets Signature
         /// </summary>
-        [DataMember(Name="signature", EmitDefaultValue=false)]
+        [JsonPropertyName("signature")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Signature { get; set; }
 
         /// <summary>
         /// Gets or Sets PublicKey
         /// </summary>
-        [DataMember(Name="publicKey", EmitDefaultValue=false)]
+        [JsonPropertyName("publicKey")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PublicKey { get; set; }
 
         /// <summary>
         /// Gets or Sets SellerProtection
         /// </summary>
-        [DataMember(Name="sellerProtection", EmitDefaultValue=false)]
-        public PtsV2PaymentsPost201ResponseProcessorInformationSellerProtection SellerProtection { get; set; }
+        [JsonPropertyName("sellerProtection")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public ProcessorInformationSellerProtection SellerProtection { get; set; }
 
         /// <summary>
         /// The date on which the transaction expires and payment cannot be made. 
         /// </summary>
         /// <value>The date on which the transaction expires and payment cannot be made. </value>
-        [DataMember(Name="transactionExpiryDate", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionExpiryDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionExpiryDate { get; set; }
 
         /// <summary>
         /// For merchants to declare customs Customs declaration service URL. 
         /// </summary>
         /// <value>For merchants to declare customs Customs declaration service URL. </value>
-        [DataMember(Name="customUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("customUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CustomUrl { get; set; }
 
         /// <summary>
         /// Unique id assigned to a merchant by the APM and not PSP The merchant ID, as boarded with Alipay 
         /// </summary>
         /// <value>Unique id assigned to a merchant by the APM and not PSP The merchant ID, as boarded with Alipay </value>
-        [DataMember(Name="schemeAssignedId", EmitDefaultValue=false)]
+        [JsonPropertyName("schemeAssignedId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SchemeAssignedId { get; set; }
 
         /// <summary>
         /// The QR code value. Convert this value into an image and send it to the POS terminal to be displayed. The terminal can also perform the conversion. The value is a URL like in the example below: https://qr.alipay.com/pmxabcka1ts5grar12. 
         /// </summary>
         /// <value>The QR code value. Convert this value into an image and send it to the POS terminal to be displayed. The terminal can also perform the conversion. The value is a URL like in the example below: https://qr.alipay.com/pmxabcka1ts5grar12. </value>
-        [DataMember(Name="deviceUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeviceUrl { get; set; }
 
         /// <summary>
         /// The funds are released to the merchant immediately. INSTANT The funds are released to the merchant immediately. DELAYED The funds are held for a finite number of days. The actual duration depends on the region and type of integration. You can release the funds through a referenced payout. Otherwise, the funds disbursed automatically after the specified duration. 
         /// </summary>
         /// <value>The funds are released to the merchant immediately. INSTANT The funds are released to the merchant immediately. DELAYED The funds are held for a finite number of days. The actual duration depends on the region and type of integration. You can release the funds through a referenced payout. Otherwise, the funds disbursed automatically after the specified duration. </value>
-        [DataMember(Name="disbursementMode", EmitDefaultValue=false)]
+        [JsonPropertyName("disbursementMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DisbursementMode { get; set; }
 
         /// <summary>
         /// The date and time when the transaction was last updated, in Internet date and time format. 
         /// </summary>
         /// <value>The date and time when the transaction was last updated, in Internet date and time format. </value>
-        [DataMember(Name="updateTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("updateTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string UpdateTimeUtc { get; set; }
 
         /// <summary>
         /// The date and time when the authorized payment expires, in Internet date and time format. 
         /// </summary>
         /// <value>The date and time when the authorized payment expires, in Internet date and time format. </value>
-        [DataMember(Name="expirationTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationTimeUtc { get; set; }
 
         /// <summary>
         /// The id of the order 
         /// </summary>
         /// <value>The id of the order </value>
-        [DataMember(Name="orderId", EmitDefaultValue=false)]
+        [JsonPropertyName("orderId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrderId { get; set; }
 
         /// <summary>
         /// The order status.  Possible values: - &#x60;CREATED&#x60; - &#x60;VOIDED&#x60; - &#x60;COMPLETED&#x60; - &#x60;PAYER_ACTION_REQUIRED&#x60; - &#x60;STEP_UP_REQUIRED&#x60; 
         /// </summary>
         /// <value>The order status.  Possible values: - &#x60;CREATED&#x60; - &#x60;VOIDED&#x60; - &#x60;COMPLETED&#x60; - &#x60;PAYER_ACTION_REQUIRED&#x60; - &#x60;STEP_UP_REQUIRED&#x60; </value>
-        [DataMember(Name="orderStatus", EmitDefaultValue=false)]
+        [JsonPropertyName("orderStatus")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrderStatus { get; set; }
 
         /// <summary>
         /// Mastercard is introducing the Merchant Risk Predict Service in the middle East/Africa Region. A newly launched service comprised of seven independent artificial intelligence (AI)-powered scores intended to augment existing merchant risk management practices. 
         /// </summary>
         /// <value>Mastercard is introducing the Merchant Risk Predict Service in the middle East/Africa Region. A newly launched service comprised of seven independent artificial intelligence (AI)-powered scores intended to augment existing merchant risk management practices. </value>
-        [DataMember(Name="merchantRiskPrediction", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantRiskPrediction")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantRiskPrediction { get; set; }
 
         /// <summary>
         /// Gets or Sets Network
         /// </summary>
-        [DataMember(Name="network", EmitDefaultValue=false)]
+        [JsonPropertyName("network")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsProcessorInformationReversalNetwork Network { get; set; }
 
         /// <summary>
         /// Merchant Commercial Enhanced Data Program (CEDP) verified indicator received in authorization response messages for U.S. domestic transactions containing a credential for the commercial credit products.  This field flows in ISO field 34, DSID 02 tag DA, in AN, EBCDIC format.  Possible values: - &#x60;Y&#x60;: Merchant CEDP verified  This field is for internal processing only (TC33A usage) and is not sent back to the merchant.  #### Used by **Authorization Response** Response field only. 
         /// </summary>
         /// <value>Merchant Commercial Enhanced Data Program (CEDP) verified indicator received in authorization response messages for U.S. domestic transactions containing a credential for the commercial credit products.  This field flows in ISO field 34, DSID 02 tag DA, in AN, EBCDIC format.  Possible values: - &#x60;Y&#x60;: Merchant CEDP verified  This field is for internal processing only (TC33A usage) and is not sent back to the merchant.  #### Used by **Authorization Response** Response field only. </value>
-        [DataMember(Name="cedpVerifiedIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("cedpVerifiedIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CedpVerifiedIndicator { get; set; }
 
         /// <summary>
@@ -465,54 +513,54 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseProcessorInformation {\n");
-            if (AuthIndicator != null) sb.Append("  AuthIndicator: ").Append(AuthIndicator).Append("\n");
-            if (ApprovalCode != null) sb.Append("  ApprovalCode: ").Append(ApprovalCode).Append("\n");
-            if (CardReferenceData != null) sb.Append("  CardReferenceData: ").Append(CardReferenceData).Append("\n");
-            if (TransactionId != null) sb.Append("  TransactionId: ").Append(TransactionId).Append("\n");
-            if (NetworkTransactionId != null) sb.Append("  NetworkTransactionId: ").Append(NetworkTransactionId).Append("\n");
-            if (ResponseCode != null) sb.Append("  ResponseCode: ").Append(ResponseCode).Append("\n");
-            if (ResponseCodeSource != null) sb.Append("  ResponseCodeSource: ").Append(ResponseCodeSource).Append("\n");
-            if (ResponseDetails != null) sb.Append("  ResponseDetails: ").Append(ResponseDetails).Append("\n");
-            if (ResponseCategoryCode != null) sb.Append("  ResponseCategoryCode: ").Append(ResponseCategoryCode).Append("\n");
-            if (ResponseSourceCode != null) sb.Append("  ResponseSourceCode: ").Append(ResponseSourceCode).Append("\n");
-            if (ForwardedAcquirerCode != null) sb.Append("  ForwardedAcquirerCode: ").Append(ForwardedAcquirerCode).Append("\n");
-            if (SettlementDate != null) sb.Append("  SettlementDate: ").Append(SettlementDate).Append("\n");
-            if (SequenceNumber != null) sb.Append("  SequenceNumber: ").Append(SequenceNumber).Append("\n");
-            if (Avs != null) sb.Append("  Avs: ").Append(Avs).Append("\n");
-            if (CardVerification != null) sb.Append("  CardVerification: ").Append(CardVerification).Append("\n");
-            if (MerchantAdvice != null) sb.Append("  MerchantAdvice: ").Append(MerchantAdvice).Append("\n");
-            if (ElectronicVerificationResults != null) sb.Append("  ElectronicVerificationResults: ").Append(ElectronicVerificationResults).Append("\n");
-            if (AchVerification != null) sb.Append("  AchVerification: ").Append(AchVerification).Append("\n");
-            if (Customer != null) sb.Append("  Customer: ").Append(Customer).Append("\n");
-            if (ConsumerAuthenticationResponse != null) sb.Append("  ConsumerAuthenticationResponse: ").Append(ConsumerAuthenticationResponse).Append("\n");
-            if (SystemTraceAuditNumber != null) sb.Append("  SystemTraceAuditNumber: ").Append(SystemTraceAuditNumber).Append("\n");
-            if (PaymentAccountReferenceNumber != null) sb.Append("  PaymentAccountReferenceNumber: ").Append(PaymentAccountReferenceNumber).Append("\n");
-            if (TransactionIntegrityCode != null) sb.Append("  TransactionIntegrityCode: ").Append(TransactionIntegrityCode).Append("\n");
-            if (AmexVerbalAuthReferenceNumber != null) sb.Append("  AmexVerbalAuthReferenceNumber: ").Append(AmexVerbalAuthReferenceNumber).Append("\n");
-            if (MasterCardServiceCode != null) sb.Append("  MasterCardServiceCode: ").Append(MasterCardServiceCode).Append("\n");
-            if (MasterCardServiceReplyCode != null) sb.Append("  MasterCardServiceReplyCode: ").Append(MasterCardServiceReplyCode).Append("\n");
-            if (MasterCardAuthenticationType != null) sb.Append("  MasterCardAuthenticationType: ").Append(MasterCardAuthenticationType).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Routing != null) sb.Append("  Routing: ").Append(Routing).Append("\n");
-            if (MerchantNumber != null) sb.Append("  MerchantNumber: ").Append(MerchantNumber).Append("\n");
-            if (RetrievalReferenceNumber != null) sb.Append("  RetrievalReferenceNumber: ").Append(RetrievalReferenceNumber).Append("\n");
-            if (PaymentUrl != null) sb.Append("  PaymentUrl: ").Append(PaymentUrl).Append("\n");
-            if (CompleteUrl != null) sb.Append("  CompleteUrl: ").Append(CompleteUrl).Append("\n");
-            if (Signature != null) sb.Append("  Signature: ").Append(Signature).Append("\n");
-            if (PublicKey != null) sb.Append("  PublicKey: ").Append(PublicKey).Append("\n");
-            if (SellerProtection != null) sb.Append("  SellerProtection: ").Append(SellerProtection).Append("\n");
-            if (TransactionExpiryDate != null) sb.Append("  TransactionExpiryDate: ").Append(TransactionExpiryDate).Append("\n");
-            if (CustomUrl != null) sb.Append("  CustomUrl: ").Append(CustomUrl).Append("\n");
-            if (SchemeAssignedId != null) sb.Append("  SchemeAssignedId: ").Append(SchemeAssignedId).Append("\n");
-            if (DeviceUrl != null) sb.Append("  DeviceUrl: ").Append(DeviceUrl).Append("\n");
-            if (DisbursementMode != null) sb.Append("  DisbursementMode: ").Append(DisbursementMode).Append("\n");
-            if (UpdateTimeUtc != null) sb.Append("  UpdateTimeUtc: ").Append(UpdateTimeUtc).Append("\n");
-            if (ExpirationTimeUtc != null) sb.Append("  ExpirationTimeUtc: ").Append(ExpirationTimeUtc).Append("\n");
-            if (OrderId != null) sb.Append("  OrderId: ").Append(OrderId).Append("\n");
-            if (OrderStatus != null) sb.Append("  OrderStatus: ").Append(OrderStatus).Append("\n");
-            if (MerchantRiskPrediction != null) sb.Append("  MerchantRiskPrediction: ").Append(MerchantRiskPrediction).Append("\n");
-            if (Network != null) sb.Append("  Network: ").Append(Network).Append("\n");
-            if (CedpVerifiedIndicator != null) sb.Append("  CedpVerifiedIndicator: ").Append(CedpVerifiedIndicator).Append("\n");
+            if (AuthIndicator != null) sb.Append("  AuthIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "authIndicator", AuthIndicator.ToString())).Append("\n");
+            if (ApprovalCode != null) sb.Append("  ApprovalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "approvalCode", ApprovalCode.ToString())).Append("\n");
+            if (CardReferenceData != null) sb.Append("  CardReferenceData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "cardReferenceData", CardReferenceData.ToString())).Append("\n");
+            if (TransactionId != null) sb.Append("  TransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "transactionId", TransactionId.ToString())).Append("\n");
+            if (NetworkTransactionId != null) sb.Append("  NetworkTransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "networkTransactionId", NetworkTransactionId.ToString())).Append("\n");
+            if (ResponseCode != null) sb.Append("  ResponseCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "responseCode", ResponseCode.ToString())).Append("\n");
+            if (ResponseCodeSource != null) sb.Append("  ResponseCodeSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "responseCodeSource", ResponseCodeSource.ToString())).Append("\n");
+            if (ResponseDetails != null) sb.Append("  ResponseDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "responseDetails", ResponseDetails.ToString())).Append("\n");
+            if (ResponseCategoryCode != null) sb.Append("  ResponseCategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "responseCategoryCode", ResponseCategoryCode.ToString())).Append("\n");
+            if (ResponseSourceCode != null) sb.Append("  ResponseSourceCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "responseSourceCode", ResponseSourceCode.ToString())).Append("\n");
+            if (ForwardedAcquirerCode != null) sb.Append("  ForwardedAcquirerCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "forwardedAcquirerCode", ForwardedAcquirerCode.ToString())).Append("\n");
+            if (SettlementDate != null) sb.Append("  SettlementDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "settlementDate", SettlementDate.ToString())).Append("\n");
+            if (SequenceNumber != null) sb.Append("  SequenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "sequenceNumber", SequenceNumber.ToString())).Append("\n");
+            if (Avs != null) sb.Append("  Avs: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "avs", Avs.ToString())).Append("\n");
+            if (CardVerification != null) sb.Append("  CardVerification: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "cardVerification", CardVerification.ToString())).Append("\n");
+            if (MerchantAdvice != null) sb.Append("  MerchantAdvice: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "merchantAdvice", MerchantAdvice.ToString())).Append("\n");
+            if (ElectronicVerificationResults != null) sb.Append("  ElectronicVerificationResults: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "electronicVerificationResults", ElectronicVerificationResults.ToString())).Append("\n");
+            if (AchVerification != null) sb.Append("  AchVerification: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "achVerification", AchVerification.ToString())).Append("\n");
+            if (Customer != null) sb.Append("  Customer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "customer", Customer.ToString())).Append("\n");
+            if (ConsumerAuthenticationResponse != null) sb.Append("  ConsumerAuthenticationResponse: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "consumerAuthenticationResponse", ConsumerAuthenticationResponse.ToString())).Append("\n");
+            if (SystemTraceAuditNumber != null) sb.Append("  SystemTraceAuditNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "systemTraceAuditNumber", SystemTraceAuditNumber.ToString())).Append("\n");
+            if (PaymentAccountReferenceNumber != null) sb.Append("  PaymentAccountReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "paymentAccountReferenceNumber", PaymentAccountReferenceNumber.ToString())).Append("\n");
+            if (TransactionIntegrityCode != null) sb.Append("  TransactionIntegrityCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "transactionIntegrityCode", TransactionIntegrityCode.ToString())).Append("\n");
+            if (AmexVerbalAuthReferenceNumber != null) sb.Append("  AmexVerbalAuthReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "amexVerbalAuthReferenceNumber", AmexVerbalAuthReferenceNumber.ToString())).Append("\n");
+            if (MasterCardServiceCode != null) sb.Append("  MasterCardServiceCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "masterCardServiceCode", MasterCardServiceCode.ToString())).Append("\n");
+            if (MasterCardServiceReplyCode != null) sb.Append("  MasterCardServiceReplyCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "masterCardServiceReplyCode", MasterCardServiceReplyCode.ToString())).Append("\n");
+            if (MasterCardAuthenticationType != null) sb.Append("  MasterCardAuthenticationType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "masterCardAuthenticationType", MasterCardAuthenticationType.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "name", Name.ToString())).Append("\n");
+            if (Routing != null) sb.Append("  Routing: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "routing", Routing.ToString())).Append("\n");
+            if (MerchantNumber != null) sb.Append("  MerchantNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "merchantNumber", MerchantNumber.ToString())).Append("\n");
+            if (RetrievalReferenceNumber != null) sb.Append("  RetrievalReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "retrievalReferenceNumber", RetrievalReferenceNumber.ToString())).Append("\n");
+            if (PaymentUrl != null) sb.Append("  PaymentUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "paymentUrl", PaymentUrl.ToString())).Append("\n");
+            if (CompleteUrl != null) sb.Append("  CompleteUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "completeUrl", CompleteUrl.ToString())).Append("\n");
+            if (Signature != null) sb.Append("  Signature: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "signature", Signature.ToString())).Append("\n");
+            if (PublicKey != null) sb.Append("  PublicKey: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "publicKey", PublicKey.ToString())).Append("\n");
+            if (SellerProtection != null) sb.Append("  SellerProtection: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "sellerProtection", SellerProtection.ToString())).Append("\n");
+            if (TransactionExpiryDate != null) sb.Append("  TransactionExpiryDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "transactionExpiryDate", TransactionExpiryDate.ToString())).Append("\n");
+            if (CustomUrl != null) sb.Append("  CustomUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "customUrl", CustomUrl.ToString())).Append("\n");
+            if (SchemeAssignedId != null) sb.Append("  SchemeAssignedId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "schemeAssignedId", SchemeAssignedId.ToString())).Append("\n");
+            if (DeviceUrl != null) sb.Append("  DeviceUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "deviceUrl", DeviceUrl.ToString())).Append("\n");
+            if (DisbursementMode != null) sb.Append("  DisbursementMode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "disbursementMode", DisbursementMode.ToString())).Append("\n");
+            if (UpdateTimeUtc != null) sb.Append("  UpdateTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "updateTimeUtc", UpdateTimeUtc.ToString())).Append("\n");
+            if (ExpirationTimeUtc != null) sb.Append("  ExpirationTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "expirationTimeUtc", ExpirationTimeUtc.ToString())).Append("\n");
+            if (OrderId != null) sb.Append("  OrderId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "orderId", OrderId.ToString())).Append("\n");
+            if (OrderStatus != null) sb.Append("  OrderStatus: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "orderStatus", OrderStatus.ToString())).Append("\n");
+            if (MerchantRiskPrediction != null) sb.Append("  MerchantRiskPrediction: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "merchantRiskPrediction", MerchantRiskPrediction.ToString())).Append("\n");
+            if (Network != null) sb.Append("  Network: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "network", Network.ToString())).Append("\n");
+            if (CedpVerifiedIndicator != null) sb.Append("  CedpVerifiedIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformation", "cedpVerifiedIndicator", CedpVerifiedIndicator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -523,7 +571,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseProcessorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

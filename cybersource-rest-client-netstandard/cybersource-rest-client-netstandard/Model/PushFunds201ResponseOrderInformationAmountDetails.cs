@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PushFunds201ResponseOrderInformationAmountDetails" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected PushFunds201ResponseOrderInformationAmountDetails() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PushFunds201ResponseOrderInformationAmountDetails" /> class.
@@ -54,28 +54,32 @@ namespace CyberSource.Model
         /// Grand total for the order. This value cannot be negative. You can include a decimal point (.), but no other special characters. CyberSource truncates the amount to the correct number of decimal places. 
         /// </summary>
         /// <value>Grand total for the order. This value cannot be negative. You can include a decimal point (.), but no other special characters. CyberSource truncates the amount to the correct number of decimal places. </value>
-        [DataMember(Name="totalAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalAmount { get; set; }
 
         /// <summary>
         /// Currency used for the order. Use the three-character ISO Standard Currency Codes 
         /// </summary>
         /// <value>Currency used for the order. Use the three-character ISO Standard Currency Codes </value>
-        [DataMember(Name="currency", EmitDefaultValue=false)]
+        [JsonPropertyName("currency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Currency { get; set; }
 
         /// <summary>
         /// This is a multicurrency field. It contains the transaction amount (field 4), converted to the Currency used to bill the cardholder&#39;s account. This field is returned for OCT transactions. 
         /// </summary>
         /// <value>This is a multicurrency field. It contains the transaction amount (field 4), converted to the Currency used to bill the cardholder&#39;s account. This field is returned for OCT transactions. </value>
-        [DataMember(Name="settlementAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementAmount { get; set; }
 
         /// <summary>
         /// This is a multicurrency-only field. It contains a 3-digit numeric code that identifies the currency used by the issuer to bill the cardholder&#39;s account. This field is returned for OCT transactions. 
         /// </summary>
         /// <value>This is a multicurrency-only field. It contains a 3-digit numeric code that identifies the currency used by the issuer to bill the cardholder&#39;s account. This field is returned for OCT transactions. </value>
-        [DataMember(Name="settlementCurrency", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementCurrency")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementCurrency { get; set; }
 
         /// <summary>
@@ -86,10 +90,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PushFunds201ResponseOrderInformationAmountDetails {\n");
-            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(TotalAmount).Append("\n");
-            if (Currency != null) sb.Append("  Currency: ").Append(Currency).Append("\n");
-            if (SettlementAmount != null) sb.Append("  SettlementAmount: ").Append(SettlementAmount).Append("\n");
-            if (SettlementCurrency != null) sb.Append("  SettlementCurrency: ").Append(SettlementCurrency).Append("\n");
+            if (TotalAmount != null) sb.Append("  TotalAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponseOrderInformationAmountDetails", "totalAmount", TotalAmount.ToString())).Append("\n");
+            if (Currency != null) sb.Append("  Currency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponseOrderInformationAmountDetails", "currency", Currency.ToString())).Append("\n");
+            if (SettlementAmount != null) sb.Append("  SettlementAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponseOrderInformationAmountDetails", "settlementAmount", SettlementAmount.ToString())).Append("\n");
+            if (SettlementCurrency != null) sb.Append("  SettlementCurrency: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PushFunds201ResponseOrderInformationAmountDetails", "settlementCurrency", SettlementCurrency.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -100,7 +104,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PushFunds201ResponseOrderInformationAmountDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

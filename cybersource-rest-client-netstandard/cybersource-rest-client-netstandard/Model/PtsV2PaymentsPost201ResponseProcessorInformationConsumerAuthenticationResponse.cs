@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Mapped response code for Visa Secure and American Express SafeKey. 
         /// </summary>
         /// <value>Mapped response code for Visa Secure and American Express SafeKey. </value>
-        [DataMember(Name="code", EmitDefaultValue=false)]
+        [JsonPropertyName("code")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Code { get; set; }
 
         /// <summary>
         /// Raw response code sent directly from the processor for Visa Secure and American Express SafeKey: 
         /// </summary>
         /// <value>Raw response code sent directly from the processor for Visa Secure and American Express SafeKey: </value>
-        [DataMember(Name="codeRaw", EmitDefaultValue=false)]
+        [JsonPropertyName("codeRaw")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CodeRaw { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseProcessorInformationConsumerAuthenticationResponse {\n");
-            if (Code != null) sb.Append("  Code: ").Append(Code).Append("\n");
-            if (CodeRaw != null) sb.Append("  CodeRaw: ").Append(CodeRaw).Append("\n");
+            if (Code != null) sb.Append("  Code: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationConsumerAuthenticationResponse", "code", Code.ToString())).Append("\n");
+            if (CodeRaw != null) sb.Append("  CodeRaw: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessorInformationConsumerAuthenticationResponse", "codeRaw", CodeRaw.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseProcessorInformationConsumerAuthenticationResponse", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

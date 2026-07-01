@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -50,35 +50,40 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets MerchantDescriptor
         /// </summary>
-        [DataMember(Name="merchantDescriptor", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDescriptor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsMerchantInformationMerchantDescriptor MerchantDescriptor { get; set; }
 
         /// <summary>
         /// customer would be redirected to this url based on the decision of the transaction
         /// </summary>
         /// <value>customer would be redirected to this url based on the decision of the transaction</value>
-        [DataMember(Name="cancelUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("cancelUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CancelUrl { get; set; }
 
         /// <summary>
         /// customer would be redirected to this url based on the decision of the transaction
         /// </summary>
         /// <value>customer would be redirected to this url based on the decision of the transaction</value>
-        [DataMember(Name="successUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("successUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SuccessUrl { get; set; }
 
         /// <summary>
         /// customer would be redirected to this url based on the decision of the transaction
         /// </summary>
         /// <value>customer would be redirected to this url based on the decision of the transaction</value>
-        [DataMember(Name="failureUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("failureUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FailureUrl { get; set; }
 
         /// <summary>
         /// Free-form text field.
         /// </summary>
         /// <value>Free-form text field.</value>
-        [DataMember(Name="noteToBuyer", EmitDefaultValue=false)]
+        [JsonPropertyName("noteToBuyer")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NoteToBuyer { get; set; }
 
         /// <summary>
@@ -89,11 +94,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentreferencesMerchantInformation {\n");
-            if (MerchantDescriptor != null) sb.Append("  MerchantDescriptor: ").Append(MerchantDescriptor).Append("\n");
-            if (CancelUrl != null) sb.Append("  CancelUrl: ").Append(CancelUrl).Append("\n");
-            if (SuccessUrl != null) sb.Append("  SuccessUrl: ").Append(SuccessUrl).Append("\n");
-            if (FailureUrl != null) sb.Append("  FailureUrl: ").Append(FailureUrl).Append("\n");
-            if (NoteToBuyer != null) sb.Append("  NoteToBuyer: ").Append(NoteToBuyer).Append("\n");
+            if (MerchantDescriptor != null) sb.Append("  MerchantDescriptor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesMerchantInformation", "merchantDescriptor", MerchantDescriptor.ToString())).Append("\n");
+            if (CancelUrl != null) sb.Append("  CancelUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesMerchantInformation", "cancelUrl", CancelUrl.ToString())).Append("\n");
+            if (SuccessUrl != null) sb.Append("  SuccessUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesMerchantInformation", "successUrl", SuccessUrl.ToString())).Append("\n");
+            if (FailureUrl != null) sb.Append("  FailureUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesMerchantInformation", "failureUrl", FailureUrl.ToString())).Append("\n");
+            if (NoteToBuyer != null) sb.Append("  NoteToBuyer: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesMerchantInformation", "noteToBuyer", NoteToBuyer.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,7 +109,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentreferencesMerchantInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

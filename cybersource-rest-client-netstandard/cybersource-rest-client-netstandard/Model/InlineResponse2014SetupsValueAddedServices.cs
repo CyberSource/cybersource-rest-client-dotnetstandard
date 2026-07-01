@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -38,7 +38,7 @@ namespace CyberSource.Model
         /// <param name="BankAccountValidation">BankAccountValidation.</param>
         /// <param name="Flexapi">Flexapi.</param>
         /// <param name="Webhooks">Webhooks.</param>
-        public InlineResponse2014SetupsValueAddedServices(InlineResponse2014SetupsPaymentsDigitalPayments Reporting = default(InlineResponse2014SetupsPaymentsDigitalPayments), InlineResponse2014SetupsPaymentsDigitalPayments TransactionSearch = default(InlineResponse2014SetupsPaymentsDigitalPayments), InlineResponse2014SetupsPaymentsDigitalPayments BankAccountValidation = default(InlineResponse2014SetupsPaymentsDigitalPayments), InlineResponse2014SetupsPaymentsDigitalPayments Flexapi = default(InlineResponse2014SetupsPaymentsDigitalPayments), InlineResponse2014SetupsPaymentsDigitalPayments Webhooks = default(InlineResponse2014SetupsPaymentsDigitalPayments))
+        public InlineResponse2014SetupsValueAddedServices(PaymentsConfigurationSetupDigitalPayments Reporting = default(PaymentsConfigurationSetupDigitalPayments), PaymentsConfigurationSetupDigitalPayments TransactionSearch = default(PaymentsConfigurationSetupDigitalPayments), PaymentsConfigurationSetupDigitalPayments BankAccountValidation = default(PaymentsConfigurationSetupDigitalPayments), PaymentsConfigurationSetupDigitalPayments Flexapi = default(PaymentsConfigurationSetupDigitalPayments), PaymentsConfigurationSetupDigitalPayments Webhooks = default(PaymentsConfigurationSetupDigitalPayments))
         {
             this.Reporting = Reporting;
             this.TransactionSearch = TransactionSearch;
@@ -50,32 +50,37 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Reporting
         /// </summary>
-        [DataMember(Name="reporting", EmitDefaultValue=false)]
-        public InlineResponse2014SetupsPaymentsDigitalPayments Reporting { get; set; }
+        [JsonPropertyName("reporting")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public PaymentsConfigurationSetupDigitalPayments Reporting { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionSearch
         /// </summary>
-        [DataMember(Name="transactionSearch", EmitDefaultValue=false)]
-        public InlineResponse2014SetupsPaymentsDigitalPayments TransactionSearch { get; set; }
+        [JsonPropertyName("transactionSearch")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public PaymentsConfigurationSetupDigitalPayments TransactionSearch { get; set; }
 
         /// <summary>
         /// Gets or Sets BankAccountValidation
         /// </summary>
-        [DataMember(Name="bankAccountValidation", EmitDefaultValue=false)]
-        public InlineResponse2014SetupsPaymentsDigitalPayments BankAccountValidation { get; set; }
+        [JsonPropertyName("bankAccountValidation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public PaymentsConfigurationSetupDigitalPayments BankAccountValidation { get; set; }
 
         /// <summary>
         /// Gets or Sets Flexapi
         /// </summary>
-        [DataMember(Name="flexapi", EmitDefaultValue=false)]
-        public InlineResponse2014SetupsPaymentsDigitalPayments Flexapi { get; set; }
+        [JsonPropertyName("flexapi")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public PaymentsConfigurationSetupDigitalPayments Flexapi { get; set; }
 
         /// <summary>
         /// Gets or Sets Webhooks
         /// </summary>
-        [DataMember(Name="webhooks", EmitDefaultValue=false)]
-        public InlineResponse2014SetupsPaymentsDigitalPayments Webhooks { get; set; }
+        [JsonPropertyName("webhooks")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public PaymentsConfigurationSetupDigitalPayments Webhooks { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -85,11 +90,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2014SetupsValueAddedServices {\n");
-            if (Reporting != null) sb.Append("  Reporting: ").Append(Reporting).Append("\n");
-            if (TransactionSearch != null) sb.Append("  TransactionSearch: ").Append(TransactionSearch).Append("\n");
-            if (BankAccountValidation != null) sb.Append("  BankAccountValidation: ").Append(BankAccountValidation).Append("\n");
-            if (Flexapi != null) sb.Append("  Flexapi: ").Append(Flexapi).Append("\n");
-            if (Webhooks != null) sb.Append("  Webhooks: ").Append(Webhooks).Append("\n");
+            if (Reporting != null) sb.Append("  Reporting: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014SetupsValueAddedServices", "reporting", Reporting.ToString())).Append("\n");
+            if (TransactionSearch != null) sb.Append("  TransactionSearch: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014SetupsValueAddedServices", "transactionSearch", TransactionSearch.ToString())).Append("\n");
+            if (BankAccountValidation != null) sb.Append("  BankAccountValidation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014SetupsValueAddedServices", "bankAccountValidation", BankAccountValidation.ToString())).Append("\n");
+            if (Flexapi != null) sb.Append("  Flexapi: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014SetupsValueAddedServices", "flexapi", Flexapi.ToString())).Append("\n");
+            if (Webhooks != null) sb.Append("  Webhooks: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014SetupsValueAddedServices", "webhooks", Webhooks.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -100,7 +105,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2014SetupsValueAddedServices", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

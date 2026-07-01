@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,26 +48,30 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Profile
         /// </summary>
-        [DataMember(Name="profile", EmitDefaultValue=false)]
+        [JsonPropertyName("profile")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsRiskInformationProfile Profile { get; set; }
 
         /// <summary>
         /// Specifies one of the following types of events: - login - account_creation - account_update For regular payment transactions, do not send this field. 
         /// </summary>
         /// <value>Specifies one of the following types of events: - login - account_creation - account_update For regular payment transactions, do not send this field. </value>
-        [DataMember(Name="eventType", EmitDefaultValue=false)]
+        [JsonPropertyName("eventType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string EventType { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerHistory
         /// </summary>
-        [DataMember(Name="buyerHistory", EmitDefaultValue=false)]
+        [JsonPropertyName("buyerHistory")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsRiskInformationBuyerHistory BuyerHistory { get; set; }
 
         /// <summary>
         /// Gets or Sets AuxiliaryData
         /// </summary>
-        [DataMember(Name="auxiliaryData", EmitDefaultValue=false)]
+        [JsonPropertyName("auxiliaryData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsRiskInformationAuxiliaryData> AuxiliaryData { get; set; }
 
         /// <summary>
@@ -78,10 +82,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsRiskInformation {\n");
-            if (Profile != null) sb.Append("  Profile: ").Append(Profile).Append("\n");
-            if (EventType != null) sb.Append("  EventType: ").Append(EventType).Append("\n");
-            if (BuyerHistory != null) sb.Append("  BuyerHistory: ").Append(BuyerHistory).Append("\n");
-            if (AuxiliaryData != null) sb.Append("  AuxiliaryData: ").Append(AuxiliaryData).Append("\n");
+            if (Profile != null) sb.Append("  Profile: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformation", "profile", Profile.ToString())).Append("\n");
+            if (EventType != null) sb.Append("  EventType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformation", "eventType", EventType.ToString())).Append("\n");
+            if (BuyerHistory != null) sb.Append("  BuyerHistory: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformation", "buyerHistory", BuyerHistory.ToString())).Append("\n");
+            if (AuxiliaryData != null) sb.Append("  AuxiliaryData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsRiskInformation", "auxiliaryData", AuxiliaryData.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -92,7 +96,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsRiskInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

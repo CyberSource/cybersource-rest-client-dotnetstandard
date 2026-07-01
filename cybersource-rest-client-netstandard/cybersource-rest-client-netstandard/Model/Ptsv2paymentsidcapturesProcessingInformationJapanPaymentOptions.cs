@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,56 +57,64 @@ namespace CyberSource.Model
         /// This value is a 2-digit code indicating the payment method. Use Payment Method Code value that applies to the tranasction. - 10 (One-time payment) - 21, 22, 23, 24  (Bonus(one-time)payment) - 61 (Installment payment) - 31, 32, 33, 34  (Integrated (Bonus + Installment)payment) - 80 (Revolving payment) 
         /// </summary>
         /// <value>This value is a 2-digit code indicating the payment method. Use Payment Method Code value that applies to the tranasction. - 10 (One-time payment) - 21, 22, 23, 24  (Bonus(one-time)payment) - 61 (Installment payment) - 31, 32, 33, 34  (Integrated (Bonus + Installment)payment) - 80 (Revolving payment) </value>
-        [DataMember(Name="paymentMethod", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentMethod")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentMethod { get; set; }
 
         /// <summary>
         /// Field contains the number of bonuses. 
         /// </summary>
         /// <value>Field contains the number of bonuses. </value>
-        [DataMember(Name="bonuses", EmitDefaultValue=false)]
+        [JsonPropertyName("bonuses")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Bonuses { get; set; }
 
         /// <summary>
         /// Number of Installments. 
         /// </summary>
         /// <value>Number of Installments. </value>
-        [DataMember(Name="installments", EmitDefaultValue=false)]
+        [JsonPropertyName("installments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Installments { get; set; }
 
         /// <summary>
         /// Billing month in MM format. 
         /// </summary>
         /// <value>Billing month in MM format. </value>
-        [DataMember(Name="firstBillingMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("firstBillingMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstBillingMonth { get; set; }
 
         /// <summary>
         /// This field contains the bonus amount. 
         /// </summary>
         /// <value>This field contains the bonus amount. </value>
-        [DataMember(Name="bonusAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("bonusAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BonusAmount { get; set; }
 
         /// <summary>
         /// This field contains the Japan specific first bonus month. 
         /// </summary>
         /// <value>This field contains the Japan specific first bonus month. </value>
-        [DataMember(Name="bonusMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("bonusMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BonusMonth { get; set; }
 
         /// <summary>
         /// Field contains the second bonus amount. 
         /// </summary>
         /// <value>Field contains the second bonus amount. </value>
-        [DataMember(Name="secondBonusAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("secondBonusAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecondBonusAmount { get; set; }
 
         /// <summary>
         /// Field contains the Japan specific second bonus month. 
         /// </summary>
         /// <value>Field contains the Japan specific second bonus month. </value>
-        [DataMember(Name="secondBonusMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("secondBonusMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecondBonusMonth { get; set; }
 
         /// <summary>
@@ -117,14 +125,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidcapturesProcessingInformationJapanPaymentOptions {\n");
-            if (PaymentMethod != null) sb.Append("  PaymentMethod: ").Append(PaymentMethod).Append("\n");
-            if (Bonuses != null) sb.Append("  Bonuses: ").Append(Bonuses).Append("\n");
-            if (Installments != null) sb.Append("  Installments: ").Append(Installments).Append("\n");
-            if (FirstBillingMonth != null) sb.Append("  FirstBillingMonth: ").Append(FirstBillingMonth).Append("\n");
-            if (BonusAmount != null) sb.Append("  BonusAmount: ").Append(BonusAmount).Append("\n");
-            if (BonusMonth != null) sb.Append("  BonusMonth: ").Append(BonusMonth).Append("\n");
-            if (SecondBonusAmount != null) sb.Append("  SecondBonusAmount: ").Append(SecondBonusAmount).Append("\n");
-            if (SecondBonusMonth != null) sb.Append("  SecondBonusMonth: ").Append(SecondBonusMonth).Append("\n");
+            if (PaymentMethod != null) sb.Append("  PaymentMethod: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessingInformationJapanPaymentOptions", "paymentMethod", PaymentMethod.ToString())).Append("\n");
+            if (Bonuses != null) sb.Append("  Bonuses: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessingInformationJapanPaymentOptions", "bonuses", Bonuses.ToString())).Append("\n");
+            if (Installments != null) sb.Append("  Installments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessingInformationJapanPaymentOptions", "installments", Installments.ToString())).Append("\n");
+            if (FirstBillingMonth != null) sb.Append("  FirstBillingMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessingInformationJapanPaymentOptions", "firstBillingMonth", FirstBillingMonth.ToString())).Append("\n");
+            if (BonusAmount != null) sb.Append("  BonusAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessingInformationJapanPaymentOptions", "bonusAmount", BonusAmount.ToString())).Append("\n");
+            if (BonusMonth != null) sb.Append("  BonusMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessingInformationJapanPaymentOptions", "bonusMonth", BonusMonth.ToString())).Append("\n");
+            if (SecondBonusAmount != null) sb.Append("  SecondBonusAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessingInformationJapanPaymentOptions", "secondBonusAmount", SecondBonusAmount.ToString())).Append("\n");
+            if (SecondBonusMonth != null) sb.Append("  SecondBonusMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesProcessingInformationJapanPaymentOptions", "secondBonusMonth", SecondBonusMonth.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -135,7 +143,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidcapturesProcessingInformationJapanPaymentOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

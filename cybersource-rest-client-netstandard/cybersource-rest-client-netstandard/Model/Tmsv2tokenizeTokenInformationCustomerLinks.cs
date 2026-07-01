@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,19 +46,22 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Self
         /// </summary>
-        [DataMember(Name="self", EmitDefaultValue=false)]
+        [JsonPropertyName("self")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizeTokenInformationCustomerLinksSelf Self { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInstruments
         /// </summary>
-        [DataMember(Name="paymentInstruments", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentInstruments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizeTokenInformationCustomerLinksPaymentInstruments PaymentInstruments { get; set; }
 
         /// <summary>
         /// Gets or Sets ShippingAddress
         /// </summary>
-        [DataMember(Name="shippingAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("shippingAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2tokenizeTokenInformationCustomerLinksShippingAddress ShippingAddress { get; set; }
 
         /// <summary>
@@ -69,9 +72,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2tokenizeTokenInformationCustomerLinks {\n");
-            if (Self != null) sb.Append("  Self: ").Append(Self).Append("\n");
-            if (PaymentInstruments != null) sb.Append("  PaymentInstruments: ").Append(PaymentInstruments).Append("\n");
-            if (ShippingAddress != null) sb.Append("  ShippingAddress: ").Append(ShippingAddress).Append("\n");
+            if (Self != null) sb.Append("  Self: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeTokenInformationCustomerLinks", "self", Self.ToString())).Append("\n");
+            if (PaymentInstruments != null) sb.Append("  PaymentInstruments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeTokenInformationCustomerLinks", "paymentInstruments", PaymentInstruments.ToString())).Append("\n");
+            if (ShippingAddress != null) sb.Append("  ShippingAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeTokenInformationCustomerLinks", "shippingAddress", ShippingAddress.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +85,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2tokenizeTokenInformationCustomerLinks", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

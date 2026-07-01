@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Indicates whether the transaction is a billing agreement. Possible values - true - false (default) 
         /// </summary>
         /// <value>Indicates whether the transaction is a billing agreement. Possible values - true - false (default) </value>
-        [DataMember(Name="indicator", EmitDefaultValue=false)]
+        [JsonPropertyName("indicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Indicator { get; set; }
 
         /// <summary>
         /// Description of the billing agreement
         /// </summary>
         /// <value>Description of the billing agreement</value>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        [JsonPropertyName("description")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Description { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentreferencesAgreementInformation {\n");
-            if (Indicator != null) sb.Append("  Indicator: ").Append(Indicator).Append("\n");
-            if (Description != null) sb.Append("  Description: ").Append(Description).Append("\n");
+            if (Indicator != null) sb.Append("  Indicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesAgreementInformation", "indicator", Indicator.ToString())).Append("\n");
+            if (Description != null) sb.Append("  Description: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesAgreementInformation", "description", Description.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentreferencesAgreementInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

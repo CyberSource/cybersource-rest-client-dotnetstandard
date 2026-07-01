@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ECheckConfigCommon" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected ECheckConfigCommon() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="ECheckConfigCommon" /> class.
@@ -57,41 +57,47 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Processors
         /// </summary>
-        [DataMember(Name="processors", EmitDefaultValue=false)]
+        [JsonPropertyName("processors")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, ECheckConfigCommonProcessors> Processors { get; set; }
 
         /// <summary>
         /// Gets or Sets InternalOnly
         /// </summary>
-        [DataMember(Name="internalOnly", EmitDefaultValue=false)]
+        [JsonPropertyName("internalOnly")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public ECheckConfigCommonInternalOnly InternalOnly { get; set; }
 
         /// <summary>
         /// Mandatory  Name on Merchant&#39;s Bank Account Only ASCII (Hex 20 to Hex 7E) 
         /// </summary>
         /// <value>Mandatory  Name on Merchant&#39;s Bank Account Only ASCII (Hex 20 to Hex 7E) </value>
-        [DataMember(Name="accountHolderName", EmitDefaultValue=false)]
+        [JsonPropertyName("accountHolderName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountHolderName { get; set; }
 
         /// <summary>
         /// Mandatory  Type of account for Merchant&#39;s Bank Account Possible values: - checking - savings - corporatechecking - corporatesavings 
         /// </summary>
         /// <value>Mandatory  Type of account for Merchant&#39;s Bank Account Possible values: - checking - savings - corporatechecking - corporatesavings </value>
-        [DataMember(Name="accountType", EmitDefaultValue=false)]
+        [JsonPropertyName("accountType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountType { get; set; }
 
         /// <summary>
         /// Mandatory  Routing number for Merchant&#39;s Bank Account US Account Routing Number 
         /// </summary>
         /// <value>Mandatory  Routing number for Merchant&#39;s Bank Account US Account Routing Number </value>
-        [DataMember(Name="accountRoutingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("accountRoutingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountRoutingNumber { get; set; }
 
         /// <summary>
         /// Mandatory  Account number for Merchant&#39;s Bank Account 
         /// </summary>
         /// <value>Mandatory  Account number for Merchant&#39;s Bank Account </value>
-        [DataMember(Name="accountNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("accountNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountNumber { get; set; }
 
         /// <summary>
@@ -102,12 +108,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ECheckConfigCommon {\n");
-            if (Processors != null) sb.Append("  Processors: ").Append(Processors).Append("\n");
-            if (InternalOnly != null) sb.Append("  InternalOnly: ").Append(InternalOnly).Append("\n");
-            if (AccountHolderName != null) sb.Append("  AccountHolderName: ").Append(AccountHolderName).Append("\n");
-            if (AccountType != null) sb.Append("  AccountType: ").Append(AccountType).Append("\n");
-            if (AccountRoutingNumber != null) sb.Append("  AccountRoutingNumber: ").Append(AccountRoutingNumber).Append("\n");
-            if (AccountNumber != null) sb.Append("  AccountNumber: ").Append(AccountNumber).Append("\n");
+            if (Processors != null) sb.Append("  Processors: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommon", "processors", Processors.ToString())).Append("\n");
+            if (InternalOnly != null) sb.Append("  InternalOnly: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommon", "internalOnly", InternalOnly.ToString())).Append("\n");
+            if (AccountHolderName != null) sb.Append("  AccountHolderName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommon", "accountHolderName", AccountHolderName.ToString())).Append("\n");
+            if (AccountType != null) sb.Append("  AccountType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommon", "accountType", AccountType.ToString())).Append("\n");
+            if (AccountRoutingNumber != null) sb.Append("  AccountRoutingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommon", "accountRoutingNumber", AccountRoutingNumber.ToString())).Append("\n");
+            if (AccountNumber != null) sb.Append("  AccountNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigCommon", "accountNumber", AccountNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -118,7 +124,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ECheckConfigCommon", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

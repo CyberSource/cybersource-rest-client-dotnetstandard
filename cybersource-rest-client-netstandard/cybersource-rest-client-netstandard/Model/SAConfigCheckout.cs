@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Toggles whether or not the tax amount is displayed on the Hosted Checkout.
         /// </summary>
         /// <value>Toggles whether or not the tax amount is displayed on the Hosted Checkout.</value>
-        [DataMember(Name="displayTaxAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("displayTaxAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DisplayTaxAmount { get; set; }
 
         /// <summary>
         /// Specifies whether the Hosted Checkout is displayed as a single page form or multi page checkout.   Valid values:  &#x60;multi&#x60;  &#x60;single&#x60; 
         /// </summary>
         /// <value>Specifies whether the Hosted Checkout is displayed as a single page form or multi page checkout.   Valid values:  &#x60;multi&#x60;  &#x60;single&#x60; </value>
-        [DataMember(Name="templateType", EmitDefaultValue=false)]
+        [JsonPropertyName("templateType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TemplateType { get; set; }
 
         /// <summary>
         /// URL of the website linked to from the Secure Acceptance receipt page. Only used if the profile does not have custom receipt pages configured.
         /// </summary>
         /// <value>URL of the website linked to from the Secure Acceptance receipt page. Only used if the profile does not have custom receipt pages configured.</value>
-        [DataMember(Name="returnToMerchantSiteUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("returnToMerchantSiteUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReturnToMerchantSiteUrl { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class SAConfigCheckout {\n");
-            if (DisplayTaxAmount != null) sb.Append("  DisplayTaxAmount: ").Append(DisplayTaxAmount).Append("\n");
-            if (TemplateType != null) sb.Append("  TemplateType: ").Append(TemplateType).Append("\n");
-            if (ReturnToMerchantSiteUrl != null) sb.Append("  ReturnToMerchantSiteUrl: ").Append(ReturnToMerchantSiteUrl).Append("\n");
+            if (DisplayTaxAmount != null) sb.Append("  DisplayTaxAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigCheckout", "displayTaxAmount", DisplayTaxAmount.ToString())).Append("\n");
+            if (TemplateType != null) sb.Append("  TemplateType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigCheckout", "templateType", TemplateType.ToString())).Append("\n");
+            if (ReturnToMerchantSiteUrl != null) sb.Append("  ReturnToMerchantSiteUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigCheckout", "returnToMerchantSiteUrl", ReturnToMerchantSiteUrl.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("SAConfigCheckout", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

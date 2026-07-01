@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,48 +55,55 @@ namespace CyberSource.Model
         /// Merchant ID for the payment method. This is a unique identifier for the merchant. example. mid12345678 
         /// </summary>
         /// <value>Merchant ID for the payment method. This is a unique identifier for the merchant. example. mid12345678 </value>
-        [DataMember(Name="merchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantId { get; set; }
 
         /// <summary>
         /// URL of the logo for the payment method. This is used for branding purposes. example: http://www.test.com 
         /// </summary>
         /// <value>URL of the logo for the payment method. This is used for branding purposes. example: http://www.test.com </value>
-        [DataMember(Name="logoUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("logoUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LogoUrl { get; set; }
 
         /// <summary>
         /// URL to redirect to after a successful transaction. This is where the user will be sent after completing the payment. example: http://www.test.com/success 
         /// </summary>
         /// <value>URL to redirect to after a successful transaction. This is where the user will be sent after completing the payment. example: http://www.test.com/success </value>
-        [DataMember(Name="redirectSuccessUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("redirectSuccessUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RedirectSuccessUrl { get; set; }
 
         /// <summary>
         /// URL to redirect to if the user cancels the transaction. This is where the user will be sent if they choose to cancel the payment. example: http://www.test.com/cancel 
         /// </summary>
         /// <value>URL to redirect to if the user cancels the transaction. This is where the user will be sent if they choose to cancel the payment. example: http://www.test.com/cancel </value>
-        [DataMember(Name="redirectCancelUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("redirectCancelUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RedirectCancelUrl { get; set; }
 
         /// <summary>
         /// URL to redirect to if the transaction fails. This is where the user will be sent if there is an error during the payment process. example: http://www.test.com/failure 
         /// </summary>
         /// <value>URL to redirect to if the transaction fails. This is where the user will be sent if there is an error during the payment process. example: http://www.test.com/failure </value>
-        [DataMember(Name="redirectFailureUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("redirectFailureUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RedirectFailureUrl { get; set; }
 
         /// <summary>
         /// Gets or Sets Underwriting
         /// </summary>
-        [DataMember(Name="underwriting", EmitDefaultValue=false)]
+        [JsonPropertyName("underwriting")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public UnderwritingConfiguration Underwriting { get; set; }
 
         /// <summary>
         /// Additional configurations for the payment method. This can include various settings specific to the payment method. 
         /// </summary>
         /// <value>Additional configurations for the payment method. This can include various settings specific to the payment method. </value>
-        [DataMember(Name="additionalConfigurations", EmitDefaultValue=false)]
+        [JsonPropertyName("additionalConfigurations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsAdditionalConfigurations> AdditionalConfigurations { get; set; }
 
         /// <summary>
@@ -107,13 +114,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsPaymentMethods {\n");
-            if (MerchantId != null) sb.Append("  MerchantId: ").Append(MerchantId).Append("\n");
-            if (LogoUrl != null) sb.Append("  LogoUrl: ").Append(LogoUrl).Append("\n");
-            if (RedirectSuccessUrl != null) sb.Append("  RedirectSuccessUrl: ").Append(RedirectSuccessUrl).Append("\n");
-            if (RedirectCancelUrl != null) sb.Append("  RedirectCancelUrl: ").Append(RedirectCancelUrl).Append("\n");
-            if (RedirectFailureUrl != null) sb.Append("  RedirectFailureUrl: ").Append(RedirectFailureUrl).Append("\n");
-            if (Underwriting != null) sb.Append("  Underwriting: ").Append(Underwriting).Append("\n");
-            if (AdditionalConfigurations != null) sb.Append("  AdditionalConfigurations: ").Append(AdditionalConfigurations).Append("\n");
+            if (MerchantId != null) sb.Append("  MerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsPaymentMethods", "merchantId", MerchantId.ToString())).Append("\n");
+            if (LogoUrl != null) sb.Append("  LogoUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsPaymentMethods", "logoUrl", LogoUrl.ToString())).Append("\n");
+            if (RedirectSuccessUrl != null) sb.Append("  RedirectSuccessUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsPaymentMethods", "redirectSuccessUrl", RedirectSuccessUrl.ToString())).Append("\n");
+            if (RedirectCancelUrl != null) sb.Append("  RedirectCancelUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsPaymentMethods", "redirectCancelUrl", RedirectCancelUrl.ToString())).Append("\n");
+            if (RedirectFailureUrl != null) sb.Append("  RedirectFailureUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsPaymentMethods", "redirectFailureUrl", RedirectFailureUrl.ToString())).Append("\n");
+            if (Underwriting != null) sb.Append("  Underwriting: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsPaymentMethods", "underwriting", Underwriting.ToString())).Append("\n");
+            if (AdditionalConfigurations != null) sb.Append("  AdditionalConfigurations: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsPaymentMethods", "additionalConfigurations", AdditionalConfigurations.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -124,7 +131,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PaymentsProductsAlternativePaymentMethodsConfigurationInformationConfigurationsPaymentMethods", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

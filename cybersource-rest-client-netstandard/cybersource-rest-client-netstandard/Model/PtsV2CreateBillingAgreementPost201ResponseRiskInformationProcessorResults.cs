@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Risk score returned by the processor. Possible values of 0-10. A value of 10 indicates a high risk. 
         /// </summary>
         /// <value>Risk score returned by the processor. Possible values of 0-10. A value of 10 indicates a high risk. </value>
-        [DataMember(Name="riskScore", EmitDefaultValue=false)]
+        [JsonPropertyName("riskScore")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RiskScore { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2CreateBillingAgreementPost201ResponseRiskInformationProcessorResults {\n");
-            if (RiskScore != null) sb.Append("  RiskScore: ").Append(RiskScore).Append("\n");
+            if (RiskScore != null) sb.Append("  RiskScore: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2CreateBillingAgreementPost201ResponseRiskInformationProcessorResults", "riskScore", RiskScore.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2CreateBillingAgreementPost201ResponseRiskInformationProcessorResults", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

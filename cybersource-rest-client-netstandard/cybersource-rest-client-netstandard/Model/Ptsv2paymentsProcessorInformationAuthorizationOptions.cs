@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// #### Visa Platform Connect The field contains the PAN translation indicator for American Express Contactless Transaction. Valid value is   1- Expresspay Translation, PAN request 2- Expresspay Translation, PAN and Expiry date request 
         /// </summary>
         /// <value>#### Visa Platform Connect The field contains the PAN translation indicator for American Express Contactless Transaction. Valid value is   1- Expresspay Translation, PAN request 2- Expresspay Translation, PAN and Expiry date request </value>
-        [DataMember(Name="panReturnIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("panReturnIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PanReturnIndicator { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsProcessorInformationAuthorizationOptions {\n");
-            if (PanReturnIndicator != null) sb.Append("  PanReturnIndicator: ").Append(PanReturnIndicator).Append("\n");
+            if (PanReturnIndicator != null) sb.Append("  PanReturnIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessorInformationAuthorizationOptions", "panReturnIndicator", PanReturnIndicator.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsProcessorInformationAuthorizationOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

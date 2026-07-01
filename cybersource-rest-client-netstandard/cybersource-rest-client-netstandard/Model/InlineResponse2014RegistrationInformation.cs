@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -44,20 +44,23 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets BoardingPackageId
         /// </summary>
-        [DataMember(Name="boardingPackageId", EmitDefaultValue=false)]
+        [JsonPropertyName("boardingPackageId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BoardingPackageId { get; private set; }
 
         /// <summary>
         /// In case mode is not provided the API will use COMPLETE as default Possible Values:   - &#39;COMPLETE&#39;   - &#39;PARTIAL&#39; 
         /// </summary>
         /// <value>In case mode is not provided the API will use COMPLETE as default Possible Values:   - &#39;COMPLETE&#39;   - &#39;PARTIAL&#39; </value>
-        [DataMember(Name="mode", EmitDefaultValue=false)]
+        [JsonPropertyName("mode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Mode { get; set; }
 
         /// <summary>
         /// Gets or Sets SalesRepId
         /// </summary>
-        [DataMember(Name="salesRepId", EmitDefaultValue=false)]
+        [JsonPropertyName("salesRepId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SalesRepId { get; set; }
 
         /// <summary>
@@ -68,9 +71,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2014RegistrationInformation {\n");
-            if (BoardingPackageId != null) sb.Append("  BoardingPackageId: ").Append(BoardingPackageId).Append("\n");
-            if (Mode != null) sb.Append("  Mode: ").Append(Mode).Append("\n");
-            if (SalesRepId != null) sb.Append("  SalesRepId: ").Append(SalesRepId).Append("\n");
+            if (BoardingPackageId != null) sb.Append("  BoardingPackageId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014RegistrationInformation", "boardingPackageId", BoardingPackageId.ToString())).Append("\n");
+            if (Mode != null) sb.Append("  Mode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014RegistrationInformation", "mode", Mode.ToString())).Append("\n");
+            if (SalesRepId != null) sb.Append("  SalesRepId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014RegistrationInformation", "salesRepId", SalesRepId.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -81,7 +84,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2014RegistrationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

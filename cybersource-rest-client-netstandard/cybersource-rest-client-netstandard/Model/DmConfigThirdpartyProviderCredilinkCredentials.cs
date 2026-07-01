@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,19 +46,22 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Username
         /// </summary>
-        [DataMember(Name="username", EmitDefaultValue=false)]
+        [JsonPropertyName("username")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Username { get; set; }
 
         /// <summary>
         /// Gets or Sets Password
         /// </summary>
-        [DataMember(Name="password", EmitDefaultValue=false)]
+        [JsonPropertyName("password")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Password { get; set; }
 
         /// <summary>
         /// Gets or Sets Sigla
         /// </summary>
-        [DataMember(Name="sigla", EmitDefaultValue=false)]
+        [JsonPropertyName("sigla")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Sigla { get; set; }
 
         /// <summary>
@@ -69,9 +72,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class DmConfigThirdpartyProviderCredilinkCredentials {\n");
-            if (Username != null) sb.Append("  Username: ").Append(Username).Append("\n");
-            if (Password != null) sb.Append("  Password: ").Append(Password).Append("\n");
-            if (Sigla != null) sb.Append("  Sigla: ").Append(Sigla).Append("\n");
+            if (Username != null) sb.Append("  Username: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProviderCredilinkCredentials", "username", Username.ToString())).Append("\n");
+            if (Password != null) sb.Append("  Password: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProviderCredilinkCredentials", "password", Password.ToString())).Append("\n");
+            if (Sigla != null) sb.Append("  Sigla: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigThirdpartyProviderCredilinkCredentials", "sigla", Sigla.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +85,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("DmConfigThirdpartyProviderCredilinkCredentials", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

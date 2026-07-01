@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// URL to redirect the customer after a successful payment. If not provided, the default page and message will be shown.
         /// </summary>
         /// <value>URL to redirect the customer after a successful payment. If not provided, the default page and message will be shown.</value>
-        [DataMember(Name="paymentAccepted", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentAccepted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentAccepted { get; set; }
 
         /// <summary>
         /// URL to redirect the customer after a payment is rejected. If not provided, the default page and message will be shown.
         /// </summary>
         /// <value>URL to redirect the customer after a payment is rejected. If not provided, the default page and message will be shown.</value>
-        [DataMember(Name="paymentRejected", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentRejected")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentRejected { get; set; }
 
         /// <summary>
         /// URL to redirect the customer after a payment is pending. If not provided, the default page and message will be shown.
         /// </summary>
         /// <value>URL to redirect the customer after a payment is pending. If not provided, the default page and message will be shown.</value>
-        [DataMember(Name="paymentPending", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentPending")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentPending { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformationCustomRedirectUrls {\n");
-            if (PaymentAccepted != null) sb.Append("  PaymentAccepted: ").Append(PaymentAccepted).Append("\n");
-            if (PaymentRejected != null) sb.Append("  PaymentRejected: ").Append(PaymentRejected).Append("\n");
-            if (PaymentPending != null) sb.Append("  PaymentPending: ").Append(PaymentPending).Append("\n");
+            if (PaymentAccepted != null) sb.Append("  PaymentAccepted: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformationCustomRedirectUrls", "paymentAccepted", PaymentAccepted.ToString())).Append("\n");
+            if (PaymentRejected != null) sb.Append("  PaymentRejected: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformationCustomRedirectUrls", "paymentRejected", PaymentRejected.ToString())).Append("\n");
+            if (PaymentPending != null) sb.Append("  PaymentPending: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformationCustomRedirectUrls", "paymentPending", PaymentPending.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformationCustomRedirectUrls", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

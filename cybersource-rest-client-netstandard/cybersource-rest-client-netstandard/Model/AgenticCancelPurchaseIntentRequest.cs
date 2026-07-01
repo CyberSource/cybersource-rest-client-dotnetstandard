@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticCancelPurchaseIntentRequest" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected AgenticCancelPurchaseIntentRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="AgenticCancelPurchaseIntentRequest" /> class.
@@ -42,7 +42,7 @@ namespace CyberSource.Model
         /// <param name="PaymentInformation">PaymentInformation.</param>
         /// <param name="DeviceInformation">DeviceInformation (required).</param>
         /// <param name="AssuranceData">Assurance data. (required).</param>
-        public AgenticCancelPurchaseIntentRequest(string ClientCorrelationId = default(string), Acpv1tokensPaymentInformation PaymentInformation = default(Acpv1tokensPaymentInformation), Acpv1tokensDeviceInformation DeviceInformation = default(Acpv1tokensDeviceInformation), List<Acpv1tokensAssuranceData> AssuranceData = default(List<Acpv1tokensAssuranceData>))
+        public AgenticCancelPurchaseIntentRequest(string ClientCorrelationId = default(string), Iccv1tokensPaymentInformation PaymentInformation = default(Iccv1tokensPaymentInformation), Iccv1tokensDeviceInformation DeviceInformation = default(Iccv1tokensDeviceInformation), List<Iccv1tokensAssuranceData> AssuranceData = default(List<Iccv1tokensAssuranceData>))
         {
             this.ClientCorrelationId = ClientCorrelationId;
             this.PaymentInformation = PaymentInformation;
@@ -54,27 +54,31 @@ namespace CyberSource.Model
         /// Client Correlation Id used during the tokenization or during FIDO assertion.
         /// </summary>
         /// <value>Client Correlation Id used during the tokenization or during FIDO assertion.</value>
-        [DataMember(Name="clientCorrelationId", EmitDefaultValue=false)]
+        [JsonPropertyName("clientCorrelationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientCorrelationId { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentInformation
         /// </summary>
-        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
-        public Acpv1tokensPaymentInformation PaymentInformation { get; set; }
+        [JsonPropertyName("paymentInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DeviceInformation
         /// </summary>
-        [DataMember(Name="deviceInformation", EmitDefaultValue=false)]
-        public Acpv1tokensDeviceInformation DeviceInformation { get; set; }
+        [JsonPropertyName("deviceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public Iccv1tokensDeviceInformation DeviceInformation { get; set; }
 
         /// <summary>
         /// Assurance data.
         /// </summary>
         /// <value>Assurance data.</value>
-        [DataMember(Name="assuranceData", EmitDefaultValue=false)]
-        public List<Acpv1tokensAssuranceData> AssuranceData { get; set; }
+        [JsonPropertyName("assuranceData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public List<Iccv1tokensAssuranceData> AssuranceData { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -84,10 +88,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class AgenticCancelPurchaseIntentRequest {\n");
-            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(ClientCorrelationId).Append("\n");
-            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
-            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(DeviceInformation).Append("\n");
-            if (AssuranceData != null) sb.Append("  AssuranceData: ").Append(AssuranceData).Append("\n");
+            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCancelPurchaseIntentRequest", "clientCorrelationId", ClientCorrelationId.ToString())).Append("\n");
+            if (PaymentInformation != null) sb.Append("  PaymentInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCancelPurchaseIntentRequest", "paymentInformation", PaymentInformation.ToString())).Append("\n");
+            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCancelPurchaseIntentRequest", "deviceInformation", DeviceInformation.ToString())).Append("\n");
+            if (AssuranceData != null) sb.Append("  AssuranceData: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("AgenticCancelPurchaseIntentRequest", "assuranceData", AssuranceData.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -98,7 +102,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("AgenticCancelPurchaseIntentRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

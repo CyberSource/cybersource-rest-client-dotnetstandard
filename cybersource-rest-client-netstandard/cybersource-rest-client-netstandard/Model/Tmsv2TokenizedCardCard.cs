@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,42 +51,48 @@ namespace CyberSource.Model
         /// The latest customer&#39;s payment card number associated to the network token. 
         /// </summary>
         /// <value>The latest customer&#39;s payment card number associated to the network token. </value>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Number { get; set; }
 
         /// <summary>
         /// Two-digit month in which the payment card expires.  Format: &#x60;MM&#x60;.  Possible Values: &#x60;01&#x60; through &#x60;12&#x60;. 
         /// </summary>
         /// <value>Two-digit month in which the payment card expires.  Format: &#x60;MM&#x60;.  Possible Values: &#x60;01&#x60; through &#x60;12&#x60;. </value>
-        [DataMember(Name="expirationMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationMonth { get; set; }
 
         /// <summary>
         /// Four-digit year in which the credit card expires.  Format: &#x60;YYYY&#x60;. 
         /// </summary>
         /// <value>Four-digit year in which the credit card expires.  Format: &#x60;YYYY&#x60;. </value>
-        [DataMember(Name="expirationYear", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationYear")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationYear { get; set; }
 
         /// <summary>
         /// The type of card (Card Network). Possible Values: - 001: visa - 002: mastercard - 003: american express - 007: jcb 
         /// </summary>
         /// <value>The type of card (Card Network). Possible Values: - 001: visa - 002: mastercard - 003: american express - 007: jcb </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// The customer&#39;s latest payment card number suffix. 
         /// </summary>
         /// <value>The customer&#39;s latest payment card number suffix. </value>
-        [DataMember(Name="suffix", EmitDefaultValue=false)]
+        [JsonPropertyName("suffix")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Suffix { get; private set; }
 
         /// <summary>
         /// Card issuance date. XML date format: YYYY-MM-DD.
         /// </summary>
         /// <value>Card issuance date. XML date format: YYYY-MM-DD.</value>
-        [DataMember(Name="issueDate", EmitDefaultValue=false)]
+        [JsonPropertyName("issueDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [JsonConverter(typeof(SwaggerDateConverter))]
         public DateTime? IssueDate { get; private set; }
 
@@ -94,7 +100,8 @@ namespace CyberSource.Model
         /// Card activation date. XML date format: YYYY-MM-DD
         /// </summary>
         /// <value>Card activation date. XML date format: YYYY-MM-DD</value>
-        [DataMember(Name="activationDate", EmitDefaultValue=false)]
+        [JsonPropertyName("activationDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [JsonConverter(typeof(SwaggerDateConverter))]
         public DateTime? ActivationDate { get; private set; }
 
@@ -102,20 +109,23 @@ namespace CyberSource.Model
         /// Indicates if the expiration date is printed on the card.
         /// </summary>
         /// <value>Indicates if the expiration date is printed on the card.</value>
-        [DataMember(Name="expirationPrinted", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationPrinted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ExpirationPrinted { get; private set; }
 
         /// <summary>
         /// Indicates if the Card Verification Number is printed on the card.
         /// </summary>
         /// <value>Indicates if the Card Verification Number is printed on the card.</value>
-        [DataMember(Name="securityCodePrinted", EmitDefaultValue=false)]
+        [JsonPropertyName("securityCodePrinted")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? SecurityCodePrinted { get; private set; }
 
         /// <summary>
         /// Gets or Sets TermsAndConditions
         /// </summary>
-        [DataMember(Name="termsAndConditions", EmitDefaultValue=false)]
+        [JsonPropertyName("termsAndConditions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv2TokenizedCardCardTermsAndConditions TermsAndConditions { get; set; }
 
         /// <summary>
@@ -126,16 +136,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2TokenizedCardCard {\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
-            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(ExpirationMonth).Append("\n");
-            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(ExpirationYear).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Suffix != null) sb.Append("  Suffix: ").Append(Suffix).Append("\n");
-            if (IssueDate != null) sb.Append("  IssueDate: ").Append(IssueDate).Append("\n");
-            if (ActivationDate != null) sb.Append("  ActivationDate: ").Append(ActivationDate).Append("\n");
-            if (ExpirationPrinted != null) sb.Append("  ExpirationPrinted: ").Append(ExpirationPrinted).Append("\n");
-            if (SecurityCodePrinted != null) sb.Append("  SecurityCodePrinted: ").Append(SecurityCodePrinted).Append("\n");
-            if (TermsAndConditions != null) sb.Append("  TermsAndConditions: ").Append(TermsAndConditions).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardCard", "number", Number.ToString())).Append("\n");
+            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardCard", "expirationMonth", ExpirationMonth.ToString())).Append("\n");
+            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardCard", "expirationYear", ExpirationYear.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardCard", "type", Type.ToString())).Append("\n");
+            if (Suffix != null) sb.Append("  Suffix: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardCard", "suffix", Suffix.ToString())).Append("\n");
+            if (IssueDate != null) sb.Append("  IssueDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardCard", "issueDate", IssueDate.ToString())).Append("\n");
+            if (ActivationDate != null) sb.Append("  ActivationDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardCard", "activationDate", ActivationDate.ToString())).Append("\n");
+            if (ExpirationPrinted != null) sb.Append("  ExpirationPrinted: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardCard", "expirationPrinted", ExpirationPrinted.ToString())).Append("\n");
+            if (SecurityCodePrinted != null) sb.Append("  SecurityCodePrinted: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardCard", "securityCodePrinted", SecurityCodePrinted.ToString())).Append("\n");
+            if (TermsAndConditions != null) sb.Append("  TermsAndConditions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2TokenizedCardCard", "termsAndConditions", TermsAndConditions.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -146,7 +156,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2TokenizedCardCard", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

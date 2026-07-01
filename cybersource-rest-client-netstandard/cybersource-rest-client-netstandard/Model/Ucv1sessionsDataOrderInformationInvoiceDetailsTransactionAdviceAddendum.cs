@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Four Transaction Advice Addendum (TAA) fields.   These fields are used to display descriptive information about a transaction on the customer&#39;s American Express card statement.   When you send TAA fields, start with amexdata_taa1, then ...taa2, and so on.   Skipping a TAA field causes subsequent TAA fields to be ignored.  To use these fields, contact CyberSource Customer Support to have your account enabled for this feature. 
         /// </summary>
         /// <value>Four Transaction Advice Addendum (TAA) fields.   These fields are used to display descriptive information about a transaction on the customer&#39;s American Express card statement.   When you send TAA fields, start with amexdata_taa1, then ...taa2, and so on.   Skipping a TAA field causes subsequent TAA fields to be ignored.  To use these fields, contact CyberSource Customer Support to have your account enabled for this feature. </value>
-        [DataMember(Name="data", EmitDefaultValue=false)]
+        [JsonPropertyName("data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Data { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ucv1sessionsDataOrderInformationInvoiceDetailsTransactionAdviceAddendum {\n");
-            if (Data != null) sb.Append("  Data: ").Append(Data).Append("\n");
+            if (Data != null) sb.Append("  Data: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ucv1sessionsDataOrderInformationInvoiceDetailsTransactionAdviceAddendum", "data", Data.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ucv1sessionsDataOrderInformationInvoiceDetailsTransactionAdviceAddendum", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

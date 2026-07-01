@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Indicates the transaction that is the first of a series of recurring payments.  - &#x60;True&#x60; &#x3D; is first recurring payment - &#x60;False&#x60; &#x3D; is not first recurring payment  Conditional for MITCOF transactions 
         /// </summary>
         /// <value>Indicates the transaction that is the first of a series of recurring payments.  - &#x60;True&#x60; &#x3D; is first recurring payment - &#x60;False&#x60; &#x3D; is not first recurring payment  Conditional for MITCOF transactions </value>
-        [DataMember(Name="firstRecurringPayment", EmitDefaultValue=false)]
+        [JsonPropertyName("firstRecurringPayment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? FirstRecurringPayment { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferProcessingInformationRecurringOptions {\n");
-            if (FirstRecurringPayment != null) sb.Append("  FirstRecurringPayment: ").Append(FirstRecurringPayment).Append("\n");
+            if (FirstRecurringPayment != null) sb.Append("  FirstRecurringPayment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferProcessingInformationRecurringOptions", "firstRecurringPayment", FirstRecurringPayment.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferProcessingInformationRecurringOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

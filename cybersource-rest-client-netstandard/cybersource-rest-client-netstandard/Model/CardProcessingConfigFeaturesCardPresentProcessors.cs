@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// Default Terminal ID used for Card Present and Virtual Terminal transactions. Applicable for VPC, GPX (gpx), American Express Direct (amexdirect) and Chase Paymentech Salem (chasepaymentechsalem) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z]+$&lt;/td&gt;&lt;td&gt;1111&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Default Terminal ID used for Card Present and Virtual Terminal transactions. Applicable for VPC, GPX (gpx), American Express Direct (amexdirect) and Chase Paymentech Salem (chasepaymentechsalem) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cp&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z]+$&lt;/td&gt;&lt;td&gt;1111&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="defaultPointOfSaleTerminalId", EmitDefaultValue=false)]
+        [JsonPropertyName("defaultPointOfSaleTerminalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DefaultPointOfSaleTerminalId { get; set; }
 
         /// <summary>
         /// For retail transactions, if merchant chooses to send the terminal id in the API, then that value has to be validated before being used. Holds a comma separated list of all possible terminal ids that the merchant is likely to send. Applicable for VPC processors.
         /// </summary>
         /// <value>For retail transactions, if merchant chooses to send the terminal id in the API, then that value has to be validated before being used. Holds a comma separated list of all possible terminal ids that the merchant is likely to send. Applicable for VPC processors.</value>
-        [DataMember(Name="pointOfSaleTerminalIds", EmitDefaultValue=false)]
+        [JsonPropertyName("pointOfSaleTerminalIds")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> PointOfSaleTerminalIds { get; set; }
 
         /// <summary>
         /// Disables terminal ID validation. Applicable for VPC processors.
         /// </summary>
         /// <value>Disables terminal ID validation. Applicable for VPC processors.</value>
-        [DataMember(Name="disablePointOfSaleTerminalIdValidation", EmitDefaultValue=false)]
+        [JsonPropertyName("disablePointOfSaleTerminalIdValidation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DisablePointOfSaleTerminalIdValidation { get; set; }
 
         /// <summary>
         /// Order of the networks in which Visa should make routing decisions. Applicable for GPX (gpx) and VPC processors.
         /// </summary>
         /// <value>Order of the networks in which Visa should make routing decisions. Applicable for GPX (gpx) and VPC processors.</value>
-        [DataMember(Name="pinDebitNetworkOrder", EmitDefaultValue=false)]
+        [JsonPropertyName("pinDebitNetworkOrder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PinDebitNetworkOrder { get; set; }
 
         /// <summary>
         /// This attribute requests VIP to qualify a given PIN Debit transaction for a certain type of interchange program. Y &#x3D; SMS supermarket, Z &#x3D; SMS general merchant. Applicable for GPX (gpx) and VPC processors.
         /// </summary>
         /// <value>This attribute requests VIP to qualify a given PIN Debit transaction for a certain type of interchange program. Y &#x3D; SMS supermarket, Z &#x3D; SMS general merchant. Applicable for GPX (gpx) and VPC processors.</value>
-        [DataMember(Name="pinDebitReimbursementCode", EmitDefaultValue=false)]
+        [JsonPropertyName("pinDebitReimbursementCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PinDebitReimbursementCode { get; set; }
 
         /// <summary>
         /// Acquirer Institution ID for the PIN Debit Transactions. Applicable for GPX (gpx) and VPC processors.
         /// </summary>
         /// <value>Acquirer Institution ID for the PIN Debit Transactions. Applicable for GPX (gpx) and VPC processors.</value>
-        [DataMember(Name="financialInstitutionId", EmitDefaultValue=false)]
+        [JsonPropertyName("financialInstitutionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FinancialInstitutionId { get; set; }
 
         /// <summary>
         /// Enables CyberSource PIN Translation for Online PIN Transactions. Please ensure you have exchanged PIN keys with CyberSource to use this feature. Applicable for VPC processors.
         /// </summary>
         /// <value>Enables CyberSource PIN Translation for Online PIN Transactions. Please ensure you have exchanged PIN keys with CyberSource to use this feature. Applicable for VPC processors.</value>
-        [DataMember(Name="enablePinTranslation", EmitDefaultValue=false)]
+        [JsonPropertyName("enablePinTranslation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnablePinTranslation { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CardProcessingConfigFeaturesCardPresentProcessors {\n");
-            if (DefaultPointOfSaleTerminalId != null) sb.Append("  DefaultPointOfSaleTerminalId: ").Append(DefaultPointOfSaleTerminalId).Append("\n");
-            if (PointOfSaleTerminalIds != null) sb.Append("  PointOfSaleTerminalIds: ").Append(PointOfSaleTerminalIds).Append("\n");
-            if (DisablePointOfSaleTerminalIdValidation != null) sb.Append("  DisablePointOfSaleTerminalIdValidation: ").Append(DisablePointOfSaleTerminalIdValidation).Append("\n");
-            if (PinDebitNetworkOrder != null) sb.Append("  PinDebitNetworkOrder: ").Append(PinDebitNetworkOrder).Append("\n");
-            if (PinDebitReimbursementCode != null) sb.Append("  PinDebitReimbursementCode: ").Append(PinDebitReimbursementCode).Append("\n");
-            if (FinancialInstitutionId != null) sb.Append("  FinancialInstitutionId: ").Append(FinancialInstitutionId).Append("\n");
-            if (EnablePinTranslation != null) sb.Append("  EnablePinTranslation: ").Append(EnablePinTranslation).Append("\n");
+            if (DefaultPointOfSaleTerminalId != null) sb.Append("  DefaultPointOfSaleTerminalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardPresentProcessors", "defaultPointOfSaleTerminalId", DefaultPointOfSaleTerminalId.ToString())).Append("\n");
+            if (PointOfSaleTerminalIds != null) sb.Append("  PointOfSaleTerminalIds: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardPresentProcessors", "pointOfSaleTerminalIds", PointOfSaleTerminalIds.ToString())).Append("\n");
+            if (DisablePointOfSaleTerminalIdValidation != null) sb.Append("  DisablePointOfSaleTerminalIdValidation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardPresentProcessors", "disablePointOfSaleTerminalIdValidation", DisablePointOfSaleTerminalIdValidation.ToString())).Append("\n");
+            if (PinDebitNetworkOrder != null) sb.Append("  PinDebitNetworkOrder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardPresentProcessors", "pinDebitNetworkOrder", PinDebitNetworkOrder.ToString())).Append("\n");
+            if (PinDebitReimbursementCode != null) sb.Append("  PinDebitReimbursementCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardPresentProcessors", "pinDebitReimbursementCode", PinDebitReimbursementCode.ToString())).Append("\n");
+            if (FinancialInstitutionId != null) sb.Append("  FinancialInstitutionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardPresentProcessors", "financialInstitutionId", FinancialInstitutionId.ToString())).Append("\n");
+            if (EnablePinTranslation != null) sb.Append("  EnablePinTranslation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardPresentProcessors", "enablePinTranslation", EnablePinTranslation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CardProcessingConfigFeaturesCardPresentProcessors", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

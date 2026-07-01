@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -69,98 +69,112 @@ namespace CyberSource.Model
         /// This field indicates if cross-border money transfer OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if cross-border money transfer OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="moneyTransferFastFundsCrossBorder", EmitDefaultValue=false)]
+        [JsonPropertyName("moneyTransferFastFundsCrossBorder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MoneyTransferFastFundsCrossBorder { get; set; }
 
         /// <summary>
         /// This field indicates if domestic money transfer OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if domestic money transfer OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="moneyTransferFastFundsDomestic", EmitDefaultValue=false)]
+        [JsonPropertyName("moneyTransferFastFundsDomestic")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MoneyTransferFastFundsDomestic { get; set; }
 
         /// <summary>
         /// This field indicates if cross-border money transfer OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if cross-border money transfer OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="moneyTransferCrossBorder", EmitDefaultValue=false)]
+        [JsonPropertyName("moneyTransferCrossBorder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MoneyTransferCrossBorder { get; set; }
 
         /// <summary>
         /// This field indicates if domestic money transfer OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if domestic money transfer OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="moneyTransferDomestic", EmitDefaultValue=false)]
+        [JsonPropertyName("moneyTransferDomestic")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MoneyTransferDomestic { get; set; }
 
         /// <summary>
         /// This field indicates if cross-border non-money transfer OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if cross-border non-money transfer OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="nonMoneyTransferFastFundsCrossBorder", EmitDefaultValue=false)]
+        [JsonPropertyName("nonMoneyTransferFastFundsCrossBorder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NonMoneyTransferFastFundsCrossBorder { get; set; }
 
         /// <summary>
         /// This field indicates if domestic non-money transfer OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if domestic non-money transfer OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="nonMoneyTransferFastFundsDomestic", EmitDefaultValue=false)]
+        [JsonPropertyName("nonMoneyTransferFastFundsDomestic")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NonMoneyTransferFastFundsDomestic { get; set; }
 
         /// <summary>
         /// This field indicates if cross-border non-money transfer OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if cross-border non-money transfer OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="nonMoneyTransferCrossBorder", EmitDefaultValue=false)]
+        [JsonPropertyName("nonMoneyTransferCrossBorder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NonMoneyTransferCrossBorder { get; set; }
 
         /// <summary>
         /// This field indicates if domestic non-money transfer OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if domestic non-money transfer OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="nonMoneyTransferDomestic", EmitDefaultValue=false)]
+        [JsonPropertyName("nonMoneyTransferDomestic")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string NonMoneyTransferDomestic { get; set; }
 
         /// <summary>
         /// This field indicates if cross-border gambling OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if cross-border gambling OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="onlineGamblingFastFundsCrossBorder", EmitDefaultValue=false)]
+        [JsonPropertyName("onlineGamblingFastFundsCrossBorder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OnlineGamblingFastFundsCrossBorder { get; set; }
 
         /// <summary>
         /// This field indicates if domestic gambling OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if domestic gambling OCTs (fast push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="onlineGamblingFastFundsDomestic", EmitDefaultValue=false)]
+        [JsonPropertyName("onlineGamblingFastFundsDomestic")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OnlineGamblingFastFundsDomestic { get; set; }
 
         /// <summary>
         /// This field indicates if cross-border gambling OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if cross-border gambling OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="onlineGamblingCrossBorder", EmitDefaultValue=false)]
+        [JsonPropertyName("onlineGamblingCrossBorder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OnlineGamblingCrossBorder { get; set; }
 
         /// <summary>
         /// This field indicates if domestic gambling OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; 
         /// </summary>
         /// <value>This field indicates if domestic gambling OCTs (push funds) are allowed. Possible values:   - &#x60;Y&#x60;   - &#x60;N&#x60; </value>
-        [DataMember(Name="onlineGamblingDomestic", EmitDefaultValue=false)]
+        [JsonPropertyName("onlineGamblingDomestic")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OnlineGamblingDomestic { get; set; }
 
         /// <summary>
         /// This field indicates if domestic OCTs (push funds) are allowed. Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if domestic OCTs (push funds) are allowed. Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; </value>
-        [DataMember(Name="domesticParticipant", EmitDefaultValue=false)]
+        [JsonPropertyName("domesticParticipant")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DomesticParticipant { get; set; }
 
         /// <summary>
         /// This field indicates if cross-border OCTs (push funds) are allowed. Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; 
         /// </summary>
         /// <value>This field indicates if cross-border OCTs (push funds) are allowed. Possible values:   - &#x60;true&#x60;   - &#x60;false&#x60; </value>
-        [DataMember(Name="crossBorderParticipant", EmitDefaultValue=false)]
+        [JsonPropertyName("crossBorderParticipant")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CrossBorderParticipant { get; set; }
 
         /// <summary>
@@ -171,20 +185,20 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2013PayoutInformationPushFunds {\n");
-            if (MoneyTransferFastFundsCrossBorder != null) sb.Append("  MoneyTransferFastFundsCrossBorder: ").Append(MoneyTransferFastFundsCrossBorder).Append("\n");
-            if (MoneyTransferFastFundsDomestic != null) sb.Append("  MoneyTransferFastFundsDomestic: ").Append(MoneyTransferFastFundsDomestic).Append("\n");
-            if (MoneyTransferCrossBorder != null) sb.Append("  MoneyTransferCrossBorder: ").Append(MoneyTransferCrossBorder).Append("\n");
-            if (MoneyTransferDomestic != null) sb.Append("  MoneyTransferDomestic: ").Append(MoneyTransferDomestic).Append("\n");
-            if (NonMoneyTransferFastFundsCrossBorder != null) sb.Append("  NonMoneyTransferFastFundsCrossBorder: ").Append(NonMoneyTransferFastFundsCrossBorder).Append("\n");
-            if (NonMoneyTransferFastFundsDomestic != null) sb.Append("  NonMoneyTransferFastFundsDomestic: ").Append(NonMoneyTransferFastFundsDomestic).Append("\n");
-            if (NonMoneyTransferCrossBorder != null) sb.Append("  NonMoneyTransferCrossBorder: ").Append(NonMoneyTransferCrossBorder).Append("\n");
-            if (NonMoneyTransferDomestic != null) sb.Append("  NonMoneyTransferDomestic: ").Append(NonMoneyTransferDomestic).Append("\n");
-            if (OnlineGamblingFastFundsCrossBorder != null) sb.Append("  OnlineGamblingFastFundsCrossBorder: ").Append(OnlineGamblingFastFundsCrossBorder).Append("\n");
-            if (OnlineGamblingFastFundsDomestic != null) sb.Append("  OnlineGamblingFastFundsDomestic: ").Append(OnlineGamblingFastFundsDomestic).Append("\n");
-            if (OnlineGamblingCrossBorder != null) sb.Append("  OnlineGamblingCrossBorder: ").Append(OnlineGamblingCrossBorder).Append("\n");
-            if (OnlineGamblingDomestic != null) sb.Append("  OnlineGamblingDomestic: ").Append(OnlineGamblingDomestic).Append("\n");
-            if (DomesticParticipant != null) sb.Append("  DomesticParticipant: ").Append(DomesticParticipant).Append("\n");
-            if (CrossBorderParticipant != null) sb.Append("  CrossBorderParticipant: ").Append(CrossBorderParticipant).Append("\n");
+            if (MoneyTransferFastFundsCrossBorder != null) sb.Append("  MoneyTransferFastFundsCrossBorder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "moneyTransferFastFundsCrossBorder", MoneyTransferFastFundsCrossBorder.ToString())).Append("\n");
+            if (MoneyTransferFastFundsDomestic != null) sb.Append("  MoneyTransferFastFundsDomestic: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "moneyTransferFastFundsDomestic", MoneyTransferFastFundsDomestic.ToString())).Append("\n");
+            if (MoneyTransferCrossBorder != null) sb.Append("  MoneyTransferCrossBorder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "moneyTransferCrossBorder", MoneyTransferCrossBorder.ToString())).Append("\n");
+            if (MoneyTransferDomestic != null) sb.Append("  MoneyTransferDomestic: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "moneyTransferDomestic", MoneyTransferDomestic.ToString())).Append("\n");
+            if (NonMoneyTransferFastFundsCrossBorder != null) sb.Append("  NonMoneyTransferFastFundsCrossBorder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "nonMoneyTransferFastFundsCrossBorder", NonMoneyTransferFastFundsCrossBorder.ToString())).Append("\n");
+            if (NonMoneyTransferFastFundsDomestic != null) sb.Append("  NonMoneyTransferFastFundsDomestic: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "nonMoneyTransferFastFundsDomestic", NonMoneyTransferFastFundsDomestic.ToString())).Append("\n");
+            if (NonMoneyTransferCrossBorder != null) sb.Append("  NonMoneyTransferCrossBorder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "nonMoneyTransferCrossBorder", NonMoneyTransferCrossBorder.ToString())).Append("\n");
+            if (NonMoneyTransferDomestic != null) sb.Append("  NonMoneyTransferDomestic: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "nonMoneyTransferDomestic", NonMoneyTransferDomestic.ToString())).Append("\n");
+            if (OnlineGamblingFastFundsCrossBorder != null) sb.Append("  OnlineGamblingFastFundsCrossBorder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "onlineGamblingFastFundsCrossBorder", OnlineGamblingFastFundsCrossBorder.ToString())).Append("\n");
+            if (OnlineGamblingFastFundsDomestic != null) sb.Append("  OnlineGamblingFastFundsDomestic: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "onlineGamblingFastFundsDomestic", OnlineGamblingFastFundsDomestic.ToString())).Append("\n");
+            if (OnlineGamblingCrossBorder != null) sb.Append("  OnlineGamblingCrossBorder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "onlineGamblingCrossBorder", OnlineGamblingCrossBorder.ToString())).Append("\n");
+            if (OnlineGamblingDomestic != null) sb.Append("  OnlineGamblingDomestic: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "onlineGamblingDomestic", OnlineGamblingDomestic.ToString())).Append("\n");
+            if (DomesticParticipant != null) sb.Append("  DomesticParticipant: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "domesticParticipant", DomesticParticipant.ToString())).Append("\n");
+            if (CrossBorderParticipant != null) sb.Append("  CrossBorderParticipant: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2013PayoutInformationPushFunds", "crossBorderParticipant", CrossBorderParticipant.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -195,7 +209,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2013PayoutInformationPushFunds", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

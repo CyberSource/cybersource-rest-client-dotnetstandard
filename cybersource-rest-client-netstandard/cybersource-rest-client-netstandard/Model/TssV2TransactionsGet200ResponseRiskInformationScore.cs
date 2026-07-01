@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Array of factor codes.
         /// </summary>
         /// <value>Array of factor codes.</value>
-        [DataMember(Name="factorCodes", EmitDefaultValue=false)]
+        [JsonPropertyName("factorCodes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> FactorCodes { get; set; }
 
         /// <summary>
         /// The description for this field is not available. 
         /// </summary>
         /// <value>The description for this field is not available. </value>
-        [DataMember(Name="result", EmitDefaultValue=false)]
+        [JsonPropertyName("result")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Result { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsGet200ResponseRiskInformationScore {\n");
-            if (FactorCodes != null) sb.Append("  FactorCodes: ").Append(FactorCodes).Append("\n");
-            if (Result != null) sb.Append("  Result: ").Append(Result).Append("\n");
+            if (FactorCodes != null) sb.Append("  FactorCodes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseRiskInformationScore", "factorCodes", FactorCodes.ToString())).Append("\n");
+            if (Result != null) sb.Append("  Result: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsGet200ResponseRiskInformationScore", "result", Result.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsGet200ResponseRiskInformationScore", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

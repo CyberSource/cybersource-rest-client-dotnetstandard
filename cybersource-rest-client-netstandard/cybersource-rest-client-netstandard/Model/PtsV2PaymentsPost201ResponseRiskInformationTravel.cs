@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ActualFinalDestination
         /// </summary>
-        [DataMember(Name="actualFinalDestination", EmitDefaultValue=false)]
+        [JsonPropertyName("actualFinalDestination")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseRiskInformationTravelActualFinalDestination ActualFinalDestination { get; set; }
 
         /// <summary>
         /// Gets or Sets FirstDeparture
         /// </summary>
-        [DataMember(Name="firstDeparture", EmitDefaultValue=false)]
+        [JsonPropertyName("firstDeparture")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseRiskInformationTravelFirstDeparture FirstDeparture { get; set; }
 
         /// <summary>
         /// Gets or Sets FirstDestination
         /// </summary>
-        [DataMember(Name="firstDestination", EmitDefaultValue=false)]
+        [JsonPropertyName("firstDestination")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseRiskInformationTravelFirstDestination FirstDestination { get; set; }
 
         /// <summary>
         /// Gets or Sets LastDestination
         /// </summary>
-        [DataMember(Name="lastDestination", EmitDefaultValue=false)]
+        [JsonPropertyName("lastDestination")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseRiskInformationTravelLastDestination LastDestination { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseRiskInformationTravel {\n");
-            if (ActualFinalDestination != null) sb.Append("  ActualFinalDestination: ").Append(ActualFinalDestination).Append("\n");
-            if (FirstDeparture != null) sb.Append("  FirstDeparture: ").Append(FirstDeparture).Append("\n");
-            if (FirstDestination != null) sb.Append("  FirstDestination: ").Append(FirstDestination).Append("\n");
-            if (LastDestination != null) sb.Append("  LastDestination: ").Append(LastDestination).Append("\n");
+            if (ActualFinalDestination != null) sb.Append("  ActualFinalDestination: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationTravel", "actualFinalDestination", ActualFinalDestination.ToString())).Append("\n");
+            if (FirstDeparture != null) sb.Append("  FirstDeparture: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationTravel", "firstDeparture", FirstDeparture.ToString())).Append("\n");
+            if (FirstDestination != null) sb.Append("  FirstDestination: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationTravel", "firstDestination", FirstDestination.ToString())).Append("\n");
+            if (LastDestination != null) sb.Append("  LastDestination: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseRiskInformationTravel", "lastDestination", LastDestination.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseRiskInformationTravel", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

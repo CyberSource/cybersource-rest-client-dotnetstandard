@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -142,311 +142,362 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets RequestId
         /// </summary>
-        [DataMember(Name="requestId", EmitDefaultValue=false)]
+        [JsonPropertyName("requestId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestId { get; set; }
 
         /// <summary>
         /// Gets or Sets OrganizationId
         /// </summary>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// Gets or Sets AccountId
         /// </summary>
-        [DataMember(Name="accountId", EmitDefaultValue=false)]
+        [JsonPropertyName("accountId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountId { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessorMerchantId
         /// </summary>
-        [DataMember(Name="processorMerchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("processorMerchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessorMerchantId { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionReferenceNumber
         /// </summary>
-        [DataMember(Name="transactionReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionReferenceNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantReferenceNumber
         /// </summary>
-        [DataMember(Name="merchantReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantReferenceNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets AccountSuffix
         /// </summary>
-        [DataMember(Name="accountSuffix", EmitDefaultValue=false)]
+        [JsonPropertyName("accountSuffix")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountSuffix { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentSubType
         /// </summary>
-        [DataMember(Name="paymentSubType", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentSubType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentSubType { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentSubTypeDescription
         /// </summary>
-        [DataMember(Name="paymentSubTypeDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentSubTypeDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentSubTypeDescription { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionTime
         /// </summary>
-        [DataMember(Name="transactionTime", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? TransactionTime { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessedTime
         /// </summary>
-        [DataMember(Name="processedTime", EmitDefaultValue=false)]
+        [JsonPropertyName("processedTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? ProcessedTime { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionType
         /// </summary>
-        [DataMember(Name="transactionType", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionType { get; set; }
 
         /// <summary>
         /// Gets or Sets Amount
         /// </summary>
-        [DataMember(Name="amount", EmitDefaultValue=false)]
+        [JsonPropertyName("amount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Amount { get; set; }
 
         /// <summary>
         /// Valid ISO 4217 ALPHA-3 currency code
         /// </summary>
         /// <value>Valid ISO 4217 ALPHA-3 currency code</value>
-        [DataMember(Name="currencyCode", EmitDefaultValue=false)]
+        [JsonPropertyName("currencyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CurrencyCode { get; set; }
 
         /// <summary>
         /// Gets or Sets PriceType
         /// </summary>
-        [DataMember(Name="priceType", EmitDefaultValue=false)]
+        [JsonPropertyName("priceType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PriceType { get; set; }
 
         /// <summary>
         /// Gets or Sets PriceAmountOne
         /// </summary>
-        [DataMember(Name="priceAmountOne", EmitDefaultValue=false)]
+        [JsonPropertyName("priceAmountOne")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PriceAmountOne { get; set; }
 
         /// <summary>
         /// Gets or Sets PriceAmountTwo
         /// </summary>
-        [DataMember(Name="priceAmountTwo", EmitDefaultValue=false)]
+        [JsonPropertyName("priceAmountTwo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PriceAmountTwo { get; set; }
 
         /// <summary>
         /// Gets or Sets ReClass
         /// </summary>
-        [DataMember(Name="reClass", EmitDefaultValue=false)]
+        [JsonPropertyName("reClass")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReClass { get; set; }
 
         /// <summary>
         /// Gets or Sets SettlementTime
         /// </summary>
-        [DataMember(Name="settlementTime", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? SettlementTime { get; set; }
 
         /// <summary>
         /// Gets or Sets SettlementProcessor
         /// </summary>
-        [DataMember(Name="settlementProcessor", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementProcessor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementProcessor { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantBatchNumber
         /// </summary>
-        [DataMember(Name="merchantBatchNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantBatchNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantBatchNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets ClearedLevel
         /// </summary>
-        [DataMember(Name="clearedLevel", EmitDefaultValue=false)]
+        [JsonPropertyName("clearedLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClearedLevel { get; set; }
 
         /// <summary>
         /// Gets or Sets BillbackReasonCode
         /// </summary>
-        [DataMember(Name="billbackReasonCode", EmitDefaultValue=false)]
+        [JsonPropertyName("billbackReasonCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BillbackReasonCode { get; set; }
 
         /// <summary>
         /// Gets or Sets BillbackReasonDescription
         /// </summary>
-        [DataMember(Name="billbackReasonDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("billbackReasonDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BillbackReasonDescription { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantPricedLevel
         /// </summary>
-        [DataMember(Name="merchantPricedLevel", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantPricedLevel")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantPricedLevel { get; set; }
 
         /// <summary>
         /// Gets or Sets DiscountRate
         /// </summary>
-        [DataMember(Name="discountRate", EmitDefaultValue=false)]
+        [JsonPropertyName("discountRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscountRate { get; set; }
 
         /// <summary>
         /// Gets or Sets DiscountAmount
         /// </summary>
-        [DataMember(Name="discountAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("discountAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DiscountAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets ClearingRateAmountOne
         /// </summary>
-        [DataMember(Name="clearingRateAmountOne", EmitDefaultValue=false)]
+        [JsonPropertyName("clearingRateAmountOne")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClearingRateAmountOne { get; set; }
 
         /// <summary>
         /// Gets or Sets ClearingRateAmountTwo
         /// </summary>
-        [DataMember(Name="clearingRateAmountTwo", EmitDefaultValue=false)]
+        [JsonPropertyName("clearingRateAmountTwo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClearingRateAmountTwo { get; set; }
 
         /// <summary>
         /// Gets or Sets ClearingRateAmountThree
         /// </summary>
-        [DataMember(Name="clearingRateAmountThree", EmitDefaultValue=false)]
+        [JsonPropertyName("clearingRateAmountThree")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClearingRateAmountThree { get; set; }
 
         /// <summary>
         /// Valid ISO 4217 ALPHA-3 currency code
         /// </summary>
         /// <value>Valid ISO 4217 ALPHA-3 currency code</value>
-        [DataMember(Name="clearingRateCurrencyCode", EmitDefaultValue=false)]
+        [JsonPropertyName("clearingRateCurrencyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClearingRateCurrencyCode { get; set; }
 
         /// <summary>
         /// Gets or Sets InterchangeAmount
         /// </summary>
-        [DataMember(Name="interchangeAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("interchangeAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string InterchangeAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets BillbackAmount
         /// </summary>
-        [DataMember(Name="billbackAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("billbackAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BillbackAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets SettlementAmount
         /// </summary>
-        [DataMember(Name="settlementAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementAmount { get; set; }
 
         /// <summary>
         /// Valid ISO 4217 ALPHA-3 currency code
         /// </summary>
         /// <value>Valid ISO 4217 ALPHA-3 currency code</value>
-        [DataMember(Name="settlementCurrencyCode", EmitDefaultValue=false)]
+        [JsonPropertyName("settlementCurrencyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SettlementCurrencyCode { get; set; }
 
         /// <summary>
         /// Gets or Sets ConversionRate
         /// </summary>
-        [DataMember(Name="conversionRate", EmitDefaultValue=false)]
+        [JsonPropertyName("conversionRate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ConversionRate { get; set; }
 
         /// <summary>
         /// Gets or Sets DeltaCost
         /// </summary>
-        [DataMember(Name="deltaCost", EmitDefaultValue=false)]
+        [JsonPropertyName("deltaCost")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeltaCost { get; set; }
 
         /// <summary>
         /// Gets or Sets SurchargeAmount
         /// </summary>
-        [DataMember(Name="surchargeAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("surchargeAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SurchargeAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets PercentRateCharged
         /// </summary>
-        [DataMember(Name="percentRateCharged", EmitDefaultValue=false)]
+        [JsonPropertyName("percentRateCharged")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PercentRateCharged { get; set; }
 
         /// <summary>
         /// Gets or Sets PerTransactionCharged
         /// </summary>
-        [DataMember(Name="perTransactionCharged", EmitDefaultValue=false)]
+        [JsonPropertyName("perTransactionCharged")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PerTransactionCharged { get; set; }
 
         /// <summary>
         /// Gets or Sets DowngradeReasonCode
         /// </summary>
-        [DataMember(Name="downgradeReasonCode", EmitDefaultValue=false)]
+        [JsonPropertyName("downgradeReasonCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DowngradeReasonCode { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessTime
         /// </summary>
-        [DataMember(Name="processTime", EmitDefaultValue=false)]
+        [JsonPropertyName("processTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? ProcessTime { get; set; }
 
         /// <summary>
         /// Gets or Sets AuthCode
         /// </summary>
-        [DataMember(Name="authCode", EmitDefaultValue=false)]
+        [JsonPropertyName("authCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AuthCode { get; set; }
 
         /// <summary>
         /// Gets or Sets BatchTime
         /// </summary>
-        [DataMember(Name="batchTime", EmitDefaultValue=false)]
+        [JsonPropertyName("batchTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? BatchTime { get; set; }
 
         /// <summary>
         /// Gets or Sets ProcessorBatchNumber
         /// </summary>
-        [DataMember(Name="processorBatchNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("processorBatchNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessorBatchNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets CardIndicator
         /// </summary>
-        [DataMember(Name="cardIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("cardIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardIndicator { get; set; }
 
         /// <summary>
         /// Gets or Sets MinimumUnit
         /// </summary>
-        [DataMember(Name="minimumUnit", EmitDefaultValue=false)]
+        [JsonPropertyName("minimumUnit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? MinimumUnit { get; set; }
 
         /// <summary>
         /// Valid ISO 4217 ALPHA-3 currency code
         /// </summary>
         /// <value>Valid ISO 4217 ALPHA-3 currency code</value>
-        [DataMember(Name="minimumUnitCurrencyCode", EmitDefaultValue=false)]
+        [JsonPropertyName("minimumUnitCurrencyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MinimumUnitCurrencyCode { get; set; }
 
         /// <summary>
         /// Gets or Sets CreditDeltaIndicator
         /// </summary>
-        [DataMember(Name="creditDeltaIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("creditDeltaIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CreditDeltaIndicator { get; set; }
 
         /// <summary>
         /// Gets or Sets FeeCategory
         /// </summary>
-        [DataMember(Name="feeCategory", EmitDefaultValue=false)]
+        [JsonPropertyName("feeCategory")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FeeCategory { get; set; }
 
         /// <summary>
         /// Gets or Sets ApplicationName
         /// </summary>
-        [DataMember(Name="applicationName", EmitDefaultValue=false)]
+        [JsonPropertyName("applicationName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ApplicationName { get; set; }
 
         /// <summary>
@@ -457,57 +508,57 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails {\n");
-            if (RequestId != null) sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (AccountId != null) sb.Append("  AccountId: ").Append(AccountId).Append("\n");
-            if (ProcessorMerchantId != null) sb.Append("  ProcessorMerchantId: ").Append(ProcessorMerchantId).Append("\n");
-            if (TransactionReferenceNumber != null) sb.Append("  TransactionReferenceNumber: ").Append(TransactionReferenceNumber).Append("\n");
-            if (MerchantReferenceNumber != null) sb.Append("  MerchantReferenceNumber: ").Append(MerchantReferenceNumber).Append("\n");
-            if (AccountSuffix != null) sb.Append("  AccountSuffix: ").Append(AccountSuffix).Append("\n");
-            if (PaymentSubType != null) sb.Append("  PaymentSubType: ").Append(PaymentSubType).Append("\n");
-            if (PaymentSubTypeDescription != null) sb.Append("  PaymentSubTypeDescription: ").Append(PaymentSubTypeDescription).Append("\n");
-            if (TransactionTime != null) sb.Append("  TransactionTime: ").Append(TransactionTime).Append("\n");
-            if (ProcessedTime != null) sb.Append("  ProcessedTime: ").Append(ProcessedTime).Append("\n");
-            if (TransactionType != null) sb.Append("  TransactionType: ").Append(TransactionType).Append("\n");
-            if (Amount != null) sb.Append("  Amount: ").Append(Amount).Append("\n");
-            if (CurrencyCode != null) sb.Append("  CurrencyCode: ").Append(CurrencyCode).Append("\n");
-            if (PriceType != null) sb.Append("  PriceType: ").Append(PriceType).Append("\n");
-            if (PriceAmountOne != null) sb.Append("  PriceAmountOne: ").Append(PriceAmountOne).Append("\n");
-            if (PriceAmountTwo != null) sb.Append("  PriceAmountTwo: ").Append(PriceAmountTwo).Append("\n");
-            if (ReClass != null) sb.Append("  ReClass: ").Append(ReClass).Append("\n");
-            if (SettlementTime != null) sb.Append("  SettlementTime: ").Append(SettlementTime).Append("\n");
-            if (SettlementProcessor != null) sb.Append("  SettlementProcessor: ").Append(SettlementProcessor).Append("\n");
-            if (MerchantBatchNumber != null) sb.Append("  MerchantBatchNumber: ").Append(MerchantBatchNumber).Append("\n");
-            if (ClearedLevel != null) sb.Append("  ClearedLevel: ").Append(ClearedLevel).Append("\n");
-            if (BillbackReasonCode != null) sb.Append("  BillbackReasonCode: ").Append(BillbackReasonCode).Append("\n");
-            if (BillbackReasonDescription != null) sb.Append("  BillbackReasonDescription: ").Append(BillbackReasonDescription).Append("\n");
-            if (MerchantPricedLevel != null) sb.Append("  MerchantPricedLevel: ").Append(MerchantPricedLevel).Append("\n");
-            if (DiscountRate != null) sb.Append("  DiscountRate: ").Append(DiscountRate).Append("\n");
-            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(DiscountAmount).Append("\n");
-            if (ClearingRateAmountOne != null) sb.Append("  ClearingRateAmountOne: ").Append(ClearingRateAmountOne).Append("\n");
-            if (ClearingRateAmountTwo != null) sb.Append("  ClearingRateAmountTwo: ").Append(ClearingRateAmountTwo).Append("\n");
-            if (ClearingRateAmountThree != null) sb.Append("  ClearingRateAmountThree: ").Append(ClearingRateAmountThree).Append("\n");
-            if (ClearingRateCurrencyCode != null) sb.Append("  ClearingRateCurrencyCode: ").Append(ClearingRateCurrencyCode).Append("\n");
-            if (InterchangeAmount != null) sb.Append("  InterchangeAmount: ").Append(InterchangeAmount).Append("\n");
-            if (BillbackAmount != null) sb.Append("  BillbackAmount: ").Append(BillbackAmount).Append("\n");
-            if (SettlementAmount != null) sb.Append("  SettlementAmount: ").Append(SettlementAmount).Append("\n");
-            if (SettlementCurrencyCode != null) sb.Append("  SettlementCurrencyCode: ").Append(SettlementCurrencyCode).Append("\n");
-            if (ConversionRate != null) sb.Append("  ConversionRate: ").Append(ConversionRate).Append("\n");
-            if (DeltaCost != null) sb.Append("  DeltaCost: ").Append(DeltaCost).Append("\n");
-            if (SurchargeAmount != null) sb.Append("  SurchargeAmount: ").Append(SurchargeAmount).Append("\n");
-            if (PercentRateCharged != null) sb.Append("  PercentRateCharged: ").Append(PercentRateCharged).Append("\n");
-            if (PerTransactionCharged != null) sb.Append("  PerTransactionCharged: ").Append(PerTransactionCharged).Append("\n");
-            if (DowngradeReasonCode != null) sb.Append("  DowngradeReasonCode: ").Append(DowngradeReasonCode).Append("\n");
-            if (ProcessTime != null) sb.Append("  ProcessTime: ").Append(ProcessTime).Append("\n");
-            if (AuthCode != null) sb.Append("  AuthCode: ").Append(AuthCode).Append("\n");
-            if (BatchTime != null) sb.Append("  BatchTime: ").Append(BatchTime).Append("\n");
-            if (ProcessorBatchNumber != null) sb.Append("  ProcessorBatchNumber: ").Append(ProcessorBatchNumber).Append("\n");
-            if (CardIndicator != null) sb.Append("  CardIndicator: ").Append(CardIndicator).Append("\n");
-            if (MinimumUnit != null) sb.Append("  MinimumUnit: ").Append(MinimumUnit).Append("\n");
-            if (MinimumUnitCurrencyCode != null) sb.Append("  MinimumUnitCurrencyCode: ").Append(MinimumUnitCurrencyCode).Append("\n");
-            if (CreditDeltaIndicator != null) sb.Append("  CreditDeltaIndicator: ").Append(CreditDeltaIndicator).Append("\n");
-            if (FeeCategory != null) sb.Append("  FeeCategory: ").Append(FeeCategory).Append("\n");
-            if (ApplicationName != null) sb.Append("  ApplicationName: ").Append(ApplicationName).Append("\n");
+            if (RequestId != null) sb.Append("  RequestId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "requestId", RequestId.ToString())).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (AccountId != null) sb.Append("  AccountId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "accountId", AccountId.ToString())).Append("\n");
+            if (ProcessorMerchantId != null) sb.Append("  ProcessorMerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "processorMerchantId", ProcessorMerchantId.ToString())).Append("\n");
+            if (TransactionReferenceNumber != null) sb.Append("  TransactionReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "transactionReferenceNumber", TransactionReferenceNumber.ToString())).Append("\n");
+            if (MerchantReferenceNumber != null) sb.Append("  MerchantReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "merchantReferenceNumber", MerchantReferenceNumber.ToString())).Append("\n");
+            if (AccountSuffix != null) sb.Append("  AccountSuffix: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "accountSuffix", AccountSuffix.ToString())).Append("\n");
+            if (PaymentSubType != null) sb.Append("  PaymentSubType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "paymentSubType", PaymentSubType.ToString())).Append("\n");
+            if (PaymentSubTypeDescription != null) sb.Append("  PaymentSubTypeDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "paymentSubTypeDescription", PaymentSubTypeDescription.ToString())).Append("\n");
+            if (TransactionTime != null) sb.Append("  TransactionTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "transactionTime", TransactionTime.ToString())).Append("\n");
+            if (ProcessedTime != null) sb.Append("  ProcessedTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "processedTime", ProcessedTime.ToString())).Append("\n");
+            if (TransactionType != null) sb.Append("  TransactionType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "transactionType", TransactionType.ToString())).Append("\n");
+            if (Amount != null) sb.Append("  Amount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "amount", Amount.ToString())).Append("\n");
+            if (CurrencyCode != null) sb.Append("  CurrencyCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "currencyCode", CurrencyCode.ToString())).Append("\n");
+            if (PriceType != null) sb.Append("  PriceType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "priceType", PriceType.ToString())).Append("\n");
+            if (PriceAmountOne != null) sb.Append("  PriceAmountOne: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "priceAmountOne", PriceAmountOne.ToString())).Append("\n");
+            if (PriceAmountTwo != null) sb.Append("  PriceAmountTwo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "priceAmountTwo", PriceAmountTwo.ToString())).Append("\n");
+            if (ReClass != null) sb.Append("  ReClass: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "reClass", ReClass.ToString())).Append("\n");
+            if (SettlementTime != null) sb.Append("  SettlementTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "settlementTime", SettlementTime.ToString())).Append("\n");
+            if (SettlementProcessor != null) sb.Append("  SettlementProcessor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "settlementProcessor", SettlementProcessor.ToString())).Append("\n");
+            if (MerchantBatchNumber != null) sb.Append("  MerchantBatchNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "merchantBatchNumber", MerchantBatchNumber.ToString())).Append("\n");
+            if (ClearedLevel != null) sb.Append("  ClearedLevel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "clearedLevel", ClearedLevel.ToString())).Append("\n");
+            if (BillbackReasonCode != null) sb.Append("  BillbackReasonCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "billbackReasonCode", BillbackReasonCode.ToString())).Append("\n");
+            if (BillbackReasonDescription != null) sb.Append("  BillbackReasonDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "billbackReasonDescription", BillbackReasonDescription.ToString())).Append("\n");
+            if (MerchantPricedLevel != null) sb.Append("  MerchantPricedLevel: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "merchantPricedLevel", MerchantPricedLevel.ToString())).Append("\n");
+            if (DiscountRate != null) sb.Append("  DiscountRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "discountRate", DiscountRate.ToString())).Append("\n");
+            if (DiscountAmount != null) sb.Append("  DiscountAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "discountAmount", DiscountAmount.ToString())).Append("\n");
+            if (ClearingRateAmountOne != null) sb.Append("  ClearingRateAmountOne: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "clearingRateAmountOne", ClearingRateAmountOne.ToString())).Append("\n");
+            if (ClearingRateAmountTwo != null) sb.Append("  ClearingRateAmountTwo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "clearingRateAmountTwo", ClearingRateAmountTwo.ToString())).Append("\n");
+            if (ClearingRateAmountThree != null) sb.Append("  ClearingRateAmountThree: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "clearingRateAmountThree", ClearingRateAmountThree.ToString())).Append("\n");
+            if (ClearingRateCurrencyCode != null) sb.Append("  ClearingRateCurrencyCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "clearingRateCurrencyCode", ClearingRateCurrencyCode.ToString())).Append("\n");
+            if (InterchangeAmount != null) sb.Append("  InterchangeAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "interchangeAmount", InterchangeAmount.ToString())).Append("\n");
+            if (BillbackAmount != null) sb.Append("  BillbackAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "billbackAmount", BillbackAmount.ToString())).Append("\n");
+            if (SettlementAmount != null) sb.Append("  SettlementAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "settlementAmount", SettlementAmount.ToString())).Append("\n");
+            if (SettlementCurrencyCode != null) sb.Append("  SettlementCurrencyCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "settlementCurrencyCode", SettlementCurrencyCode.ToString())).Append("\n");
+            if (ConversionRate != null) sb.Append("  ConversionRate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "conversionRate", ConversionRate.ToString())).Append("\n");
+            if (DeltaCost != null) sb.Append("  DeltaCost: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "deltaCost", DeltaCost.ToString())).Append("\n");
+            if (SurchargeAmount != null) sb.Append("  SurchargeAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "surchargeAmount", SurchargeAmount.ToString())).Append("\n");
+            if (PercentRateCharged != null) sb.Append("  PercentRateCharged: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "percentRateCharged", PercentRateCharged.ToString())).Append("\n");
+            if (PerTransactionCharged != null) sb.Append("  PerTransactionCharged: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "perTransactionCharged", PerTransactionCharged.ToString())).Append("\n");
+            if (DowngradeReasonCode != null) sb.Append("  DowngradeReasonCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "downgradeReasonCode", DowngradeReasonCode.ToString())).Append("\n");
+            if (ProcessTime != null) sb.Append("  ProcessTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "processTime", ProcessTime.ToString())).Append("\n");
+            if (AuthCode != null) sb.Append("  AuthCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "authCode", AuthCode.ToString())).Append("\n");
+            if (BatchTime != null) sb.Append("  BatchTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "batchTime", BatchTime.ToString())).Append("\n");
+            if (ProcessorBatchNumber != null) sb.Append("  ProcessorBatchNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "processorBatchNumber", ProcessorBatchNumber.ToString())).Append("\n");
+            if (CardIndicator != null) sb.Append("  CardIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "cardIndicator", CardIndicator.ToString())).Append("\n");
+            if (MinimumUnit != null) sb.Append("  MinimumUnit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "minimumUnit", MinimumUnit.ToString())).Append("\n");
+            if (MinimumUnitCurrencyCode != null) sb.Append("  MinimumUnitCurrencyCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "minimumUnitCurrencyCode", MinimumUnitCurrencyCode.ToString())).Append("\n");
+            if (CreditDeltaIndicator != null) sb.Append("  CreditDeltaIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "creditDeltaIndicator", CreditDeltaIndicator.ToString())).Append("\n");
+            if (FeeCategory != null) sb.Append("  FeeCategory: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "feeCategory", FeeCategory.ToString())).Append("\n");
+            if (ApplicationName != null) sb.Append("  ApplicationName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", "applicationName", ApplicationName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -518,7 +569,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

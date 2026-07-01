@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,49 +55,56 @@ namespace CyberSource.Model
         /// Capture number when requesting multiple partial captures for one authorization. Used along with &#x60;totalCaptureCount&#x60; to track which capture is being processed.  For example, the second of five captures would be passed to CyberSource as:   - &#x60;captureSequenceNumber_ &#x3D; 2&#x60;, and   - &#x60;totalCaptureCount &#x3D; 5&#x60; 
         /// </summary>
         /// <value>Capture number when requesting multiple partial captures for one authorization. Used along with &#x60;totalCaptureCount&#x60; to track which capture is being processed.  For example, the second of five captures would be passed to CyberSource as:   - &#x60;captureSequenceNumber_ &#x3D; 2&#x60;, and   - &#x60;totalCaptureCount &#x3D; 5&#x60; </value>
-        [DataMember(Name="captureSequenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("captureSequenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? CaptureSequenceNumber { get; set; }
 
         /// <summary>
         /// Total number of captures when requesting multiple partial captures for one payment. Used along with &#x60;captureSequenceNumber&#x60; field to track which capture is being processed.  For example, the second of five captures would be passed to CyberSource as:   - &#x60;captureSequenceNumber &#x3D; 2&#x60;, and   - &#x60;totalCaptureCount &#x3D; 5&#x60; 
         /// </summary>
         /// <value>Total number of captures when requesting multiple partial captures for one payment. Used along with &#x60;captureSequenceNumber&#x60; field to track which capture is being processed.  For example, the second of five captures would be passed to CyberSource as:   - &#x60;captureSequenceNumber &#x3D; 2&#x60;, and   - &#x60;totalCaptureCount &#x3D; 5&#x60; </value>
-        [DataMember(Name="totalCaptureCount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalCaptureCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? TotalCaptureCount { get; set; }
 
         /// <summary>
         /// Date on which you want the capture to occur. This field is supported only for CyberSource through VisaNet. Format: &#x60;MMDD&#x60;  #### Used by **Authorization** Optional field. 
         /// </summary>
         /// <value>Date on which you want the capture to occur. This field is supported only for CyberSource through VisaNet. Format: &#x60;MMDD&#x60;  #### Used by **Authorization** Optional field. </value>
-        [DataMember(Name="dateToCapture", EmitDefaultValue=false)]
+        [JsonPropertyName("dateToCapture")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DateToCapture { get; set; }
 
         /// <summary>
         /// Indicates whether to release the authorization hold on the remaining funds.   Possible Values: - &#x60;true&#x60; - &#x60;false&#x60; 
         /// </summary>
         /// <value>Indicates whether to release the authorization hold on the remaining funds.   Possible Values: - &#x60;true&#x60; - &#x60;false&#x60; </value>
-        [DataMember(Name="isFinal", EmitDefaultValue=false)]
+        [JsonPropertyName("isFinal")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IsFinal { get; set; }
 
         /// <summary>
         /// An informational note about this settlement. Appears in both the payer&#39;s transaction history and the emails that the payer receives. 
         /// </summary>
         /// <value>An informational note about this settlement. Appears in both the payer&#39;s transaction history and the emails that the payer receives. </value>
-        [DataMember(Name="notes", EmitDefaultValue=false)]
+        [JsonPropertyName("notes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Notes { get; set; }
 
         /// <summary>
         /// Used for authbill request when capture field equals true
         /// </summary>
         /// <value>Used for authbill request when capture field equals true</value>
-        [DataMember(Name="reconciliationId", EmitDefaultValue=false)]
+        [JsonPropertyName("reconciliationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReconciliationId { get; set; }
 
         /// <summary>
         /// Used by Nike merchant to send 12 digit order number
         /// </summary>
         /// <value>Used by Nike merchant to send 12 digit order number</value>
-        [DataMember(Name="reconciliationIdAlternate", EmitDefaultValue=false)]
+        [JsonPropertyName("reconciliationIdAlternate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReconciliationIdAlternate { get; set; }
 
         /// <summary>
@@ -108,13 +115,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsProcessingInformationCaptureOptions {\n");
-            if (CaptureSequenceNumber != null) sb.Append("  CaptureSequenceNumber: ").Append(CaptureSequenceNumber).Append("\n");
-            if (TotalCaptureCount != null) sb.Append("  TotalCaptureCount: ").Append(TotalCaptureCount).Append("\n");
-            if (DateToCapture != null) sb.Append("  DateToCapture: ").Append(DateToCapture).Append("\n");
-            if (IsFinal != null) sb.Append("  IsFinal: ").Append(IsFinal).Append("\n");
-            if (Notes != null) sb.Append("  Notes: ").Append(Notes).Append("\n");
-            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(ReconciliationId).Append("\n");
-            if (ReconciliationIdAlternate != null) sb.Append("  ReconciliationIdAlternate: ").Append(ReconciliationIdAlternate).Append("\n");
+            if (CaptureSequenceNumber != null) sb.Append("  CaptureSequenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationCaptureOptions", "captureSequenceNumber", CaptureSequenceNumber.ToString())).Append("\n");
+            if (TotalCaptureCount != null) sb.Append("  TotalCaptureCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationCaptureOptions", "totalCaptureCount", TotalCaptureCount.ToString())).Append("\n");
+            if (DateToCapture != null) sb.Append("  DateToCapture: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationCaptureOptions", "dateToCapture", DateToCapture.ToString())).Append("\n");
+            if (IsFinal != null) sb.Append("  IsFinal: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationCaptureOptions", "isFinal", IsFinal.ToString())).Append("\n");
+            if (Notes != null) sb.Append("  Notes: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationCaptureOptions", "notes", Notes.ToString())).Append("\n");
+            if (ReconciliationId != null) sb.Append("  ReconciliationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationCaptureOptions", "reconciliationId", ReconciliationId.ToString())).Append("\n");
+            if (ReconciliationIdAlternate != null) sb.Append("  ReconciliationIdAlternate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsProcessingInformationCaptureOptions", "reconciliationIdAlternate", ReconciliationIdAlternate.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,7 +132,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsProcessingInformationCaptureOptions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -50,31 +50,36 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Number
         /// </summary>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount Number { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount Type { get; set; }
 
         /// <summary>
         /// Gets or Sets SecurityCode
         /// </summary>
-        [DataMember(Name="securityCode", EmitDefaultValue=false)]
+        [JsonPropertyName("securityCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount SecurityCode { get; set; }
 
         /// <summary>
         /// Gets or Sets ExpirationMonth
         /// </summary>
-        [DataMember(Name="expirationMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount ExpirationMonth { get; set; }
 
         /// <summary>
         /// Gets or Sets ExpirationYear
         /// </summary>
-        [DataMember(Name="expirationYear", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationYear")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Flexv2sessionsFieldsOrderInformationAmountDetailsTotalAmount ExpirationYear { get; set; }
 
         /// <summary>
@@ -85,11 +90,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Flexv2sessionsFieldsPaymentInformationCard {\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (SecurityCode != null) sb.Append("  SecurityCode: ").Append(SecurityCode).Append("\n");
-            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(ExpirationMonth).Append("\n");
-            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(ExpirationYear).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsPaymentInformationCard", "number", Number.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsPaymentInformationCard", "type", Type.ToString())).Append("\n");
+            if (SecurityCode != null) sb.Append("  SecurityCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsPaymentInformationCard", "securityCode", SecurityCode.ToString())).Append("\n");
+            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsPaymentInformationCard", "expirationMonth", ExpirationMonth.ToString())).Append("\n");
+            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Flexv2sessionsFieldsPaymentInformationCard", "expirationYear", ExpirationYear.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -100,7 +105,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Flexv2sessionsFieldsPaymentInformationCard", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

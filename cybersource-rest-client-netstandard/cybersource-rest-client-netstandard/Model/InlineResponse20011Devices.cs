@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -64,79 +64,91 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ReaderId
         /// </summary>
-        [DataMember(Name="readerId", EmitDefaultValue=false)]
+        [JsonPropertyName("readerId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ReaderId { get; set; }
 
         /// <summary>
         /// Gets or Sets SerialNumber
         /// </summary>
-        [DataMember(Name="serialNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("serialNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SerialNumber { get; set; }
 
         /// <summary>
         /// Gets or Sets Model
         /// </summary>
-        [DataMember(Name="model", EmitDefaultValue=false)]
+        [JsonPropertyName("model")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Model { get; set; }
 
         /// <summary>
         /// Gets or Sets Make
         /// </summary>
-        [DataMember(Name="make", EmitDefaultValue=false)]
+        [JsonPropertyName("make")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Make { get; set; }
 
         /// <summary>
         /// Gets or Sets HardwareRevision
         /// </summary>
-        [DataMember(Name="hardwareRevision", EmitDefaultValue=false)]
+        [JsonPropertyName("hardwareRevision")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HardwareRevision { get; set; }
 
         /// <summary>
         /// Status of the device. Possible Values:   - &#39;ACTIVE&#39;   - &#39;INACTIVE&#39; 
         /// </summary>
         /// <value>Status of the device. Possible Values:   - &#39;ACTIVE&#39;   - &#39;INACTIVE&#39; </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Reason for change in status.
         /// </summary>
         /// <value>Reason for change in status.</value>
-        [DataMember(Name="statusChangeReason", EmitDefaultValue=false)]
+        [JsonPropertyName("statusChangeReason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StatusChangeReason { get; set; }
 
         /// <summary>
         /// ID of the merchant to whom this device is assigned.
         /// </summary>
         /// <value>ID of the merchant to whom this device is assigned.</value>
-        [DataMember(Name="merchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantId { get; set; }
 
         /// <summary>
         /// ID of the account to whom the device assigned.
         /// </summary>
         /// <value>ID of the account to whom the device assigned.</value>
-        [DataMember(Name="accountId", EmitDefaultValue=false)]
+        [JsonPropertyName("accountId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountId { get; set; }
 
         /// <summary>
         /// Timestamp in which the device was created.
         /// </summary>
         /// <value>Timestamp in which the device was created.</value>
-        [DataMember(Name="terminalCreationDate", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalCreationDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? TerminalCreationDate { get; set; }
 
         /// <summary>
         /// Timestamp in which the device was updated/modified.
         /// </summary>
         /// <value>Timestamp in which the device was updated/modified.</value>
-        [DataMember(Name="terminalUpdationDate", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalUpdationDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? TerminalUpdationDate { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentProcessorToTerminalMap
         /// </summary>
-        [DataMember(Name="paymentProcessorToTerminalMap", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentProcessorToTerminalMap")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InlineResponse20011PaymentProcessorToTerminalMap PaymentProcessorToTerminalMap { get; set; }
 
         /// <summary>
@@ -147,18 +159,18 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse20011Devices {\n");
-            if (ReaderId != null) sb.Append("  ReaderId: ").Append(ReaderId).Append("\n");
-            if (SerialNumber != null) sb.Append("  SerialNumber: ").Append(SerialNumber).Append("\n");
-            if (Model != null) sb.Append("  Model: ").Append(Model).Append("\n");
-            if (Make != null) sb.Append("  Make: ").Append(Make).Append("\n");
-            if (HardwareRevision != null) sb.Append("  HardwareRevision: ").Append(HardwareRevision).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (StatusChangeReason != null) sb.Append("  StatusChangeReason: ").Append(StatusChangeReason).Append("\n");
-            if (MerchantId != null) sb.Append("  MerchantId: ").Append(MerchantId).Append("\n");
-            if (AccountId != null) sb.Append("  AccountId: ").Append(AccountId).Append("\n");
-            if (TerminalCreationDate != null) sb.Append("  TerminalCreationDate: ").Append(TerminalCreationDate).Append("\n");
-            if (TerminalUpdationDate != null) sb.Append("  TerminalUpdationDate: ").Append(TerminalUpdationDate).Append("\n");
-            if (PaymentProcessorToTerminalMap != null) sb.Append("  PaymentProcessorToTerminalMap: ").Append(PaymentProcessorToTerminalMap).Append("\n");
+            if (ReaderId != null) sb.Append("  ReaderId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "readerId", ReaderId.ToString())).Append("\n");
+            if (SerialNumber != null) sb.Append("  SerialNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "serialNumber", SerialNumber.ToString())).Append("\n");
+            if (Model != null) sb.Append("  Model: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "model", Model.ToString())).Append("\n");
+            if (Make != null) sb.Append("  Make: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "make", Make.ToString())).Append("\n");
+            if (HardwareRevision != null) sb.Append("  HardwareRevision: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "hardwareRevision", HardwareRevision.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "status", Status.ToString())).Append("\n");
+            if (StatusChangeReason != null) sb.Append("  StatusChangeReason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "statusChangeReason", StatusChangeReason.ToString())).Append("\n");
+            if (MerchantId != null) sb.Append("  MerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "merchantId", MerchantId.ToString())).Append("\n");
+            if (AccountId != null) sb.Append("  AccountId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "accountId", AccountId.ToString())).Append("\n");
+            if (TerminalCreationDate != null) sb.Append("  TerminalCreationDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "terminalCreationDate", TerminalCreationDate.ToString())).Append("\n");
+            if (TerminalUpdationDate != null) sb.Append("  TerminalUpdationDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "terminalUpdationDate", TerminalUpdationDate.ToString())).Append("\n");
+            if (PaymentProcessorToTerminalMap != null) sb.Append("  PaymentProcessorToTerminalMap: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse20011Devices", "paymentProcessorToTerminalMap", PaymentProcessorToTerminalMap.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -169,7 +181,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse20011Devices", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

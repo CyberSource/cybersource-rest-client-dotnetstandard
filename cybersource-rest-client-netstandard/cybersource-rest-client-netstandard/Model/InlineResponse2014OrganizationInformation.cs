@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,19 +46,22 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets OrganizationId
         /// </summary>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// Gets or Sets ParentOrganizationId
         /// </summary>
-        [DataMember(Name="parentOrganizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("parentOrganizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ParentOrganizationId { get; set; }
 
         /// <summary>
         /// Gets or Sets ChildOrganizations
         /// </summary>
-        [DataMember(Name="childOrganizations", EmitDefaultValue=false)]
+        [JsonPropertyName("childOrganizations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ChildOrganizations { get; set; }
 
         /// <summary>
@@ -69,9 +72,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2014OrganizationInformation {\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (ParentOrganizationId != null) sb.Append("  ParentOrganizationId: ").Append(ParentOrganizationId).Append("\n");
-            if (ChildOrganizations != null) sb.Append("  ChildOrganizations: ").Append(ChildOrganizations).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014OrganizationInformation", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (ParentOrganizationId != null) sb.Append("  ParentOrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014OrganizationInformation", "parentOrganizationId", ParentOrganizationId.ToString())).Append("\n");
+            if (ChildOrganizations != null) sb.Append("  ChildOrganizations: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2014OrganizationInformation", "childOrganizations", ChildOrganizations.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +85,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2014OrganizationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

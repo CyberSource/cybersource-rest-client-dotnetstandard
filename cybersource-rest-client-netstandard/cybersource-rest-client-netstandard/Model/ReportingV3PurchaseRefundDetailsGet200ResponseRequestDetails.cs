@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,42 +53,48 @@ namespace CyberSource.Model
         /// An unique identification number assigned by CyberSource to identify the submitted request.
         /// </summary>
         /// <value>An unique identification number assigned by CyberSource to identify the submitted request.</value>
-        [DataMember(Name="requestId", EmitDefaultValue=false)]
+        [JsonPropertyName("requestId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RequestId { get; set; }
 
         /// <summary>
         /// Cybersource Merchant Id
         /// </summary>
         /// <value>Cybersource Merchant Id</value>
-        [DataMember(Name="cybersourceMerchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("cybersourceMerchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CybersourceMerchantId { get; set; }
 
         /// <summary>
         /// Cybersource Processor Merchant Id
         /// </summary>
         /// <value>Cybersource Processor Merchant Id</value>
-        [DataMember(Name="processorMerchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("processorMerchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessorMerchantId { get; set; }
 
         /// <summary>
         /// Group Name
         /// </summary>
         /// <value>Group Name</value>
-        [DataMember(Name="groupName", EmitDefaultValue=false)]
+        [JsonPropertyName("groupName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string GroupName { get; set; }
 
         /// <summary>
         /// Transaction Reference Number
         /// </summary>
         /// <value>Transaction Reference Number</value>
-        [DataMember(Name="transactionReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionReferenceNumber { get; set; }
 
         /// <summary>
         /// Merchant Reference Number
         /// </summary>
         /// <value>Merchant Reference Number</value>
-        [DataMember(Name="merchantReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantReferenceNumber { get; set; }
 
         /// <summary>
@@ -99,12 +105,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails {\n");
-            if (RequestId != null) sb.Append("  RequestId: ").Append(RequestId).Append("\n");
-            if (CybersourceMerchantId != null) sb.Append("  CybersourceMerchantId: ").Append(CybersourceMerchantId).Append("\n");
-            if (ProcessorMerchantId != null) sb.Append("  ProcessorMerchantId: ").Append(ProcessorMerchantId).Append("\n");
-            if (GroupName != null) sb.Append("  GroupName: ").Append(GroupName).Append("\n");
-            if (TransactionReferenceNumber != null) sb.Append("  TransactionReferenceNumber: ").Append(TransactionReferenceNumber).Append("\n");
-            if (MerchantReferenceNumber != null) sb.Append("  MerchantReferenceNumber: ").Append(MerchantReferenceNumber).Append("\n");
+            if (RequestId != null) sb.Append("  RequestId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails", "requestId", RequestId.ToString())).Append("\n");
+            if (CybersourceMerchantId != null) sb.Append("  CybersourceMerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails", "cybersourceMerchantId", CybersourceMerchantId.ToString())).Append("\n");
+            if (ProcessorMerchantId != null) sb.Append("  ProcessorMerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails", "processorMerchantId", ProcessorMerchantId.ToString())).Append("\n");
+            if (GroupName != null) sb.Append("  GroupName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails", "groupName", GroupName.ToString())).Append("\n");
+            if (TransactionReferenceNumber != null) sb.Append("  TransactionReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails", "transactionReferenceNumber", TransactionReferenceNumber.ToString())).Append("\n");
+            if (MerchantReferenceNumber != null) sb.Append("  MerchantReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails", "merchantReferenceNumber", MerchantReferenceNumber.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,7 +121,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

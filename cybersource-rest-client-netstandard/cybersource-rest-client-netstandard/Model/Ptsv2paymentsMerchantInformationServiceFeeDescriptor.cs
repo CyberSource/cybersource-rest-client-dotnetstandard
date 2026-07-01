@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// Name of the service provider that is collecting the service fee. The service provider name must consist of 3, 7, or 12 characters followed by an asterisk (*). This value must also include the words \&quot;Service Fee.\&quot;  When you include more than one consecutive space, extra spaces are removed. Use one of the following formats for this value: - &lt;3-character name&gt;*Service Fee - &lt;7-character name&gt;*Service Fee - &lt;12-character name&gt;*Service Fee  When payments are made in installments, this value must also include installment information such as \&quot;1 of 5\&quot; or \&quot;3 of 7.\&quot; For installment payments, use one of the following formats for this value: - &lt;3-character name&gt;*Service Fee*&lt;N&gt; of &lt;M&gt; - &lt;7-character name&gt;*Service Fee*&lt;N&gt; of &lt;M&gt; - &lt;12-character name&gt;*Service Fee*&lt;N&gt; of &lt;M&gt;  where &lt;N&gt; is the payment number and &lt;M&gt; is the total number of payments.  When you do not include this value in your request, CyberSource uses the value that is in your CyberSource account.  This value might be displayed on the cardholder&#39;s statement. 
         /// </summary>
         /// <value>Name of the service provider that is collecting the service fee. The service provider name must consist of 3, 7, or 12 characters followed by an asterisk (*). This value must also include the words \&quot;Service Fee.\&quot;  When you include more than one consecutive space, extra spaces are removed. Use one of the following formats for this value: - &lt;3-character name&gt;*Service Fee - &lt;7-character name&gt;*Service Fee - &lt;12-character name&gt;*Service Fee  When payments are made in installments, this value must also include installment information such as \&quot;1 of 5\&quot; or \&quot;3 of 7.\&quot; For installment payments, use one of the following formats for this value: - &lt;3-character name&gt;*Service Fee*&lt;N&gt; of &lt;M&gt; - &lt;7-character name&gt;*Service Fee*&lt;N&gt; of &lt;M&gt; - &lt;12-character name&gt;*Service Fee*&lt;N&gt; of &lt;M&gt;  where &lt;N&gt; is the payment number and &lt;M&gt; is the total number of payments.  When you do not include this value in your request, CyberSource uses the value that is in your CyberSource account.  This value might be displayed on the cardholder&#39;s statement. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Contact information for the service provider that is collecting the service fee. when you include more than one consecutive space, extra spaces are removed.  When you do not include this value in your request, CyberSource uses the value that is in your CyberSource account.  This value might be displayed on the cardholder&#39;s statement. 
         /// </summary>
         /// <value>Contact information for the service provider that is collecting the service fee. when you include more than one consecutive space, extra spaces are removed.  When you do not include this value in your request, CyberSource uses the value that is in your CyberSource account.  This value might be displayed on the cardholder&#39;s statement. </value>
-        [DataMember(Name="contact", EmitDefaultValue=false)]
+        [JsonPropertyName("contact")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Contact { get; set; }
 
         /// <summary>
         /// State or territory in which the service provider is located.  When you do not include this value in your request, CyberSource uses the value that is in your CyberSource account.  This value might be displayed on the cardholder&#39;s statement. 
         /// </summary>
         /// <value>State or territory in which the service provider is located.  When you do not include this value in your request, CyberSource uses the value that is in your CyberSource account.  This value might be displayed on the cardholder&#39;s statement. </value>
-        [DataMember(Name="state", EmitDefaultValue=false)]
+        [JsonPropertyName("state")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string State { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsMerchantInformationServiceFeeDescriptor {\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Contact != null) sb.Append("  Contact: ").Append(Contact).Append("\n");
-            if (State != null) sb.Append("  State: ").Append(State).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformationServiceFeeDescriptor", "name", Name.ToString())).Append("\n");
+            if (Contact != null) sb.Append("  Contact: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformationServiceFeeDescriptor", "contact", Contact.ToString())).Append("\n");
+            if (State != null) sb.Append("  State: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsMerchantInformationServiceFeeDescriptor", "state", State.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsMerchantInformationServiceFeeDescriptor", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

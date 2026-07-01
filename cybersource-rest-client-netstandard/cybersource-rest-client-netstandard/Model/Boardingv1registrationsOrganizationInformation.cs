@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsOrganizationInformation" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Boardingv1registrationsOrganizationInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Boardingv1registrationsOrganizationInformation" /> class.
@@ -46,7 +46,7 @@ namespace CyberSource.Model
         /// <param name="BusinessInformation">BusinessInformation (required).</param>
         /// <param name="KYC">KYC.</param>
         /// <param name="Owners">Owners.</param>
-        public Boardingv1registrationsOrganizationInformation(string OrganizationId = default(string), string ParentOrganizationId = default(string), string Type = default(string), string Status = default(string), bool? Configurable = false, Boardingv1registrationsOrganizationInformationBusinessInformation BusinessInformation = default(Boardingv1registrationsOrganizationInformationBusinessInformation), Boardingv1registrationsOrganizationInformationKYC KYC = default(Boardingv1registrationsOrganizationInformationKYC), List<Boardingv1registrationsOrganizationInformationOwners> Owners = default(List<Boardingv1registrationsOrganizationInformationOwners>))
+        public Boardingv1registrationsOrganizationInformation(string OrganizationId = default(string), string ParentOrganizationId = default(string), string Type = default(string), string Status = default(string), bool? Configurable = false, BoardingBusinessInformation BusinessInformation = default(BoardingBusinessInformation), Boardingv1registrationsOrganizationInformationKYC KYC = default(Boardingv1registrationsOrganizationInformationKYC), List<Boardingv1registrationsOrganizationInformationOwners> Owners = default(List<Boardingv1registrationsOrganizationInformationOwners>))
         {
             this.OrganizationId = OrganizationId;
             this.ParentOrganizationId = ParentOrganizationId;
@@ -69,59 +69,68 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets OrganizationId
         /// </summary>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// This field is required for Organization Types: MERCHANT, TRANSACTING 
         /// </summary>
         /// <value>This field is required for Organization Types: MERCHANT, TRANSACTING </value>
-        [DataMember(Name="parentOrganizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("parentOrganizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ParentOrganizationId { get; set; }
 
         /// <summary>
         /// Gets or Sets ChildOrganizations
         /// </summary>
-        [DataMember(Name="childOrganizations", EmitDefaultValue=false)]
+        [JsonPropertyName("childOrganizations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ChildOrganizations { get; private set; }
 
         /// <summary>
         /// Determines the type of organization in the hirarchy that this registration will use to onboard this Organization Possible Values:   - &#39;TRANSACTING&#39;   - &#39;STRUCTURAL&#39;   - &#39;MERCHANT&#39; 
         /// </summary>
         /// <value>Determines the type of organization in the hirarchy that this registration will use to onboard this Organization Possible Values:   - &#39;TRANSACTING&#39;   - &#39;STRUCTURAL&#39;   - &#39;MERCHANT&#39; </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Determines the status that the organization will be after being onboarded Possible Values:             - &#39;LIVE&#39;             - &#39;TEST&#39;             - &#39;DRAFT&#39; 
         /// </summary>
         /// <value>Determines the status that the organization will be after being onboarded Possible Values:             - &#39;LIVE&#39;             - &#39;TEST&#39;             - &#39;DRAFT&#39; </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// This denotes the one organization, with exception to the TRANSACTING types, that is allowed to be used for configuration purposes against products.  Eventually this field will be deprecated and all organizations will be allowed for product configuration.
         /// </summary>
         /// <value>This denotes the one organization, with exception to the TRANSACTING types, that is allowed to be used for configuration purposes against products.  Eventually this field will be deprecated and all organizations will be allowed for product configuration.</value>
-        [DataMember(Name="configurable", EmitDefaultValue=false)]
+        [JsonPropertyName("configurable")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Configurable { get; set; }
 
         /// <summary>
         /// Gets or Sets BusinessInformation
         /// </summary>
-        [DataMember(Name="businessInformation", EmitDefaultValue=false)]
-        public Boardingv1registrationsOrganizationInformationBusinessInformation BusinessInformation { get; set; }
+        [JsonPropertyName("businessInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public BoardingBusinessInformation BusinessInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets KYC
         /// </summary>
-        [DataMember(Name="KYC", EmitDefaultValue=false)]
+        [JsonPropertyName("KYC")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Boardingv1registrationsOrganizationInformationKYC KYC { get; set; }
 
         /// <summary>
         /// Gets or Sets Owners
         /// </summary>
-        [DataMember(Name="owners", EmitDefaultValue=false)]
+        [JsonPropertyName("owners")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Boardingv1registrationsOrganizationInformationOwners> Owners { get; set; }
 
         /// <summary>
@@ -132,15 +141,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Boardingv1registrationsOrganizationInformation {\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (ParentOrganizationId != null) sb.Append("  ParentOrganizationId: ").Append(ParentOrganizationId).Append("\n");
-            if (ChildOrganizations != null) sb.Append("  ChildOrganizations: ").Append(ChildOrganizations).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (Configurable != null) sb.Append("  Configurable: ").Append(Configurable).Append("\n");
-            if (BusinessInformation != null) sb.Append("  BusinessInformation: ").Append(BusinessInformation).Append("\n");
-            if (KYC != null) sb.Append("  KYC: ").Append(KYC).Append("\n");
-            if (Owners != null) sb.Append("  Owners: ").Append(Owners).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformation", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (ParentOrganizationId != null) sb.Append("  ParentOrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformation", "parentOrganizationId", ParentOrganizationId.ToString())).Append("\n");
+            if (ChildOrganizations != null) sb.Append("  ChildOrganizations: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformation", "childOrganizations", ChildOrganizations.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformation", "type", Type.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformation", "status", Status.ToString())).Append("\n");
+            if (Configurable != null) sb.Append("  Configurable: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformation", "configurable", Configurable.ToString())).Append("\n");
+            if (BusinessInformation != null) sb.Append("  BusinessInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformation", "businessInformation", BusinessInformation.ToString())).Append("\n");
+            if (KYC != null) sb.Append("  KYC: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformation", "KYC", KYC.ToString())).Append("\n");
+            if (Owners != null) sb.Append("  Owners: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsOrganizationInformation", "owners", Owners.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -151,7 +160,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Boardingv1registrationsOrganizationInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

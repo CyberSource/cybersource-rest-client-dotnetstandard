@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="InlineResponse200Details" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         public InlineResponse200Details()
         {
         }
@@ -42,14 +42,16 @@ namespace CyberSource.Model
         /// The name of the field that caused the error.
         /// </summary>
         /// <value>The name of the field that caused the error.</value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; private set; }
 
         /// <summary>
         /// The location of the field that caused the error.
         /// </summary>
         /// <value>The location of the field that caused the error.</value>
-        [DataMember(Name="location", EmitDefaultValue=false)]
+        [JsonPropertyName("location")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Location { get; private set; }
 
         /// <summary>
@@ -60,8 +62,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse200Details {\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Location != null) sb.Append("  Location: ").Append(Location).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse200Details", "name", Name.ToString())).Append("\n");
+            if (Location != null) sb.Append("  Location: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse200Details", "location", Location.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -72,7 +74,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse200Details", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

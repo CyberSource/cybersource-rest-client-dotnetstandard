@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,33 +51,38 @@ namespace CyberSource.Model
         /// Identifier for the terminal at your retail location. You can define this value yourself, but consult the processor for requirements.  #### CyberSource through VisaNet A list of all possible values is stored in your CyberSource account. If terminal ID validation is enabled for your CyberSource account, the value you send for this field is validated against the list each time you include the field in a request. To enable or disable terminal ID validation, contact CyberSource Customer Support.  When you do not include this field in a request, CyberSource uses the default value that is defined in your CyberSource account.  #### FDC Nashville Global To have your account configured to support this field, contact CyberSource Customer Support. This value must be a value that FDC Nashville Global issued to you.  #### For Payouts This field is applicable for CyberSource through VisaNet.  #### GPX Identifier for the terminal at your retail location. A list of all possible values is stored in your account. If terminal ID validation is enabled for your account, the value you send for this field is validated against the list each time you include the field in a request. To enable or disable terminal ID validation, contact customer support.  When you do not include this field in a request, the default value that is defined in your account is used.  Optional for authorizations.  #### Used by **Authorization** Optional for the following processors. When you do not include this field in a request, the default value that is defined in your account is used.   - American Express Direct   - Credit Mutuel-CIC   - FDC Nashville Global   - SIX - Chase Paymentech Solutions: Optional field. If you include this field in your request, you must also include &#x60;pointOfSaleInformation.catLevel&#x60;. - FDMS Nashville: The default value that is defined in your account is used. - GPX - OmniPay Direct: Optional field.  For the following processors, this field is not used. - GPN - JCN Gateway - RBS WorldPay Atlanta - TSYS Acquiring Solutions - Worldpay VAP  #### Card Present reply Terminal identifier assigned by the acquirer. This value must be printed on the receipt. 
         /// </summary>
         /// <value>Identifier for the terminal at your retail location. You can define this value yourself, but consult the processor for requirements.  #### CyberSource through VisaNet A list of all possible values is stored in your CyberSource account. If terminal ID validation is enabled for your CyberSource account, the value you send for this field is validated against the list each time you include the field in a request. To enable or disable terminal ID validation, contact CyberSource Customer Support.  When you do not include this field in a request, CyberSource uses the default value that is defined in your CyberSource account.  #### FDC Nashville Global To have your account configured to support this field, contact CyberSource Customer Support. This value must be a value that FDC Nashville Global issued to you.  #### For Payouts This field is applicable for CyberSource through VisaNet.  #### GPX Identifier for the terminal at your retail location. A list of all possible values is stored in your account. If terminal ID validation is enabled for your account, the value you send for this field is validated against the list each time you include the field in a request. To enable or disable terminal ID validation, contact customer support.  When you do not include this field in a request, the default value that is defined in your account is used.  Optional for authorizations.  #### Used by **Authorization** Optional for the following processors. When you do not include this field in a request, the default value that is defined in your account is used.   - American Express Direct   - Credit Mutuel-CIC   - FDC Nashville Global   - SIX - Chase Paymentech Solutions: Optional field. If you include this field in your request, you must also include &#x60;pointOfSaleInformation.catLevel&#x60;. - FDMS Nashville: The default value that is defined in your account is used. - GPX - OmniPay Direct: Optional field.  For the following processors, this field is not used. - GPN - JCN Gateway - RBS WorldPay Atlanta - TSYS Acquiring Solutions - Worldpay VAP  #### Card Present reply Terminal identifier assigned by the acquirer. This value must be printed on the receipt. </value>
-        [DataMember(Name="terminalId", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalId { get; set; }
 
         /// <summary>
         /// Terminal serial number assigned by the hardware manufacturer. This value is provided by the client software that is installed on the POS terminal.  This value is not forwarded to the processor. Instead, the value is forwarded to the reporting functionality.  #### Used by **Authorization and Credit** Optional. This field is supported only by client software that is installed on your POS terminals for the following processors: - American Express Direct - Credit Mutuel-CIC - FDC Nashville Global - OmniPay Direct - SIX 
         /// </summary>
         /// <value>Terminal serial number assigned by the hardware manufacturer. This value is provided by the client software that is installed on the POS terminal.  This value is not forwarded to the processor. Instead, the value is forwarded to the reporting functionality.  #### Used by **Authorization and Credit** Optional. This field is supported only by client software that is installed on your POS terminals for the following processors: - American Express Direct - Credit Mutuel-CIC - FDC Nashville Global - OmniPay Direct - SIX </value>
-        [DataMember(Name="terminalSerialNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("terminalSerialNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TerminalSerialNumber { get; set; }
 
         /// <summary>
         /// Value created by the client software that uniquely identifies the POS device. CyberSource does not forward this value to the processor. Instead, the value is forwarded to the CyberSource reporting functionality.  This field is supported only for authorizations and credits on these processors: - American Express Direct - Credit Mutuel-CIC - FDC Nashville Global - OmniPay Direct - SIX  Optional field. String (32) 
         /// </summary>
         /// <value>Value created by the client software that uniquely identifies the POS device. CyberSource does not forward this value to the processor. Instead, the value is forwarded to the CyberSource reporting functionality.  This field is supported only for authorizations and credits on these processors: - American Express Direct - Credit Mutuel-CIC - FDC Nashville Global - OmniPay Direct - SIX  Optional field. String (32) </value>
-        [DataMember(Name="deviceId", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DeviceId { get; set; }
 
         /// <summary>
         /// Gets or Sets Partner
         /// </summary>
-        [DataMember(Name="partner", EmitDefaultValue=false)]
+        [JsonPropertyName("partner")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsPost201ResponseEmbeddedPointOfSaleInformationPartner Partner { get; set; }
 
         /// <summary>
         /// Gets or Sets Emv
         /// </summary>
-        [DataMember(Name="emv", EmitDefaultValue=false)]
+        [JsonPropertyName("emv")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsidreversalsPointOfSaleInformationEmv Emv { get; set; }
 
         /// <summary>
@@ -88,11 +93,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsPost201ResponseEmbeddedPointOfSaleInformation {\n");
-            if (TerminalId != null) sb.Append("  TerminalId: ").Append(TerminalId).Append("\n");
-            if (TerminalSerialNumber != null) sb.Append("  TerminalSerialNumber: ").Append(TerminalSerialNumber).Append("\n");
-            if (DeviceId != null) sb.Append("  DeviceId: ").Append(DeviceId).Append("\n");
-            if (Partner != null) sb.Append("  Partner: ").Append(Partner).Append("\n");
-            if (Emv != null) sb.Append("  Emv: ").Append(Emv).Append("\n");
+            if (TerminalId != null) sb.Append("  TerminalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedPointOfSaleInformation", "terminalId", TerminalId.ToString())).Append("\n");
+            if (TerminalSerialNumber != null) sb.Append("  TerminalSerialNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedPointOfSaleInformation", "terminalSerialNumber", TerminalSerialNumber.ToString())).Append("\n");
+            if (DeviceId != null) sb.Append("  DeviceId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedPointOfSaleInformation", "deviceId", DeviceId.ToString())).Append("\n");
+            if (Partner != null) sb.Append("  Partner: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedPointOfSaleInformation", "partner", Partner.ToString())).Append("\n");
+            if (Emv != null) sb.Append("  Emv: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201ResponseEmbeddedPointOfSaleInformation", "emv", Emv.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -103,7 +108,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsPost201ResponseEmbeddedPointOfSaleInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

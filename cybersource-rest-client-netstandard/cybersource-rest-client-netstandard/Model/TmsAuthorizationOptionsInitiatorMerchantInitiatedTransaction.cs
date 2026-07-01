@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Network transaction identifier that was returned in the payment response field _processorInformation.transactionID_ in the reply message for either the original merchant-initiated payment in the series or the previous merchant-initiated payment in the series. 
         /// </summary>
         /// <value>Network transaction identifier that was returned in the payment response field _processorInformation.transactionID_ in the reply message for either the original merchant-initiated payment in the series or the previous merchant-initiated payment in the series. </value>
-        [DataMember(Name="previousTransactionId", EmitDefaultValue=false)]
+        [JsonPropertyName("previousTransactionId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PreviousTransactionId { get; set; }
 
         /// <summary>
         /// Amount of the original authorization. 
         /// </summary>
         /// <value>Amount of the original authorization. </value>
-        [DataMember(Name="originalAuthorizedAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("originalAuthorizedAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OriginalAuthorizedAmount { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TmsAuthorizationOptionsInitiatorMerchantInitiatedTransaction {\n");
-            if (PreviousTransactionId != null) sb.Append("  PreviousTransactionId: ").Append(PreviousTransactionId).Append("\n");
-            if (OriginalAuthorizedAmount != null) sb.Append("  OriginalAuthorizedAmount: ").Append(OriginalAuthorizedAmount).Append("\n");
+            if (PreviousTransactionId != null) sb.Append("  PreviousTransactionId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsAuthorizationOptionsInitiatorMerchantInitiatedTransaction", "previousTransactionId", PreviousTransactionId.ToString())).Append("\n");
+            if (OriginalAuthorizedAmount != null) sb.Append("  OriginalAuthorizedAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TmsAuthorizationOptionsInitiatorMerchantInitiatedTransaction", "originalAuthorizedAmount", OriginalAuthorizedAmount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TmsAuthorizationOptionsInitiatorMerchantInitiatedTransaction", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

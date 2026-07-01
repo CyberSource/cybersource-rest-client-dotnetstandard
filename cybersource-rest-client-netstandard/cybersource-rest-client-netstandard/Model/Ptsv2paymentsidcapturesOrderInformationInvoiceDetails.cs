@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -55,48 +55,55 @@ namespace CyberSource.Model
         /// Value used by your customer to identify the order. This value is typically a purchase order number. CyberSource recommends that you do not populate the field with all zeros or nines. 
         /// </summary>
         /// <value>Value used by your customer to identify the order. This value is typically a purchase order number. CyberSource recommends that you do not populate the field with all zeros or nines. </value>
-        [DataMember(Name="purchaseOrderNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseOrderNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurchaseOrderNumber { get; set; }
 
         /// <summary>
         /// Date the order was processed. &#x60;Format: YYYY-MM-DD&#x60;. 
         /// </summary>
         /// <value>Date the order was processed. &#x60;Format: YYYY-MM-DD&#x60;. </value>
-        [DataMember(Name="purchaseOrderDate", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseOrderDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurchaseOrderDate { get; set; }
 
         /// <summary>
         /// The name of the individual or the company contacted for company authorized purchases. 
         /// </summary>
         /// <value>The name of the individual or the company contacted for company authorized purchases. </value>
-        [DataMember(Name="purchaseContactName", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseContactName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurchaseContactName { get; set; }
 
         /// <summary>
         /// Flag that indicates whether an order is taxable. This value must be true if the sum of all _lineItems[].taxAmount_ values &gt; 0.  If you do not include any &#x60;lineItems[].taxAmount&#x60; values in your request, CyberSource does not include &#x60;invoiceDetails.taxable&#x60; in the data it sends to the processor.  Possible values:  - **true**  - **false** 
         /// </summary>
         /// <value>Flag that indicates whether an order is taxable. This value must be true if the sum of all _lineItems[].taxAmount_ values &gt; 0.  If you do not include any &#x60;lineItems[].taxAmount&#x60; values in your request, CyberSource does not include &#x60;invoiceDetails.taxable&#x60; in the data it sends to the processor.  Possible values:  - **true**  - **false** </value>
-        [DataMember(Name="taxable", EmitDefaultValue=false)]
+        [JsonPropertyName("taxable")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Taxable { get; set; }
 
         /// <summary>
         /// VAT invoice number associated with the transaction. 
         /// </summary>
         /// <value>VAT invoice number associated with the transaction. </value>
-        [DataMember(Name="vatInvoiceReferenceNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("vatInvoiceReferenceNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VatInvoiceReferenceNumber { get; set; }
 
         /// <summary>
         /// International description code of the overall order&#39;s goods or services or the Categorizes purchases for VAT reporting. Contact your acquirer for a list of codes. 
         /// </summary>
         /// <value>International description code of the overall order&#39;s goods or services or the Categorizes purchases for VAT reporting. Contact your acquirer for a list of codes. </value>
-        [DataMember(Name="commodityCode", EmitDefaultValue=false)]
+        [JsonPropertyName("commodityCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommodityCode { get; set; }
 
         /// <summary>
         /// Gets or Sets TransactionAdviceAddendum
         /// </summary>
-        [DataMember(Name="transactionAdviceAddendum", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionAdviceAddendum")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Ptsv2paymentsOrderInformationInvoiceDetailsTransactionAdviceAddendum> TransactionAdviceAddendum { get; set; }
 
         /// <summary>
@@ -107,13 +114,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsidcapturesOrderInformationInvoiceDetails {\n");
-            if (PurchaseOrderNumber != null) sb.Append("  PurchaseOrderNumber: ").Append(PurchaseOrderNumber).Append("\n");
-            if (PurchaseOrderDate != null) sb.Append("  PurchaseOrderDate: ").Append(PurchaseOrderDate).Append("\n");
-            if (PurchaseContactName != null) sb.Append("  PurchaseContactName: ").Append(PurchaseContactName).Append("\n");
-            if (Taxable != null) sb.Append("  Taxable: ").Append(Taxable).Append("\n");
-            if (VatInvoiceReferenceNumber != null) sb.Append("  VatInvoiceReferenceNumber: ").Append(VatInvoiceReferenceNumber).Append("\n");
-            if (CommodityCode != null) sb.Append("  CommodityCode: ").Append(CommodityCode).Append("\n");
-            if (TransactionAdviceAddendum != null) sb.Append("  TransactionAdviceAddendum: ").Append(TransactionAdviceAddendum).Append("\n");
+            if (PurchaseOrderNumber != null) sb.Append("  PurchaseOrderNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationInvoiceDetails", "purchaseOrderNumber", PurchaseOrderNumber.ToString())).Append("\n");
+            if (PurchaseOrderDate != null) sb.Append("  PurchaseOrderDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationInvoiceDetails", "purchaseOrderDate", PurchaseOrderDate.ToString())).Append("\n");
+            if (PurchaseContactName != null) sb.Append("  PurchaseContactName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationInvoiceDetails", "purchaseContactName", PurchaseContactName.ToString())).Append("\n");
+            if (Taxable != null) sb.Append("  Taxable: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationInvoiceDetails", "taxable", Taxable.ToString())).Append("\n");
+            if (VatInvoiceReferenceNumber != null) sb.Append("  VatInvoiceReferenceNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationInvoiceDetails", "vatInvoiceReferenceNumber", VatInvoiceReferenceNumber.ToString())).Append("\n");
+            if (CommodityCode != null) sb.Append("  CommodityCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationInvoiceDetails", "commodityCode", CommodityCode.ToString())).Append("\n");
+            if (TransactionAdviceAddendum != null) sb.Append("  TransactionAdviceAddendum: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsidcapturesOrderInformationInvoiceDetails", "transactionAdviceAddendum", TransactionAdviceAddendum.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -124,7 +131,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsidcapturesOrderInformationInvoiceDetails", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

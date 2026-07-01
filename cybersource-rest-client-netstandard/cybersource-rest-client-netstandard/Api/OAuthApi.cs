@@ -254,14 +254,7 @@
 //                localVarPostBody = createAccessTokenRequest; // byte array
 //            }
 
-//            if (logUtility.IsMaskingEnabled(logger))
-//            {
-//                logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
-//            }
-//            else
-//            {
-//                logger.Debug($"HTTP Request Body :\n{localVarPostBody}");
-//            }
+//            logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 
 //            // make the HTTP request
@@ -354,14 +347,7 @@
 //                localVarPostBody = createAccessTokenRequest; // byte array
 //            }
 
-//            if (logUtility.IsMaskingEnabled(logger))
-//            {
-//                logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
-//            }
-//            else
-//            {
-//                logger.Debug($"HTTP Request Body :\n{localVarPostBody}");
-//            }
+//            logger.Debug($"HTTP Request Body :\n{logUtility.MaskSensitiveData(localVarPostBody.ToString())}");
 
 //            // make the HTTP request
 //            RestResponse localVarResponse = (RestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,

@@ -298,9 +298,10 @@ namespace AuthenticationSdkTests.NetCore.util
         }
 
         [TestMethod]
+        [ExpectedException(typeof(Exception))]
         public void MerchantMLESettings_EmptyResponseMleKID_IsNull()
         {
-            // Verifies the fix: empty string responseMleKID is normalized to null
+            // Empty responseMleKID is invalid when key is explicitly present.
             var mleDict = new Dictionary<string, string>
             {
                 { "enableResponseMleGlobally", "true" },
@@ -309,16 +310,14 @@ namespace AuthenticationSdkTests.NetCore.util
                 { "responseMlePrivateKeyFilePassword", "testrest" }
             };
 
-            var mleSettings = new MerchantMLESettings(mleDict);
-
-            Assert.IsNull(mleSettings.ResponseMleKID,
-                "Empty responseMleKID should be normalized to null so auto-extraction from P12 can work");
+            new MerchantMLESettings(mleDict);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(Exception))]
         public void MerchantMLESettings_WhitespaceResponseMleKID_IsNull()
         {
-            // Verifies that whitespace-only responseMleKID is normalized to null
+            // Whitespace responseMleKID is invalid when key is explicitly present.
             var mleDict = new Dictionary<string, string>
             {
                 { "enableResponseMleGlobally", "true" },
@@ -327,10 +326,7 @@ namespace AuthenticationSdkTests.NetCore.util
                 { "responseMlePrivateKeyFilePassword", "testrest" }
             };
 
-            var mleSettings = new MerchantMLESettings(mleDict);
-
-            Assert.IsNull(mleSettings.ResponseMleKID,
-                "Whitespace-only responseMleKID should be normalized to null");
+            new MerchantMLESettings(mleDict);
         }
 
         [TestMethod]
@@ -353,7 +349,7 @@ namespace AuthenticationSdkTests.NetCore.util
         [TestMethod]
         public void MerchantMLESettings_EmptyPrivateKeyFilePath_IsNull()
         {
-            // Verifies the fix: empty string responseMlePrivateKeyFilePath is normalized to null
+            // Private key path is preserved as provided when response MLE is disabled.
             var mleDict = new Dictionary<string, string>
             {
                 { "enableResponseMleGlobally", "false" },
@@ -362,8 +358,8 @@ namespace AuthenticationSdkTests.NetCore.util
 
             var mleSettings = new MerchantMLESettings(mleDict);
 
-            Assert.IsNull(mleSettings.ResponseMlePrivateKeyFilePath,
-                "Empty responseMlePrivateKeyFilePath should be normalized to null");
+            Assert.AreEqual(string.Empty, mleSettings.ResponseMlePrivateKeyFilePath,
+                "Empty responseMlePrivateKeyFilePath should be preserved when response MLE is disabled");
         }
 
         [TestMethod]

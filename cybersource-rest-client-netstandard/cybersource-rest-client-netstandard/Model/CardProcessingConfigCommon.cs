@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -89,166 +89,190 @@ namespace CyberSource.Model
         /// e.g. * amexdirect * barclays2 * CUP * EFTPOS * fdiglobal * gpngsapv3 * gpx * smartfdc * tsys * vero * VPC  For VPC, CUP and EFTPOS processors, replace the processor name from VPC or CUP or EFTPOS to the actual processor name in the sample request. e.g. replace VPC with &amp;lt;your vpc processor&amp;gt; 
         /// </summary>
         /// <value>e.g. * amexdirect * barclays2 * CUP * EFTPOS * fdiglobal * gpngsapv3 * gpx * smartfdc * tsys * vero * VPC  For VPC, CUP and EFTPOS processors, replace the processor name from VPC or CUP or EFTPOS to the actual processor name in the sample request. e.g. replace VPC with &amp;lt;your vpc processor&amp;gt; </value>
-        [DataMember(Name="processors", EmitDefaultValue=false)]
+        [JsonPropertyName("processors")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, CardProcessingConfigCommonProcessors> Processors { get; set; }
 
         /// <summary>
         /// Vendor code assigned by American Express. Applicable for TSYS (tsys) processor.
         /// </summary>
         /// <value>Vendor code assigned by American Express. Applicable for TSYS (tsys) processor.</value>
-        [DataMember(Name="amexVendorCode", EmitDefaultValue=false)]
+        [JsonPropertyName("amexVendorCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AmexVendorCode { get; set; }
 
         /// <summary>
         /// Authorization Finality indicator. Please note that the input can be in small case or capitals but response is in small case as of now. It will be made capitals everywhere in the next version. Applicable for Elavon Americas (elavonamericas), TSYS (tsys), Barclays (barclays2), Streamline (streamline2), Six (six), Barclays HISO (barclayshiso), GPN (gpn), FDI Global (fdiglobal), GPX (gpx), Paymentech Tampa (paymentechtampa), FDC Nashville (smartfdc), VPC and Chase Paymentech Salem (chasepaymentechsalem) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;FINAL&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;FINAL&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt;   Possible values: - PRE - FINAL - UNDEFINED
         /// </summary>
         /// <value>Authorization Finality indicator. Please note that the input can be in small case or capitals but response is in small case as of now. It will be made capitals everywhere in the next version. Applicable for Elavon Americas (elavonamericas), TSYS (tsys), Barclays (barclays2), Streamline (streamline2), Six (six), Barclays HISO (barclayshiso), GPN (gpn), FDI Global (fdiglobal), GPX (gpx), Paymentech Tampa (paymentechtampa), FDC Nashville (smartfdc), VPC and Chase Paymentech Salem (chasepaymentechsalem) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;FINAL&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;Barclays HISO&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;FINAL&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt;   Possible values: - PRE - FINAL - UNDEFINED</value>
-        [DataMember(Name="defaultAuthTypeCode", EmitDefaultValue=false)]
+        [JsonPropertyName("defaultAuthTypeCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DefaultAuthTypeCode { get; set; }
 
         /// <summary>
         /// MAID aka MasterCard assigned ID, MasterCard equivalent of Merchant Verification Value by Visa. Applicable for VPC, GPX (gpx) and FDI Global (fdiglobal) processors.
         /// </summary>
         /// <value>MAID aka MasterCard assigned ID, MasterCard equivalent of Merchant Verification Value by Visa. Applicable for VPC, GPX (gpx) and FDI Global (fdiglobal) processors.</value>
-        [DataMember(Name="masterCardAssignedId", EmitDefaultValue=false)]
+        [JsonPropertyName("masterCardAssignedId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MasterCardAssignedId { get; set; }
 
         /// <summary>
         /// Allow merchants to accept partial authorization approvals. Applicable for Elavon Americas (elavonamericas), VPC, GPX (gpx), FDI Global (fdiglobal), FDC Nashville (smartfdc), GPN (gpn), TSYS (tsys), American Express Direct (amexdirect), Paymentech Tampa (paymentechtampa) and Chase Paymentech Salem (chasepaymentechsalem) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Allow merchants to accept partial authorization approvals. Applicable for Elavon Americas (elavonamericas), VPC, GPX (gpx), FDI Global (fdiglobal), FDC Nashville (smartfdc), GPN (gpn), TSYS (tsys), American Express Direct (amexdirect), Paymentech Tampa (paymentechtampa) and Chase Paymentech Salem (chasepaymentechsalem) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Default Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="enablePartialAuth", EmitDefaultValue=false)]
+        [JsonPropertyName("enablePartialAuth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnablePartialAuth { get; set; }
 
         /// <summary>
         /// Indicates type of business product or service of the merchant. Applicable for Chase Paymentech Salem (chasepaymentechsalem), FDI Global (fdiglobal), RUPAY, Elavon Americas (elavonamericas), American Express Direct (amexdirect), CMCIC (cmcic), GPX (gpx), VPC, TSYS (tsys), EFTPOS, CUP, Paymentech Tampa (paymentechtampa), CB2A, Barclays (barclays2), Prisma (prisma) and GPN (gpn) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;^[0-9]+$&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;^[0-9]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Indicates type of business product or service of the merchant. Applicable for Chase Paymentech Salem (chasepaymentechsalem), FDI Global (fdiglobal), RUPAY, Elavon Americas (elavonamericas), American Express Direct (amexdirect), CMCIC (cmcic), GPX (gpx), VPC, TSYS (tsys), EFTPOS, CUP, Paymentech Tampa (paymentechtampa), CB2A, Barclays (barclays2), Prisma (prisma) and GPN (gpn) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;^[0-9]+$&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;Yes&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;^[0-9]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="merchantCategoryCode", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantCategoryCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantCategoryCode { get; set; }
 
         /// <summary>
         /// The Standard Industrial Classification (SIC) are four-digit codes that categorize the industries that companies belong to based on their business activities. Standard Industrial Classification codes were mostly replaced by the six-digit North American Industry Classification System (NAICS). Applicable for VPC and GPX (gpx) processors.
         /// </summary>
         /// <value>The Standard Industrial Classification (SIC) are four-digit codes that categorize the industries that companies belong to based on their business activities. Standard Industrial Classification codes were mostly replaced by the six-digit North American Industry Classification System (NAICS). Applicable for VPC and GPX (gpx) processors.</value>
-        [DataMember(Name="sicCode", EmitDefaultValue=false)]
+        [JsonPropertyName("sicCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SicCode { get; set; }
 
         /// <summary>
         /// Food and Consumer Service ID. Identifies the merchant as being certified and approved to accept Food Stamps. Applicable for GPX (gpx) processor.
         /// </summary>
         /// <value>Food and Consumer Service ID. Identifies the merchant as being certified and approved to accept Food Stamps. Applicable for GPX (gpx) processor.</value>
-        [DataMember(Name="foodAndConsumerServiceId", EmitDefaultValue=false)]
+        [JsonPropertyName("foodAndConsumerServiceId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FoodAndConsumerServiceId { get; set; }
 
         /// <summary>
         /// Enables you to split an order into multiple shipments with multiple captures. This feature is provided by CyberSource and supports three different scenarios:  * multiple authorizations * multiple captures * multiple authorizations with multiple captures  Applicable for VPC processors. 
         /// </summary>
         /// <value>Enables you to split an order into multiple shipments with multiple captures. This feature is provided by CyberSource and supports three different scenarios:  * multiple authorizations * multiple captures * multiple authorizations with multiple captures  Applicable for VPC processors. </value>
-        [DataMember(Name="enableSplitShipment", EmitDefaultValue=false)]
+        [JsonPropertyName("enableSplitShipment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableSplitShipment { get; set; }
 
         /// <summary>
         /// Reduces your interchange fees by using automatic authorization refresh and automatic partial authorization reversal. Applicable for VPC processors.
         /// </summary>
         /// <value>Reduces your interchange fees by using automatic authorization refresh and automatic partial authorization reversal. Applicable for VPC processors.</value>
-        [DataMember(Name="enableInterchangeOptimization", EmitDefaultValue=false)]
+        [JsonPropertyName("enableInterchangeOptimization")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableInterchangeOptimization { get; set; }
 
         /// <summary>
         /// Identifier provided to merchants who opt for Visa&#39;s delegated authorization program. Applicable for VPC processors.
         /// </summary>
         /// <value>Identifier provided to merchants who opt for Visa&#39;s delegated authorization program. Applicable for VPC processors.</value>
-        [DataMember(Name="visaDelegatedAuthenticationId", EmitDefaultValue=false)]
+        [JsonPropertyName("visaDelegatedAuthenticationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string VisaDelegatedAuthenticationId { get; set; }
 
         /// <summary>
         /// Blocks over-refunds when the aggregated refund amount is higher than the percentage set for this field. Applicable for GPX (gpx), VPC and Chase Paymentech Salem (chasepaymentechsalem) processors.
         /// </summary>
         /// <value>Blocks over-refunds when the aggregated refund amount is higher than the percentage set for this field. Applicable for GPX (gpx), VPC and Chase Paymentech Salem (chasepaymentechsalem) processors.</value>
-        [DataMember(Name="creditCardRefundLimitPercent", EmitDefaultValue=false)]
+        [JsonPropertyName("creditCardRefundLimitPercent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CreditCardRefundLimitPercent { get; set; }
 
         /// <summary>
         /// Limits refunds to the percentage set in this field. Applicable for GPX (gpx) and VPC processors.
         /// </summary>
         /// <value>Limits refunds to the percentage set in this field. Applicable for GPX (gpx) and VPC processors.</value>
-        [DataMember(Name="businessCenterCreditCardRefundLimitPercent", EmitDefaultValue=false)]
+        [JsonPropertyName("businessCenterCreditCardRefundLimitPercent")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessCenterCreditCardRefundLimitPercent { get; set; }
 
         /// <summary>
         /// Enables this merchant account to capture amounts greater than the authorization amount. Applicable for GPX (gpx), VPC, Paymentech Tampa (paymentechtampa) and Chase Paymentech Salem (chasepaymentechsalem) processors.
         /// </summary>
         /// <value>Enables this merchant account to capture amounts greater than the authorization amount. Applicable for GPX (gpx), VPC, Paymentech Tampa (paymentechtampa) and Chase Paymentech Salem (chasepaymentechsalem) processors.</value>
-        [DataMember(Name="allowCapturesGreaterThanAuthorizations", EmitDefaultValue=false)]
+        [JsonPropertyName("allowCapturesGreaterThanAuthorizations")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AllowCapturesGreaterThanAuthorizations { get; set; }
 
         /// <summary>
         /// Helps prevent duplicate transactions. Applicable for VPC, GPX (gpx) and Chase Paymentech Salem (chasepaymentechsalem) processors.
         /// </summary>
         /// <value>Helps prevent duplicate transactions. Applicable for VPC, GPX (gpx) and Chase Paymentech Salem (chasepaymentechsalem) processors.</value>
-        [DataMember(Name="enableDuplicateMerchantReferenceNumberBlocking", EmitDefaultValue=false)]
+        [JsonPropertyName("enableDuplicateMerchantReferenceNumberBlocking")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableDuplicateMerchantReferenceNumberBlocking { get; set; }
 
         /// <summary>
         /// This is a local merchant ID used by merchants in addition to the conventional merchant ID. This value is sent to the issuer. Applicable for VPC and Prisma (prisma) processors.
         /// </summary>
         /// <value>This is a local merchant ID used by merchants in addition to the conventional merchant ID. This value is sent to the issuer. Applicable for VPC and Prisma (prisma) processors.</value>
-        [DataMember(Name="domesticMerchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("domesticMerchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DomesticMerchantId { get; set; }
 
         /// <summary>
         /// Indicates whether merchant processes Level 3 transactions. Applicable for TSYS (tsys), Barclays (barclays2), Paymentech Tampa (paymentechtampa), FDI Global (fdiglobal), Elavon Americas (elavonamericas) and Chase Paymentech Salem (chasepaymentechsalem) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Indicates whether merchant processes Level 3 transactions. Applicable for TSYS (tsys), Barclays (barclays2), Paymentech Tampa (paymentechtampa), FDI Global (fdiglobal), Elavon Americas (elavonamericas) and Chase Paymentech Salem (chasepaymentechsalem) processors.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;Barclays&lt;/td&gt;&lt;td&gt;cnp&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="processLevel3Data", EmitDefaultValue=false)]
+        [JsonPropertyName("processLevel3Data")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ProcessLevel3Data { get; set; }
 
         /// <summary>
         /// The ID assigned to the sub-merchant. Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z&amp;#92;-&amp;#92;_&amp;#92;,\\s.]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>The ID assigned to the sub-merchant. Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z&amp;#92;-&amp;#92;_&amp;#92;,\\s.]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="subMerchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("subMerchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubMerchantId { get; set; }
 
         /// <summary>
         /// Sub-merchant&#39;s business name. Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;37&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z&amp;#92;-&amp;#92;_&amp;#92;,\\s.]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; 
         /// </summary>
         /// <value>Sub-merchant&#39;s business name. Applicable for American Express Direct (amexdirect) processor.  Validation details (for selected processors)...  &lt;table&gt; &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Processor&lt;/th&gt;&lt;th&gt;Acceptance Type&lt;/th&gt;&lt;th&gt;Required&lt;/th&gt;&lt;th&gt;Min. Length&lt;/th&gt;&lt;th&gt;Max. Length&lt;/th&gt;&lt;th&gt;Regex&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt; &lt;tr&gt;&lt;td&gt;American Express Direct&lt;/td&gt;&lt;td&gt;cnp, cp, hybrid&lt;/td&gt;&lt;td&gt;No&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;37&lt;/td&gt;&lt;td&gt;^[0-9a-zA-Z&amp;#92;-&amp;#92;_&amp;#92;,\\s.]+$&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; </value>
-        [DataMember(Name="subMerchantBusinessName", EmitDefaultValue=false)]
+        [JsonPropertyName("subMerchantBusinessName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubMerchantBusinessName { get; set; }
 
         /// <summary>
         /// It denotes merchant&#39;s preference on secondary brand for routing in case of co-branded cards. Applicable for EFTPOS processors.
         /// </summary>
         /// <value>It denotes merchant&#39;s preference on secondary brand for routing in case of co-branded cards. Applicable for EFTPOS processors.</value>
-        [DataMember(Name="preferCobadgedSecondaryBrand", EmitDefaultValue=false)]
+        [JsonPropertyName("preferCobadgedSecondaryBrand")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? PreferCobadgedSecondaryBrand { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantDescriptorInformation
         /// </summary>
-        [DataMember(Name="merchantDescriptorInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantDescriptorInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public CardProcessingConfigCommonMerchantDescriptorInformation MerchantDescriptorInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets AcquirerAgreement
         /// </summary>
-        [DataMember(Name="acquirerAgreement", EmitDefaultValue=false)]
+        [JsonPropertyName("acquirerAgreement")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public CardProcessingConfigCommonAcquirerAgreement AcquirerAgreement { get; set; }
 
         /// <summary>
         /// Indicates whether the merchant is government controlled. Applicable for VPC processors.
         /// </summary>
         /// <value>Indicates whether the merchant is government controlled. Applicable for VPC processors.</value>
-        [DataMember(Name="governmentControlled", EmitDefaultValue=false)]
+        [JsonPropertyName("governmentControlled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? GovernmentControlled { get; set; }
 
         /// <summary>
         /// This field is used to indicate whether the merchant wants to drop the billing information from the request. If this field is set to true, then the billing information will be dropped from the request. If this field is set to false, then the billing information will be sent in the request.
         /// </summary>
         /// <value>This field is used to indicate whether the merchant wants to drop the billing information from the request. If this field is set to true, then the billing information will be dropped from the request. If this field is set to false, then the billing information will be sent in the request.</value>
-        [DataMember(Name="dropBillingInfo", EmitDefaultValue=false)]
+        [JsonPropertyName("dropBillingInfo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? DropBillingInfo { get; set; }
 
         /// <summary>
@@ -259,30 +283,30 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CardProcessingConfigCommon {\n");
-            if (Processors != null) sb.Append("  Processors: ").Append(Processors).Append("\n");
-            if (AmexVendorCode != null) sb.Append("  AmexVendorCode: ").Append(AmexVendorCode).Append("\n");
-            if (DefaultAuthTypeCode != null) sb.Append("  DefaultAuthTypeCode: ").Append(DefaultAuthTypeCode).Append("\n");
-            if (MasterCardAssignedId != null) sb.Append("  MasterCardAssignedId: ").Append(MasterCardAssignedId).Append("\n");
-            if (EnablePartialAuth != null) sb.Append("  EnablePartialAuth: ").Append(EnablePartialAuth).Append("\n");
-            if (MerchantCategoryCode != null) sb.Append("  MerchantCategoryCode: ").Append(MerchantCategoryCode).Append("\n");
-            if (SicCode != null) sb.Append("  SicCode: ").Append(SicCode).Append("\n");
-            if (FoodAndConsumerServiceId != null) sb.Append("  FoodAndConsumerServiceId: ").Append(FoodAndConsumerServiceId).Append("\n");
-            if (EnableSplitShipment != null) sb.Append("  EnableSplitShipment: ").Append(EnableSplitShipment).Append("\n");
-            if (EnableInterchangeOptimization != null) sb.Append("  EnableInterchangeOptimization: ").Append(EnableInterchangeOptimization).Append("\n");
-            if (VisaDelegatedAuthenticationId != null) sb.Append("  VisaDelegatedAuthenticationId: ").Append(VisaDelegatedAuthenticationId).Append("\n");
-            if (CreditCardRefundLimitPercent != null) sb.Append("  CreditCardRefundLimitPercent: ").Append(CreditCardRefundLimitPercent).Append("\n");
-            if (BusinessCenterCreditCardRefundLimitPercent != null) sb.Append("  BusinessCenterCreditCardRefundLimitPercent: ").Append(BusinessCenterCreditCardRefundLimitPercent).Append("\n");
-            if (AllowCapturesGreaterThanAuthorizations != null) sb.Append("  AllowCapturesGreaterThanAuthorizations: ").Append(AllowCapturesGreaterThanAuthorizations).Append("\n");
-            if (EnableDuplicateMerchantReferenceNumberBlocking != null) sb.Append("  EnableDuplicateMerchantReferenceNumberBlocking: ").Append(EnableDuplicateMerchantReferenceNumberBlocking).Append("\n");
-            if (DomesticMerchantId != null) sb.Append("  DomesticMerchantId: ").Append(DomesticMerchantId).Append("\n");
-            if (ProcessLevel3Data != null) sb.Append("  ProcessLevel3Data: ").Append(ProcessLevel3Data).Append("\n");
-            if (SubMerchantId != null) sb.Append("  SubMerchantId: ").Append(SubMerchantId).Append("\n");
-            if (SubMerchantBusinessName != null) sb.Append("  SubMerchantBusinessName: ").Append(SubMerchantBusinessName).Append("\n");
-            if (PreferCobadgedSecondaryBrand != null) sb.Append("  PreferCobadgedSecondaryBrand: ").Append(PreferCobadgedSecondaryBrand).Append("\n");
-            if (MerchantDescriptorInformation != null) sb.Append("  MerchantDescriptorInformation: ").Append(MerchantDescriptorInformation).Append("\n");
-            if (AcquirerAgreement != null) sb.Append("  AcquirerAgreement: ").Append(AcquirerAgreement).Append("\n");
-            if (GovernmentControlled != null) sb.Append("  GovernmentControlled: ").Append(GovernmentControlled).Append("\n");
-            if (DropBillingInfo != null) sb.Append("  DropBillingInfo: ").Append(DropBillingInfo).Append("\n");
+            if (Processors != null) sb.Append("  Processors: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "processors", Processors.ToString())).Append("\n");
+            if (AmexVendorCode != null) sb.Append("  AmexVendorCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "amexVendorCode", AmexVendorCode.ToString())).Append("\n");
+            if (DefaultAuthTypeCode != null) sb.Append("  DefaultAuthTypeCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "defaultAuthTypeCode", DefaultAuthTypeCode.ToString())).Append("\n");
+            if (MasterCardAssignedId != null) sb.Append("  MasterCardAssignedId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "masterCardAssignedId", MasterCardAssignedId.ToString())).Append("\n");
+            if (EnablePartialAuth != null) sb.Append("  EnablePartialAuth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "enablePartialAuth", EnablePartialAuth.ToString())).Append("\n");
+            if (MerchantCategoryCode != null) sb.Append("  MerchantCategoryCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "merchantCategoryCode", MerchantCategoryCode.ToString())).Append("\n");
+            if (SicCode != null) sb.Append("  SicCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "sicCode", SicCode.ToString())).Append("\n");
+            if (FoodAndConsumerServiceId != null) sb.Append("  FoodAndConsumerServiceId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "foodAndConsumerServiceId", FoodAndConsumerServiceId.ToString())).Append("\n");
+            if (EnableSplitShipment != null) sb.Append("  EnableSplitShipment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "enableSplitShipment", EnableSplitShipment.ToString())).Append("\n");
+            if (EnableInterchangeOptimization != null) sb.Append("  EnableInterchangeOptimization: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "enableInterchangeOptimization", EnableInterchangeOptimization.ToString())).Append("\n");
+            if (VisaDelegatedAuthenticationId != null) sb.Append("  VisaDelegatedAuthenticationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "visaDelegatedAuthenticationId", VisaDelegatedAuthenticationId.ToString())).Append("\n");
+            if (CreditCardRefundLimitPercent != null) sb.Append("  CreditCardRefundLimitPercent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "creditCardRefundLimitPercent", CreditCardRefundLimitPercent.ToString())).Append("\n");
+            if (BusinessCenterCreditCardRefundLimitPercent != null) sb.Append("  BusinessCenterCreditCardRefundLimitPercent: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "businessCenterCreditCardRefundLimitPercent", BusinessCenterCreditCardRefundLimitPercent.ToString())).Append("\n");
+            if (AllowCapturesGreaterThanAuthorizations != null) sb.Append("  AllowCapturesGreaterThanAuthorizations: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "allowCapturesGreaterThanAuthorizations", AllowCapturesGreaterThanAuthorizations.ToString())).Append("\n");
+            if (EnableDuplicateMerchantReferenceNumberBlocking != null) sb.Append("  EnableDuplicateMerchantReferenceNumberBlocking: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "enableDuplicateMerchantReferenceNumberBlocking", EnableDuplicateMerchantReferenceNumberBlocking.ToString())).Append("\n");
+            if (DomesticMerchantId != null) sb.Append("  DomesticMerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "domesticMerchantId", DomesticMerchantId.ToString())).Append("\n");
+            if (ProcessLevel3Data != null) sb.Append("  ProcessLevel3Data: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "processLevel3Data", ProcessLevel3Data.ToString())).Append("\n");
+            if (SubMerchantId != null) sb.Append("  SubMerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "subMerchantId", SubMerchantId.ToString())).Append("\n");
+            if (SubMerchantBusinessName != null) sb.Append("  SubMerchantBusinessName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "subMerchantBusinessName", SubMerchantBusinessName.ToString())).Append("\n");
+            if (PreferCobadgedSecondaryBrand != null) sb.Append("  PreferCobadgedSecondaryBrand: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "preferCobadgedSecondaryBrand", PreferCobadgedSecondaryBrand.ToString())).Append("\n");
+            if (MerchantDescriptorInformation != null) sb.Append("  MerchantDescriptorInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "merchantDescriptorInformation", MerchantDescriptorInformation.ToString())).Append("\n");
+            if (AcquirerAgreement != null) sb.Append("  AcquirerAgreement: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "acquirerAgreement", AcquirerAgreement.ToString())).Append("\n");
+            if (GovernmentControlled != null) sb.Append("  GovernmentControlled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "governmentControlled", GovernmentControlled.ToString())).Append("\n");
+            if (DropBillingInfo != null) sb.Append("  DropBillingInfo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigCommon", "dropBillingInfo", DropBillingInfo.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -293,7 +317,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CardProcessingConfigCommon", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

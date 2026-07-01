@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Name or title of the customer. 
         /// </summary>
         /// <value>Name or title of the customer. </value>
-        [DataMember(Name="title", EmitDefaultValue=false)]
+        [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Title { get; set; }
 
         /// <summary>
         /// Comments that you can make about the customer. 
         /// </summary>
         /// <value>Comments that you can make about the customer. </value>
-        [DataMember(Name="comment", EmitDefaultValue=false)]
+        [JsonPropertyName("comment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Comment { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2tokenizeTokenInformationCustomerObjectInformation {\n");
-            if (Title != null) sb.Append("  Title: ").Append(Title).Append("\n");
-            if (Comment != null) sb.Append("  Comment: ").Append(Comment).Append("\n");
+            if (Title != null) sb.Append("  Title: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeTokenInformationCustomerObjectInformation", "title", Title.ToString())).Append("\n");
+            if (Comment != null) sb.Append("  Comment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2tokenizeTokenInformationCustomerObjectInformation", "comment", Comment.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2tokenizeTokenInformationCustomerObjectInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

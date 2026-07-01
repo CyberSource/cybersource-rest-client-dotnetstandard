@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Payment method for the unit purchase.   Possible values:   UNRESTRICTED (default)—this value is   available only when configured by PayPal   for the merchant.   INSTANT. 
         /// </summary>
         /// <value>Payment method for the unit purchase.   Possible values:   UNRESTRICTED (default)—this value is   available only when configured by PayPal   for the merchant.   INSTANT. </value>
-        [DataMember(Name="fundingSource", EmitDefaultValue=false)]
+        [JsonPropertyName("fundingSource")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FundingSource { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentreferencesPaymentInformationEWallet {\n");
-            if (FundingSource != null) sb.Append("  FundingSource: ").Append(FundingSource).Append("\n");
+            if (FundingSource != null) sb.Append("  FundingSource: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentreferencesPaymentInformationEWallet", "fundingSource", FundingSource.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentreferencesPaymentInformationEWallet", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

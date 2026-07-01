@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -54,46 +54,53 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets BankTransferOptions
         /// </summary>
-        [DataMember(Name="bankTransferOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("bankTransferOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessingInformationBankTransferOptions BankTransferOptions { get; set; }
 
         /// <summary>
         /// Type of digital payment solution for the transaction. Possible Values:   - &#x60;visacheckout&#x60;: Visa Checkout. This value is required for Visa Checkout transactions. For details, see &#x60;payment_solution&#x60; field description in [Visa Checkout Using the REST API.](https://developer.cybersource.com/content/dam/docs/cybs/en-us/apifields/reference/all/rest/api-fields.pdf)  - &#x60;001&#x60;: Apple Pay.  - &#x60;004&#x60;: Cybersource In-App Solution.  - &#x60;005&#x60;: Masterpass. This value is required for Masterpass transactions on OmniPay Direct.   - &#x60;006&#x60;: Android Pay.  - &#x60;007&#x60;: Chase Pay.  - &#x60;008&#x60;: Samsung Pay.  - &#x60;012&#x60;: Google Pay.  - &#x60;013&#x60;: Cybersource P2PE Decryption  - &#x60;014&#x60;: Mastercard credential on file (COF) payment network token. Returned in authorizations that use a payment network token associated with a TMS token.  - &#x60;015&#x60;: Visa credential on file (COF) payment network token. Returned in authorizations that use a payment network token associated with a TMS token.  - &#x60;027&#x60;: Click to Pay. 
         /// </summary>
         /// <value>Type of digital payment solution for the transaction. Possible Values:   - &#x60;visacheckout&#x60;: Visa Checkout. This value is required for Visa Checkout transactions. For details, see &#x60;payment_solution&#x60; field description in [Visa Checkout Using the REST API.](https://developer.cybersource.com/content/dam/docs/cybs/en-us/apifields/reference/all/rest/api-fields.pdf)  - &#x60;001&#x60;: Apple Pay.  - &#x60;004&#x60;: Cybersource In-App Solution.  - &#x60;005&#x60;: Masterpass. This value is required for Masterpass transactions on OmniPay Direct.   - &#x60;006&#x60;: Android Pay.  - &#x60;007&#x60;: Chase Pay.  - &#x60;008&#x60;: Samsung Pay.  - &#x60;012&#x60;: Google Pay.  - &#x60;013&#x60;: Cybersource P2PE Decryption  - &#x60;014&#x60;: Mastercard credential on file (COF) payment network token. Returned in authorizations that use a payment network token associated with a TMS token.  - &#x60;015&#x60;: Visa credential on file (COF) payment network token. Returned in authorizations that use a payment network token associated with a TMS token.  - &#x60;027&#x60;: Click to Pay. </value>
-        [DataMember(Name="paymentSolution", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentSolution")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentSolution { get; set; }
 
         /// <summary>
         /// The possible values for the reply field are: - &#x60;true&#x60; : the airline data was included in the request to the processor. - &#x60;false&#x60; : the airline data was not included in the request to the processor.  Returned by authorization, capture, or credit services. 
         /// </summary>
         /// <value>The possible values for the reply field are: - &#x60;true&#x60; : the airline data was included in the request to the processor. - &#x60;false&#x60; : the airline data was not included in the request to the processor.  Returned by authorization, capture, or credit services. </value>
-        [DataMember(Name="enhancedDataEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("enhancedDataEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnhancedDataEnabled { get; set; }
 
         /// <summary>
         /// Mastercard Digital Enablement Service (MDES) digital service indicators received in the authorization response message for MDES transactions.   This data is provided in the 0110 response in the Field 34—Acceptance Environment Data (TLV Format), Dataset ID 04—Additional Service Result Data, Tag DF1F—Mastercard Digital Enablement Service Indicator for Acquirer to acquirers.  This field is in ANS, EBCDIC format and flows in Field 34, DSID 04 Tag DF1F, mapped to Mastercard Data Element DE119, Sub-element 004.  This field is supported for all flavors of Authorization response only.  #### Used by **Authorization Response** Response field only. 
         /// </summary>
         /// <value>Mastercard Digital Enablement Service (MDES) digital service indicators received in the authorization response message for MDES transactions.   This data is provided in the 0110 response in the Field 34—Acceptance Environment Data (TLV Format), Dataset ID 04—Additional Service Result Data, Tag DF1F—Mastercard Digital Enablement Service Indicator for Acquirer to acquirers.  This field is in ANS, EBCDIC format and flows in Field 34, DSID 04 Tag DF1F, mapped to Mastercard Data Element DE119, Sub-element 004.  This field is supported for all flavors of Authorization response only.  #### Used by **Authorization Response** Response field only. </value>
-        [DataMember(Name="digitalServiceIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("digitalServiceIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DigitalServiceIndicator { get; set; }
 
         /// <summary>
         /// Gets or Sets CaptureOptions
         /// </summary>
-        [DataMember(Name="captureOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("captureOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessingInformationCaptureOptions CaptureOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets AuthorizationOptions
         /// </summary>
-        [DataMember(Name="authorizationOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("authorizationOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessingInformationAuthorizationOptions AuthorizationOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets PurchaseOptions
         /// </summary>
-        [DataMember(Name="purchaseOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("purchaseOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2PaymentsPost201ResponseProcessingInformationPurchaseOptions PurchaseOptions { get; set; }
 
         /// <summary>
@@ -104,13 +111,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PtsV2PaymentsPost201ResponseProcessingInformation {\n");
-            if (BankTransferOptions != null) sb.Append("  BankTransferOptions: ").Append(BankTransferOptions).Append("\n");
-            if (PaymentSolution != null) sb.Append("  PaymentSolution: ").Append(PaymentSolution).Append("\n");
-            if (EnhancedDataEnabled != null) sb.Append("  EnhancedDataEnabled: ").Append(EnhancedDataEnabled).Append("\n");
-            if (DigitalServiceIndicator != null) sb.Append("  DigitalServiceIndicator: ").Append(DigitalServiceIndicator).Append("\n");
-            if (CaptureOptions != null) sb.Append("  CaptureOptions: ").Append(CaptureOptions).Append("\n");
-            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(AuthorizationOptions).Append("\n");
-            if (PurchaseOptions != null) sb.Append("  PurchaseOptions: ").Append(PurchaseOptions).Append("\n");
+            if (BankTransferOptions != null) sb.Append("  BankTransferOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessingInformation", "bankTransferOptions", BankTransferOptions.ToString())).Append("\n");
+            if (PaymentSolution != null) sb.Append("  PaymentSolution: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessingInformation", "paymentSolution", PaymentSolution.ToString())).Append("\n");
+            if (EnhancedDataEnabled != null) sb.Append("  EnhancedDataEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessingInformation", "enhancedDataEnabled", EnhancedDataEnabled.ToString())).Append("\n");
+            if (DigitalServiceIndicator != null) sb.Append("  DigitalServiceIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessingInformation", "digitalServiceIndicator", DigitalServiceIndicator.ToString())).Append("\n");
+            if (CaptureOptions != null) sb.Append("  CaptureOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessingInformation", "captureOptions", CaptureOptions.ToString())).Append("\n");
+            if (AuthorizationOptions != null) sb.Append("  AuthorizationOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessingInformation", "authorizationOptions", AuthorizationOptions.ToString())).Append("\n");
+            if (PurchaseOptions != null) sb.Append("  PurchaseOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PtsV2PaymentsPost201ResponseProcessingInformation", "purchaseOptions", PurchaseOptions.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -121,7 +128,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PtsV2PaymentsPost201ResponseProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,21 +47,24 @@ namespace CyberSource.Model
         /// URI of the linked resource.
         /// </summary>
         /// <value>URI of the linked resource.</value>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        [JsonPropertyName("href")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Href { get; set; }
 
         /// <summary>
         /// Label of the linked resource.
         /// </summary>
         /// <value>Label of the linked resource.</value>
-        [DataMember(Name="title", EmitDefaultValue=false)]
+        [JsonPropertyName("title")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Title { get; set; }
 
         /// <summary>
         /// HTTP method of the linked resource.
         /// </summary>
         /// <value>HTTP method of the linked resource.</value>
-        [DataMember(Name="method", EmitDefaultValue=false)]
+        [JsonPropertyName("method")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Method { get; set; }
 
         /// <summary>
@@ -72,9 +75,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponseDefaultLinksNext {\n");
-            if (Href != null) sb.Append("  Href: ").Append(Href).Append("\n");
-            if (Title != null) sb.Append("  Title: ").Append(Title).Append("\n");
-            if (Method != null) sb.Append("  Method: ").Append(Method).Append("\n");
+            if (Href != null) sb.Append("  Href: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponseDefaultLinksNext", "href", Href.ToString())).Append("\n");
+            if (Title != null) sb.Append("  Title: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponseDefaultLinksNext", "title", Title.ToString())).Append("\n");
+            if (Method != null) sb.Append("  Method: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponseDefaultLinksNext", "method", Method.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -85,7 +88,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponseDefaultLinksNext", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

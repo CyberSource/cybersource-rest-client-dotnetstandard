@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Flag that indicates whether the user consented to the tokenization of their credentials. Required for card network tokenization in certain markets, such as India. Possible Values: - &#x60;true&#x60;: Consumer has consented to tokenization of their credentials. - &#x60;false&#x60;: Consumer has not consented to tokenization of their credentials. 
         /// </summary>
         /// <value>Flag that indicates whether the user consented to the tokenization of their credentials. Required for card network tokenization in certain markets, such as India. Possible Values: - &#x60;true&#x60;: Consumer has consented to tokenization of their credentials. - &#x60;false&#x60;: Consumer has not consented to tokenization of their credentials. </value>
-        [DataMember(Name="consumerConsentObtained", EmitDefaultValue=false)]
+        [JsonPropertyName("consumerConsentObtained")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ConsumerConsentObtained { get; set; }
 
         /// <summary>
         /// Flag that indicates whether AFA (Additional Factor of Authentication) for the PAN was completed. Required for card network tokenization in certain markets, such as India. Possible Values: - &#x60;true&#x60;: Consumer has been authenticated by the issuer. - &#x60;false&#x60;: Consumer has not been authenticated by the issuer. 
         /// </summary>
         /// <value>Flag that indicates whether AFA (Additional Factor of Authentication) for the PAN was completed. Required for card network tokenization in certain markets, such as India. Possible Values: - &#x60;true&#x60;: Consumer has been authenticated by the issuer. - &#x60;false&#x60;: Consumer has not been authenticated by the issuer. </value>
-        [DataMember(Name="multiFactorAuthenticated", EmitDefaultValue=false)]
+        [JsonPropertyName("multiFactorAuthenticated")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? MultiFactorAuthenticated { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2paymentsTokenInformationTokenProvisioningInformation {\n");
-            if (ConsumerConsentObtained != null) sb.Append("  ConsumerConsentObtained: ").Append(ConsumerConsentObtained).Append("\n");
-            if (MultiFactorAuthenticated != null) sb.Append("  MultiFactorAuthenticated: ").Append(MultiFactorAuthenticated).Append("\n");
+            if (ConsumerConsentObtained != null) sb.Append("  ConsumerConsentObtained: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTokenInformationTokenProvisioningInformation", "consumerConsentObtained", ConsumerConsentObtained.ToString())).Append("\n");
+            if (MultiFactorAuthenticated != null) sb.Append("  MultiFactorAuthenticated: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2paymentsTokenInformationTokenProvisioningInformation", "multiFactorAuthenticated", MultiFactorAuthenticated.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2paymentsTokenInformationTokenProvisioningInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

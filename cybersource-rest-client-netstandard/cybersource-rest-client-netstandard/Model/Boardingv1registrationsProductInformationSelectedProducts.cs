@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Payments
         /// </summary>
-        [DataMember(Name="payments", EmitDefaultValue=false)]
+        [JsonPropertyName("payments")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PaymentsProducts Payments { get; set; }
 
         /// <summary>
         /// Gets or Sets Risk
         /// </summary>
-        [DataMember(Name="risk", EmitDefaultValue=false)]
+        [JsonPropertyName("risk")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public RiskProducts Risk { get; set; }
 
         /// <summary>
         /// Gets or Sets CommerceSolutions
         /// </summary>
-        [DataMember(Name="commerceSolutions", EmitDefaultValue=false)]
+        [JsonPropertyName("commerceSolutions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public CommerceSolutionsProducts CommerceSolutions { get; set; }
 
         /// <summary>
         /// Gets or Sets ValueAddedServices
         /// </summary>
-        [DataMember(Name="valueAddedServices", EmitDefaultValue=false)]
+        [JsonPropertyName("valueAddedServices")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public ValueAddedServicesProducts ValueAddedServices { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Boardingv1registrationsProductInformationSelectedProducts {\n");
-            if (Payments != null) sb.Append("  Payments: ").Append(Payments).Append("\n");
-            if (Risk != null) sb.Append("  Risk: ").Append(Risk).Append("\n");
-            if (CommerceSolutions != null) sb.Append("  CommerceSolutions: ").Append(CommerceSolutions).Append("\n");
-            if (ValueAddedServices != null) sb.Append("  ValueAddedServices: ").Append(ValueAddedServices).Append("\n");
+            if (Payments != null) sb.Append("  Payments: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsProductInformationSelectedProducts", "payments", Payments.ToString())).Append("\n");
+            if (Risk != null) sb.Append("  Risk: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsProductInformationSelectedProducts", "risk", Risk.ToString())).Append("\n");
+            if (CommerceSolutions != null) sb.Append("  CommerceSolutions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsProductInformationSelectedProducts", "commerceSolutions", CommerceSolutions.ToString())).Append("\n");
+            if (ValueAddedServices != null) sb.Append("  ValueAddedServices: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Boardingv1registrationsProductInformationSelectedProducts", "valueAddedServices", ValueAddedServices.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Boardingv1registrationsProductInformationSelectedProducts", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

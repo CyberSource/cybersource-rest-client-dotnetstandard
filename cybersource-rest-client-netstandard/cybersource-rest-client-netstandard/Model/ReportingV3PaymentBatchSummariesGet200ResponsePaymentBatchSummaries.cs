@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -64,73 +64,85 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets CurrencyCode
         /// </summary>
-        [DataMember(Name="currencyCode", EmitDefaultValue=false)]
+        [JsonPropertyName("currencyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CurrencyCode { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentSubTypeDescription
         /// </summary>
-        [DataMember(Name="paymentSubTypeDescription", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentSubTypeDescription")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentSubTypeDescription { get; set; }
 
         /// <summary>
         /// Gets or Sets StartTime
         /// </summary>
-        [DataMember(Name="startTime", EmitDefaultValue=false)]
+        [JsonPropertyName("startTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? StartTime { get; set; }
 
         /// <summary>
         /// Gets or Sets EndTime
         /// </summary>
-        [DataMember(Name="endTime", EmitDefaultValue=false)]
+        [JsonPropertyName("endTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? EndTime { get; set; }
 
         /// <summary>
         /// Gets or Sets SalesCount
         /// </summary>
-        [DataMember(Name="salesCount", EmitDefaultValue=false)]
+        [JsonPropertyName("salesCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? SalesCount { get; set; }
 
         /// <summary>
         /// Gets or Sets SalesAmount
         /// </summary>
-        [DataMember(Name="salesAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("salesAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SalesAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets CreditCount
         /// </summary>
-        [DataMember(Name="creditCount", EmitDefaultValue=false)]
+        [JsonPropertyName("creditCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? CreditCount { get; set; }
 
         /// <summary>
         /// Gets or Sets CreditAmount
         /// </summary>
-        [DataMember(Name="creditAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("creditAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CreditAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets AccountName
         /// </summary>
-        [DataMember(Name="accountName", EmitDefaultValue=false)]
+        [JsonPropertyName("accountName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountName { get; set; }
 
         /// <summary>
         /// Gets or Sets AccountId
         /// </summary>
-        [DataMember(Name="accountId", EmitDefaultValue=false)]
+        [JsonPropertyName("accountId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountId { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantId
         /// </summary>
-        [DataMember(Name="merchantId", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantId { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantName
         /// </summary>
-        [DataMember(Name="merchantName", EmitDefaultValue=false)]
+        [JsonPropertyName("merchantName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MerchantName { get; set; }
 
         /// <summary>
@@ -141,18 +153,18 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries {\n");
-            if (CurrencyCode != null) sb.Append("  CurrencyCode: ").Append(CurrencyCode).Append("\n");
-            if (PaymentSubTypeDescription != null) sb.Append("  PaymentSubTypeDescription: ").Append(PaymentSubTypeDescription).Append("\n");
-            if (StartTime != null) sb.Append("  StartTime: ").Append(StartTime).Append("\n");
-            if (EndTime != null) sb.Append("  EndTime: ").Append(EndTime).Append("\n");
-            if (SalesCount != null) sb.Append("  SalesCount: ").Append(SalesCount).Append("\n");
-            if (SalesAmount != null) sb.Append("  SalesAmount: ").Append(SalesAmount).Append("\n");
-            if (CreditCount != null) sb.Append("  CreditCount: ").Append(CreditCount).Append("\n");
-            if (CreditAmount != null) sb.Append("  CreditAmount: ").Append(CreditAmount).Append("\n");
-            if (AccountName != null) sb.Append("  AccountName: ").Append(AccountName).Append("\n");
-            if (AccountId != null) sb.Append("  AccountId: ").Append(AccountId).Append("\n");
-            if (MerchantId != null) sb.Append("  MerchantId: ").Append(MerchantId).Append("\n");
-            if (MerchantName != null) sb.Append("  MerchantName: ").Append(MerchantName).Append("\n");
+            if (CurrencyCode != null) sb.Append("  CurrencyCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "currencyCode", CurrencyCode.ToString())).Append("\n");
+            if (PaymentSubTypeDescription != null) sb.Append("  PaymentSubTypeDescription: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "paymentSubTypeDescription", PaymentSubTypeDescription.ToString())).Append("\n");
+            if (StartTime != null) sb.Append("  StartTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "startTime", StartTime.ToString())).Append("\n");
+            if (EndTime != null) sb.Append("  EndTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "endTime", EndTime.ToString())).Append("\n");
+            if (SalesCount != null) sb.Append("  SalesCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "salesCount", SalesCount.ToString())).Append("\n");
+            if (SalesAmount != null) sb.Append("  SalesAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "salesAmount", SalesAmount.ToString())).Append("\n");
+            if (CreditCount != null) sb.Append("  CreditCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "creditCount", CreditCount.ToString())).Append("\n");
+            if (CreditAmount != null) sb.Append("  CreditAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "creditAmount", CreditAmount.ToString())).Append("\n");
+            if (AccountName != null) sb.Append("  AccountName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "accountName", AccountName.ToString())).Append("\n");
+            if (AccountId != null) sb.Append("  AccountId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "accountId", AccountId.ToString())).Append("\n");
+            if (MerchantId != null) sb.Append("  MerchantId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "merchantId", MerchantId.ToString())).Append("\n");
+            if (MerchantName != null) sb.Append("  MerchantName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", "merchantName", MerchantName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -163,7 +175,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

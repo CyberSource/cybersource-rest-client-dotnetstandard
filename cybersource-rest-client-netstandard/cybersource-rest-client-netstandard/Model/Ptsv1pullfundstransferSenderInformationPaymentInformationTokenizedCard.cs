@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,42 +53,48 @@ namespace CyberSource.Model
         /// This field contains token cryptogram information
         /// </summary>
         /// <value>This field contains token cryptogram information</value>
-        [DataMember(Name="cryptogram", EmitDefaultValue=false)]
+        [JsonPropertyName("cryptogram")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Cryptogram { get; set; }
 
         /// <summary>
         /// One of two possible meanings:  The two-digit month in which a token expires. The two-digit month in which a card expires.   Format: &#x60;MM&#x60;   Possible values: 01 through 12 
         /// </summary>
         /// <value>One of two possible meanings:  The two-digit month in which a token expires. The two-digit month in which a card expires.   Format: &#x60;MM&#x60;   Possible values: 01 through 12 </value>
-        [DataMember(Name="expirationMonth", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationMonth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationMonth { get; set; }
 
         /// <summary>
         /// One of two possible meanings:  The four-digit year in which a token expires. The four-digit year in which a card expires.   Format: &#x60;YYYY&#x60;   Possible values: 1900 through 3000   Data type: Non-negative integer 
         /// </summary>
         /// <value>One of two possible meanings:  The four-digit year in which a token expires. The four-digit year in which a card expires.   Format: &#x60;YYYY&#x60;   Possible values: 1900 through 3000   Data type: Non-negative integer </value>
-        [DataMember(Name="expirationYear", EmitDefaultValue=false)]
+        [JsonPropertyName("expirationYear")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpirationYear { get; set; }
 
         /// <summary>
         /// Customer&#39;s payment network token value. 
         /// </summary>
         /// <value>Customer&#39;s payment network token value. </value>
-        [DataMember(Name="number", EmitDefaultValue=false)]
+        [JsonPropertyName("number")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Number { get; set; }
 
         /// <summary>
         /// Card Verification Number (CVN). 
         /// </summary>
         /// <value>Card Verification Number (CVN). </value>
-        [DataMember(Name="securityCode", EmitDefaultValue=false)]
+        [JsonPropertyName("securityCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecurityCode { get; set; }
 
         /// <summary>
         /// Three-digit value that indicates the card type. Mandatory if not present in a token.  Possible values:  - &#x60;001&#x60;: Visa - &#x60;002&#x60;: Mastercard, Eurocard, which is a European regional brand of Mastercard. - &#x60;033&#x60;: Visa Electron - &#x60;024&#x60;: Maestro 
         /// </summary>
         /// <value>Three-digit value that indicates the card type. Mandatory if not present in a token.  Possible values:  - &#x60;001&#x60;: Visa - &#x60;002&#x60;: Mastercard, Eurocard, which is a European regional brand of Mastercard. - &#x60;033&#x60;: Visa Electron - &#x60;024&#x60;: Maestro </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
@@ -99,12 +105,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferSenderInformationPaymentInformationTokenizedCard {\n");
-            if (Cryptogram != null) sb.Append("  Cryptogram: ").Append(Cryptogram).Append("\n");
-            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(ExpirationMonth).Append("\n");
-            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(ExpirationYear).Append("\n");
-            if (Number != null) sb.Append("  Number: ").Append(Number).Append("\n");
-            if (SecurityCode != null) sb.Append("  SecurityCode: ").Append(SecurityCode).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
+            if (Cryptogram != null) sb.Append("  Cryptogram: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationPaymentInformationTokenizedCard", "cryptogram", Cryptogram.ToString())).Append("\n");
+            if (ExpirationMonth != null) sb.Append("  ExpirationMonth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationPaymentInformationTokenizedCard", "expirationMonth", ExpirationMonth.ToString())).Append("\n");
+            if (ExpirationYear != null) sb.Append("  ExpirationYear: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationPaymentInformationTokenizedCard", "expirationYear", ExpirationYear.ToString())).Append("\n");
+            if (Number != null) sb.Append("  Number: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationPaymentInformationTokenizedCard", "number", Number.ToString())).Append("\n");
+            if (SecurityCode != null) sb.Append("  SecurityCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationPaymentInformationTokenizedCard", "securityCode", SecurityCode.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferSenderInformationPaymentInformationTokenizedCard", "type", Type.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,7 +121,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferSenderInformationPaymentInformationTokenizedCard", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

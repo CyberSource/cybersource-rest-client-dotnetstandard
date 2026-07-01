@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,35 +51,40 @@ namespace CyberSource.Model
         /// Enables Webhook transaction confirmation messages sent to URL defined in backofficePostUrl. Usually enabled by web developers integrating to Secure Acceptance.
         /// </summary>
         /// <value>Enables Webhook transaction confirmation messages sent to URL defined in backofficePostUrl. Usually enabled by web developers integrating to Secure Acceptance.</value>
-        [DataMember(Name="backofficePostEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("backofficePostEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? BackofficePostEnabled { get; set; }
 
         /// <summary>
         /// Email address to receive transaction confirmation messages.
         /// </summary>
         /// <value>Email address to receive transaction confirmation messages.</value>
-        [DataMember(Name="backofficeEmailAddress", EmitDefaultValue=false)]
+        [JsonPropertyName("backofficeEmailAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BackofficeEmailAddress { get; set; }
 
         /// <summary>
         /// Enables email transaction confirmation messages, sent to the address specified in backofficeEmailAddress.
         /// </summary>
         /// <value>Enables email transaction confirmation messages, sent to the address specified in backofficeEmailAddress.</value>
-        [DataMember(Name="backofficeEmailEnabled", EmitDefaultValue=false)]
+        [JsonPropertyName("backofficeEmailEnabled")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? BackofficeEmailEnabled { get; set; }
 
         /// <summary>
         /// Webhook URL to which transaction confirmation is sent. Usually completed by the web developers integrating to Secure Acceptance.
         /// </summary>
         /// <value>Webhook URL to which transaction confirmation is sent. Usually completed by the web developers integrating to Secure Acceptance.</value>
-        [DataMember(Name="backofficePostUrl", EmitDefaultValue=false)]
+        [JsonPropertyName("backofficePostUrl")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BackofficePostUrl { get; set; }
 
         /// <summary>
         /// Format in which the card number should be masked in the notifications.   Valid values: &#x60;1&#x60; - Display first 6 digits only (e.g. \&quot;444433**********\&quot;)  &#x60;2&#x60; - Display last four digits only (e.g. \&quot;************1111\&quot;)  &#x60;3&#x60; - Display First six and last four digits (e.g. \&quot;444433******1111\&quot;) 
         /// </summary>
         /// <value>Format in which the card number should be masked in the notifications.   Valid values: &#x60;1&#x60; - Display first 6 digits only (e.g. \&quot;444433**********\&quot;)  &#x60;2&#x60; - Display last four digits only (e.g. \&quot;************1111\&quot;)  &#x60;3&#x60; - Display First six and last four digits (e.g. \&quot;444433******1111\&quot;) </value>
-        [DataMember(Name="cardNumberFormat", EmitDefaultValue=false)]
+        [JsonPropertyName("cardNumberFormat")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CardNumberFormat { get; set; }
 
         /// <summary>
@@ -90,11 +95,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class SAConfigNotificationsMerchantNotifications {\n");
-            if (BackofficePostEnabled != null) sb.Append("  BackofficePostEnabled: ").Append(BackofficePostEnabled).Append("\n");
-            if (BackofficeEmailAddress != null) sb.Append("  BackofficeEmailAddress: ").Append(BackofficeEmailAddress).Append("\n");
-            if (BackofficeEmailEnabled != null) sb.Append("  BackofficeEmailEnabled: ").Append(BackofficeEmailEnabled).Append("\n");
-            if (BackofficePostUrl != null) sb.Append("  BackofficePostUrl: ").Append(BackofficePostUrl).Append("\n");
-            if (CardNumberFormat != null) sb.Append("  CardNumberFormat: ").Append(CardNumberFormat).Append("\n");
+            if (BackofficePostEnabled != null) sb.Append("  BackofficePostEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsMerchantNotifications", "backofficePostEnabled", BackofficePostEnabled.ToString())).Append("\n");
+            if (BackofficeEmailAddress != null) sb.Append("  BackofficeEmailAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsMerchantNotifications", "backofficeEmailAddress", BackofficeEmailAddress.ToString())).Append("\n");
+            if (BackofficeEmailEnabled != null) sb.Append("  BackofficeEmailEnabled: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsMerchantNotifications", "backofficeEmailEnabled", BackofficeEmailEnabled.ToString())).Append("\n");
+            if (BackofficePostUrl != null) sb.Append("  BackofficePostUrl: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsMerchantNotifications", "backofficePostUrl", BackofficePostUrl.ToString())).Append("\n");
+            if (CardNumberFormat != null) sb.Append("  CardNumberFormat: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigNotificationsMerchantNotifications", "cardNumberFormat", CardNumberFormat.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,7 +110,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("SAConfigNotificationsMerchantNotifications", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -43,7 +43,8 @@ namespace CyberSource.Model
         /// Must be one of the following : NO_GROUP, INCLUDE_IN_PARENTS_GROUP 
         /// </summary>
         /// <value>Must be one of the following : NO_GROUP, INCLUDE_IN_PARENTS_GROUP </value>
-        [DataMember(Name="hierarchyGroup", EmitDefaultValue=false)]
+        [JsonPropertyName("hierarchyGroup")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string HierarchyGroup { get; set; }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class DmConfigOrganization {\n");
-            if (HierarchyGroup != null) sb.Append("  HierarchyGroup: ").Append(HierarchyGroup).Append("\n");
+            if (HierarchyGroup != null) sb.Append("  HierarchyGroup: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfigOrganization", "hierarchyGroup", HierarchyGroup.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -65,7 +66,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("DmConfigOrganization", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

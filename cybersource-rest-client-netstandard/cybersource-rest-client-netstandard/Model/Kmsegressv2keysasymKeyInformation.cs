@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -59,63 +59,72 @@ namespace CyberSource.Model
         /// Provider name 
         /// </summary>
         /// <value>Provider name </value>
-        [DataMember(Name="provider", EmitDefaultValue=false)]
+        [JsonPropertyName("provider")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Provider { get; set; }
 
         /// <summary>
         /// Tenant name 
         /// </summary>
         /// <value>Tenant name </value>
-        [DataMember(Name="tenant", EmitDefaultValue=false)]
+        [JsonPropertyName("tenant")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Tenant { get; set; }
 
         /// <summary>
         /// Type of the key 
         /// </summary>
         /// <value>Type of the key </value>
-        [DataMember(Name="keyType", EmitDefaultValue=false)]
+        [JsonPropertyName("keyType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string KeyType { get; set; }
 
         /// <summary>
         /// Organization Id 
         /// </summary>
         /// <value>Organization Id </value>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// Public certificate with only base64 encoded payload and not the header (BEGIN CERTIFICATE) and footer (END CERTIFICATE) 
         /// </summary>
         /// <value>Public certificate with only base64 encoded payload and not the header (BEGIN CERTIFICATE) and footer (END CERTIFICATE) </value>
-        [DataMember(Name="pub", EmitDefaultValue=false)]
+        [JsonPropertyName("pub")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Pub { get; set; }
 
         /// <summary>
         /// Key Serial Number 
         /// </summary>
         /// <value>Key Serial Number </value>
-        [DataMember(Name="keyId", EmitDefaultValue=false)]
+        [JsonPropertyName("keyId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string KeyId { get; set; }
 
         /// <summary>
         /// Private certificate with only base64 encoded payload and not header (BEGIN CERTIFICATE) and footer (END CERTIFICATE) 
         /// </summary>
         /// <value>Private certificate with only base64 encoded payload and not header (BEGIN CERTIFICATE) and footer (END CERTIFICATE) </value>
-        [DataMember(Name="pvt", EmitDefaultValue=false)]
+        [JsonPropertyName("pvt")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Pvt { get; set; }
 
         /// <summary>
         /// The status of the key 
         /// </summary>
         /// <value>The status of the key </value>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        [JsonPropertyName("status")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Status { get; set; }
 
         /// <summary>
         /// Key expiry duration in days 
         /// </summary>
         /// <value>Key expiry duration in days </value>
-        [DataMember(Name="expiryDuration", EmitDefaultValue=false)]
+        [JsonPropertyName("expiryDuration")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ExpiryDuration { get; set; }
 
         /// <summary>
@@ -126,15 +135,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Kmsegressv2keysasymKeyInformation {\n");
-            if (Provider != null) sb.Append("  Provider: ").Append(Provider).Append("\n");
-            if (Tenant != null) sb.Append("  Tenant: ").Append(Tenant).Append("\n");
-            if (KeyType != null) sb.Append("  KeyType: ").Append(KeyType).Append("\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (Pub != null) sb.Append("  Pub: ").Append(Pub).Append("\n");
-            if (KeyId != null) sb.Append("  KeyId: ").Append(KeyId).Append("\n");
-            if (Pvt != null) sb.Append("  Pvt: ").Append(Pvt).Append("\n");
-            if (Status != null) sb.Append("  Status: ").Append(Status).Append("\n");
-            if (ExpiryDuration != null) sb.Append("  ExpiryDuration: ").Append(ExpiryDuration).Append("\n");
+            if (Provider != null) sb.Append("  Provider: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Kmsegressv2keysasymKeyInformation", "provider", Provider.ToString())).Append("\n");
+            if (Tenant != null) sb.Append("  Tenant: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Kmsegressv2keysasymKeyInformation", "tenant", Tenant.ToString())).Append("\n");
+            if (KeyType != null) sb.Append("  KeyType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Kmsegressv2keysasymKeyInformation", "keyType", KeyType.ToString())).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Kmsegressv2keysasymKeyInformation", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (Pub != null) sb.Append("  Pub: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Kmsegressv2keysasymKeyInformation", "pub", Pub.ToString())).Append("\n");
+            if (KeyId != null) sb.Append("  KeyId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Kmsegressv2keysasymKeyInformation", "keyId", KeyId.ToString())).Append("\n");
+            if (Pvt != null) sb.Append("  Pvt: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Kmsegressv2keysasymKeyInformation", "pvt", Pvt.ToString())).Append("\n");
+            if (Status != null) sb.Append("  Status: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Kmsegressv2keysasymKeyInformation", "status", Status.ToString())).Append("\n");
+            if (ExpiryDuration != null) sb.Append("  ExpiryDuration: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Kmsegressv2keysasymKeyInformation", "expiryDuration", ExpiryDuration.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -145,7 +154,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Kmsegressv2keysasymKeyInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

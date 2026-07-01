@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ProcessingOptions
         /// </summary>
-        [DataMember(Name="processingOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("processingOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigProcessingOptions ProcessingOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets Organization
         /// </summary>
-        [DataMember(Name="organization", EmitDefaultValue=false)]
+        [JsonPropertyName("organization")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigOrganization Organization { get; set; }
 
         /// <summary>
         /// Gets or Sets PortfolioControls
         /// </summary>
-        [DataMember(Name="portfolioControls", EmitDefaultValue=false)]
+        [JsonPropertyName("portfolioControls")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigPortfolioControls PortfolioControls { get; set; }
 
         /// <summary>
         /// Gets or Sets Thirdparty
         /// </summary>
-        [DataMember(Name="thirdparty", EmitDefaultValue=false)]
+        [JsonPropertyName("thirdparty")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DmConfigThirdparty Thirdparty { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class DmConfig {\n");
-            if (ProcessingOptions != null) sb.Append("  ProcessingOptions: ").Append(ProcessingOptions).Append("\n");
-            if (Organization != null) sb.Append("  Organization: ").Append(Organization).Append("\n");
-            if (PortfolioControls != null) sb.Append("  PortfolioControls: ").Append(PortfolioControls).Append("\n");
-            if (Thirdparty != null) sb.Append("  Thirdparty: ").Append(Thirdparty).Append("\n");
+            if (ProcessingOptions != null) sb.Append("  ProcessingOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfig", "processingOptions", ProcessingOptions.ToString())).Append("\n");
+            if (Organization != null) sb.Append("  Organization: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfig", "organization", Organization.ToString())).Append("\n");
+            if (PortfolioControls != null) sb.Append("  PortfolioControls: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfig", "portfolioControls", PortfolioControls.ToString())).Append("\n");
+            if (Thirdparty != null) sb.Append("  Thirdparty: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("DmConfig", "thirdparty", Thirdparty.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("DmConfig", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

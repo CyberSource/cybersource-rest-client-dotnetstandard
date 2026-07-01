@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Ptsv1pullfundstransferProcessingInformation" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected Ptsv1pullfundstransferProcessingInformation() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="Ptsv1pullfundstransferProcessingInformation" /> class.
@@ -46,7 +46,7 @@ namespace CyberSource.Model
         /// <param name="PayoutsOptions">PayoutsOptions.</param>
         /// <param name="LanguageCode">Contains the ISO 639-2 defined language Code .</param>
         /// <param name="AccountVerificationCode">Account verification code will inform what Payment Account Verification should be performed. With this array of codes, a merchant can choose à la carte what verifications to run. This field is optional, and the default is 1 if it is not passed in. This means that a full validation of the fields will be performed. Valid verification codes: - &#x60;1&#x60; &#x3D; Full Account Verification (Card Account, CVN, CAVV, TAVV, Address, Name, eMail, Phone, Identity) - &#x60;2&#x60; &#x3D; Card Account Verification - &#x60;3&#x60; &#x3D; Address Verification - &#x60;4&#x60; &#x3D; Card Authentication Method (CAM) (Cryptogram) - &#x60;5&#x60; &#x3D; Cardholder Authentication Verification (CAVV) - &#x60;6&#x60; &#x3D; Cardholder Identity Verification - &#x60;7&#x60; &#x3D; CVV2 Verification - &#x60;8&#x60; &#x3D; eMail Verification - &#x60;9&#x60; &#x3D; Name Verification - &#x60;10&#x60; &#x3D; Phone Verification .</param>
-        public Ptsv1pullfundstransferProcessingInformation(string CommerceIndicator = default(string), Ptsv1pullfundstransferProcessingInformationFundingOptions FundingOptions = default(Ptsv1pullfundstransferProcessingInformationFundingOptions), Ptsv1pullfundstransferProcessingInformationRecurringOptions RecurringOptions = default(Ptsv1pullfundstransferProcessingInformationRecurringOptions), string BusinessApplicationId = default(string), string PurposeOfPayment = default(string), Ptsv1pullfundstransferProcessingInformationPayoutsOptions PayoutsOptions = default(Ptsv1pullfundstransferProcessingInformationPayoutsOptions), string LanguageCode = default(string), List<string> AccountVerificationCode = default(List<string>))
+        public Ptsv1pullfundstransferProcessingInformation(string CommerceIndicator = default(string), AftFundingOptions FundingOptions = default(AftFundingOptions), Ptsv1pullfundstransferProcessingInformationRecurringOptions RecurringOptions = default(Ptsv1pullfundstransferProcessingInformationRecurringOptions), string BusinessApplicationId = default(string), string PurposeOfPayment = default(string), Ptsv1pullfundstransferProcessingInformationPayoutsOptions PayoutsOptions = default(Ptsv1pullfundstransferProcessingInformationPayoutsOptions), string LanguageCode = default(string), List<string> AccountVerificationCode = default(List<string>))
         {
             this.CommerceIndicator = CommerceIndicator;
             this.FundingOptions = FundingOptions;
@@ -62,53 +62,61 @@ namespace CyberSource.Model
         /// Type of transaction. This field identifies the level of security used in an electronic commerce transaction over an open network (for example, the internet).  Values for a Payouts transaction:   &#x60;INTERNET&#x60;, &#x60;RECURRING&#x60;, &#x60;RECURRING_INTERNET&#x60;, &#x60;VBV_FAILURE&#x60;, &#x60;VBV_ATTEMPTED&#x60;, &#x60;VBV&#x60;, &#x60;SPA_FAILURE&#x60;, &#x60;SPA_ATTEMPTED&#x60;, &#x60;SPA&#x60;    If no value is entered this field will set a default value &#x3D; &#x60;INTERNET&#x60;. 
         /// </summary>
         /// <value>Type of transaction. This field identifies the level of security used in an electronic commerce transaction over an open network (for example, the internet).  Values for a Payouts transaction:   &#x60;INTERNET&#x60;, &#x60;RECURRING&#x60;, &#x60;RECURRING_INTERNET&#x60;, &#x60;VBV_FAILURE&#x60;, &#x60;VBV_ATTEMPTED&#x60;, &#x60;VBV&#x60;, &#x60;SPA_FAILURE&#x60;, &#x60;SPA_ATTEMPTED&#x60;, &#x60;SPA&#x60;    If no value is entered this field will set a default value &#x3D; &#x60;INTERNET&#x60;. </value>
-        [DataMember(Name="commerceIndicator", EmitDefaultValue=false)]
+        [JsonPropertyName("commerceIndicator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CommerceIndicator { get; set; }
 
         /// <summary>
         /// Gets or Sets FundingOptions
         /// </summary>
-        [DataMember(Name="fundingOptions", EmitDefaultValue=false)]
-        public Ptsv1pullfundstransferProcessingInformationFundingOptions FundingOptions { get; set; }
+        [JsonPropertyName("fundingOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public AftFundingOptions FundingOptions { get; set; }
 
         /// <summary>
         /// Gets or Sets RecurringOptions
         /// </summary>
-        [DataMember(Name="recurringOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("recurringOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv1pullfundstransferProcessingInformationRecurringOptions RecurringOptions { get; set; }
 
         /// <summary>
         /// Payouts transaction type.  Possible Values: - &#x60;AA&#x60; &#x3D; Account to account - &#x60;PP&#x60; &#x3D; Person to person - &#x60;TU&#x60; &#x3D; Top-up for enhanced prepaid loads - &#x60;WT&#x60; &#x3D; Wallet transfer - &#x60;BI&#x60; &#x3D; Bank-Initiated - &#x60;FT&#x60; &#x3D; Funds Transfer - &#x60;FD&#x60; &#x3D; Funds Disbursement - &#x60;MP&#x60; &#x3D; Merchant Payment - &#x60;PD&#x60; &#x3D; Payroll Disbursement - &#x60;LA&#x60; &#x3D; Liquid Assets 
         /// </summary>
         /// <value>Payouts transaction type.  Possible Values: - &#x60;AA&#x60; &#x3D; Account to account - &#x60;PP&#x60; &#x3D; Person to person - &#x60;TU&#x60; &#x3D; Top-up for enhanced prepaid loads - &#x60;WT&#x60; &#x3D; Wallet transfer - &#x60;BI&#x60; &#x3D; Bank-Initiated - &#x60;FT&#x60; &#x3D; Funds Transfer - &#x60;FD&#x60; &#x3D; Funds Disbursement - &#x60;MP&#x60; &#x3D; Merchant Payment - &#x60;PD&#x60; &#x3D; Payroll Disbursement - &#x60;LA&#x60; &#x3D; Liquid Assets </value>
-        [DataMember(Name="businessApplicationId", EmitDefaultValue=false)]
+        [JsonPropertyName("businessApplicationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BusinessApplicationId { get; set; }
 
         /// <summary>
         /// Visa Direct   Purpose of payment is required in certain markets to clearly identify the purpose of the payment based on the standard values defined for respective market. 
         /// </summary>
         /// <value>Visa Direct   Purpose of payment is required in certain markets to clearly identify the purpose of the payment based on the standard values defined for respective market. </value>
-        [DataMember(Name="purposeOfPayment", EmitDefaultValue=false)]
+        [JsonPropertyName("purposeOfPayment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PurposeOfPayment { get; set; }
 
         /// <summary>
         /// Gets or Sets PayoutsOptions
         /// </summary>
-        [DataMember(Name="payoutsOptions", EmitDefaultValue=false)]
+        [JsonPropertyName("payoutsOptions")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv1pullfundstransferProcessingInformationPayoutsOptions PayoutsOptions { get; set; }
 
         /// <summary>
         /// Contains the ISO 639-2 defined language Code 
         /// </summary>
         /// <value>Contains the ISO 639-2 defined language Code </value>
-        [DataMember(Name="languageCode", EmitDefaultValue=false)]
+        [JsonPropertyName("languageCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LanguageCode { get; set; }
 
         /// <summary>
         /// Account verification code will inform what Payment Account Verification should be performed. With this array of codes, a merchant can choose à la carte what verifications to run. This field is optional, and the default is 1 if it is not passed in. This means that a full validation of the fields will be performed. Valid verification codes: - &#x60;1&#x60; &#x3D; Full Account Verification (Card Account, CVN, CAVV, TAVV, Address, Name, eMail, Phone, Identity) - &#x60;2&#x60; &#x3D; Card Account Verification - &#x60;3&#x60; &#x3D; Address Verification - &#x60;4&#x60; &#x3D; Card Authentication Method (CAM) (Cryptogram) - &#x60;5&#x60; &#x3D; Cardholder Authentication Verification (CAVV) - &#x60;6&#x60; &#x3D; Cardholder Identity Verification - &#x60;7&#x60; &#x3D; CVV2 Verification - &#x60;8&#x60; &#x3D; eMail Verification - &#x60;9&#x60; &#x3D; Name Verification - &#x60;10&#x60; &#x3D; Phone Verification 
         /// </summary>
         /// <value>Account verification code will inform what Payment Account Verification should be performed. With this array of codes, a merchant can choose à la carte what verifications to run. This field is optional, and the default is 1 if it is not passed in. This means that a full validation of the fields will be performed. Valid verification codes: - &#x60;1&#x60; &#x3D; Full Account Verification (Card Account, CVN, CAVV, TAVV, Address, Name, eMail, Phone, Identity) - &#x60;2&#x60; &#x3D; Card Account Verification - &#x60;3&#x60; &#x3D; Address Verification - &#x60;4&#x60; &#x3D; Card Authentication Method (CAM) (Cryptogram) - &#x60;5&#x60; &#x3D; Cardholder Authentication Verification (CAVV) - &#x60;6&#x60; &#x3D; Cardholder Identity Verification - &#x60;7&#x60; &#x3D; CVV2 Verification - &#x60;8&#x60; &#x3D; eMail Verification - &#x60;9&#x60; &#x3D; Name Verification - &#x60;10&#x60; &#x3D; Phone Verification </value>
-        [DataMember(Name="accountVerificationCode", EmitDefaultValue=false)]
+        [JsonPropertyName("accountVerificationCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> AccountVerificationCode { get; set; }
 
         /// <summary>
@@ -119,14 +127,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferProcessingInformation {\n");
-            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CommerceIndicator).Append("\n");
-            if (FundingOptions != null) sb.Append("  FundingOptions: ").Append(FundingOptions).Append("\n");
-            if (RecurringOptions != null) sb.Append("  RecurringOptions: ").Append(RecurringOptions).Append("\n");
-            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(BusinessApplicationId).Append("\n");
-            if (PurposeOfPayment != null) sb.Append("  PurposeOfPayment: ").Append(PurposeOfPayment).Append("\n");
-            if (PayoutsOptions != null) sb.Append("  PayoutsOptions: ").Append(PayoutsOptions).Append("\n");
-            if (LanguageCode != null) sb.Append("  LanguageCode: ").Append(LanguageCode).Append("\n");
-            if (AccountVerificationCode != null) sb.Append("  AccountVerificationCode: ").Append(AccountVerificationCode).Append("\n");
+            if (CommerceIndicator != null) sb.Append("  CommerceIndicator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferProcessingInformation", "commerceIndicator", CommerceIndicator.ToString())).Append("\n");
+            if (FundingOptions != null) sb.Append("  FundingOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferProcessingInformation", "fundingOptions", FundingOptions.ToString())).Append("\n");
+            if (RecurringOptions != null) sb.Append("  RecurringOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferProcessingInformation", "recurringOptions", RecurringOptions.ToString())).Append("\n");
+            if (BusinessApplicationId != null) sb.Append("  BusinessApplicationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferProcessingInformation", "businessApplicationId", BusinessApplicationId.ToString())).Append("\n");
+            if (PurposeOfPayment != null) sb.Append("  PurposeOfPayment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferProcessingInformation", "purposeOfPayment", PurposeOfPayment.ToString())).Append("\n");
+            if (PayoutsOptions != null) sb.Append("  PayoutsOptions: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferProcessingInformation", "payoutsOptions", PayoutsOptions.ToString())).Append("\n");
+            if (LanguageCode != null) sb.Append("  LanguageCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferProcessingInformation", "languageCode", LanguageCode.ToString())).Append("\n");
+            if (AccountVerificationCode != null) sb.Append("  AccountVerificationCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferProcessingInformation", "accountVerificationCode", AccountVerificationCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -137,7 +145,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// Indicates if tokens may be created
         /// </summary>
         /// <value>Indicates if tokens may be created</value>
-        [DataMember(Name="create", EmitDefaultValue=false)]
+        [JsonPropertyName("create")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Create { get; set; }
 
         /// <summary>
         /// Indicates if tokens may be read
         /// </summary>
         /// <value>Indicates if tokens may be read</value>
-        [DataMember(Name="read", EmitDefaultValue=false)]
+        [JsonPropertyName("read")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Read { get; set; }
 
         /// <summary>
         /// Indicates if tokens may be updated
         /// </summary>
         /// <value>Indicates if tokens may be updated</value>
-        [DataMember(Name="update", EmitDefaultValue=false)]
+        [JsonPropertyName("update")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Update { get; set; }
 
         /// <summary>
         /// Indicates if tokens may be deleted
         /// </summary>
         /// <value>Indicates if tokens may be deleted</value>
-        [DataMember(Name="delete", EmitDefaultValue=false)]
+        [JsonPropertyName("delete")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Delete { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TokenPermissions {\n");
-            if (Create != null) sb.Append("  Create: ").Append(Create).Append("\n");
-            if (Read != null) sb.Append("  Read: ").Append(Read).Append("\n");
-            if (Update != null) sb.Append("  Update: ").Append(Update).Append("\n");
-            if (Delete != null) sb.Append("  Delete: ").Append(Delete).Append("\n");
+            if (Create != null) sb.Append("  Create: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TokenPermissions", "create", Create.ToString())).Append("\n");
+            if (Read != null) sb.Append("  Read: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TokenPermissions", "read", Read.ToString())).Append("\n");
+            if (Update != null) sb.Append("  Update: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TokenPermissions", "update", Update.ToString())).Append("\n");
+            if (Delete != null) sb.Append("  Delete: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TokenPermissions", "delete", Delete.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TokenPermissions", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

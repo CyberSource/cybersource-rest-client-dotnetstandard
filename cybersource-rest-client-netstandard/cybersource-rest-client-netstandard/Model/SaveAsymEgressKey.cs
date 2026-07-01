@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,20 +46,23 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Kmsegressv2keyssymClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
         /// Client request action. 
         /// </summary>
         /// <value>Client request action. </value>
-        [DataMember(Name="clientRequestAction", EmitDefaultValue=false)]
+        [JsonPropertyName("clientRequestAction")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientRequestAction { get; set; }
 
         /// <summary>
         /// Gets or Sets KeyInformation
         /// </summary>
-        [DataMember(Name="keyInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("keyInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Kmsegressv2keysasymKeyInformation KeyInformation { get; set; }
 
         /// <summary>
@@ -70,9 +73,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class SaveAsymEgressKey {\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
-            if (ClientRequestAction != null) sb.Append("  ClientRequestAction: ").Append(ClientRequestAction).Append("\n");
-            if (KeyInformation != null) sb.Append("  KeyInformation: ").Append(KeyInformation).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SaveAsymEgressKey", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
+            if (ClientRequestAction != null) sb.Append("  ClientRequestAction: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SaveAsymEgressKey", "clientRequestAction", ClientRequestAction.ToString())).Append("\n");
+            if (KeyInformation != null) sb.Append("  KeyInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SaveAsymEgressKey", "keyInformation", KeyInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -83,7 +86,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("SaveAsymEgressKey", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

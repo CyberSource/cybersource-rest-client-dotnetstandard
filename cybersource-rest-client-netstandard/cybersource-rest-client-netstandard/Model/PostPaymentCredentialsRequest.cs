@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -40,7 +40,7 @@ namespace CyberSource.Model
         /// <param name="MerchantInformation">MerchantInformation.</param>
         /// <param name="DeviceInformation">DeviceInformation.</param>
         /// <param name="AuthenticatedIdentities">AuthenticatedIdentities.</param>
-        public PostPaymentCredentialsRequest(string PaymentCredentialType = default(string), string TransactionType = default(string), string ClientCorrelationId = default(string), Tmsv3tokenstokenIdpaymentcredentialsOrderInformation OrderInformation = default(Tmsv3tokenstokenIdpaymentcredentialsOrderInformation), Tmsv3tokenstokenIdpaymentcredentialsMerchantInformation MerchantInformation = default(Tmsv3tokenstokenIdpaymentcredentialsMerchantInformation), Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation DeviceInformation = default(Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation), List<Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities> AuthenticatedIdentities = default(List<Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities>))
+        public PostPaymentCredentialsRequest(string PaymentCredentialType = default(string), string TransactionType = default(string), string ClientCorrelationId = default(string), Tmsv3tokenstokenIdpaymentcredentialsOrderInformation OrderInformation = default(Tmsv3tokenstokenIdpaymentcredentialsOrderInformation), TmsMerchantInformation MerchantInformation = default(TmsMerchantInformation), Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation DeviceInformation = default(Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation), List<Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities> AuthenticatedIdentities = default(List<Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities>))
         {
             this.PaymentCredentialType = PaymentCredentialType;
             this.TransactionType = TransactionType;
@@ -55,45 +55,52 @@ namespace CyberSource.Model
         /// The type of payment credentials to be returned. By default, payment credentials include network token and cryptogram or dynamic CVV. If \&quot;NETWORK_TOKEN\&quot; is supplied then only network token card number will be returned and no cryptogram or dynamic CVV will be requested. If \&quot;SECURITY_CODE\&quot; is supplied then dynamic CVV will be requested and returned with the network token card number. Dynamic CVV is only supported for Amex and SCOF. If \&quot;CRYPTOGRAM\&quot; is supplied then cryptogram will be requested and returned with the network token card number. Cryptogram is NOT supported for Amex.  Possible Values:   - NETWORK_TOKEN   - SECURITY_CODE   - CRYPTOGRAM 
         /// </summary>
         /// <value>The type of payment credentials to be returned. By default, payment credentials include network token and cryptogram or dynamic CVV. If \&quot;NETWORK_TOKEN\&quot; is supplied then only network token card number will be returned and no cryptogram or dynamic CVV will be requested. If \&quot;SECURITY_CODE\&quot; is supplied then dynamic CVV will be requested and returned with the network token card number. Dynamic CVV is only supported for Amex and SCOF. If \&quot;CRYPTOGRAM\&quot; is supplied then cryptogram will be requested and returned with the network token card number. Cryptogram is NOT supported for Amex.  Possible Values:   - NETWORK_TOKEN   - SECURITY_CODE   - CRYPTOGRAM </value>
-        [DataMember(Name="paymentCredentialType", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentCredentialType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentCredentialType { get; set; }
 
         /// <summary>
         /// Specifies the type of transaction for which the network token credentials are required. Possible Values:   - ECOM: Ecommerce transaction. If transactionType is not provided, ECOM is set as the default.   - AFT: Account Funding Transaction. This is only supported for VISA and paymentCredentialType of CRYPTOGRAM. 
         /// </summary>
         /// <value>Specifies the type of transaction for which the network token credentials are required. Possible Values:   - ECOM: Ecommerce transaction. If transactionType is not provided, ECOM is set as the default.   - AFT: Account Funding Transaction. This is only supported for VISA and paymentCredentialType of CRYPTOGRAM. </value>
-        [DataMember(Name="transactionType", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionType { get; set; }
 
         /// <summary>
         /// Used to correlate authentication and payment credential requests. 
         /// </summary>
         /// <value>Used to correlate authentication and payment credential requests. </value>
-        [DataMember(Name="clientCorrelationId", EmitDefaultValue=false)]
+        [JsonPropertyName("clientCorrelationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ClientCorrelationId { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderInformation
         /// </summary>
-        [DataMember(Name="orderInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("orderInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv3tokenstokenIdpaymentcredentialsOrderInformation OrderInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets MerchantInformation
         /// </summary>
-        [DataMember(Name="merchantInformation", EmitDefaultValue=false)]
-        public Tmsv3tokenstokenIdpaymentcredentialsMerchantInformation MerchantInformation { get; set; }
+        [JsonPropertyName("merchantInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public TmsMerchantInformation MerchantInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets DeviceInformation
         /// </summary>
-        [DataMember(Name="deviceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("deviceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Tmsv3tokenstokenIdpaymentcredentialsDeviceInformation DeviceInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets AuthenticatedIdentities
         /// </summary>
-        [DataMember(Name="authenticatedIdentities", EmitDefaultValue=false)]
+        [JsonPropertyName("authenticatedIdentities")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Tmsv3tokenstokenIdpaymentcredentialsAuthenticatedIdentities> AuthenticatedIdentities { get; set; }
 
         /// <summary>
@@ -104,13 +111,13 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PostPaymentCredentialsRequest {\n");
-            if (PaymentCredentialType != null) sb.Append("  PaymentCredentialType: ").Append(PaymentCredentialType).Append("\n");
-            if (TransactionType != null) sb.Append("  TransactionType: ").Append(TransactionType).Append("\n");
-            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(ClientCorrelationId).Append("\n");
-            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(OrderInformation).Append("\n");
-            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(MerchantInformation).Append("\n");
-            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(DeviceInformation).Append("\n");
-            if (AuthenticatedIdentities != null) sb.Append("  AuthenticatedIdentities: ").Append(AuthenticatedIdentities).Append("\n");
+            if (PaymentCredentialType != null) sb.Append("  PaymentCredentialType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostPaymentCredentialsRequest", "paymentCredentialType", PaymentCredentialType.ToString())).Append("\n");
+            if (TransactionType != null) sb.Append("  TransactionType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostPaymentCredentialsRequest", "transactionType", TransactionType.ToString())).Append("\n");
+            if (ClientCorrelationId != null) sb.Append("  ClientCorrelationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostPaymentCredentialsRequest", "clientCorrelationId", ClientCorrelationId.ToString())).Append("\n");
+            if (OrderInformation != null) sb.Append("  OrderInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostPaymentCredentialsRequest", "orderInformation", OrderInformation.ToString())).Append("\n");
+            if (MerchantInformation != null) sb.Append("  MerchantInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostPaymentCredentialsRequest", "merchantInformation", MerchantInformation.ToString())).Append("\n");
+            if (DeviceInformation != null) sb.Append("  DeviceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostPaymentCredentialsRequest", "deviceInformation", DeviceInformation.ToString())).Append("\n");
+            if (AuthenticatedIdentities != null) sb.Append("  AuthenticatedIdentities: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PostPaymentCredentialsRequest", "authenticatedIdentities", AuthenticatedIdentities.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -121,7 +128,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PostPaymentCredentialsRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

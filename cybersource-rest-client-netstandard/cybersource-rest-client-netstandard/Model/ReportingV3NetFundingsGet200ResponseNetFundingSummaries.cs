@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -57,50 +57,58 @@ namespace CyberSource.Model
         /// Valid values: - PURCHASES - REFUNDS - FEES - CHARGEBACKS 
         /// </summary>
         /// <value>Valid values: - PURCHASES - REFUNDS - FEES - CHARGEBACKS </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentSubType
         /// </summary>
-        [DataMember(Name="paymentSubType", EmitDefaultValue=false)]
+        [JsonPropertyName("paymentSubType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PaymentSubType { get; set; }
 
         /// <summary>
         /// Gets or Sets ConveyedCount
         /// </summary>
-        [DataMember(Name="conveyedCount", EmitDefaultValue=false)]
+        [JsonPropertyName("conveyedCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? ConveyedCount { get; set; }
 
         /// <summary>
         /// Gets or Sets ConveyedAmount
         /// </summary>
-        [DataMember(Name="conveyedAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("conveyedAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string ConveyedAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets SettledCount
         /// </summary>
-        [DataMember(Name="settledCount", EmitDefaultValue=false)]
+        [JsonPropertyName("settledCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? SettledCount { get; set; }
 
         /// <summary>
         /// Gets or Sets FundedCount
         /// </summary>
-        [DataMember(Name="fundedCount", EmitDefaultValue=false)]
+        [JsonPropertyName("fundedCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? FundedCount { get; set; }
 
         /// <summary>
         /// Gets or Sets FundedAmount
         /// </summary>
-        [DataMember(Name="fundedAmount", EmitDefaultValue=false)]
+        [JsonPropertyName("fundedAmount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FundedAmount { get; set; }
 
         /// <summary>
         /// Valid ISO 4217 ALPHA-3 currency code
         /// </summary>
         /// <value>Valid ISO 4217 ALPHA-3 currency code</value>
-        [DataMember(Name="currencyCode", EmitDefaultValue=false)]
+        [JsonPropertyName("currencyCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CurrencyCode { get; set; }
 
         /// <summary>
@@ -111,14 +119,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3NetFundingsGet200ResponseNetFundingSummaries {\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (PaymentSubType != null) sb.Append("  PaymentSubType: ").Append(PaymentSubType).Append("\n");
-            if (ConveyedCount != null) sb.Append("  ConveyedCount: ").Append(ConveyedCount).Append("\n");
-            if (ConveyedAmount != null) sb.Append("  ConveyedAmount: ").Append(ConveyedAmount).Append("\n");
-            if (SettledCount != null) sb.Append("  SettledCount: ").Append(SettledCount).Append("\n");
-            if (FundedCount != null) sb.Append("  FundedCount: ").Append(FundedCount).Append("\n");
-            if (FundedAmount != null) sb.Append("  FundedAmount: ").Append(FundedAmount).Append("\n");
-            if (CurrencyCode != null) sb.Append("  CurrencyCode: ").Append(CurrencyCode).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200ResponseNetFundingSummaries", "type", Type.ToString())).Append("\n");
+            if (PaymentSubType != null) sb.Append("  PaymentSubType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200ResponseNetFundingSummaries", "paymentSubType", PaymentSubType.ToString())).Append("\n");
+            if (ConveyedCount != null) sb.Append("  ConveyedCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200ResponseNetFundingSummaries", "conveyedCount", ConveyedCount.ToString())).Append("\n");
+            if (ConveyedAmount != null) sb.Append("  ConveyedAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200ResponseNetFundingSummaries", "conveyedAmount", ConveyedAmount.ToString())).Append("\n");
+            if (SettledCount != null) sb.Append("  SettledCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200ResponseNetFundingSummaries", "settledCount", SettledCount.ToString())).Append("\n");
+            if (FundedCount != null) sb.Append("  FundedCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200ResponseNetFundingSummaries", "fundedCount", FundedCount.ToString())).Append("\n");
+            if (FundedAmount != null) sb.Append("  FundedAmount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200ResponseNetFundingSummaries", "fundedAmount", FundedAmount.ToString())).Append("\n");
+            if (CurrencyCode != null) sb.Append("  CurrencyCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3NetFundingsGet200ResponseNetFundingSummaries", "currencyCode", CurrencyCode.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -129,7 +137,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3NetFundingsGet200ResponseNetFundingSummaries", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

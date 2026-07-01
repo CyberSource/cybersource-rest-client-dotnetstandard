@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -61,69 +61,79 @@ namespace CyberSource.Model
         /// Configure Unified Checkout to capture billing address information.  Possible values: - FULL: Capture complete billing address information. - PARTIAL: Capture first name, last name, country and postal/zip code only. - NONE: Capture only first name and last name. 
         /// </summary>
         /// <value>Configure Unified Checkout to capture billing address information.  Possible values: - FULL: Capture complete billing address information. - PARTIAL: Capture first name, last name, country and postal/zip code only. - NONE: Capture only first name and last name. </value>
-        [DataMember(Name="billingType", EmitDefaultValue=false)]
+        [JsonPropertyName("billingType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BillingType { get; set; }
 
         /// <summary>
         /// Configure Unified Checkout to capture customer email address.  Possible values:  - True  - False 
         /// </summary>
         /// <value>Configure Unified Checkout to capture customer email address.  Possible values:  - True  - False </value>
-        [DataMember(Name="requestEmail", EmitDefaultValue=false)]
+        [JsonPropertyName("requestEmail")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? RequestEmail { get; set; }
 
         /// <summary>
         /// Configure Unified Checkout to capture customer phone number.  Possible values: - True - False 
         /// </summary>
         /// <value>Configure Unified Checkout to capture customer phone number.  Possible values: - True - False </value>
-        [DataMember(Name="requestPhone", EmitDefaultValue=false)]
+        [JsonPropertyName("requestPhone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? RequestPhone { get; set; }
 
         /// <summary>
         /// Configure Unified Checkout to capture customer shipping details.  Possible values: - True - False 
         /// </summary>
         /// <value>Configure Unified Checkout to capture customer shipping details.  Possible values: - True - False </value>
-        [DataMember(Name="requestShipping", EmitDefaultValue=false)]
+        [JsonPropertyName("requestShipping")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? RequestShipping { get; set; }
 
         /// <summary>
         /// List of countries available to ship to.   Use the two-character ISO Standard Country Codes. 
         /// </summary>
         /// <value>List of countries available to ship to.   Use the two-character ISO Standard Country Codes. </value>
-        [DataMember(Name="shipToCountries", EmitDefaultValue=false)]
+        [JsonPropertyName("shipToCountries")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> ShipToCountries { get; set; }
 
         /// <summary>
         /// Configure Unified Checkout to display the list of accepted card networks beneath the payment button  Possible values: - True - False 
         /// </summary>
         /// <value>Configure Unified Checkout to display the list of accepted card networks beneath the payment button  Possible values: - True - False </value>
-        [DataMember(Name="showAcceptedNetworkIcons", EmitDefaultValue=false)]
+        [JsonPropertyName("showAcceptedNetworkIcons")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ShowAcceptedNetworkIcons { get; set; }
 
         /// <summary>
         /// Configure Unified Checkout to display the final confirmation screen when using Click to Pay.&lt;br&gt; Where &#39;BillingType&#39;&#x3D; NONE and &#39;requestShipping&#39;&#x3D; FALSE and the customer is using an existing Click to Pay card as their chosen payment method, a final confirmation screen can be removed allowing the customer to check out as soon as they have selected their payment method from within their Click to Pay card tray.  Possible values: - True - False 
         /// </summary>
         /// <value>Configure Unified Checkout to display the final confirmation screen when using Click to Pay.&lt;br&gt; Where &#39;BillingType&#39;&#x3D; NONE and &#39;requestShipping&#39;&#x3D; FALSE and the customer is using an existing Click to Pay card as their chosen payment method, a final confirmation screen can be removed allowing the customer to check out as soon as they have selected their payment method from within their Click to Pay card tray.  Possible values: - True - False </value>
-        [DataMember(Name="showConfirmationStep", EmitDefaultValue=false)]
+        [JsonPropertyName("showConfirmationStep")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ShowConfirmationStep { get; set; }
 
         /// <summary>
         /// Configure Unified Checkout to display the \&quot;Save card for future use\&quot; checkbox.&lt;br&gt;  Configurable check box that will show in a Manual card entry flow to allow a Cardholder to give consent to store their manually entered credential with the Merchant that they are paying.&lt;br&gt;  Applicable when manually entering the details and not enrolling in Click to Pay.  Possible values:  - True   - False&lt;br&gt;&lt;br&gt;  **Use Cases:**  **Offer consumers option to save their card in Unified Checkout:**  - Include the captureMandate.requestSaveCard field in the capture context request and set it to true. - When set to true, this will show a checkbox with the message &#39;Save card for future use&#39; in Unified Checkout. - When selected this provides a response in both the Transient Token and Get Credentials API response.&lt;br&gt;&lt;br&gt;  **Do not offer consumers the option to save their card in Unified Checkout:**  - Include the captureMandate.requestSaveCard field in the capture context request and set it to false OR omit the field from the capture context request. - When set to false, the save card option is not shown to consumers when manually entering card details. 
         /// </summary>
         /// <value>Configure Unified Checkout to display the \&quot;Save card for future use\&quot; checkbox.&lt;br&gt;  Configurable check box that will show in a Manual card entry flow to allow a Cardholder to give consent to store their manually entered credential with the Merchant that they are paying.&lt;br&gt;  Applicable when manually entering the details and not enrolling in Click to Pay.  Possible values:  - True   - False&lt;br&gt;&lt;br&gt;  **Use Cases:**  **Offer consumers option to save their card in Unified Checkout:**  - Include the captureMandate.requestSaveCard field in the capture context request and set it to true. - When set to true, this will show a checkbox with the message &#39;Save card for future use&#39; in Unified Checkout. - When selected this provides a response in both the Transient Token and Get Credentials API response.&lt;br&gt;&lt;br&gt;  **Do not offer consumers the option to save their card in Unified Checkout:**  - Include the captureMandate.requestSaveCard field in the capture context request and set it to false OR omit the field from the capture context request. - When set to false, the save card option is not shown to consumers when manually entering card details. </value>
-        [DataMember(Name="requestSaveCard", EmitDefaultValue=false)]
+        [JsonPropertyName("requestSaveCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? RequestSaveCard { get; set; }
 
         /// <summary>
         /// Configure Unified Checkout to display combo card at checkout.&lt;br&gt;  A combo debit/credit card is a single card that functions both as a Debit/Credit card.  Unified Checkout / Click to Pay Drop-in UI allows the Cardholder to choose whether they would like the transaction to be paid for using either debit or credit card. **Important:** This is applicable to Visa cards only.  Possible values: - True  - False&lt;br&gt;&lt;br&gt;  **Use Cases:**  **Offer Combo Card at Checkout:**  - Include the captureMandate.comboCard field in the capture context request and set it to true. - When set to true, Combo Card selection is shown at checkout &lt;br&gt;&lt;br&gt;  **Do not offer Combo Card at Checkout:**  - Include the captureMandate.comboCard field in the capture context request and set it to false OR omit the field from the capture context request. - The Combo Card selection is not shown at checkout. 
         /// </summary>
         /// <value>Configure Unified Checkout to display combo card at checkout.&lt;br&gt;  A combo debit/credit card is a single card that functions both as a Debit/Credit card.  Unified Checkout / Click to Pay Drop-in UI allows the Cardholder to choose whether they would like the transaction to be paid for using either debit or credit card. **Important:** This is applicable to Visa cards only.  Possible values: - True  - False&lt;br&gt;&lt;br&gt;  **Use Cases:**  **Offer Combo Card at Checkout:**  - Include the captureMandate.comboCard field in the capture context request and set it to true. - When set to true, Combo Card selection is shown at checkout &lt;br&gt;&lt;br&gt;  **Do not offer Combo Card at Checkout:**  - Include the captureMandate.comboCard field in the capture context request and set it to false OR omit the field from the capture context request. - The Combo Card selection is not shown at checkout. </value>
-        [DataMember(Name="comboCard", EmitDefaultValue=false)]
+        [JsonPropertyName("comboCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? ComboCard { get; set; }
 
         /// <summary>
         /// Gets or Sets CPF
         /// </summary>
-        [DataMember(Name="CPF", EmitDefaultValue=false)]
+        [JsonPropertyName("CPF")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Upv1capturecontextsCaptureMandateCPF CPF { get; set; }
 
         /// <summary>
@@ -134,16 +144,16 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Upv1capturecontextsCaptureMandate {\n");
-            if (BillingType != null) sb.Append("  BillingType: ").Append(BillingType).Append("\n");
-            if (RequestEmail != null) sb.Append("  RequestEmail: ").Append(RequestEmail).Append("\n");
-            if (RequestPhone != null) sb.Append("  RequestPhone: ").Append(RequestPhone).Append("\n");
-            if (RequestShipping != null) sb.Append("  RequestShipping: ").Append(RequestShipping).Append("\n");
-            if (ShipToCountries != null) sb.Append("  ShipToCountries: ").Append(ShipToCountries).Append("\n");
-            if (ShowAcceptedNetworkIcons != null) sb.Append("  ShowAcceptedNetworkIcons: ").Append(ShowAcceptedNetworkIcons).Append("\n");
-            if (ShowConfirmationStep != null) sb.Append("  ShowConfirmationStep: ").Append(ShowConfirmationStep).Append("\n");
-            if (RequestSaveCard != null) sb.Append("  RequestSaveCard: ").Append(RequestSaveCard).Append("\n");
-            if (ComboCard != null) sb.Append("  ComboCard: ").Append(ComboCard).Append("\n");
-            if (CPF != null) sb.Append("  CPF: ").Append(CPF).Append("\n");
+            if (BillingType != null) sb.Append("  BillingType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCaptureMandate", "billingType", BillingType.ToString())).Append("\n");
+            if (RequestEmail != null) sb.Append("  RequestEmail: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCaptureMandate", "requestEmail", RequestEmail.ToString())).Append("\n");
+            if (RequestPhone != null) sb.Append("  RequestPhone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCaptureMandate", "requestPhone", RequestPhone.ToString())).Append("\n");
+            if (RequestShipping != null) sb.Append("  RequestShipping: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCaptureMandate", "requestShipping", RequestShipping.ToString())).Append("\n");
+            if (ShipToCountries != null) sb.Append("  ShipToCountries: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCaptureMandate", "shipToCountries", ShipToCountries.ToString())).Append("\n");
+            if (ShowAcceptedNetworkIcons != null) sb.Append("  ShowAcceptedNetworkIcons: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCaptureMandate", "showAcceptedNetworkIcons", ShowAcceptedNetworkIcons.ToString())).Append("\n");
+            if (ShowConfirmationStep != null) sb.Append("  ShowConfirmationStep: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCaptureMandate", "showConfirmationStep", ShowConfirmationStep.ToString())).Append("\n");
+            if (RequestSaveCard != null) sb.Append("  RequestSaveCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCaptureMandate", "requestSaveCard", RequestSaveCard.ToString())).Append("\n");
+            if (ComboCard != null) sb.Append("  ComboCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCaptureMandate", "comboCard", ComboCard.ToString())).Append("\n");
+            if (CPF != null) sb.Append("  CPF: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Upv1capturecontextsCaptureMandate", "CPF", CPF.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -154,7 +164,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Upv1capturecontextsCaptureMandate", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

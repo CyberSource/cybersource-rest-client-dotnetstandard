@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -46,19 +46,22 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Gets or Sets Phone
         /// </summary>
-        [DataMember(Name="phone", EmitDefaultValue=false)]
+        [JsonPropertyName("phone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Phone { get; set; }
 
         /// <summary>
         /// Gets or Sets AddressDetails
         /// </summary>
-        [DataMember(Name="addressDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("addressDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public InvoicingV2InvoiceSettingsGet200ResponseMerchantInformationAddressDetails AddressDetails { get; set; }
 
         /// <summary>
@@ -69,9 +72,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InvoicingV2InvoiceSettingsGet200ResponseMerchantInformation {\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Phone != null) sb.Append("  Phone: ").Append(Phone).Append("\n");
-            if (AddressDetails != null) sb.Append("  AddressDetails: ").Append(AddressDetails).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseMerchantInformation", "name", Name.ToString())).Append("\n");
+            if (Phone != null) sb.Append("  Phone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseMerchantInformation", "phone", Phone.ToString())).Append("\n");
+            if (AddressDetails != null) sb.Append("  AddressDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InvoicingV2InvoiceSettingsGet200ResponseMerchantInformation", "addressDetails", AddressDetails.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -82,7 +85,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InvoicingV2InvoiceSettingsGet200ResponseMerchantInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

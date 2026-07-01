@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -53,42 +53,48 @@ namespace CyberSource.Model
         /// Possible values: Visa Platform Connect - &#x60;8401&#x60; Merchant not participating in Visa Trusted Listing Program. - &#x60;8402&#x60; Issuer not participating in Visa Trusted Listing Program. - &#x60;8403&#x60; Cardholder has not trusted the merchant (supplied by Visa Net). - &#x60;8404&#x60; Indeterminate or invalid issuer response. - &#x60;8473&#x60; Cardholder has not trusted the merchant (issuer-supplied). - &#x60;8474&#x60; Did not meet the exemption criteria (issuer-supplied).  Upto 20 Values may be received in a transaction. 
         /// </summary>
         /// <value>Possible values: Visa Platform Connect - &#x60;8401&#x60; Merchant not participating in Visa Trusted Listing Program. - &#x60;8402&#x60; Issuer not participating in Visa Trusted Listing Program. - &#x60;8403&#x60; Cardholder has not trusted the merchant (supplied by Visa Net). - &#x60;8404&#x60; Indeterminate or invalid issuer response. - &#x60;8473&#x60; Cardholder has not trusted the merchant (issuer-supplied). - &#x60;8474&#x60; Did not meet the exemption criteria (issuer-supplied).  Upto 20 Values may be received in a transaction. </value>
-        [DataMember(Name="riskAnalysisExemptionResult", EmitDefaultValue=false)]
+        [JsonPropertyName("riskAnalysisExemptionResult")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string RiskAnalysisExemptionResult { get; set; }
 
         /// <summary>
         /// Possible values: Visa Platform Connect - &#x60;2&#x60; Trusted merchant exemption validated/honored. - &#x60;3&#x60; Trusted merchant exemption failed validation/not honored. 
         /// </summary>
         /// <value>Possible values: Visa Platform Connect - &#x60;2&#x60; Trusted merchant exemption validated/honored. - &#x60;3&#x60; Trusted merchant exemption failed validation/not honored. </value>
-        [DataMember(Name="trustedMerchantExemptionResult", EmitDefaultValue=false)]
+        [JsonPropertyName("trustedMerchantExemptionResult")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TrustedMerchantExemptionResult { get; set; }
 
         /// <summary>
         /// This will be the value returned by Visanet when low value exemption has been requested.  Valid values: Visa Platform Connect - &#x60;2&#x60; Low value exemption validated/honored - &#x60;3&#x60; Low value exemption failed validation/not honored 
         /// </summary>
         /// <value>This will be the value returned by Visanet when low value exemption has been requested.  Valid values: Visa Platform Connect - &#x60;2&#x60; Low value exemption validated/honored - &#x60;3&#x60; Low value exemption failed validation/not honored </value>
-        [DataMember(Name="lowValueExemptionResult", EmitDefaultValue=false)]
+        [JsonPropertyName("lowValueExemptionResult")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LowValueExemptionResult { get; set; }
 
         /// <summary>
         /// This will be the value returned by Visanet when secure corporate payment (scp) exemption has been requested.  Valid values: Visa Platform Connect - &#x60;2&#x60; Secure corporate payment exemption validated/honored - &#x60;3&#x60; Secure corporate payment exemption failed validation/not honored 
         /// </summary>
         /// <value>This will be the value returned by Visanet when secure corporate payment (scp) exemption has been requested.  Valid values: Visa Platform Connect - &#x60;2&#x60; Secure corporate payment exemption validated/honored - &#x60;3&#x60; Secure corporate payment exemption failed validation/not honored </value>
-        [DataMember(Name="secureCorporatePaymentResult", EmitDefaultValue=false)]
+        [JsonPropertyName("secureCorporatePaymentResult")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SecureCorporatePaymentResult { get; set; }
 
         /// <summary>
         /// This will be the value returned by Visanet when transaction risk analysis (TRA) exemption has been requested.    Valid values: Visa Platform Connect   - &#x60;2&#x60; transaction risk analysis (TRA) exemption validated/honored   - &#x60;3&#x60; transaction risk analysis (TRA) exemption failed validation/not honored 
         /// </summary>
         /// <value>This will be the value returned by Visanet when transaction risk analysis (TRA) exemption has been requested.    Valid values: Visa Platform Connect   - &#x60;2&#x60; transaction risk analysis (TRA) exemption validated/honored   - &#x60;3&#x60; transaction risk analysis (TRA) exemption failed validation/not honored </value>
-        [DataMember(Name="transactionRiskAnalysisExemptionResult", EmitDefaultValue=false)]
+        [JsonPropertyName("transactionRiskAnalysisExemptionResult")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TransactionRiskAnalysisExemptionResult { get; set; }
 
         /// <summary>
         /// This will be the value returned by Visanet when delegated authentication has been requested. 
         /// </summary>
         /// <value>This will be the value returned by Visanet when delegated authentication has been requested. </value>
-        [DataMember(Name="delegatedAuthenticationResult", EmitDefaultValue=false)]
+        [JsonPropertyName("delegatedAuthenticationResult")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DelegatedAuthenticationResult { get; set; }
 
         /// <summary>
@@ -99,12 +105,12 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class PaymentsStrongAuthIssuerInformation {\n");
-            if (RiskAnalysisExemptionResult != null) sb.Append("  RiskAnalysisExemptionResult: ").Append(RiskAnalysisExemptionResult).Append("\n");
-            if (TrustedMerchantExemptionResult != null) sb.Append("  TrustedMerchantExemptionResult: ").Append(TrustedMerchantExemptionResult).Append("\n");
-            if (LowValueExemptionResult != null) sb.Append("  LowValueExemptionResult: ").Append(LowValueExemptionResult).Append("\n");
-            if (SecureCorporatePaymentResult != null) sb.Append("  SecureCorporatePaymentResult: ").Append(SecureCorporatePaymentResult).Append("\n");
-            if (TransactionRiskAnalysisExemptionResult != null) sb.Append("  TransactionRiskAnalysisExemptionResult: ").Append(TransactionRiskAnalysisExemptionResult).Append("\n");
-            if (DelegatedAuthenticationResult != null) sb.Append("  DelegatedAuthenticationResult: ").Append(DelegatedAuthenticationResult).Append("\n");
+            if (RiskAnalysisExemptionResult != null) sb.Append("  RiskAnalysisExemptionResult: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsStrongAuthIssuerInformation", "riskAnalysisExemptionResult", RiskAnalysisExemptionResult.ToString())).Append("\n");
+            if (TrustedMerchantExemptionResult != null) sb.Append("  TrustedMerchantExemptionResult: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsStrongAuthIssuerInformation", "trustedMerchantExemptionResult", TrustedMerchantExemptionResult.ToString())).Append("\n");
+            if (LowValueExemptionResult != null) sb.Append("  LowValueExemptionResult: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsStrongAuthIssuerInformation", "lowValueExemptionResult", LowValueExemptionResult.ToString())).Append("\n");
+            if (SecureCorporatePaymentResult != null) sb.Append("  SecureCorporatePaymentResult: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsStrongAuthIssuerInformation", "secureCorporatePaymentResult", SecureCorporatePaymentResult.ToString())).Append("\n");
+            if (TransactionRiskAnalysisExemptionResult != null) sb.Append("  TransactionRiskAnalysisExemptionResult: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsStrongAuthIssuerInformation", "transactionRiskAnalysisExemptionResult", TransactionRiskAnalysisExemptionResult.ToString())).Append("\n");
+            if (DelegatedAuthenticationResult != null) sb.Append("  DelegatedAuthenticationResult: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("PaymentsStrongAuthIssuerInformation", "delegatedAuthenticationResult", DelegatedAuthenticationResult.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,7 +121,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("PaymentsStrongAuthIssuerInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

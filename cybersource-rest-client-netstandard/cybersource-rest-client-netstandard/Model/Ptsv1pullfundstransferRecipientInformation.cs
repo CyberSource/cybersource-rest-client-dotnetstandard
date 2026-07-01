@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -89,167 +89,191 @@ namespace CyberSource.Model
         /// Recipient&#39;s state. Use the State, Province, and Territory Codes for the United States and Canada. Value must be an ISO Standard State Code:  https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf 
         /// </summary>
         /// <value>Recipient&#39;s state. Use the State, Province, and Territory Codes for the United States and Canada. Value must be an ISO Standard State Code:  https://developer.cybersource.com/library/documentation/sbc/quickref/states_and_provinces.pdf </value>
-        [DataMember(Name="administrativeArea", EmitDefaultValue=false)]
+        [JsonPropertyName("administrativeArea")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AdministrativeArea { get; set; }
 
         /// <summary>
         /// Recipient&#39;s postal code. 
         /// </summary>
         /// <value>Recipient&#39;s postal code. </value>
-        [DataMember(Name="postalCode", EmitDefaultValue=false)]
+        [JsonPropertyName("postalCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PostalCode { get; set; }
 
         /// <summary>
         /// Recipient&#39;s country code. Check that this field contains 2-character alpha ISO 3166-1 standard values. 
         /// </summary>
         /// <value>Recipient&#39;s country code. Check that this field contains 2-character alpha ISO 3166-1 standard values. </value>
-        [DataMember(Name="country", EmitDefaultValue=false)]
+        [JsonPropertyName("country")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Country { get; set; }
 
         /// <summary>
         /// Gets or Sets PersonalIdentification
         /// </summary>
-        [DataMember(Name="personalIdentification", EmitDefaultValue=false)]
+        [JsonPropertyName("personalIdentification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv1pullfundstransferRecipientInformationPersonalIdentification PersonalIdentification { get; set; }
 
         /// <summary>
         /// Recipient&#39;s first name. 
         /// </summary>
         /// <value>Recipient&#39;s first name. </value>
-        [DataMember(Name="firstName", EmitDefaultValue=false)]
+        [JsonPropertyName("firstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Middle Initial of recipient. This field is supported by FDC Compass. 
         /// </summary>
         /// <value>Middle Initial of recipient. This field is supported by FDC Compass. </value>
-        [DataMember(Name="middleInitial", EmitDefaultValue=false)]
+        [JsonPropertyName("middleInitial")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MiddleInitial { get; set; }
 
         /// <summary>
         /// Recipient&#39;s middle name. This field is a pass through, which means that CyberSource does not verify the value or modify it in any way before sending it to the processor. If the field is not required for the transaction, CyberSource does not forward it to the processor. 
         /// </summary>
         /// <value>Recipient&#39;s middle name. This field is a pass through, which means that CyberSource does not verify the value or modify it in any way before sending it to the processor. If the field is not required for the transaction, CyberSource does not forward it to the processor. </value>
-        [DataMember(Name="middleName", EmitDefaultValue=false)]
+        [JsonPropertyName("middleName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string MiddleName { get; set; }
 
         /// <summary>
         /// Recipient&#39;s last name. Conditional field. If &#x60;recipientInformation.sameAsSender&#x60; &#x3D; &#x60;false&#x60;, this field is mandatory. 
         /// </summary>
         /// <value>Recipient&#39;s last name. Conditional field. If &#x60;recipientInformation.sameAsSender&#x60; &#x3D; &#x60;false&#x60;, this field is mandatory. </value>
-        [DataMember(Name="lastName", EmitDefaultValue=false)]
+        [JsonPropertyName("lastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LastName { get; set; }
 
         /// <summary>
         /// Street address of recipient. This field is conditional: it is required if using neither a Customer nor Payment Instrument token. 
         /// </summary>
         /// <value>Street address of recipient. This field is conditional: it is required if using neither a Customer nor Payment Instrument token. </value>
-        [DataMember(Name="address1", EmitDefaultValue=false)]
+        [JsonPropertyName("address1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address1 { get; set; }
 
         /// <summary>
         /// Second line of the recipient&#39;s address. 
         /// </summary>
         /// <value>Second line of the recipient&#39;s address. </value>
-        [DataMember(Name="address2", EmitDefaultValue=false)]
+        [JsonPropertyName("address2")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Address2 { get; set; }
 
         /// <summary>
         /// This field contains the house or the building number of the recipient address. 
         /// </summary>
         /// <value>This field contains the house or the building number of the recipient address. </value>
-        [DataMember(Name="buildingNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("buildingNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string BuildingNumber { get; set; }
 
         /// <summary>
         /// Recipient city. 
         /// </summary>
         /// <value>Recipient city. </value>
-        [DataMember(Name="locality", EmitDefaultValue=false)]
+        [JsonPropertyName("locality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Locality { get; set; }
 
         /// <summary>
         /// Government-issued identification number.  Conditional: This field is mandatory if the &#x60;processingInformation.businessApplicationId&#x60; is any of the following:   - &#x60;AA&#x60; - &#x60;PP&#x60; - &#x60;TU&#x60; - &#x60;BI&#x60; - &#x60;WT&#x60; - &#x60;FT&#x60; - and country code &#x3D; &#x60;BR&#x60;, &#x60;AR&#x60;, &#x60;CO&#x60;, &#x60;PE&#x60;, in &#x60;recipientInformation.countryCode&#x60; (Argentina, Brazil, Colombia, and Peru) 
         /// </summary>
         /// <value>Government-issued identification number.  Conditional: This field is mandatory if the &#x60;processingInformation.businessApplicationId&#x60; is any of the following:   - &#x60;AA&#x60; - &#x60;PP&#x60; - &#x60;TU&#x60; - &#x60;BI&#x60; - &#x60;WT&#x60; - &#x60;FT&#x60; - and country code &#x3D; &#x60;BR&#x60;, &#x60;AR&#x60;, &#x60;CO&#x60;, &#x60;PE&#x60;, in &#x60;recipientInformation.countryCode&#x60; (Argentina, Brazil, Colombia, and Peru) </value>
-        [DataMember(Name="identificationNumber", EmitDefaultValue=false)]
+        [JsonPropertyName("identificationNumber")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string IdentificationNumber { get; set; }
 
         /// <summary>
         /// &#x60;B&#x60; for Business or &#x60;I&#x60; for individual.  Conditional:  If &#x60;recipientInformation.identificationNumber&#x60; is present, then this field is mandatory. 
         /// </summary>
         /// <value>&#x60;B&#x60; for Business or &#x60;I&#x60; for individual.  Conditional:  If &#x60;recipientInformation.identificationNumber&#x60; is present, then this field is mandatory. </value>
-        [DataMember(Name="type", EmitDefaultValue=false)]
+        [JsonPropertyName("type")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Type { get; set; }
 
         /// <summary>
         /// Recipient first name, this will be concatenated with the 4-digit originator abbreviation. 
         /// </summary>
         /// <value>Recipient first name, this will be concatenated with the 4-digit originator abbreviation. </value>
-        [DataMember(Name="descriptor", EmitDefaultValue=false)]
+        [JsonPropertyName("descriptor")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Descriptor { get; set; }
 
         /// <summary>
         /// Identifier for the recipient&#39;s account. 
         /// </summary>
         /// <value>Identifier for the recipient&#39;s account. </value>
-        [DataMember(Name="accountId", EmitDefaultValue=false)]
+        [JsonPropertyName("accountId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountId { get; set; }
 
         /// <summary>
         /// Identifies the recipient&#39;s account type. This field is applicable for AFT transactions.  Valid values are:  - &#x60;00&#x60; Other - &#x60;01&#x60; Routing transit number (RTN) and bank account - &#x60;02&#x60; IBAN - &#x60;03&#x60; Card account - &#x60;04&#x60; Email - &#x60;05&#x60; Phone number - &#x60;06&#x60; Bank account number (BAN) and bank identification code (BIC) - &#x60;07&#x60; Wallet ID - &#x60;08&#x60; Social network ID 
         /// </summary>
         /// <value>Identifies the recipient&#39;s account type. This field is applicable for AFT transactions.  Valid values are:  - &#x60;00&#x60; Other - &#x60;01&#x60; Routing transit number (RTN) and bank account - &#x60;02&#x60; IBAN - &#x60;03&#x60; Card account - &#x60;04&#x60; Email - &#x60;05&#x60; Phone number - &#x60;06&#x60; Bank account number (BAN) and bank identification code (BIC) - &#x60;07&#x60; Wallet ID - &#x60;08&#x60; Social network ID </value>
-        [DataMember(Name="accountType", EmitDefaultValue=false)]
+        [JsonPropertyName("accountType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AccountType { get; set; }
 
         /// <summary>
         /// Account owner alias name. 
         /// </summary>
         /// <value>Account owner alias name. </value>
-        [DataMember(Name="aliasName", EmitDefaultValue=false)]
+        [JsonPropertyName("aliasName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AliasName { get; set; }
 
         /// <summary>
         /// Account Owner Country of Birth 
         /// </summary>
         /// <value>Account Owner Country of Birth </value>
-        [DataMember(Name="countryOfBirth", EmitDefaultValue=false)]
+        [JsonPropertyName("countryOfBirth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string CountryOfBirth { get; set; }
 
         /// <summary>
         /// Recipient&#39;s date of birth. Format: YYYYMMDD. 
         /// </summary>
         /// <value>Recipient&#39;s date of birth. Format: YYYYMMDD. </value>
-        [DataMember(Name="dateOfBirth", EmitDefaultValue=false)]
+        [JsonPropertyName("dateOfBirth")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string DateOfBirth { get; set; }
 
         /// <summary>
         /// Account Owner email address 
         /// </summary>
         /// <value>Account Owner email address </value>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        [JsonPropertyName("email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Email { get; set; }
 
         /// <summary>
         /// Account Owner Nationality 
         /// </summary>
         /// <value>Account Owner Nationality </value>
-        [DataMember(Name="nationality", EmitDefaultValue=false)]
+        [JsonPropertyName("nationality")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Nationality { get; set; }
 
         /// <summary>
         /// Account Owner Occupation 
         /// </summary>
         /// <value>Account Owner Occupation </value>
-        [DataMember(Name="occupation", EmitDefaultValue=false)]
+        [JsonPropertyName("occupation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Occupation { get; set; }
 
         /// <summary>
         /// This field contains the street name of the recipient&#39;s address. 
         /// </summary>
         /// <value>This field contains the street name of the recipient&#39;s address. </value>
-        [DataMember(Name="streetName", EmitDefaultValue=false)]
+        [JsonPropertyName("streetName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string StreetName { get; set; }
 
         /// <summary>
@@ -260,30 +284,30 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv1pullfundstransferRecipientInformation {\n");
-            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(AdministrativeArea).Append("\n");
-            if (PostalCode != null) sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
-            if (Country != null) sb.Append("  Country: ").Append(Country).Append("\n");
-            if (PersonalIdentification != null) sb.Append("  PersonalIdentification: ").Append(PersonalIdentification).Append("\n");
-            if (FirstName != null) sb.Append("  FirstName: ").Append(FirstName).Append("\n");
-            if (MiddleInitial != null) sb.Append("  MiddleInitial: ").Append(MiddleInitial).Append("\n");
-            if (MiddleName != null) sb.Append("  MiddleName: ").Append(MiddleName).Append("\n");
-            if (LastName != null) sb.Append("  LastName: ").Append(LastName).Append("\n");
-            if (Address1 != null) sb.Append("  Address1: ").Append(Address1).Append("\n");
-            if (Address2 != null) sb.Append("  Address2: ").Append(Address2).Append("\n");
-            if (BuildingNumber != null) sb.Append("  BuildingNumber: ").Append(BuildingNumber).Append("\n");
-            if (Locality != null) sb.Append("  Locality: ").Append(Locality).Append("\n");
-            if (IdentificationNumber != null) sb.Append("  IdentificationNumber: ").Append(IdentificationNumber).Append("\n");
-            if (Type != null) sb.Append("  Type: ").Append(Type).Append("\n");
-            if (Descriptor != null) sb.Append("  Descriptor: ").Append(Descriptor).Append("\n");
-            if (AccountId != null) sb.Append("  AccountId: ").Append(AccountId).Append("\n");
-            if (AccountType != null) sb.Append("  AccountType: ").Append(AccountType).Append("\n");
-            if (AliasName != null) sb.Append("  AliasName: ").Append(AliasName).Append("\n");
-            if (CountryOfBirth != null) sb.Append("  CountryOfBirth: ").Append(CountryOfBirth).Append("\n");
-            if (DateOfBirth != null) sb.Append("  DateOfBirth: ").Append(DateOfBirth).Append("\n");
-            if (Email != null) sb.Append("  Email: ").Append(Email).Append("\n");
-            if (Nationality != null) sb.Append("  Nationality: ").Append(Nationality).Append("\n");
-            if (Occupation != null) sb.Append("  Occupation: ").Append(Occupation).Append("\n");
-            if (StreetName != null) sb.Append("  StreetName: ").Append(StreetName).Append("\n");
+            if (AdministrativeArea != null) sb.Append("  AdministrativeArea: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "administrativeArea", AdministrativeArea.ToString())).Append("\n");
+            if (PostalCode != null) sb.Append("  PostalCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "postalCode", PostalCode.ToString())).Append("\n");
+            if (Country != null) sb.Append("  Country: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "country", Country.ToString())).Append("\n");
+            if (PersonalIdentification != null) sb.Append("  PersonalIdentification: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "personalIdentification", PersonalIdentification.ToString())).Append("\n");
+            if (FirstName != null) sb.Append("  FirstName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "firstName", FirstName.ToString())).Append("\n");
+            if (MiddleInitial != null) sb.Append("  MiddleInitial: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "middleInitial", MiddleInitial.ToString())).Append("\n");
+            if (MiddleName != null) sb.Append("  MiddleName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "middleName", MiddleName.ToString())).Append("\n");
+            if (LastName != null) sb.Append("  LastName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "lastName", LastName.ToString())).Append("\n");
+            if (Address1 != null) sb.Append("  Address1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "address1", Address1.ToString())).Append("\n");
+            if (Address2 != null) sb.Append("  Address2: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "address2", Address2.ToString())).Append("\n");
+            if (BuildingNumber != null) sb.Append("  BuildingNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "buildingNumber", BuildingNumber.ToString())).Append("\n");
+            if (Locality != null) sb.Append("  Locality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "locality", Locality.ToString())).Append("\n");
+            if (IdentificationNumber != null) sb.Append("  IdentificationNumber: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "identificationNumber", IdentificationNumber.ToString())).Append("\n");
+            if (Type != null) sb.Append("  Type: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "type", Type.ToString())).Append("\n");
+            if (Descriptor != null) sb.Append("  Descriptor: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "descriptor", Descriptor.ToString())).Append("\n");
+            if (AccountId != null) sb.Append("  AccountId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "accountId", AccountId.ToString())).Append("\n");
+            if (AccountType != null) sb.Append("  AccountType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "accountType", AccountType.ToString())).Append("\n");
+            if (AliasName != null) sb.Append("  AliasName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "aliasName", AliasName.ToString())).Append("\n");
+            if (CountryOfBirth != null) sb.Append("  CountryOfBirth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "countryOfBirth", CountryOfBirth.ToString())).Append("\n");
+            if (DateOfBirth != null) sb.Append("  DateOfBirth: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "dateOfBirth", DateOfBirth.ToString())).Append("\n");
+            if (Email != null) sb.Append("  Email: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "email", Email.ToString())).Append("\n");
+            if (Nationality != null) sb.Append("  Nationality: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "nationality", Nationality.ToString())).Append("\n");
+            if (Occupation != null) sb.Append("  Occupation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "occupation", Occupation.ToString())).Append("\n");
+            if (StreetName != null) sb.Append("  StreetName: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv1pullfundstransferRecipientInformation", "streetName", StreetName.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -294,7 +318,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv1pullfundstransferRecipientInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

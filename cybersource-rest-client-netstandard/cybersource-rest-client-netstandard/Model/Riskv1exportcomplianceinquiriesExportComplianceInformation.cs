@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -47,20 +47,23 @@ namespace CyberSource.Model
         /// Parts of the customer&#39;s information that must match with an entry in the DPL (denied parties list) before a match occurs. This field can contain one of the following values: - AND: (default) The customer&#39;s name or company and the customer&#39;s address must appear in the database. - OR: The customer&#39;s name must appear in the database. - IGNORE: You want the service to detect a match only of the customer&#39;s name or company but not of the address. 
         /// </summary>
         /// <value>Parts of the customer&#39;s information that must match with an entry in the DPL (denied parties list) before a match occurs. This field can contain one of the following values: - AND: (default) The customer&#39;s name or company and the customer&#39;s address must appear in the database. - OR: The customer&#39;s name must appear in the database. - IGNORE: You want the service to detect a match only of the customer&#39;s name or company but not of the address. </value>
-        [DataMember(Name="addressOperator", EmitDefaultValue=false)]
+        [JsonPropertyName("addressOperator")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AddressOperator { get; set; }
 
         /// <summary>
         /// Gets or Sets Weights
         /// </summary>
-        [DataMember(Name="weights", EmitDefaultValue=false)]
+        [JsonPropertyName("weights")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2paymentsWatchlistScreeningInformationWeights Weights { get; set; }
 
         /// <summary>
         /// Use this field to specify which list(s) you want checked with the request. The reply will include the list name as well as the response data. To check against multiple lists, enter multiple list codes separated by a caret (^). For more information, see \&quot;Restricted and Denied Parties List,\&quot; page 68. 
         /// </summary>
         /// <value>Use this field to specify which list(s) you want checked with the request. The reply will include the list name as well as the response data. To check against multiple lists, enter multiple list codes separated by a caret (^). For more information, see \&quot;Restricted and Denied Parties List,\&quot; page 68. </value>
-        [DataMember(Name="sanctionLists", EmitDefaultValue=false)]
+        [JsonPropertyName("sanctionLists")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<string> SanctionLists { get; set; }
 
         /// <summary>
@@ -71,9 +74,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1exportcomplianceinquiriesExportComplianceInformation {\n");
-            if (AddressOperator != null) sb.Append("  AddressOperator: ").Append(AddressOperator).Append("\n");
-            if (Weights != null) sb.Append("  Weights: ").Append(Weights).Append("\n");
-            if (SanctionLists != null) sb.Append("  SanctionLists: ").Append(SanctionLists).Append("\n");
+            if (AddressOperator != null) sb.Append("  AddressOperator: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1exportcomplianceinquiriesExportComplianceInformation", "addressOperator", AddressOperator.ToString())).Append("\n");
+            if (Weights != null) sb.Append("  Weights: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1exportcomplianceinquiriesExportComplianceInformation", "weights", Weights.ToString())).Append("\n");
+            if (SanctionLists != null) sb.Append("  SanctionLists: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1exportcomplianceinquiriesExportComplianceInformation", "sanctionLists", SanctionLists.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -84,7 +87,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1exportcomplianceinquiriesExportComplianceInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

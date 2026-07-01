@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -50,34 +50,39 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Account
         /// </summary>
-        [DataMember(Name="account", EmitDefaultValue=false)]
+        [JsonPropertyName("account")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsPaymentInformationBankAccount Account { get; set; }
 
         /// <summary>
         /// International Bank Account Number (IBAN). #### SEPA Required for mandates services 
         /// </summary>
         /// <value>International Bank Account Number (IBAN). #### SEPA Required for mandates services </value>
-        [DataMember(Name="iban", EmitDefaultValue=false)]
+        [JsonPropertyName("iban")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Iban { get; set; }
 
         /// <summary>
         /// Bank&#39;s SWIFT code. You can use this field only when scoring a direct debit transaction. #### BACS Required for mandates services 
         /// </summary>
         /// <value>Bank&#39;s SWIFT code. You can use this field only when scoring a direct debit transaction. #### BACS Required for mandates services </value>
-        [DataMember(Name="swiftCode", EmitDefaultValue=false)]
+        [JsonPropertyName("swiftCode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SwiftCode { get; set; }
 
         /// <summary>
         /// The scheme that sets the rules for the direct debit process. Possible values:   - SEPA   - BACS #### SEPA/BACS Required for mandates services 
         /// </summary>
         /// <value>The scheme that sets the rules for the direct debit process. Possible values:   - SEPA   - BACS #### SEPA/BACS Required for mandates services </value>
-        [DataMember(Name="scheme", EmitDefaultValue=false)]
+        [JsonPropertyName("scheme")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Scheme { get; set; }
 
         /// <summary>
         /// Gets or Sets AccountAlias
         /// </summary>
-        [DataMember(Name="accountAlias", EmitDefaultValue=false)]
+        [JsonPropertyName("accountAlias")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Ptsv2billingagreementsPaymentInformationBankAccountAlias AccountAlias { get; set; }
 
         /// <summary>
@@ -88,11 +93,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Ptsv2billingagreementsPaymentInformationBank {\n");
-            if (Account != null) sb.Append("  Account: ").Append(Account).Append("\n");
-            if (Iban != null) sb.Append("  Iban: ").Append(Iban).Append("\n");
-            if (SwiftCode != null) sb.Append("  SwiftCode: ").Append(SwiftCode).Append("\n");
-            if (Scheme != null) sb.Append("  Scheme: ").Append(Scheme).Append("\n");
-            if (AccountAlias != null) sb.Append("  AccountAlias: ").Append(AccountAlias).Append("\n");
+            if (Account != null) sb.Append("  Account: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsPaymentInformationBank", "account", Account.ToString())).Append("\n");
+            if (Iban != null) sb.Append("  Iban: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsPaymentInformationBank", "iban", Iban.ToString())).Append("\n");
+            if (SwiftCode != null) sb.Append("  SwiftCode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsPaymentInformationBank", "swiftCode", SwiftCode.ToString())).Append("\n");
+            if (Scheme != null) sb.Append("  Scheme: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsPaymentInformationBank", "scheme", Scheme.ToString())).Append("\n");
+            if (AccountAlias != null) sb.Append("  AccountAlias: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Ptsv2billingagreementsPaymentInformationBank", "accountAlias", AccountAlias.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -103,7 +108,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Ptsv2billingagreementsPaymentInformationBank", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

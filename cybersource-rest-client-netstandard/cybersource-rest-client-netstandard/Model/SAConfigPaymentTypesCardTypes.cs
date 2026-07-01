@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -48,25 +48,29 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets Discover
         /// </summary>
-        [DataMember(Name="discover", EmitDefaultValue=false)]
+        [JsonPropertyName("discover")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SAConfigPaymentTypesCardTypesDiscover Discover { get; set; }
 
         /// <summary>
         /// Gets or Sets Amex
         /// </summary>
-        [DataMember(Name="amex", EmitDefaultValue=false)]
+        [JsonPropertyName("amex")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SAConfigPaymentTypesCardTypesDiscover Amex { get; set; }
 
         /// <summary>
         /// Gets or Sets MasterCard
         /// </summary>
-        [DataMember(Name="masterCard", EmitDefaultValue=false)]
+        [JsonPropertyName("masterCard")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SAConfigPaymentTypesCardTypesDiscover MasterCard { get; set; }
 
         /// <summary>
         /// Gets or Sets Visa
         /// </summary>
-        [DataMember(Name="visa", EmitDefaultValue=false)]
+        [JsonPropertyName("visa")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public SAConfigPaymentTypesCardTypesDiscover Visa { get; set; }
 
         /// <summary>
@@ -77,10 +81,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class SAConfigPaymentTypesCardTypes {\n");
-            if (Discover != null) sb.Append("  Discover: ").Append(Discover).Append("\n");
-            if (Amex != null) sb.Append("  Amex: ").Append(Amex).Append("\n");
-            if (MasterCard != null) sb.Append("  MasterCard: ").Append(MasterCard).Append("\n");
-            if (Visa != null) sb.Append("  Visa: ").Append(Visa).Append("\n");
+            if (Discover != null) sb.Append("  Discover: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigPaymentTypesCardTypes", "discover", Discover.ToString())).Append("\n");
+            if (Amex != null) sb.Append("  Amex: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigPaymentTypesCardTypes", "amex", Amex.ToString())).Append("\n");
+            if (MasterCard != null) sb.Append("  MasterCard: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigPaymentTypesCardTypes", "masterCard", MasterCard.ToString())).Append("\n");
+            if (Visa != null) sb.Append("  Visa: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("SAConfigPaymentTypesCardTypes", "visa", Visa.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,7 +95,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("SAConfigPaymentTypesCardTypes", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

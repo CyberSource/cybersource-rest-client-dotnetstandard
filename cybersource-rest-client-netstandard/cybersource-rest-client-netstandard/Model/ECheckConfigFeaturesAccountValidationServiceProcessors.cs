@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -83,63 +83,72 @@ namespace CyberSource.Model
         /// *NEW* Determined in WF eTicket if account has opted into the Account Ownership Service.
         /// </summary>
         /// <value>*NEW* Determined in WF eTicket if account has opted into the Account Ownership Service.</value>
-        [DataMember(Name="avsAccountOwnershipService", EmitDefaultValue=false)]
+        [JsonPropertyName("avsAccountOwnershipService")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AvsAccountOwnershipService { get; set; }
 
         /// <summary>
         /// *NEW* Determined in WF eTicket if account has opted into the Account Status Service.
         /// </summary>
         /// <value>*NEW* Determined in WF eTicket if account has opted into the Account Status Service.</value>
-        [DataMember(Name="avsAccountStatusService", EmitDefaultValue=false)]
+        [JsonPropertyName("avsAccountStatusService")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AvsAccountStatusService { get; set; }
 
         /// <summary>
         /// *NEW* Taken from Addendum Agreement Column in boarding form.
         /// </summary>
         /// <value>*NEW* Taken from Addendum Agreement Column in boarding form.</value>
-        [DataMember(Name="avsSignedAgreement", EmitDefaultValue=false)]
+        [JsonPropertyName("avsSignedAgreement")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? AvsSignedAgreement { get; set; }
 
         /// <summary>
         /// *NEW*  Possible values: - continue
         /// </summary>
         /// <value>*NEW*  Possible values: - continue</value>
-        [DataMember(Name="avsCalculatedResponseBehavior", EmitDefaultValue=false)]
+        [JsonPropertyName("avsCalculatedResponseBehavior")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AvsCalculatedResponseBehavior { get; set; }
 
         /// <summary>
         /// *NEW* Also known as the Additional ID. Taken from the boarding form.
         /// </summary>
         /// <value>*NEW* Also known as the Additional ID. Taken from the boarding form.</value>
-        [DataMember(Name="avsAdditionalId", EmitDefaultValue=false)]
+        [JsonPropertyName("avsAdditionalId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AvsAdditionalId { get; set; }
 
         /// <summary>
         /// *NEW*
         /// </summary>
         /// <value>*NEW*</value>
-        [DataMember(Name="enableAvs", EmitDefaultValue=false)]
+        [JsonPropertyName("enableAvs")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableAvs { get; set; }
 
         /// <summary>
         /// *NEW* Also known as the AVS Gateway Entity ID.
         /// </summary>
         /// <value>*NEW* Also known as the AVS Gateway Entity ID.</value>
-        [DataMember(Name="avsEntityId", EmitDefaultValue=false)]
+        [JsonPropertyName("avsEntityId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AvsEntityId { get; set; }
 
         /// <summary>
         /// *NEW*  Possible values: - FULL_RESPONSE - LOGIC_BOX
         /// </summary>
         /// <value>*NEW*  Possible values: - FULL_RESPONSE - LOGIC_BOX</value>
-        [DataMember(Name="avsResultMode", EmitDefaultValue=false)]
+        [JsonPropertyName("avsResultMode")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AvsResultMode { get; set; }
 
         /// <summary>
         /// *NEW* Applicable if the merchant wants to run AVS on token creation requests only.
         /// </summary>
         /// <value>*NEW* Applicable if the merchant wants to run AVS on token creation requests only.</value>
-        [DataMember(Name="enableAvsTokenCreation", EmitDefaultValue=false)]
+        [JsonPropertyName("enableAvsTokenCreation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? EnableAvsTokenCreation { get; set; }
 
         /// <summary>
@@ -150,15 +159,15 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ECheckConfigFeaturesAccountValidationServiceProcessors {\n");
-            if (AvsAccountOwnershipService != null) sb.Append("  AvsAccountOwnershipService: ").Append(AvsAccountOwnershipService).Append("\n");
-            if (AvsAccountStatusService != null) sb.Append("  AvsAccountStatusService: ").Append(AvsAccountStatusService).Append("\n");
-            if (AvsSignedAgreement != null) sb.Append("  AvsSignedAgreement: ").Append(AvsSignedAgreement).Append("\n");
-            if (AvsCalculatedResponseBehavior != null) sb.Append("  AvsCalculatedResponseBehavior: ").Append(AvsCalculatedResponseBehavior).Append("\n");
-            if (AvsAdditionalId != null) sb.Append("  AvsAdditionalId: ").Append(AvsAdditionalId).Append("\n");
-            if (EnableAvs != null) sb.Append("  EnableAvs: ").Append(EnableAvs).Append("\n");
-            if (AvsEntityId != null) sb.Append("  AvsEntityId: ").Append(AvsEntityId).Append("\n");
-            if (AvsResultMode != null) sb.Append("  AvsResultMode: ").Append(AvsResultMode).Append("\n");
-            if (EnableAvsTokenCreation != null) sb.Append("  EnableAvsTokenCreation: ").Append(EnableAvsTokenCreation).Append("\n");
+            if (AvsAccountOwnershipService != null) sb.Append("  AvsAccountOwnershipService: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigFeaturesAccountValidationServiceProcessors", "avsAccountOwnershipService", AvsAccountOwnershipService.ToString())).Append("\n");
+            if (AvsAccountStatusService != null) sb.Append("  AvsAccountStatusService: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigFeaturesAccountValidationServiceProcessors", "avsAccountStatusService", AvsAccountStatusService.ToString())).Append("\n");
+            if (AvsSignedAgreement != null) sb.Append("  AvsSignedAgreement: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigFeaturesAccountValidationServiceProcessors", "avsSignedAgreement", AvsSignedAgreement.ToString())).Append("\n");
+            if (AvsCalculatedResponseBehavior != null) sb.Append("  AvsCalculatedResponseBehavior: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigFeaturesAccountValidationServiceProcessors", "avsCalculatedResponseBehavior", AvsCalculatedResponseBehavior.ToString())).Append("\n");
+            if (AvsAdditionalId != null) sb.Append("  AvsAdditionalId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigFeaturesAccountValidationServiceProcessors", "avsAdditionalId", AvsAdditionalId.ToString())).Append("\n");
+            if (EnableAvs != null) sb.Append("  EnableAvs: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigFeaturesAccountValidationServiceProcessors", "enableAvs", EnableAvs.ToString())).Append("\n");
+            if (AvsEntityId != null) sb.Append("  AvsEntityId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigFeaturesAccountValidationServiceProcessors", "avsEntityId", AvsEntityId.ToString())).Append("\n");
+            if (AvsResultMode != null) sb.Append("  AvsResultMode: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigFeaturesAccountValidationServiceProcessors", "avsResultMode", AvsResultMode.ToString())).Append("\n");
+            if (EnableAvsTokenCreation != null) sb.Append("  EnableAvsTokenCreation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ECheckConfigFeaturesAccountValidationServiceProcessors", "enableAvsTokenCreation", EnableAvsTokenCreation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -169,7 +178,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ECheckConfigFeaturesAccountValidationServiceProcessors", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

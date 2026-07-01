@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -49,28 +49,32 @@ namespace CyberSource.Model
         /// Organization Id
         /// </summary>
         /// <value>Organization Id</value>
-        [DataMember(Name="organizationId", EmitDefaultValue=false)]
+        [JsonPropertyName("organizationId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string OrganizationId { get; set; }
 
         /// <summary>
         /// Report Start Date (ISO 8601 Extended)
         /// </summary>
         /// <value>Report Start Date (ISO 8601 Extended)</value>
-        [DataMember(Name="startTime", EmitDefaultValue=false)]
+        [JsonPropertyName("startTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? StartTime { get; set; }
 
         /// <summary>
         /// Report Start Date (ISO 8601 Extended)
         /// </summary>
         /// <value>Report Start Date (ISO 8601 Extended)</value>
-        [DataMember(Name="endTime", EmitDefaultValue=false)]
+        [JsonPropertyName("endTime")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public DateTime? EndTime { get; set; }
 
         /// <summary>
         /// List of Chargeback Details list.
         /// </summary>
         /// <value>List of Chargeback Details list.</value>
-        [DataMember(Name="chargebackDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("chargebackDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<ReportingV3ChargebackDetailsGet200ResponseChargebackDetails> ChargebackDetails { get; set; }
 
         /// <summary>
@@ -81,10 +85,10 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class ReportingV3ChargebackDetailsGet200Response {\n");
-            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(OrganizationId).Append("\n");
-            if (StartTime != null) sb.Append("  StartTime: ").Append(StartTime).Append("\n");
-            if (EndTime != null) sb.Append("  EndTime: ").Append(EndTime).Append("\n");
-            if (ChargebackDetails != null) sb.Append("  ChargebackDetails: ").Append(ChargebackDetails).Append("\n");
+            if (OrganizationId != null) sb.Append("  OrganizationId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200Response", "organizationId", OrganizationId.ToString())).Append("\n");
+            if (StartTime != null) sb.Append("  StartTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200Response", "startTime", StartTime.ToString())).Append("\n");
+            if (EndTime != null) sb.Append("  EndTime: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200Response", "endTime", EndTime.ToString())).Append("\n");
+            if (ChargebackDetails != null) sb.Append("  ChargebackDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("ReportingV3ChargebackDetailsGet200Response", "chargebackDetails", ChargebackDetails.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,7 +99,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("ReportingV3ChargebackDetailsGet200Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

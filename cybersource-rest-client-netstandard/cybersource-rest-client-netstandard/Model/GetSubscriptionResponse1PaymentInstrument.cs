@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -38,7 +38,7 @@ namespace CyberSource.Model
         /// <param name="Card">Card.</param>
         /// <param name="BillTo">BillTo.</param>
         /// <param name="BuyerInformation">BuyerInformation.</param>
-        public GetSubscriptionResponse1PaymentInstrument(string Id = default(string), GetSubscriptionResponse1PaymentInstrumentBankAccount BankAccount = default(GetSubscriptionResponse1PaymentInstrumentBankAccount), GetSubscriptionResponse1PaymentInstrumentCard Card = default(GetSubscriptionResponse1PaymentInstrumentCard), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBillTo BillTo = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBillTo), GetSubscriptionResponse1PaymentInstrumentBuyerInformation BuyerInformation = default(GetSubscriptionResponse1PaymentInstrumentBuyerInformation))
+        public GetSubscriptionResponse1PaymentInstrument(string Id = default(string), GetSubscriptionResponse1PaymentInstrumentBankAccount BankAccount = default(GetSubscriptionResponse1PaymentInstrumentBankAccount), GetSubscriptionResponse1PaymentInstrumentCard Card = default(GetSubscriptionResponse1PaymentInstrumentCard), DefaultPaymentInstrumentBillTo BillTo = default(DefaultPaymentInstrumentBillTo), FollowOnTransactionBuyerInformation BuyerInformation = default(FollowOnTransactionBuyerInformation))
         {
             this.Id = Id;
             this.BankAccount = BankAccount;
@@ -51,32 +51,37 @@ namespace CyberSource.Model
         /// The Id of the Payment Instrument Token.
         /// </summary>
         /// <value>The Id of the Payment Instrument Token.</value>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        [JsonPropertyName("id")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets BankAccount
         /// </summary>
-        [DataMember(Name="bankAccount", EmitDefaultValue=false)]
+        [JsonPropertyName("bankAccount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public GetSubscriptionResponse1PaymentInstrumentBankAccount BankAccount { get; set; }
 
         /// <summary>
         /// Gets or Sets Card
         /// </summary>
-        [DataMember(Name="card", EmitDefaultValue=false)]
+        [JsonPropertyName("card")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public GetSubscriptionResponse1PaymentInstrumentCard Card { get; set; }
 
         /// <summary>
         /// Gets or Sets BillTo
         /// </summary>
-        [DataMember(Name="billTo", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultPaymentInstrumentBillTo BillTo { get; set; }
+        [JsonPropertyName("billTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultPaymentInstrumentBillTo BillTo { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerInformation
         /// </summary>
-        [DataMember(Name="buyerInformation", EmitDefaultValue=false)]
-        public GetSubscriptionResponse1PaymentInstrumentBuyerInformation BuyerInformation { get; set; }
+        [JsonPropertyName("buyerInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public FollowOnTransactionBuyerInformation BuyerInformation { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -86,11 +91,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class GetSubscriptionResponse1PaymentInstrument {\n");
-            if (Id != null) sb.Append("  Id: ").Append(Id).Append("\n");
-            if (BankAccount != null) sb.Append("  BankAccount: ").Append(BankAccount).Append("\n");
-            if (Card != null) sb.Append("  Card: ").Append(Card).Append("\n");
-            if (BillTo != null) sb.Append("  BillTo: ").Append(BillTo).Append("\n");
-            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(BuyerInformation).Append("\n");
+            if (Id != null) sb.Append("  Id: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionResponse1PaymentInstrument", "id", Id.ToString())).Append("\n");
+            if (BankAccount != null) sb.Append("  BankAccount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionResponse1PaymentInstrument", "bankAccount", BankAccount.ToString())).Append("\n");
+            if (Card != null) sb.Append("  Card: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionResponse1PaymentInstrument", "card", Card.ToString())).Append("\n");
+            if (BillTo != null) sb.Append("  BillTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionResponse1PaymentInstrument", "billTo", BillTo.ToString())).Append("\n");
+            if (BuyerInformation != null) sb.Append("  BuyerInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("GetSubscriptionResponse1PaymentInstrument", "buyerInformation", BuyerInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -101,7 +106,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("GetSubscriptionResponse1PaymentInstrument", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -63,21 +63,24 @@ namespace CyberSource.Model
         /// linkType defines what type of link you want to create.  Possible Values:   - &#x60;PURCHASE&#x60;   - &#x60;DONATION&#x60; 
         /// </summary>
         /// <value>linkType defines what type of link you want to create.  Possible Values:   - &#x60;PURCHASE&#x60;   - &#x60;DONATION&#x60; </value>
-        [DataMember(Name="linkType", EmitDefaultValue=false)]
+        [JsonPropertyName("linkType")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string LinkType { get; set; }
 
         /// <summary>
         /// Collect the payers phone number during the payment.
         /// </summary>
         /// <value>Collect the payers phone number during the payment.</value>
-        [DataMember(Name="requestPhone", EmitDefaultValue=false)]
+        [JsonPropertyName("requestPhone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? RequestPhone { get; set; }
 
         /// <summary>
         /// Collect the payers shipping address during the payment.
         /// </summary>
         /// <value>Collect the payers shipping address during the payment.</value>
-        [DataMember(Name="requestShipping", EmitDefaultValue=false)]
+        [JsonPropertyName("requestShipping")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? RequestShipping { get; set; }
 
         /// <summary>
@@ -88,9 +91,9 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Iplv2paymentlinksidProcessingInformation {\n");
-            if (LinkType != null) sb.Append("  LinkType: ").Append(LinkType).Append("\n");
-            if (RequestPhone != null) sb.Append("  RequestPhone: ").Append(RequestPhone).Append("\n");
-            if (RequestShipping != null) sb.Append("  RequestShipping: ").Append(RequestShipping).Append("\n");
+            if (LinkType != null) sb.Append("  LinkType: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Iplv2paymentlinksidProcessingInformation", "linkType", LinkType.ToString())).Append("\n");
+            if (RequestPhone != null) sb.Append("  RequestPhone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Iplv2paymentlinksidProcessingInformation", "requestPhone", RequestPhone.ToString())).Append("\n");
+            if (RequestShipping != null) sb.Append("  RequestShipping: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Iplv2paymentlinksidProcessingInformation", "requestShipping", RequestShipping.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -101,7 +104,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Iplv2paymentlinksidProcessingInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

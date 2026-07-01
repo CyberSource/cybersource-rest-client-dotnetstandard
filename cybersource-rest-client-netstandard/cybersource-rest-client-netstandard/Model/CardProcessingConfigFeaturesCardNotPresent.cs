@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -51,34 +51,39 @@ namespace CyberSource.Model
         /// e.g. * amexdirect * barclays2 * CUP * EFTPOS * fdiglobal * gpx * smartfdc * tsys * vero * VPC  For VPC, CUP and EFTPOS processors, replace the processor name from VPC or CUP or EFTPOS to the actual processor name in the sample request. e.g. replace VPC with &amp;lt;your vpc processor&amp;gt; 
         /// </summary>
         /// <value>e.g. * amexdirect * barclays2 * CUP * EFTPOS * fdiglobal * gpx * smartfdc * tsys * vero * VPC  For VPC, CUP and EFTPOS processors, replace the processor name from VPC or CUP or EFTPOS to the actual processor name in the sample request. e.g. replace VPC with &amp;lt;your vpc processor&amp;gt; </value>
-        [DataMember(Name="processors", EmitDefaultValue=false)]
+        [JsonPropertyName("processors")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Dictionary<string, CardProcessingConfigFeaturesCardNotPresentProcessors> Processors { get; set; }
 
         /// <summary>
         /// Flag for a sale request that indicates whether to allow the capture service to run even when the authorization receives an AVS decline. Applicable for VPC, FDI Global (fdiglobal), GPX (gpx) and GPN (gpn) processors.
         /// </summary>
         /// <value>Flag for a sale request that indicates whether to allow the capture service to run even when the authorization receives an AVS decline. Applicable for VPC, FDI Global (fdiglobal), GPX (gpx) and GPN (gpn) processors.</value>
-        [DataMember(Name="ignoreAddressVerificationSystem", EmitDefaultValue=false)]
+        [JsonPropertyName("ignoreAddressVerificationSystem")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? IgnoreAddressVerificationSystem { get; set; }
 
         /// <summary>
         /// Indicates if a merchant is enabled for Straight Through Processing - B2B invoice payments. Applicable for FDI Global (fdiglobal), TSYS (tsys), VPC and GPX (gpx) processors.
         /// </summary>
         /// <value>Indicates if a merchant is enabled for Straight Through Processing - B2B invoice payments. Applicable for FDI Global (fdiglobal), TSYS (tsys), VPC and GPX (gpx) processors.</value>
-        [DataMember(Name="visaStraightThroughProcessingOnly", EmitDefaultValue=false)]
+        [JsonPropertyName("visaStraightThroughProcessingOnly")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? VisaStraightThroughProcessingOnly { get; set; }
 
         /// <summary>
         /// Advice addendum field. It is used to display descriptive information about a transaction on customer&#39;s American Express card statement. Applicable for TSYS (tsys), FDI Global (fdiglobal) and American Express Direct (amexdirect) processors.
         /// </summary>
         /// <value>Advice addendum field. It is used to display descriptive information about a transaction on customer&#39;s American Express card statement. Applicable for TSYS (tsys), FDI Global (fdiglobal) and American Express Direct (amexdirect) processors.</value>
-        [DataMember(Name="amexTransactionAdviceAddendum1", EmitDefaultValue=false)]
+        [JsonPropertyName("amexTransactionAdviceAddendum1")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string AmexTransactionAdviceAddendum1 { get; set; }
 
         /// <summary>
         /// Gets or Sets Installment
         /// </summary>
-        [DataMember(Name="installment", EmitDefaultValue=false)]
+        [JsonPropertyName("installment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public CardProcessingConfigFeaturesCardNotPresentInstallment Installment { get; set; }
 
         /// <summary>
@@ -89,11 +94,11 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class CardProcessingConfigFeaturesCardNotPresent {\n");
-            if (Processors != null) sb.Append("  Processors: ").Append(Processors).Append("\n");
-            if (IgnoreAddressVerificationSystem != null) sb.Append("  IgnoreAddressVerificationSystem: ").Append(IgnoreAddressVerificationSystem).Append("\n");
-            if (VisaStraightThroughProcessingOnly != null) sb.Append("  VisaStraightThroughProcessingOnly: ").Append(VisaStraightThroughProcessingOnly).Append("\n");
-            if (AmexTransactionAdviceAddendum1 != null) sb.Append("  AmexTransactionAdviceAddendum1: ").Append(AmexTransactionAdviceAddendum1).Append("\n");
-            if (Installment != null) sb.Append("  Installment: ").Append(Installment).Append("\n");
+            if (Processors != null) sb.Append("  Processors: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresent", "processors", Processors.ToString())).Append("\n");
+            if (IgnoreAddressVerificationSystem != null) sb.Append("  IgnoreAddressVerificationSystem: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresent", "ignoreAddressVerificationSystem", IgnoreAddressVerificationSystem.ToString())).Append("\n");
+            if (VisaStraightThroughProcessingOnly != null) sb.Append("  VisaStraightThroughProcessingOnly: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresent", "visaStraightThroughProcessingOnly", VisaStraightThroughProcessingOnly.ToString())).Append("\n");
+            if (AmexTransactionAdviceAddendum1 != null) sb.Append("  AmexTransactionAdviceAddendum1: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresent", "amexTransactionAdviceAddendum1", AmexTransactionAdviceAddendum1.ToString())).Append("\n");
+            if (Installment != null) sb.Append("  Installment: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("CardProcessingConfigFeaturesCardNotPresent", "installment", Installment.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -104,7 +109,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("CardProcessingConfigFeaturesCardNotPresent", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

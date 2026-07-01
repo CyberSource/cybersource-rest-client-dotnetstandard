@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -33,7 +33,7 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="FraudMarkingActionRequest" /> class.
         /// </summary>
-        [JsonConstructorAttribute]
+        [JsonConstructor]
         protected FraudMarkingActionRequest() { }
         /// <summary>
         /// Initializes a new instance of the <see cref="FraudMarkingActionRequest" /> class.
@@ -49,13 +49,15 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets RiskInformation
         /// </summary>
-        [DataMember(Name="riskInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("riskInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1decisionsidmarkingRiskInformation RiskInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets ClientReferenceInformation
         /// </summary>
-        [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
+        [JsonPropertyName("clientReferenceInformation")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public RiskV1DecisionsPost201ResponseClientReferenceInformation ClientReferenceInformation { get; set; }
 
         /// <summary>
@@ -66,8 +68,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class FraudMarkingActionRequest {\n");
-            if (RiskInformation != null) sb.Append("  RiskInformation: ").Append(RiskInformation).Append("\n");
-            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
+            if (RiskInformation != null) sb.Append("  RiskInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("FraudMarkingActionRequest", "riskInformation", RiskInformation.ToString())).Append("\n");
+            if (ClientReferenceInformation != null) sb.Append("  ClientReferenceInformation: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("FraudMarkingActionRequest", "clientReferenceInformation", ClientReferenceInformation.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -78,7 +80,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("FraudMarkingActionRequest", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

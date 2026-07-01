@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -56,54 +56,62 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets AmountDetails
         /// </summary>
-        [DataMember(Name="amountDetails", EmitDefaultValue=false)]
+        [JsonPropertyName("amountDetails")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsOrderInformationAmountDetails AmountDetails { get; set; }
 
         /// <summary>
         /// Indicates whether cardholder is placing an order with a future availability or release date. This field can contain one of these values: - MERCHANDISE_AVAILABLE: Merchandise available - FUTURE_AVAILABILITY: Future availability 
         /// </summary>
         /// <value>Indicates whether cardholder is placing an order with a future availability or release date. This field can contain one of these values: - MERCHANDISE_AVAILABLE: Merchandise available - FUTURE_AVAILABILITY: Future availability </value>
-        [DataMember(Name="preOrder", EmitDefaultValue=false)]
+        [JsonPropertyName("preOrder")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PreOrder { get; set; }
 
         /// <summary>
         /// Expected date that a pre-ordered purchase will be available. Format: YYYYMMDD 
         /// </summary>
         /// <value>Expected date that a pre-ordered purchase will be available. Format: YYYYMMDD </value>
-        [DataMember(Name="preOrderDate", EmitDefaultValue=false)]
+        [JsonPropertyName("preOrderDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string PreOrderDate { get; set; }
 
         /// <summary>
         /// Indicates whether the cardholder is reordering previously purchased merchandise. This field can contain one of these values: - false: First time ordered - true: Reordered 
         /// </summary>
         /// <value>Indicates whether the cardholder is reordering previously purchased merchandise. This field can contain one of these values: - false: First time ordered - true: Reordered </value>
-        [DataMember(Name="reordered", EmitDefaultValue=false)]
+        [JsonPropertyName("reordered")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Reordered { get; set; }
 
         /// <summary>
         /// Gets or Sets ShipTo
         /// </summary>
-        [DataMember(Name="shipTo", EmitDefaultValue=false)]
+        [JsonPropertyName("shipTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1decisionsOrderInformationShipTo ShipTo { get; set; }
 
         /// <summary>
         /// This array contains detailed information about individual products in the order.
         /// </summary>
         /// <value>This array contains detailed information about individual products in the order.</value>
-        [DataMember(Name="lineItems", EmitDefaultValue=false)]
+        [JsonPropertyName("lineItems")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public List<Riskv1authenticationsOrderInformationLineItems> LineItems { get; set; }
 
         /// <summary>
         /// Gets or Sets BillTo
         /// </summary>
-        [DataMember(Name="billTo", EmitDefaultValue=false)]
+        [JsonPropertyName("billTo")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public Riskv1authenticationsOrderInformationBillTo BillTo { get; set; }
 
         /// <summary>
         /// Total number of articles/items in the order as a numeric decimal count. Possible values: 00 - 99 
         /// </summary>
         /// <value>Total number of articles/items in the order as a numeric decimal count. Possible values: 00 - 99 </value>
-        [DataMember(Name="totalOffersCount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalOffersCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string TotalOffersCount { get; set; }
 
         /// <summary>
@@ -114,14 +122,14 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Riskv1authenticationsOrderInformation {\n");
-            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(AmountDetails).Append("\n");
-            if (PreOrder != null) sb.Append("  PreOrder: ").Append(PreOrder).Append("\n");
-            if (PreOrderDate != null) sb.Append("  PreOrderDate: ").Append(PreOrderDate).Append("\n");
-            if (Reordered != null) sb.Append("  Reordered: ").Append(Reordered).Append("\n");
-            if (ShipTo != null) sb.Append("  ShipTo: ").Append(ShipTo).Append("\n");
-            if (LineItems != null) sb.Append("  LineItems: ").Append(LineItems).Append("\n");
-            if (BillTo != null) sb.Append("  BillTo: ").Append(BillTo).Append("\n");
-            if (TotalOffersCount != null) sb.Append("  TotalOffersCount: ").Append(TotalOffersCount).Append("\n");
+            if (AmountDetails != null) sb.Append("  AmountDetails: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsOrderInformation", "amountDetails", AmountDetails.ToString())).Append("\n");
+            if (PreOrder != null) sb.Append("  PreOrder: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsOrderInformation", "preOrder", PreOrder.ToString())).Append("\n");
+            if (PreOrderDate != null) sb.Append("  PreOrderDate: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsOrderInformation", "preOrderDate", PreOrderDate.ToString())).Append("\n");
+            if (Reordered != null) sb.Append("  Reordered: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsOrderInformation", "reordered", Reordered.ToString())).Append("\n");
+            if (ShipTo != null) sb.Append("  ShipTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsOrderInformation", "shipTo", ShipTo.ToString())).Append("\n");
+            if (LineItems != null) sb.Append("  LineItems: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsOrderInformation", "lineItems", LineItems.ToString())).Append("\n");
+            if (BillTo != null) sb.Append("  BillTo: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsOrderInformation", "billTo", BillTo.ToString())).Append("\n");
+            if (TotalOffersCount != null) sb.Append("  TotalOffersCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Riskv1authenticationsOrderInformation", "totalOffersCount", TotalOffersCount.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -132,7 +140,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Riskv1authenticationsOrderInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

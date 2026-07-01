@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -45,14 +45,16 @@ namespace CyberSource.Model
         /// Only required when offer cannot be made. The reason of the status.  Possible values: - &#39;INVALID_MERCHANT_CONFIGURATION&#39; - &#39;NOT_ELIGIBLE&#39; - &#39;CURRENCY_NOT_CONFIGURED&#39; - &#39;BIN_UNKNOWN&#39; - &#39;CURRENCY_MATCH&#39; - &#39;CURRENCY_NOT_ALLOWED&#39; - &#39;LOOKUP_FAILED&#39; - &#39;EXCHANGE_RATE_NOT_FOUND&#39; - &#39;CARD_TYPE_NOT_ACCEPTED&#39; - &#39;INVALID_AMOUNT&#39; - &#39;INVALID_CARD&#39; - &#39;INVALID_CURRENCY&#39; - &#39;INVALID_TERMINAL&#39; - &#39;INVALID_ACQUIRER&#39; - &#39;SERVICE_DISABLED&#39; - &#39;DUPLICATE_REQUEST&#39; - &#39;UNKNOWN&#39; - &#39;PROCESSOR_ERROR&#39; 
         /// </summary>
         /// <value>Only required when offer cannot be made. The reason of the status.  Possible values: - &#39;INVALID_MERCHANT_CONFIGURATION&#39; - &#39;NOT_ELIGIBLE&#39; - &#39;CURRENCY_NOT_CONFIGURED&#39; - &#39;BIN_UNKNOWN&#39; - &#39;CURRENCY_MATCH&#39; - &#39;CURRENCY_NOT_ALLOWED&#39; - &#39;LOOKUP_FAILED&#39; - &#39;EXCHANGE_RATE_NOT_FOUND&#39; - &#39;CARD_TYPE_NOT_ACCEPTED&#39; - &#39;INVALID_AMOUNT&#39; - &#39;INVALID_CARD&#39; - &#39;INVALID_CURRENCY&#39; - &#39;INVALID_TERMINAL&#39; - &#39;INVALID_ACQUIRER&#39; - &#39;SERVICE_DISABLED&#39; - &#39;DUPLICATE_REQUEST&#39; - &#39;UNKNOWN&#39; - &#39;PROCESSOR_ERROR&#39; </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
+        [JsonPropertyName("reason")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Reason { get; set; }
 
         /// <summary>
         /// Only required when the requested action cannot be performed. Descriptive message to add more detail to the status E.g. not all cards are eligible for DCC, so it is not possible for DCC to be offered.
         /// </summary>
         /// <value>Only required when the requested action cannot be performed. Descriptive message to add more detail to the status E.g. not all cards are eligible for DCC, so it is not possible for DCC to be offered.</value>
-        [DataMember(Name="message", EmitDefaultValue=false)]
+        [JsonPropertyName("message")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Message { get; set; }
 
         /// <summary>
@@ -63,8 +65,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class InlineResponse2019ErrorInformation {\n");
-            if (Reason != null) sb.Append("  Reason: ").Append(Reason).Append("\n");
-            if (Message != null) sb.Append("  Message: ").Append(Message).Append("\n");
+            if (Reason != null) sb.Append("  Reason: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019ErrorInformation", "reason", Reason.ToString())).Append("\n");
+            if (Message != null) sb.Append("  Message: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("InlineResponse2019ErrorInformation", "message", Message.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -75,7 +77,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("InlineResponse2019ErrorInformation", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

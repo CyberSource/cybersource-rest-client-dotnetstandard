@@ -47,7 +47,7 @@ robocopy ..\..\..\docs ..\docs /S
 
 @REM replace sdkLinks fieldName to links for supporting links field name in request/response body
 echo "starting of replacing the links keyword in PblPaymentLinksAllGet200Response.cs model"
-powershell -Command "Set-Content ..\Model\PblPaymentLinksAllGet200Response.cs ((Get-Content ..\Model\PblPaymentLinksAllGet200Response.cs -Raw) -replace '\[DataMember\(Name=\"sdkLinks\", EmitDefaultValue=false\)\]', '[DataMember(Name=\"links\", EmitDefaultValue=false)]')"
+powershell -Command "Set-Content ..\Model\PblPaymentLinksAllGet200Response.cs ((Get-Content ..\Model\PblPaymentLinksAllGet200Response.cs -Raw) -replace '\[JsonPropertyName\(\"sdkLinks\"\)\]', '[JsonPropertyName(\"links\")]')"
 echo "completed the task of replacing the links keyword in PblPaymentLinksAllGet200Response.cs model"
 
 del ..\..\..\CyberSource.sln

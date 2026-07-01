@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -35,7 +35,7 @@ namespace CyberSource.Model
         /// </summary>
         /// <param name="DefaultPaymentInstrument">DefaultPaymentInstrument.</param>
         /// <param name="DefaultShippingAddress">DefaultShippingAddress.</param>
-        public Tmsv2customersEmbedded(PatchPaymentInstrumentRequest DefaultPaymentInstrument = default(PatchPaymentInstrumentRequest), Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddress DefaultShippingAddress = default(Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddress))
+        public Tmsv2customersEmbedded(PatchPaymentInstrumentRequest DefaultPaymentInstrument = default(PatchPaymentInstrumentRequest), DefaultShippingAddress DefaultShippingAddress = default(DefaultShippingAddress))
         {
             this.DefaultPaymentInstrument = DefaultPaymentInstrument;
             this.DefaultShippingAddress = DefaultShippingAddress;
@@ -44,14 +44,16 @@ namespace CyberSource.Model
         /// <summary>
         /// Gets or Sets DefaultPaymentInstrument
         /// </summary>
-        [DataMember(Name="defaultPaymentInstrument", EmitDefaultValue=false)]
+        [JsonPropertyName("defaultPaymentInstrument")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PatchPaymentInstrumentRequest DefaultPaymentInstrument { get; set; }
 
         /// <summary>
         /// Gets or Sets DefaultShippingAddress
         /// </summary>
-        [DataMember(Name="defaultShippingAddress", EmitDefaultValue=false)]
-        public Tmsv2tokenizeTokenInformationCustomerEmbeddedDefaultShippingAddress DefaultShippingAddress { get; set; }
+        [JsonPropertyName("defaultShippingAddress")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public DefaultShippingAddress DefaultShippingAddress { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -61,8 +63,8 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class Tmsv2customersEmbedded {\n");
-            if (DefaultPaymentInstrument != null) sb.Append("  DefaultPaymentInstrument: ").Append(DefaultPaymentInstrument).Append("\n");
-            if (DefaultShippingAddress != null) sb.Append("  DefaultShippingAddress: ").Append(DefaultShippingAddress).Append("\n");
+            if (DefaultPaymentInstrument != null) sb.Append("  DefaultPaymentInstrument: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2customersEmbedded", "defaultPaymentInstrument", DefaultPaymentInstrument.ToString())).Append("\n");
+            if (DefaultShippingAddress != null) sb.Append("  DefaultShippingAddress: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("Tmsv2customersEmbedded", "defaultShippingAddress", DefaultShippingAddress.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -73,7 +75,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("Tmsv2customersEmbedded", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

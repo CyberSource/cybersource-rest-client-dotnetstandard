@@ -17,8 +17,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
 using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
@@ -67,89 +67,102 @@ namespace CyberSource.Model
         /// An unique identification number assigned by CyberSource to identify each Search request.
         /// </summary>
         /// <value>An unique identification number assigned by CyberSource to identify each Search request.</value>
-        [DataMember(Name="searchId", EmitDefaultValue=false)]
+        [JsonPropertyName("searchId")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SearchId { get; set; }
 
         /// <summary>
         /// Indicates whether or not you want to save this search request for future use. The options are:  * &#x60;true&#x60; * &#x60;false&#x60; (default value)  If set to &#x60;true&#x60;, this field returns &#x60;searchID&#x60; in the response. You can use this value to retrieve the details of the saved search. 
         /// </summary>
         /// <value>Indicates whether or not you want to save this search request for future use. The options are:  * &#x60;true&#x60; * &#x60;false&#x60; (default value)  If set to &#x60;true&#x60;, this field returns &#x60;searchID&#x60; in the response. You can use this value to retrieve the details of the saved search. </value>
-        [DataMember(Name="save", EmitDefaultValue=false)]
+        [JsonPropertyName("save")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public bool? Save { get; set; }
 
         /// <summary>
         /// Name of this search. When &#x60;save&#x60; is set to &#x60;true&#x60;, this search is saved with this name. 
         /// </summary>
         /// <value>Name of this search. When &#x60;save&#x60; is set to &#x60;true&#x60;, this search is saved with this name. </value>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        [JsonPropertyName("name")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Name { get; set; }
 
         /// <summary>
         /// Merchant&#39;s time zone in ISO standard, using the TZ database format. For example: &#x60;America/Chicago&#x60; 
         /// </summary>
         /// <value>Merchant&#39;s time zone in ISO standard, using the TZ database format. For example: &#x60;America/Chicago&#x60; </value>
-        [DataMember(Name="timezone", EmitDefaultValue=false)]
+        [JsonPropertyName("timezone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Timezone { get; set; }
 
         /// <summary>
         /// String that contains the filters and variables for which you want to search. For information about supported field-filters and operators, see the [Query Filters]( https://developer.cybersource.com/api/developer-guides/dita-txn-search-details-rest-api-dev-guide-102718/txn-search-intro/txn-filtering.html) section of the Transaction Search Developer Guide. 
         /// </summary>
         /// <value>String that contains the filters and variables for which you want to search. For information about supported field-filters and operators, see the [Query Filters]( https://developer.cybersource.com/api/developer-guides/dita-txn-search-details-rest-api-dev-guide-102718/txn-search-intro/txn-filtering.html) section of the Transaction Search Developer Guide. </value>
-        [DataMember(Name="query", EmitDefaultValue=false)]
+        [JsonPropertyName("query")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Query { get; set; }
 
         /// <summary>
         /// Controls the starting point within the collection of results, which defaults to 0. The first item in the collection is retrieved by setting a zero offset.  For example, if you have a collection of 15 items to be retrieved from a resource and you specify limit&#x3D;5, you can retrieve the entire set of results in 3 successive requests by varying the offset value like this:  &#x60;offset&#x3D;0&#x60; &#x60;offset&#x3D;5&#x60; &#x60;offset&#x3D;10&#x60;  **Note:** If an offset larger than the number of results is provided, this will result in no embedded object being returned. 
         /// </summary>
         /// <value>Controls the starting point within the collection of results, which defaults to 0. The first item in the collection is retrieved by setting a zero offset.  For example, if you have a collection of 15 items to be retrieved from a resource and you specify limit&#x3D;5, you can retrieve the entire set of results in 3 successive requests by varying the offset value like this:  &#x60;offset&#x3D;0&#x60; &#x60;offset&#x3D;5&#x60; &#x60;offset&#x3D;10&#x60;  **Note:** If an offset larger than the number of results is provided, this will result in no embedded object being returned. </value>
-        [DataMember(Name="offset", EmitDefaultValue=false)]
+        [JsonPropertyName("offset")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Offset { get; set; }
 
         /// <summary>
         /// Controls the maximum number of items that may be returned for a single request. The default is 20, the maximum is 2500. 
         /// </summary>
         /// <value>Controls the maximum number of items that may be returned for a single request. The default is 20, the maximum is 2500. </value>
-        [DataMember(Name="limit", EmitDefaultValue=false)]
+        [JsonPropertyName("limit")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Limit { get; set; }
 
         /// <summary>
         /// A comma separated list of the following form:  &#x60;submitTimeUtc:desc&#x60; 
         /// </summary>
         /// <value>A comma separated list of the following form:  &#x60;submitTimeUtc:desc&#x60; </value>
-        [DataMember(Name="sort", EmitDefaultValue=false)]
+        [JsonPropertyName("sort")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string Sort { get; set; }
 
         /// <summary>
         /// Results for this page, this could be below the limit.
         /// </summary>
         /// <value>Results for this page, this could be below the limit.</value>
-        [DataMember(Name="count", EmitDefaultValue=false)]
+        [JsonPropertyName("count")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? Count { get; set; }
 
         /// <summary>
         /// Total number of results.
         /// </summary>
         /// <value>Total number of results.</value>
-        [DataMember(Name="totalCount", EmitDefaultValue=false)]
+        [JsonPropertyName("totalCount")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public int? TotalCount { get; set; }
 
         /// <summary>
         /// Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC.  Returned by Cybersource for all services. 
         /// </summary>
         /// <value>Time of request in UTC. Format: &#x60;YYYY-MM-DDThh:mm:ssZ&#x60; **Example** &#x60;2016-08-11T22:47:57Z&#x60; equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The &#x60;T&#x60; separates the date and the time. The &#x60;Z&#x60; indicates UTC.  Returned by Cybersource for all services. </value>
-        [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
+        [JsonPropertyName("submitTimeUtc")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string SubmitTimeUtc { get; set; }
 
         /// <summary>
         /// Gets or Sets Embedded
         /// </summary>
-        [DataMember(Name="_embedded", EmitDefaultValue=false)]
+        [JsonPropertyName("_embedded")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public TssV2TransactionsPost201ResponseEmbedded Embedded { get; set; }
 
         /// <summary>
         /// Gets or Sets Links
         /// </summary>
-        [DataMember(Name="_links", EmitDefaultValue=false)]
+        [JsonPropertyName("_links")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public PtsV2IncrementalAuthorizationPatch201ResponseLinks Links { get; set; }
 
         /// <summary>
@@ -160,19 +173,19 @@ namespace CyberSource.Model
         {
             var sb = new StringBuilder();
             sb.Append("class TssV2TransactionsPost201Response {\n");
-            if (SearchId != null) sb.Append("  SearchId: ").Append(SearchId).Append("\n");
-            if (Save != null) sb.Append("  Save: ").Append(Save).Append("\n");
-            if (Name != null) sb.Append("  Name: ").Append(Name).Append("\n");
-            if (Timezone != null) sb.Append("  Timezone: ").Append(Timezone).Append("\n");
-            if (Query != null) sb.Append("  Query: ").Append(Query).Append("\n");
-            if (Offset != null) sb.Append("  Offset: ").Append(Offset).Append("\n");
-            if (Limit != null) sb.Append("  Limit: ").Append(Limit).Append("\n");
-            if (Sort != null) sb.Append("  Sort: ").Append(Sort).Append("\n");
-            if (Count != null) sb.Append("  Count: ").Append(Count).Append("\n");
-            if (TotalCount != null) sb.Append("  TotalCount: ").Append(TotalCount).Append("\n");
-            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(SubmitTimeUtc).Append("\n");
-            if (Embedded != null) sb.Append("  Embedded: ").Append(Embedded).Append("\n");
-            if (Links != null) sb.Append("  Links: ").Append(Links).Append("\n");
+            if (SearchId != null) sb.Append("  SearchId: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "searchId", SearchId.ToString())).Append("\n");
+            if (Save != null) sb.Append("  Save: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "save", Save.ToString())).Append("\n");
+            if (Name != null) sb.Append("  Name: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "name", Name.ToString())).Append("\n");
+            if (Timezone != null) sb.Append("  Timezone: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "timezone", Timezone.ToString())).Append("\n");
+            if (Query != null) sb.Append("  Query: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "query", Query.ToString())).Append("\n");
+            if (Offset != null) sb.Append("  Offset: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "offset", Offset.ToString())).Append("\n");
+            if (Limit != null) sb.Append("  Limit: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "limit", Limit.ToString())).Append("\n");
+            if (Sort != null) sb.Append("  Sort: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "sort", Sort.ToString())).Append("\n");
+            if (Count != null) sb.Append("  Count: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "count", Count.ToString())).Append("\n");
+            if (TotalCount != null) sb.Append("  TotalCount: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "totalCount", TotalCount.ToString())).Append("\n");
+            if (SubmitTimeUtc != null) sb.Append("  SubmitTimeUtc: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "submitTimeUtc", SubmitTimeUtc.ToString())).Append("\n");
+            if (Embedded != null) sb.Append("  Embedded: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "_embedded", Embedded.ToString())).Append("\n");
+            if (Links != null) sb.Append("  Links: ").Append(CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskFieldValue("TssV2TransactionsPost201Response", "_links", Links.ToString())).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -183,7 +196,7 @@ namespace CyberSource.Model
         /// <returns>JSON string presentation of the object</returns>
         public string ToJson()
         {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
+            return CyberSource.Utilities.SensitiveFieldMaskingUtility.MaskSensitiveDataInJson("TssV2TransactionsPost201Response", JsonSerializer.Serialize(this, CyberSource.Utilities.Serialization.ModelLevelSerializerOptions.ToJsonOptions));
         }
 
         /// <summary>

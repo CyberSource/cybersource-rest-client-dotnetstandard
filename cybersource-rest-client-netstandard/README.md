@@ -1,3 +1,38 @@
+# Repository Migration Notice
+
+This package has been retired and is no longer actively maintained.
+
+The NuGet package **<CyberSource.Rest.Client.NetStandard>** will not receive further feature updates, bug fixes, or security patches.
+
+Development has moved to **<CyberSource.Rest.Client>**, which should be used for all new projects and future upgrades.
+
+## Recommended Action
+
+Existing consumers should migrate from:
+
+```xml
+<PackageReference Include="<CyberSource.Rest.Client.NetStandard>" Version="0.0.1.56" />
+```
+
+to
+
+```xml
+<PackageReference Include="<CyberSource.Rest.Client>" Version="1.0.0" />
+```
+
+### Compatibility Notice
+
+There are **no breaking changes or functional code changes** associated with this migration.
+
+The package version listed above is intended to be a compatible replacement for the retired package. The version change reflects updates to the package identity and target framework support, rather than changes to the runtime behavior or public functionality of the code.
+
+This migration is expected to be straightforward for most consumers. However, as with any dependency update, we recommend validating the change in your application or library through your normal build, test, and release process.
+
+### Consumer Guidance
+
+If you maintain a library or application that depends on **<CyberSource.Rest.Client.NetStandard>**, we recommend updating your dependency as soon as practical to ensure continued compatibility and support.
+
+## Thank you to everyone who used, contributed to, or provided feedback on this package.
 
 # .NET Standard Client SDK for the CyberSource REST API
 
